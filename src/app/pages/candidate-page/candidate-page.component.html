@@ -1,3 +1,4 @@
-<p>
-  candidate-page works!
-</p>
+<mat-spinner *ngIf="!candidate">
+</mat-spinner>
+<app-short-info-user *ngIf="candidate" [candidate]="candidate"></app-short-info-user>
+

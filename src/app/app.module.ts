@@ -7,11 +7,13 @@ import { MaterialDesignModule } from './modules/material-design/material-design.
 
 import { AppComponent } from './app.component';
 import { CandidatePageComponent } from './pages/candidate-page/candidate-page.component';
+import { ShortInfoUserComponent } from './components/cards/short-info-user/short-info-user.component';
 
 @NgModule({
   declarations: [
     AppComponent,
-    CandidatePageComponent
+    CandidatePageComponent,
+    ShortInfoUserComponent
   ],
   imports: [
     BrowserModule,

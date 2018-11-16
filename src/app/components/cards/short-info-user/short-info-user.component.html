@@ -1,0 +1,19 @@
+<mat-card>
+  <mat-grid-list cols="2"  rowHeight="100px">
+    <mat-grid-tile>
+      <img src="assets/candidate/icons8-person-80.png" />
+    </mat-grid-tile>
+    <mat-grid-tile>
+        <p>
+          Name: <span>{{candidate.name}} {{candidate.surname}}</span>
+          <mat-icon class="edit-icon">create</mat-icon>
+        </p>
+        <p>Position: <span>??</span>
+          <mat-icon class="edit-icon">create</mat-icon>
+        </p>
+        <p>Status: <span>{{candidate.candidateState.name}}</span>
+          <mat-icon class="edit-icon">create</mat-icon>
+        </p>
+      </mat-grid-tile>
+  </mat-grid-list>
+</mat-card>
