@@ -1,19 +1,25 @@
-<mat-card>
-  <mat-grid-list cols="2"  rowHeight="100px">
-    <mat-grid-tile>
-      <img src="assets/candidate/icons8-person-80.png" />
-    </mat-grid-tile>
-    <mat-grid-tile>
-        <p>
-          Name: <span>{{candidate.name}} {{candidate.surname}}</span>
-          <mat-icon class="edit-icon">create</mat-icon>
-        </p>
-        <p>Position: <span>??</span>
-          <mat-icon class="edit-icon">create</mat-icon>
-        </p>
-        <p>Status: <span>{{candidate.candidateState.name}}</span>
-          <mat-icon class="edit-icon">create</mat-icon>
-        </p>
-      </mat-grid-tile>
-  </mat-grid-list>
-</mat-card>
+<!-- <mat-card> -->
+  <div class="row">
+    <div class="col-12 col-md-3">
+      <ngx-avatar 
+      src="assets/candidate/icons8-person-80.png"
+      [round]="false"
+      borderColor="black"></ngx-avatar>
+      <!-- <div class="user-avatar">
+          <img src="assets/candidate/icons8-person-80.png" />
+      </div> -->
+    </div>
+    <div class="col-12 col-md-6">
+      <p>
+        Name: <span>{{candidate.name}} {{candidate.surname}}</span>
+        <mat-icon class="edit-icon">create</mat-icon>
+      </p>
+      <p>Position: <span>??</span>
+        <mat-icon class="edit-icon">create</mat-icon>
+      </p>
+      <p>Status: <span>{{candidate.candidateState.name}}</span>
+        <mat-icon (click)="openDialog()" class="edit-icon">create</mat-icon>
+      </p>
+    </div>
+  </div>
+<!-- </mat-card> -->

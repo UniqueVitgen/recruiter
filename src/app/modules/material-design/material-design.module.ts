@@ -1,7 +1,16 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
-import { MatProgressSpinnerModule, MatIconModule, MatCardModule, MatGridListModule } from '@angular/material';
+import { 
+  MatProgressSpinnerModule, 
+  MatIconModule, 
+  MatCardModule, 
+  MatDialogModule,
+  MatGridListModule ,
+  MatFormFieldModule,
+  MatInputModule,
+  MatButtonModule
+} from '@angular/material';
 
 
 @NgModule({
@@ -10,7 +19,11 @@ import { MatProgressSpinnerModule, MatIconModule, MatCardModule, MatGridListModu
     MatIconModule,
     MatProgressSpinnerModule,
     MatCardModule,
-    MatGridListModule
+    MatGridListModule,
+    MatDialogModule,
+    MatFormFieldModule,
+    MatInputModule,
+    MatButtonModule
   ],
   declarations: [],
   exports:[
@@ -18,7 +31,11 @@ import { MatProgressSpinnerModule, MatIconModule, MatCardModule, MatGridListModu
     MatProgressSpinnerModule,
     MatCardModule,
     BrowserAnimationsModule,
-    MatGridListModule
+    MatDialogModule,
+    MatGridListModule,
+    MatFormFieldModule,
+    MatInputModule,
+    MatButtonModule
   ]
 })
 export class MaterialDesignModule { }
