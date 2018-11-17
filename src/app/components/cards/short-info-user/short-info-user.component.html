@@ -1,25 +1,23 @@
 <!-- <mat-card> -->
-  <div class="row">
-    <div class="col-12 col-md-3">
-      <ngx-avatar 
+<div class="row">
+  <div class="col-12 col-md-3">
+    <app-candidate-avatar></app-candidate-avatar>
+    <!-- <ngx-avatar 
       src="assets/candidate/icons8-person-80.png"
       [round]="false"
-      borderColor="black"></ngx-avatar>
-      <!-- <div class="user-avatar">
-          <img src="assets/candidate/icons8-person-80.png" />
-      </div> -->
-    </div>
-    <div class="col-12 col-md-6">
-      <p>
-        Name: <span>{{candidate.name}} {{candidate.surname}}</span>
-        <mat-icon class="edit-icon">create</mat-icon>
-      </p>
-      <p>Position: <span>??</span>
-        <mat-icon class="edit-icon">create</mat-icon>
-      </p>
-      <p>Status: <span>{{candidate.candidateState.name}}</span>
-        <mat-icon (click)="openDialog()" class="edit-icon">create</mat-icon>
-      </p>
-    </div>
+      borderColor="black"></ngx-avatar> -->
   </div>
+  <div class="col-12 col-md-6">
+    <p>
+      Name: <span>{{candidate.name}} {{candidate.surname}}</span>
+      <mat-icon (click)="openNameDialog()" class="edit-icon">create</mat-icon>
+    </p>
+    <p>Position: <span>??</span>
+      <mat-icon class="edit-icon">create</mat-icon>
+    </p>
+    <p>Status: <span>{{candidate.candidateState.name}}</span>
+      <mat-icon (click)="openStatusDialog()" class="edit-icon">create</mat-icon>
+    </p>
+  </div>
+</div>
 <!-- </mat-card> -->

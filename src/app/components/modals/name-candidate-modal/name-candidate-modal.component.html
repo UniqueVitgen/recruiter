@@ -1,9 +1,15 @@
 <app-modal-component>
-  <dialog-title>Name candidate</dialog-title>
+  <dialog-title>Edit name candidate</dialog-title>
   <dialog-body>
-    <mat-form-field>
-      <input matInput>
+    <mat-form-field  class="example-full-width">
+      <input *ngIf="editedCandidate.name" placeholder="name" [(ngModel)]="editedCandidate.name" matInput>
+    </mat-form-field>
+    <mat-form-field  class="example-full-width">
+      <input *ngIf="editedCandidate.surname" placeholder="surname" [(ngModel)]="editedCandidate.surname" matInput>
     </mat-form-field>
   </dialog-body>
-  <dialog-footer></dialog-footer>
+  <dialog-footer>
+    <button mat-button (click)="onNoClick()">No Thanks</button>
+    <button mat-button (click)="editCandidate()" cdkFocusInitial>Ok</button>
+  </dialog-footer>
 </app-modal-component>

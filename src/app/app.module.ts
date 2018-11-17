@@ -16,6 +16,7 @@ import { ModalComponentComponent } from './components/modals/modal-component/mod
 import { NameCandidateModalComponent } from './components/modals/name-candidate-modal/name-candidate-modal.component';
 import { StatusCandidateModalComponent } from './components/modals/status-candidate-modal/status-candidate-modal.component';
 import { PositionCandidateModalComponent } from './components/modals/position-candidate-modal/position-candidate-modal.component';
+import { CandidateAvatarComponent } from './components/avatar/candidate-avatar/candidate-avatar.component';
 
 
 @NgModule({
@@ -27,7 +28,8 @@ import { PositionCandidateModalComponent } from './components/modals/position-ca
     ModalComponentComponent,
     NameCandidateModalComponent,
     StatusCandidateModalComponent,
-    PositionCandidateModalComponent
+    PositionCandidateModalComponent,
+    CandidateAvatarComponent
   ],
   imports: [
     BrowserModule,

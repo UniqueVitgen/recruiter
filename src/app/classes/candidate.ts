@@ -2,6 +2,7 @@ import { Skill } from "./skill";
 import { CandidateExperience } from "./candidate-experience";
 import { ContactDetails } from "./contact-details";
 import { Attachment } from "./attachment";
+import { CandidateState } from "./candidate-state";
 
 export class Candidate {
   id?: number;
@@ -9,8 +10,9 @@ export class Candidate {
   surname?: string;
   birthday?: string;
   salaryInDollars?: number;
-  skills: Skill[];
-  experiences: CandidateExperience[];
-  contacts: ContactDetails[];
-  attachments: Attachment[];
+  candidateState?: CandidateState;
+  skills?: Skill[];
+  experiences?: CandidateExperience[];
+  contacts?: ContactDetails[];
+  attachments?: Attachment[];
 }

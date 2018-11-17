@@ -3,6 +3,7 @@ import { Candidate } from 'src/app/classes/candidate';
 import { ModalComponentComponent } from '../../modals/modal-component/modal-component.component';
 import {MatDialog, MatDialogRef, MAT_DIALOG_DATA} from '@angular/material';
 import { NameCandidateModalComponent } from '../../modals/name-candidate-modal/name-candidate-modal.component';
+import { StatusCandidateModalComponent } from '../../modals/status-candidate-modal/status-candidate-modal.component';
 
 @Component({
   selector: 'app-short-info-user',
@@ -17,14 +18,26 @@ export class ShortInfoUserComponent implements OnInit {
   ngOnInit() {
   }
 
-  openDialog(): void {
+  openStatusDialog(): void {
+    const dialogRef = this.dialog.open(StatusCandidateModalComponent, {
+      data: this.candidate
+      }
+    );
+
+    dialogRef.afterClosed().subscribe(result => {
+      console.log('The dialog was closed')
+      // this.animal = result;
+    });
+  }
+
+  openNameDialog(): void {
     const dialogRef = this.dialog.open(NameCandidateModalComponent, {
       data: this.candidate
       }
     );
 
     dialogRef.afterClosed().subscribe(result => {
-      console.log('The dialog was closed');
+      console.log('The dialog was closed')
       // this.animal = result;
     });
   }

@@ -1,3 +1,13 @@
-<p>
-  status-candidate-modal works!
-</p>
+<app-modal-component>
+  <dialog-title>Edit status candidate</dialog-title>
+  <dialog-body>
+    <mat-form-field class="example-full-width">
+      <input *ngIf="editedCandidate.candidateState.name" placeholder="candidate status" [(ngModel)]="editedCandidate.candidateState.name"
+        matInput>
+    </mat-form-field>
+  </dialog-body>
+  <dialog-footer>
+    <button mat-button (click)="onNoClick()">No Thanks</button>
+    <button mat-button (click)="editCandidate()" cdkFocusInitial>Ok</button>
+  </dialog-footer>
+</app-modal-component>
