@@ -38,8 +38,7 @@ export class CandidateCvListComponent implements OnInit {
     const dialogRef = this.dialog.open(AttachmentCandidateModalComponent, dialogConfig);
 
     dialogRef.afterClosed().subscribe(result => {
-      console.log('The dialog was closed')
-      // this.animal = result;
+      console.log('The dialog was closed');
     });
   }
 

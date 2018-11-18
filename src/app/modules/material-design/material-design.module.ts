@@ -9,7 +9,8 @@ import {
   MatGridListModule ,
   MatFormFieldModule,
   MatInputModule,
-  MatButtonModule
+  MatButtonModule,
+  MatSelectModule
 } from '@angular/material';
 
 
@@ -23,7 +24,8 @@ import {
     MatDialogModule,
     MatFormFieldModule,
     MatInputModule,
-    MatButtonModule
+    MatButtonModule,
+    MatSelectModule
   ],
   declarations: [],
   exports:[
@@ -35,7 +37,8 @@ import {
     MatGridListModule,
     MatFormFieldModule,
     MatInputModule,
-    MatButtonModule
+    MatButtonModule,
+    MatSelectModule
   ]
 })
 export class MaterialDesignModule { }

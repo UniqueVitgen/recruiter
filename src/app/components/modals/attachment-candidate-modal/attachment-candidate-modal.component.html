@@ -1,11 +1,25 @@
 <app-modal-component>
-  <dialog-title>Edit name candidate</dialog-title>
+  <dialog-title>
+    <span *ngIf="data.isEdit">
+      Edit Attachment
+    </span>
+    <span *ngIf="!data.isEdit">
+      Add Attachment
+    </span>
+  </dialog-title>
   <dialog-body>
     <mat-form-field class="example-full-width">
-      <input *ngIf="editedAttachment.filePath" placeholder="name" [(ngModel)]="editedAttachment.filePath" matInput>
+      <input *ngIf="editedAttachment != null" placeholder="filePath" [(ngModel)]="editedAttachment.filePath" matInput>
     </mat-form-field>
     <mat-form-field class="example-full-width">
-      <input *ngIf="editedAttachment.attachmentType" placeholder="attachmentType" [(ngModel)]="editedAttachment.attachmentType" matInput>
+
+      <mat-select placeholder="Attachment type">
+        <mat-option *ngFor="let food of getAttachmentsTypes()" [value]="food">
+          {{food}}
+        </mat-option>
+      </mat-select>
+      <!-- <input *ngIf="editedAttachment != null" placeholder="attachmentType" [(ngModel)]="editedAttachment.attachmentType"
+        matInput> -->
     </mat-form-field>
   </dialog-body>
   <dialog-footer>

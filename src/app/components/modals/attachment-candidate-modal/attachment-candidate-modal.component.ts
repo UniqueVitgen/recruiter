@@ -5,6 +5,8 @@ import { NameCandidateModalComponent } from '../name-candidate-modal/name-candid
 import { MatDialog, MatDialogRef, MAT_DIALOG_DATA } from '@angular/material';
 import { Attachment } from 'src/app/classes/attachment';
 import { AttachmentDialogData } from 'src/app/interfaces/dialog/attachment-dialog-data';
+import { AttachmentType } from 'src/app/enums/attachment-type.enum';
+import { EnumWorker } from 'src/app/workers/enum/enum.worker';
 
 @Component({
   selector: 'app-attachment-candidate-modal',
@@ -19,13 +21,25 @@ export class AttachmentCandidateModalComponent implements OnInit {
   constructor(
     private candidateService: CandidateService,
     public dialogRef: MatDialogRef<NameCandidateModalComponent>,
+    private EnumWorker: EnumWorker,
     @Inject(MAT_DIALOG_DATA) public data: AttachmentDialogData) {
     // console.log('candidate', this.candidate);
     this.editedCandidate = Object.assign({}, this.data.sourceCandidate);
-    this.editedAttachment = Object.assign(new Attachment(), this.data.sourceAttachment);
+    if(this.data.isEdit) {
+      this.editedAttachment = Object.assign(new Attachment(), this.data.sourceAttachment);
+    }
+    else {
+      this.editedAttachment = new Attachment();
+    }
   }
 
   ngOnInit() {
+  }
+
+  getAttachmentsTypes() {
+    const valuesOfEnum = this.EnumWorker.getValuesFromEnum(AttachmentType);
+    console.log(valuesOfEnum);
+    return valuesOfEnum;
   }
 
   editCandidate() {
