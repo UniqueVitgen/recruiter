@@ -17,8 +17,8 @@
       <mat-card>
         <ul>
           <li *ngFor="let exp of candidate.experiences ; let i = index">
-            <button class="btn action-button" ng-click="myFunction()"><i class="fa fa-trash"></i></button>
-            <button class="btn action-button"><i class="fa fa-edit"></i></button>
+            <button class="btn action-button" ng-click="myFunction()"><mat-icon class="edit-icon">delete</mat-icon></button>
+            <button class="btn action-button"><mat-icon class="edit-icon">create</mat-icon></button>
             {{exp.dateFrom}} - {{exp.dateTo}} {{candidate.skills[i].name}}
           </li>
         </ul>

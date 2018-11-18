@@ -1,28 +1,30 @@
-<div class="row">
-  <div class="col-12 col-md-2">
+<div class="candidate-list">
+  <div class="row">
+    <div class="col-12 col-md-2">
+    </div>
+    <div class="col-12 col-md-10">
+      <h2>Attachments</h2>
+    </div>
   </div>
-  <div class="col-12 col-md-10">
-    <h2>Attachment</h2>
-  </div>
-</div>
-<div class="row">
-  <div class="col-6 col-md-2 center-right-item">
-    <!-- <mat-icon class="add-icon">playlist_add</mat-icon> -->
-    <input type="image" src="assets/candidate/adding-icon.png" class="myButton" />
-  </div>
-  <div class="col-6 col-md-10">
-    <mat-card>
-      <mat-card-content *ngIf="candidate">
-        <div *ngIf="candidate.attachments.length > 0" class="row">
-          <div *ngFor="let attachment of candidate.attachments; let i = index" class="col-12 col-md-4 center-item">
-            <app-candidate-attachment [attachment]="attachment" (onDelete)="onDeleteAttachment($event, i)">
-            </app-candidate-attachment>
+  <div class="row">
+    <div class="col-6 col-md-2 center-right-item">
+      <!-- <mat-icon class="add-icon">playlist_add</mat-icon> -->
+      <input type="image" src="assets/candidate/adding-icon.png" class="myButton" />
+    </div>
+    <div class="col-6 col-md-10">
+      <mat-card>
+        <mat-card-content *ngIf="candidate">
+          <div *ngIf="candidate.attachments.length > 0" class="row">
+            <div *ngFor="let attachment of candidate.attachments; let i = index" class="col-12 col-md-4 center-item">
+              <app-candidate-attachment [attachment]="attachment" (onDelete)="onDeleteAttachment($event, i)">
+              </app-candidate-attachment>
+            </div>
           </div>
-        </div>
-        <div  *ngIf="candidate.attachments.length == 0">
-          <div class="center-item description-text">empty attachment list</div>
-        </div>
-      </mat-card-content>
-    </mat-card>
+          <div *ngIf="candidate.attachments.length == 0">
+            <div class="center-item description-text">empty attachment list</div>
+          </div>
+        </mat-card-content>
+      </mat-card>
+    </div>
   </div>
 </div>

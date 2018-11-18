@@ -1,0 +1,39 @@
+<div class="candidate-list">
+  <div class="row">
+    <div class="col-6 col-md-2">
+    </div>
+    <div class="col-6 col-md-10">
+      <h2 class="headline">Notes</h2>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-12 col-md-2 center-right-item">
+      <!-- <mat-icon>description</mat-icon> -->
+      <div>
+        <input type="image" src="assets/candidate/adding-icon.png" class="myButton" />
+      </div>
+    </div>
+    <div class="col-12 col-md-10">
+      <mat-card class="candidate-color">
+        <div class="row">
+          <div class="col-12 col-md-3">
+            <p>
+              By <span> {{notes?.interviewer}} </span>
+            </p>
+            <p>Date: <span>{{notes?.date}}</span>
+            </p>
+          </div>
+          <div class="col-12 col-md-6">
+            <mat-form-field class="example-full-width candidate-textarea-field">
+              <textarea matInput [(ngModel)]="notes.noteText" placeholder="Comment" class="txtArea" readonly></textarea>
+            </mat-form-field>
+          </div>
+          <div class="col-12 col-md-3 center-right-item">
+            <mat-icon class="edit-icon">create</mat-icon>
+            <mat-icon class="edit-icon">delete</mat-icon>
+          </div>
+        </div>
+      </mat-card>
+    </div>
+  </div>
+</div>

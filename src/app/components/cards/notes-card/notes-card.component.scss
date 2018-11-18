@@ -1,0 +1,17 @@
+.textarea-field {
+  .mat-form-field-infix {
+    border: 1px solid DodgerBlue;
+    border-radius: 5px;
+  }
+
+  .txtArea {
+   resize: none;
+  }
+}
+.edit-icon {
+  float: right;
+}
+
+::ng-deep .mat-form-field-underline {
+  display: none;
+}

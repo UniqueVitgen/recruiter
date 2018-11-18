@@ -1,6 +1,7 @@
 .candidate-list {
   .btn {
-    background-color: DodgerBlue;
+    // background-color: DodgerBlue;
+    background-color: cornflowerblue;
     border: none;
     color: white;
     padding: 12px 16px;
@@ -8,7 +9,8 @@
     cursor: pointer;
     &.btn-action, &.action-button {
       background: none;
-      color:DodgerBlue;
+      // color:DodgerBlue;
+      color: cornflowerblue;
     }
   }
   .myButton{
@@ -29,4 +31,15 @@
     color:cornflowerblue;
     margin-bottom:2px;
   }
+}
+
+.candidate-textarea-field {
+    .mat-form-field-infix {
+      border: 1px solid DodgerBlue;
+      border-radius: 5px;
+    }
+  
+    .txtArea {
+     resize: none;
+    }
 }
