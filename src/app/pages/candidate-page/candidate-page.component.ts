@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { CandidateService } from 'src/app/services/candidate/candidate.service';
 import { Candidate } from 'src/app/classes/candidate';
+import {Notes} from 'src/app/classes/notes';
 
 @Component({
   selector: 'app-candidate-page',
@@ -11,6 +12,9 @@ import { Candidate } from 'src/app/classes/candidate';
 export class CandidatePageComponent implements OnInit {
   id: number;
   candidate: Candidate;
+  notes = { interviewer: 'Вася',
+  date: '1',
+  noteText: '1111111111111111111111111111111111111111111111111111111111111111111111111'};
 
   constructor(
     private route: ActivatedRoute,
