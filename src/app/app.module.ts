@@ -21,6 +21,8 @@ import { CandidateCvListComponent } from './components/cards/candidate-cv-list/c
 import { CandidateAttachmentComponent } from './components/items/candidate-attachment/candidate-attachment.component';
 import { AttachmentCandidateModalComponent } from './components/modals/attachment-candidate-modal/attachment-candidate-modal.component';
 
+import { ContactsUserComponent } from './components/cards/contacts-user/contacts-user.component';
+import { ExperienceUserComponent } from './components/cards/experience-user/experience-user.component';
 
 @NgModule({
   declarations: [
@@ -37,7 +39,9 @@ import { AttachmentCandidateModalComponent } from './components/modals/attachmen
 
     CandidateAvatarComponent,
     CandidateCvListComponent,
-    CandidateAttachmentComponent
+    CandidateAttachmentComponent,
+    ContactsUserComponent,
+    ExperienceUserComponent
   ],
   imports: [
     BrowserModule,

@@ -1,0 +1,23 @@
+<div class="row candidate-list">
+  <div class="col-12 col-md-2">
+  </div>
+  <div class="col-12 col-md-10">
+    <h2 class="headline">Contacts</h2>
+  </div>
+</div>
+<div class="row candidate-list">
+  <div class="col-6 col-md-2 center-right-item">
+    <input type="image" src="assets/candidate/adding-icon.png" class="myButton" />
+  </div>
+  <div class="col-6 col-md-10">
+    <mat-card>
+      <ul>
+        <li *ngFor="let i of candidate.contacts">
+          <button class="btn action-button" ng-click="myFunction()"><i class="fa fa-trash"></i></button>
+          <button class="btn action-button"><i class="fa fa-edit"></i></button>
+          {{i.contactType}}: {{i.contactDetails}}
+        </li>
+      </ul>
+    </mat-card>
+  </div>
+</div>

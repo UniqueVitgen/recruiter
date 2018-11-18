@@ -1,6 +1,9 @@
-<mat-card>
+<mat-card class="candidate-color">
   <mat-spinner *ngIf="!candidate">
   </mat-spinner>
   <app-short-info-user *ngIf="candidate" [candidate]="candidate"></app-short-info-user>
   <app-candidate-cv-list *ngIf="candidate" [candidate]="candidate"></app-candidate-cv-list>
+  <app-contacts-user *ngIf="candidate" [candidate]="candidate"></app-contacts-user>
+  <app-experience-user *ngIf="candidate" [candidate]="candidate"></app-experience-user>
 </mat-card>
+

@@ -5,6 +5,7 @@
   float: right;
   &:hover {
     border-color: #00b0f0;
+    cursor: pointer;
     & .avatar-hover{
       display: block;
     }

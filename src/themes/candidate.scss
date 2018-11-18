@@ -1,0 +1,32 @@
+.candidate-list {
+  .btn {
+    background-color: DodgerBlue;
+    border: none;
+    color: white;
+    padding: 12px 16px;
+    font-size: 16px;
+    cursor: pointer;
+    &.btn-action, &.action-button {
+      background: none;
+      color:DodgerBlue;
+    }
+  }
+  .myButton{
+    margin-right:10px;
+  }
+  div.contacts{
+    display:inline-block;
+    border:1px solid black;
+    border-radius:20px;
+    width:80%;
+  }
+  
+  li{
+    list-style-type: none;
+    color: cornflowerblue;
+  }
+  .headline{
+    color:cornflowerblue;
+    margin-bottom:2px;
+  }
+}
