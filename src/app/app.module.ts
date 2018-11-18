@@ -8,12 +8,16 @@ import { MaterialDesignModule } from './modules/material-design/material-design.
 import { AppComponent } from './app.component';
 import { CandidatePageComponent } from './pages/candidate-page/candidate-page.component';
 import { ShortInfoUserComponent } from './components/cards/short-info-user/short-info-user.component';
+import { ContactsUserComponent } from './components/cards/contacts-user/contacts-user.component';
+import { ExperienceUserComponent } from './components/cards/experience-user/experience-user.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     CandidatePageComponent,
-    ShortInfoUserComponent
+    ShortInfoUserComponent,
+    ContactsUserComponent,
+    ExperienceUserComponent
   ],
   imports: [
     BrowserModule,

@@ -1,0 +1,13 @@
+<h2 class="headline">Contacts</h2>
+<div>
+  <input type="image" src="assets/candidate/adding-icon.png" class="myButton"/>
+</div>
+<div class="contacts" ng-controller="myCtrl">
+  <ul>
+    <li *ngFor="let i of candidate.contacts">
+      <button class="btn" ng-click="myFunction()"><i class="fa fa-trash"></i></button>
+      <button class="btn"><i class="fa fa-edit"></i></button>
+      {{i.contactType}}: {{i.contactDetails}}
+    </li>
+  </ul>
+</div>

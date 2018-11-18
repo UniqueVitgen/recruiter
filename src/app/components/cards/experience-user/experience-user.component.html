@@ -1,0 +1,14 @@
+
+<h2 class="headline">Experience</h2>
+<div>
+  <input type="image" src="assets/candidate/adding-icon.png" class="myButton"/>
+</div>
+<div class="contacts" ng-controller="myCtrl">
+  <ul>
+    <li *ngFor="let exp of candidate.experiences ; let i = index">
+      <button class="btn" ng-click="myFunction()"><i class="fa fa-trash"></i></button>
+      <button class="btn"><i class="fa fa-edit"></i></button>
+      {{exp.dateFrom}} - {{exp.dateTo}} {{candidate.skills[i].name}}
+    </li>
+  </ul>
+</div>
