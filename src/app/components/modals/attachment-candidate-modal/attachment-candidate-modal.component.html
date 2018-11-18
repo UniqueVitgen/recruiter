@@ -1,0 +1,15 @@
+<app-modal-component>
+  <dialog-title>Edit name candidate</dialog-title>
+  <dialog-body>
+    <mat-form-field class="example-full-width">
+      <input *ngIf="editedAttachment.filePath" placeholder="name" [(ngModel)]="editedAttachment.filePath" matInput>
+    </mat-form-field>
+    <mat-form-field class="example-full-width">
+      <input *ngIf="editedAttachment.attachmentType" placeholder="attachmentType" [(ngModel)]="editedAttachment.attachmentType" matInput>
+    </mat-form-field>
+  </dialog-body>
+  <dialog-footer>
+    <button mat-button (click)="onNoClick()">No Thanks</button>
+    <button mat-button (click)="editCandidate()" cdkFocusInitial>Ok</button>
+  </dialog-footer>
+</app-modal-component>

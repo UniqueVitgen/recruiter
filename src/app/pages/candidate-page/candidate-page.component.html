@@ -2,4 +2,5 @@
   <mat-spinner *ngIf="!candidate">
   </mat-spinner>
   <app-short-info-user *ngIf="candidate" [candidate]="candidate"></app-short-info-user>
+  <app-candidate-cv-list *ngIf="candidate" [candidate]="candidate"></app-candidate-cv-list>
 </mat-card>

@@ -17,6 +17,9 @@ import { NameCandidateModalComponent } from './components/modals/name-candidate-
 import { StatusCandidateModalComponent } from './components/modals/status-candidate-modal/status-candidate-modal.component';
 import { PositionCandidateModalComponent } from './components/modals/position-candidate-modal/position-candidate-modal.component';
 import { CandidateAvatarComponent } from './components/avatar/candidate-avatar/candidate-avatar.component';
+import { CandidateCvListComponent } from './components/cards/candidate-cv-list/candidate-cv-list.component';
+import { CandidateAttachmentComponent } from './components/items/candidate-attachment/candidate-attachment.component';
+import { AttachmentCandidateModalComponent } from './components/modals/attachment-candidate-modal/attachment-candidate-modal.component';
 
 
 @NgModule({
@@ -25,11 +28,16 @@ import { CandidateAvatarComponent } from './components/avatar/candidate-avatar/c
     CandidatePageComponent,
     ShortInfoUserComponent,
     NavbarItcharComponent,
+    
     ModalComponentComponent,
     NameCandidateModalComponent,
     StatusCandidateModalComponent,
     PositionCandidateModalComponent,
-    CandidateAvatarComponent
+    AttachmentCandidateModalComponent,
+
+    CandidateAvatarComponent,
+    CandidateCvListComponent,
+    CandidateAttachmentComponent
   ],
   imports: [
     BrowserModule,
@@ -45,7 +53,8 @@ import { CandidateAvatarComponent } from './components/avatar/candidate-avatar/c
     ModalComponentComponent,
     NameCandidateModalComponent,
     StatusCandidateModalComponent,
-    PositionCandidateModalComponent
+    PositionCandidateModalComponent,
+    AttachmentCandidateModalComponent
   ],
   schemas:      [ NO_ERRORS_SCHEMA ] // add this line
 })
