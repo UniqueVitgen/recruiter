@@ -57,8 +57,7 @@ import { ExperienceUserComponent } from './components/cards/experience-user/expe
     ModalComponentComponent,
     NameCandidateModalComponent,
     StatusCandidateModalComponent,
-    PositionCandidateModalComponent,
-    AttachmentCandidateModalComponent
+    PositionCandidateModalComponent
   ],
   schemas: [NO_ERRORS_SCHEMA] // add this line
 })
