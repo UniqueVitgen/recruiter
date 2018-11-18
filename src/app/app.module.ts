@@ -22,6 +22,10 @@ import { AttachmentCandidateModalComponent } from './components/modals/attachmen
 import { NotesCardComponent } from './components/cards/notes-card/notes-card.component';
 import { ContactsUserComponent } from './components/cards/contacts-user/contacts-user.component';
 import { ExperienceUserComponent } from './components/cards/experience-user/experience-user.component';
+import { CandidateDashboardPageComponent } from './pages/candidate-dashboard-page/candidate-dashboard-page.component';
+import { JobDescriptionDashboardPageComponent } from './pages/job-description-dashboard-page/job-description-dashboard-page.component';
+import { CandidateDashboardItemComponent } from './components/items/candidate-dashboard-item/candidate-dashboard-item.component';
+import { CandidateDashboardComponent } from './components/dashboards/candidate-dashboard/candidate-dashboard.component';
 
 
 @NgModule({
@@ -41,7 +45,11 @@ import { ExperienceUserComponent } from './components/cards/experience-user/expe
     CandidateAttachmentComponent,
     ContactsUserComponent,
     ExperienceUserComponent,
-    NotesCardComponent
+    NotesCardComponent,
+    CandidateDashboardPageComponent,
+    JobDescriptionDashboardPageComponent,
+    CandidateDashboardItemComponent,
+    CandidateDashboardComponent
   ],
   imports: [
     BrowserModule,
