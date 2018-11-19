@@ -1,14 +1,3 @@
-<div class="row">
-  <div *ngFor="let candidate of candidates" class="col-12 col-md-3 center-item">
-    <app-candidate-dashboard-item [candidate]="candidate"></app-candidate-dashboard-item>
-  </div>
-  <div *ngFor="let candidate of candidates" class="col-12 col-md-3 center-item">
-    <app-candidate-dashboard-item [candidate]="candidate"></app-candidate-dashboard-item>
-  </div>
-  <div *ngFor="let candidate of candidates" class="col-12 col-md-3 center-item">
-    <app-candidate-dashboard-item [candidate]="candidate"></app-candidate-dashboard-item>
-  </div>
-  <div *ngFor="let candidate of candidates" class="col-12 col-md-3 center-item">
-    <app-candidate-dashboard-item [candidate]="candidate"></app-candidate-dashboard-item>
-  </div>
-</div>
+<app-search-input></app-search-input>
+<br>
+<app-candidate-dashboard [candidates]="candidates"></app-candidate-dashboard>

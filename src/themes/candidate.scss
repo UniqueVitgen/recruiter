@@ -45,7 +45,11 @@
 }
 
 .candidate-dashboard-item {
-  img {
-    width: 150px;
+  padding: 0;
+  app-candidate-avatar {
+    display: -webkit-box;
+    img {
+      width: 200px;
+    }
   }
 }

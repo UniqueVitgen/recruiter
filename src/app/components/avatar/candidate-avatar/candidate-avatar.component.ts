@@ -1,4 +1,5 @@
-import { Component, OnInit, Input } from '@angular/core';
+import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
+import {  } from 'events';
 
 @Component({
   selector: 'app-candidate-avatar',
@@ -7,10 +8,27 @@ import { Component, OnInit, Input } from '@angular/core';
 })
 export class CandidateAvatarComponent implements OnInit {
   @Input() src: string;
+  @Input() isEditedIcon: boolean;
+  @Input() isClosedIcon: boolean;
+  @Output() clickEditIcon: EventEmitter<any> = new EventEmitter();
+  @Output() clickCloseIcon: EventEmitter<any> = new EventEmitter();
+  @Output('clickAvatar') outputClickAvatar: EventEmitter<any> = new EventEmitter();
 
   constructor() { }
 
   ngOnInit() {
+  }
+
+  clickEdit() {
+    this.clickEditIcon.emit();
+  }
+
+  clickClose() {
+    this.clickCloseIcon.emit();
+  }
+
+  clickAvatar() {
+    this.outputClickAvatar.emit();
   }
 
 }

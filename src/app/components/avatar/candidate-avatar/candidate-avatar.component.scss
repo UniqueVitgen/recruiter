@@ -11,8 +11,19 @@
   }
   .avatar-hover {
     .edit-icon-image {
+      &:hover{
+        cursor: pointer;
+      }
       position: absolute;
       bottom: 0;
+      right: 0;
+    }
+    .close-icon-image {
+      &:hover{
+        cursor: pointer;
+      }
+      position: absolute;
+      top: 0;
       right: 0;
     }
     display: none;

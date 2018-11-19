@@ -1,6 +1,7 @@
 <div class="user-avatar">
   <img [src]="src" alt="" onerror="this.src = '/assets/candidate/icons8-person-80.png'" />
-  <div class="avatar-hover" (click)="checkNew()">
-    <mat-icon class="edit-icon-image">create</mat-icon>
+  <div (click)="clickAvatar()" class="avatar-hover">
+    <mat-icon *ngIf="isClosedIcon" (click)="clickClose()" class="close-icon-image">cancel</mat-icon>
+    <mat-icon *ngIf="isEditedIcon" (click)="clickEdit()" class="edit-icon-image">create</mat-icon>
   </div>
 </div>

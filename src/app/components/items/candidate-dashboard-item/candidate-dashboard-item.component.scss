@@ -1,6 +1,10 @@
-app-candidate-avatar {
-  display: -webkit-box;
-  img {
-    width: 150px;
+.candidate-dashboard-item {
+  padding: 0;
+  app-candidate-avatar {
+    display: -webkit-box;
+    img {
+      width: 200px;
+    }
   }
 }
+
