@@ -8,7 +8,7 @@ import { CandidateService } from 'src/app/services/candidate/candidate.service';
   styleUrls: ['./candidate-dashboard-page.component.scss']
 })
 export class CandidateDashboardPageComponent implements OnInit {
-  private candidates: Candidate[];
+  candidates: Candidate[];
 
   constructor(private candidateService: CandidateService) { }
 
@@ -19,7 +19,7 @@ export class CandidateDashboardPageComponent implements OnInit {
   getAll() {
     this.candidateService.getAll().subscribe(res => {
       this.candidates = res;
-    })
+    });
   }
 
 }

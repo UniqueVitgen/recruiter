@@ -5,10 +5,10 @@
   <div *ngIf="jobDescription.experienceYearsRequired">
     <span class="title-text">experience:</span> {{jobDescription.experienceYearsRequired}}
   </div>
-  <div *ngIf="jobDescription.salaryInDollarsFrom || jobDescription.salaryInDollarsTo">
+  <div *ngIf="jobDescription.salaryInDollarsTo || jobDescription.salaryInDollarsFrom">
     <span class="title-text">salary: </span>
     <span *ngIf="jobDescription.salaryInDollarsFrom">{{jobDescription.salaryInDollarsFrom}}</span>
-    <span *ngIf="jobDescription.salaryInDollarsTo && jobDescription.salaryInDollarsFrom"> - </span>
+    <span *ngIf="jobDescription.salaryInDollarsFrom && jobDescription.salaryInDollarsTo"> - </span>
     <span *ngIf="jobDescription.salaryInDollarsTo">{{jobDescription.salaryInDollarsTo}}</span>
   </div>
 </mat-card>

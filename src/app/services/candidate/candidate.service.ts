@@ -10,7 +10,7 @@ export class CandidateService {
 
   constructor(private configService: ConfigService) { }
 
-  get(id:number): Observable<Candidate> {
+  get(id: number): Observable<Candidate> {
     return this.configService.get('candidate/' + id);
   }
 

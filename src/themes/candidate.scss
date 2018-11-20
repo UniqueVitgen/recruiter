@@ -48,6 +48,16 @@
   &, &.mat-card {
     padding: 0;
   }
+  &.add-item {
+    mat-icon {
+      font-size: 200px;
+      display: inline;
+    }
+    &:hover {
+      background: #cccccc;
+      cursor: pointer;
+    }
+  }
   app-candidate-avatar {
     display: -webkit-box;
     img {
