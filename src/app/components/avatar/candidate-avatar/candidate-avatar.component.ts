@@ -10,6 +10,7 @@ export class CandidateAvatarComponent implements OnInit {
   @Input() src: string;
   @Input() isEditedIcon: boolean;
   @Input() isClosedIcon: boolean;
+  @Input() isMoreIcon: boolean;
   @Output() clickEditIcon: EventEmitter<any> = new EventEmitter();
   @Output() clickCloseIcon: EventEmitter<any> = new EventEmitter();
   @Output('clickAvatar') outputClickAvatar: EventEmitter<any> = new EventEmitter();

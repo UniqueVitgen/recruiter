@@ -45,7 +45,9 @@
 }
 
 .candidate-dashboard-item {
-  padding: 0;
+  &, &.mat-card {
+    padding: 0;
+  }
   app-candidate-avatar {
     display: -webkit-box;
     img {

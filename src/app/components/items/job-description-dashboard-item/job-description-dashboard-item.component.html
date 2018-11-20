@@ -1,0 +1,14 @@
+<mat-card class="example-full-width job-description-dashboard-item">
+  <div><span class="big-text">{{jobDescription.position}}</span></div>
+  <mat-divider></mat-divider>
+  <br>
+  <div *ngIf="jobDescription.experienceYearsRequired">
+    <span class="title-text">experience:</span> {{jobDescription.experienceYearsRequired}}
+  </div>
+  <div *ngIf="jobDescription.salaryInDollarsFrom || jobDescription.salaryInDollarsTo">
+    <span class="title-text">salary: </span>
+    <span *ngIf="jobDescription.salaryInDollarsFrom">{{jobDescription.salaryInDollarsFrom}}</span>
+    <span *ngIf="jobDescription.salaryInDollarsTo && jobDescription.salaryInDollarsFrom"> - </span>
+    <span *ngIf="jobDescription.salaryInDollarsTo">{{jobDescription.salaryInDollarsTo}}</span>
+  </div>
+</mat-card>

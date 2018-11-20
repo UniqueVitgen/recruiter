@@ -27,6 +27,9 @@ import { JobDescriptionDashboardPageComponent } from './pages/job-description-da
 import { CandidateDashboardItemComponent } from './components/items/candidate-dashboard-item/candidate-dashboard-item.component';
 import { CandidateDashboardComponent } from './components/dashboards/candidate-dashboard/candidate-dashboard.component';
 import { SearchInputComponent } from './components/inputs/search-input/search-input.component';
+import { JobDescriptionDashboardComponent } from './components/dashboards/job-description-dashboard/job-description-dashboard.component';
+import { JobDescriptionDashboardItemComponent } from './components/items/job-description-dashboard-item/job-description-dashboard-item.component';
+import { JobDescriptionPageComponent } from './pages/job-description-page/job-description-page.component';
 
 
 @NgModule({
@@ -51,7 +54,10 @@ import { SearchInputComponent } from './components/inputs/search-input/search-in
     JobDescriptionDashboardPageComponent,
     CandidateDashboardItemComponent,
     CandidateDashboardComponent,
-    SearchInputComponent
+    SearchInputComponent,
+    JobDescriptionDashboardComponent,
+    JobDescriptionDashboardItemComponent,
+    JobDescriptionPageComponent
   ],
   imports: [
     BrowserModule,

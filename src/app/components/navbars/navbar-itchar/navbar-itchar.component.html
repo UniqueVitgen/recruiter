@@ -8,11 +8,8 @@
 
     <div class="collapse navbar-collapse" id="navbarSupportedContent">
       <ul class="navbar-nav mr-auto">
-        <li class="nav-item active">
-          <a class="nav-link"  routerLink="/candidate">Candidate Dashboard <span class="sr-only">(current)</span></a>
-        </li>
-        <li class="nav-item">
-          <a class="nav-link"   routerLink="/job-description">Job Description Dashboard</a>
+        <li *ngFor="let route of routes; let i = index" [ngClass]="{'active': route.isActive}" (click)="changeRoute(i)" class="nav-item">
+          <a class="nav-link"  [routerLink]="route.routerLink">{{route.title}}</a>
         </li>
         <!-- <li class="nav-item dropdown">
           <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown"

@@ -1,15 +1,15 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
-import { 
-  MatProgressSpinnerModule, 
-  MatIconModule, 
-  MatCardModule, 
+import {
+  MatProgressSpinnerModule,
+  MatIconModule,
+  MatCardModule,
   MatDialogModule,
-  MatGridListModule ,
+  MatGridListModule,
   MatFormFieldModule,
   MatInputModule,
-  MatButtonModule
+  MatButtonModule, MatDividerModule
 } from '@angular/material';
 
 
@@ -23,7 +23,8 @@ import {
     MatDialogModule,
     MatFormFieldModule,
     MatInputModule,
-    MatButtonModule
+    MatButtonModule,
+    MatDividerModule
   ],
   declarations: [],
   exports:[
@@ -35,7 +36,8 @@ import {
     MatGridListModule,
     MatFormFieldModule,
     MatInputModule,
-    MatButtonModule
+    MatButtonModule,
+    MatDividerModule
   ]
 })
 export class MaterialDesignModule { }

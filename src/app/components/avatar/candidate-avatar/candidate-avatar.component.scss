@@ -10,6 +10,20 @@
     }
   }
   .avatar-hover {
+    &:hover {
+      cursor: pointer;
+      .more-icon-image {
+        zoom: 2;
+      }
+    }
+    .more-icon-image {
+      &:hover{
+      }
+      position: absolute;
+      bottom: 0%;
+      transform: translate(50%,0);
+      right: 50%;
+    }
     .edit-icon-image {
       &:hover{
         cursor: pointer;
