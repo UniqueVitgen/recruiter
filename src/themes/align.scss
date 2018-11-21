@@ -13,3 +13,12 @@
   justify-content: flex-end;
   align-items: center;
 }
+
+.flex-to-bottom-parent {
+  display: flex;
+  flex-direction: column;
+  .flex-to-bottom-child {
+    margin-top: auto;
+  }
+
+}

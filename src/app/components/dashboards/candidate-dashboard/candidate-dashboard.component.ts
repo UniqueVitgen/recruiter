@@ -8,6 +8,7 @@ import { Candidate } from 'src/app/classes/candidate';
 })
 export class CandidateDashboardComponent implements OnInit {
   @Input() candidates: Candidate[];
+  @Input() haveAddElement: boolean;
 
   constructor() { }
 

@@ -1,3 +1,6 @@
-<p>
-  job-description-page works!
-</p>
+
+<app-job-description-short-info *ngIf="vacancy" [vacancy]="vacancy"></app-job-description-short-info>
+<br>
+<app-job-description-requirements *ngIf="vacancy" [vacancy]="vacancy"></app-job-description-requirements>
+<br>
+<app-candidate-dashboard *ngIf="candidates" [candidates]="candidates" [haveAddElement]="false"></app-candidate-dashboard>

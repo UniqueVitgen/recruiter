@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import {ConfigService} from '../config/config.service';
 import {Observable} from 'rxjs';
-import {InterviewFeedback} from '../../classes/interview_feedback';
+import {InterviewFeedback} from '../../classes/interview-feedback';
 
 @Injectable({
   providedIn: 'root'

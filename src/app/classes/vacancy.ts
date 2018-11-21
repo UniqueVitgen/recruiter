@@ -7,7 +7,7 @@ export class Vacancy {
   salaryInDollarsFrom?: number;
   salaryInDollarsTo?: number;
   vacancyState: VacancyState;
-  experienceYearsRequired: number;
+  experienceYearsRequire: number;
   developerId: number;
   skills: Skill[];
 }

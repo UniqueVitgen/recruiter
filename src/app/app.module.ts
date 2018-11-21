@@ -30,6 +30,8 @@ import { SearchInputComponent } from './components/inputs/search-input/search-in
 import { JobDescriptionDashboardComponent } from './components/dashboards/job-description-dashboard/job-description-dashboard.component';
 import { JobDescriptionDashboardItemComponent } from './components/items/job-description-dashboard-item/job-description-dashboard-item.component';
 import { JobDescriptionPageComponent } from './pages/job-description-page/job-description-page.component';
+import { JobDescriptionShortInfoComponent } from './components/cards/job-description-short-info/job-description-short-info.component';
+import { JobDescriptionRequirementsComponent } from './components/cards/job-description-requirements/job-description-requirements.component';
 
 
 @NgModule({
@@ -57,7 +59,9 @@ import { JobDescriptionPageComponent } from './pages/job-description-page/job-de
     SearchInputComponent,
     JobDescriptionDashboardComponent,
     JobDescriptionDashboardItemComponent,
-    JobDescriptionPageComponent
+    JobDescriptionPageComponent,
+    JobDescriptionShortInfoComponent,
+    JobDescriptionRequirementsComponent
   ],
   imports: [
     BrowserModule,

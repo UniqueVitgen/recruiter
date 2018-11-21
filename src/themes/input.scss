@@ -5,3 +5,11 @@
     border-top: 0;
   }
 }
+
+.input-group-prepend {
+  opacity: 0.6;
+  &:hover {
+    cursor: pointer;
+    opacity: 1;
+  }
+}

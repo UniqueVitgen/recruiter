@@ -2,6 +2,7 @@ import { Injectable } from '@angular/core';
 import {ConfigService} from '../config/config.service';
 import {Observable} from 'rxjs';
 import {Vacancy} from '../../classes/vacancy';
+import {Candidate} from '../../classes/candidate';
 
 @Injectable({
   providedIn: 'root'
@@ -20,6 +21,10 @@ export class VacancyService {
 
   add(vacancy: Vacancy): Observable<Vacancy> {
     return this.configService.post('vacancies', vacancy);
+  }
+
+  getCandidates(vacancy: Vacancy): Observable<Candidate[]> {
+    return this.configService.get('vacancy/' + vacancy.id + '/candidates');
   }
 
   update(vacancy: Vacancy): Observable<Vacancy> {
