@@ -15,7 +15,7 @@ export class NameCandidateModalComponent implements OnInit {
   constructor(
     private candidateService: CandidateService,
     public dialogRef: MatDialogRef<NameCandidateModalComponent>,
-    @Inject(MAT_DIALOG_DATA) public candidate: Candidate) { 
+    @Inject(MAT_DIALOG_DATA) public candidate: Candidate) {
       console.log('candidate', this.candidate);
       this.editedCandidate = Object.assign({}, this.candidate);
     }
@@ -25,9 +25,9 @@ export class NameCandidateModalComponent implements OnInit {
 
   editCandidate() {
     this.candidateService.update(this.editedCandidate).subscribe(res => {
-      console.log('rs',res);
+      console.log('rs', res);
       this.dialogRef.close();
-    })
+    });
   }
 
   onNoClick(): void {

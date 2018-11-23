@@ -32,6 +32,9 @@ import { JobDescriptionDashboardItemComponent } from './components/items/job-des
 import { JobDescriptionPageComponent } from './pages/job-description-page/job-description-page.component';
 import { JobDescriptionShortInfoComponent } from './components/cards/job-description-short-info/job-description-short-info.component';
 import { JobDescriptionRequirementsComponent } from './components/cards/job-description-requirements/job-description-requirements.component';
+import {CalendarPageComponent} from './pages/calendar-page/calendar-page.component';
+import { InterviewCalendarComponent } from './components/calendar/interview-calendar/interview-calendar.component';
+import { InterviewModalComponent } from './components/modals/interview-modal/interview-modal.component';
 
 
 @NgModule({
@@ -61,7 +64,10 @@ import { JobDescriptionRequirementsComponent } from './components/cards/job-desc
     JobDescriptionDashboardItemComponent,
     JobDescriptionPageComponent,
     JobDescriptionShortInfoComponent,
-    JobDescriptionRequirementsComponent
+    JobDescriptionRequirementsComponent,
+    CalendarPageComponent,
+    InterviewCalendarComponent,
+    InterviewModalComponent
   ],
   imports: [
     BrowserModule,
@@ -77,7 +83,8 @@ import { JobDescriptionRequirementsComponent } from './components/cards/job-desc
     ModalComponentComponent,
     NameCandidateModalComponent,
     StatusCandidateModalComponent,
-    PositionCandidateModalComponent
+    PositionCandidateModalComponent,
+    InterviewModalComponent
   ],
   schemas: [NO_ERRORS_SCHEMA] // add this line
 })

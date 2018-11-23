@@ -10,7 +10,8 @@ export class NavbarItcharComponent implements OnInit {
 
   routes: NavbarLink[] = [
     {routerLink: '/candidate', title: 'Candidate Dashboard', isActive: true},
-    {routerLink: '/job-description', title: 'Job Description Dashboard', isActive: false}
+    {routerLink: '/job-description', title: 'Job Description Dashboard', isActive: false},
+    {routerLink: '/calendar', title: 'Interview Calendar', isActive: false}
   ];
 
   constructor() { }

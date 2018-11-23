@@ -1,0 +1,38 @@
+<div style="text-align:center">
+  <h1>
+    {{ title }}
+  </h1>
+</div>
+<div class="row">
+  <div class="col-md-3 col-12">
+
+  </div>
+  <div class="col-md-6 col-12">
+        <div class="row">
+          <div class="col-2 calendar-arrow arrow-left">
+            <mat-icon  (click)="prevMonth()">arrow_back_ios</mat-icon>
+          </div>
+          <div class="col-8 center-text">
+            <h2 > {{ date.format('MMMM') + " " + date.format('YYYY')}} </h2>
+          </div>
+          <div class="col-2 calendar-arrow arrow-right">
+            <mat-icon (click)="nextMonth()">arrow_forward_ios</mat-icon>
+          </div>
+        </div>
+        <!--<i class = "fa fa-chevron-left" (click)="prevMonth()"></i>-->
+        <!--<i class = "fa fa-chevron-right" (click)="nextMonth()"></i>-->
+    <div class='flex-container flex-center'>
+      <div id='calendar-container' class='flex-container flex-column'>
+        <div class="flex-container flex-wrap" >
+          <div class="calendar-day flex-container" (click)="openInterviewDialog(d.day, d.mockInterview)" *ngFor="let d of daysArray">
+            <h5>{{d.day}}</h5>
+            <p>{{dateTimeWorker.getTime(d?.mockInterview?.planDate)}} - {{d?.mockInterview?.candidate?.name}}</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="col-md-3 col-12">
+
+  </div>
+</div>

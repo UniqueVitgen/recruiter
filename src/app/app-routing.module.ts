@@ -23,6 +23,9 @@ const routes: Routes = [
   {
     path: 'job-description/:id', component: JobDescriptionPageComponent
   },
+  {
+    path: 'calendar', component: CalendarPageComponent
+  },
   // {
   //   path: 'guest', loadChildren: './components/guest/guest.module#GuestModule'
   // },

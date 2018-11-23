@@ -1,5 +1,6 @@
 import {Component, Input, OnInit} from '@angular/core';
 import * as moment from 'moment';
+import {InterviewService} from '../../services/interview/interview.service';
 
 
 @Component({
@@ -8,29 +9,14 @@ import * as moment from 'moment';
   styleUrls: ['./calendar-page.scss']
 })
 export class CalendarPageComponent implements OnInit {
-  @Input() daysArray;
-  title = 'my-calendar';
-  date = moment();
-  ngOnInit() {
+  constructor(private interviewService: InterviewService) {}
+  ngOnInit(): void {
+    this.getInterviews();
   }
- createCalendar(month) {
-    const firstDay = moment(month).startOf('M');
-    const days = Array.apply(null, {length: month.daysInMonth()})
-      .map(Number.call, Number)
-      .map(n => {
-        return {
-          day: moment(firstDay).add(n, 'd').format('DD'),
-          interviews: ['14:00-16:00 - Bobo']
-      };
-      });
-    return days;
-  }
-  prevMonth() {
-    this.date = this.date.add(-1, 'month');
-    this.daysArray = this.createCalendar(this.date);
-  }
-  nextMonth() {
-    this.date = this.date.add(1, 'month');
-    this.daysArray = this.createCalendar(this.date);
+
+  getInterviews() {
+    this.interviewService.getAll().subscribe(res => {
+      console.log(res);
+    });
   }
 }

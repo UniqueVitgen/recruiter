@@ -1,0 +1,11 @@
+.interviewer-list {
+  list-style: none;
+  mat-icon, .material-icons {
+    font-size: 1.5em;
+    border-radius: 50%;
+    &:hover {
+      cursor: pointer;
+      background: #cccccc;
+    }
+  }
+}
