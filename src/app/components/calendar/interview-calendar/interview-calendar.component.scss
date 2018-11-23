@@ -19,6 +19,9 @@
   &.arrow-right {
     justify-content: flex-start;
   }
+  &:hover {
+    cursor: pointer;
+  }
 }
 
 .flex-wrap {
@@ -35,6 +38,10 @@
   background: cornflowerblue;
   border: 3px solid #c2c2c2;
   text-align:left;
+  &:hover {
+    cursor: pointer;
+    opacity: 0.8;
+  }
 }
 p{
   font-size:10px;

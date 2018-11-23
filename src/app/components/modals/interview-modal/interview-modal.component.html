@@ -1,6 +1,8 @@
 <app-modal-component>
   <dialog-title>
-    <div class="center-text">{{data.day}}</div>
+    <div class="center-text">{{data.day}}
+      <mat-icon (click)="onNoClick()" class="float-right action-icon">close</mat-icon>
+    </div>
   </dialog-title>
   <dialog-body>
     <mat-card>

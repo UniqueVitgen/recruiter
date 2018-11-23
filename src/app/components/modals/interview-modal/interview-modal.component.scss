@@ -3,9 +3,25 @@
   mat-icon, .material-icons {
     font-size: 1.5em;
     border-radius: 50%;
+    &.action-icon {
+      &:hover {
+        cursor: pointer;
+      }
+    }
     &:hover {
       cursor: pointer;
       background: #cccccc;
     }
   }
+}
+
+mat-icon, .material-icons {
+  &.action-icon {
+    &:hover {
+      background: #cccccc;
+      cursor: pointer;
+      border-radius: 50%;
+    }
+  }
+
 }

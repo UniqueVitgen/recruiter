@@ -19,6 +19,9 @@ export class InterviewModalComponent implements OnInit {
     public dateTimeWorker: DateTimeWorker,
     public userWorker: UserWorker,
     @Inject(MAT_DIALOG_DATA) public data: InterviewDialogData) { }
+  onNoClick(): void {
+    this.dialogRef.close();
+  }
 
   ngOnInit() {
   }
