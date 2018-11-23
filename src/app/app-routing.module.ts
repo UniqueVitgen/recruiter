@@ -4,7 +4,7 @@ import { CandidatePageComponent } from './pages/candidate-page/candidate-page.co
 import { CandidateDashboardPageComponent } from './pages/candidate-dashboard-page/candidate-dashboard-page.component';
 import { JobDescriptionDashboardPageComponent } from './pages/job-description-dashboard-page/job-description-dashboard-page.component';
 import {JobDescriptionPageComponent} from './pages/job-description-page/job-description-page.component';
-
+import { CalendarPageComponent } from './pages/calendar-page/calendar-page.component';
 // import {RouterFactory} from './factory/router.factory'
 
 const routes: Routes = [
@@ -22,7 +22,7 @@ const routes: Routes = [
   },
   {
     path: 'job-description/:id', component: JobDescriptionPageComponent
-  }
+  },
   // {
   //   path: 'guest', loadChildren: './components/guest/guest.module#GuestModule'
   // },

@@ -1,0 +1,47 @@
+.flex-container {
+  display: -webkit-flex;
+  display: flex;
+}
+
+.flex-center {
+  -webkit-align-items: center;
+  align-items: center;
+  -webkit-justify-content: center;
+  justify-content: center;
+}
+
+.flex-wrap {
+  flex-wrap: wrap;
+}
+
+#calendar-container {
+  width: 666px;
+}
+
+.calendar-day {
+  width: 90px;
+  height: 90px;
+  background: cornflowerblue;
+  border: 3px solid #c2c2c2;
+  text-align:left;
+}
+p{
+  font-size:10px;
+  height:40%;
+  width:80%;
+  margin:10px;
+}
+h2 {
+  text-align: center;
+  display: inline;
+  font-weight:bold;
+}
+h5{
+  margin:0px;
+}
+div.month {
+  padding-left: 43%;
+
+}
+
+
