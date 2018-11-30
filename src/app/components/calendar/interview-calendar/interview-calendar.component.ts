@@ -135,10 +135,23 @@ export class InterviewCalendarComponent implements OnInit {
       .map(n => {
         return {
           day: moment(firstDay).add(n, 'd').format('DD'),
-          mockInterview: this.mockInterview
+          mockInterview: this.mockInterview,
+          lastMonth: false
             // ['14:00-16:00 - Bobo']
         };
       });
+    const dayOfWeek = firstDay.weekday();
+    const lastDay = moment(month).add(-1, 'month').endOf('month');
+    for (let i = 0; i < dayOfWeek; i++) {
+      days.unshift(
+        {
+          day: lastDay.format('DD'),
+          mockInterview: this.mockInterview,
+          lastMonth: true
+        }
+      );
+      lastDay.add(-1, 'day');
+    }
     return days;
   }
   currentMonth() {
