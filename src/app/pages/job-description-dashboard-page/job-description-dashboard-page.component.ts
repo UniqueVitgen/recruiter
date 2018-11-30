@@ -14,8 +14,9 @@ export class JobDescriptionDashboardPageComponent implements OnInit {
 
   ngOnInit() {
     this.vacancyService.getAll().subscribe(res => {
+      console.log(res);
       this.jobDescriptionList = res;
-      console.log('this.jobDescriptionList',this.jobDescriptionList);
+      console.log('this.jobDescriptionList', this.jobDescriptionList);
     });
   }
 

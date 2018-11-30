@@ -1,8 +1,9 @@
-import { Injectable } from '@angular/core';
-import { HttpClient, HttpErrorResponse, HttpHeaders, HttpParams, HttpResponse } from '@angular/common/http';
+import {Injectable} from '@angular/core';
+import {HttpClient, HttpErrorResponse, HttpHeaders, HttpResponse} from '@angular/common/http';
 // import { Http, Response, RequestOptionsArgs, RequestOptions, Headers, ResponseContentType } from '@angular/http';
-import { throwError } from 'rxjs/index';
-import { catchError } from 'rxjs/internal/operators';
+import {observable, Observable, throwError} from 'rxjs/index';
+import {catchError} from 'rxjs/internal/operators';
+import {ServiceData} from '../../enums/service-data.enum';
 
 
 @Injectable({
@@ -10,6 +11,7 @@ import { catchError } from 'rxjs/internal/operators';
 })
 export class ConfigService {
   static apiUrl = 'https://virtserver.swaggerhub.com/ksenya96/hr_api/1.0.0/';
+  static serviceData: ServiceData = ServiceData.Mock;
 
   constructor(private http: HttpClient
     // ,private sessionService: SessionService
@@ -21,7 +23,7 @@ export class ConfigService {
   }
 
   post<T>(url, data) {
-    let headers = this.createHeaders();
+    const headers = this.createHeaders();
     return this.http.post<T>(ConfigService.apiUrl + url, data, { headers: headers })
       .pipe(
         catchError(this.handleError)
@@ -29,7 +31,7 @@ export class ConfigService {
   }
 
   get<T>(url) {
-    let headers = this.createHeaders();
+    const headers = this.createHeaders();
     return this.http.get<T>(ConfigService.apiUrl + url, { headers: headers })
       .pipe(
         catchError(this.handleError)
@@ -41,7 +43,7 @@ export class ConfigService {
   }
 
   put<T>(url, data) {
-    let headers = this.createHeaders();
+    const headers = this.createHeaders();
     return this.http.put<T>(ConfigService.apiUrl + url, data, { headers: headers })
       .pipe(
         catchError(this.handleError)
@@ -49,7 +51,7 @@ export class ConfigService {
   }
 
   delete<T>(url) {
-    let headers = this.createHeaders();
+    const headers = this.createHeaders();
     return this.http.delete<T>(ConfigService.apiUrl + url, { headers: headers })
       .pipe(
         catchError(this.handleError)
@@ -65,5 +67,10 @@ export class ConfigService {
       }
       return throwError(error);
     }
-  };
+  }
+  createObservable(object: any): Observable<any> {
+    return Observable.create(observableObject => {
+      observableObject.next(object);
+    });
+  }
 }

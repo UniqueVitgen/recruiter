@@ -13,6 +13,12 @@ import { StatusCandidateModalComponent } from '../../modals/status-candidate-mod
 export class ShortInfoUserComponent implements OnInit {
   @Input() candidate: Candidate;
 
+  tests = {
+    phone: false,
+    skype: false,
+    email: false
+  };
+
   constructor(public dialog: MatDialog) { }
 
   ngOnInit() {

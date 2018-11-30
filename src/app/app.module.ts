@@ -35,6 +35,11 @@ import { JobDescriptionRequirementsComponent } from './components/cards/job-desc
 import {CalendarPageComponent} from './pages/calendar-page/calendar-page.component';
 import { InterviewCalendarComponent } from './components/calendar/interview-calendar/interview-calendar.component';
 import { InterviewModalComponent } from './components/modals/interview-modal/interview-modal.component';
+import { CandidateTimelineComponent } from './components/timelines/candidate-timeline/candidate-timeline.component';
+import { InterviewCandidateTimelineItemComponent } from './components/items/interview-candidate-timeline-item/interview-candidate-timeline-item.component';
+import { NoteCandidateTimelineItemComponent } from './note-candidate-timeline-item/note-candidate-timeline-item.component';
+import { AttachmentCandidateTimelineItemComponent } from './components/items/attachment-candidate-timeline-item/attachment-candidate-timeline-item.component';
+import { ExperienceCandidateTimelineItemComponent } from './components/items/experience-candidate-timeline-item/experience-candidate-timeline-item.component';
 
 
 @NgModule({
@@ -67,7 +72,12 @@ import { InterviewModalComponent } from './components/modals/interview-modal/int
     JobDescriptionRequirementsComponent,
     CalendarPageComponent,
     InterviewCalendarComponent,
-    InterviewModalComponent
+    InterviewModalComponent,
+    CandidateTimelineComponent,
+    InterviewCandidateTimelineItemComponent,
+    NoteCandidateTimelineItemComponent,
+    AttachmentCandidateTimelineItemComponent,
+    ExperienceCandidateTimelineItemComponent
   ],
   imports: [
     BrowserModule,

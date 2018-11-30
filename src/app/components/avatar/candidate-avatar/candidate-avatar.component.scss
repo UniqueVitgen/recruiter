@@ -1,13 +1,29 @@
 .user-avatar {
-  border: 1px solid;
+  //border: 1px solid;
   display: inline-block;
   position: relative;
-  float: right;
+  //float: right;
+  &.me {
+    display: block;
+    margin: 2em auto;
+    margin-bottom: 3em;
+    width: 150px;
+    height: 150px;
+    border-radius: 50%;
+    position: relative;
+    z-index: 2;
+    .avatar-hover {
+      border-radius: 50%;
+    }
+  }
   &:hover {
     border-color: #00b0f0;
     & .avatar-hover{
       display: block;
     }
+  }
+  img {
+    width: 100%;
   }
   .avatar-hover {
     &:hover {
