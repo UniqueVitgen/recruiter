@@ -2,13 +2,15 @@
   <mat-spinner *ngIf="!candidate">
   </mat-spinner>
   <div class="row">
-    <div class="col-3">
+    <div class="col-lg-3" >
+      <div class="affix">
       <!--<mat-card>-->
       <app-short-info-user *ngIf="candidate" [candidate]="candidate"></app-short-info-user>
+      </div>
       <!--</mat-card>-->
     </div>
-    <div class="col-9">
-      <app-candidate-timeline></app-candidate-timeline>
+    <div class="col-lg-9">
+      <app-candidate-timeline *ngIf="candidate" [candidate]="candidate"></app-candidate-timeline>
       <!--<mat-card>-->
       <!--<app-contacts-user *ngIf="candidate" [candidate]="candidate"></app-contacts-user>-->
       <!--<app-candidate-cv-list *ngIf="candidate" [candidate]="candidate"></app-candidate-cv-list>-->

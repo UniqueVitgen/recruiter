@@ -1,5 +1,5 @@
 import {Component, Input, OnInit} from '@angular/core';
-import {Vacancy} from '../../../classes/vacancy';
+import {Vacancy} from '../../../../classes/vacancy';
 
 @Component({
   selector: 'app-job-description-dashboard-item',

@@ -9,7 +9,7 @@ import {
   MatGridListModule,
   MatFormFieldModule,
   MatInputModule,
-  MatButtonModule, MatDividerModule, MatCheckboxModule
+  MatButtonModule, MatDividerModule, MatCheckboxModule, MatDatepickerModule, MatNativeDateModule
 } from '@angular/material';
 
 
@@ -25,7 +25,11 @@ import {
     MatInputModule,
     MatButtonModule,
     MatDividerModule,
-    MatCheckboxModule
+    MatCheckboxModule,
+    MatDatepickerModule,
+    MatNativeDateModule
+    // ,
+    // MatMom
   ],
   declarations: [],
   exports:[
@@ -39,7 +43,9 @@ import {
     MatInputModule,
     MatButtonModule,
     MatDividerModule,
-    MatCheckboxModule
+    MatCheckboxModule,
+    MatDatepickerModule,
+    MatNativeDateModule
   ]
 })
 export class MaterialDesignModule { }

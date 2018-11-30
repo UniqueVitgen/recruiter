@@ -1,3 +1,9 @@
 <mat-card>
-  <app-attachment-candidate-timeline-item></app-attachment-candidate-timeline-item>
+  <app-interview-candidate-timeline-item></app-interview-candidate-timeline-item>
+  <br>
+  <app-attachment-candidate-timeline-item *ngFor="let attachment of candidate.attachments" [attachment]="attachment"></app-attachment-candidate-timeline-item>
+  <br>
+  <app-experience-candidate-timeline-item *ngFor="let experience of candidate.experiences" [experience]="experience"></app-experience-candidate-timeline-item>
+  <br>
+  <app-note-candidate-timeline-item></app-note-candidate-timeline-item>
 </mat-card>

@@ -1,0 +1,27 @@
+<!--<form>-->
+<mat-card>
+  <mat-form-field class="example-full-width">
+    <input [(ngModel)]="experience.companyName.name" matInput placeholder="company Name">
+  </mat-form-field>
+  <mat-form-field>
+    <input matInput [value]="experience.dateFrom" [matDatepicker]="picker" placeholder="From">
+    <mat-datepicker-toggle name="dateSuffix" matSuffix [for]="picker"></mat-datepicker-toggle>
+    <mat-datepicker #picker></mat-datepicker>
+  </mat-form-field>
+  &nbsp;
+  &nbsp;
+  <!--<br>-->
+  <mat-form-field >
+    <input matInput [(ngModel)]="experience.dateTo" [min]="experience.dateFrom" [matDatepicker]="picker1" placeholder="To">
+    <mat-datepicker-toggle name="dateSuffix1" matSuffix [for]="picker1"></mat-datepicker-toggle>
+    <mat-datepicker #picker1></mat-datepicker>
+  </mat-form-field>
+  <mat-form-field class="example-full-width">
+    <input [(ngModel)]="experience.jobPosition" matInput placeholder="Position">
+  </mat-form-field>
+  <mat-form-field class="example-full-width">
+    <textarea matInput placeholder="Comment"></textarea>
+  </mat-form-field>
+  <button mat-raised-button color="primary">Save</button>
+</mat-card>
+<!--</form>-->

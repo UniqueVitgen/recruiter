@@ -26,6 +26,7 @@ export class CandidatePageComponent implements OnInit {
       this.id = Number(params['id']);
       this.candidateService.get(this.id).subscribe(res => {
         this.candidate = res;
+        console.log('res', res);
       });
       // this.candidateService.get()
       // Defaults to 0 if no query param provided.

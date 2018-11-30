@@ -13,3 +13,9 @@
     opacity: 1;
   }
 }
+
+textarea {
+  &, &.mat-input-element {
+    resize: none !important;
+  }
+}

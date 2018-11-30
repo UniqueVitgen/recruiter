@@ -1,4 +1,5 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, Input, OnInit} from '@angular/core';
+import {Attachment} from '../../../../classes/attachment';
 
 @Component({
   selector: 'app-attachment-candidate-timeline-item',
@@ -6,6 +7,7 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./attachment-candidate-timeline-item.component.scss']
 })
 export class AttachmentCandidateTimelineItemComponent implements OnInit {
+  @Input() attachment: Attachment;
 
   constructor() { }
 
