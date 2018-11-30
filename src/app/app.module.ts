@@ -37,7 +37,7 @@ import { InterviewCalendarComponent } from './components/calendar/interview-cale
 import { InterviewModalComponent } from './components/modals/interview-modal/interview-modal.component';
 import { CandidateTimelineComponent } from './components/timelines/candidate-timeline/candidate-timeline.component';
 import { InterviewCandidateTimelineItemComponent } from './components/items/interview-candidate-timeline-item/interview-candidate-timeline-item.component';
-import { NoteCandidateTimelineItemComponent } from './note-candidate-timeline-item/note-candidate-timeline-item.component';
+import { NoteCandidateTimelineItemComponent } from './components/items/note-candidate-timeline-item/note-candidate-timeline-item.component';
 import { AttachmentCandidateTimelineItemComponent } from './components/items/attachment-candidate-timeline-item/attachment-candidate-timeline-item.component';
 import { ExperienceCandidateTimelineItemComponent } from './components/items/experience-candidate-timeline-item/experience-candidate-timeline-item.component';
 
