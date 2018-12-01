@@ -47,6 +47,9 @@
 .candidate-dashboard-item {
   &, &.mat-card {
     padding: 0;
+    mat-card-header {
+      padding: 16px 16px 0 16px;
+    }
   }
   &.add-item {
     mat-icon {

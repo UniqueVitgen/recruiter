@@ -16,7 +16,7 @@ import {
   MatNativeDateModule,
   MatButtonToggleModule,
   MatMenuModule,
-  MatAutocompleteModule
+  MatAutocompleteModule, MatTooltipModule
 } from '@angular/material';
 import {DragDropModule} from '@angular/cdk/drag-drop';
 
@@ -39,7 +39,8 @@ import {DragDropModule} from '@angular/cdk/drag-drop';
     MatButtonToggleModule,
     MatMenuModule,
     MatAutocompleteModule,
-    DragDropModule
+    DragDropModule,
+    MatTooltipModule
     // ,
     // MatMom
   ],
@@ -61,7 +62,8 @@ import {DragDropModule} from '@angular/cdk/drag-drop';
     MatButtonToggleModule,
     MatMenuModule,
     MatAutocompleteModule,
-    DragDropModule
+    DragDropModule,
+    MatTooltipModule
   ]
 })
 export class MaterialDesignModule { }
