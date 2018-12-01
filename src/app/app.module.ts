@@ -16,7 +16,8 @@ import { ModalComponentComponent } from './components/modals/modal-component/mod
 import { NameCandidateModalComponent } from './components/modals/candidate/name-candidate-modal/name-candidate-modal.component';
 import { StatusCandidateModalComponent } from './components/modals/candidate/status-candidate-modal/status-candidate-modal.component';
 import { PositionCandidateModalComponent } from './components/modals/candidate/position-candidate-modal/position-candidate-modal.component';
-import { CandidateAvatarComponent } from './components/avatar/candidate-avatar/candidate-avatar.component'; import { CandidateCvListComponent } from './components/cards/candidate/candidate-cv-list/candidate-cv-list.component';
+import { CandidateAvatarComponent } from './components/avatar/candidate-avatar/candidate-avatar.component';
+import { CandidateCvListComponent } from './components/cards/candidate/candidate-cv-list/candidate-cv-list.component';
 import { CandidateAttachmentComponent } from './components/items/candidate-attachment/candidate-attachment.component';
 import { AttachmentCandidateModalComponent } from './components/modals/candidate/attachment-candidate-modal/attachment-candidate-modal.component';
 import { NotesCardComponent } from './components/cards/candidate/notes-card/notes-card.component';
@@ -42,10 +43,13 @@ import { AttachmentCandidateTimelineItemComponent } from './components/items/tim
 import { ExperienceCandidateTimelineItemComponent } from './components/items/timeline/experience-candidate-timeline-item/experience-candidate-timeline-item.component';
 import { CandidateTimelineToolbarComponent } from './components/toolbar/candidate-timeline-toolbar/candidate-timeline-toolbar.component';
 import { JobDescriptionModalComponent } from './components/modals/job-description/job-description-modal/job-description-modal.component';
+
 import { InterviewPageComponent } from './pages/interview-page/interview-page.component';
 import { InterviewShortInfoComponent } from './components/cards/interview/interview-short-info/interview-short-info.component';
 import { InterviewFeedbackComponent } from './components/cards/interview/interview-feedback/interview-feedback.component';
 import { InterviewCandidateComponent } from './components/cards/interview/interview-candidate/interview-candidate.component';
+
+import { PerfectScrollbarModule } from 'ngx-perfect-scrollbar';
 
 
 @NgModule({
@@ -97,7 +101,8 @@ import { InterviewCandidateComponent } from './components/cards/interview/interv
     AppRoutingModule,
     MaterialDesignModule,
     AvatarModule,
-    FormsModule
+    FormsModule,
+    PerfectScrollbarModule
   ],
   providers: [],
   bootstrap: [AppComponent],
