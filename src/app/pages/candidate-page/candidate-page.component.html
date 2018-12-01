@@ -10,7 +10,7 @@
       <!--</mat-card>-->
     </div>
     <div class="col-lg-9">
-      <app-candidate-timeline *ngIf="candidate" [candidate]="candidate"></app-candidate-timeline>
+      <app-candidate-timeline *ngIf="candidate"  [candidate]="candidate" [timelineNotes]="eventNoteList"></app-candidate-timeline>
       <!--<mat-card>-->
       <!--<app-contacts-user *ngIf="candidate" [candidate]="candidate"></app-contacts-user>-->
       <!--<app-candidate-cv-list *ngIf="candidate" [candidate]="candidate"></app-candidate-cv-list>-->
