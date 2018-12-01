@@ -1,4 +1,6 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, EventEmitter, OnInit, Output} from '@angular/core';
+import {Attachment} from '../../../classes/attachment';
+import {AttachmentType} from '../../../enums/attachment-type.enum';
 
 @Component({
   selector: 'app-candidate-timeline-toolbar',
@@ -6,7 +8,6 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./candidate-timeline-toolbar.component.scss']
 })
 export class CandidateTimelineToolbarComponent implements OnInit {
-
   constructor() { }
 
   ngOnInit() {
