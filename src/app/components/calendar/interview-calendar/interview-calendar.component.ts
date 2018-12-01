@@ -128,9 +128,9 @@ export class InterviewCalendarComponent implements OnInit {
       // this.animal = result;
     });
   }
-  createCalendar(month: Moment) {
-    const firstDay = moment(month).startOf('M');
-    const days = Array.apply(null, {length: month.daysInMonth()})
+  createCalendar(month: Moment): Moment[] {
+    const firstDay: Moment = moment(month).startOf('M');
+    const days: any = Array.apply(null, {length: month.daysInMonth()})
       .map(Number.call, Number)
       .map(n => {
         return {
@@ -140,8 +140,8 @@ export class InterviewCalendarComponent implements OnInit {
             // ['14:00-16:00 - Bobo']
         };
       });
-    const dayOfWeek = firstDay.weekday();
-    const lastDay = moment(month).add(-1, 'month').endOf('month');
+    const dayOfWeek: number = firstDay.weekday();
+    const lastDay: Moment = moment(month).add(-1, 'month').endOf('month');
     for (let i = 0; i < dayOfWeek; i++) {
       days.unshift(
         {
@@ -154,15 +154,22 @@ export class InterviewCalendarComponent implements OnInit {
     }
     return days;
   }
-  currentMonth() {
+  isToday(day: Moment): boolean {
+    if (moment().diff(this.date, 'days') === 0 && moment().format('DD') === day.toString() ) {
+      return true;
+    } else {
+      return false;
+    }
+  }
+  currentMonth(): void {
     this.date = this.date.add(0, 'month');
     this.daysArray = this.createCalendar(this.date);
   }
-  prevMonth() {
+  prevMonth(): void  {
     this.date = this.date.add(-1, 'month');
     this.daysArray = this.createCalendar(this.date);
   }
-  nextMonth() {
+  nextMonth(): void {
     this.date = this.date.add(1, 'month');
     this.daysArray = this.createCalendar(this.date);
   }
