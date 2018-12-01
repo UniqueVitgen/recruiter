@@ -1,3 +1,60 @@
-<p>
-  job-description-modal works!
-</p>
+<app-modal-component>
+  <dialog-title>
+    <span>Job description</span>
+    <button (click)="onNoClick()" class="float-right" mat-icon-button>
+      <mat-icon>close</mat-icon>
+    </button>
+  </dialog-title>
+  <dialog-body>
+    <mat-form-field *ngIf="editedVacancy" class="example-full-width">
+      <input [(ngModel)]="editedVacancy.position" matInput placeholder="Position">
+    </mat-form-field>
+    <mat-form-field class="example-full-width">
+      <textarea matInput placeholder="Description"></textarea>
+    </mat-form-field>
+    <div class="row font-weight-bold">
+      <div class="col-6">
+        <span>Requirement</span>
+      </div>
+      <div class="col-3">
+        <span>Required</span>
+      </div>
+      <div class="col-3">
+        <span>Public</span>
+      </div>
+    </div>
+    <div  cdkDropList  (cdkDropListDropped)="drop($event)">
+      <div cdkDrag class="row" *ngFor="let requirement of editedVacancy.requirements">
+        <div class="col-1 checkbox-col">
+          <mat-icon>format_line_spacing</mat-icon>
+        </div>
+        <div class="col-5">
+          <mat-form-field class="example-full-width">
+            <input matInput placeholder="Requirement" [matAutocomplete]="auto" [(ngModel)]="requirement.name">
+            <mat-autocomplete #auto="matAutocomplete">
+              <mat-option *ngFor="let state of searchWorker.search(requirement.name, testRequirements)" [value]="state">
+                <span>{{state}}</span>
+                <!--<small>Population: {{state.population}}</small>-->
+              </mat-option>
+            </mat-autocomplete>
+          </mat-form-field>
+        </div>
+        <div class="col-3 checkbox-col">
+          <mat-checkbox class="example-margin"></mat-checkbox>
+        </div>
+        <div class="col-3 checkbox-col">
+          <mat-checkbox class="example-margin"></mat-checkbox>
+        </div>
+      </div>
+    </div>
+    <!--<div class="row">-->
+      <!--<div class="col-12 center-item">-->
+        <button (click)="addRequirement()" mat-raised-button color="primary">Add Requirement</button>
+      <!--</div>-->
+    <!--</div>-->
+  </dialog-body>
+  <dialog-footer>
+    <button mat-button (click)="onNoClick()">No Thanks</button>
+    <button mat-button cdkFocusInitial>Ok</button>
+  </dialog-footer>
+</app-modal-component>

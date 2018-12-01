@@ -98,7 +98,8 @@ import { JobDescriptionModalComponent } from './components/modals/job-descriptio
     NameCandidateModalComponent,
     StatusCandidateModalComponent,
     PositionCandidateModalComponent,
-    InterviewModalComponent
+    InterviewModalComponent,
+    JobDescriptionModalComponent
   ],
   schemas: [NO_ERRORS_SCHEMA] // add this line
 })

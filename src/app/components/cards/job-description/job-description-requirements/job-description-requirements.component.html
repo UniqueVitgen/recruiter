@@ -35,9 +35,11 @@
   <!--</div>-->
 <!--</mat-card>-->
 <mat-card>
-  <mat-card-title>Requirements <button *ngIf="isMoreIcon" class="float-right" mat-icon-button [matMenuTriggerFor]="menu">
-    <mat-icon>more_horiz</mat-icon>
-  </button></mat-card-title>
+  <mat-card-title>Requirements
+    <button *ngIf="isMoreIcon" class="float-right" mat-icon-button [matMenuTriggerFor]="menu">
+      <mat-icon>more_horiz</mat-icon>
+    </button>
+  </mat-card-title>
   <ul>
     <li *ngFor="let requirement of vacancy.requirements">
       {{requirement.name}}
@@ -45,5 +47,5 @@
   </ul>
 </mat-card>
 <mat-menu  #menu="matMenu">
-  <button (click)="click" mat-menu-item>Edit</button>
+  <button (click)="clickEdit()" mat-menu-item>Edit</button>
 </mat-menu>

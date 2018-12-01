@@ -9,8 +9,16 @@ import {
   MatGridListModule,
   MatFormFieldModule,
   MatInputModule,
-  MatButtonModule, MatDividerModule, MatCheckboxModule, MatDatepickerModule, MatNativeDateModule, MatButtonToggleModule, MatMenuModule
+  MatButtonModule,
+  MatDividerModule,
+  MatCheckboxModule,
+  MatDatepickerModule,
+  MatNativeDateModule,
+  MatButtonToggleModule,
+  MatMenuModule,
+  MatAutocompleteModule
 } from '@angular/material';
+import {DragDropModule} from '@angular/cdk/drag-drop';
 
 
 @NgModule({
@@ -29,7 +37,9 @@ import {
     MatDatepickerModule,
     MatNativeDateModule,
     MatButtonToggleModule,
-    MatMenuModule
+    MatMenuModule,
+    MatAutocompleteModule,
+    DragDropModule
     // ,
     // MatMom
   ],
@@ -49,7 +59,9 @@ import {
     MatDatepickerModule,
     MatNativeDateModule,
     MatButtonToggleModule,
-    MatMenuModule
+    MatMenuModule,
+    MatAutocompleteModule,
+    DragDropModule
   ]
 })
 export class MaterialDesignModule { }
