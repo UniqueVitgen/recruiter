@@ -14,7 +14,7 @@
     <mat-card>
       <!--<p>-->
       <mat-form-field class="example-full-width">
-        <input  matInput placeholder="Name">
+        <input [(ngModel)]="candidate.name" matInput placeholder="Name">
       </mat-form-field>
       <mat-form-field class="example-full-width">
         <input [(ngModel)]="candidate.surname" matInput placeholder="Surname" >
