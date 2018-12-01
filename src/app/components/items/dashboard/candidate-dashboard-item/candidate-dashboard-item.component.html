@@ -4,7 +4,7 @@
     <!--<mat-card-title class="font-weight-bold">Name: {{userWorker.formatFullName(candidate)}}</mat-card-title>-->
     <!--&lt;!&ndash;<mat-card-subtitle>Dog Breed</mat-card-subtitle>&ndash;&gt;-->
   <!--</mat-card-header>-->
-  <div class="row">
+  <!--<div class="row">-->
     <!--<div class="col-6">-->
       <app-candidate-avatar [isClosedIcon]="true" [isMoreIcon]="true" (clickAvatar)="goToCandidatePage()" (clickCloseIcon)="deleteCandidate()"></app-candidate-avatar>
     <!--</div>-->
@@ -12,9 +12,23 @@
       <!--<span>Full name:</span>-->
       <!--<span>{{userWorker.formatFullName(candidate)}}</span>-->
     <!--</div>-->
-  </div><!--<br>-->
+  <!--</div>-->
+  <!--<br>-->
   <!--<span></span>-->
   <!--<mat-card-content>-->
 
   <!--</mat-card-content>-->
+</mat-card>
+<mat-card>
+  <div>
+    <span class="font-weight-bold">Full name:</span>
+    &nbsp;
+    <span>{{userWorker.formatFullName(candidate)}}</span>
+  </div>
+  <div *ngFor="let contact of candidate.contacts">
+    <span class="font-weight-bold">{{contact.contactType}}:</span>
+    &nbsp;
+    <span>{{contact.contactDetails}}</span>
+  </div>
+  <span></span>
 </mat-card>
