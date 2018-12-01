@@ -1,5 +1,5 @@
 import {Component, Input, OnInit} from '@angular/core';
-import {Candidate} from '../../../classes/candidate';
+import {Candidate} from '../../../../classes/candidate';
 
 @Component({
   selector: 'app-experience-user',

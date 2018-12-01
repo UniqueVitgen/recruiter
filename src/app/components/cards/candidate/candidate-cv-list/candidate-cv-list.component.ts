@@ -4,7 +4,7 @@ import { Attachment } from 'src/app/classes/attachment';
 import {MatDialog, MatDialogRef, MAT_DIALOG_DATA, MatDialogConfig} from '@angular/material';
 import { CandidateService } from 'src/app/services/candidate/candidate.service';
 import { ArrayWorker } from 'src/app/workers/array/array.worker';
-import { AttachmentCandidateModalComponent } from '../../modals/attachment-candidate-modal/attachment-candidate-modal.component';
+import { AttachmentCandidateModalComponent } from '../../../modals/candidate/attachment-candidate-modal/attachment-candidate-modal.component';
 import { AttachmentDialogData } from 'src/app/interfaces/dialog/attachment-dialog-data';
 
 @Component({

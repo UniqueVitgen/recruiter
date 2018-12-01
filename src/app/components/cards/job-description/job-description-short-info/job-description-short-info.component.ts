@@ -1,5 +1,5 @@
 import {Component, Input, OnInit} from '@angular/core';
-import {Vacancy} from '../../../classes/vacancy';
+import {Vacancy} from '../../../../classes/vacancy';
 
 @Component({
   selector: 'app-job-description-short-info',
@@ -8,6 +8,7 @@ import {Vacancy} from '../../../classes/vacancy';
 })
 export class JobDescriptionShortInfoComponent implements OnInit {
   @Input() vacancy: Vacancy;
+  @Input() isEdited: boolean;
 
   constructor() { }
 

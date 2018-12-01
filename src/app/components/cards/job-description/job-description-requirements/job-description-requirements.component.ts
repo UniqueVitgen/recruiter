@@ -1,5 +1,5 @@
 import {Component, Input, OnInit} from '@angular/core';
-import {Vacancy} from '../../../classes/vacancy';
+import {Vacancy} from '../../../../classes/vacancy';
 
 @Component({
   selector: 'app-job-description-requirements',
@@ -8,10 +8,15 @@ import {Vacancy} from '../../../classes/vacancy';
 })
 export class JobDescriptionRequirementsComponent implements OnInit {
   @Input() vacancy: Vacancy;
+  @Input() isMoreIcon: boolean;
 
   constructor() { }
 
   ngOnInit() {
+  }
+
+  clickEdit() {
+
   }
 
 }

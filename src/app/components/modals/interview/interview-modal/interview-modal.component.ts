@@ -1,10 +1,10 @@
 import {Component, Inject, OnInit} from '@angular/core';
-import {CandidateService} from '../../../services/candidate/candidate.service';
+import {CandidateService} from '../../../../services/candidate/candidate.service';
 import {MAT_DIALOG_DATA, MatDialogRef} from '@angular/material';
-import {AttachmentDialogData} from '../../../interfaces/dialog/attachment-dialog-data';
-import {InterviewDialogData} from '../../../interfaces/dialog/interview-dialog-data';
-import {DateTimeWorker} from '../../../workers/date-time/date-time.worker';
-import {UserWorker} from '../../../workers/user/user.worker';
+import {AttachmentDialogData} from '../../../../interfaces/dialog/attachment-dialog-data';
+import {InterviewDialogData} from '../../../../interfaces/dialog/interview-dialog-data';
+import {DateTimeWorker} from '../../../../workers/date-time/date-time.worker';
+import {UserWorker} from '../../../../workers/user/user.worker';
 
 @Component({
   selector: 'app-interview-modal',

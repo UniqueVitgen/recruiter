@@ -1,9 +1,20 @@
+
+<app-candidate-timeline-toolbar></app-candidate-timeline-toolbar>
 <mat-card>
-  <app-interview-candidate-timeline-item></app-interview-candidate-timeline-item>
-  <br>
-  <app-attachment-candidate-timeline-item *ngFor="let attachment of candidate.attachments" [attachment]="attachment"></app-attachment-candidate-timeline-item>
-  <br>
-  <app-experience-candidate-timeline-item *ngFor="let experience of candidate.experiences" [experience]="experience"></app-experience-candidate-timeline-item>
-  <br>
-  <app-note-candidate-timeline-item></app-note-candidate-timeline-item>
+  <!--<br>-->
+  <div>
+    <app-interview-candidate-timeline-item></app-interview-candidate-timeline-item>
+    <br>
+  </div>
+  <div  *ngFor="let attachment of candidate.attachments">
+    <app-attachment-candidate-timeline-item [attachment]="attachment"></app-attachment-candidate-timeline-item>
+    <br>
+  </div>
+  <div  *ngFor="let experience of candidate.experiences">
+    <app-experience-candidate-timeline-item [experience]="experience"></app-experience-candidate-timeline-item>
+    <br>
+  </div>
+  <div>
+    <app-note-candidate-timeline-item></app-note-candidate-timeline-item>
+  </div>
 </mat-card>

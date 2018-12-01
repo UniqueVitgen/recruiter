@@ -2,7 +2,7 @@ import {Component, OnInit} from '@angular/core';
 import * as moment from 'moment';
 import {Moment} from 'moment';
 import {MatDialog} from '@angular/material';
-import {InterviewModalComponent} from '../../modals/interview-modal/interview-modal.component';
+import {InterviewModalComponent} from '../../modals/interview/interview-modal/interview-modal.component';
 import {InterviewExtended} from '../../../classes/interview';
 import {Vacancy} from '../../../classes/vacancy';
 import {VacancyState} from '../../../enums/vacancy-state.enum';

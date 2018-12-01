@@ -1,6 +1,31 @@
-
-<app-job-description-short-info *ngIf="vacancy" [vacancy]="vacancy"></app-job-description-short-info>
+<mat-card>
+  <app-job-description-short-info *ngIf="vacancy" [vacancy]="vacancy" [isEdited]="true"></app-job-description-short-info>
+</mat-card>
 <br>
-<app-job-description-requirements *ngIf="vacancy" [vacancy]="vacancy"></app-job-description-requirements>
+<app-job-description-requirements *ngIf="vacancy" [vacancy]="vacancy" [isMoreIcon]="true"></app-job-description-requirements>
 <br>
-<app-candidate-dashboard *ngIf="candidates" [candidates]="candidates" [haveAddElement]="false"></app-candidate-dashboard>
+<mat-card>
+  <mat-card-title>
+    <span>Selected Candidates</span>
+    &nbsp;
+    <button mat-mini-fab color="primary"><mat-icon>search</mat-icon></button>
+    &nbsp;
+    <button mat-mini-fab color="primary"><mat-icon>person_add</mat-icon></button>
+  </mat-card-title>
+<mat-divider></mat-divider>
+<br>
+<app-candidate-dashboard *ngIf="candidates" [candidates]="candidates" [haveAddElement]="true"></app-candidate-dashboard>
+</mat-card>
+<br>
+<mat-card>
+  <mat-card-title>
+    <span>Possible Candidates</span>
+    &nbsp;
+    <button mat-mini-fab color="primary"><mat-icon>search</mat-icon></button>
+    &nbsp;
+    <button mat-mini-fab color="primary"><mat-icon>person_add</mat-icon></button>
+  </mat-card-title>
+  <mat-divider></mat-divider>
+  <br>
+  <app-candidate-dashboard *ngIf="candidates" [candidates]="candidates" [haveAddElement]="false"></app-candidate-dashboard>
+</mat-card>

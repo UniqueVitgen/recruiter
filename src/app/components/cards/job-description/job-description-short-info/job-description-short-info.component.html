@@ -1,6 +1,15 @@
 <div *ngIf="vacancy">
-  <span class="big-text">{{vacancy?.position}}</span>
-  <mat-divider></mat-divider>
+  <span *ngIf="!isEdited" class="big-text">{{vacancy?.position}}</span>
+  <ng-container *ngIf="isEdited">
+    <mat-form-field *ngIf="vacancy" class="example-full-width">
+      <input [(ngModel)]="vacancy.position" matInput placeholder="Position">
+    </mat-form-field>
+    <mat-form-field class="example-full-width">
+      <textarea matInput placeholder="Comment"></textarea>
+    </mat-form-field>
+  </ng-container>
+  <!--<textarea placeholder="Enter something funny." id="text" name="text" rows="4" style="overflow: hidden; word-wrap: break-word; resize: none; height: 160px; "></textarea>-->
+  <!--<mat-divider></mat-divider>-->
   <!--<br>-->
   <div class="description-vacancy">
     <div *ngIf="vacancy.experienceYearsRequire">

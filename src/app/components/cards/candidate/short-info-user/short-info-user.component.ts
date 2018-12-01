@@ -1,9 +1,9 @@
 import { Component, OnInit, Input } from '@angular/core';
 import { Candidate } from 'src/app/classes/candidate';
-import { ModalComponentComponent } from '../../modals/modal-component/modal-component.component';
+import { ModalComponentComponent } from '../../../modals/modal-component/modal-component.component';
 import {MatDialog, MatDialogRef, MAT_DIALOG_DATA} from '@angular/material';
-import { NameCandidateModalComponent } from '../../modals/name-candidate-modal/name-candidate-modal.component';
-import { StatusCandidateModalComponent } from '../../modals/status-candidate-modal/status-candidate-modal.component';
+import { NameCandidateModalComponent } from '../../../modals/candidate/name-candidate-modal/name-candidate-modal.component';
+import { StatusCandidateModalComponent } from '../../../modals/candidate/status-candidate-modal/status-candidate-modal.component';
 
 @Component({
   selector: 'app-short-info-user',

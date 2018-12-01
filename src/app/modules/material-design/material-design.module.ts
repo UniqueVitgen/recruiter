@@ -9,7 +9,7 @@ import {
   MatGridListModule,
   MatFormFieldModule,
   MatInputModule,
-  MatButtonModule, MatDividerModule, MatCheckboxModule, MatDatepickerModule, MatNativeDateModule
+  MatButtonModule, MatDividerModule, MatCheckboxModule, MatDatepickerModule, MatNativeDateModule, MatButtonToggleModule, MatMenuModule
 } from '@angular/material';
 
 
@@ -27,12 +27,14 @@ import {
     MatDividerModule,
     MatCheckboxModule,
     MatDatepickerModule,
-    MatNativeDateModule
+    MatNativeDateModule,
+    MatButtonToggleModule,
+    MatMenuModule
     // ,
     // MatMom
   ],
   declarations: [],
-  exports:[
+  exports: [
     MatIconModule,
     MatProgressSpinnerModule,
     MatCardModule,
@@ -45,7 +47,9 @@ import {
     MatDividerModule,
     MatCheckboxModule,
     MatDatepickerModule,
-    MatNativeDateModule
+    MatNativeDateModule,
+    MatButtonToggleModule,
+    MatMenuModule
   ]
 })
 export class MaterialDesignModule { }
