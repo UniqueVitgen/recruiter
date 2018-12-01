@@ -42,6 +42,8 @@ import { AttachmentCandidateTimelineItemComponent } from './components/items/tim
 import { ExperienceCandidateTimelineItemComponent } from './components/items/timeline/experience-candidate-timeline-item/experience-candidate-timeline-item.component';
 import { CandidateTimelineToolbarComponent } from './components/toolbar/candidate-timeline-toolbar/candidate-timeline-toolbar.component';
 import { JobDescriptionModalComponent } from './components/modals/job-description/job-description-modal/job-description-modal.component';
+import { PerfectScrollbarModule } from 'ngx-perfect-scrollbar';
+
 
 
 @NgModule({
@@ -89,7 +91,8 @@ import { JobDescriptionModalComponent } from './components/modals/job-descriptio
     AppRoutingModule,
     MaterialDesignModule,
     AvatarModule,
-    FormsModule
+    FormsModule,
+    PerfectScrollbarModule
   ],
   providers: [],
   bootstrap: [AppComponent],
