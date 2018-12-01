@@ -5,6 +5,7 @@ import { CandidateDashboardPageComponent } from './pages/candidate-dashboard-pag
 import { JobDescriptionDashboardPageComponent } from './pages/job-description-dashboard-page/job-description-dashboard-page.component';
 import {JobDescriptionPageComponent} from './pages/job-description-page/job-description-page.component';
 import { CalendarPageComponent } from './pages/calendar-page/calendar-page.component';
+import {InterviewPageComponent} from './pages/interview-page/interview-page.component';
 // import {RouterFactory} from './factory/router.factory'
 
 const routes: Routes = [
@@ -22,6 +23,9 @@ const routes: Routes = [
   },
   {
     path: 'job-description/:id', component: JobDescriptionPageComponent
+  },
+  {
+    path: 'interview/:id', component: InterviewPageComponent
   },
   {
     path: 'calendar', component: CalendarPageComponent

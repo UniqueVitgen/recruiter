@@ -12,6 +12,7 @@ import { StatusCandidateModalComponent } from '../../../modals/candidate/status-
 })
 export class ShortInfoUserComponent implements OnInit {
   @Input() candidate: Candidate;
+  @Input() readonly: boolean;
 
   tests = {
     phone: false,

@@ -1,3 +1,4 @@
+
 import {Component, Input, OnChanges, Output, EventEmitter} from '@angular/core';
 import {EventNote} from '../../../classes/event-note';
 import {Attachment} from '../../../classes/attachment';

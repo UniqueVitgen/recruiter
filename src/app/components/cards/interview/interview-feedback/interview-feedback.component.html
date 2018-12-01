@@ -1,0 +1,8 @@
+<!--<div class="center-item">-->
+  <mat-card *ngIf="interview">
+    <mat-card-title>Feedback</mat-card-title>
+    <mat-form-field *ngFor="let requirement of interview.vacancy.requirements" class="example-full-width">
+      <textarea matInput [placeholder]="requirement.name"></textarea>
+    </mat-form-field>
+  </mat-card>
+<!--</div>-->
