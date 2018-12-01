@@ -45,6 +45,7 @@ import { JobDescriptionModalComponent } from './components/modals/job-descriptio
 import { InterviewPageComponent } from './pages/interview-page/interview-page.component';
 import { InterviewShortInfoComponent } from './components/cards/interview/interview-short-info/interview-short-info.component';
 import { InterviewFeedbackComponent } from './components/cards/interview/interview-feedback/interview-feedback.component';
+import { InterviewCandidateComponent } from './components/cards/interview/interview-candidate/interview-candidate.component';
 
 
 @NgModule({
@@ -87,7 +88,8 @@ import { InterviewFeedbackComponent } from './components/cards/interview/intervi
     JobDescriptionModalComponent,
     InterviewPageComponent,
     InterviewShortInfoComponent,
-    InterviewFeedbackComponent
+    InterviewFeedbackComponent,
+    InterviewCandidateComponent
   ],
   imports: [
     BrowserModule,

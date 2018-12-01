@@ -13,15 +13,46 @@
     <br>
     <mat-card>
       <!--<p>-->
-      <mat-form-field class="example-full-width">
-        <input  matInput placeholder="Name">
-      </mat-form-field>
-      <mat-form-field class="example-full-width">
-        <input [(ngModel)]="candidate.surname" matInput placeholder="Surname" >
-      </mat-form-field>
-      <mat-form-field class="example-full-width">
-        <input matInput placeholder="Position">
-      </mat-form-field>
+      <div *ngIf="!readonly">
+        <mat-form-field class="example-full-width">
+          <input  matInput placeholder="Name">
+        </mat-form-field>
+        <mat-form-field class="example-full-width">
+          <input [(ngModel)]="candidate.surname" matInput placeholder="Surname" >
+        </mat-form-field>
+        <mat-form-field class="example-full-width">
+          <input matInput placeholder="Position">
+        </mat-form-field>
+        <mat-form-field class="example-full-width">
+          <input [(ngModel)]="candidate.candidateState.name" matInput placeholder="Status">
+        </mat-form-field>
+      </div>
+      <div *ngIf="readonly">
+        <div class="row">
+          <div class="col-3">
+            <span class="font-weight-bold float-right">Name:</span>
+          </div>
+          <div class="col-9">
+            <span>{{candidate.name}}</span>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-3">
+            <span class="font-weight-bold float-right">Surname:</span>
+          </div>
+          <div class="col-9">
+            <span>{{candidate.surname}}</span>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-3">
+            <span class="font-weight-bold float-right">Status:</span>
+          </div>
+          <div class="col-9">
+            <span>{{candidate.candidateState.name}}</span>
+          </div>
+        </div>
+      </div>
       <!--Name: <span>{{candidate.name}} {{candidate.surname}}</span>-->
       <!--<mat-icon (click)="openNameDialog()" class="edit-icon">create</mat-icon>-->
       <!--</p>-->
@@ -30,34 +61,43 @@
       <!--<mat-icon class="edit-icon">create</mat-icon>-->
       <!--</p>-->
       <!--<p>-->
-      <mat-form-field class="example-full-width">
-        <input [(ngModel)]="candidate.candidateState.name" matInput placeholder="Status">
-      </mat-form-field>
     </mat-card>
     <br>
     <mat-card>
       <mat-card-title>Contacts</mat-card-title>
       <mat-card-content>
-        <mat-checkbox [(ngModel)]="tests.email">
-          <mat-form-field class="example-full-width" *ngIf="tests.email">
-            <input [(ngModel)]="candidate.candidateState.name" matInput placeholder="Email">
-          </mat-form-field>
-          <span  *ngIf="!tests.email">Email</span>
-        </mat-checkbox>
-        <br>
-        <mat-checkbox [(ngModel)]="tests.skype">
-          <mat-form-field class="example-full-width" *ngIf="tests.skype">
-            <input [(ngModel)]="candidate.candidateState.name" matInput placeholder="skype">
-          </mat-form-field>
-          <span  *ngIf="!tests.skype">skype</span>
-        </mat-checkbox>
-        <br>
-        <mat-checkbox [(ngModel)]="tests.phone">
-          <mat-form-field class="example-full-width" *ngIf="tests.phone">
-            <input [(ngModel)]="candidate.candidateState.name" matInput placeholder="phone">
-          </mat-form-field>
-          <span  *ngIf="!tests.phone">phone</span>
-        </mat-checkbox>
+        <div *ngIf="!readonly">
+          <mat-checkbox [(ngModel)]="tests.email">
+            <mat-form-field class="example-full-width" *ngIf="tests.email">
+              <input [(ngModel)]="candidate.candidateState.name" matInput placeholder="Email">
+            </mat-form-field>
+            <span  *ngIf="!tests.email">Email</span>
+          </mat-checkbox>
+          <br>
+          <mat-checkbox [(ngModel)]="tests.skype">
+            <mat-form-field class="example-full-width" *ngIf="tests.skype">
+              <input [(ngModel)]="candidate.candidateState.name" matInput placeholder="skype">
+            </mat-form-field>
+            <span  *ngIf="!tests.skype">skype</span>
+          </mat-checkbox>
+          <br>
+          <mat-checkbox [(ngModel)]="tests.phone">
+            <mat-form-field class="example-full-width" *ngIf="tests.phone">
+              <input [(ngModel)]="candidate.candidateState.name" matInput placeholder="phone">
+            </mat-form-field>
+            <span  *ngIf="!tests.phone">phone</span>
+          </mat-checkbox>
+        </div>
+        <div *ngIf="readonly">
+          <div class="row" *ngFor="let contact of candidate.contacts">
+            <div class="col-3">
+              <span class="font-weight-bold float-right">{{contact.contactType}}</span>
+            </div>
+            <div class="col-9">
+              <span>{{contact.contactDetails}}</span>
+            </div>
+          </div>
+        </div>
       </mat-card-content>
     </mat-card>
       <!--Status:-->

@@ -1,8 +1,8 @@
 <mat-button-toggle-group name="fontStyle" aria-label="Font Style">
-  <mat-button-toggle>Assign interview</mat-button-toggle>
-  <mat-button-toggle>Add CV file</mat-button-toggle>
-  <mat-button-toggle>Add info About experience</mat-button-toggle>
-  <mat-button-toggle>Add some note</mat-button-toggle>
+  <mat-button-toggle (click)="addAssignInterview()">Assign interview</mat-button-toggle>
+  <mat-button-toggle (click)="addCV()">Add CV file</mat-button-toggle>
+  <mat-button-toggle (click)="addExperience()">Add info About experience</mat-button-toggle>
+  <mat-button-toggle (click)="addNote()">Add some note</mat-button-toggle>
 </mat-button-toggle-group>
 <!--<div class="btn-toolbar" role="toolbar">-->
   <!--<div class="btn-group btn-group-justified" role="group">-->

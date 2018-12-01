@@ -1,5 +1,6 @@
 import {Component, Input, OnInit} from '@angular/core';
 import {Candidate} from '../../../classes/candidate';
+import {Events} from '../../../classes/events';
 import {EventNote} from '../../../classes/event-note';
 import {Interview} from '../../../classes/interview';
 import {CandidateExperience} from '../../../classes/candidate-experience';
@@ -15,8 +16,8 @@ import {EventNoteWorker} from '../../../workers/event-note/event-note.worker';
 })
 export class CandidateTimelineComponent implements OnInit {
   @Input() candidate: Candidate;
-  @Input() timelineNotes: EventNote[];
 
+  @Input() timelineNotes: EventNote[];
   constructor(private typeCheckingWorker: TypeCheckingWorker,
               private eventNoteWorker: EventNoteWorker) { }
 
@@ -33,6 +34,9 @@ export class CandidateTimelineComponent implements OnInit {
   }
   checkIfNoteISAttachment(eventNote: EventNote) {
     return this.eventNoteWorker.isAttachement(eventNote);
+  }
+  changeTimeLine(timeline) {
+    this.timelineNotes = timeline;
   }
 
 }
