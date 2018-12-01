@@ -12,4 +12,7 @@ export class CandidateTimelineToolbarComponent implements OnInit {
   ngOnInit() {
   }
 
+  addAssignInterview() {
+
+  }
 }

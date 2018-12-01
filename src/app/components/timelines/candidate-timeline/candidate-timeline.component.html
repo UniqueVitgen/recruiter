@@ -1,20 +1,24 @@
 
 <app-candidate-timeline-toolbar></app-candidate-timeline-toolbar>
-<mat-card>
+<mat-card *ngFor="let event of arr">
   <!--<br>-->
-  <div>
+  <div *ngIf="event.event ==='interview'">
     <app-interview-candidate-timeline-item></app-interview-candidate-timeline-item>
     <br>
   </div>
-  <div  *ngFor="let attachment of candidate.attachments">
-    <app-attachment-candidate-timeline-item [attachment]="attachment"></app-attachment-candidate-timeline-item>
-    <br>
+  <div *ngIf="event.event ==='attachment'">
+    <div  *ngFor="let attachment of candidate.attachments">
+      <app-attachment-candidate-timeline-item [attachment]="attachment"></app-attachment-candidate-timeline-item>
+      <br>
+    </div>
   </div>
-  <div  *ngFor="let experience of candidate.experiences">
-    <app-experience-candidate-timeline-item [experience]="experience"></app-experience-candidate-timeline-item>
-    <br>
+  <div *ngIf="event.event ==='experience'">
+    <div  *ngFor="let experience of candidate.experiences">
+      <app-experience-candidate-timeline-item [experience]="experience"></app-experience-candidate-timeline-item>
+      <br>
+    </div>
   </div>
-  <div>
+  <div *ngIf="event.event ==='note'">
     <app-note-candidate-timeline-item></app-note-candidate-timeline-item>
   </div>
 </mat-card>
