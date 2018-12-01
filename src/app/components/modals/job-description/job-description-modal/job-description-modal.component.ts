@@ -5,6 +5,7 @@ import {Vacancy} from '../../../../classes/vacancy';
 import {FormControl} from '@angular/forms';
 import {SearchWorker} from '../../../../workers/search/search.worker';
 import {CdkDragDrop, moveItemInArray} from '@angular/cdk/drag-drop';
+import {ArrayWorker} from '../../../../workers/array/array.worker';
 
 @Component({
   selector: 'app-job-description-modal',
@@ -22,6 +23,7 @@ export class JobDescriptionModalComponent implements OnInit {
   constructor(
     public dialogRef: MatDialogRef<JobDescriptionModalComponent>,
     public searchWorker: SearchWorker,
+    private arrayWorker: ArrayWorker,
     @Inject(MAT_DIALOG_DATA) public data: JobDescriptionDialogData) {
     this.editedVacancy = Object.assign({}, this.data.sourceJobDescription);
   }
@@ -30,6 +32,9 @@ export class JobDescriptionModalComponent implements OnInit {
   }
   onNoClick(): void {
     this.dialogRef.close();
+  }
+  removeElement(element: any) {
+    this.editedVacancy.requirements = this.arrayWorker.removeElement(this.editedVacancy.requirements, element);
   }
 
   addRequirement() {

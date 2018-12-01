@@ -4,9 +4,14 @@ import { Injectable } from '@angular/core';
   providedIn: 'root'
 })
 export class ArrayWorker {
-  removeElement<T>(array: T[], element: T) {
+  public removeElement<T>(array: T[], element: T) {
     const arrayCopy = array.slice();
     const index = arrayCopy.indexOf(element);
+    arrayCopy.splice(index, 1);
+    return arrayCopy;
+  }
+  public removeElementByIndex<T>(array: T[], index: number) {
+    const arrayCopy = array.slice();
     arrayCopy.splice(index, 1);
     return arrayCopy;
   }

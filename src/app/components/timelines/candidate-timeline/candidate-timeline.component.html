@@ -2,19 +2,22 @@
 <app-candidate-timeline-toolbar></app-candidate-timeline-toolbar>
 <mat-card>
   <!--<br>-->
-  <div>
-    <app-interview-candidate-timeline-item></app-interview-candidate-timeline-item>
+  <div *ngFor="let eventNote of timelineNotes">
+    <app-interview-candidate-timeline-item *ngIf="checkIfNoteIsInterview(eventNote)"></app-interview-candidate-timeline-item>
+    <app-attachment-candidate-timeline-item *ngIf="checkIfNoteISAttachment(eventNote)" [attachment]="eventNote"></app-attachment-candidate-timeline-item>
+    <app-experience-candidate-timeline-item *ngIf="checkIfNoteIsExperience(eventNote)" [experience]="eventNote"></app-experience-candidate-timeline-item>
+    <app-note-candidate-timeline-item *ngIf="checkIfNoteISNote(eventNote)"></app-note-candidate-timeline-item>
     <br>
   </div>
-  <div  *ngFor="let attachment of candidate.attachments">
-    <app-attachment-candidate-timeline-item [attachment]="attachment"></app-attachment-candidate-timeline-item>
-    <br>
-  </div>
-  <div  *ngFor="let experience of candidate.experiences">
-    <app-experience-candidate-timeline-item [experience]="experience"></app-experience-candidate-timeline-item>
-    <br>
-  </div>
-  <div>
-    <app-note-candidate-timeline-item></app-note-candidate-timeline-item>
-  </div>
+  <!--<div  *ngFor="let attachment of candidate.attachments">-->
+    <!--<app-attachment-candidate-timeline-item [attachment]="attachment"></app-attachment-candidate-timeline-item>-->
+    <!--<br>-->
+  <!--</div>-->
+  <!--<div  *ngFor="let experience of candidate.experiences">-->
+    <!--<app-experience-candidate-timeline-item [experience]="experience"></app-experience-candidate-timeline-item>-->
+    <!--<br>-->
+  <!--</div>-->
+  <!--<div>-->
+    <!--<app-note-candidate-timeline-item></app-note-candidate-timeline-item>-->
+  <!--</div>-->
 </mat-card>

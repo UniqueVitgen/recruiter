@@ -1,8 +1,10 @@
 import {Candidate} from './candidate';
 import {Vacancy} from './vacancy';
+import {EventNote} from './event-note';
+import {EventNoteType} from '../enums/event-note-type.enum';
 
-export class Interview {
-  id?: number;
+export class Interview extends EventNote {
+  // id?: number;
   candidateId: number;
   vacancyId: number;
   planDate: string;
