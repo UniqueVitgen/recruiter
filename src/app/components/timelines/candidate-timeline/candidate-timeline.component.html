@@ -1,15 +1,17 @@
 
 <app-candidate-timeline-toolbar [timelineNotes]="timelineNotes" (changeTimeline)="changeTimeLine($event)"></app-candidate-timeline-toolbar>
+
+<perfect-scrollbar style="max-height: 600px;">
 <mat-card>
   <!--<br>-->
-  <perfect-scrollbar style="max-height: 600px;">
+  <!--<perfect-scrollbar style="max-height: 600px;">-->
     <div *ngFor="let eventNote of timelineNotes" class="example-item">
       <app-interview-candidate-timeline-item *ngIf="checkIfNoteIsInterview(eventNote)"></app-interview-candidate-timeline-item>
       <app-attachment-candidate-timeline-item *ngIf="checkIfNoteISAttachment(eventNote)" [attachment]="eventNote"></app-attachment-candidate-timeline-item>
       <app-experience-candidate-timeline-item *ngIf="checkIfNoteIsExperience(eventNote)" [experience]="eventNote"></app-experience-candidate-timeline-item>
       <app-note-candidate-timeline-item *ngIf="checkIfNoteISNote(eventNote)"></app-note-candidate-timeline-item>
+      <br>
     </div>
-  </perfect-scrollbar>
 
   <!--<div  *ngFor="let attachment of candidate.attachments">-->
     <!--<app-attachment-candidate-timeline-item [attachment]="attachment"></app-attachment-candidate-timeline-item>-->
@@ -23,3 +25,5 @@
     <!--<app-note-candidate-timeline-item></app-note-candidate-timeline-item>-->
   <!--</div>-->
 </mat-card>
+
+</perfect-scrollbar>
