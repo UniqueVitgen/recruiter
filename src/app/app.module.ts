@@ -50,6 +50,10 @@ import { InterviewFeedbackComponent } from './components/cards/interview/intervi
 import { InterviewCandidateComponent } from './components/cards/interview/interview-candidate/interview-candidate.component';
 
 import { PerfectScrollbarModule } from 'ngx-perfect-scrollbar';
+import {CustExtBrowserXhr} from './services/ext/cust-ext-browser-xhr';
+import {BrowserXhr, HttpModule} from '@angular/http';
+import {HashLocationStrategy, LocationStrategy} from '@angular/common';
+import { CandidateModalComponent } from './components/modals/candidate/candidate-modal/candidate-modal.component';
 
 
 @NgModule({
@@ -93,7 +97,8 @@ import { PerfectScrollbarModule } from 'ngx-perfect-scrollbar';
     InterviewPageComponent,
     InterviewShortInfoComponent,
     InterviewFeedbackComponent,
-    InterviewCandidateComponent
+    InterviewCandidateComponent,
+    CandidateModalComponent
   ],
   imports: [
     BrowserModule,
@@ -104,7 +109,8 @@ import { PerfectScrollbarModule } from 'ngx-perfect-scrollbar';
     FormsModule,
     PerfectScrollbarModule
   ],
-  providers: [],
+  providers: [
+    ],
   bootstrap: [AppComponent],
   entryComponents: [
     ModalComponentComponent,
@@ -112,7 +118,8 @@ import { PerfectScrollbarModule } from 'ngx-perfect-scrollbar';
     StatusCandidateModalComponent,
     PositionCandidateModalComponent,
     InterviewModalComponent,
-    JobDescriptionModalComponent
+    JobDescriptionModalComponent,
+    CandidateModalComponent
   ],
   schemas: [NO_ERRORS_SCHEMA] // add this line
 })

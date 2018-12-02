@@ -1,8 +1,12 @@
-<mat-card>
-  <app-job-description-short-info *ngIf="vacancy" [vacancy]="vacancy" [isEdited]="true"></app-job-description-short-info>
-</mat-card>
-<br>
-<app-job-description-requirements *ngIf="vacancy" [vacancy]="vacancy" [isMoreIcon]="true"></app-job-description-requirements>
+<div class="row">
+  <div class="col-6">
+    <mat-card><app-job-description-short-info *ngIf="vacancy" [vacancy]="vacancy" [isEdited]="true"></app-job-description-short-info></mat-card>
+  </div>
+<div class="col-6">
+  <app-job-description-requirements *ngIf="vacancy" [vacancy]="vacancy" [isMoreIcon]="true"></app-job-description-requirements>
+</div>
+</div>
+
 <br>
 <mat-card>
   <mat-card-title>

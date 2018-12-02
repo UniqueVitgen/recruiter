@@ -26,7 +26,7 @@ export class CandidatePageComponent implements OnInit {
   ngOnInit() {
     this.route.params
     .subscribe(params => {
-      this.id = Number(params['id']);
+      this.id = params['id'];
       this.candidateService.get(this.id).subscribe(res => {
         this.candidate = res;
         const interviewers = <Interview[]> [
@@ -48,6 +48,9 @@ export class CandidatePageComponent implements OnInit {
           .concat(interviewers)
           .concat(noteList);
         console.log(this.eventNoteList);
+        console.log('res', res);
+      });
+      this.candidateService.getTest().subscribe(res => {
         console.log('res', res);
       });
       // this.candidateService.get()

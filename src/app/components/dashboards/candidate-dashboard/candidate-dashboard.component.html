@@ -2,7 +2,7 @@
   <div *ngFor="let candidate of candidates" class="col-12 col-md-3 center-item">
     <app-candidate-dashboard-item [candidate]="candidate"></app-candidate-dashboard-item>
   </div>
-  <div *ngIf="haveAddElement" class="col-12 col-md-3 center-item">
+  <div *ngIf="haveAddElement" (click)="addCandidate()" class="col-12 col-md-3 center-item">
     <mat-card class="candidate-dashboard-item add-item">
       <mat-icon>add</mat-icon>
     </mat-card>

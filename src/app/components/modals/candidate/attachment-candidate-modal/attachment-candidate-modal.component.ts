@@ -21,14 +21,13 @@ export class AttachmentCandidateModalComponent implements OnInit {
   constructor(
     private candidateService: CandidateService,
     public dialogRef: MatDialogRef<NameCandidateModalComponent>,
-    private EnumWorker: EnumWorker,
+    public enumWorker: EnumWorker,
     @Inject(MAT_DIALOG_DATA) public data: AttachmentDialogData) {
     // console.log('candidate', this.candidate);
     this.editedCandidate = Object.assign({}, this.data.sourceCandidate);
-    if(this.data.isEdit) {
+    if (this.data.isEdit) {
       this.editedAttachment = Object.assign(new Attachment(), this.data.sourceAttachment);
-    }
-    else {
+    } else {
       this.editedAttachment = new Attachment();
     }
   }
@@ -37,7 +36,7 @@ export class AttachmentCandidateModalComponent implements OnInit {
   }
 
   getAttachmentsTypes() {
-    const valuesOfEnum = this.EnumWorker.getValuesFromEnum(AttachmentType);
+    const valuesOfEnum = this.enumWorker.getValuesFromEnum(AttachmentType);
     console.log(valuesOfEnum);
     return valuesOfEnum;
   }
@@ -46,7 +45,7 @@ export class AttachmentCandidateModalComponent implements OnInit {
     this.candidateService.update(this.editedCandidate).subscribe(res => {
       console.log('rs', res);
       this.dialogRef.close(res);
-    })
+    });
   }
 
   onNoClick(): void {

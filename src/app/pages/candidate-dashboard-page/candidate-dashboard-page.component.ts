@@ -15,7 +15,10 @@ export class CandidateDashboardPageComponent implements OnInit {
 
   ngOnInit() {
     this.getAll();
-    this.mockCandidates = this.candidateService.mockCandidates;
+    this.candidateService.getTest().subscribe(res => {
+      console.log('res', res);
+    });
+    // this.mockCandidates = this.candidateService.mockCandidates;
   }
 
   getAll() {

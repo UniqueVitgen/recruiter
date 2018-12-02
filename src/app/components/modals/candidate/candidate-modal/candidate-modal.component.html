@@ -1,0 +1,27 @@
+<app-modal-component>
+  <dialog-title>
+    <span *ngIf="data.isEdit">
+      Edit Candidate
+    </span>
+    <span *ngIf="!data.isEdit">
+      Add Candidate
+    </span>
+  </dialog-title>
+  <dialog-body>
+    <!--<mat-form-field class="example-full-width">-->
+      <!--<input *ngIf="editedAttachment != null" placeholder="filePath" [(ngModel)]="editedAttachment.filePath" matInput>-->
+    <!--</mat-form-field>-->
+    <!--<mat-form-field class="example-full-width">-->
+
+      <!--<mat-select placeholder="Attachment type">-->
+        <!--<mat-option *ngFor="let food of getAttachmentsTypes()" [value]="food">-->
+          <!--{{food}}-->
+        <!--</mat-option>-->
+      <!--</mat-select>-->
+    <!--</mat-form-field>-->
+  </dialog-body>
+  <dialog-footer>
+    <button mat-button (click)="onNoClick()">No Thanks</button>
+    <button mat-button (click)="editCandidate()" cdkFocusInitial>Ok</button>
+  </dialog-footer>
+</app-modal-component>
