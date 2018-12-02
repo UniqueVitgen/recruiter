@@ -3,11 +3,110 @@ import {ConfigService} from '../config/config.service';
 import {Candidate} from 'src/app/classes/candidate';
 import {Observable} from 'rxjs/index';
 import {ServiceData} from '../../enums/service-data.enum';
+import {ContactType} from '../../enums/contact-type.enum';
+import {AttachmentType} from '../../enums/attachment-type.enum';
 
 @Injectable({
   providedIn: 'root'
 })
 export class CandidateService {
+
+  mockCandidates: Candidate[] = [
+    {
+      id: 0,
+      name: 'string',
+      surname: 'string',
+      birthday: 'string',
+      salaryInDollars: 0,
+      candidateState: {
+        name: 'string'
+      },
+      skills: [
+        {
+          name: 'string'
+        }
+      ],
+      experiences: [
+        {
+          dateFrom: 'string',
+          dateTo: 'string',
+          jobDescription: {
+            id: 0,
+            name: 'string'
+          },
+          jobPosition: 'string',
+          companyName: {
+            id: 0,
+            name: 'string'
+          }
+        }
+      ],
+      contacts: [
+        {
+          contactType: ContactType.EMAIL,
+          contactDetails: 'string'
+        }
+      ],
+      attachments: [
+        {
+          attachmentType: AttachmentType.CV,
+          filePath: 'string'
+        }
+      ],
+      responsibilities: [
+        {
+          name: 'string'
+        }
+      ]
+    },
+    {
+      id: 1,
+      name: 'string',
+      surname: 'string',
+      birthday: 'string',
+      salaryInDollars: 0,
+      candidateState: {
+        name: 'string'
+      },
+      skills: [
+        {
+          name: 'string'
+        }
+      ],
+      experiences: [
+        {
+          dateFrom: 'string',
+          dateTo: 'string',
+          jobDescription: {
+            id: 0,
+            name: 'string'
+          },
+          jobPosition: 'string',
+          companyName: {
+            id: 0,
+            name: 'string'
+          }
+        }
+      ],
+      contacts: [
+        {
+          contactType: ContactType.EMAIL,
+          contactDetails: 'string'
+        }
+      ],
+      attachments: [
+        {
+          attachmentType: AttachmentType.CV,
+          filePath: 'string'
+        }
+      ],
+      responsibilities: [
+        {
+          name: 'string'
+        }
+      ]
+    }
+  ];
 
   constructor(private configService: ConfigService) { }
 

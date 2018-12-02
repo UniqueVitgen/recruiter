@@ -10,6 +10,8 @@ export class CandidateDashboardComponent implements OnInit {
   @Input() candidates: Candidate[];
   @Input() haveAddElement: boolean;
 
+  private mockCandidate: Candidate;
+
   constructor() { }
 
   ngOnInit() {

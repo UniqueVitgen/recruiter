@@ -9,11 +9,13 @@ import { CandidateService } from 'src/app/services/candidate/candidate.service';
 })
 export class CandidateDashboardPageComponent implements OnInit {
   candidates: Candidate[];
+  mockCandidates: Candidate[];
 
   constructor(private candidateService: CandidateService) { }
 
   ngOnInit() {
     this.getAll();
+    this.mockCandidates = this.candidateService.mockCandidates;
   }
 
   getAll() {

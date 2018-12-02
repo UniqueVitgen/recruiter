@@ -1,5 +1,7 @@
 import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
 import {  } from 'events';
+import {UserWorker} from '../../../workers/user/user.worker';
+import {Candidate} from '../../../classes/candidate';
 
 @Component({
   selector: 'app-candidate-avatar',
@@ -7,6 +9,7 @@ import {  } from 'events';
   styleUrls: ['./candidate-avatar.component.scss']
 })
 export class CandidateAvatarComponent implements OnInit {
+  @Input() candidate: Candidate;
   @Input() src: string;
   @Input() isEditedIcon: boolean;
   @Input() isClosedIcon: boolean;
@@ -15,7 +18,7 @@ export class CandidateAvatarComponent implements OnInit {
   @Output() clickCloseIcon: EventEmitter<any> = new EventEmitter();
   @Output('clickAvatar') outputClickAvatar: EventEmitter<any> = new EventEmitter();
 
-  constructor() { }
+  constructor(public userWorker: UserWorker) { }
 
   ngOnInit() {
   }
