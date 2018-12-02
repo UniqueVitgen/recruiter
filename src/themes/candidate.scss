@@ -50,6 +50,19 @@
     mat-card-header {
       padding: 16px 16px 0 16px;
     }
+    .user-avatar-hover:hover {
+      background-color: rgba(0, 0, 0, .3);
+    }
+    &:hover {
+      cursor: pointer;
+      background-color: rgba(0, 0, 0, .3);
+      //border-color: #00b0f0;
+      .user-avatar-hover {
+        .avatar-hover {
+          display: block;
+        }
+      }
+    }
   }
   &.add-item {
     mat-icon {

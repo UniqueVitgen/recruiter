@@ -16,10 +16,12 @@
       border-radius: 50%;
     }
   }
-  &:hover {
-    border-color: #00b0f0;
-    & .avatar-hover{
-      display: block;
+  &.user-avatar-hover {
+    &:hover {
+      border-color: #00b0f0;
+      & .avatar-hover{
+        display: block;
+      }
     }
   }
   img {
@@ -37,46 +39,46 @@
       color: lawngreen;
     }
   }
+  .more-icon-image {
+    &:hover{
+    }
+    position: absolute;
+    bottom: 0%;
+    transform: translate(50%,0);
+    right: 50%;
+  }
+  .edit-icon-image {
+    &:hover{
+      cursor: pointer;
+    }
+    position: absolute;
+    bottom: 0;
+    right: 0;
+  }
+  .close-icon-image {
+    &:hover{
+      cursor: pointer;
+    }
+    position: absolute;
+    top: 0;
+    right: 0;
+  }
+  .fiber-icon-image {
+    &:hover{
+      cursor: pointer;
+    }
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    &.success-fiber {
+      color: lawngreen;
+    }
+  }
   .avatar-hover {
     &:hover {
       cursor: pointer;
       .more-icon-image {
         zoom: 2;
-      }
-    }
-    .more-icon-image {
-      &:hover{
-      }
-      position: absolute;
-      bottom: 0%;
-      transform: translate(50%,0);
-      right: 50%;
-    }
-    .edit-icon-image {
-      &:hover{
-        cursor: pointer;
-      }
-      position: absolute;
-      bottom: 0;
-      right: 0;
-    }
-    .close-icon-image {
-      &:hover{
-        cursor: pointer;
-      }
-      position: absolute;
-      top: 0;
-      right: 0;
-    }
-    .fiber-icon-image {
-      &:hover{
-        cursor: pointer;
-      }
-      position: absolute;
-      bottom: 0;
-      left: 0;
-      &.success-fiber {
-        color: lawngreen;
       }
     }
     display: none;
