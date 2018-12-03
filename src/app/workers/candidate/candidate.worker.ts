@@ -8,24 +8,78 @@ import {ContactDetails} from '../../classes/contact-details';
 })
 export class CandidateWorker {
   haveEmail(candidate: Candidate): boolean {
-    const targetContact = candidate.contacts.find((value) => {
-      return value.contactType === ContactType.EMAIL;
-    });
-    return targetContact != null;
+    if (candidate.contacts) {
+      const targetContact = candidate.contacts.find((value) => {
+        return value.contactType === ContactType.EMAIL;
+      });
+      return targetContact != null;
+    }
     // return
+  }
+  getEmailValue(candidate: Candidate): string {
+    if (candidate.contacts) {
+      const targetContact = candidate.contacts.find((value) => {
+        return value.contactType === ContactType.EMAIL;
+      });
+      return targetContact.contactDetails;
+    }
+  }
+  getEmailObject(candidate: Candidate): ContactDetails {
+    if (candidate.contacts) {
+      const targetContact = candidate.contacts.find((value) => {
+        return value.contactType === ContactType.EMAIL;
+      });
+      return targetContact;
+    }
   }
   havePhone(candidate: Candidate): boolean {
-    const targetContact = candidate.contacts.find((value) => {
-      return value.contactType === ContactType.PHONE;
-    });
-    return targetContact != null;
+    if (candidate.contacts) {
+      const targetContact = candidate.contacts.find((value) => {
+        return value.contactType === ContactType.PHONE;
+      });
+      return targetContact != null;
+    }
     // return
   }
+  getPhoneValue(candidate: Candidate): string {
+    if (candidate.contacts) {
+      const targetContact = candidate.contacts.find((value) => {
+        return value.contactType === ContactType.PHONE;
+      });
+      return targetContact.contactDetails;
+    }
+  }
+  getPhoneObject(candidate: Candidate): ContactDetails {
+    if (candidate.contacts) {
+      const targetContact = candidate.contacts.find((value) => {
+        return value.contactType === ContactType.PHONE;
+      });
+      return targetContact;
+    }
+  }
   haveSkype(candidate: Candidate): boolean {
-    const targetContact = candidate.contacts.find((value) => {
-      return value.contactType === ContactType.SKYPE;
-    });
-    return targetContact != null;
-    // return
+    if (candidate.contacts) {
+      const targetContact = candidate.contacts.find((value) => {
+        return value.contactType === ContactType.SKYPE;
+      });
+      return targetContact != null;
+      // return
+    }
+  }
+  getSkypeValue(candidate: Candidate): string {
+    if (candidate.contacts) {
+      const targetContact = candidate.contacts.find((value) => {
+        return value.contactType === ContactType.SKYPE;
+      });
+      return targetContact.contactDetails;
+    }
+  }
+  getSkypeObject(candidate: Candidate): ContactDetails {
+    if (candidate.contacts) {
+      const targetContact = candidate.contacts.find((value) => {
+        return value.contactType === ContactType.SKYPE;
+      });
+      return targetContact;
+    }
   }
 }

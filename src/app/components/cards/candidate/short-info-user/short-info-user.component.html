@@ -15,16 +15,16 @@
       <!--<p>-->
       <div *ngIf="!readonly">
         <mat-form-field class="example-full-width">
-          <input [(ngModel)]="candidate.name"  matInput placeholder="Name">
+          <input (blur)="onFocusoutAnyInput()" [(ngModel)]="candidate.name"  matInput placeholder="Name">
         </mat-form-field>
         <mat-form-field class="example-full-width">
-          <input [(ngModel)]="candidate.surname" matInput placeholder="Surname" >
+          <input (blur)="onFocusoutAnyInput()" [(ngModel)]="candidate.surname" matInput placeholder="Surname" >
         </mat-form-field>
         <mat-form-field class="example-full-width">
-          <input matInput placeholder="Position">
+          <input (blur)="onFocusoutAnyInput()" matInput placeholder="Position">
         </mat-form-field>
         <mat-form-field class="example-full-width">
-          <input [(ngModel)]="candidate.candidateState.name" matInput placeholder="Status">
+          <input (blur)="onFocusoutAnyInput()" [(ngModel)]="candidate.candidateState.name" matInput placeholder="Status">
         </mat-form-field>
       </div>
       <div *ngIf="readonly">
@@ -67,23 +67,23 @@
       <mat-card-title>Contacts</mat-card-title>
       <mat-card-content>
         <div *ngIf="!readonly">
-          <mat-checkbox [(ngModel)]="tests.email">
-            <mat-form-field class="example-full-width" *ngIf="tests.email">
-              <input [(ngModel)]="candidate.candidateState.name" matInput placeholder="Email">
+          <mat-checkbox [(ngModel)]="tests.email" (ngModelChange)="changeEmail()">
+            <mat-form-field class="example-full-width" *ngIf="tests.email && tests.emailObject">
+              <input [(ngModel)]="tests.emailObject.contactDetails" (blur)="onFocusoutAnyInput()" matInput placeholder="Email">
             </mat-form-field>
             <span  *ngIf="!tests.email">Email</span>
           </mat-checkbox>
           <br>
-          <mat-checkbox [(ngModel)]="tests.skype">
-            <mat-form-field class="example-full-width" *ngIf="tests.skype">
-              <input [(ngModel)]="candidate.candidateState.name" matInput placeholder="skype">
+          <mat-checkbox [(ngModel)]="tests.skype" (ngModelChange)="changeSkype()">
+            <mat-form-field class="example-full-width" *ngIf="tests.skype && tests.skypeObject">
+              <input [(ngModel)]="tests.skypeObject.contactDetails" (blur)="onFocusoutAnyInput()" matInput placeholder="skype">
             </mat-form-field>
             <span  *ngIf="!tests.skype">skype</span>
           </mat-checkbox>
           <br>
-          <mat-checkbox [(ngModel)]="tests.phone">
-            <mat-form-field class="example-full-width" *ngIf="tests.phone">
-              <input [(ngModel)]="candidate.candidateState.name" matInput placeholder="phone">
+          <mat-checkbox [(ngModel)]="tests.phone" (ngModelChange)="changePhone()">
+            <mat-form-field class="example-full-width" *ngIf="tests.phone && tests.phoneObject">
+              <input [(ngModel)]="tests.phoneObject.contactDetails" (blur)="onFocusoutAnyInput()" matInput placeholder="phone">
             </mat-form-field>
             <span  *ngIf="!tests.phone">phone</span>
           </mat-checkbox>

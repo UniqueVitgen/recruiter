@@ -50,9 +50,6 @@ export class CandidatePageComponent implements OnInit {
         console.log(this.eventNoteList);
         console.log('res', res);
       });
-      this.candidateService.getTest().subscribe(res => {
-        console.log('res', res);
-      });
       // this.candidateService.get()
       // Defaults to 0 if no query param provided.
     });

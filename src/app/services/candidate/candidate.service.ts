@@ -171,9 +171,6 @@ export class CandidateService {
     //   });
     // }
   }
-  getTest() {
-    return this.configService.get('api/todos');
-  }
 
   getAll(): Observable<Candidate[] | any> {
     console.log(ConfigService.serviceData);
