@@ -19,6 +19,7 @@ export class CandidateDashboardPageComponent implements OnInit {
   }
 
   getAll() {
+    console.log('1');
     this.candidateService.getAll().subscribe(res => {
       console.log(res);
       this.candidates = res;

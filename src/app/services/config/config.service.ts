@@ -1,12 +1,10 @@
 import {Injectable} from '@angular/core';
 import {HttpClient, HttpErrorResponse, HttpHeaders, HttpResponse} from '@angular/common/http';
 // import { Http, Response, RequestOptionsArgs, RequestOptions, Headers, ResponseContentType } from '@angular/http';
-import {observable, Observable, throwError} from 'rxjs/index';
+import {observable, Observable, throwError} from 'rxjs';
+// import { throwError } from 'rjxs';
 import {catchError, map} from 'rxjs/internal/operators';
 import {ServiceData} from '../../enums/service-data.enum';
-import {Http} from '@angular/http';
-
-
 @Injectable({
   providedIn: 'root'
 })
@@ -34,20 +32,29 @@ export class ConfigService {
     return headers;
   }
 
+  createResponseHeaders(): HttpHeaders {
+    let headers = new HttpHeaders({
+        'Content-Type': 'text/plain'
+      // 'Accept': 'application/json',
+      // 'Access-Control-Allow-Origin': '*'
+    });
+    return headers;
+  }
+
   post<T>(url, data) {
     const headers = this.createHeaders();
     return this.http.post<T>(ConfigService.apiUrl + url, data)
-      .pipe(
-        catchError(this.handleError)
-      );
+      // .pipe(
+      //   catchError(this.handleError)
+      // );
   }
 
   get<T>(url) {
     const headers = this.createHeaders();
-    return this.http.get<T>(ConfigService.apiUrl + url)
-      .pipe(
-        catchError(this.handleError)
-      );
+    return this.http.get<T>(ConfigService.apiUrl + url);
+      // .pipe(
+      //   catchError(this.handleError)
+      // );
   }
 
   getResponse<T>(url) {
@@ -57,17 +64,17 @@ export class ConfigService {
   put<T>(url, data) {
     const headers = this.createHeaders();
     return this.http.put<T>(ConfigService.apiUrl + url, data)
-      .pipe(
-        catchError(this.handleError)
-      );
+      // .pipe(
+      //   catchError(this.handleError)
+      // );
   }
 
-  delete<T>(url) {
-    const headers = this.createHeaders();
-    return this.http.delete<T>(ConfigService.apiUrl + url)
-      .pipe(
-        catchError(this.handleError)
-      );
+  delete(url) {
+    const headers = this.createResponseHeaders();
+    return this.http.delete(ConfigService.apiUrl + url, <any>{ responseType: 'text'});
+      // .pipe(
+      //   catchError(this.handleError)
+      // );
   }
 
   private handleError(error: HttpErrorResponse) {
