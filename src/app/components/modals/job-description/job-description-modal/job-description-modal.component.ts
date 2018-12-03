@@ -1,6 +1,6 @@
 import {Component, Inject, OnInit} from '@angular/core';
 import {MAT_DIALOG_DATA, MatDialogRef} from '@angular/material';
-import {JobDescriptionDialogData} from '../../../../interfaces/dialog/job-description-dialog-data';
+import {JobDescriptionDialogData} from '../../../../interfaces/dialog/init/job-description-dialog-data';
 import {Vacancy} from '../../../../classes/vacancy';
 import {FormControl} from '@angular/forms';
 import {SearchWorker} from '../../../../workers/search/search.worker';

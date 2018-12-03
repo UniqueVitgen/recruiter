@@ -1,8 +1,8 @@
 import {Component, Inject, OnInit} from '@angular/core';
 import {CandidateService} from '../../../../services/candidate/candidate.service';
 import {MAT_DIALOG_DATA, MatDialogRef} from '@angular/material';
-import {AttachmentDialogData} from '../../../../interfaces/dialog/attachment-dialog-data';
-import {InterviewDialogData} from '../../../../interfaces/dialog/interview-dialog-data';
+import {AttachmentDialogData} from '../../../../interfaces/dialog/init/attachment-dialog-data';
+import {InterviewDialogData} from '../../../../interfaces/dialog/init/interview-dialog-data';
 import {DateTimeWorker} from '../../../../workers/date-time/date-time.worker';
 import {UserWorker} from '../../../../workers/user/user.worker';
 

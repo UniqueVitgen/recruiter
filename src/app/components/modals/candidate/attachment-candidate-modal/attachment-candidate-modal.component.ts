@@ -4,7 +4,7 @@ import { CandidateService } from 'src/app/services/candidate/candidate.service';
 import { NameCandidateModalComponent } from '../name-candidate-modal/name-candidate-modal.component';
 import { MatDialog, MatDialogRef, MAT_DIALOG_DATA } from '@angular/material';
 import { Attachment } from 'src/app/classes/attachment';
-import { AttachmentDialogData } from 'src/app/interfaces/dialog/attachment-dialog-data';
+import { AttachmentDialogData } from 'src/app/interfaces/dialog/init/attachment-dialog-data';
 import { AttachmentType } from 'src/app/enums/attachment-type.enum';
 import { EnumWorker } from 'src/app/workers/enum/enum.worker';
 

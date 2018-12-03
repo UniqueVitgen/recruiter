@@ -11,19 +11,27 @@ import {Attachment} from '../../classes/attachment';
 export class EventNoteWorker {
   public isInterview(eventNote: EventNote) {
     const interview = <Interview> eventNote;
-    return interview.candidateId != null && interview.vacancyId != null;
+    if (interview) {
+      return interview.candidateId != null && interview.vacancyId != null;
+    }
   }
 
   public isExperience(eventNote: EventNote) {
-    const experiecne = <CandidateExperience> eventNote;
-    return experiecne.dateFrom != null && experiecne.dateTo != null;
+    const experience = <CandidateExperience> eventNote;
+    if (experience) {
+      return experience.dateFrom != null && experience.dateTo != null;
+    }
   }
   public isNote(eventNote: EventNote) {
     const note = <Notes> eventNote;
-    return note.noteText;
+    if (note) {
+      return note.noteText;
+    }
   }
   public isAttachement(eventNote: EventNote) {
     const attachment = <Attachment> eventNote;
-    return attachment.filePath != null && attachment.attachmentType != null;
+    if (attachment) {
+      return attachment.filePath != null && attachment.attachmentType != null;
+    }
   }
 }

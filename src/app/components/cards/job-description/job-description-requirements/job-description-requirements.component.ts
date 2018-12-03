@@ -2,7 +2,7 @@ import {Component, Input, OnInit} from '@angular/core';
 import {Vacancy} from '../../../../classes/vacancy';
 import {StatusCandidateModalComponent} from '../../../modals/candidate/status-candidate-modal/status-candidate-modal.component';
 import {MatDialog} from '@angular/material';
-import {JobDescriptionDialogData} from '../../../../interfaces/dialog/job-description-dialog-data';
+import {JobDescriptionDialogData} from '../../../../interfaces/dialog/init/job-description-dialog-data';
 import {JobDescriptionModalComponent} from '../../../modals/job-description/job-description-modal/job-description-modal.component';
 
 @Component({

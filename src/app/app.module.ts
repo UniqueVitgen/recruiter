@@ -1,12 +1,12 @@
 import { BrowserModule } from '@angular/platform-browser';
-import { NgModule, NO_ERRORS_SCHEMA } from '@angular/core';
+import {forwardRef, NgModule, NO_ERRORS_SCHEMA} from '@angular/core';
 
 import { HttpClientModule } from '@angular/common/http';
 import { AppRoutingModule } from './app-routing.module';
 import { MaterialDesignModule } from './modules/material-design/material-design.module';
 // Import your AvatarModule
 import { AvatarModule } from 'ngx-avatar';
-import { FormsModule } from '@angular/forms';
+import {FormsModule, NG_VALUE_ACCESSOR, NgControl, ReactiveFormsModule} from '@angular/forms';
 
 import { AppComponent } from './app.component';
 import { CandidatePageComponent } from './pages/candidate-page/candidate-page.component';
@@ -54,6 +54,10 @@ import {CustExtBrowserXhr} from './services/ext/cust-ext-browser-xhr';
 import {BrowserXhr, HttpModule} from '@angular/http';
 import {HashLocationStrategy, LocationStrategy} from '@angular/common';
 import { CandidateModalComponent } from './components/modals/candidate/candidate-modal/candidate-modal.component';
+import { PhoneMaskDirective } from './directives/phone-mask/phone-mask.directive';
+import {SHARED_FORM_DIRECTIVES} from '@angular/forms/src/directives';
+import {TextMaskModule} from 'angular2-text-mask';
+import { LimitToDirective } from './directives/limit-to/limit-to.directive';
 
 
 @NgModule({
@@ -98,7 +102,9 @@ import { CandidateModalComponent } from './components/modals/candidate/candidate
     InterviewShortInfoComponent,
     InterviewFeedbackComponent,
     InterviewCandidateComponent,
-    CandidateModalComponent
+    CandidateModalComponent,
+    PhoneMaskDirective,
+    LimitToDirective
   ],
   imports: [
     BrowserModule,
@@ -107,7 +113,11 @@ import { CandidateModalComponent } from './components/modals/candidate/candidate
     MaterialDesignModule,
     AvatarModule,
     FormsModule,
-    PerfectScrollbarModule
+    PerfectScrollbarModule,
+    ReactiveFormsModule,
+    TextMaskModule
+    // ,
+    // InternationalPhoneNumberModule
   ],
   providers: [
     ],

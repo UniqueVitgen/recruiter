@@ -1,10 +1,11 @@
-import { Component, OnInit, Input } from '@angular/core';
+import {Component, OnInit, Input, Output, EventEmitter} from '@angular/core';
 import { Candidate } from 'src/app/classes/candidate';
 import {MatDialog} from '@angular/material';
 import {JobDescriptionModalComponent} from '../../modals/job-description/job-description-modal/job-description-modal.component';
-import {JobDescriptionDialogData} from '../../../interfaces/dialog/job-description-dialog-data';
-import {CandidateDialogData} from '../../../interfaces/dialog/candidate-dialog-data';
+import {JobDescriptionDialogData} from '../../../interfaces/dialog/init/job-description-dialog-data';
+import {CandidateDialogData} from '../../../interfaces/dialog/init/candidate-dialog-data';
 import {CandidateModalComponent} from '../../modals/candidate/candidate-modal/candidate-modal.component';
+import {CandidateDialogResult} from '../../../interfaces/dialog/result/candidate-dialog-result';
 
 @Component({
   selector: 'app-candidate-dashboard',
@@ -14,6 +15,7 @@ import {CandidateModalComponent} from '../../modals/candidate/candidate-modal/ca
 export class CandidateDashboardComponent implements OnInit {
   @Input() candidates: Candidate[];
   @Input() haveAddElement: boolean;
+  @Output('addCandidate') outputAddCandidate: EventEmitter<Candidate> = new EventEmitter();
 
   private mockCandidate: Candidate;
 
@@ -28,6 +30,11 @@ export class CandidateDashboardComponent implements OnInit {
         }
       }
     );
+    dialogRef.afterClosed().subscribe((res: CandidateDialogResult) => {
+      if (res) {
+        this.outputAddCandidate.emit(res.resCandidate);
+      }
+    });
   }
 
 }

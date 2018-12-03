@@ -1,9 +1,6 @@
 <div *ngIf="vacancy">
   <span *ngIf="!isEdited" class="big-text">{{vacancy?.position}}</span>
   <ng-container *ngIf="isEdited">
-      <!--<div class="col-2">-->
-        <!---->
-      <!--</div>-->
         <mat-form-field *ngIf="vacancy" class="example-full-width">
           <input [(ngModel)]="vacancy.position" matInput placeholder="Position">
         </mat-form-field>

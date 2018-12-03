@@ -8,6 +8,44 @@
     </span>
   </dialog-title>
   <dialog-body>
+    <div *ngIf="editedCandidate && candidateForm">
+      <form [formGroup]="candidateForm">
+        <mat-form-field class="example-full-width">
+          <input formControlName="name" [(ngModel)]="editedCandidate.name"  matInput placeholder="Name *">
+          <mat-error *ngIf="candidateForm.controls['name'].hasError('pattern')">
+            name must contain only latin characters
+          </mat-error>
+        </mat-form-field>
+        <mat-form-field class="example-full-width">
+          <input formControlName="surname" [(ngModel)]="editedCandidate.surname" matInput placeholder="Surname" >
+          <mat-error *ngIf="candidateForm.controls['surname'].hasError('pattern')">
+            surname must contain only latin characters
+          </mat-error>
+        </mat-form-field>
+        <mat-form-field class="example-full-width">
+          <input formControlName="position" matInput placeholder="Position">
+        </mat-form-field>
+        <mat-form-field class="example-full-width">
+          <input formControlName="status" [(ngModel)]="editedCandidate.candidateState.name" matInput placeholder="Status">
+        </mat-form-field>
+        <mat-form-field class="example-full-width">
+          <input formControlName="skype" [(ngModel)]="editedCandidate.contacts[0].contactDetails" matInput placeholder="Skype">
+        </mat-form-field>
+        <!--<international-phone-number [(ngModel)]="model.phone_number" placeholder="Enter phone number" [maxlength]="20" [defaultCountry]="'be'" [required]="true" #phone_number="ngModel" name="phone_number"></international-phone-number>-->
+        <mat-form-field  class="example-full-width">
+          <input [textMask]="{mask: mask}" formControlName="phone" [(ngModel)]="editedCandidate.contacts[1].contactDetails" matInput placeholder="Phone">
+          <mat-error *ngIf="candidateForm.controls['phone'].hasError('pattern')">
+            Please enter a valid phone number with valida operator code like 17, 29, 33, 44.
+          </mat-error>
+        </mat-form-field>
+        <mat-form-field class="example-full-width">
+          <input formControlName="email" [(ngModel)]="editedCandidate.contacts[2].contactDetails" matInput placeholder="Email">
+          <mat-error *ngIf="candidateForm.controls['email'].hasError('pattern')">
+            Please enter a valid email address
+          </mat-error>
+        </mat-form-field>
+      </form>
+    </div>
     <!--<mat-form-field class="example-full-width">-->
       <!--<input *ngIf="editedAttachment != null" placeholder="filePath" [(ngModel)]="editedAttachment.filePath" matInput>-->
     <!--</mat-form-field>-->
@@ -22,6 +60,6 @@
   </dialog-body>
   <dialog-footer>
     <button mat-button (click)="onNoClick()">No Thanks</button>
-    <button mat-button (click)="editCandidate()" cdkFocusInitial>Ok</button>
+    <button [disabled]="candidateForm?.invalid" mat-button mat-raised-button color="primary" (click)="editCandidate()" cdkFocusInitial>Ok</button>
   </dialog-footer>
 </app-modal-component>

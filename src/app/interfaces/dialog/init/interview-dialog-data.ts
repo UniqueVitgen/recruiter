@@ -1,4 +1,4 @@
-import {InterviewExtended} from '../../classes/interview';
+import {InterviewExtended} from '../../../classes/interview';
 
 export interface InterviewDialogData {
   interview: InterviewExtended;
