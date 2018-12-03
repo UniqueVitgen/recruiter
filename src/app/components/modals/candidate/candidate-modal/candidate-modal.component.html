@@ -11,13 +11,19 @@
     <div *ngIf="editedCandidate && candidateForm">
       <form [formGroup]="candidateForm">
         <mat-form-field class="example-full-width">
-          <input formControlName="name" [(ngModel)]="editedCandidate.name"  matInput placeholder="Name *">
+          <input class="star-input" formControlName="name" [(ngModel)]="editedCandidate.name"  matInput placeholder="Name*">
+          <mat-error *ngIf="candidateForm.controls['name'].hasError('required')">
+            name is required
+          </mat-error>
           <mat-error *ngIf="candidateForm.controls['name'].hasError('pattern')">
             name must contain only latin characters
           </mat-error>
         </mat-form-field>
         <mat-form-field class="example-full-width">
-          <input formControlName="surname" [(ngModel)]="editedCandidate.surname" matInput placeholder="Surname" >
+          <input class="star-input" formControlName="surname" [(ngModel)]="editedCandidate.surname" matInput placeholder="Surname*" >
+          <mat-error *ngIf="candidateForm.controls['surname'].hasError('required')">
+            surname is required
+          </mat-error>
           <mat-error *ngIf="candidateForm.controls['surname'].hasError('pattern')">
             surname must contain only latin characters
           </mat-error>

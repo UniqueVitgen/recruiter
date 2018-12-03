@@ -14,6 +14,12 @@
   }
 }
 
+.star-input {
+  &::placeholder {
+    color: red;
+  }
+}
+
 textarea {
   &, &.mat-input-element {
     resize: none !important;
