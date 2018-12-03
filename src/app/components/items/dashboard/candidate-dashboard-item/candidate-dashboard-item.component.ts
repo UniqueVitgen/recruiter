@@ -10,7 +10,7 @@ import {CandidateService} from '../../../../services/candidate/candidate.service
   styleUrls: ['./candidate-dashboard-item.component.scss']
 })
 export class CandidateDashboardItemComponent {
-  @Output('deleteCandidate') outputDeleteCandidate: EventEmitter<Candidate> = new EventEmitter();
+  @Output('deleteCandidate') outputDeleteCandidate: EventEmitter<any> = new EventEmitter();
   @Input() candidate: Candidate;
 
   constructor(
@@ -20,12 +20,11 @@ export class CandidateDashboardItemComponent {
 
 
   deleteCandidate() {
-    this.candidateService.delete(this.candidate.id).subscribe();
-    this.outputDeleteCandidate.emit(this.candidate);
+    this.candidateService.delete(this.candidate.id).subscribe(res => {this.outputDeleteCandidate.emit(); });
   }
 
   goToCandidatePage() {
-    this.router.navigate(['candidate', this.candidate.id]);
+    //this.router.navigate(['candidate', this.candidate.id]);
   }
 
 }
