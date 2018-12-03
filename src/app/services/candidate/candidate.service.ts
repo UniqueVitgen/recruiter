@@ -250,7 +250,7 @@ export class CandidateService {
     return this.configService.put('candidate/' + candidate.id, candidate);
   }
 
-  delete(candidate: Candidate): Observable<Candidate> {
-    return this.configService.delete('candidate/' + candidate.id);
+  delete(id: number): Observable<Candidate> {
+    return this.configService.delete('candidate/' + id);
   }
 }

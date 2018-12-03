@@ -16,6 +16,7 @@ export class CandidateDashboardComponent implements OnInit {
   @Input() candidates: Candidate[];
   @Input() haveAddElement: boolean;
   @Output('addCandidate') outputAddCandidate: EventEmitter<Candidate> = new EventEmitter();
+  @Output('deleteCandidate') outputDeleteCandidate: EventEmitter<any> = new EventEmitter();
 
   private mockCandidate: Candidate;
 
@@ -35,6 +36,9 @@ export class CandidateDashboardComponent implements OnInit {
         this.outputAddCandidate.emit(res.resCandidate);
       }
     });
+  }
+  deleteCandidate() {
+    this.outputDeleteCandidate.emit();
   }
 
 }

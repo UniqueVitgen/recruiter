@@ -1,24 +1,27 @@
-import { Component, OnInit, Input } from '@angular/core';
+import {Component, OnChanges, Input, Output, EventEmitter} from '@angular/core';
 import { Router } from '@angular/router';
 import { Candidate } from 'src/app/classes/candidate';
 import {UserWorker} from '../../../../workers/user/user.worker';
+import {CandidateService} from '../../../../services/candidate/candidate.service';
 
 @Component({
   selector: 'app-candidate-dashboard-item',
   templateUrl: './candidate-dashboard-item.component.html',
   styleUrls: ['./candidate-dashboard-item.component.scss']
 })
-export class CandidateDashboardItemComponent implements OnInit {
+export class CandidateDashboardItemComponent {
+  @Output('deleteCandidate') outputDeleteCandidate: EventEmitter<Candidate> = new EventEmitter();
   @Input() candidate: Candidate;
 
   constructor(
     private router: Router,
-    public userWorker: UserWorker) { }
+    public userWorker: UserWorker,
+    public candidateService: CandidateService) { }
 
-  ngOnInit() {
-  }
 
   deleteCandidate() {
+    this.candidateService.delete(this.candidate.id).subscribe();
+    this.outputDeleteCandidate.emit(this.candidate);
   }
 
   goToCandidatePage() {
