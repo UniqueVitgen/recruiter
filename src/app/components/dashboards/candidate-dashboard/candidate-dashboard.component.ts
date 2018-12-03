@@ -38,6 +38,7 @@ export class CandidateDashboardComponent implements OnInit {
     });
   }
   deleteCandidate() {
+    console.log('rerew');
     this.outputDeleteCandidate.emit();
   }
 

@@ -30,7 +30,7 @@ export class UserService {
     return this.configService.put('user/' + user.email, user);
   }
 
-  delete(user: User): Observable<User> {
+  delete(user: User): Observable<any> {
     return this.configService.delete('user/' + user.email);
   }
 }

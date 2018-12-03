@@ -131,7 +131,7 @@ export class VacancyService {
     return this.configService.put('vacancy/' + vacancy.id, vacancy);
   }
 
-  delete(vacancy: Vacancy): Observable<Vacancy> {
+  delete(vacancy: Vacancy): Observable<any> {
     return this.configService.delete('vacancy/' + vacancy.id);
   }
 }

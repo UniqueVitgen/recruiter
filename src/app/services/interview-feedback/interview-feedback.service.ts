@@ -26,7 +26,7 @@ export class InterviewFeedbackService {
     return this.configService.put('interview_feedback/' + interviewFeedback.id, interviewFeedback);
   }
 
-  delete(interviewFeedback: InterviewFeedback): Observable<InterviewFeedback> {
+  delete(interviewFeedback: InterviewFeedback): Observable<any> {
     return this.configService.delete('interview_feedback/' + interviewFeedback.id);
   }
 }

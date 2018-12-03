@@ -49,7 +49,7 @@ export class InterviewService {
     return this.configService.put('interview/' + interview.id, interview);
   }
 
-  delete(interview: Interview): Observable<Interview> {
+  delete(interview: Interview): Observable<any> {
     return this.configService.delete('interview/' + interview.id);
   }
 }

@@ -20,7 +20,10 @@ export class CandidateDashboardItemComponent {
 
 
   deleteCandidate() {
-    this.candidateService.delete(this.candidate.id).subscribe(res => {this.outputDeleteCandidate.emit(); });
+    this.candidateService.delete(this.candidate.id).subscribe(
+      (res) => { console.log('id');
+        this.outputDeleteCandidate.emit(this.candidate);
+      });
   }
 
   goToCandidatePage() {
