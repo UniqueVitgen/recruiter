@@ -22,7 +22,7 @@ export class InterviewFeedbackService {
     return this.configService.post('interview_feedback', interviewFeedback);
   }
 
-  update(interviewFeedback: InterviewFeedback): Observable<InterviewFeedback> {
+  update(interviewFeedback: InterviewFeedback): Observable<any> {
     return this.configService.put('interview_feedback/' + interviewFeedback.id, interviewFeedback);
   }
 

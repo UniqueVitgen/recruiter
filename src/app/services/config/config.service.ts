@@ -61,9 +61,9 @@ export class ConfigService {
     return this.http.get<T>(ConfigService.apiUrl + url);
   }
 
-  put<T>(url, data) {
+  put(url, data) {
     const headers = this.createHeaders();
-    return this.http.put<T>(ConfigService.apiUrl + url, data)
+    return this.http.put(ConfigService.apiUrl + url, data)
       // .pipe(
       //   catchError(this.handleError)
       // );

@@ -127,7 +127,7 @@ export class VacancyService {
     }
   }
 
-  update(vacancy: Vacancy): Observable<Vacancy> {
+  update(vacancy: Vacancy): Observable<any> {
     return this.configService.put('vacancy/' + vacancy.id, vacancy);
   }
 

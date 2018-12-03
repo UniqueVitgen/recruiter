@@ -27,7 +27,7 @@ export class CandidateDashboardItemComponent {
   }
 
   goToCandidatePage() {
-    //this.router.navigate(['candidate', this.candidate.id]);
+    this.router.navigate(['candidate', this.candidate.id]);
   }
 
 }

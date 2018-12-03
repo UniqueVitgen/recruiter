@@ -26,7 +26,7 @@ export class UserService {
     return this.configService.post('user', user);
   }
 
-  update(user: User): Observable<User> {
+  update(user: User): Observable<any> {
     return this.configService.put('user/' + user.email, user);
   }
 

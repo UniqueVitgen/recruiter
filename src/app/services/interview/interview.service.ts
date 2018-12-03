@@ -45,7 +45,7 @@ export class InterviewService {
     return this.configService.post('interview', interview);
   }
 
-  update(interview: Interview): Observable<Interview> {
+  update(interview: Interview): Observable<any> {
     return this.configService.put('interview/' + interview.id, interview);
   }
 

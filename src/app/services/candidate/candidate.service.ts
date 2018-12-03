@@ -243,7 +243,7 @@ export class CandidateService {
     return this.configService.post('candidates', candidate);
   }
 
-  update(candidate: Candidate): Observable<Candidate> {
+  update(candidate: Candidate): Observable<any> {
     return this.configService.put('candidate/' + candidate.id, candidate);
   }
 

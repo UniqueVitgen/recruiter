@@ -8,6 +8,7 @@ import {ContactDetails} from '../../../../classes/contact-details';
 import {CandidateService} from '../../../../services/candidate/candidate.service';
 import {ContactType} from '../../../../enums/contact-type.enum';
 import {ArrayWorker} from '../../../../workers/array/array.worker';
+import {StringWorker} from '../../../../workers/string/string.worker';
 
 @Component({
   selector: 'app-short-info-user',
@@ -29,6 +30,7 @@ export class ShortInfoUserComponent implements OnInit, OnChanges {
 
   constructor(public dialog: MatDialog,
               private candidateSerivce: CandidateService,
+              private stringWorker: StringWorker,
               private arrayWorker: ArrayWorker,
               public candidateWorker: CandidateWorker) { }
 
@@ -48,30 +50,80 @@ export class ShortInfoUserComponent implements OnInit, OnChanges {
     if (this.tests.skype) { this.tests.skypeObject = this.candidateWorker.getSkypeObject(this.candidate); }
     if (this.tests.email) { this.tests.emailObject = this.candidateWorker.getEmailObject(this.candidate); }
   }
-
-  changeSkype() {
-    if (this.tests.skype) {
-      if (this.candidateWorker.getSkypeObject(this.candidate) == null) {
-        const skypeObject: ContactDetails = {
-          contactType: ContactType.SKYPE,
-          contactDetails: ''
-        };
+  changeContactProperty(property) {
+    const getObjectStr = 'get' + this.stringWorker.capitalize(property) + 'Object';
+    const objectStr = property + 'Object';
+    const objectUpper = property.toUpperCase();
+    if (this.tests[property]) {
+      if (this.candidateWorker[getObjectStr](this.candidate) == null) {
+        let skypeObject: ContactDetails;
+        if (this.tests[objectStr]) {
+          skypeObject = this.tests[objectStr];
+        } else {
+          skypeObject = {
+            contactType: <any> objectUpper,
+            contactDetails: ''
+          };
+        }
         this.candidate.contacts.push(skypeObject);
-        this.tests.skypeObject = skypeObject;
+        this.tests[objectStr] = skypeObject;
       }
     } else {
-      if (this.candidateWorker.getSkypeObject(this.candidate) != null) {
-        this.arrayWorker.removeElement(this.candidate.contacts, this.tests.skypeObject);
+      if (this.candidateWorker[getObjectStr](this.candidate) != null) {
+        this.candidate.contacts = this.arrayWorker.removeElement(this.candidate.contacts, this.tests[objectStr]);
+        this.candidateSerivce.update(this.candidate).subscribe(res => {
+          console.log(res);
+        });
       }
     }
+
+  }
+
+  changeSkype() {
+    this.changeContactProperty('skype');
   }
 
   changeEmail() {
+    this.changeContactProperty('email');
+    // if (this.tests.email) {
+    //   if (this.candidateWorker.getEmailObject(this.candidate) == null) {
+    //     const emailObject: ContactDetails = {
+    //       contactType: ContactType.EMAIL,
+    //       contactDetails: ''
+    //     };
+    //     this.candidate.contacts.push(emailObject);
+    //     this.tests.emailObject = emailObject;
+    //   }
+    // } else {
+    //   if (this.candidateWorker.getEmailObject(this.candidate) != null) {
+    //     this.candidate.contacts = this.arrayWorker.removeElement(this.candidate.contacts, this.tests.emailObject);
+    //     this.candidateSerivce.update(this.candidate).subscribe(res => {
+    //       console.log(res);
+    //     });
+    //   }
+    // }
 
   }
 
   changePhone() {
-
+    this.changeContactProperty('phone');
+    // if (this.tests.phone) {
+    //   if (this.candidateWorker.getPhoneObject(this.candidate) == null) {
+    //     const phoneObject: ContactDetails = {
+    //       contactType: ContactType.PHONE,
+    //       contactDetails: ''
+    //     };
+    //     this.candidate.contacts.push(phoneObject);
+    //     this.tests.phoneObject = phoneObject;
+    //   }
+    // } else {
+    //   if (this.candidateWorker.getPhoneObject(this.candidate) != null) {
+    //     this.candidate.contacts = this.arrayWorker.removeElement(this.candidate.contacts, this.tests.phoneObject);
+    //     this.candidateSerivce.update(this.candidate).subscribe(res => {
+    //       console.log(res);
+    //     });
+    //   }
+    // }
   }
 
   openStatusDialog(): void {
