@@ -32,7 +32,7 @@
       cursor: pointer;
     }
     position: absolute;
-    bottom: 100;
+    bottom: 0;
     left: 0;
     z-index: 1000;
     &.success-fiber {
@@ -93,7 +93,4 @@
     font-size: 1rem;
     padding: 15px 10px;
   }
-}
-.user-name {
-  padding: 10px;
 }
