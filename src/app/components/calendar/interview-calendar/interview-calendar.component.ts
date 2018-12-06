@@ -113,20 +113,23 @@ export class InterviewCalendarComponent implements OnInit {
     this.currentMonth();
   }
 
-  openInterviewDialog(day, interview: InterviewExtended): void {
-    const dialogRef = this.dialog.open(InterviewModalComponent, {
-      minWidth: '400px',
-        data: {
-          day: day,
-          interview: interview
+  openInterviewDialog(day: String, interview: InterviewExtended, date: Moment): void {
+    const checkDate: Moment = moment().add(-1, 'day' );
+    if (date >= checkDate ) {
+      const dialogRef = this.dialog.open(InterviewModalComponent, {
+          minWidth: '400px',
+          data: {
+            day: day,
+            interview: interview
+          }
         }
-      }
-    );
+      );
 
-    dialogRef.afterClosed().subscribe(result => {
-      console.log('The dialog was closed');
-      // this.animal = result;
-    });
+      dialogRef.afterClosed().subscribe(result => {
+        console.log('The dialog was closed');
+        // this.animal = result;
+      });
+    }
   }
   createCalendar(month: Moment): Moment[] {
     const firstDay: Moment = moment(month).startOf('M');
@@ -136,7 +139,8 @@ export class InterviewCalendarComponent implements OnInit {
         return {
           day: moment(firstDay).add(n, 'd').format('DD'),
           mockInterview: this.mockInterview,
-          lastMonth: false
+          lastMonth: false,
+          date: moment(firstDay).add(n, 'd')
             // ['14:00-16:00 - Bobo']
         };
       });
@@ -147,7 +151,8 @@ export class InterviewCalendarComponent implements OnInit {
         {
           day: lastDay.format('DD'),
           mockInterview: this.mockInterview,
-          lastMonth: true
+          lastMonth: true,
+          date: lastDay
         }
       );
       lastDay.add(-1, 'day');
