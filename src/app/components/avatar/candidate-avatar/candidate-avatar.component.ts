@@ -10,6 +10,7 @@ import {Candidate} from '../../../classes/candidate';
 })
 export class CandidateAvatarComponent implements OnInit {
   @Input() haveHoverEffect: boolean;
+  @Input() candidate: Candidate;
   @Input() src: string;
   @Input() isEditedIcon: boolean;
   @Input() isClosedIcon: boolean;

@@ -1,7 +1,7 @@
 <div class="user-avatar" [ngClass]="{'user-avatar-hover': haveHoverEffect}">
   <img [src]="src" alt="" onerror="this.src = '/assets/candidate/middle-man.jpg'" />
   <mat-icon class="fiber-icon-image"
-            matTooltip="Status: status" [ngClass]="{'success-fiber': true}">fiber_manual_record</mat-icon>
+            matTooltip="Status: {{candidate.candidateState.name}}" [ngClass]="{'success-fiber': true}">fiber_manual_record</mat-icon>
   <div (click)="clickAvatar()" class="avatar-hover">
     <mat-icon *ngIf="isClosedIcon" (click)="clickClose(); $event.stopPropagation()" class="close-icon-image" matTooltip="Delete Candidate">cancel</mat-icon>
     <mat-icon *ngIf="isEditedIcon" (click)="clickEdit()" class="edit-icon-image">create</mat-icon>

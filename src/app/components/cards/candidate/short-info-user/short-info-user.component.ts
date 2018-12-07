@@ -100,7 +100,7 @@ export class ShortInfoUserComponent implements OnInit, OnChanges {
   }
 
   changeEmail() {
-    this.changeContactProperty(this.tests[2]);
+    this.changeContactProperty(this.tests[0]);
     // if (this.tests.email) {
     //   if (this.candidateWorker.getEmailObject(this.candidate) == null) {
     //     const emailObject: ContactDetails = {
@@ -122,7 +122,7 @@ export class ShortInfoUserComponent implements OnInit, OnChanges {
   }
 
   changePhone() {
-    this.changeContactProperty(this.tests[0]);
+    this.changeContactProperty(this.tests[2]);
     // if (this.tests.phone) {
     //   if (this.candidateWorker.getPhoneObject(this.candidate) == null) {
     //     const phoneObject: ContactDetails = {
