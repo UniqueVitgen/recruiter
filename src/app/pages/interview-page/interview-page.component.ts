@@ -21,8 +21,8 @@ export class InterviewPageComponent implements OnInit {
   private candidateService: CandidateService) { }
 
   ngOnInit() {
-    this.vacancyService.get(0).subscribe(vacancyRes => {
-      this.mockVacancy = vacancyRes;
+    this.vacancyService.getAll().subscribe(vacanciesRes => {
+      this.mockVacancy = vacanciesRes[0];
       this.candidateService.getAll().subscribe(candidatesRes => {
         this.mockCandidate = candidatesRes[0];
         this.interviewService.get(0).subscribe(res => {

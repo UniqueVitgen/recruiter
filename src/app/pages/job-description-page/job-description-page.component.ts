@@ -26,7 +26,7 @@ export class JobDescriptionPageComponent implements OnInit {
   getVacancy() {
     this.route.params
       .subscribe(params => {
-        this.id = Number(params['id']);
+        this.id = params['id'];
         this.vacancyService.get(this.id).subscribe(res => {
           this.vacancy = res;
           this.getCandidateList(this.vacancy);

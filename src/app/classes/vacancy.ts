@@ -3,7 +3,8 @@ import {Skill} from './skill';
 import {Requirement} from './requirement';
 
 export class Vacancy {
-  id?: number;
+  id?: string | number
+  ;
   position: string;
   salaryInDollarsFrom?: number;
   salaryInDollarsTo?: number;

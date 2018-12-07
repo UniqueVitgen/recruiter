@@ -37,10 +37,9 @@ export class CandidateDashboardComponent implements OnInit, OnChanges {
       const valueLowercase = value.toLowerCase();
       this.selectedCandidates = this.candidates.filter((candidate) => {
         const fullname = this.userWorker.formatFullName(candidate).toLowerCase();
-        const name = candidate.name.toLowerCase();
         const surname = candidate.surname.toLowerCase();
         return fullname.indexOf(valueLowercase) > -1
-          || name.indexOf(valueLowercase) > -1
+          // || name.indexOf(valueLowercase) > -1
           || surname.indexOf(valueLowercase) > -1;
       });
     } else {
