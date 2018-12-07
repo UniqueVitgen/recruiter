@@ -60,9 +60,9 @@ export class ShortInfoUserComponent implements OnInit, OnChanges {
       }
     ];
     console.log(this.tests);
-    if (this.tests[0].have) { this.tests[2].object = this.candidateWorker.getEmailObject(this.candidate); }
+    if (this.tests[0].have) { this.tests[0].object = this.candidateWorker.getEmailObject(this.candidate); }
     if (this.tests[1].have) { this.tests[1].object = this.candidateWorker.getSkypeObject(this.candidate); }
-    if (this.tests[2].have) { this.tests[0].object = this.candidateWorker.getPhoneObject(this.candidate); }
+    if (this.tests[2].have) { this.tests[2].object = this.candidateWorker.getPhoneObject(this.candidate); }
   }
   changeContactProperty(value: CandidateContactInput) {
     console.log(value);

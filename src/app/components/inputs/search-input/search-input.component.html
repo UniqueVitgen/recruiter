@@ -5,7 +5,7 @@
         <div class="input-group-prepend">
           <span class="input-group-text" id="basic-addon1"><mat-icon>search</mat-icon></span>
         </div>
-        <input type="text" class="form-control" placeholder="Search">
+        <input type="text" (input)="search($event.target.value)" class="form-control" placeholder="Search">
         <!-- <span class="input-group-addon">
           <button type="submit">
             <span class="glyphicon glyphicon-search"></span>
