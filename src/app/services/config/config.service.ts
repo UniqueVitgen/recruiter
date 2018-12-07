@@ -63,7 +63,7 @@ export class ConfigService {
 
   put(url, data) {
     const headers = this.createHeaders();
-    return this.http.put(ConfigService.apiUrl + url, data)
+    return this.http.put(ConfigService.apiUrl + url, data, <any>{ responseType: 'text'});
       // .pipe(
       //   catchError(this.handleError)
       // );

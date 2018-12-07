@@ -6,7 +6,7 @@ import {Candidate} from '../../../../classes/candidate';
 import {CandidateDialogResult} from '../../../../interfaces/dialog/result/candidate-dialog-result';
 import {ContactType} from '../../../../enums/contact-type.enum';
 import {FormBuilder, FormGroup, Validators} from '@angular/forms';
-import {Regexp} from '../../../../const/regexp';
+import {RegexpConst} from '../../../../const/regexp.const';
 
 @Component({
   selector: 'app-candidate-modal',
@@ -52,14 +52,14 @@ export class CandidateModalComponent implements OnInit {
         ]
       };
       this.candidateForm = this.formBuilder.group({
-        name: ['', Validators.compose([Validators.required, Validators.pattern(Regexp.LATIN_NAME)])],
-        surname: ['', Validators.compose([Validators.required, Validators.pattern(Regexp.LATIN_NAME)])],
+        name: ['', Validators.compose([Validators.required, Validators.pattern(RegexpConst.LATIN_NAME)])],
+        surname: ['', Validators.compose([Validators.required, Validators.pattern(RegexpConst.LATIN_NAME)])],
         state: [''],
         position: [''],
         status: [''],
         skype: [''],
-        phone: ['', Validators.compose([Validators.pattern(Regexp.BELLARUSSIAN_PHONE)])],
-        email: ['', Validators.compose([Validators.pattern(Regexp.EMAIL)])]
+        phone: ['', Validators.compose([Validators.pattern(RegexpConst.BELLARUSSIAN_PHONE)])],
+        email: ['', Validators.compose([Validators.pattern(RegexpConst.EMAIL)])]
       });
     }
   }
