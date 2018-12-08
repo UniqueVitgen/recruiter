@@ -24,7 +24,6 @@ export class JobDescriptionModalComponent implements OnInit {
     'TeamLeader',
     'Responsible'
   ];
-  jobDescriptionGroup: FormGroup;
 
   constructor(
     public dialogRef: MatDialogRef<JobDescriptionModalComponent>,
@@ -42,10 +41,6 @@ export class JobDescriptionModalComponent implements OnInit {
       this.editedVacancy = new Vacancy();
       this.editedVacancy.requirements = [];
     }
-    this.jobDescriptionGroup = this.formBuilder.group({
-      position: ['', Validators.compose([Validators.required])],
-      requirements: this.formBuilder.array(this.editedVacancy.requirements)
-    });
   }
   onNoClick(): void {
     this.dialogRef.close();
@@ -55,11 +50,6 @@ export class JobDescriptionModalComponent implements OnInit {
   }
 
   addRequirement() {
-    (this.jobDescriptionGroup.controls['requirements'] as FormArray).push(this.formBuilder.group({
-      name: '',
-      public: true,
-      required: false
-    }));
     if (this.editedVacancy.requirements == null) {
       this.editedVacancy.requirements = [];
     }
@@ -76,6 +66,14 @@ export class JobDescriptionModalComponent implements OnInit {
 
   save() {
     if (this.data.isEdit) {
+      this.vacancyService.update(this.editedVacancy).subscribe(resVacancy => {
+        this.dialogResult = {
+          isEdit: this.data.isEdit,
+          resObject: resVacancy,
+          success: true
+        };
+        this.dialogRef.close(this.dialogResult);
+      });
     } else {
       this.vacancyService.add(this.editedVacancy).subscribe(resVacancy => {
         console.log('resVacancy', resVacancy);

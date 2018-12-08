@@ -6,9 +6,9 @@
     </button>
   </dialog-title>
   <dialog-body>
-    <form [formGroup]="jobDescriptionGroup">
+    <form>
         <mat-form-field *ngIf="editedVacancy" class="example-full-width">
-          <input formControlName="position" [(ngModel)]="editedVacancy.position" matInput placeholder="Position*">
+          <input [(ngModel)]="editedVacancy.position" name="position" matInput placeholder="Position" required>
         </mat-form-field>
         <mat-form-field class="example-full-width">
           <textarea matInput placeholder="Description"></textarea>
@@ -27,14 +27,14 @@
           </div>
         </div>
         <div  cdkDropList  (cdkDropListDropped)="drop($event)">
-          <div cdkDrag class="row" formArrayName="requirements" *ngFor="let requirement of jobDescriptionGroup.controls['requirements'].controls">
+          <div cdkDrag class="row" *ngFor="let requirement of editedVacancy.requirements; let i = index">
             <div class="col-1 checkbox-col">
               <mat-icon>format_line_spacing</mat-icon>
             </div>
             <div class="col-5">
               <mat-form-field class="example-full-width">
-                <input matInput placeholder="Requirement" formControlName="name" [matAutocomplete]="auto" [(ngModel)]="requirement.name">
-                <mat-autocomplete #auto="matAutocomplete">
+                <input [name]="'requirements-' + i" matInput placeholder="Requirement" [matAutocomplete]="auto" [(ngModel)]="requirement.name">
+                <mat-autocomplete required #auto="matAutocomplete">
                   <mat-option *ngFor="let state of searchWorker.search(requirement.name, testRequirements)" [value]="state">
                     <span>{{state}}</span>
                     <!--<small>Population: {{state.population}}</small>-->
@@ -43,10 +43,10 @@
               </mat-form-field>
             </div>
             <div class="col-2 checkbox-col">
-              <mat-checkbox class="example-margin"></mat-checkbox>
+                <mat-checkbox [name]="'requred' + i" [(ngModel)]="requirement.required" class="example-margin"></mat-checkbox>
             </div>
             <div class="col-2 checkbox-col">
-              <mat-checkbox class="example-margin"></mat-checkbox>
+                <mat-checkbox [name]="'public' + i" [(ngModel)]="requirement.public" class="example-margin"></mat-checkbox>
             </div>
             <div class="col-2 checkbox-col">
               <button (click)="removeElement(editedVacancy.requirements, requirement)" class="float-right" mat-icon-button>
