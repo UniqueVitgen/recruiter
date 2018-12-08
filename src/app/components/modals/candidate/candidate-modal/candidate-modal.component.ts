@@ -77,6 +77,8 @@ export class CandidateModalComponent implements OnInit {
         this.dialogRef.close(res);
       });
     } else {
+      //this.editedCandidate.contacts =  this.editedCandidate.contacts.filter(contact => contact.contactDetails !== '' );
+
       this.candidateService.add(this.editedCandidate).subscribe(res => {
         this.dialogResult = {
           isEdit: this.data.isEdit,

@@ -71,8 +71,11 @@
     position: absolute;
     bottom: 0;
     left: 0;
-    &.success-fiber {
+    &.open-fiber {
       color: lawngreen;
+    }
+    &.archive-fiber {
+      color: #8a3700;
     }
   }
   .avatar-hover {

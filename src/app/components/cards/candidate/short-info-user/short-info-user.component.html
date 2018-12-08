@@ -1,7 +1,7 @@
 <!-- <mat-card> -->
 <div class="row">
   <div class="col-12 col-md-12">
-    <app-candidate-avatar [haveHoverEffect]="true" [isEditedIcon]="true" [candidate]="candidate"></app-candidate-avatar>
+    <app-candidate-avatar [candidate]="candidate" [isStatus]="true"></app-candidate-avatar>
     <!-- <ngx-avatar 
       src="assets/candidate/icons8-person-80.png"
       [round]="false"
@@ -24,7 +24,11 @@
           <input (blur)="onFocusoutAnyInput()" matInput placeholder="Position">
         </mat-form-field>
         <mat-form-field class="example-full-width">
-          <input (blur)="onFocusoutAnyInput()" [(ngModel)]="candidate.candidateState.name" matInput placeholder="Status">
+          <!--<input (blur)="onFocusoutAnyInput()" [(ngModel)]="candidate.candidateState.name" matInput placeholder="Status"> -->
+          <select matNativeControl required [(ngModel)]="candidate.candidateState.name" matInput (blur)="onFocusoutAnyInput()">
+            <option value="Open" >Open</option>
+            <option value="Archive">Archive</option>
+          </select>
         </mat-form-field>
       </div>
       <div *ngIf="readonly">
