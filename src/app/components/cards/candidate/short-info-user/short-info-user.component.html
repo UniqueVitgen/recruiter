@@ -23,9 +23,6 @@
         <mat-form-field class="example-full-width">
           <input (blur)="onFocusoutAnyInput()" matInput placeholder="Position">
         </mat-form-field>
-        <mat-form-field class="example-full-width">
-          <input (blur)="onFocusoutAnyInput()" [(ngModel)]="candidate.candidateState.name" matInput placeholder="Status">
-        </mat-form-field>
       </div>
       <div *ngIf="readonly">
         <div class="row">
@@ -42,14 +39,6 @@
           </div>
           <div class="col-9">
             <span>{{candidate.surname}}</span>
-          </div>
-        </div>
-        <div class="row">
-          <div class="col-3">
-            <span class="font-weight-bold float-right">Status:</span>
-          </div>
-          <div class="col-9">
-            <span>{{candidate.candidateState.name}}</span>
           </div>
         </div>
       </div>
