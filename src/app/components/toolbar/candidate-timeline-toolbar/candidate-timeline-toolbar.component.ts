@@ -1,13 +1,10 @@
-
-import {Component, Input, OnChanges, Output, EventEmitter} from '@angular/core';
-import {EventNote} from '../../../classes/event-note';
-import {Attachment} from '../../../classes/attachment';
-import {Interview} from '../../../classes/interview';
-import {AttachmentType} from '../../../enums/attachment-type.enum';
-import {CandidateExperience} from '../../../classes/candidate-experience';
-import {Project} from '../../../classes/project';
-import {Team} from '../../../classes/team';
-import {Notes} from '../../../classes/notes';
+import {Component, EventEmitter, Input, OnChanges, Output} from '@angular/core';
+import {InterviewTimeline} from '../../../classes/timeline/interview-timeline';
+import {BaseTimeline} from '../../../classes/timeline/base-timeline';
+import {AttachmentTimeline} from '../../../classes/timeline/attachment-timeline';
+import {ExperienceTimeline} from '../../../classes/timeline/experience-timeline';
+import {NoteTimeline} from '../../../classes/timeline/note-timeline';
+import {EventTimelineType} from '../../../enums/event-timeline-type.enum';
 
 @Component({
   selector: 'app-candidate-timeline-toolbar',
@@ -16,9 +13,9 @@ import {Notes} from '../../../classes/notes';
 })
 export class CandidateTimelineToolbarComponent implements OnChanges {
 
-  @Input() timelineNotes: EventNote[];
+  @Input() timelineNotes: BaseTimeline[];
   @Output('changeTimeline') outputChangeTimeline = new EventEmitter();
-  internalTimeLineList: EventNote[];
+  internalTimeLineList: BaseTimeline[];
   constructor() { }
 
   ngOnChanges() {
@@ -27,39 +24,40 @@ export class CandidateTimelineToolbarComponent implements OnChanges {
 
   addAssignInterview() {
     console.log(this.internalTimeLineList);
-    this.internalTimeLineList.unshift(<Interview> {
-      candidateId: 0,
-      vacancyId: 0,
-      planDate: '',
-      factDate: ''
+    this.internalTimeLineList.unshift(<InterviewTimeline> {
+      when: new Date(),
+      where: '',
+      whoConducts: '',
+      comment: '',
+      type: EventTimelineType.Interview
     });
     this.outputChangeTimeline.emit(this.internalTimeLineList);
   }
 
   addCV() {
-    this.internalTimeLineList.unshift(<Attachment> {
-      attachmentType: AttachmentType.CV,
-      filePath: ''
+    this.internalTimeLineList.unshift(<AttachmentTimeline> {
+      comment: '',
+      type: EventTimelineType.Attachment
     });
     this.outputChangeTimeline.emit(this.internalTimeLineList);
   }
 
   addExperience() {
-    this.internalTimeLineList.unshift(<CandidateExperience> {
-      dateFrom: new Date().toDateString(),
-      dateTo: new Date().toDateString(),
-      jobDescription: Project,
+    this.internalTimeLineList.unshift(<ExperienceTimeline> {
+      companyName: '',
+      dateFrom: new Date(),
+      dateTo: new Date(),
       jobPosition: '',
-      companyName: Team
+      comment: '',
+      type: EventTimelineType.Experience
     });
     this.outputChangeTimeline.emit(this.internalTimeLineList);
   }
 
   addNote() {
-    this.internalTimeLineList.unshift(<Notes> {
-      interviewer: '',
-      date: new Date().toDateString(),
-      noteText: '12'
+    this.internalTimeLineList.unshift(<NoteTimeline> {
+      comment: '',
+      type: EventTimelineType.Note
     });
     this.outputChangeTimeline.emit(this.internalTimeLineList);
   }

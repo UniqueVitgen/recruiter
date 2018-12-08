@@ -1,4 +1,4 @@
-export enum EventNoteType {
+export enum EventTimelineType {
   Note = 'Note',
   Interview = 'Interview',
   Attachment = 'Attachment',
