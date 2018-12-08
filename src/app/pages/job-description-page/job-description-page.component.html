@@ -18,7 +18,7 @@
   </mat-card-title>
 <mat-divider></mat-divider>
 <br>
-<app-candidate-dashboard *ngIf="candidates" [candidates]="candidates" [haveAddElement]="true"></app-candidate-dashboard>
+<app-candidate-dashboard (addCandidate)="addCandidate($event)" *ngIf="vacancy.candidates" [candidates]="vacancy.candidates" [haveAddElement]="true"></app-candidate-dashboard>
 </mat-card>
 <br>
 <mat-card>

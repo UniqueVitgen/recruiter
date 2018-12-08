@@ -2,7 +2,7 @@
   <mat-card>
     <app-job-description-short-info [vacancy]="jobDescription"></app-job-description-short-info>
   </mat-card>
-  <app-candidate-dashboard></app-candidate-dashboard>
+  <app-candidate-dashboard [candidates]="jobDescription.candidates"></app-candidate-dashboard>
   <!--<div><span class="big-text">{{jobDescription.position}}</span></div>-->
   <!--<mat-divider></mat-divider>-->
   <!--<br>-->

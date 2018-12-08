@@ -36,10 +36,16 @@ export class JobDescriptionPageComponent implements OnInit {
         // Defaults to 0 if no query param provided.
       });
   }
+  addCandidate(candidate: Candidate) {
+    this.vacancy.candidates.push(candidate);
+    this.vacancyService.update(this.vacancy).subscribe(resVacancy => {
+      console.log(resVacancy);
+      this.getVacancy();
+    });
+  }
 
   getCandidateList(vacancy: Vacancy) {
     this.vacancyService.getCandidates(vacancy).subscribe(res => {
-      this.candidates = res;
     });
   }
 
