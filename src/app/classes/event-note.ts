@@ -1,4 +1,4 @@
-import {EventNoteType} from '../enums/event-note-type.enum';
+import {EventNoteType} from '../enums/event-timeline-type.enum';
 
 export class EventNote {
   id?: number;

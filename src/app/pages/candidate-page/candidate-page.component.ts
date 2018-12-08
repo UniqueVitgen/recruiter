@@ -5,6 +5,10 @@ import { Candidate } from 'src/app/classes/candidate';
 import {Notes} from 'src/app/classes/notes';
 import {EventNote} from '../../classes/event-note';
 import {Interview} from '../../classes/interview';
+import {BaseTimeline} from '../../classes/timeline/base-timeline';
+import {InterviewTimeline} from '../../classes/timeline/interview-timeline';
+import {EventTimelineType} from '../../enums/event-timeline-type.enum';
+import {NoteTimeline} from '../../classes/timeline/note-timeline';
 
 @Component({
   selector: 'app-candidate-page',
@@ -17,7 +21,7 @@ export class CandidatePageComponent implements OnInit {
   notes = { interviewer: 'Вася',
   date: '1',
   noteText: '1111111111111111111111111111111111111111111111111111111111111111111111111'};
-  eventNoteList: EventNote[];
+  eventNoteList: BaseTimeline[];
 
   constructor(
     private route: ActivatedRoute,
@@ -29,24 +33,24 @@ export class CandidatePageComponent implements OnInit {
       this.id = params['id'];
       this.candidateService.get(this.id).subscribe(res => {
         this.candidate = res;
-        const interviewers = <Interview[]> [
-          {
-            vacancyId: 0,
-            candidateId: 0,
-            planDate: new Date().toDateString(),
-            factDate: new Date().toDateString()
-          }
-          ];
-        const noteList = <Notes[]> [
-          {
-            date: new Date().toDateString(),
-            interviewer: 'me',
-            noteText: 'fadsfeqwgegqewgewgewgew'
-          }
-        ];
-        this.eventNoteList = [].concat(this.candidate.experiences).concat(this.candidate.attachments)
-          .concat(interviewers)
-          .concat(noteList);
+        // const interviewers = <InterviewTimeline[]> [
+        //   {
+        //     when: new Date(),
+        //     where: '',
+        //     whoConducts: '',
+        //     comment: '',
+        //     type: EventTimelineType.Interview
+        //   }
+        //   ];
+        // const noteList = <NoteTimeline[]> [
+        //   {
+        //     comment: '',
+        //     type: EventTimelineType.Note
+        //   }
+        // ];
+        this.eventNoteList = []; //.concat(this.candidate.experiences).concat(this.candidate.attachments)
+          //.concat(interviewers)
+          //.concat(noteList);
         console.log(this.eventNoteList);
         console.log('res', res);
       });

@@ -1,5 +1,5 @@
 import {BaseTimeline} from './base-timeline';
 
-export class NodeTimeline extends BaseTimeline {
+export class NoteTimeline extends BaseTimeline {
   comment: string;
 }
