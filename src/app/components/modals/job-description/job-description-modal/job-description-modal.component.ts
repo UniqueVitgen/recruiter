@@ -57,7 +57,9 @@ export class JobDescriptionModalComponent implements OnInit {
       this.editedVacancy.requirements = [];
     }
     this.editedVacancy.requirements.push({
-      name: ''
+      name: '',
+      public: true,
+      required: false
     });
   }
 

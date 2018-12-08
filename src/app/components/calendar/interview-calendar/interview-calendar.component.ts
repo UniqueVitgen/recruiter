@@ -35,7 +35,9 @@ export class InterviewCalendarComponent implements OnInit {
     ],
     requirements: [
       {
-        name: 'string'
+        name: 'string',
+        public: true,
+        required: false
       }
     ]
   };

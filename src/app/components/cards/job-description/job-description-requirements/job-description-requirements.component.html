@@ -1,51 +1,97 @@
-
 <!--<mat-card class="job-description-requirements">-->
-  <!--<div class="row">-->
-    <!--<div class="col-6">-->
-      <!--Public-->
-    <!--</div>-->
-    <!--<div class="col-6">-->
-      <!--Private-->
-    <!--</div>-->
-  <!--</div>-->
-  <!--<mat-divider></mat-divider>-->
-  <!--<div class="row">-->
-    <!--<div class="col-6 flex-to-bottom-parent">-->
-      <!--<ul>-->
-        <!--<li *ngFor="let skill of vacancy.skills">-->
-          <!--<span>{{skill.name}}</span>-->
-          <!--<i class="material-icons float-right">cancel</i>-->
-        <!--</li>-->
-      <!--</ul>-->
-      <!--<div class="input-group mb-3 flex-to-bottom-child">-->
-        <!--<div class="input-group-prepend">-->
-          <!--<span class="input-group-text" id="basic-addon1">+</span>-->
-        <!--</div>-->
-        <!--<input type="text" class="form-control" placeholder="Skill" aria-label="Username" aria-describedby="basic-addon1">-->
-      <!--</div>-->
-    <!--</div>-->
-    <!--<div class="col-6 flex-to-bottom-parent">-->
-      <!--<div class="input-group mb-3 flex-to-bottom-child">-->
-        <!--<div class="input-group-prepend">-->
-          <!--<span class="input-group-text" id="basic-addon2">+</span>-->
-        <!--</div>-->
-        <!--<input type="text" class="form-control" placeholder="Skill" aria-label="Username" aria-describedby="basic-addon1">-->
-      <!--</div>-->
-    <!--</div>-->
-  <!--</div>-->
+<!--<div class="row">-->
+<!--<div class="col-6">-->
+<!--Public-->
+<!--</div>-->
+<!--<div class="col-6">-->
+<!--Private-->
+<!--</div>-->
+<!--</div>-->
+<!--<mat-divider></mat-divider>-->
+<!--<div class="row">-->
+<!--<div class="col-6 flex-to-bottom-parent">-->
+<!--<ul>-->
+<!--<li *ngFor="let skill of vacancy.skills">-->
+<!--<span>{{skill.name}}</span>-->
+<!--<i class="material-icons float-right">cancel</i>-->
+<!--</li>-->
+<!--</ul>-->
+<!--<div class="input-group mb-3 flex-to-bottom-child">-->
+<!--<div class="input-group-prepend">-->
+<!--<span class="input-group-text" id="basic-addon1">+</span>-->
+<!--</div>-->
+<!--<input type="text" class="form-control" placeholder="Skill" aria-label="Username" aria-describedby="basic-addon1">-->
+<!--</div>-->
+<!--</div>-->
+<!--<div class="col-6 flex-to-bottom-parent">-->
+<!--<div class="input-group mb-3 flex-to-bottom-child">-->
+<!--<div class="input-group-prepend">-->
+<!--<span class="input-group-text" id="basic-addon2">+</span>-->
+<!--</div>-->
+<!--<input type="text" class="form-control" placeholder="Skill" aria-label="Username" aria-describedby="basic-addon1">-->
+<!--</div>-->
+<!--</div>-->
+<!--</div>-->
 <!--</mat-card>-->
 <mat-card>
-  <mat-card-title>Requirements
-    <button *ngIf="isMoreIcon" class="float-right" mat-icon-button [matMenuTriggerFor]="menu">
+  <mat-card-title>
+    <div class="row font-weight-bold">
+      <div class="col-6">
+        <span>Requirements: </span>
+      </div>
+      <div class="col-2">
+        <span>Require</span>
+      </div>
+      <div class="col-2">
+        <span>Public</span>
+      </div>
+      <div class="col-2">
+      </div>
+    </div>
+    <div cdkDrag class="row" *ngFor="let requirement of vacancy.requirements">
+      <div class="col-1 checkbox-col">
+
+      </div>
+      <div class="col-5">
+          {{ requirement.name }}
+      </div>
+      <div class="col-2 checkbox-col">
+        <mat-checkbox class="example-margin"   [checked]="requirement.required" disabled></mat-checkbox>
+      </div>
+      <div class="col-2 checkbox-col">
+        <mat-checkbox class="example-margin" [checked]="requirement.public" disabled ></mat-checkbox>
+      </div>
+      <div class="col-2 checkbox-col">
+      </div>
+    </div>
+<!--    <div *ngFor="let requirement of vacancy.requirements" class = "requirements">
+      <span>
+        <p class ="requirement-name"> {{ requirement.name }}</p>
+      </span>
+      <ul>
+        <li>
+          <mat-checkbox></mat-checkbox>
+        </li>
+      </ul>
+      <ul>
+        <li>
+          <mat-checkbox></mat-checkbox>
+        </li>
+      </ul>
+    </div>-->
+    <!--     <p>
+         <label>
+           <input type="checkbox" />
+           <span>Red</span>
+         </label>
+       </p>-->
+   <!-- <button *ngIf="isMoreIcon" class="float-right" mat-icon-button [matMenuTriggerFor]="menu">
       <mat-icon>more_horiz</mat-icon>
-    </button>
+    </button>-->
   </mat-card-title>
-  <ul>
+ <!-- <ul>
     <li *ngFor="let requirement of vacancy.requirements">
       {{requirement.name}}
     </li>
-  </ul>
+  </ul>-->
 </mat-card>
-<mat-menu  #menu="matMenu">
-  <button (click)="clickEdit()" mat-menu-item>Edit</button>
-</mat-menu>

@@ -1,31 +1,45 @@
 <div *ngIf="vacancy">
-  <span *ngIf="!isEdited" class="big-text">{{vacancy?.position}}</span>
-  <ng-container *ngIf="isEdited">
-        <mat-form-field *ngIf="vacancy" class="example-full-width">
-          <input [(ngModel)]="vacancy.position" matInput placeholder="Position">
-        </mat-form-field>
-        <mat-form-field class="example-full-width">
-          <textarea matInput placeholder="Comment"></textarea>
-        </mat-form-field>
-  </ng-container>
-  <!--<textarea placeholder="Enter something funny." id="text" name="text" rows="4" style="overflow: hidden; word-wrap: break-word; resize: none; height: 160px; "></textarea>-->
-  <!--<mat-divider></mat-divider>-->
-  <!--<br>-->
+  <div *ngIf="!isEdited">
+    <span class="big-text">{{vacancy?.position}}</span>
+    <button class="float-right" mat-icon-button [matMenuTriggerFor]="menu" color="primary">
+      <mat-icon>more_horiz</mat-icon>
+    </button>
+    <div *ngIf="vacancy.vacancyState">
+      <span class="title-text">Vacancy status: </span>
+      <span>{{vacancy.vacancyState}}</span>
+    </div>
+
+    <mat-form-field *ngIf="vacancy">
+      <input [(ngModel)]="vacancy.position" matInput placeholder="Description:" disabled>
+    </mat-form-field>
+    <!--  <button mat-raised-button color="primary" class="float-right" [matMenuTriggerFor]="menu">Primary
+      </button>-->
+  </div>
+  <!--  <ng-container *ngIf="isEdited || true">
+          <mat-form-field *ngIf="vacancy" class="example-full-width">
+            <input [(ngModel)]="vacancy.position" matInput placeholder="Position">
+          </mat-form-field>
+          <mat-form-field class="example-full-width">
+            <textarea matInput placeholder="Comment"></textarea>
+          </mat-form-field>
+    </ng-container>-->
+
+  <mat-divider></mat-divider>
+  <br>
   <div class="description-vacancy">
-    <div *ngIf="vacancy.experienceYearsRequire">
+    <div *ngIf="vacancy.experienceYearsRequire || true">
       <span class="title-text">experience: </span>
       <span>{{vacancy.experienceYearsRequire}} years</span>
     </div>
-    <div *ngIf="vacancy.salaryInDollarsTo || vacancy.salaryInDollarsFrom">
+    <div *ngIf="vacancy.salaryInDollarsTo || vacancy.salaryInDollarsFrom || true">
       <span class="title-text">salary: </span>
       <span *ngIf="vacancy.salaryInDollarsFrom">{{vacancy.salaryInDollarsFrom}}</span>
       <span *ngIf="vacancy.salaryInDollarsFrom && vacancy.salaryInDollarsTo"> - </span>
       <span *ngIf="vacancy.salaryInDollarsTo">{{vacancy.salaryInDollarsTo}}</span>
       <span> $</span>
     </div>
-    <div *ngIf="vacancy.vacancyState">
-      <span class="title-text">state: </span>
-      <span>{{vacancy.vacancyState}}</span>
-    </div>
   </div>
 </div>
+<mat-menu #menu="matMenu">
+  <button (click)="clickEdit()" mat-menu-item>Edit</button>
+</mat-menu>
