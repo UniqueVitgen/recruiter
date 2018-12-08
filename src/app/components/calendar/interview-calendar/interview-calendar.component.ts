@@ -139,7 +139,8 @@ export class InterviewCalendarComponent implements OnInit {
         return {
           day: moment(firstDay).add(n, 'd').format('DD'),
           mockInterview: this.mockInterview,
-          lastMonth: false,
+          lastMonth: moment() > moment(firstDay).add(n + 1, 'd')  ? true :  false,
+          disable: false,
           date: moment(firstDay).add(n, 'd')
             // ['14:00-16:00 - Bobo']
         };
@@ -151,7 +152,8 @@ export class InterviewCalendarComponent implements OnInit {
         {
           day: lastDay.format('DD'),
           mockInterview: this.mockInterview,
-          lastMonth: true,
+          lastMonth: moment() > moment(firstDay).add(i + 1, 'd')  ? true :  false,
+          disable: true,
           date: lastDay
         }
       );

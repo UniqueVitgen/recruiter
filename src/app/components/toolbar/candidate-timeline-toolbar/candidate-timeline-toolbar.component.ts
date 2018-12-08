@@ -34,7 +34,6 @@ export class CandidateTimelineToolbarComponent implements OnChanges {
       factDate: ''
     });
     this.outputChangeTimeline.emit(this.internalTimeLineList);
-
   }
 
   addCV() {

@@ -25,10 +25,9 @@
         </mat-form-field>
         <mat-form-field class="example-full-width">
           <!--<input (blur)="onFocusoutAnyInput()" [(ngModel)]="candidate.candidateState.name" matInput placeholder="Status"> -->
-          <select matNativeControl required [(ngModel)]="candidate.candidateState.name" matInput (blur)="onFocusoutAnyInput()">
-            <option value="Open" >Open</option>
-            <option value="Archive">Archive</option>
-          </select>
+          <mat-select [(ngModel)]="candidate.candidateState.name" matInput (blur)="onFocusoutAnyInput()">
+            <mat-option *ngFor="let state of setStates" [value]="state" >{{state}}</mat-option>
+          </mat-select>
         </mat-form-field>
       </div>
       <div *ngIf="readonly">

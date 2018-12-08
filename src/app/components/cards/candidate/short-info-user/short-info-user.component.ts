@@ -13,6 +13,8 @@ import {CandidateContactInput} from '../../../../classes/html/candidate-contact-
 import {FormControl, Validators} from '@angular/forms';
 import {RegexpConst} from '../../../../const/regexp.const';
 import {MaskConst} from '../../../../const/mask.const';
+import {CandidateState} from '../../../../enums/candidate-state.enum';
+import {EnumWorker} from '../../../../workers/enum/enum.worker';
 
 @Component({
   selector: 'app-short-info-user',
@@ -25,14 +27,17 @@ export class ShortInfoUserComponent implements OnInit, OnChanges {
   @Output('editCandidate') outputEditCandidate: EventEmitter<Candidate> = new EventEmitter();
   tests: CandidateContactInput[] ;
   MaskConst = MaskConst;
+  setStates: string[];
 
   constructor(public dialog: MatDialog,
               private candidateSerivce: CandidateService,
               private stringWorker: StringWorker,
               private arrayWorker: ArrayWorker,
-              public candidateWorker: CandidateWorker) { }
+              public candidateWorker: CandidateWorker,
+              public  enumWorker: EnumWorker) { }
 
   ngOnInit() {
+    this.setStates = this.enumWorker.getValuesFromEnum(CandidateState);
   }
 
   ngOnChanges(changes: SimpleChanges): void {

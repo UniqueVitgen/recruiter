@@ -10,14 +10,14 @@
     <!--</div>-->
     <!--<div class="col-6">-->
   <div class="user-name user-info">
-    <div>
+    <div class="candidate-one-row">
       <span class="font-weight-bold">Full name:</span>      &nbsp;
-      <span>{{userWorker.formatFullName(candidate)}}</span>
+      <span matTooltip="{{userWorker.formatFullName(candidate)}}">{{userWorker.formatFullName(candidate)}}</span>
     </div>
     <div *ngFor="let contact of candidate.contacts">
-        <div *ngIf="contact.contactDetails !== ''" [style.white-space]="'nowrap'">
+        <div *ngIf="contact.contactDetails !== ''" class="candidate-one-row">
           <span class="font-weight-bold">{{contact.contactType}}:</span>      &nbsp;
-          <span>{{contact.contactDetails}}</span>
+          <span matTooltip="{{contact.contactDetails}}">{{contact.contactDetails}}</span>
         </div>
     </div>
   </div>
