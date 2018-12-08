@@ -6,6 +6,9 @@ import {FormControl} from '@angular/forms';
 import {SearchWorker} from '../../../../workers/search/search.worker';
 import {CdkDragDrop, moveItemInArray} from '@angular/cdk/drag-drop';
 import {ArrayWorker} from '../../../../workers/array/array.worker';
+import { VacancyService } from '../../../../services/vacancy/vacancy.service';
+import { CandidateDialogResult } from '../../../../interfaces/dialog/result/candidate-dialog-result';
+import { BaseDialogResult } from '../../../../interfaces/dialog/result/base-dialog-result';
 
 @Component({
   selector: 'app-job-description-modal',
@@ -13,6 +16,7 @@ import {ArrayWorker} from '../../../../workers/array/array.worker';
   styleUrls: ['./job-description-modal.component.scss']
 })
 export class JobDescriptionModalComponent implements OnInit {
+  private dialogResult: BaseDialogResult<Vacancy>;
   editedVacancy: Vacancy;
   testRequirements = [
     'Communicable',
@@ -23,9 +27,15 @@ export class JobDescriptionModalComponent implements OnInit {
   constructor(
     public dialogRef: MatDialogRef<JobDescriptionModalComponent>,
     public searchWorker: SearchWorker,
+    private vacancyService: VacancyService,
     private arrayWorker: ArrayWorker,
     @Inject(MAT_DIALOG_DATA) public data: JobDescriptionDialogData) {
-    this.editedVacancy = Object.assign({}, this.data.sourceJobDescription);
+      if(data.isEdit) {
+        this.editedVacancy = Object.assign({}, this.data.sourceJobDescription);
+      }
+      else {
+        this.editedVacancy = new Vacancy();
+      }
   }
 
   ngOnInit() {
@@ -38,6 +48,9 @@ export class JobDescriptionModalComponent implements OnInit {
   }
 
   addRequirement() {
+    if(this.editedVacancy.requirements == null) {
+      this.editedVacancy.requirements = [];
+    }
     this.editedVacancy.requirements.push({
       name: ''
     });
@@ -45,6 +58,23 @@ export class JobDescriptionModalComponent implements OnInit {
 
   drop(event: CdkDragDrop<string[]>) {
     moveItemInArray(this.editedVacancy.requirements, event.previousIndex, event.currentIndex);
+  }
+
+  save() {
+    if(this.data.isEdit) {
+
+    }
+    else {
+      this.vacancyService.add(this.editedVacancy).subscribe(resVacancy => {
+        console.log('resVacancy', resVacancy);
+        this.dialogResult = {
+          isEdit: this.data.isEdit,
+          resObject: resVacancy,
+          success: true
+        };
+        this.dialogRef.close();
+      })
+    }
   }
 
 }
