@@ -2,7 +2,10 @@
   <mat-card>
     <app-job-description-short-info [vacancy]="jobDescription"></app-job-description-short-info>
   </mat-card>
-  <app-candidate-dashboard [candidates]="jobDescription.candidates"></app-candidate-dashboard>
+  <br>
+  <mat-card>
+    <app-candidate-dashboard [haveHoverEffect]="false" [isClosedIcon]="false" [candidates]="jobDescription.candidates"></app-candidate-dashboard>
+  </mat-card>
   <!--<div><span class="big-text">{{jobDescription.position}}</span></div>-->
   <!--<mat-divider></mat-divider>-->
   <!--<br>-->
@@ -15,5 +18,5 @@
     <!--<span *ngIf="jobDescription.salaryInDollarsFrom">{{jobDescription.salaryInDollarsFrom}}</span>-->
     <!--<span *ngIf="jobDescription.salaryInDollarsFrom && jobDescription.salaryInDollarsTo"> - </span>-->
     <!--<span *ngIf="jobDescription.salaryInDollarsTo">{{jobDescription.salaryInDollarsTo}}</span>-->
-  <!--</div>-->
+    <!--</div>-->
 </mat-card>
