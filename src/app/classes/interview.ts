@@ -1,7 +1,6 @@
 import {Candidate} from './candidate';
 import {Vacancy} from './vacancy';
 import {EventNote} from './event-note';
-// import {EventNoteType} from '../enums/event-timeline-type.enum';
 
 export class Interview extends EventNote {
   // id?: number;

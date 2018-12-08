@@ -1,10 +1,10 @@
-<mat-card>
+<mat-card >
+  <mat-icon class="delete" matTooltip="Delete" matTooltip="Delete" (click)="delete()">close</mat-icon>
   <mat-card-title><mat-icon class="myIcon">insert_drive_file</mat-icon> Cv</mat-card-title>
   <mat-card-content>
-    <app-candidate-attachment [attachment]="attachment"></app-candidate-attachment>
+    <app-candidate-attachment></app-candidate-attachment>
     <mat-form-field class="example-full-width">
-      <textarea matInput placeholder="Comment"></textarea>
+      <textarea (blur)="onFocusoutAnyInput()" matInput placeholder="Comment" [(ngModel)]="editedAttachment.comment"></textarea>
     </mat-form-field>
-    <button mat-raised-button color="primary">Save</button>
   </mat-card-content>
 </mat-card>

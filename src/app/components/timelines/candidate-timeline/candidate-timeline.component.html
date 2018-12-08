@@ -1,15 +1,15 @@
 
-<app-candidate-timeline-toolbar [timelineNotes]="timelineNotes" (changeTimeline)="changeTimeLine($event) "></app-candidate-timeline-toolbar>
+<app-candidate-timeline-toolbar [timelineNotes]="candidate.timelines" (changeTimeline)="changeTimeLine($event) "></app-candidate-timeline-toolbar>
 
 <perfect-scrollbar style="max-height: 600px;">
 <mat-card>
   <!--<br>-->
   <!--<perfect-scrollbar style="max-height: 600px;">-->
-    <div *ngFor="let eventNote of timelineNotes" class="example-item">
-      <app-interview-candidate-timeline-item *ngIf="checkIfNoteIsInterview(eventNote)"></app-interview-candidate-timeline-item>
-      <app-attachment-candidate-timeline-item *ngIf="checkIfNoteISAttachment(eventNote)" [attachment]="eventNote"></app-attachment-candidate-timeline-item>
-      <app-experience-candidate-timeline-item *ngIf="checkIfNoteIsExperience(eventNote)" [experience]="eventNote"></app-experience-candidate-timeline-item>
-      <app-note-candidate-timeline-item *ngIf="checkIfNoteISNote(eventNote)"></app-note-candidate-timeline-item>
+    <div *ngFor="let eventNote of candidate.timelines; let i = index" class="example-item">
+      <app-interview-candidate-timeline-item *ngIf="checkIfNoteIsInterview(eventNote)" [candidate]="candidate" [interview]="eventNote" (changeCandidate)="changeCandidate($event, i)" (deleteEvent)="deleteEvent(i)"></app-interview-candidate-timeline-item>
+      <app-attachment-candidate-timeline-item *ngIf="checkIfNoteISAttachment(eventNote)" [attachment]="eventNote" [candidate]="candidate" (changeCandidate)="changeCandidate($event, i)" (deleteEvent)="deleteEvent(i)"></app-attachment-candidate-timeline-item>
+      <app-experience-candidate-timeline-item *ngIf="checkIfNoteIsExperience(eventNote)" [experience]="eventNote" [candidate]="candidate" (changeCandidate)="changeCandidate($event, i)" (deleteEvent)="deleteEvent(i)"></app-experience-candidate-timeline-item>
+      <app-note-candidate-timeline-item *ngIf="checkIfNoteISNote(eventNote)" [note]="eventNote"  [candidate]="candidate" (changeCandidate)="changeCandidate($event, i)" (deleteEvent)="deleteEvent(i)"></app-note-candidate-timeline-item>
       <br>
     </div>
 
