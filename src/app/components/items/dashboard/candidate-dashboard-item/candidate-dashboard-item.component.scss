@@ -1,1 +1,9 @@
-
+.candidate-dashboard-item {
+  height: 300px;
+  width: 250px;
+}
+.candidate-one-row {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}

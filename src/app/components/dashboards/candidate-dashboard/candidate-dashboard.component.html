@@ -1,5 +1,5 @@
 <div class="row">
-  <div *ngFor="let candidate of selectedCandidates" class="col-12 col-md-3 center-item">
+  <div *ngFor="let candidate of selectedCandidates" class="col-12 col-md-3 center-item heightitem">
     <app-candidate-dashboard-item (deleteCandidate)="deleteCandidate()" [candidate]="candidate"></app-candidate-dashboard-item>
   </div>
   <div *ngIf="haveAddElement" (click)="addCandidate()" class="col-12 col-md-3 center-item">

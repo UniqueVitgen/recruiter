@@ -33,8 +33,8 @@
           <div class='calendar-day-of-week flex-container flex-center '>Saturday</div>
         </div>
         <div class="flex-container flex-wrap" >
-          <div class="calendar-day flex-container" (click)="openInterviewDialog(d.day, d.mockInterview,d.date)" [ngClass]="{ 'last-month': d.lastMonth }" *ngFor="let d of daysArray">
-            <h5 [ngClass]="{'today': isToday(d.day)}" >{{d.day}}</h5>
+          <div class="calendar-day flex-container" (click)="openInterviewDialog(d.day, d.mockInterview,d.date)" [ngClass]="{'today': isToday(d.day), 'last-month': d.lastMonth, 'disable': d.disable }" *ngFor="let d of daysArray">
+            <h5  >{{d.day}}</h5>
             <p>{{dateTimeWorker.getTime(d?.mockInterview?.planDate)}} - {{d?.mockInterview?.candidate?.name}}</p>
           </div>
         </div>

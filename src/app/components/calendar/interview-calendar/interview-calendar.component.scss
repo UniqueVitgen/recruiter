@@ -55,10 +55,24 @@
   border-color: #cdcdcd;
 }
 .last-month {
-  opacity:0.5;
+  opacity:0.3;
+  background: #8eceff;
+  &:hover {
+    cursor: default;
+    opacity: 0.3;
+  }
+}
+.disable {
+  opacity:0.4;
+  background: #FFFFFF;
+  &:hover {
+    cursor: default;
+    opacity: 0.4;
+  }
 }
 .today{
   color:blue;
+  background: rgba(35, 98, 255, 0.18);
 }
 p{
   font-size:10px;
