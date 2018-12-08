@@ -1,28 +1,28 @@
 <!--<form>-->
 <mat-card>
+  <mat-icon class="delete" matTooltip="Delete" (click)="delete()">close</mat-icon>
   <mat-card-title><mat-icon class="myIcon">description</mat-icon> Experience</mat-card-title>
   <mat-form-field class="example-full-width">
-    <input [(ngModel)]="experience.companyName.name" matInput placeholder="company Name">
+    <input (blur)="onFocusoutAnyInput()" [(ngModel)]="editedExperience.companyName" matInput placeholder="company Name">
   </mat-form-field>
   <mat-form-field>
-    <input matInput [value]="experience.dateFrom" [matDatepicker]="picker" placeholder="From">
+    <input (blur)="onFocusoutAnyInput()" (dateChange)="onFocusoutAnyInput()" matInput [(ngModel)]="editedExperience.dateFrom" [matDatepicker]="picker" placeholder="From">
     <mat-datepicker-toggle name="dateSuffix" matSuffix [for]="picker"></mat-datepicker-toggle>
-    <mat-datepicker #picker></mat-datepicker>
+    <mat-datepicker  #picker></mat-datepicker>
   </mat-form-field>
   &nbsp;
   &nbsp;
   <!--<br>-->
   <mat-form-field >
-    <input matInput [(ngModel)]="experience.dateTo" [min]="experience.dateFrom" [matDatepicker]="picker1" placeholder="To">
+    <input matInput (blur)="onFocusoutAnyInput()" [(ngModel)]="editedExperience.dateTo" [min]="editedExperience.dateFrom" [matDatepicker]="picker1" placeholder="To">
     <mat-datepicker-toggle name="dateSuffix1" matSuffix [for]="picker1"></mat-datepicker-toggle>
-    <mat-datepicker #picker1></mat-datepicker>
+    <mat-datepicker (dateChange)="onFocusoutAnyInput()" #picker1></mat-datepicker>
   </mat-form-field>
   <mat-form-field class="example-full-width">
-    <input [(ngModel)]="experience.jobPosition" matInput placeholder="Position">
+    <input (blur)="onFocusoutAnyInput()" [(ngModel)]="editedExperience.jobPosition" matInput placeholder="Position">
   </mat-form-field>
   <mat-form-field class="example-full-width">
-    <textarea matInput placeholder="Comment"></textarea>
+    <textarea  (blur)="onFocusoutAnyInput()" matInput placeholder="Comment" [(ngModel)]="editedExperience.comment"></textarea>
   </mat-form-field>
-  <button mat-raised-button color="primary">Save</button>
 </mat-card>
 <!--</form>-->

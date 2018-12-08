@@ -12,6 +12,8 @@ import {EventTimelineWorker} from '../../../workers/timeline/event-timeline.work
 import * as moment from 'moment';
 import Base = moment.unitOfTime.Base;
 import {BaseTimeline} from '../../../classes/timeline/base-timeline';
+import {CandidateService} from '../../../services/candidate/candidate.service';
+import {ArrayWorker} from '../../../workers/array/array.worker';
 
 @Component({
   selector: 'app-candidate-timeline',
@@ -21,9 +23,11 @@ import {BaseTimeline} from '../../../classes/timeline/base-timeline';
 export class CandidateTimelineComponent implements OnInit {
   @Input() candidate: Candidate;
 
-  @Input() timelineNotes: EventNote[];
+  @Input() timelineNotes: BaseTimeline[];
   constructor(private typeCheckingWorker: TypeCheckingWorker,
-              private eventTimelineWorker: EventTimelineWorker) { }
+              private eventTimelineWorker: EventTimelineWorker,
+              public  candidateService: CandidateService,
+              public  arrayWorker: ArrayWorker) { }
 
   ngOnInit() {
   }
@@ -40,7 +44,18 @@ export class CandidateTimelineComponent implements OnInit {
     return this.eventTimelineWorker.isAttachement(eventNote);
   }
   changeTimeLine(timeline) {
-    this.timelineNotes = timeline;
+    this.candidate.timelines = timeline;
+    this.candidateService.update(this.candidate).subscribe();
+  }
+  changeCandidate(baseTimeline: BaseTimeline, i: number) {
+    this.candidate.timelines[i] = baseTimeline;
+    this.candidateService.update(this.candidate).subscribe();
+    console.log(this.candidate);
+  }
+  deleteEvent(i: number) {
+    this.candidate.timelines = this.arrayWorker.removeElementByIndex(this.candidate.timelines, i);
+    this.candidateService.update(this.candidate).subscribe();
+    console.log(this.candidate);
   }
 
 }

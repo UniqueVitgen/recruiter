@@ -17,4 +17,5 @@ export class Candidate {
   contacts?: ContactDetails[];
   attachments?: Attachment[];
   responsibilities?: Responsibility[];
+  timelines?: any[];
 }

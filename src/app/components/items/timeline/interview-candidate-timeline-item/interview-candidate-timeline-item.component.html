@@ -1,18 +1,18 @@
 <mat-card>
+  <mat-icon class="delete"  matTooltip="Delete" (click)="delete()">close</mat-icon>
   <mat-card-title><mat-icon class="myIcon">event</mat-icon> Interview</mat-card-title>
   <mat-form-field >
-    <input matInput [matDatepicker]="picker1" placeholder="When">
+    <input (blur)="onFocusoutAnyInput()" (dateChange)="onFocusoutAnyInput()" matInput [(ngModel)]="editedInterview.when" [matDatepicker]="picker1" placeholder="When">
     <mat-datepicker-toggle name="dateSuffix1" matSuffix [for]="picker1"></mat-datepicker-toggle>
     <mat-datepicker #picker1></mat-datepicker>
   </mat-form-field>
   <mat-form-field class="example-full-width">
-    <input matInput placeholder="Where">
+    <input (blur)="onFocusoutAnyInput()" [(ngModel)]="editedInterview.where" matInput placeholder="Where">
   </mat-form-field>
   <mat-form-field class="example-full-width">
-    <input matInput placeholder="Who conducts">
+    <input (blur)="onFocusoutAnyInput()" [(ngModel)]="editedInterview.whoConducts" matInput placeholder="Who conducts">
   </mat-form-field>
   <mat-form-field class="example-full-width">
-    <textarea matInput placeholder="Comment"></textarea>
+    <textarea (blur)="onFocusoutAnyInput()" [(ngModel)]="editedInterview.comment" matInput placeholder="Comment"></textarea>
   </mat-form-field>
-  <button mat-raised-button color="primary">Save</button>
 </mat-card>
