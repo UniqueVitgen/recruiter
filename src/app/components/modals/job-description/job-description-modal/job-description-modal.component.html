@@ -6,7 +6,7 @@
     </button>
   </dialog-title>
   <dialog-body>
-    <form>
+    <form name="form">
         <mat-form-field *ngIf="editedVacancy" class="example-full-width">
           <input [(ngModel)]="editedVacancy.position" name="position" matInput placeholder="Position" required>
         </mat-form-field>
@@ -33,7 +33,7 @@
             </div>
             <div class="col-5">
               <mat-form-field class="example-full-width">
-                <input [name]="'requirements-' + i" matInput placeholder="Requirement" [matAutocomplete]="auto" [(ngModel)]="requirement.name">
+                <input [name]="'requirements-' + i" matInput required placeholder="Requirement" [matAutocomplete]="auto" [(ngModel)]="requirement.name">
                 <mat-autocomplete required #auto="matAutocomplete">
                   <mat-option *ngFor="let state of searchWorker.search(requirement.name, testRequirements)" [value]="state">
                     <span>{{state}}</span>
@@ -65,6 +65,6 @@
   </dialog-body>
   <dialog-footer>
     <button mat-button (click)="onNoClick()">No Thanks</button>
-    <button mat-button mat-raised-button color="primary" (click)="save()">Save</button>
+    <button [disabled]="" mat-button mat-raised-button color="primary" (click)="save()">Save</button>
   </dialog-footer>
 </app-modal-component>
