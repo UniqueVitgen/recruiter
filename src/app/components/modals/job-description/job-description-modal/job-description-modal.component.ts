@@ -42,7 +42,7 @@ export class JobDescriptionModalComponent implements OnInit {
 
   ngOnInit() {
     this.jobDescriptionGroup = this.formBuilder.group({
-      name: ['', Validators.compose([Validators.required])],
+      position: ['', Validators.compose([Validators.required])],
     });
   }
   onNoClick(): void {
