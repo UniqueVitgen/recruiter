@@ -5,10 +5,12 @@ import { Injectable } from '@angular/core';
 })
 export class SearchWorker {
   public search(value: string, stringList: string[]) {
-    value = value.toLowerCase();
-    return stringList.filter( (string) => {
-      string = string.toLowerCase();
-      return string.indexOf(value) !== -1;
-    });
+    if (value) {
+      value = value.toLowerCase();
+      return stringList.filter( (string) => {
+        string = string.toLowerCase();
+        return string.indexOf(value) !== -1;
+      });
+    }
   }
 }

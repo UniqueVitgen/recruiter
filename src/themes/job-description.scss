@@ -1,6 +1,18 @@
 .job-description-dashboard-item {
   &:hover {
     background: #cccccc;
+    .candidate-dashboard-item {
+      background: #ccc;
+      .user-avatar {
+        background-color: rgba(0, 0, 0, .3);
+      }
+      .user-avatar-hover {
+        background-color: rgba(0, 0, 0, .3);
+      }
+      .avatar-hover {
+        display: block;
+      }
+    }
   }
 }
 

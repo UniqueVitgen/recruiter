@@ -27,13 +27,13 @@
           </div>
         </div>
         <div  cdkDropList  (cdkDropListDropped)="drop($event)">
-          <div cdkDrag class="row" *ngFor="let requirement of editedVacancy.requirements">
+          <div cdkDrag class="row" formArrayName="requirements" *ngFor="let requirement of jobDescriptionGroup.controls['requirements'].controls">
             <div class="col-1 checkbox-col">
               <mat-icon>format_line_spacing</mat-icon>
             </div>
             <div class="col-5">
               <mat-form-field class="example-full-width">
-                <input matInput placeholder="Requirement" [matAutocomplete]="auto" [(ngModel)]="requirement.name">
+                <input matInput placeholder="Requirement" formControlName="name" [matAutocomplete]="auto" [(ngModel)]="requirement.name">
                 <mat-autocomplete #auto="matAutocomplete">
                   <mat-option *ngFor="let state of searchWorker.search(requirement.name, testRequirements)" [value]="state">
                     <span>{{state}}</span>

@@ -2,7 +2,7 @@ import {Component, Inject, OnInit} from '@angular/core';
 import {MAT_DIALOG_DATA, MatDialogRef} from '@angular/material';
 import {JobDescriptionDialogData} from '../../../../interfaces/dialog/init/job-description-dialog-data';
 import {Vacancy} from '../../../../classes/vacancy';
-import {FormControl, FormGroup, FormBuilder, Validators} from '@angular/forms';
+import {FormControl, FormGroup, FormBuilder, Validators, FormArray} from '@angular/forms';
 import {SearchWorker} from '../../../../workers/search/search.worker';
 import {CdkDragDrop, moveItemInArray} from '@angular/cdk/drag-drop';
 import {ArrayWorker} from '../../../../workers/array/array.worker';
@@ -33,16 +33,18 @@ export class JobDescriptionModalComponent implements OnInit {
     private arrayWorker: ArrayWorker,
     private formBuilder: FormBuilder,
     @Inject(MAT_DIALOG_DATA) public data: JobDescriptionDialogData) {
-      if (data.isEdit) {
-        this.editedVacancy = Object.assign({}, this.data.sourceJobDescription);
-      } else {
-        this.editedVacancy = new Vacancy();
-      }
   }
 
   ngOnInit() {
+    if (this.data.isEdit) {
+      this.editedVacancy = Object.assign({}, this.data.sourceJobDescription);
+    } else {
+      this.editedVacancy = new Vacancy();
+      this.editedVacancy.requirements = [];
+    }
     this.jobDescriptionGroup = this.formBuilder.group({
       position: ['', Validators.compose([Validators.required])],
+      requirements: this.formBuilder.array(this.editedVacancy.requirements)
     });
   }
   onNoClick(): void {
@@ -53,6 +55,11 @@ export class JobDescriptionModalComponent implements OnInit {
   }
 
   addRequirement() {
+    (this.jobDescriptionGroup.controls['requirements'] as FormArray).push(this.formBuilder.group({
+      name: '',
+      public: true,
+      required: false
+    }));
     if (this.editedVacancy.requirements == null) {
       this.editedVacancy.requirements = [];
     }
