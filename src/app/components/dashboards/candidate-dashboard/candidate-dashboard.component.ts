@@ -17,6 +17,8 @@ export class CandidateDashboardComponent implements OnInit, OnChanges {
   @Input() candidates: Candidate[];
   @Input() haveAddElement: boolean;
   @Input() search;
+  @Input() haveHoverEffect: boolean = true;
+  @Input() isClosedIcon: boolean = true;
   @Output('addCandidate') outputAddCandidate: EventEmitter<Candidate> = new EventEmitter();
   @Output('deleteCandidate') outputDeleteCandidate: EventEmitter<any> = new EventEmitter();
   public selectedCandidates: Candidate[];

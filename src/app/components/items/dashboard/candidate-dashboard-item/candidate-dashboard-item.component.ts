@@ -12,7 +12,8 @@ import {CandidateService} from '../../../../services/candidate/candidate.service
 export class CandidateDashboardItemComponent {
   @Output('deleteCandidate') outputDeleteCandidate: EventEmitter<any> = new EventEmitter();
   @Input() candidate: Candidate;
-
+  @Input() haveHoverEffect: boolean;
+  @Input() isClosedIcon: boolean;
   constructor(
     private router: Router,
     public userWorker: UserWorker,

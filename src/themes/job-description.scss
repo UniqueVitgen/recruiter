@@ -1,20 +1,39 @@
+$background: #d9dbe2;
 .job-description-dashboard-item {
+
   &:hover {
-    background: #cccccc;
+    background: $background;
     .candidate-dashboard-item {
-      background: #ccc;
+      background: $background;
       .user-avatar {
-        background-color: rgba(0, 0, 0, .3);
-      }
-      .user-avatar-hover {
-        background-color: rgba(0, 0, 0, .3);
-      }
-      .avatar-hover {
-        display: block;
-      }
+        & {
+
+          & .avatar-hover{
+            display: block;
+            background: rgba(217, 219, 226, .5);
+          }
+        }
+
     }
+    }
+    mat-card {
+      background: $background;
+    }
+    //img {
+    //  background: #ccc;
+    //}
+    //.avatar-hover {
+    //  background: #ccc;
+    //}
+    //.user-avatar-hover {
+    //  background: #ccc;
+    //}
+    //.user-avatar {
+    //  background: #ccc;
+    }
+
   }
-}
+
 
 .job-description-requirements {
   mat-icon, .material-icons {

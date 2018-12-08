@@ -8,7 +8,6 @@ import {Vacancy} from '../../../../classes/vacancy';
 })
 export class JobDescriptionDashboardItemComponent implements OnInit {
   @Input() jobDescription: Vacancy;
-
   constructor() { }
 
   ngOnInit() {
