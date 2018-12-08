@@ -13,6 +13,10 @@ export class JobDescriptionDashboardPageComponent implements OnInit {
   constructor(private vacancyService: VacancyService) { }
 
   ngOnInit() {
+    this.getVacancies();
+  }
+
+  getVacancies() {
     this.vacancyService.getAll().subscribe(res => {
       console.log(res);
       this.jobDescriptionList = res;

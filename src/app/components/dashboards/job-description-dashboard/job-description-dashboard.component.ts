@@ -1,9 +1,10 @@
-import {Component, Input, OnInit} from '@angular/core';
+import {Component, Input, OnInit, Output, EventEmitter} from '@angular/core';
 import {Vacancy} from '../../../classes/vacancy';
 import {Router} from '@angular/router';
 import { MatDialog } from '@angular/material';
 import { JobDescriptionModalComponent } from '../../modals/job-description/job-description-modal/job-description-modal.component';
 import { JobDescriptionDialogData } from '../../../interfaces/dialog/init/job-description-dialog-data';
+import { BaseDialogResult } from '../../../interfaces/dialog/result/base-dialog-result';
 
 @Component({
   selector: 'app-job-description-dashboard',
@@ -12,6 +13,7 @@ import { JobDescriptionDialogData } from '../../../interfaces/dialog/init/job-de
 })
 export class JobDescriptionDashboardComponent implements OnInit {
   @Input() jobDescriptionList: Vacancy[];
+  @Output('addVacancy') outputAddVacancy: EventEmitter<Vacancy> = new EventEmitter();
 
   constructor(
     public dialog: MatDialog,
@@ -36,6 +38,13 @@ export class JobDescriptionDashboardComponent implements OnInit {
         }
       }
     );
+    dialogRef.afterClosed().subscribe((res: BaseDialogResult<Vacancy>) => {
+      if(res) {
+        if(res.success) {
+          this.outputAddVacancy.emit(res.resObject);
+        }
+      }
+    })
   }
 
 }
