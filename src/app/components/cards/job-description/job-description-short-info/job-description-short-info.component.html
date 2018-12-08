@@ -1,8 +1,11 @@
 <div *ngIf="vacancy">
   <div *ngIf="!isEdited">
     <span class="big-text">{{vacancy?.position}}</span>
-    <button class="float-right" mat-icon-button [matMenuTriggerFor]="menu" color="primary">
+    <button *ngIf="buttonEdit" class="float-right" mat-icon-button [matMenuTriggerFor]="menu" color="primary">
       <mat-icon>more_horiz</mat-icon>
+    </button>
+    <button *ngIf="buttonDelete" mat-icon-button  class="float-right" (click) = "clickDelete.emit(vacancy)">
+      <mat-icon>close</mat-icon>
     </button>
     <div *ngIf="vacancy.vacancyState">
       <span class="title-text">Vacancy status: </span>
@@ -12,6 +15,7 @@
     <mat-form-field *ngIf="vacancy">
       <input [(ngModel)]="vacancy.position" matInput placeholder="Description:" disabled>
     </mat-form-field>
+
     <!--  <button mat-raised-button color="primary" class="float-right" [matMenuTriggerFor]="menu">Primary
       </button>-->
   </div>

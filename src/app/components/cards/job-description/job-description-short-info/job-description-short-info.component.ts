@@ -1,4 +1,4 @@
-import {Component, Input, OnInit} from '@angular/core';
+import {Component, EventEmitter, Input, OnInit, Output} from '@angular/core';
 import {Vacancy} from '../../../../classes/vacancy';
 import {JobDescriptionModalComponent} from '../../../modals/job-description/job-description-modal/job-description-modal.component';
 import {JobDescriptionDialogData} from '../../../../interfaces/dialog/init/job-description-dialog-data';
@@ -12,7 +12,9 @@ import {MatDialog} from '@angular/material';
 export class JobDescriptionShortInfoComponent implements OnInit {
   @Input() vacancy: Vacancy;
   @Input() isEdited: boolean;
-
+  @Input() buttonEdit: boolean;
+  @Input() buttonDelete: boolean;
+  @Output() clickDelete: EventEmitter<Vacancy>;
   constructor(public dialog: MatDialog)  { }
 
   ngOnInit() {
@@ -26,7 +28,8 @@ export class JobDescriptionShortInfoComponent implements OnInit {
       }
     );
   }
-  clickEdit() {
+  clickEdit(): void {
     this.openJobDescriptionDialog();
   }
+  deleteClick(): void  {}
 }
