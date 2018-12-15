@@ -9,13 +9,15 @@ import {VacancyService} from '../../services/vacancy/vacancy.service';
 })
 export class JobDescriptionDashboardPageComponent implements OnInit {
   jobDescriptionList: Vacancy[];
-
+  searchValue: string;
   constructor(private vacancyService: VacancyService) { }
 
   ngOnInit() {
     this.getVacancies();
   }
-
+  search(value: string) {
+    this.searchValue = value;
+  }
   getVacancies() {
     this.vacancyService.getAll().subscribe(res => {
       console.log(res);
