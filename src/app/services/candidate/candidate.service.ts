@@ -113,12 +113,12 @@ export class CandidateService {
 
   get(id: number): Observable<Candidate> {
     // if (ConfigService.serviceData === ServiceData.Real) {
-      return this.configService.get('candidate/' + id)
-        .pipe(map((element: Candidate) => {
-          console.log('element');
-          element.id = (element as any)._id;
-          return element;
-        }));
+      return this.configService.get('candidate/' + id);
+        // .pipe(map((element: Candidate) => {
+        //   console.log('element');
+        //   element.id = (element as any)._id;
+        //   return element;
+        // }));
     // } else {
     //   return Observable.create(observableObject => {
     //     observableObject.next({
@@ -175,15 +175,15 @@ export class CandidateService {
   getAll(): Observable<Candidate[] | any> {
     console.log(ConfigService.serviceData);
     // if (ConfigService.serviceData === ServiceData.Real) {
-      return this.configService.get('candidates')
-        .pipe(map((elements: Candidate[]) => {
-          console.log('elements', elements);
-          const candidates = elements.map(element => {
-            element.id = (element as any)._id;
-            return element;
-          });
-          return candidates;
-        }));
+      return this.configService.get('candidates');
+        // .pipe(map((elements: Candidate[]) => {
+        //   console.log('elements', elements);
+        //   const candidates = elements.map(element => {
+        //     element.id = (element as any)._id;
+        //     return element;
+        //   });
+        //   return candidates;
+        // }));
     // } else {
     //   return Observable.create(observ => {
     //     observ.next([

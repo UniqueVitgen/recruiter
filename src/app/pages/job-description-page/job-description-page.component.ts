@@ -37,6 +37,10 @@ export class JobDescriptionPageComponent implements OnInit {
       });
   }
   addCandidate(candidate: Candidate) {
+    console.log('candidate', candidate);
+    if (this.vacancy.candidates == null) {
+      this.vacancy.candidates = [];
+    }
     this.vacancy.candidates.push(candidate);
     this.vacancyService.update(this.vacancy).subscribe(resVacancy => {
       console.log(resVacancy);

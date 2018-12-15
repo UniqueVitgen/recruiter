@@ -14,5 +14,5 @@ export class Vacancy {
   developerId: number;
   skills: Skill[];
   requirements: Requirement[] = [];
-  candidates?: Candidate[];
+  candidates?: Candidate[] = [];
 }

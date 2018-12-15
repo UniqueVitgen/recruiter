@@ -16,11 +16,11 @@ export class VacancyService {
   get(id: number): Observable<Vacancy> {
     // if (ConfigService.serviceData === ServiceData.Real) {
       return this.configService.get('vacancy/' + id)
-        .pipe(map((element: Vacancy) => {
-          console.log('element');
-          element.id = (element as any)._id;
-          return element;
-        }));
+        // .pipe(map((element: Vacancy) => {
+        //   console.log('element');
+        //   element.id = (element as any)._id;
+        //   return element;
+        // }));
     // } else {
     //   return this.configService.createObservable(
     //     {
@@ -49,14 +49,14 @@ export class VacancyService {
   getAll(): Observable<Vacancy[]> {
     // if (ConfigService.serviceData === ServiceData.Real) {
       return this.configService.get('vacancies')
-        .pipe(map((elements: Vacancy[]) => {
-          console.log('elements', elements);
-          const candidates = elements.map(element => {
-            element.id = (element as any)._id;
-            return element;
-          });
-          return candidates;
-        }));
+        // .pipe(map((elements: Vacancy[]) => {
+        //   console.log('elements', elements);
+        //   const candidates = elements.map(element => {
+        //     element.id = (element as any)._id;
+        //     return element;
+        //   });
+        //   return candidates;
+        // }));
     // } else {
     //   return this.configService.createObservable(
     //     [{
@@ -88,14 +88,14 @@ export class VacancyService {
   getCandidates(vacancy: Vacancy): Observable<Candidate[]> {
     // if (ConfigService.serviceData === ServiceData.Real) {
       return this.configService.get('vacancy/' + vacancy.id + '/candidates')
-        .pipe(map((elements: Candidate[]) => {
-          console.log('elements', elements);
-          const candidates = elements.map(element => {
-            element.id = (element as any)._id;
-            return element;
-          });
-          return candidates;
-        }));
+        // .pipe(map((elements: Candidate[]) => {
+        //   console.log('elements', elements);
+        //   const candidates = elements.map(element => {
+        //     element.id = (element as any)._id;
+        //     return element;
+        //   });
+        //   return candidates;
+        // }));
     // } else {
     //   return this.configService.createObservable([
     //     {

@@ -73,6 +73,11 @@ export class CandidateModalComponent implements OnInit {
   editCandidate() {
     if (this.data.isEdit) {
       this.candidateService.update(this.editedCandidate).subscribe(res => {
+        this.dialogResult = {
+          isEdit: this.data.isEdit,
+          resCandidate: res,
+          success: true
+        };
         console.log('rs', res);
         this.dialogRef.close(res);
       });
@@ -80,6 +85,7 @@ export class CandidateModalComponent implements OnInit {
       this.editedCandidate.contacts =  this.editedCandidate.contacts.filter(contact => contact.contactDetails !== '' );
 
       this.candidateService.add(this.editedCandidate).subscribe(res => {
+        console.log('rs', res);
         this.dialogResult = {
           isEdit: this.data.isEdit,
           resCandidate: res,

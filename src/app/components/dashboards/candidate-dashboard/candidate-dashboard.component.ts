@@ -57,6 +57,7 @@ export class CandidateDashboardComponent implements OnInit, OnChanges {
     );
     dialogRef.afterClosed().subscribe((res: CandidateDialogResult) => {
       if (res) {
+        console.log('res - ', res);
         this.outputAddCandidate.emit(res.resCandidate);
       }
     });
