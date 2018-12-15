@@ -7,6 +7,7 @@ import { Attachment } from 'src/app/classes/attachment';
 import { AttachmentDialogData } from 'src/app/interfaces/dialog/init/attachment-dialog-data';
 import { AttachmentType } from 'src/app/enums/attachment-type.enum';
 import { EnumWorker } from 'src/app/workers/enum/enum.worker';
+import {BaseDialogResult} from '../../../../interfaces/dialog/result/base-dialog-result';
 
 @Component({
   selector: 'app-attachment-candidate-modal',
@@ -15,14 +16,15 @@ import { EnumWorker } from 'src/app/workers/enum/enum.worker';
 })
 export class AttachmentCandidateModalComponent implements OnInit {
 
-  private editedCandidate: Candidate;
-  private editedAttachment: Attachment;
+  public editedCandidate: Candidate;
+  public editedAttachment: Attachment;
+  public attachmentResult: BaseDialogResult<Attachment>;
 
   constructor(
     private candidateService: CandidateService,
     public dialogRef: MatDialogRef<NameCandidateModalComponent>,
     public enumWorker: EnumWorker,
-    @Inject(MAT_DIALOG_DATA) public data: AttachmentDialogData) {
+    @Inject(MAT_DIALOG_DATA) public data: AttachmentDialogData ) {
     // console.log('candidate', this.candidate);
     this.editedCandidate = Object.assign({}, this.data.sourceCandidate);
     if (this.data.isEdit) {
@@ -42,10 +44,22 @@ export class AttachmentCandidateModalComponent implements OnInit {
   }
 
   editCandidate() {
-    this.candidateService.update(this.editedCandidate).subscribe(res => {
-      console.log('rs', res);
-      this.dialogRef.close(res);
+    if (this.editedCandidate.attachments == null) {
+      this.editedCandidate.attachments = [];
+    }
+    this.editedCandidate.attachments.push(this.editedAttachment);
+    this.candidateService.update(this.editedCandidate).subscribe(resCandidate => {
+      this.attachmentResult = {
+        isEdit: false,
+        resObject: null,
+        success: true
+      };
+      this.dialogRef.close(this.attachmentResult);
     });
+    // this.candidateService.update(this.editedCandidate).subscribe(res => {
+    //   console.log('rs', res);
+    //   this.dialogRef.close(res);
+    // });
   }
 
   onNoClick(): void {

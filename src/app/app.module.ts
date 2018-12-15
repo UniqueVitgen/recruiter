@@ -129,7 +129,8 @@ import { LimitToDirective } from './directives/limit-to/limit-to.directive';
     PositionCandidateModalComponent,
     InterviewModalComponent,
     JobDescriptionModalComponent,
-    CandidateModalComponent
+    CandidateModalComponent,
+    AttachmentCandidateModalComponent
   ],
   schemas: [NO_ERRORS_SCHEMA] // add this line
 })

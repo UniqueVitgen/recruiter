@@ -239,6 +239,10 @@ export class CandidateService {
     // }
   }
 
+  getTimeline(candidate: Candidate): Observable<any> {
+    return this.configService.get('candidate/' + candidate.id + '/timeline');
+  }
+
   add(candidate: Candidate): Observable<Candidate> {
     return this.configService.post('candidates', candidate);
   }
