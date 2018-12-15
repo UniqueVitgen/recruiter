@@ -1,6 +1,6 @@
 
   <mat-card class="example-full-width">
-    <div *ngFor="let jobDescription of jobDescriptionList" class="col-12 col-md-12">
+    <div *ngFor="let jobDescription of selectedVacancies" class="col-12 col-md-12">
       <app-job-description-dashboard-item [jobDescription]="jobDescription" (click)="goToJobDescriptionPage(jobDescription)"></app-job-description-dashboard-item>
       <br>
     </div>
