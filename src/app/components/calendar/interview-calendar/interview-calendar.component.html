@@ -12,7 +12,7 @@
           <div class="col-1 calendar-arrow arrow-left">
             <mat-icon  (click)="prevMonth()">arrow_back_ios</mat-icon>
           </div>
-          <div class="col-4 center-text">
+          <div class="col-4 text center-text">
             <h2 > {{ date.format('MMMM') + " " + date.format('YYYY')}} </h2>
           </div>
           <div class="col-1 calendar-arrow arrow-right">
@@ -31,16 +31,16 @@
         </div>
         <!--<i class = "fa fa-chevron-left" (click)="prevMonth()"></i>-->
         <!--<i class = "fa fa-chevron-right" (click)="nextMonth()"></i>-->
-    <div class='flex-container flex-center'>
+    <div class='flex-container flex-center' *ngIf="selected===MONTH">
       <div id='calendar-container' class='flex-container flex-column'>
         <div class='flex-container '>
-          <div class='calendar-day-of-week flex-container flex-center '>Sunday</div>
           <div class='calendar-day-of-week flex-container flex-center '>Monday</div>
           <div class='calendar-day-of-week flex-container flex-center '>Tuesday</div>
           <div class='calendar-day-of-week flex-container flex-center '>Wednesday</div>
           <div class='calendar-day-of-week flex-container flex-center '>Thursday</div>
           <div class='calendar-day-of-week flex-container flex-center '>Friday</div>
           <div class='calendar-day-of-week flex-container flex-center '>Saturday</div>
+          <div class='calendar-day-of-week flex-container flex-center '>Sunday</div>
         </div>
         <div class="flex-container flex-wrap" >
           <div class="calendar-day flex-container" (click)="openInterviewDialog(d.day, d.mockInterview,d.date)" [ngClass]="{'today': isToday(d.day), 'last-month': d.lastMonth, 'disable': d.disable }" *ngFor="let d of daysArray">
@@ -48,6 +48,27 @@
             <p>{{dateTimeWorker.getTime(d?.mockInterview?.planDate)}} - {{d?.mockInterview?.candidate?.name}}</p>
           </div>
         </div>
+      </div>
+    </div>
+    <div class='flex-container flex-center' *ngIf="selected===WEEK">
+      <div  class='flex-container flex-column'>
+        <div class='flex-container '>
+          <div class='calendar-weekday flex-container flex-center ' *ngFor="let d of daysOfWeekArray">
+            <h5>{{d.weekday}}</h5>
+            <h5>{{d.day}}</h5>
+          </div>
+        </div>
+        <div class="flex-container flex-wrap" >
+          <div class="calendar-day flex-container" (click)="openInterviewDialog(d.day, d.mockInterview,d.date)" *ngFor="let d of timesArray">
+
+          </div>
+        </div>
+        <!--<div class="flex-container flex-wrap" >
+          <div class="calendar-day flex-container" (click)="openInterviewDialog(d.day, d.mockInterview,d.date)" [ngClass]="{'today': isToday(d.day), 'last-month': d.lastMonth, 'disable': d.disable }" *ngFor="let d of daysArray">
+            <h5  >{{d.day}}</h5>
+            <p>{{dateTimeWorker.getTime(d?.mockInterview?.planDate)}} - {{d?.mockInterview?.candidate?.name}}</p>
+          </div>
+        </div>-->
       </div>
     </div>
   </div>

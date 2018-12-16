@@ -2,7 +2,12 @@
   display: -webkit-flex;
   display: flex;
 }
-
+.text{
+  text-align: center;
+  justify-content: center;
+  display: flex;
+  align-items: center;
+}
 .flex-center {
   -webkit-align-items: center;
   align-items: center;
@@ -47,6 +52,18 @@
   margin-top: 10px;
   width: 140px;
   height: 40px;
+  text-align:left;
+  background: #9675ce;
+  color: #FFF;
+  font-size: 14px;
+  font-weight: 500;
+  border-color: #cdcdcd;
+}
+.calendar-weekday {
+  display: block;
+  margin-top: 10px;
+  width: 140px;
+  height: 70px;
   text-align:left;
   background: #9675ce;
   color: #FFF;

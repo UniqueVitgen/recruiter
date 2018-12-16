@@ -1,4 +1,4 @@
-import {Component, HostListener, OnInit} from '@angular/core';
+import {Component, HostListener, OnChanges, OnInit} from '@angular/core';
 import * as moment from 'moment';
 import {Moment} from 'moment';
 import {MatDialog} from '@angular/material';
@@ -89,15 +89,21 @@ export class InterviewCalendarComponent implements OnInit {
     ]
   };
   private mockInterview: InterviewExtended;
+  MONTH = 'Month';
+  WEEK = 'Week';
   daysArray;
   title = 'Interview Calendar';
   date: Moment = moment();
-  selected  = 'Month';
+  daysOfWeekArray = this.createWeekCalendar(this.date);
+  timesArray =  Array.apply(null, {length: 7 * 24});
+  selected: string;
   constructor(private dialog: MatDialog,
               private vacancyService: VacancyService,
               private candidateService: CandidateService,
               public dateTimeWorker: DateTimeWorker,
-              private interviewService: InterviewService) {}
+              private interviewService: InterviewService) {
+    this.selected  = this.MONTH;
+  }
   @HostListener('document:keydown', ['$event'])
   handleKeyboardEvent(event: KeyboardEvent) {
     if (event.key === 'ArrowLeft' ) {
@@ -121,14 +127,9 @@ export class InterviewCalendarComponent implements OnInit {
           this.currentMonth();
         });
       });
-    });
+    })
+    this.selected  = this.MONTH;
     this.currentMonth();
-  }
-  onKeydown(event): void {
-    alert('adasd');
-    if (event.key === 'Enter') {
-      alert(event);
-    }
   }
   openInterviewDialog(day: String, interview: InterviewExtended, date: Moment): void {
     const checkDate: Moment = moment().add(-1, 'day' );
@@ -148,6 +149,25 @@ export class InterviewCalendarComponent implements OnInit {
       });
     }
   }
+  createWeekCalendar(currentDay: Moment): Moment[] {
+    const startOfWeek = moment(currentDay).startOf('isoWeek');
+    const endOfWeek = moment(currentDay).endOf('isoWeek');
+    const days = [];
+    let dayOfWeek = startOfWeek;
+    while (dayOfWeek <= endOfWeek) {
+      // days.push(dayOfWeek.weekday() + '\n' + dayOfWeek.format('DD'));
+      days.push({
+        weekday: dayOfWeek.clone().format('dddd'),
+        day: dayOfWeek.format('DD')
+      });
+      dayOfWeek = dayOfWeek.clone().add(1, 'd');
+    }
+  //  for(let i = 0; i < )
+     /*for (const day in days) {
+       console.log(day);
+     }*/
+    return days;
+  }
   createCalendar(month: Moment): Moment[] {
     const firstDay: Moment = moment(month).startOf('M');
     const days: any = Array.apply(null, {length: month.daysInMonth()})
@@ -162,9 +182,9 @@ export class InterviewCalendarComponent implements OnInit {
             // ['14:00-16:00 - Bobo']
         };
       });
-    const dayOfWeek: number = firstDay.weekday();
+    const dayOfWeek: number = firstDay.isoWeekday();
     const lastDay: Moment = moment(month).add(-1, 'month').endOf('month');
-    for (let i = 0; i < dayOfWeek; i++) {
+    for (let i = 1; i < dayOfWeek; i++) {
       days.unshift(
         {
           day: lastDay.format('DD'),
@@ -176,6 +196,20 @@ export class InterviewCalendarComponent implements OnInit {
       );
       lastDay.add(-1, 'day');
     }
+    const lastDayOfCurrentMonth = moment(month).endOf('month');
+    const lastDayOfCurrentMonthWeekDay: number = lastDayOfCurrentMonth.isoWeekday();
+    for (let i = lastDayOfCurrentMonthWeekDay; i < 7; i++) {
+      lastDayOfCurrentMonth.add(1, 'day');
+      days.push(
+        {
+          day: lastDayOfCurrentMonth.format('DD'),
+          mockInterview: this.mockInterview,
+          lastMonth: false,
+          disable: true,
+          date: lastDayOfCurrentMonth
+        });
+    }
+
     return days;
   }
   isToday(day: Moment): boolean {
@@ -186,16 +220,26 @@ export class InterviewCalendarComponent implements OnInit {
     }
   }
   currentMonth(): void {
-    this.date = this.date.add(0, 'month');
-    this.daysArray = this.createCalendar(this.date);
+      this.date = this.date.add(0, 'month');
+      this.daysArray = this.createCalendar(this.date);
   }
   prevMonth(): void  {
-    this.date = this.date.add(-1, 'month');
-    this.daysArray = this.createCalendar(this.date);
+    if (this.selected === this.MONTH) {
+      this.date = this.date.add(-1, 'month');
+      this.daysArray = this.createCalendar(this.date);
+    } else {
+      this.date = this.date.add(-7, 'day');
+      this.daysOfWeekArray = this.createWeekCalendar(this.date);
+    }
   }
   nextMonth(): void {
-    this.date = this.date.add(1, 'month');
-    this.daysArray = this.createCalendar(this.date);
+    if (this.selected === this.MONTH) {
+      this.date = this.date.add(1, 'month');
+      this.daysArray = this.createCalendar(this.date);
+    } else {
+      this.date = this.date.add(7, 'day');
+      this.daysOfWeekArray = this.createWeekCalendar(this.date);
+    }
   }
 
 }
