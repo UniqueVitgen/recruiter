@@ -12,7 +12,7 @@ export class EventNoteWorker {
   public isInterview(eventNote: EventNote) {
     const interview = <Interview> eventNote;
     if (interview) {
-      return interview.candidateId != null && interview.vacancyId != null;
+      return interview.candidateId != null && interview.planDate != null;
     }
   }
 

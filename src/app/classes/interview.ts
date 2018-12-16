@@ -8,6 +8,7 @@ export class Interview extends EventNote {
   vacancyId: number;
   planDate: string;
   factDate?: string;
+  comment?: string;
 }
 
 export class InterviewExtended extends Interview {

@@ -1,6 +1,8 @@
-import {InterviewExtended} from '../../../classes/interview';
+import {Interview} from '../../../classes/interview';
+import {Candidate} from '../../../classes/candidate';
 
 export interface InterviewDialogData {
-  interview: InterviewExtended;
-  day: any;
+  sourceCandidate: Candidate;
+  sourceInterview?: Interview;
+  isEdit?: boolean;
 }
