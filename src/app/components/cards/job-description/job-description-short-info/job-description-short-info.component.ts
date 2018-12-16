@@ -24,7 +24,8 @@ export class JobDescriptionShortInfoComponent implements OnInit {
         data: <JobDescriptionDialogData> {
           sourceJobDescription: this.vacancy,
           isEdit: true
-        }
+        },
+      disableClose: true
       }
     );
   }

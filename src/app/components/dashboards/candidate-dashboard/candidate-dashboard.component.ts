@@ -1,5 +1,5 @@
 import {Component, OnInit, Input, Output, EventEmitter, OnChanges, SimpleChanges} from '@angular/core';
-import { Candidate } from 'src/app/classes/candidate';
+import {Candidate} from 'src/app/classes/candidate';
 import {MatDialog} from '@angular/material';
 import {JobDescriptionModalComponent} from '../../modals/job-description/job-description-modal/job-description-modal.component';
 import {JobDescriptionDialogData} from '../../../interfaces/dialog/init/job-description-dialog-data';
@@ -25,7 +25,8 @@ export class CandidateDashboardComponent implements OnInit, OnChanges {
 
   private mockCandidate: Candidate;
 
-  constructor(public dialog: MatDialog, private userWorker: UserWorker) { }
+  constructor(public dialog: MatDialog, private userWorker: UserWorker) {
+  }
 
   ngOnInit() {
   }
@@ -51,8 +52,8 @@ export class CandidateDashboardComponent implements OnInit, OnChanges {
 
   addCandidate() {
     const dialogRef = this.dialog.open(CandidateModalComponent, {
-        data: <CandidateDialogData> {
-        }
+        data: <CandidateDialogData> {},
+        disableClose: true
       }
     );
     dialogRef.afterClosed().subscribe((res: CandidateDialogResult) => {
@@ -62,6 +63,7 @@ export class CandidateDashboardComponent implements OnInit, OnChanges {
       }
     });
   }
+
   deleteCandidate() {
     console.log('rerew');
     this.outputDeleteCandidate.emit();

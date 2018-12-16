@@ -28,7 +28,9 @@ export class CandidateTimelineToolbarComponent implements OnChanges {
   @Output('changeTimeline') outputChangeTimeline = new EventEmitter();
   editedCandidate: Candidate;
   internalTimeLineList: BaseTimeline[];
-  constructor(private dialog: MatDialog) { }
+
+  constructor(private dialog: MatDialog) {
+  }
 
   ngOnChanges() {
     if (this.timelineNotes) {
@@ -69,7 +71,8 @@ export class CandidateTimelineToolbarComponent implements OnChanges {
     const dialogRef = this.dialog.open(AttachmentCandidateModalComponent, {
         data: <CandidateDialogData> {
           sourceCandidate: this.editedCandidate
-        }
+        },
+        disableClose: true
       }
     );
     dialogRef.afterClosed().subscribe((res: BaseDialogResult<Candidate>) => {
@@ -89,7 +92,8 @@ export class CandidateTimelineToolbarComponent implements OnChanges {
     const dialogRef = this.dialog.open(ExperienceCandidateModalComponent, {
         data: <CandidateDialogData> {
           sourceCandidate: this.editedCandidate
-        }
+        },
+        disableClose: true
       }
     );
     dialogRef.afterClosed().subscribe((res: BaseDialogResult<Candidate>) => {
