@@ -2,15 +2,11 @@ import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { CandidateService } from 'src/app/services/candidate/candidate.service';
 import { Candidate } from 'src/app/classes/candidate';
-import {Notes} from 'src/app/classes/notes';
 import {EventNote} from '../../classes/event-note';
 import {Interview} from '../../classes/interview';
-import {BaseTimeline} from '../../classes/timeline/base-timeline';
-import {InterviewTimeline} from '../../classes/timeline/interview-timeline';
-import {EventTimelineType} from '../../enums/event-timeline-type.enum';
-import {NoteTimeline} from '../../classes/timeline/note-timeline';
 import {EventNoteWorker} from '../../workers/event-note/event-note.worker';
 import {FeedbackService} from '../../services/feedback/feedback.service';
+import {InterviewService} from '../../services/interview/interview.service';
 
 @Component({
   selector: 'app-candidate-page',
@@ -29,7 +25,8 @@ export class CandidatePageComponent implements OnInit {
     private route: ActivatedRoute,
     private eventNoteWorker: EventNoteWorker,
     private feedbackService: FeedbackService,
-    private candidateService: CandidateService) { }
+    private candidateService: CandidateService,
+    private interviewService: InterviewService) { }
 
   ngOnInit() {
     this.route.params
@@ -55,7 +52,9 @@ export class CandidatePageComponent implements OnInit {
       this.candidate.experiences = this.candidate.experiences.filter((attachment => {
         return object.id !== attachment.id;
       }));
-    }
+    } else if (this.eventNoteWorker.isInterview(object)) {
+        this.interviewService.delete(<Interview>object).subscribe( res => { this.getCandidate(); });
+      }
     this.candidateService.update(this.candidate).subscribe(resMessage => {
       this.getCandidate();
     });
@@ -81,6 +80,8 @@ export class CandidatePageComponent implements OnInit {
           return attachment;
         }
       });
+    } else if (this.eventNoteWorker.isInterview(object)) {
+      this.interviewService.update(object).subscribe( res => { this.getCandidate(); });
     }
     this.candidateService.update(this.candidate).subscribe(resMessage => {
       this.getCandidate();

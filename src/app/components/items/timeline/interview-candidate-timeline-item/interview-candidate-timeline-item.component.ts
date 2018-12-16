@@ -1,5 +1,6 @@
 import {Component, EventEmitter, Input, OnInit, Output} from '@angular/core';
 import {InterviewTimeline} from '../../../../classes/timeline/interview-timeline';
+import {Interview} from '../../../../classes/interview';
 
 @Component({
   selector: 'app-interview-candidate-timeline-item',
@@ -7,11 +8,11 @@ import {InterviewTimeline} from '../../../../classes/timeline/interview-timeline
   styleUrls: ['./interview-candidate-timeline-item.component.scss']
 })
 export class InterviewCandidateTimelineItemComponent implements OnInit {
-  @Input() interview: InterviewTimeline;
+  @Input() interview: Interview;
   @Output() changeCandidate: EventEmitter<any> = new EventEmitter();
   @Output() deleteEvent: EventEmitter<any> = new EventEmitter();
 
-  editedInterview: InterviewTimeline;
+  editedInterview: Interview;
   constructor() { }
   ngOnInit() {
     this.editedInterview = Object.assign({}, this.interview);

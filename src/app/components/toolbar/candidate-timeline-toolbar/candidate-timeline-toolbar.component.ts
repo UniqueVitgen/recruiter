@@ -1,23 +1,20 @@
 import {Component, EventEmitter, Input, OnChanges, Output} from '@angular/core';
-import {InterviewTimeline} from '../../../classes/timeline/interview-timeline';
 import {BaseTimeline} from '../../../classes/timeline/base-timeline';
-import {AttachmentTimeline} from '../../../classes/timeline/attachment-timeline';
-import {ExperienceTimeline} from '../../../classes/timeline/experience-timeline';
 import {NoteTimeline} from '../../../classes/timeline/note-timeline';
 import {EventTimelineType} from '../../../enums/event-timeline-type.enum';
-import {CandidateModalComponent} from '../../modals/candidate/candidate-modal/candidate-modal.component';
 import {CandidateDialogData} from '../../../interfaces/dialog/init/candidate-dialog-data';
-import {CandidateDialogResult} from '../../../interfaces/dialog/result/candidate-dialog-result';
 import {MatDialog} from '@angular/material';
 import {AttachmentCandidateModalComponent} from '../../modals/candidate/attachment-candidate-modal/attachment-candidate-modal.component';
 import {BaseDialogResult} from '../../../interfaces/dialog/result/base-dialog-result';
-import {Attachment} from '../../../classes/attachment';
 import {Candidate} from '../../../classes/candidate';
-import {AttachmentDialogData} from '../../../interfaces/dialog/init/attachment-dialog-data';
 import {ExperienceCandidateModalComponent} from '../../modals/candidate/experience-candidate-modal/experience-candidate-modal.component';
+<<<<<<< HEAD
 import {NoteCandidateModalComponent} from '../../modals/candidate/note-candidate-modal/note-candidate-modal.component';
 import {NoteDialogData} from '../../../interfaces/dialog/init/note-dialog-data';
 import {Feedback} from '../../../classes/feedback';
+=======
+import {InterviewModalComponent} from '../../modals/interview/interview-modal/interview-modal.component';
+>>>>>>> origin/interview-timeline-add-upd-del
 
 @Component({
   selector: 'app-candidate-timeline-toolbar',
@@ -43,6 +40,7 @@ export class CandidateTimelineToolbarComponent implements OnChanges {
   }
 
   addAssignInterview() {
+<<<<<<< HEAD
 
     // const dialogRef = this.dialog.open(InterviewCandidateModalComponent, {
     //     data: <AttachmentDialogData> {
@@ -66,6 +64,20 @@ export class CandidateTimelineToolbarComponent implements OnChanges {
     //   type: EventTimelineType.Interview
     // });
     // this.outputChangeTimeline.emit(this.internalTimeLineList);
+=======
+    const dialogRef = this.dialog.open(InterviewModalComponent, {
+        data: <CandidateDialogData> {
+          sourceCandidate: this.editedCandidate
+        }
+      }
+    );
+    dialogRef.afterClosed().subscribe((res: BaseDialogResult<Candidate>) => {
+      if (res) {
+        console.log('res - ', res);
+        this.outputChangeTimeline.emit(res.resObject);
+      }
+    });
+>>>>>>> origin/interview-timeline-add-upd-del
   }
 
   addCV() {
@@ -81,11 +93,6 @@ export class CandidateTimelineToolbarComponent implements OnChanges {
         this.outputChangeTimeline.emit(res.resObject);
       }
     });
-    // this.internalTimeLineList.unshift(<AttachmentTimeline> {
-    //   comment: '',
-    //   type: EventTimelineType.Attachment
-    // });
-    // this.outputChangeTimeline.emit(this.internalTimeLineList);
   }
 
   addExperience() {

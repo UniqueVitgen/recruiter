@@ -29,7 +29,7 @@ export class InterviewService {
 
   getAll(): Observable<Interview[]> {
     if (ConfigService.serviceData === ServiceData.Real) {
-      return this.configService.get('interview');
+      return this.configService.get('interviews');
     } else {
       this.configService.createObservable([{
         'id': 0,
@@ -42,7 +42,7 @@ export class InterviewService {
   }
 
   add(interview: Interview): Observable<Interview> {
-    return this.configService.post('interview', interview);
+    return this.configService.post('interviews', interview);
   }
 
   update(interview: Interview): Observable<any> {

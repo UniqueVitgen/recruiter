@@ -1,10 +1,9 @@
 import {Component, Inject, OnInit} from '@angular/core';
-import {CandidateService} from '../../../../services/candidate/candidate.service';
 import {MAT_DIALOG_DATA, MatDialogRef} from '@angular/material';
-import {AttachmentDialogData} from '../../../../interfaces/dialog/init/attachment-dialog-data';
 import {InterviewDialogData} from '../../../../interfaces/dialog/init/interview-dialog-data';
-import {DateTimeWorker} from '../../../../workers/date-time/date-time.worker';
-import {UserWorker} from '../../../../workers/user/user.worker';
+import {Interview} from '../../../../classes/interview';
+import {BaseDialogResult} from '../../../../interfaces/dialog/result/base-dialog-result';
+import {InterviewService} from '../../../../services/interview/interview.service';
 
 @Component({
   selector: 'app-interview-modal',
@@ -13,17 +12,37 @@ import {UserWorker} from '../../../../workers/user/user.worker';
 })
 export class InterviewModalComponent implements OnInit {
 
+  public editedInterview: Interview;
+  public interviewResult: BaseDialogResult<Interview>;
+
   constructor(
-    private candidateService: CandidateService,
+    private interviewService: InterviewService,
     public dialogRef: MatDialogRef<InterviewModalComponent>,
-    public dateTimeWorker: DateTimeWorker,
-    public userWorker: UserWorker,
-    @Inject(MAT_DIALOG_DATA) public data: InterviewDialogData) { }
+    @Inject(MAT_DIALOG_DATA) public data: InterviewDialogData ) {
+    if (this.data.isEdit) {
+      this.editedInterview = Object.assign(new Interview(), this.data.sourceInterview);
+    } else {
+      this.editedInterview = new Interview();
+    }
+    this.editedInterview.candidateId = this.data.sourceCandidate.id;
+  }
+
   onNoClick(): void {
     this.dialogRef.close();
   }
 
   ngOnInit() {
+  }
+
+  addInterview() {
+    this.interviewService.add(this.editedInterview).subscribe(resCandidate => {
+      this.interviewResult = {
+        isEdit: false,
+        resObject: null,
+        success: true
+      };
+      this.dialogRef.close(this.interviewResult);
+    });
   }
 
 }
