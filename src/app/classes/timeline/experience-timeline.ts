@@ -1,7 +1,8 @@
 import {BaseTimeline} from './base-timeline';
+import {Team} from '../team';
 
 export class ExperienceTimeline extends BaseTimeline {
-  companyName: string;
+  companyName: Team;
   dateFrom: Date;
   dateTo: Date;
   jobPosition: string;

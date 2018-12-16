@@ -3,7 +3,7 @@
   <mat-icon class="delete" matTooltip="Delete" (click)="delete()">close</mat-icon>
   <mat-card-title><mat-icon class="myIcon">description</mat-icon> Experience</mat-card-title>
   <mat-form-field class="example-full-width">
-    <input (blur)="onFocusoutAnyInput()" [(ngModel)]="editedExperience.companyName" matInput placeholder="company Name">
+    <input (blur)="onFocusoutAnyInput()" [(ngModel)]="editedExperience.companyName.name" matInput placeholder="company Name">
   </mat-form-field>
   <mat-form-field>
     <input (blur)="onFocusoutAnyInput()" (dateChange)="onFocusoutAnyInput()" matInput [(ngModel)]="editedExperience.dateFrom" [matDatepicker]="picker" placeholder="From">
