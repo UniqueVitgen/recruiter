@@ -1,4 +1,4 @@
-import {Component, OnInit} from '@angular/core';
+import {Component, HostListener, OnInit} from '@angular/core';
 import * as moment from 'moment';
 import {Moment} from 'moment';
 import {MatDialog} from '@angular/material';
@@ -92,11 +92,21 @@ export class InterviewCalendarComponent implements OnInit {
   daysArray;
   title = 'Interview Calendar';
   date: Moment = moment();
+  selected  = 'Month';
   constructor(private dialog: MatDialog,
               private vacancyService: VacancyService,
               private candidateService: CandidateService,
               public dateTimeWorker: DateTimeWorker,
               private interviewService: InterviewService) {}
+  @HostListener('document:keydown', ['$event'])
+  handleKeyboardEvent(event: KeyboardEvent) {
+    if (event.key === 'ArrowLeft' ) {
+      this.prevMonth();
+    }
+    if (event.key === 'ArrowRight' ) {
+      this.nextMonth();
+    }
+  }
   ngOnInit() {
     // this.createCalendar(this.date);
     this.vacancyService.get(0).subscribe(vacancyRes => {
@@ -114,7 +124,12 @@ export class InterviewCalendarComponent implements OnInit {
     });
     this.currentMonth();
   }
-
+  onKeydown(event): void {
+    alert('adasd');
+    if (event.key === 'Enter') {
+      alert(event);
+    }
+  }
   openInterviewDialog(day: String, interview: InterviewExtended, date: Moment): void {
     const checkDate: Moment = moment().add(-1, 'day' );
     if (date >= checkDate ) {

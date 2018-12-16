@@ -3,21 +3,31 @@
     {{ title }}
   </h1>
 </div>
-<div class="row">
+<div class="row" >
   <div class="col-md-1 col-12">
 
   </div>
   <div class="col-md-10 col-12">
         <div class="row">
-          <div class="col-2 calendar-arrow arrow-left">
+          <div class="col-1 calendar-arrow arrow-left">
             <mat-icon  (click)="prevMonth()">arrow_back_ios</mat-icon>
           </div>
-          <div class="col-8 center-text">
+          <div class="col-4 center-text">
             <h2 > {{ date.format('MMMM') + " " + date.format('YYYY')}} </h2>
           </div>
-          <div class="col-2 calendar-arrow arrow-right">
+          <div class="col-1 calendar-arrow arrow-right">
             <mat-icon (click)="nextMonth()">arrow_forward_ios</mat-icon>
           </div>
+          <div class="col-3"></div>
+          <div class="col-2 calendar-arrow arrow-right">
+            <mat-form-field>
+              <mat-select [(value)]="selected">
+                <mat-option value="Month">Month</mat-option>
+                <mat-option value="Week">Week</mat-option>
+              </mat-select>
+            </mat-form-field>
+          </div>
+          <div class="col-1"></div>
         </div>
         <!--<i class = "fa fa-chevron-left" (click)="prevMonth()"></i>-->
         <!--<i class = "fa fa-chevron-right" (click)="nextMonth()"></i>-->
