@@ -58,6 +58,7 @@ import { PhoneMaskDirective } from './directives/phone-mask/phone-mask.directive
 import {SHARED_FORM_DIRECTIVES} from '@angular/forms/src/directives';
 import {TextMaskModule} from 'angular2-text-mask';
 import { LimitToDirective } from './directives/limit-to/limit-to.directive';
+import { ExperienceCandidateModalComponent } from './components/modals/candidate/experience-candidate-modal/experience-candidate-modal.component';
 
 
 @NgModule({
@@ -104,7 +105,8 @@ import { LimitToDirective } from './directives/limit-to/limit-to.directive';
     InterviewCandidateComponent,
     CandidateModalComponent,
     PhoneMaskDirective,
-    LimitToDirective
+    LimitToDirective,
+    ExperienceCandidateModalComponent
   ],
   imports: [
     BrowserModule,
@@ -130,7 +132,8 @@ import { LimitToDirective } from './directives/limit-to/limit-to.directive';
     InterviewModalComponent,
     JobDescriptionModalComponent,
     CandidateModalComponent,
-    AttachmentCandidateModalComponent
+    AttachmentCandidateModalComponent,
+    ExperienceCandidateModalComponent
   ],
   schemas: [NO_ERRORS_SCHEMA] // add this line
 })

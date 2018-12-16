@@ -80,7 +80,9 @@ export class CandidatePageComponent implements OnInit {
       this.getCandidate();
     });
   }
-
+  addTimelineItem(candidate: Candidate) {
+    this.getCandidate();
+  }
   getCandidate() {
     this.candidateService.get(this.id).subscribe(res => {
       this.candidate = res;

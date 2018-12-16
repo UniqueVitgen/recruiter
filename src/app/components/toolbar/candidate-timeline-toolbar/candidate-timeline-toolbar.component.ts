@@ -10,6 +10,11 @@ import {CandidateDialogData} from '../../../interfaces/dialog/init/candidate-dia
 import {CandidateDialogResult} from '../../../interfaces/dialog/result/candidate-dialog-result';
 import {MatDialog} from '@angular/material';
 import {AttachmentCandidateModalComponent} from '../../modals/candidate/attachment-candidate-modal/attachment-candidate-modal.component';
+import {BaseDialogResult} from '../../../interfaces/dialog/result/base-dialog-result';
+import {Attachment} from '../../../classes/attachment';
+import {Candidate} from '../../../classes/candidate';
+import {AttachmentDialogData} from '../../../interfaces/dialog/init/attachment-dialog-data';
+import {ExperienceCandidateModalComponent} from '../../modals/candidate/experience-candidate-modal/experience-candidate-modal.component';
 
 @Component({
   selector: 'app-candidate-timeline-toolbar',
@@ -19,27 +24,36 @@ import {AttachmentCandidateModalComponent} from '../../modals/candidate/attachme
 export class CandidateTimelineToolbarComponent implements OnChanges {
 
   @Input() timelineNotes: BaseTimeline[];
+  @Input() candidate: Candidate;
   @Output('changeTimeline') outputChangeTimeline = new EventEmitter();
+  editedCandidate: Candidate;
   internalTimeLineList: BaseTimeline[];
   constructor(private dialog: MatDialog) { }
 
   ngOnChanges() {
-    this.internalTimeLineList = this.timelineNotes.slice();
+    if (this.timelineNotes) {
+      this.internalTimeLineList = this.timelineNotes.slice();
+    }
+    if (this.candidate) {
+      this.editedCandidate = Object.assign({}, this.candidate);
+    }
   }
 
   addAssignInterview() {
 
-    const dialogRef = this.dialog.open(AttachmentCandidateModalComponent, {
-        data: <CandidateDialogData> {
-        }
-      }
-    );
-    dialogRef.afterClosed().subscribe((res: CandidateDialogResult) => {
-      if (res) {
-        console.log('res - ', res);
-        this.outputChangeTimeline.emit(res.resCandidate);
-      }
-    });
+    // const dialogRef = this.dialog.open(AttachmentCandidateModalComponent, {
+    //     data: <AttachmentDialogData> {
+    //       isEdit: false,
+    //       sourceCandidate: this.candidate
+    //     }
+    //   }
+    // );
+    // dialogRef.afterClosed().subscribe((res: CandidateDialogResult) => {
+    //   if (res) {
+    //     console.log('res - ', res);
+    //     this.outputChangeTimeline.emit(res.resCandidate);
+    //   }
+    // });
     // console.log(this.internalTimeLineList);
     // this.internalTimeLineList.unshift(<InterviewTimeline> {
     //   when: new Date(),
@@ -48,19 +62,20 @@ export class CandidateTimelineToolbarComponent implements OnChanges {
     //   comment: '',
     //   type: EventTimelineType.Interview
     // });
-    this.outputChangeTimeline.emit(this.internalTimeLineList);
+    // this.outputChangeTimeline.emit(this.internalTimeLineList);
   }
 
   addCV() {
     const dialogRef = this.dialog.open(AttachmentCandidateModalComponent, {
         data: <CandidateDialogData> {
+          sourceCandidate: this.editedCandidate
         }
       }
     );
-    dialogRef.afterClosed().subscribe((res: CandidateDialogResult) => {
+    dialogRef.afterClosed().subscribe((res: BaseDialogResult<Candidate>) => {
       if (res) {
         console.log('res - ', res);
-        this.outputChangeTimeline.emit(res.resCandidate);
+        this.outputChangeTimeline.emit(res.resObject);
       }
     });
     // this.internalTimeLineList.unshift(<AttachmentTimeline> {
@@ -71,15 +86,18 @@ export class CandidateTimelineToolbarComponent implements OnChanges {
   }
 
   addExperience() {
-    this.internalTimeLineList.unshift(<ExperienceTimeline> {
-      companyName: '',
-      dateFrom: new Date(),
-      dateTo: new Date(),
-      jobPosition: '',
-      comment: '',
-      type: EventTimelineType.Experience
+    const dialogRef = this.dialog.open(ExperienceCandidateModalComponent, {
+        data: <CandidateDialogData> {
+          sourceCandidate: this.editedCandidate
+        }
+      }
+    );
+    dialogRef.afterClosed().subscribe((res: BaseDialogResult<Candidate>) => {
+      if (res) {
+        console.log('res - ', res);
+        this.outputChangeTimeline.emit(res.resObject);
+      }
     });
-    this.outputChangeTimeline.emit(this.internalTimeLineList);
   }
 
   addNote() {

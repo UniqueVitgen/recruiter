@@ -22,10 +22,10 @@ import {ArrayWorker} from '../../../workers/array/array.worker';
 })
 export class CandidateTimelineComponent implements OnInit {
   @Input() candidate: Candidate;
-
   @Input() timelineNotes: BaseTimeline[];
   @Output('clickClose') outputClickClose: EventEmitter<any> = new EventEmitter();
   @Output('changeTimeline') outputChangeTimeline: EventEmitter<any> = new EventEmitter();
+  @Output('addTimelineItem') outputAddTimelineItem: EventEmitter<any> = new EventEmitter();
   constructor(private typeCheckingWorker: TypeCheckingWorker,
               private eventTimelineWorker: EventTimelineWorker,
               private eventNoteWorker: EventNoteWorker,
@@ -46,9 +46,8 @@ export class CandidateTimelineComponent implements OnInit {
   checkIfNoteISAttachment(eventNote: EventNote) {
     return this.eventNoteWorker.isAttachement(eventNote);
   }
-  changeTimeLine(timeline) {
-    this.candidate.timelines = timeline;
-    this.candidateService.update(this.candidate).subscribe();
+  changeTimeLine(canidate: Candidate) {
+    this.outputAddTimelineItem.emit(this.candidate);
   }
   changeCandidate(baseTimeline: BaseTimeline, i: number) {
     this.outputChangeTimeline.emit(baseTimeline);
