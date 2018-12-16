@@ -4,7 +4,7 @@
     <button *ngIf="buttonEdit" class="float-right" mat-icon-button [matMenuTriggerFor]="menu" color="primary">
       <mat-icon>more_horiz</mat-icon>
     </button>
-    <button *ngIf="buttonDelete" mat-icon-button  class="float-right" (click) = "clickDelete.emit(vacancy)">
+    <button *ngIf="buttonDelete" mat-icon-button  class="float-right" (click)="deleteVacancy(); $event.stopPropagation()">
       <mat-icon>close</mat-icon>
     </button>
     <div *ngIf="vacancy.vacancyState">

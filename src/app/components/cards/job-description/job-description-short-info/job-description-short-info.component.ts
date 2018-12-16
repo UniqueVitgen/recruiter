@@ -14,7 +14,7 @@ export class JobDescriptionShortInfoComponent implements OnInit {
   @Input() isEdited: boolean;
   @Input() buttonEdit: boolean;
   @Input() buttonDelete: boolean;
-  @Output() clickDelete: EventEmitter<Vacancy>;
+  @Output('deleteVacancy') outputDeleteVacancy: EventEmitter<any> = new EventEmitter();
   constructor(public dialog: MatDialog)  { }
 
   ngOnInit() {
@@ -31,5 +31,7 @@ export class JobDescriptionShortInfoComponent implements OnInit {
   clickEdit(): void {
     this.openJobDescriptionDialog();
   }
-  deleteClick(): void  {}
+  deleteVacancy() {
+    this.outputDeleteVacancy.emit();
+  }
 }

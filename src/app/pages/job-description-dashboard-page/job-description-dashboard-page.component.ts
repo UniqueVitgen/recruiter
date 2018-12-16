@@ -25,5 +25,9 @@ export class JobDescriptionDashboardPageComponent implements OnInit {
       console.log('this.jobDescriptionList', this.jobDescriptionList);
     });
   }
+  deleteVacancy(index: number) {
+    const object = this.jobDescriptionList[index];
+    this.vacancyService.delete(object).subscribe(res => { this.getVacancies(); });
+  }
 
 }
