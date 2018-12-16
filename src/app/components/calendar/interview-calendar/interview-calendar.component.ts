@@ -97,6 +97,7 @@ export class InterviewCalendarComponent implements OnInit {
   daysOfWeekArray = this.createWeekCalendar(this.date);
   timesArray =  Array.apply(null, {length: 7 * 24});
   selected: string;
+
   constructor(private dialog: MatDialog,
               private vacancyService: VacancyService,
               private candidateService: CandidateService,
@@ -113,6 +114,7 @@ export class InterviewCalendarComponent implements OnInit {
       this.nextMonth();
     }
   }
+
   ngOnInit() {
     // this.createCalendar(this.date);
     this.vacancyService.get(0).subscribe(vacancyRes => {
@@ -132,14 +134,15 @@ export class InterviewCalendarComponent implements OnInit {
     this.currentMonth();
   }
   openInterviewDialog(day: String, interview: InterviewExtended, date: Moment): void {
-    const checkDate: Moment = moment().add(-1, 'day' );
-    if (date >= checkDate ) {
+    const checkDate: Moment = moment().add(-1, 'day');
+    if (date >= checkDate) {
       const dialogRef = this.dialog.open(InterviewModalComponent, {
           minWidth: '400px',
           data: {
             day: day,
             interview: interview
-          }
+          },
+          disableClose: true
         }
       );
 
@@ -176,10 +179,10 @@ export class InterviewCalendarComponent implements OnInit {
         return {
           day: moment(firstDay).add(n, 'd').format('DD'),
           mockInterview: this.mockInterview,
-          lastMonth: moment() > moment(firstDay).add(n + 1, 'd')  ? true :  false,
+          lastMonth: moment() > moment(firstDay).add(n + 1, 'd') ? true : false,
           disable: false,
           date: moment(firstDay).add(n, 'd')
-            // ['14:00-16:00 - Bobo']
+          // ['14:00-16:00 - Bobo']
         };
       });
     const dayOfWeek: number = firstDay.isoWeekday();
@@ -189,7 +192,7 @@ export class InterviewCalendarComponent implements OnInit {
         {
           day: lastDay.format('DD'),
           mockInterview: this.mockInterview,
-          lastMonth: moment() > moment(firstDay).add(i + 1, 'd')  ? true :  false,
+          lastMonth: moment() > moment(firstDay).add(i + 1, 'd') ? true : false,
           disable: true,
           date: lastDay
         }
@@ -212,18 +215,20 @@ export class InterviewCalendarComponent implements OnInit {
 
     return days;
   }
+
   isToday(day: Moment): boolean {
-    if (moment().diff(this.date, 'days') === 0 && moment().format('DD') === day.toString() ) {
+    if (moment().diff(this.date, 'days') === 0 && moment().format('DD') === day.toString()) {
       return true;
     } else {
       return false;
     }
   }
+
   currentMonth(): void {
       this.date = this.date.add(0, 'month');
       this.daysArray = this.createCalendar(this.date);
   }
-  prevMonth(): void  {
+  prevMonth(): void {
     if (this.selected === this.MONTH) {
       this.date = this.date.add(-1, 'month');
       this.daysArray = this.createCalendar(this.date);
@@ -232,6 +237,7 @@ export class InterviewCalendarComponent implements OnInit {
       this.daysOfWeekArray = this.createWeekCalendar(this.date);
     }
   }
+
   nextMonth(): void {
     if (this.selected === this.MONTH) {
       this.date = this.date.add(1, 'month');

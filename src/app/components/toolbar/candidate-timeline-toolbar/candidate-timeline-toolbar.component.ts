@@ -8,14 +8,11 @@ import {AttachmentCandidateModalComponent} from '../../modals/candidate/attachme
 import {BaseDialogResult} from '../../../interfaces/dialog/result/base-dialog-result';
 import {Candidate} from '../../../classes/candidate';
 import {ExperienceCandidateModalComponent} from '../../modals/candidate/experience-candidate-modal/experience-candidate-modal.component';
-<<<<<<< HEAD
+
 import {NoteCandidateModalComponent} from '../../modals/candidate/note-candidate-modal/note-candidate-modal.component';
 import {NoteDialogData} from '../../../interfaces/dialog/init/note-dialog-data';
 import {Feedback} from '../../../classes/feedback';
-=======
 import {InterviewModalComponent} from '../../modals/interview/interview-modal/interview-modal.component';
->>>>>>> origin/interview-timeline-add-upd-del
-
 @Component({
   selector: 'app-candidate-timeline-toolbar',
   templateUrl: './candidate-timeline-toolbar.component.html',
@@ -28,7 +25,9 @@ export class CandidateTimelineToolbarComponent implements OnChanges {
   @Output('changeTimeline') outputChangeTimeline = new EventEmitter();
   editedCandidate: Candidate;
   internalTimeLineList: BaseTimeline[];
-  constructor(private dialog: MatDialog) { }
+
+  constructor(private dialog: MatDialog) {
+  }
 
   ngOnChanges() {
     if (this.timelineNotes) {
@@ -40,7 +39,6 @@ export class CandidateTimelineToolbarComponent implements OnChanges {
   }
 
   addAssignInterview() {
-<<<<<<< HEAD
 
     // const dialogRef = this.dialog.open(InterviewCandidateModalComponent, {
     //     data: <AttachmentDialogData> {
@@ -64,7 +62,6 @@ export class CandidateTimelineToolbarComponent implements OnChanges {
     //   type: EventTimelineType.Interview
     // });
     // this.outputChangeTimeline.emit(this.internalTimeLineList);
-=======
     const dialogRef = this.dialog.open(InterviewModalComponent, {
         data: <CandidateDialogData> {
           sourceCandidate: this.editedCandidate
@@ -77,14 +74,14 @@ export class CandidateTimelineToolbarComponent implements OnChanges {
         this.outputChangeTimeline.emit(res.resObject);
       }
     });
->>>>>>> origin/interview-timeline-add-upd-del
   }
 
   addCV() {
     const dialogRef = this.dialog.open(AttachmentCandidateModalComponent, {
         data: <CandidateDialogData> {
           sourceCandidate: this.editedCandidate
-        }
+        },
+        disableClose: true
       }
     );
     dialogRef.afterClosed().subscribe((res: BaseDialogResult<Candidate>) => {
@@ -99,7 +96,8 @@ export class CandidateTimelineToolbarComponent implements OnChanges {
     const dialogRef = this.dialog.open(ExperienceCandidateModalComponent, {
         data: <CandidateDialogData> {
           sourceCandidate: this.editedCandidate
-        }
+        },
+        disableClose: true
       }
     );
     dialogRef.afterClosed().subscribe((res: BaseDialogResult<Candidate>) => {
