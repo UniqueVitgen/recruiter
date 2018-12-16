@@ -14,16 +14,25 @@ export class JobDescriptionPageComponent implements OnInit {
   id: number;
   vacancy: Vacancy;
   candidates: Candidate[];
-
+  searchInput: boolean;
+  searchValue: string;
   constructor(
     private route: ActivatedRoute,
     private vacancyService: VacancyService,
-    private candidateService: CandidateService) { }
+    private candidateService: CandidateService) {
+    this.searchInput = false;
+  }
 
   ngOnInit() {
     this.getVacancy();
   }
-  getVacancy() {
+  changeSearchInput(): void {
+    this.searchInput = !this.searchInput;
+  }
+  search(value: string): void {
+    this.searchValue = value;
+  }
+  getVacancy(): void {
     this.route.params
       .subscribe(params => {
         this.id = params['id'];
@@ -36,7 +45,7 @@ export class JobDescriptionPageComponent implements OnInit {
         // Defaults to 0 if no query param provided.
       });
   }
-  addCandidate(candidate: Candidate) {
+  addCandidate(candidate: Candidate): void {
     console.log('candidate', candidate);
     if (this.vacancy.candidates == null) {
       this.vacancy.candidates = [];
@@ -48,7 +57,7 @@ export class JobDescriptionPageComponent implements OnInit {
     });
   }
 
-  getCandidateList(vacancy: Vacancy) {
+  getCandidateList(vacancy: Vacancy): void {
     this.vacancyService.getCandidates(vacancy).subscribe(res => {
     });
   }
