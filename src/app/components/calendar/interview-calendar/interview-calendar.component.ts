@@ -64,7 +64,7 @@ export class InterviewCalendarComponent implements OnInit {
           name: 'string'
         },
         jobPosition: 'string',
-        companyName: {
+        team: {
           id: 0,
           name: 'string'
         }

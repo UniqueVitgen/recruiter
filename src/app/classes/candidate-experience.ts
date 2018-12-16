@@ -7,5 +7,5 @@ export class CandidateExperience  extends EventNote {
   dateTo: string;
   jobDescription: Project;
   jobPosition: string;
-  companyName: Team = new Team();
+  team: Team = new Team();
 }
