@@ -4,6 +4,7 @@ import {Interview} from '../../classes/interview';
 import {CandidateExperience} from '../../classes/candidate-experience';
 import {Notes} from '../../classes/notes';
 import {Attachment} from '../../classes/attachment';
+import {Feedback} from '../../classes/feedback';
 
 @Injectable({
   providedIn: 'root'
@@ -23,9 +24,9 @@ export class EventNoteWorker {
     }
   }
   public isNote(eventNote: EventNote) {
-    const note = <Notes> eventNote;
+    const note = <Feedback> eventNote;
     if (note) {
-      return note.noteText;
+      return note.feedbackText;
     }
   }
   public isAttachement(eventNote: EventNote) {

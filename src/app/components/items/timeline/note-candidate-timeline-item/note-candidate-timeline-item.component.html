@@ -2,6 +2,6 @@
   <mat-icon class="delete" (click)="delete()">close</mat-icon>
   <mat-card-title><mat-icon class="myIcon">feedback</mat-icon> Notes</mat-card-title>
   <mat-form-field class="example-full-width">
-    <textarea (blur)="onFocusoutAnyInput()" [(ngModel)]="editedNote.comment" placeholder="Comment" matInput></textarea>
+    <textarea (blur)="onFocusoutAnyInput()" [(ngModel)]="editedNote.feedbackText" placeholder="Feedback comment" matInput></textarea>
   </mat-form-field>
 </mat-card>

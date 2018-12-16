@@ -10,6 +10,7 @@ import {InterviewTimeline} from '../../classes/timeline/interview-timeline';
 import {EventTimelineType} from '../../enums/event-timeline-type.enum';
 import {NoteTimeline} from '../../classes/timeline/note-timeline';
 import {EventNoteWorker} from '../../workers/event-note/event-note.worker';
+import {FeedbackService} from '../../services/feedback/feedback.service';
 
 @Component({
   selector: 'app-candidate-page',
@@ -27,6 +28,7 @@ export class CandidatePageComponent implements OnInit {
   constructor(
     private route: ActivatedRoute,
     private eventNoteWorker: EventNoteWorker,
+    private feedbackService: FeedbackService,
     private candidateService: CandidateService) { }
 
   ngOnInit() {
@@ -46,7 +48,9 @@ export class CandidatePageComponent implements OnInit {
         return object.id !== attachment.id;
       }));
     } else if (this.eventNoteWorker.isNote(object)) {
-
+      this.feedbackService.delete(<any>object).subscribe(res => {
+        this.getCandidate();
+      });
     } else if (this.eventNoteWorker.isExperience(object)) {
       this.candidate.experiences = this.candidate.experiences.filter((attachment => {
         return object.id !== attachment.id;
@@ -66,7 +70,9 @@ export class CandidatePageComponent implements OnInit {
         }
       });
     } else if (this.eventNoteWorker.isNote(object)) {
-
+      this.feedbackService.update(object).subscribe(res => {
+        this.getCandidate();
+      });
     } else if (this.eventNoteWorker.isExperience(object)) {
       this.candidate.experiences = this.candidate.experiences.map((attachment) => {
         if (attachment.id === object.id) {

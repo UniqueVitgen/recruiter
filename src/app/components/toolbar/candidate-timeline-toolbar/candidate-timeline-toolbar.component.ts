@@ -15,6 +15,9 @@ import {Attachment} from '../../../classes/attachment';
 import {Candidate} from '../../../classes/candidate';
 import {AttachmentDialogData} from '../../../interfaces/dialog/init/attachment-dialog-data';
 import {ExperienceCandidateModalComponent} from '../../modals/candidate/experience-candidate-modal/experience-candidate-modal.component';
+import {NoteCandidateModalComponent} from '../../modals/candidate/note-candidate-modal/note-candidate-modal.component';
+import {NoteDialogData} from '../../../interfaces/dialog/init/note-dialog-data';
+import {Feedback} from '../../../classes/feedback';
 
 @Component({
   selector: 'app-candidate-timeline-toolbar',
@@ -41,7 +44,7 @@ export class CandidateTimelineToolbarComponent implements OnChanges {
 
   addAssignInterview() {
 
-    // const dialogRef = this.dialog.open(AttachmentCandidateModalComponent, {
+    // const dialogRef = this.dialog.open(InterviewCandidateModalComponent, {
     //     data: <AttachmentDialogData> {
     //       isEdit: false,
     //       sourceCandidate: this.candidate
@@ -101,10 +104,19 @@ export class CandidateTimelineToolbarComponent implements OnChanges {
   }
 
   addNote() {
-    this.internalTimeLineList.unshift(<NoteTimeline> {
-      comment: '',
-      type: EventTimelineType.Note
+
+    const dialogRef = this.dialog.open(NoteCandidateModalComponent, {
+        data: <NoteDialogData> {
+          isEdit: false,
+          sourceCandidate: this.candidate
+        }
+      }
+    );
+    dialogRef.afterClosed().subscribe((res: BaseDialogResult<Feedback>) => {
+      if (res) {
+        console.log('res - ', res);
+        this.outputChangeTimeline.emit(res.resObject);
+      }
     });
-    this.outputChangeTimeline.emit(this.internalTimeLineList);
   }
 }

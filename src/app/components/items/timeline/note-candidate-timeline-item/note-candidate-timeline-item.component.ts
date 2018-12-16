@@ -1,5 +1,6 @@
 import {Component, EventEmitter, Input, OnInit, Output} from '@angular/core';
 import {NoteTimeline} from '../../../../classes/timeline/note-timeline';
+import {Feedback} from '../../../../classes/feedback';
 
 @Component({
   selector: 'app-note-candidate-timeline-item',
@@ -7,10 +8,10 @@ import {NoteTimeline} from '../../../../classes/timeline/note-timeline';
   styleUrls: ['./note-candidate-timeline-item.component.scss']
 })
 export class NoteCandidateTimelineItemComponent implements OnInit {
-  @Input() note: NoteTimeline;
+  @Input() note: Feedback;
   @Output() changeCandidate: EventEmitter<any> = new EventEmitter();
   @Output() deleteEvent: EventEmitter<any> = new EventEmitter();
-  editedNote: NoteTimeline;
+  editedNote: Feedback;
   constructor() { }
   ngOnInit() {
     this.editedNote = Object.assign({}, this.note);
