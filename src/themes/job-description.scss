@@ -8,14 +8,14 @@ $box-shadow: 0 0 0 2px white, 0 0 0 4px #3F51B5;
     box-shadow: $box-shadow;
     cursor: pointer;
     .candidate-dashboard-item {
-      background: $background;
-      box-shadow: $box-shadow;
+      //background: $background;
+      //box-shadow: $box-shadow;
       .user-avatar {
         & {
 
           & .avatar-hover{
-            display: block;
-            background: rgba(217, 219, 226, .5);
+            //display: block;
+            //background: rgba(217, 219, 226, .5);
           }
         }
 

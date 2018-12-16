@@ -56,7 +56,9 @@ export class JobDescriptionPageComponent implements OnInit {
       this.getVacancy();
     });
   }
-
+  changeVacancy(vacancy: Vacancy) {
+   this.getVacancy();
+  }
   getCandidateList(vacancy: Vacancy): void {
     this.vacancyService.getCandidates(vacancy).subscribe(res => {
     });
