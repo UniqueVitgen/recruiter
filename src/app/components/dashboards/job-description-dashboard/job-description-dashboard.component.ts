@@ -15,6 +15,7 @@ export class JobDescriptionDashboardComponent implements OnInit, OnChanges {
   @Input() jobDescriptionList: Vacancy[];
   @Output('addVacancy') outputAddVacancy: EventEmitter<Vacancy> = new EventEmitter();
   @Input() search;
+  @Output('deleteVacancy') outputDeleteVacancy: EventEmitter<any> = new EventEmitter();
   public selectedVacancies: Vacancy[];
 
   constructor(
@@ -59,6 +60,9 @@ export class JobDescriptionDashboardComponent implements OnInit, OnChanges {
         }
       }
     })
+  }
+  deleteVacancy(index: number) {
+    this.outputDeleteVacancy.emit(index);
   }
 
 }

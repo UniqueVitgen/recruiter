@@ -1,6 +1,6 @@
 <mat-card class="example-full-width job-description-dashboard-item">
   <mat-card>
-    <app-job-description-short-info [vacancy]="jobDescription" [buttonEdit]="false" [buttonDelete]="true"></app-job-description-short-info>
+    <app-job-description-short-info [vacancy]="jobDescription" [buttonEdit]="false" [buttonDelete]="true" (deleteVacancy)="deleteVacancy($event)"></app-job-description-short-info>
   </mat-card>
   <br>
   <mat-card>

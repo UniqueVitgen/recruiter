@@ -1,4 +1,4 @@
 <app-search-input (onSearch)="search($event)"></app-search-input>
 <br>
-<app-job-description-dashboard [search]="searchValue" [jobDescriptionList]="jobDescriptionList" (addVacancy)="getVacancies()"  ></app-job-description-dashboard>
+<app-job-description-dashboard [search]="searchValue" [jobDescriptionList]="jobDescriptionList" (addVacancy)="getVacancies()" (deleteVacancy)="deleteVacancy($event)"></app-job-description-dashboard>
 

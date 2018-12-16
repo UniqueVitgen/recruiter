@@ -1,4 +1,4 @@
-import {Component, Input, OnInit} from '@angular/core';
+import {Component, EventEmitter, Input, OnInit, Output} from '@angular/core';
 import {Vacancy} from '../../../../classes/vacancy';
 
 @Component({
@@ -8,9 +8,12 @@ import {Vacancy} from '../../../../classes/vacancy';
 })
 export class JobDescriptionDashboardItemComponent implements OnInit {
   @Input() jobDescription: Vacancy;
+  @Output('deleteVacancy') outputDeleteVacancy: EventEmitter<any> = new EventEmitter();
   constructor() { }
 
   ngOnInit() {
   }
-
+  deleteVacancy(index: number) {
+    this.outputDeleteVacancy.emit(index);
+  }
 }
