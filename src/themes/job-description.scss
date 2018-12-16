@@ -1,10 +1,15 @@
-$background: #d9dbe2;
+$background: #fff;
+$box-shadow: 0 0 0 2px white, 0 0 0 4px #3F51B5;
 .job-description-dashboard-item {
+  transition: 0.25s;
 
   &:hover {
     background: $background;
+    box-shadow: $box-shadow;
+    cursor: pointer;
     .candidate-dashboard-item {
       background: $background;
+      box-shadow: $box-shadow;
       .user-avatar {
         & {
 
@@ -18,6 +23,7 @@ $background: #d9dbe2;
     }
     mat-card {
       background: $background;
+      //box-shadow: $box-shadow;
     }
     //img {
     //  background: #ccc;
