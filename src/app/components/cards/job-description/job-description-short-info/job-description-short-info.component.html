@@ -1,6 +1,6 @@
 <div *ngIf="vacancy">
   <div *ngIf="!isEdited">
-    <span class="big-text">{{vacancy?.position}}</span>
+    <span class="big-text" [style.color]="'red'">{{vacancy?.position}}</span>
     <button *ngIf="buttonEdit" class="float-right" mat-icon-button [matMenuTriggerFor]="menu" color="primary">
       <mat-icon>more_horiz</mat-icon>
     </button>
