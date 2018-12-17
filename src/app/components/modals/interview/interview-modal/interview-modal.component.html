@@ -5,21 +5,23 @@
     </div>
   </dialog-title>
   <dialog-body>
-    <mat-form-field>
-      <input matInput [(ngModel)]="editedInterview.planDate" [matDatepicker]="picker" placeholder="From">
-      <mat-datepicker-toggle name="dateSuffix" matSuffix [for]="picker"></mat-datepicker-toggle>
-      <mat-datepicker  #picker></mat-datepicker>
-    </mat-form-field>
+    <form [formGroup]="interviewForm">
+      <mat-form-field>
+        <input matInput formControlName="from" [(ngModel)]="editedInterview.planDate" [matDatepicker]="picker" placeholder="From">
+        <mat-datepicker-toggle name="dateSuffix" matSuffix [for]="picker"></mat-datepicker-toggle>
+        <mat-datepicker  #picker></mat-datepicker>
+      </mat-form-field>
 
-    <br>
-    <mat-form-field >
-      <input matInput  [(ngModel)]="editedInterview.factDate" [min]="editedInterview.planDate" [matDatepicker]="picker1" placeholder="To">
-      <mat-datepicker-toggle name="dateSuffix1" matSuffix [for]="picker1"></mat-datepicker-toggle>
-      <mat-datepicker #picker1></mat-datepicker>
-    </mat-form-field>
+      <br>
+      <mat-form-field >
+        <input matInput formControlName="to"  [(ngModel)]="editedInterview.factDate" [min]="editedInterview.planDate" [matDatepicker]="picker1" placeholder="To">
+        <mat-datepicker-toggle name="dateSuffix1" matSuffix [for]="picker1"></mat-datepicker-toggle>
+        <mat-datepicker #picker1></mat-datepicker>
+      </mat-form-field>
+    </form>
   </dialog-body>
   <dialog-footer>
     <button mat-button (click)="onNoClick()">No Thanks</button>
-    <button mat-button (click)="addInterview()" cdkFocusInitial>Ok</button>
+    <button mat-raised-button color="primary" [disabled]="interviewForm.invalid" (click)="addInterview()" cdkFocusInitial>Ok</button>
   </dialog-footer>
 </app-modal-component>

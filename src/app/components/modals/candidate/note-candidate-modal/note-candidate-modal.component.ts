@@ -11,6 +11,7 @@ import {EnumWorker} from '../../../../workers/enum/enum.worker';
 import {ExperienceDialogData} from '../../../../interfaces/dialog/init/experience-dialog-data';
 import {FeedbackState} from '../../../../classes/feedback-state';
 import {FeedbackService} from '../../../../services/feedback/feedback.service';
+import {FormBuilder, FormGroup, Validators} from '@angular/forms';
 
 @Component({
   selector: 'app-note-candidate-modal',
@@ -22,9 +23,12 @@ export class NoteCandidateModalComponent implements OnInit {
   public editedCandidate: Candidate;
   public editedFeedback: Feedback;
   public experienceResult: BaseDialogResult<Feedback>;
+  public testFeedbackStates = ['OPEN', 'CLOSED'];
+  public formNote: FormGroup;
 
   constructor(
     private candidateService: CandidateService,
+    private fb: FormBuilder,
     public dialogRef: MatDialogRef<NameCandidateModalComponent>,
     public feedbackService: FeedbackService,
     public enumWorker: EnumWorker,
@@ -37,6 +41,10 @@ export class NoteCandidateModalComponent implements OnInit {
       this.editedFeedback = new Feedback();
     }
     this.editedFeedback.candidateId = this.data.sourceCandidate.id;
+    this.formNote = this.fb.group({
+      state: ['', Validators.compose([Validators.required])],
+      text: ['', Validators.compose([Validators.required])]
+    });
   }
 
   ngOnInit() {

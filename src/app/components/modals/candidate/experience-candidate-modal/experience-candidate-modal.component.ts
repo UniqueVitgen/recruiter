@@ -7,6 +7,7 @@ import {NameCandidateModalComponent} from '../name-candidate-modal/name-candidat
 import {EnumWorker} from '../../../../workers/enum/enum.worker';
 import {CandidateExperience} from '../../../../classes/candidate-experience';
 import {ExperienceDialogData} from '../../../../interfaces/dialog/init/experience-dialog-data';
+import {FormBuilder, FormGroup, Validators} from '@angular/forms';
 
 @Component({
   selector: 'app-experience-candidate-modal',
@@ -18,11 +19,13 @@ export class ExperienceCandidateModalComponent implements OnInit {
   public editedCandidate: Candidate;
   public editedExperience: CandidateExperience;
   public experienceResult: BaseDialogResult<CandidateExperience>;
+  public formExperience: FormGroup;
 
   constructor(
     private candidateService: CandidateService,
     public dialogRef: MatDialogRef<NameCandidateModalComponent>,
     public enumWorker: EnumWorker,
+    private fb: FormBuilder,
     @Inject(MAT_DIALOG_DATA) public data: ExperienceDialogData ) {
     // console.log('candidate', this.candidate);
     this.editedCandidate = Object.assign({}, this.data.sourceCandidate);
@@ -31,6 +34,12 @@ export class ExperienceCandidateModalComponent implements OnInit {
     } else {
       this.editedExperience = new CandidateExperience();
     }
+    this.formExperience = this.fb.group({
+      companyName: ['', Validators.compose([Validators.required])],
+      dateFrom: ['', Validators.compose([Validators.required])],
+      dateTo: ['', Validators.compose([Validators.required])],
+      position: ['', Validators.compose([Validators.required])]
+    });
   }
 
   ngOnInit() {

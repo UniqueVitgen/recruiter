@@ -8,12 +8,19 @@
     </span>
   </dialog-title>
   <dialog-body>
-    <mat-form-field class="example-full-width">
-      <input required [(ngModel)]="editedFeedback.feedbackState.name" matInput placeholder="feedback state">
-    </mat-form-field>
-    <mat-form-field class="example-full-width">
-      <textarea required [(ngModel)]="editedFeedback.feedbackText" matInput placeholder="feedback Text"></textarea>
-    </mat-form-field>
+    <form [formGroup]="formNote">
+      <mat-form-field class="example-full-width">
+        <mat-select required formControlName="state" placeholder="Feedback State" [(ngModel)]="editedFeedback.feedbackState.name" matInput>
+          <mat-option *ngFor="let state of testFeedbackStates" [value]="state" >{{state}}</mat-option>
+        </mat-select>
+      </mat-form-field>
+      <mat-form-field class="example-full-width">
+        <textarea formControlName="text" required [(ngModel)]="editedFeedback.feedbackText" matInput placeholder="feedback Text"></textarea>
+      </mat-form-field>
+    </form>
+    <!--<mat-form-field class="example-full-width">-->
+      <!--<input required [(ngModel)]="editedFeedback.feedbackState.name" matInput placeholder="feedback state">-->
+    <!--</mat-form-field>-->
     <!--<mat-form-field>-->
       <!--<input matInput [(ngModel)]="editedExperience.dateFrom" [matDatepicker]="picker" placeholder="From">-->
       <!--<mat-datepicker-toggle name="dateSuffix" matSuffix [for]="picker"></mat-datepicker-toggle>-->
@@ -32,6 +39,6 @@
   </dialog-body>
   <dialog-footer>
     <button mat-button (click)="onNoClick()">No Thanks</button>
-    <button mat-raised-button color="primary" (click)="editCandidate()" cdkFocusInitial>Ok</button>
+    <button mat-raised-button color="primary" [disabled]="formNote.invalid" (click)="editCandidate()" cdkFocusInitial>Ok</button>
   </dialog-footer>
 </app-modal-component>

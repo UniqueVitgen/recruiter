@@ -8,31 +8,33 @@
     </span>
   </dialog-title>
   <dialog-body>
-    <mat-form-field class="example-full-width">
-      <input [(ngModel)]="editedExperience.companyName.name" matInput placeholder="company Name">
-    </mat-form-field>
-    <mat-form-field>
-      <input matInput [(ngModel)]="editedExperience.dateFrom" [matDatepicker]="picker" placeholder="From">
-      <mat-datepicker-toggle name="dateSuffix" matSuffix [for]="picker"></mat-datepicker-toggle>
-      <mat-datepicker  #picker></mat-datepicker>
-    </mat-form-field>
-    &nbsp;
-    &nbsp;
-    <!--<br>-->
-    <mat-form-field >
-      <input matInput  [(ngModel)]="editedExperience.dateTo" [min]="editedExperience.dateFrom" [matDatepicker]="picker1" placeholder="To">
-      <mat-datepicker-toggle name="dateSuffix1" matSuffix [for]="picker1"></mat-datepicker-toggle>
-      <mat-datepicker #picker1></mat-datepicker>
-    </mat-form-field>
-    <mat-form-field class="example-full-width">
-      <input [(ngModel)]="editedExperience.jobPosition" matInput placeholder="Position">
-    </mat-form-field>
+    <form [formGroup]="formExperience">
+      <mat-form-field class="example-full-width">
+        <input required formControlName="companyName" [(ngModel)]="editedExperience.companyName.name" matInput placeholder="company Name">
+      </mat-form-field>
+      <mat-form-field>
+        <input required formControlName="dateFrom" matInput [(ngModel)]="editedExperience.dateFrom" [matDatepicker]="picker" placeholder="From">
+        <mat-datepicker-toggle name="dateSuffix" matSuffix [for]="picker"></mat-datepicker-toggle>
+        <mat-datepicker  #picker></mat-datepicker>
+      </mat-form-field>
+      &nbsp;
+      &nbsp;
+      <!--<br>-->
+      <mat-form-field >
+        <input required matInput formControlName="dateTo"  [(ngModel)]="editedExperience.dateTo" [min]="editedExperience.dateFrom" [matDatepicker]="picker1" placeholder="To">
+        <mat-datepicker-toggle name="dateSuffix1" matSuffix [for]="picker1"></mat-datepicker-toggle>
+        <mat-datepicker #picker1></mat-datepicker>
+      </mat-form-field>
+      <mat-form-field class="example-full-width">
+        <input required formControlName="position" [(ngModel)]="editedExperience.jobPosition" matInput placeholder="Position">
+      </mat-form-field>
+    </form>
     <!--<mat-form-field class="example-full-width">-->
       <!--<textarea matInput placeholder="Comment" [(ngModel)]="editedExperience."></textarea>-->
     <!--</mat-form-field>-->
   </dialog-body>
   <dialog-footer>
     <button mat-button (click)="onNoClick()">No Thanks</button>
-    <button mat-button (click)="editCandidate()" cdkFocusInitial>Ok</button>
+    <button mat-raised-button color="primary" [disabled]="formExperience.invalid" (click)="editCandidate()" cdkFocusInitial>Ok</button>
   </dialog-footer>
 </app-modal-component>

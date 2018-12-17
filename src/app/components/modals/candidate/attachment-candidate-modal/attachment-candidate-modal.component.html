@@ -8,22 +8,25 @@
     </span>
   </dialog-title>
   <dialog-body>
-    <mat-form-field class="example-full-width">
-      <input *ngIf="editedAttachment != null" placeholder="filePath" [(ngModel)]="editedAttachment.filePath" matInput>
-    </mat-form-field>
-    <mat-form-field class="example-full-width">
+    <form [formGroup]="attachmentForm">
+      <!--<input type="file">-->
+      <mat-form-field class="example-full-width">
+        <input formControlName="filePath" *ngIf="editedAttachment != null" placeholder="filePath" [(ngModel)]="editedAttachment.filePath" matInput>
+      </mat-form-field>
+      <mat-form-field class="example-full-width">
 
-      <mat-select placeholder="Attachment type">
-        <mat-option *ngFor="let food of getAttachmentsTypes()" [value]="food">
-          {{food}}
-        </mat-option>
-      </mat-select>
-      <!-- <input *ngIf="editedAttachment != null" placeholder="attachmentType" [(ngModel)]="editedAttachment.attachmentType"
-        matInput> -->
-    </mat-form-field>
+        <mat-select required formControlName="attachmentType" placeholder="Attachment type">
+          <mat-option *ngFor="let food of getAttachmentsTypes()" [value]="food">
+            {{food}}
+          </mat-option>
+        </mat-select>
+        <!-- <input *ngIf="editedAttachment != null" placeholder="attachmentType" [(ngModel)]="editedAttachment.attachmentType"
+          matInput> -->
+      </mat-form-field>
+    </form>
   </dialog-body>
   <dialog-footer>
     <button mat-button (click)="onNoClick()">No Thanks</button>
-    <button mat-button (click)="editCandidate()" cdkFocusInitial>Ok</button>
+    <button mat-raised-button color="primary" [disabled]="attachmentForm.invalid" (click)="editCandidate()" cdkFocusInitial>Ok</button>
   </dialog-footer>
 </app-modal-component>

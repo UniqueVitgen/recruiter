@@ -8,6 +8,7 @@ import { AttachmentDialogData } from 'src/app/interfaces/dialog/init/attachment-
 import { AttachmentType } from 'src/app/enums/attachment-type.enum';
 import { EnumWorker } from 'src/app/workers/enum/enum.worker';
 import {BaseDialogResult} from '../../../../interfaces/dialog/result/base-dialog-result';
+import {FormBuilder, FormGroup, Validators} from '@angular/forms';
 
 @Component({
   selector: 'app-attachment-candidate-modal',
@@ -19,11 +20,13 @@ export class AttachmentCandidateModalComponent implements OnInit {
   public editedCandidate: Candidate;
   public editedAttachment: Attachment;
   public attachmentResult: BaseDialogResult<Attachment>;
+  public attachmentForm: FormGroup;
 
   constructor(
     private candidateService: CandidateService,
     public dialogRef: MatDialogRef<NameCandidateModalComponent>,
     public enumWorker: EnumWorker,
+    private fb: FormBuilder,
     @Inject(MAT_DIALOG_DATA) public data: AttachmentDialogData ) {
     // console.log('candidate', this.candidate);
     this.editedCandidate = Object.assign({}, this.data.sourceCandidate);
@@ -32,6 +35,10 @@ export class AttachmentCandidateModalComponent implements OnInit {
     } else {
       this.editedAttachment = new Attachment();
     }
+    this.attachmentForm = this.fb.group({
+      attachmentType: ['', Validators.compose([Validators.required])],
+      filePath: ['']
+    });
   }
 
   ngOnInit() {
