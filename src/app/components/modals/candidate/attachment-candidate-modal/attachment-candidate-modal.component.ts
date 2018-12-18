@@ -9,6 +9,7 @@ import { AttachmentType } from 'src/app/enums/attachment-type.enum';
 import { EnumWorker } from 'src/app/workers/enum/enum.worker';
 import {BaseDialogResult} from '../../../../interfaces/dialog/result/base-dialog-result';
 import {FormBuilder, FormGroup, Validators} from '@angular/forms';
+import {AttachmentForm} from '../../../../classes/html/attachment-form';
 
 @Component({
   selector: 'app-attachment-candidate-modal',
@@ -18,7 +19,7 @@ import {FormBuilder, FormGroup, Validators} from '@angular/forms';
 export class AttachmentCandidateModalComponent implements OnInit {
 
   public editedCandidate: Candidate;
-  public editedAttachment: Attachment;
+  public editedAttachment: AttachmentForm;
   public attachmentResult: BaseDialogResult<Attachment>;
   public attachmentForm: FormGroup;
 
@@ -31,31 +32,36 @@ export class AttachmentCandidateModalComponent implements OnInit {
     // console.log('candidate', this.candidate);
     this.editedCandidate = Object.assign({}, this.data.sourceCandidate);
     if (this.data.isEdit) {
-      this.editedAttachment = Object.assign(new Attachment(), this.data.sourceAttachment);
+      // this.editedAttachment = Object.assign(new Attachment(), this.data.sourceAttachment);
     } else {
-      this.editedAttachment = new Attachment();
+      this.editedAttachment = new AttachmentForm();
     }
     this.attachmentForm = this.fb.group({
       attachmentType: ['', Validators.compose([Validators.required])],
-      filePath: ['']
+      filePath: ['', Validators.compose([Validators.required])]
     });
   }
 
   ngOnInit() {
   }
 
+  selectFile(event) {
+    console.log(event.target);
+    this.editedAttachment.file = event.target.files[0];
+  }
+
   getAttachmentsTypes() {
     const valuesOfEnum = this.enumWorker.getValuesFromEnum(AttachmentType);
-    console.log(valuesOfEnum);
+    // console.log(valuesOfEnum);
     return valuesOfEnum;
   }
 
   editCandidate() {
+    console.log(this.editedAttachment);
     if (this.editedCandidate.attachments == null) {
       this.editedCandidate.attachments = [];
     }
-    this.editedCandidate.attachments.push(this.editedAttachment);
-    this.candidateService.update(this.editedCandidate).subscribe(resCandidate => {
+    this.candidateService.uploadAttachment(this.editedCandidate, this.editedAttachment).subscribe(resCandidate => {
       this.attachmentResult = {
         isEdit: false,
         resObject: null,
@@ -63,10 +69,6 @@ export class AttachmentCandidateModalComponent implements OnInit {
       };
       this.dialogRef.close(this.attachmentResult);
     });
-    // this.candidateService.update(this.editedCandidate).subscribe(res => {
-    //   console.log('rs', res);
-    //   this.dialogRef.close(res);
-    // });
   }
 
   onNoClick(): void {

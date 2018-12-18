@@ -6,6 +6,7 @@ import {ServiceData} from '../../enums/service-data.enum';
 import {ContactType} from '../../enums/contact-type.enum';
 import {AttachmentType} from '../../enums/attachment-type.enum';
 import {map} from 'rxjs/operators';
+import {AttachmentForm} from '../../classes/html/attachment-form';
 
 @Injectable({
   providedIn: 'root'
@@ -253,5 +254,13 @@ export class CandidateService {
 
   delete(id: number): Observable<any> {
     return this.configService.delete('candidate/' + id);
+  }
+
+  uploadAttachment(candidate: Candidate, attachmentForm: AttachmentForm) {
+    const formData = new FormData();
+    formData.append('file', attachmentForm.file);
+    formData.append('attachmentType', attachmentForm.attachmentType);
+    console.log(attachmentForm.file);
+    return this.configService.uploadFile('candidate/' + candidate.id + '/uploadAttachment', attachmentForm);
   }
 }

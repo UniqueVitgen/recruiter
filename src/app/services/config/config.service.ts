@@ -1,5 +1,5 @@
 import {Injectable} from '@angular/core';
-import {HttpClient, HttpErrorResponse, HttpHeaders, HttpResponse} from '@angular/common/http';
+import {HttpClient, HttpErrorResponse, HttpHeaders, HttpRequest, HttpResponse} from '@angular/common/http';
 // import { Http, Response, RequestOptionsArgs, RequestOptions, Headers, ResponseContentType } from '@angular/http';
 import {observable, Observable, throwError} from 'rxjs';
 // import { throwError } from 'rjxs';
@@ -75,6 +75,13 @@ export class ConfigService {
       // .pipe(
       //   catchError(this.handleError)
       // );
+  }
+
+  uploadFile(url, formData) {
+    const req = new HttpRequest('POST', ConfigService.apiUrl + url, formData);
+
+    return this.http.request(req);
+
   }
 
   private handleError(error: HttpErrorResponse) {

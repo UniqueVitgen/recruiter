@@ -6,7 +6,7 @@ import { Injectable } from '@angular/core';
 export class EnumWorker {
   getKeysFromEnum(E: any) {
     const keys = Object.keys(E); // ["A", "B"]
-    console.log(keys);
+    // console.log(keys);
     return keys;
   }
 
