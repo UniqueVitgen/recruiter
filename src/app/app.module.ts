@@ -60,6 +60,8 @@ import {TextMaskModule} from 'angular2-text-mask';
 import { LimitToDirective } from './directives/limit-to/limit-to.directive';
 import { ExperienceCandidateModalComponent } from './components/modals/candidate/experience-candidate-modal/experience-candidate-modal.component';
 import { NoteCandidateModalComponent } from './components/modals/candidate/note-candidate-modal/note-candidate-modal.component';
+import {MatExpansionModule} from '@angular/material';
+import { JobDashboardExpansionPanelComponent } from './components/expansion-panels/job-dashboard-expansion-panel/job-dashboard-expansion-panel.component';
 
 
 @NgModule({
@@ -108,7 +110,8 @@ import { NoteCandidateModalComponent } from './components/modals/candidate/note-
     PhoneMaskDirective,
     LimitToDirective,
     ExperienceCandidateModalComponent,
-    NoteCandidateModalComponent
+    NoteCandidateModalComponent,
+    JobDashboardExpansionPanelComponent
   ],
   imports: [
     BrowserModule,
@@ -119,7 +122,8 @@ import { NoteCandidateModalComponent } from './components/modals/candidate/note-
     FormsModule,
     PerfectScrollbarModule,
     ReactiveFormsModule,
-    TextMaskModule
+    TextMaskModule,
+    MatExpansionModule
     // ,
     // InternationalPhoneNumberModule
   ],

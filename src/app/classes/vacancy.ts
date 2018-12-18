@@ -6,7 +6,7 @@ import {Candidate} from './candidate';
 export class Vacancy {
   id?: string | number
   ;
-  position: string;
+  position: string; // vacancy's name
   salaryInDollarsFrom?: number;
   salaryInDollarsTo?: number;
   vacancyState: VacancyState;
@@ -15,4 +15,6 @@ export class Vacancy {
   skills: Skill[];
   requirements: Requirement[] = [];
   candidates?: Candidate[] = [];
+
+
 }
