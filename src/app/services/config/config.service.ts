@@ -78,7 +78,10 @@ export class ConfigService {
   }
 
   uploadFile(url, formData) {
-    const req = new HttpRequest('POST', ConfigService.apiUrl + url, formData);
+    const req = new HttpRequest('POST', ConfigService.apiUrl + url, formData, {
+      reportProgress: true,
+      responseType: 'text'
+    });
 
     return this.http.request(req);
 

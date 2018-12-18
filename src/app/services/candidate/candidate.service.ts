@@ -260,7 +260,8 @@ export class CandidateService {
     const formData = new FormData();
     formData.append('file', attachmentForm.file);
     formData.append('attachmentType', attachmentForm.attachmentType);
-    console.log(attachmentForm.file);
-    return this.configService.uploadFile('candidate/' + candidate.id + '/uploadAttachment', attachmentForm);
+    console.log('attachmentForm.attachmentType', attachmentForm.attachmentType);
+    console.log('formData', formData);
+    return this.configService.uploadFile('candidate/' + candidate.id + '/uploadAttachment', formData);
   }
 }

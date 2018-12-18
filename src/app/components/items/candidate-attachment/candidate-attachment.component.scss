@@ -1,7 +1,13 @@
 .attachment-item {
   //color: DodgerBlue;
-  width: 100px;
+  //width: 100px;
   .file-icon {
     font-size: 100px;
   }
 }
+
+.center-vertical-text-container {
+  display: flex;
+  align-items: center;
+}
+

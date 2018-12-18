@@ -1,6 +1,12 @@
 <div class="attachment-item">
-  <div class="text-center">{{attachment?.comment}}</div>
-  <mat-icon class="file-icon">assignment</mat-icon>
+  <div class="row">
+    <div href="{{ attachment?.filePath }}" target="_blank"  class="col-2">
+      <mat-icon class="file-icon">assignment</mat-icon>
+    </div>
+    <div class="col-10 center-vertical-text-container">
+      <a href="{{ 'file:///' + attachment?.filePath }}" target="_blank">{{attachment?.filePath}}</a>
+    </div>
+  </div>
   <!--<div class="text-center">-->
     <!--<mat-icon (click)="deleteAttachment()">delete_sweep</mat-icon>-->
   <!--</div>-->

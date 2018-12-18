@@ -2,7 +2,8 @@
   <mat-icon class="delete" matTooltip="Delete" matTooltip="Delete" (click)="delete()">close</mat-icon>
   <mat-card-title><mat-icon class="myIcon">insert_drive_file</mat-icon> Cv</mat-card-title>
   <mat-card-content>
-    <app-candidate-attachment [attachment]="attachment"></app-candidate-attachment>
+    <img [src]="'file:///' + editedAttachment.filePath"/>
+    <!--<app-candidate-attachment></app-candidate-attachment>-->
     <mat-form-field class="example-full-width">
       <textarea (blur)="onFocusoutAnyInput()" matInput placeholder="Comment" [(ngModel)]="editedAttachment.comment"></textarea>
     </mat-form-field>

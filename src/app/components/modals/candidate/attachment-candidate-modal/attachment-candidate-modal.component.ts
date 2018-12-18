@@ -46,8 +46,8 @@ export class AttachmentCandidateModalComponent implements OnInit {
   }
 
   selectFile(event) {
-    console.log(event.target);
-    this.editedAttachment.file = event.target.files[0];
+    console.log(event.target.files[0]);
+    this.editedAttachment.file = <File>event.target.files[0];
   }
 
   getAttachmentsTypes() {

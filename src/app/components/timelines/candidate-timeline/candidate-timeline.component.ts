@@ -46,6 +46,12 @@ export class CandidateTimelineComponent implements OnInit {
   checkIfNoteISAttachment(eventNote: EventNote) {
     return this.eventNoteWorker.isAttachement(eventNote);
   }
+  checkIfNoteISCV(eventNote: EventNote) {
+    return this.eventNoteWorker.isCV(eventNote);
+  }
+  checkIfNoteISImg(eventNote: EventNote) {
+    return this.eventNoteWorker.isImg(eventNote);
+  }
   changeTimeLine(canidate: Candidate) {
     this.outputAddTimelineItem.emit(this.candidate);
   }

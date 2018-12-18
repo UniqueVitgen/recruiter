@@ -7,7 +7,8 @@
   <!--<perfect-scrollbar style="max-height: 600px;">-->
     <div *ngFor="let eventNote of timelineNotes; let i = index" class="example-item">
       <app-interview-candidate-timeline-item *ngIf="checkIfNoteIsInterview(eventNote)" [candidate]="candidate" [interview]="eventNote" (changeCandidate)="changeCandidate($event, i)" (deleteEvent)="deleteEvent(i)"></app-interview-candidate-timeline-item>
-      <app-attachment-candidate-timeline-item *ngIf="checkIfNoteISAttachment(eventNote)" [attachment]="eventNote" [candidate]="candidate" (changeCandidate)="changeCandidate($event, i)" (deleteEvent)="deleteEvent(i)"></app-attachment-candidate-timeline-item>
+      <app-attachment-candidate-timeline-item *ngIf="checkIfNoteISCV(eventNote)" [attachment]="eventNote" [candidate]="candidate" (changeCandidate)="changeCandidate($event, i)" (deleteEvent)="deleteEvent(i)"></app-attachment-candidate-timeline-item>
+      <app-image-candiate-timeline-item *ngIf="checkIfNoteISImg(eventNote)" [attachment]="eventNote" [candidate]="candidate" (changeCandidate)="changeCandidate($event, i)" (deleteEvent)="deleteEvent(i)"></app-image-candiate-timeline-item>
       <app-experience-candidate-timeline-item *ngIf="checkIfNoteIsExperience(eventNote)" [experience]="eventNote" [candidate]="candidate" (changeCandidate)="changeCandidate($event, i)" (deleteEvent)="deleteEvent(i)"></app-experience-candidate-timeline-item>
       <app-note-candidate-timeline-item *ngIf="checkIfNoteISNote(eventNote)" [note]="eventNote"  [candidate]="candidate" (changeCandidate)="changeCandidate($event, i)" (deleteEvent)="deleteEvent(i)"></app-note-candidate-timeline-item>
       <br>

@@ -1,10 +1,10 @@
-import { Injectable } from '@angular/core';
+import {Injectable} from '@angular/core';
 import {EventNote} from '../../classes/event-note';
 import {Interview} from '../../classes/interview';
 import {CandidateExperience} from '../../classes/candidate-experience';
-import {Notes} from '../../classes/notes';
 import {Attachment} from '../../classes/attachment';
 import {Feedback} from '../../classes/feedback';
+import {AttachmentType} from '../../enums/attachment-type.enum';
 
 @Injectable({
   providedIn: 'root'
@@ -33,6 +33,18 @@ export class EventNoteWorker {
     const attachment = <Attachment> eventNote;
     if (attachment) {
       return attachment.filePath != null && attachment.attachmentType != null;
+    }
+  }
+  public isCV(eventNote: EventNote) {
+    const attachment = <Attachment> eventNote;
+    if (attachment) {
+      return attachment.filePath != null && attachment.attachmentType != null && attachment.attachmentType === AttachmentType.CV;
+    }
+  }
+  public isImg(eventNote: EventNote) {
+    const attachment = <Attachment> eventNote;
+    if (attachment) {
+      return attachment.filePath != null && attachment.attachmentType != null && attachment.attachmentType === AttachmentType.PHOTO;
     }
   }
 }

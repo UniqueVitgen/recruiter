@@ -62,6 +62,7 @@ import { ExperienceCandidateModalComponent } from './components/modals/candidate
 import { NoteCandidateModalComponent } from './components/modals/candidate/note-candidate-modal/note-candidate-modal.component';
 import {MatExpansionModule} from '@angular/material';
 import { JobDashboardExpansionPanelComponent } from './components/expansion-panels/job-dashboard-expansion-panel/job-dashboard-expansion-panel.component';
+import { ImageCandiateTimelineItemComponent } from './components/items/timeline/image-candiate-timeline-item/image-candiate-timeline-item.component';
 
 
 @NgModule({
@@ -111,7 +112,8 @@ import { JobDashboardExpansionPanelComponent } from './components/expansion-pane
     LimitToDirective,
     ExperienceCandidateModalComponent,
     NoteCandidateModalComponent,
-    JobDashboardExpansionPanelComponent
+    JobDashboardExpansionPanelComponent,
+    ImageCandiateTimelineItemComponent
   ],
   imports: [
     BrowserModule,

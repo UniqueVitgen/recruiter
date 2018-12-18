@@ -1,16 +1,15 @@
 import {Component, EventEmitter, Input, OnInit, Output} from '@angular/core';
 import {AttachmentTimeline} from '../../../../classes/timeline/attachment-timeline';
-import {Attachment} from '../../../../classes/attachment';
 
 @Component({
-  selector: 'app-attachment-candidate-timeline-item',
-  templateUrl: './attachment-candidate-timeline-item.component.html',
-  styleUrls: ['./attachment-candidate-timeline-item.component.scss']
+  selector: 'app-image-candiate-timeline-item',
+  templateUrl: './image-candiate-timeline-item.component.html',
+  styleUrls: ['./image-candiate-timeline-item.component.scss']
 })
-export class AttachmentCandidateTimelineItemComponent implements OnInit {
-  @Input() attachment: Attachment;
+export class ImageCandiateTimelineItemComponent implements OnInit {
+  @Input() attachment: AttachmentTimeline;
 
-  editedAttachment: Attachment;
+  editedAttachment: AttachmentTimeline;
   @Output() changeCandidate: EventEmitter<any> = new EventEmitter();
   @Output() deleteEvent: EventEmitter<any> = new EventEmitter();
 
@@ -29,4 +28,5 @@ export class AttachmentCandidateTimelineItemComponent implements OnInit {
   delete() {
     this.deleteEvent.emit(this.editedAttachment);
   }
+
 }
