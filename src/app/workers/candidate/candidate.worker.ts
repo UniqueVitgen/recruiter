@@ -2,6 +2,8 @@ import {Injectable} from '@angular/core';
 import {Candidate} from '../../classes/candidate';
 import {ContactType} from '../../enums/contact-type.enum';
 import {ContactDetails} from '../../classes/contact-details';
+import {AttachmentType} from '../../enums/attachment-type.enum';
+import {Attachment} from '../../classes/attachment';
 
 @Injectable({
   providedIn: 'root'
@@ -80,6 +82,18 @@ export class CandidateWorker {
         return value.contactType === ContactType.SKYPE;
       });
       return targetContact;
+    }
+  }
+  findPhoto(candidate: Candidate) {
+    if (candidate) {
+      return candidate.attachments.reverse().find((attachment) => {
+        return attachment.attachmentType === AttachmentType.PHOTO;
+      });
+    }
+  }
+  generatePhotoUrl(photo: Attachment) {
+    if (photo) {
+      return 'http://localhost:8081/attachment/' + photo.id;
     }
   }
 }

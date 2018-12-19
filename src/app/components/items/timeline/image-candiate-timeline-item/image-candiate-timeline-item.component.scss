@@ -1,0 +1,16 @@
+.delete {
+  &:hover{
+    cursor: pointer;
+  }
+  position: absolute;
+  top: 0;
+  right: 0;
+}
+
+.image-item-container {
+  //text-align: center;
+  .image-item {
+    max-width: 100%;
+    max-height: 600px;
+  }
+}

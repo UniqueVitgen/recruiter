@@ -15,6 +15,8 @@ import {RegexpConst} from '../../../../const/regexp.const';
 import {MaskConst} from '../../../../const/mask.const';
 import {CandidateState} from '../../../../enums/candidate-state.enum';
 import {EnumWorker} from '../../../../workers/enum/enum.worker';
+import {Attachment} from '../../../../classes/attachment';
+import {AttachmentType} from '../../../../enums/attachment-type.enum';
 
 @Component({
   selector: 'app-short-info-user',
@@ -28,12 +30,13 @@ export class ShortInfoUserComponent implements OnInit, OnChanges {
   tests: CandidateContactInput[] ;
   MaskConst = MaskConst;
   setStates: string[];
+  photo: Attachment;
 
   constructor(public dialog: MatDialog,
               private candidateSerivce: CandidateService,
+              public candidateWorker: CandidateWorker,
               private stringWorker: StringWorker,
               private arrayWorker: ArrayWorker,
-              public candidateWorker: CandidateWorker,
               public  enumWorker: EnumWorker) { }
 
   ngOnInit() {
@@ -42,6 +45,14 @@ export class ShortInfoUserComponent implements OnInit, OnChanges {
 
   ngOnChanges(changes: SimpleChanges): void {
     this.initContacts();
+    this.photo = this.candidateWorker.findPhoto(this.candidate);
+  }
+
+  findPhoto() {
+    console.log('attachments', this.candidate.attachments);
+    this.photo = this.candidate.attachments.find((attachment) => {
+      return attachment.attachmentType === AttachmentType.PHOTO;
+    });
   }
   initContacts() {
     // this.tests = [

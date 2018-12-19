@@ -7,6 +7,7 @@ import {CandidateDialogData} from '../../../interfaces/dialog/init/candidate-dia
 import {CandidateModalComponent} from '../../modals/candidate/candidate-modal/candidate-modal.component';
 import {CandidateDialogResult} from '../../../interfaces/dialog/result/candidate-dialog-result';
 import {UserWorker} from '../../../workers/user/user.worker';
+import {Attachment} from '../../../classes/attachment';
 
 @Component({
   selector: 'app-candidate-dashboard',

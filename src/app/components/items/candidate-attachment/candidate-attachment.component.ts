@@ -7,6 +7,8 @@ import {
 } from '@angular/core';
 import { Attachment } from 'src/app/classes/attachment';
 import {AttachmentTimeline} from '../../../classes/timeline/attachment-timeline';
+import {FileWorker} from '../../../workers/file/file.worker';
+import {CandidateWorker} from '../../../workers/candidate/candidate.worker';
 
 @Component({
   selector: 'app-candidate-attachment',
@@ -14,10 +16,10 @@ import {AttachmentTimeline} from '../../../classes/timeline/attachment-timeline'
   styleUrls: ['./candidate-attachment.component.scss']
 })
 export class CandidateAttachmentComponent implements OnInit {
-  @Input() attachment: AttachmentTimeline;
-  @Output() onDelete: EventEmitter<AttachmentTimeline> = new EventEmitter();
+  @Input() attachment: Attachment;
+  @Output() onDelete: EventEmitter<Attachment> = new EventEmitter();
 
-  constructor() { }
+  constructor(private fileWorker: FileWorker, public candidateWorker: CandidateWorker) { }
 
   ngOnInit() {
   }

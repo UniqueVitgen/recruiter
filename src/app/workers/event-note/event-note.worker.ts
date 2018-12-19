@@ -38,7 +38,8 @@ export class EventNoteWorker {
   public isCV(eventNote: EventNote) {
     const attachment = <Attachment> eventNote;
     if (attachment) {
-      return attachment.filePath != null && attachment.attachmentType != null && attachment.attachmentType === AttachmentType.CV;
+      return attachment.filePath != null && attachment.attachmentType != null && (attachment.attachmentType === AttachmentType.CV || attachment.attachmentType === AttachmentType.COVER_LETTER)
+        ;
     }
   }
   public isImg(eventNote: EventNote) {

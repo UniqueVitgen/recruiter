@@ -1,6 +1,7 @@
 import {Component, EventEmitter, Input, OnInit, Output} from '@angular/core';
 import {AttachmentTimeline} from '../../../../classes/timeline/attachment-timeline';
 import {Attachment} from '../../../../classes/attachment';
+import {FileWorker} from '../../../../workers/file/file.worker';
 
 @Component({
   selector: 'app-attachment-candidate-timeline-item',
@@ -14,7 +15,7 @@ export class AttachmentCandidateTimelineItemComponent implements OnInit {
   @Output() changeCandidate: EventEmitter<any> = new EventEmitter();
   @Output() deleteEvent: EventEmitter<any> = new EventEmitter();
 
-  constructor() { }
+  constructor(public fileWorker: FileWorker) { }
 
   ngOnInit() {
     this.editedAttachment = Object.assign({}, this.attachment);

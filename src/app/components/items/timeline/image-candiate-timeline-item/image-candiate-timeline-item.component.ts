@@ -1,5 +1,7 @@
 import {Component, EventEmitter, Input, OnInit, Output} from '@angular/core';
 import {AttachmentTimeline} from '../../../../classes/timeline/attachment-timeline';
+import {Attachment} from '../../../../classes/attachment';
+import {CandidateWorker} from '../../../../workers/candidate/candidate.worker';
 
 @Component({
   selector: 'app-image-candiate-timeline-item',
@@ -7,13 +9,13 @@ import {AttachmentTimeline} from '../../../../classes/timeline/attachment-timeli
   styleUrls: ['./image-candiate-timeline-item.component.scss']
 })
 export class ImageCandiateTimelineItemComponent implements OnInit {
-  @Input() attachment: AttachmentTimeline;
+  @Input() attachment: Attachment;
 
-  editedAttachment: AttachmentTimeline;
+  editedAttachment: Attachment;
   @Output() changeCandidate: EventEmitter<any> = new EventEmitter();
   @Output() deleteEvent: EventEmitter<any> = new EventEmitter();
 
-  constructor() { }
+  constructor(public candidateWorker: CandidateWorker) { }
 
   ngOnInit() {
     this.editedAttachment = Object.assign({}, this.attachment);
