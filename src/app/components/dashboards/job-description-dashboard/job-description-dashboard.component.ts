@@ -5,6 +5,7 @@ import {MatDialog} from '@angular/material';
 import {JobDescriptionModalComponent} from '../../modals/job-description/job-description-modal/job-description-modal.component';
 import {JobDescriptionDialogData} from '../../../interfaces/dialog/init/job-description-dialog-data';
 import {BaseDialogResult} from '../../../interfaces/dialog/result/base-dialog-result';
+import {DeleteVacancyDialogComponent} from '../../modals/delete-vacancy-dialog/delete-vacancy-dialog.component';
 
 @Component({
   selector: 'app-job-description-dashboard',
@@ -65,6 +66,19 @@ export class JobDescriptionDashboardComponent implements OnInit, OnChanges {
       }
     });
   }
+
+  openDeleteVacancyDialog(vacancyID: number): void {
+    console.log(vacancyID);
+    const dialogRef = this.dialog.open(DeleteVacancyDialogComponent, {
+      width: '400px',
+      disableClose: true
+    });
+    dialogRef.afterClosed().subscribe(res => {
+      if (res) this.deleteVacancy(vacancyID);
+    });
+
+  }
+
 
   deleteVacancy(index: number) {
     this.outputDeleteVacancy.emit(index);
