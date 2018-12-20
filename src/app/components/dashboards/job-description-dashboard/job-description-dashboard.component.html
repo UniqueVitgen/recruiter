@@ -88,7 +88,7 @@
       </mat-expansion-panel>
 
       <button class="vacancyEditButton" mat-raised-button (click)="goToJobDescriptionPage(vacancy)">Info</button>
-      <button class="vacancyDeleteButton" mat-raised-button (click)="deleteVacancy(vacancyID)">X</button>
+      <button class="vacancyDeleteButton" mat-raised-button (click)="openDeleteVacancyDialog(vacancyID)">X</button>
     </div>
     <div class="col-12 col-md-12 center-item">
       <button (click)="openJobDescriptionDialog()" class="half-width" mat-raised-button color="primary">Add New</button>

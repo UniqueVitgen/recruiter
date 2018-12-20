@@ -1,0 +1,17 @@
+.div-buttons{
+  margin-top: 20px;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-around;
+}
+.header-text {
+  font-size: 30px;
+  text-align: center;
+  font-weight: bold;
+}
+.buttons{
+  background-color: #35ccff;
+}
+.buttons:hover{
+  background-color: #007bff;
+}
