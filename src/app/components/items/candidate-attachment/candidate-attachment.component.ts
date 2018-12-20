@@ -19,7 +19,7 @@ export class CandidateAttachmentComponent implements OnInit {
   @Input() attachment: Attachment;
   @Output() onDelete: EventEmitter<Attachment> = new EventEmitter();
 
-  constructor(private fileWorker: FileWorker, public candidateWorker: CandidateWorker) { }
+  constructor(public fileWorker: FileWorker, public candidateWorker: CandidateWorker) { }
 
   ngOnInit() {
   }

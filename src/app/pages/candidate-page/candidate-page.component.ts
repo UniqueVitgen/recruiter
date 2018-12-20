@@ -44,6 +44,10 @@ export class CandidatePageComponent implements OnInit {
       this.candidate.attachments = this.candidate.attachments.filter((attachment => {
         return object.id !== attachment.id;
       }));
+    } else if (this.eventNoteWorker.isImg(object)) {
+      this.candidate.attachments = this.candidate.attachments.filter((attachment => {
+        return object.id !== attachment.id;
+      }));
     } else if (this.eventNoteWorker.isNote(object)) {
       this.feedbackService.delete(<any>object).subscribe(res => {
         this.getCandidate();

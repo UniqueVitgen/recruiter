@@ -1,13 +1,25 @@
 import {Injectable} from '@angular/core';
+import {Attachment} from '../../classes/attachment';
 
 
 @Injectable({
   providedIn: 'root'
 })
 export class FileWorker {
-  downloadFile(data: Response) {
-    const blob = new Blob([data], { type: 'text/csv' });
-    const url = window.URL.createObjectURL(blob);
-    window.open(url);
+  downloadFile(attachment: Attachment) {
+    const data = new Blob([attachment.data]);
+    const file = window.URL.createObjectURL(data);
+    const link = document.createElement('a');
+    link.href = file;
+
+    link.download = this.getFilename(attachment.filePath) ;
+    document.body.appendChild(link);
+    link.click();
+    link.parentNode.removeChild(link);
+  }
+  getFilename(url: string) {
+    const filename = url.substring(url.lastIndexOf('/') + 1);
+    return filename;
+    // alert(filename);
   }
 }

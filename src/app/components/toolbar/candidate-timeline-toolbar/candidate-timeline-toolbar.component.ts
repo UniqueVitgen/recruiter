@@ -85,6 +85,7 @@ export class CandidateTimelineToolbarComponent implements OnChanges {
       }
     );
     dialogRef.afterClosed().subscribe((res: BaseDialogResult<Candidate>) => {
+      console.log('res', res);
       if (res) {
         console.log('res - ', res);
         this.outputChangeTimeline.emit(res.resObject);

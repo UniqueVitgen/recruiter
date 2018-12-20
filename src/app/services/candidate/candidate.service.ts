@@ -256,7 +256,7 @@ export class CandidateService {
     return this.configService.delete('candidate/' + id);
   }
 
-  uploadAttachment(candidate: Candidate, attachmentForm: AttachmentForm) {
+  uploadAttachment(candidate: Candidate, attachmentForm: AttachmentForm): Observable<any> {
     const formData = new FormData();
     formData.append('file', attachmentForm.file);
     formData.append('attachmentType', attachmentForm.attachmentType);

@@ -46,6 +46,7 @@ export class ShortInfoUserComponent implements OnInit, OnChanges {
   ngOnChanges(changes: SimpleChanges): void {
     this.initContacts();
     this.photo = this.candidateWorker.findPhoto(this.candidate);
+    console.log('photo', this.photo);
   }
 
   findPhoto() {

@@ -64,7 +64,7 @@ export class AttachmentCandidateModalComponent implements OnInit {
     this.candidateService.uploadAttachment(this.editedCandidate, this.editedAttachment).subscribe(resCandidate => {
       this.attachmentResult = {
         isEdit: false,
-        resObject: null,
+        resObject: resCandidate,
         success: true
       };
       this.dialogRef.close(this.attachmentResult);
