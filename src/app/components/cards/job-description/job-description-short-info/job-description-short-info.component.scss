@@ -25,3 +25,45 @@
   border-top:1px solid #FFF;
   border-bottom:1px solid #FFF;
 }
+
+.vacancyInfo{
+  display: flex;
+  flex-direction: column;
+
+}
+.vacancyName{
+  font-size: 30px;
+  font-weight: bold;
+}
+
+.vacancyHeader{
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+}
+.vacancyTitles{
+  font-size: 20px;
+  font-weight: bold;
+}
+.vacancyDescriptionContent{
+
+}
+.vacancyStatus{
+  font-size: 15px;
+}
+
+.vacancyRequirements{
+  display: flex;
+  flex-direction: column;
+}
+.vacancyRequirement{
+  margin-left: 15%;
+}
+.requirementsColumns{
+  display: flex;
+  flex-direction: row;
+ justify-content: center;
+}
+.requirementsFirstColumn{
+  margin-left: 10%;
+}
