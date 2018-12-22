@@ -11,12 +11,12 @@ import {InterviewService} from '../../services/interview/interview.service';
 export class CalendarPageComponent implements OnInit {
   constructor(private interviewService: InterviewService) {}
   ngOnInit(): void {
-    this.getInterviews();
+    // this.getInterviews();
   }
 
   getInterviews() {
-    this.interviewService.getAll().subscribe(res => {
-      console.log(res);
-    });
+    // this.interviewService.getAll().subscribe(res => {
+    //   console.log(res);
+    // });
   }
 }

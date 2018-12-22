@@ -4,6 +4,7 @@ import {forwardRef, NgModule, NO_ERRORS_SCHEMA} from '@angular/core';
 import { HttpClientModule } from '@angular/common/http';
 import { AppRoutingModule } from './app-routing.module';
 import { MaterialDesignModule } from './modules/material-design/material-design.module';
+import {ScheduleModule, AgendaService, DayService, WeekService, WorkWeekService, MonthService } from '@syncfusion/ej2-angular-schedule';
 // Import your AvatarModule
 import { AvatarModule } from 'ngx-avatar';
 import {FormsModule, NG_VALUE_ACCESSOR, NgControl, ReactiveFormsModule} from '@angular/forms';
@@ -64,6 +65,8 @@ import {MatExpansionModule} from '@angular/material';
 import { JobDashboardExpansionPanelComponent } from './components/expansion-panels/job-dashboard-expansion-panel/job-dashboard-expansion-panel.component';
 import { ImageCandiateTimelineItemComponent } from './components/items/timeline/image-candiate-timeline-item/image-candiate-timeline-item.component';
 import { DeleteVacancyDialogComponent } from './components/modals/delete-vacancy-dialog/delete-vacancy-dialog.component';
+import {CalendarModule} from './modules/calendar/calendar.module';
+import {DevExpressModule} from './modules/dev-express/dev-express.module';
 
 
 @NgModule({
@@ -127,7 +130,9 @@ import { DeleteVacancyDialogComponent } from './components/modals/delete-vacancy
     PerfectScrollbarModule,
     ReactiveFormsModule,
     TextMaskModule,
-    MatExpansionModule
+    MatExpansionModule,
+    CalendarModule,
+    DevExpressModule
     // ,
     // InternationalPhoneNumberModule
   ],

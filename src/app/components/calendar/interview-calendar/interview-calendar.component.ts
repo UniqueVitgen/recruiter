@@ -126,12 +126,12 @@ export class InterviewCalendarComponent implements OnInit {
           this.mockInterview.vacancy = this.mockVacancy;
           this.mockInterview.candidate = this.mockCandidate;
           console.log(this.mockInterview);
-          this.currentMonth();
+          // this.currentMonth();
         });
       });
     })
     this.selected  = this.MONTH;
-    this.currentMonth();
+    // this.currentMonth();
   }
   openInterviewDialog(day: String, interview: InterviewExtended, date: Moment): void {
     const checkDate: Moment = moment().add(-1, 'day');
