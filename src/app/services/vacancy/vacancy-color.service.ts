@@ -22,27 +22,27 @@ export class VacancyColorService {
       }*/
   public isVacancyOpened(vacancyStatus: string): boolean {
 
-    if (vacancyStatus === 'OPEN') return true;
+    if (vacancyStatus === 'OPEN') { return true; }
     return false;
 
   }
   public isVacancySuspended(vacancyStatus: string): boolean {
 
-    if (vacancyStatus === 'SUSPENDED') return true;
+    if (vacancyStatus === 'SUSPENDED') { return true; }
     return false;
 
   }
 
   public isVacancyCanceled(vacancyStatus: string): boolean {
 
-    if (vacancyStatus === 'CANCELED') return true;
+    if (vacancyStatus === 'CANCELED') { return true; }
     return false;
 
   }
 
   public isVacancyClosed(vacancyStatus: string): boolean {
 
-    if (vacancyStatus === 'CLOSE') return true;
+    if (vacancyStatus === 'CLOSE') { return true; }
     return false;
 
   }
