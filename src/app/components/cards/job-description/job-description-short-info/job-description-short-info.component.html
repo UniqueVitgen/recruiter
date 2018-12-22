@@ -1,10 +1,50 @@
 <div *ngIf="vacancy">
-  <div *ngIf="!isEdited">
+
+  <div *ngIf="!isEdited" name="vacancyInfo" class="vacancyInfo">
+    <div name="vacancyHeader" class="vacancyHeader">
+      <label class="vacancyName"> {{vacancy?.position}}
+        <span class="vacancyStatus">{{vacancy?.vacancyState}}</span>
+      </label>
+      <button *ngIf="buttonEdit" class="float-right" mat-icon-button [matMenuTriggerFor]="menu" color="primary">
+        <mat-icon>more_horiz</mat-icon>
+      </button>
+    </div>
+    <label name="vacancyDescriptionTitle" class="vacancyTitles">Description: </label>
+    <label name="vacancyDescriptionContent" class="vacancyDescriptionContent">Text of description will be here</label>
+
+
+    <div class="row font-weight-bold" >
+      <div class="col-6 ">
+        <label name="vacancyRequirementsTitle" class="vacancyTitles">Requirements: </label>
+      </div>
+      <div class="col-2 requirementsColumns">
+        <label name="vacancyRequiredColumnTitle" class="vacancyTitles">Required: </label>
+      </div>
+      <div class="col-2 requirementsColumns">
+        <label name="vacancyPublicColumnTitle" class="vacancyTitles">Public: </label>
+      </div>
+    </div>
+    <div  class="row" *ngFor="let requirement of vacancy.requirements">
+
+      <div class="col-6 requirementsColumns">
+        {{ requirement.name }}
+      </div>
+      <div class="col-2 requirementsColumns">
+        <mat-checkbox  [checked]="requirement.required" disabled></mat-checkbox>
+      </div>
+      <div class="col-2 requirementsColumns">
+        <mat-checkbox  [checked]="requirement.public" disabled></mat-checkbox>
+      </div>
+    </div>
+  </div>
+
+  <!--<div *ngIf="!isEdited">
     <span class="big-text" [style.color]="'red'">{{vacancy?.position}}</span>
     <button *ngIf="buttonEdit" class="float-right" mat-icon-button [matMenuTriggerFor]="menu" color="primary">
       <mat-icon>more_horiz</mat-icon>
     </button>
-    <button *ngIf="buttonDelete" mat-icon-button  class="float-right" (click)="deleteVacancy(); $event.stopPropagation()">
+    <button *ngIf="buttonDelete" mat-icon-button class="float-right"
+            (click)="deleteVacancy(); $event.stopPropagation()">
       <mat-icon>close</mat-icon>
     </button>
     <div *ngIf="vacancy.vacancyState">
@@ -16,9 +56,11 @@
       <input [(ngModel)]="vacancy.position" matInput placeholder="Description:" disabled>
     </mat-form-field>
 
-    <!--  <button mat-raised-button color="primary" class="float-right" [matMenuTriggerFor]="menu">Primary
-      </button>-->
-  </div>
+    &lt;!&ndash;  <button mat-raised-button color="primary" class="float-right" [matMenuTriggerFor]="menu">Primary
+      </button>&ndash;&gt;
+  </div>-->
+
+
   <!--  <ng-container *ngIf="isEdited || true">
           <mat-form-field *ngIf="vacancy" class="example-full-width">
             <input [(ngModel)]="vacancy.position" matInput placeholder="Position">
@@ -27,22 +69,22 @@
             <textarea matInput placeholder="Comment"></textarea>
           </mat-form-field>
     </ng-container>-->
-
-  <mat-divider></mat-divider>
-  <br>
-  <div class="description-vacancy">
-    <div *ngIf="vacancy.experienceYearsRequire || true">
-      <span class="title-text">experience: </span>
-      <span>{{vacancy.experienceYearsRequire}} years</span>
-    </div>
-    <div *ngIf="vacancy.salaryInDollarsTo || vacancy.salaryInDollarsFrom || true">
-      <span class="title-text">salary: </span>
-      <span *ngIf="vacancy.salaryInDollarsFrom">{{vacancy.salaryInDollarsFrom}}</span>
-      <span *ngIf="vacancy.salaryInDollarsFrom && vacancy.salaryInDollarsTo"> - </span>
-      <span *ngIf="vacancy.salaryInDollarsTo">{{vacancy.salaryInDollarsTo}}</span>
-      <span> $</span>
-    </div>
-  </div>
+  <!--
+    <mat-divider></mat-divider>
+    <br>
+    <div class="description-vacancy">
+      <div *ngIf="vacancy.experienceYearsRequire || true">
+        <span class="title-text">experience: </span>
+        <span>{{vacancy.experienceYearsRequire}} years</span>
+      </div>
+      <div *ngIf="vacancy.salaryInDollarsTo || vacancy.salaryInDollarsFrom || true">
+        <span class="title-text">salary: </span>
+        <span *ngIf="vacancy.salaryInDollarsFrom">{{vacancy.salaryInDollarsFrom}}</span>
+        <span *ngIf="vacancy.salaryInDollarsFrom && vacancy.salaryInDollarsTo"> - </span>
+        <span *ngIf="vacancy.salaryInDollarsTo">{{vacancy.salaryInDollarsTo}}</span>
+        <span> $</span>
+      </div>
+    </div>-->
 </div>
 <mat-menu #menu="matMenu">
   <button (click)="clickEdit()" mat-menu-item>Edit</button>
