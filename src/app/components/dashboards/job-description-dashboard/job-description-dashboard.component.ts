@@ -6,6 +6,7 @@ import {JobDescriptionModalComponent} from '../../modals/job-description/job-des
 import {JobDescriptionDialogData} from '../../../interfaces/dialog/init/job-description-dialog-data';
 import {BaseDialogResult} from '../../../interfaces/dialog/result/base-dialog-result';
 import {DeleteVacancyDialogComponent} from '../../modals/delete-vacancy-dialog/delete-vacancy-dialog.component';
+import {VacancyColorService} from '../../../services/vacancy/vacancy-color.service';
 
 @Component({
   selector: 'app-job-description-dashboard',
@@ -21,7 +22,8 @@ export class JobDescriptionDashboardComponent implements OnInit, OnChanges {
 
   constructor(
     public dialog: MatDialog,
-    private router: Router) {
+    private router: Router,
+    private vacancyColorService: VacancyColorService) {
   }
 
   ngOnInit() {
