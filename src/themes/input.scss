@@ -25,3 +25,17 @@ textarea {
     resize: none !important;
   }
 }
+
+.mat-form-field {
+  .custom-timepicker-toogle {
+    button {
+      position: absolute;
+      right: 0;
+      width: 20px;
+      top: 0;
+      height: 20px;
+      padding: 0;
+      color: rgba(0, 0, 0, 0.54);
+    }
+  }
+}

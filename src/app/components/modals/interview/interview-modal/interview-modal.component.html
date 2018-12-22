@@ -1,19 +1,39 @@
+<!--<mdb-card>-->
 <app-modal-component>
   <dialog-title>
-    <div class="center-text"> Day
-      <mat-icon (click)="onNoClick()" class="float-right action-icon">close</mat-icon>
+    <!--<mdb-card-header class="info-color white-text text-center py-4">-->
+      <!--<h5>-->
+        <!--<strong>Interview</strong>-->
+      <!--</h5>-->
+    <!--</mdb-card-header>-->
+    <div class="center-text"> Interview
+    <mat-icon (click)="onNoClick()" class="float-right action-icon">close</mat-icon>
     </div>
   </dialog-title>
   <dialog-body>
     <form [formGroup]="interviewForm">
-      <mat-form-field>
+      <mat-form-field class="example-full-width">
         <input matInput formControlName="from" [(ngModel)]="editedInterview.planDate" [matDatepicker]="picker" placeholder="From">
         <mat-datepicker-toggle name="dateSuffix" matSuffix [for]="picker"></mat-datepicker-toggle>
         <mat-datepicker  #picker></mat-datepicker>
       </mat-form-field>
+      <mat-form-field class="example-full-width">
+
+      <input matInput atp-time-picker>
+      </mat-form-field>
+      <ejs-timepicker placeholder='Select a time' [showClearButton]="false"></ejs-timepicker>
+      <!--<mdb-time-picker [buttonLabel]="'Done'" [twelvehour]="false" [darktheme]="true" [placeholder]="'Selected time'" [label]="'Dark version, 24hours'"></mdb-time-picker>-->
+      <!--<md2-datepicker #birthday></md2-datepicker>-->
+      <!--<button [md2DatepickerToggle]="birthday"></button>-->
+
+      <!--<mat-form-field class="example-full-width">-->
+      <!--<input matInput [disableClick]="true" readonly [ngxTimepicker]="toggleTimepicker">-->
+        <!--<ngx-material-timepicker-toggle class="custom-timepicker-toogle" [for]="toggleTimepicker"></ngx-material-timepicker-toggle>-->
+      <!--<ngx-material-timepicker #toggleTimepicker></ngx-material-timepicker>-->
+      <!--</mat-form-field>-->
 
       <br>
-      <mat-form-field >
+      <mat-form-field class="example-full-width">
         <input matInput formControlName="to"  [(ngModel)]="editedInterview.factDate" [min]="editedInterview.planDate" [matDatepicker]="picker1" placeholder="To">
         <mat-datepicker-toggle name="dateSuffix1" matSuffix [for]="picker1"></mat-datepicker-toggle>
         <mat-datepicker #picker1></mat-datepicker>
@@ -25,3 +45,4 @@
     <button mat-raised-button color="primary" [disabled]="interviewForm.invalid" (click)="addInterview()" cdkFocusInitial>Ok</button>
   </dialog-footer>
 </app-modal-component>
+<!--</mdb-card>-->

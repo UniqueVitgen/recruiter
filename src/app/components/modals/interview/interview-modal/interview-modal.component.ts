@@ -22,12 +22,16 @@ export class InterviewModalComponent implements OnInit {
     public dialogRef: MatDialogRef<InterviewModalComponent>,
     private fb: FormBuilder,
     @Inject(MAT_DIALOG_DATA) public data: InterviewDialogData ) {
-    if (this.data.isEdit) {
-      this.editedInterview = Object.assign(new Interview(), this.data.sourceInterview);
+    if (this.data) {
+      if ( this.data.isEdit) {
+        this.editedInterview = Object.assign(new Interview(), this.data.sourceInterview);
+      } else {
+        this.editedInterview = new Interview();
+      }
+      this.editedInterview.candidateId = this.data.sourceCandidate.id;
     } else {
       this.editedInterview = new Interview();
     }
-    this.editedInterview.candidateId = this.data.sourceCandidate.id;
     this.interviewForm = this.fb.group({
       from: ['', Validators.compose([Validators.required])],
       to: ['', Validators.compose([Validators.required])]

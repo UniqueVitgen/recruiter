@@ -67,6 +67,10 @@ import { ImageCandiateTimelineItemComponent } from './components/items/timeline/
 import { DeleteVacancyDialogComponent } from './components/modals/delete-vacancy-dialog/delete-vacancy-dialog.component';
 import {CalendarModule} from './modules/calendar/calendar.module';
 import {DevExpressModule} from './modules/dev-express/dev-express.module';
+import {SyncfunsionModule} from './modules/syncfunsion/syncfunsion.module';
+import {AngularBootstrapModule} from './modules/angular-bootstrap/angular-bootstrap.module';
+import { MDBBootstrapModule } from 'angular-bootstrap-md';
+import {NgxMaterialTimepickerModule} from 'ngx-material-timepicker';
 
 
 @NgModule({
@@ -132,7 +136,12 @@ import {DevExpressModule} from './modules/dev-express/dev-express.module';
     TextMaskModule,
     MatExpansionModule,
     CalendarModule,
-    DevExpressModule
+    DevExpressModule,
+    SyncfunsionModule,
+    AngularBootstrapModule
+    // ,
+    // MDBBootstrapModule.forRoot(),
+    // NgxMaterialTimepickerModule.forRoot()
     // ,
     // InternationalPhoneNumberModule
   ],

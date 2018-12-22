@@ -16,9 +16,11 @@ import {
   MatNativeDateModule,
   MatButtonToggleModule,
   MatMenuModule,
-  MatAutocompleteModule, MatTooltipModule, MatSelectModule
+  MatAutocompleteModule, MatTooltipModule, MatSelectModule,
 } from '@angular/material';
 import {DragDropModule} from '@angular/cdk/drag-drop';
+import {NgxMaterialTimepickerModule} from 'ngx-material-timepicker';
+import {AmazingTimePickerModule} from 'amazing-time-picker';
 
 
 @NgModule({
@@ -41,7 +43,12 @@ import {DragDropModule} from '@angular/cdk/drag-drop';
     MatAutocompleteModule,
     DragDropModule,
     MatTooltipModule,
-    MatSelectModule
+    MatSelectModule,
+    AmazingTimePickerModule // this line you need
+    ,
+    NgxMaterialTimepickerModule.forRoot()
+    // ,
+    // Md2Module
     // ,
     // MatMom
   ],
@@ -65,7 +72,12 @@ import {DragDropModule} from '@angular/cdk/drag-drop';
     MatAutocompleteModule,
     DragDropModule,
     MatTooltipModule,
-    MatSelectModule
+    MatSelectModule,
+    AmazingTimePickerModule // this line you need
+    ,
+    NgxMaterialTimepickerModule
+    // ,
+    // Md2Module
   ]
 })
 export class MaterialDesignModule { }

@@ -76,9 +76,15 @@
 
   <!--</div>-->
 <!--</div>-->
-<dx-scheduler
-  [views]='["day", "week", "workWeek", "month"]'
-  currentView="day"
-  [startDayHour]="9"
-  [height]="600">
-</dx-scheduler>
+<!--<dx-scheduler-->
+  <!--[views]='["day", "week", "workWeek", "month"]'-->
+  <!--currentView="month"-->
+  <!--[dataSource]="appointmentsData"-->
+  <!--[startDayHour]="9"-->
+  <!--[height]="600">-->
+<!--</dx-scheduler>-->
+
+<div class="calendar-container" *ngIf="calendarOptions">
+  <ng-fullcalendar #ucCalendar (dayClick)="addInterview()" [options]="calendarOptions"
+                   ></ng-fullcalendar>
+</div>
