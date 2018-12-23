@@ -1,17 +1,17 @@
 <app-modal-component>
   <dialog-title>
     <span *ngIf="data.isEdit">
-      Edit Candidate
+      {{'Edit Candidate' | translate}}
     </span>
     <span *ngIf="!data.isEdit">
-      Add Candidate
+      {{'Add Candidate' | translate}}
     </span>
   </dialog-title>
   <dialog-body>
     <div *ngIf="editedCandidate && candidateForm">
       <form [formGroup]="candidateForm">
         <mat-form-field class="example-full-width">
-          <input class="star-input" formControlName="name" [(ngModel)]="editedCandidate.name"  matInput placeholder="Name*">
+          <input class="star-input" formControlName="name" [(ngModel)]="editedCandidate.name"  matInput placeholder="{{'Name' | translate}}*">
           <mat-error *ngIf="candidateForm.controls['name'].hasError('required')">
             name is required
           </mat-error>
@@ -20,7 +20,7 @@
           </mat-error>
         </mat-form-field>
         <mat-form-field class="example-full-width">
-          <input class="star-input" formControlName="surname" [(ngModel)]="editedCandidate.surname" matInput placeholder="Surname*" >
+          <input class="star-input" formControlName="surname" [(ngModel)]="editedCandidate.surname" matInput placeholder="{{'Surname' | translate}}*" >
           <mat-error *ngIf="candidateForm.controls['surname'].hasError('required')">
             surname is required
           </mat-error>

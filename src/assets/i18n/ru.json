@@ -1,0 +1,21 @@
+{
+  "Language" : "Язык",
+  "Interview Calendar" : "Календарь интервью",
+  "Russian" : "Русский",
+  "English" : "Английский",
+  "Candidate Dashboard" : "Кандидаты",
+  "Job Description Dashboard" : "Вакансии",
+  "Search" : "Поиск",
+  "Name" : "Имя",
+  "Surname" : "Фамилия",
+  "Position" : "Позиция",
+  "Open" : "Открыто",
+  "Archive": "Архив",
+  "Full name" : "Полное имя",
+  "EMAIL" : "ПОЧТА",
+  "SKYPE" : "СКАЙП",
+  "PHONE" : "ТЕЛЕФОН",
+  "Contacts" : "Контакты",
+  "Status" : "Статус",
+  "Delete Candidate" : "Удалить кандидата"
+}

@@ -1,7 +1,7 @@
 import { BrowserModule } from '@angular/platform-browser';
 import {forwardRef, NgModule, NO_ERRORS_SCHEMA} from '@angular/core';
 
-import { HttpClientModule } from '@angular/common/http';
+import {HttpClient, HttpClientModule} from '@angular/common/http';
 import { AppRoutingModule } from './app-routing.module';
 import { MaterialDesignModule } from './modules/material-design/material-design.module';
 import {ScheduleModule, AgendaService, DayService, WeekService, WorkWeekService, MonthService } from '@syncfusion/ej2-angular-schedule';
@@ -69,10 +69,14 @@ import {CalendarModule} from './modules/calendar/calendar.module';
 import {DevExpressModule} from './modules/dev-express/dev-express.module';
 import {SyncfunsionModule} from './modules/syncfunsion/syncfunsion.module';
 import {AngularBootstrapModule} from './modules/angular-bootstrap/angular-bootstrap.module';
-import { MDBBootstrapModule } from 'angular-bootstrap-md';
+// import { MDBBootstrapModule } from 'angular-bootstrap-md';
 import {NgxMaterialTimepickerModule} from 'ngx-material-timepicker';
+import {TranslateLoader, TranslateModule} from '@ngx-translate/core';
+import {TranslateHttpLoader} from '@ngx-translate/http-loader';
 
-
+export function HttpLoaderFactory(http: HttpClient) {
+  return new TranslateHttpLoader(http);
+}
 @NgModule({
   declarations: [
     AppComponent,
@@ -138,8 +142,14 @@ import {NgxMaterialTimepickerModule} from 'ngx-material-timepicker';
     CalendarModule,
     DevExpressModule,
     SyncfunsionModule,
-    AngularBootstrapModule
-    // ,
+    AngularBootstrapModule,
+    TranslateModule.forRoot({
+      loader: {
+        provide: TranslateLoader,
+        useFactory: HttpLoaderFactory,
+        deps: [HttpClient]
+      }
+    })
     // MDBBootstrapModule.forRoot(),
     // NgxMaterialTimepickerModule.forRoot()
     // ,
@@ -163,4 +173,5 @@ import {NgxMaterialTimepickerModule} from 'ngx-material-timepicker';
   ],
   schemas: [NO_ERRORS_SCHEMA] // add this line
 })
-export class AppModule { }
+export class AppModule {
+}
