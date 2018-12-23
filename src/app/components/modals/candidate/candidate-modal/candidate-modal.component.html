@@ -13,41 +13,41 @@
         <mat-form-field class="example-full-width">
           <input class="star-input" formControlName="name" [(ngModel)]="editedCandidate.name"  matInput placeholder="{{'Name' | translate}}*">
           <mat-error *ngIf="candidateForm.controls['name'].hasError('required')">
-            name is required
+            {{'Name is required' | translate}}
           </mat-error>
           <mat-error *ngIf="candidateForm.controls['name'].hasError('pattern')">
-            name must contain only latin characters
+            {{'Name must contain only latin characters' | translate}}
           </mat-error>
         </mat-form-field>
         <mat-form-field class="example-full-width">
           <input class="star-input" formControlName="surname" [(ngModel)]="editedCandidate.surname" matInput placeholder="{{'Surname' | translate}}*" >
           <mat-error *ngIf="candidateForm.controls['surname'].hasError('required')">
-            surname is required
+            {{'Surname is required' | translate}}
           </mat-error>
           <mat-error *ngIf="candidateForm.controls['surname'].hasError('pattern')">
-            surname must contain only latin characters
+            {{'Surname must contain only latin characters' | translate}}
           </mat-error>
         </mat-form-field>
         <mat-form-field class="example-full-width">
-          <input formControlName="position" matInput placeholder="Position">
+          <input formControlName="position" matInput placeholder="{{'Position' | translate}}">
         </mat-form-field>
         <mat-form-field class="example-full-width">
-          <input formControlName="status" [(ngModel)]="editedCandidate.candidateState.name" matInput placeholder="Status">
+          <input formControlName="status" [(ngModel)]="editedCandidate.candidateState.name" matInput placeholder="{{'Status' | translate}}">
         </mat-form-field>
         <mat-form-field class="example-full-width">
-          <input formControlName="skype" [(ngModel)]="editedCandidate.contacts[0].contactDetails" matInput placeholder="Skype">
+          <input formControlName="skype" [(ngModel)]="editedCandidate.contacts[0].contactDetails" matInput placeholder="{{'SKYPE' | translate}}">
         </mat-form-field>
         <!--<international-phone-number [(ngModel)]="model.phone_number" placeholder="Enter phone number" [maxlength]="20" [defaultCountry]="'be'" [required]="true" #phone_number="ngModel" name="phone_number"></international-phone-number>-->
         <mat-form-field  class="example-full-width">
-          <input [textMask]="{mask: mask}" formControlName="phone" [(ngModel)]="editedCandidate.contacts[1].contactDetails" matInput placeholder="Phone">
+          <input [textMask]="{mask: mask}" formControlName="phone" [(ngModel)]="editedCandidate.contacts[1].contactDetails" matInput placeholder="{{'PHONE' | translate}}">
           <mat-error *ngIf="candidateForm.controls['phone'].hasError('pattern')">
-            Please enter a valid phone number with valida operator code like 17, 29, 33, 44.
+            {{'Please enter a valid phone number with valida operator code like 17, 29, 33, 44' | translate}}
           </mat-error>
         </mat-form-field>
         <mat-form-field class="example-full-width">
-          <input formControlName="email" [(ngModel)]="editedCandidate.contacts[2].contactDetails" matInput placeholder="Email">
+          <input formControlName="email" [(ngModel)]="editedCandidate.contacts[2].contactDetails" matInput placeholder="{{'EMAIL' | translate}}">
           <mat-error *ngIf="candidateForm.controls['email'].hasError('pattern')">
-            Please enter a valid email address
+            {{'Please enter a valid email address' | translate}}
           </mat-error>
         </mat-form-field>
       </form>
@@ -65,7 +65,7 @@
     <!--</mat-form-field>-->
   </dialog-body>
   <dialog-footer>
-    <button mat-button (click)="onNoClick()">No Thanks</button>
-    <button [disabled]="candidateForm?.invalid" mat-button mat-raised-button color="primary" (click)="editCandidate()" cdkFocusInitial>Ok</button>
+    <button mat-button (click)="onNoClick()">{{'No Thanks' | translate}}</button>
+    <button [disabled]="candidateForm?.invalid" mat-button mat-raised-button color="primary" (click)="editCandidate()" cdkFocusInitial>{{'Ok' | translate}}</button>
   </dialog-footer>
 </app-modal-component>
