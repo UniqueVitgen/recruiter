@@ -18,6 +18,7 @@ import { Options } from 'fullcalendar';
 import {CalendarEvent} from '../../../classes/html/calendar/calendar-event';
 import {InterviewWorker} from '../../../workers/interview/interview.worker';
 import {InterviewDialogData} from '../../../interfaces/dialog/init/interview-dialog-data';
+import {TranslateWorker} from '../../../workers/translate/translate.worker';
 
 
 @Component({
@@ -105,6 +106,7 @@ export class InterviewCalendarComponent implements OnInit, OnChanges {
   // selected: string;
   // appointmentsData = [];
   @Input() inteviews: InterviewExtended[];
+  @Input() locale: string;
   @Output('changeInterviews') outputChangeInterviews: EventEmitter<any> = new EventEmitter();
   public calendarEventList: CalendarEvent[];
   public calendarOptions: Options = {
@@ -123,6 +125,7 @@ export class InterviewCalendarComponent implements OnInit, OnChanges {
               private candidateService: CandidateService,
               public dateTimeWorker: DateTimeWorker,
               private interviewWorker: InterviewWorker,
+              public translateWorker: TranslateWorker,
               private interviewService: InterviewService) {
     // this.selected  = this.MONTH;
   }
@@ -177,15 +180,21 @@ export class InterviewCalendarComponent implements OnInit, OnChanges {
 
   ngOnInit() {
     const dateObj = new Date();
-    this.calendarOptions = {
-      editable: true,
-      eventLimit: false,
-      header: {
-        left: 'prev,next today',
-        center: 'title',
-        right: 'month,agendaWeek,agendaDay,listMonth'
-      }
-    };
+    // this.l = this.translateWorker.getLanguage();
+    // this.translateWorker.changeValue.subscribe(res => {
+    //   console.log(res.lang);
+    //   this.lang = res.lang;
+    // });
+    // this.calendarOptions = {
+    //   editable: true,
+    //   eventLimit: false,
+    //   header: {
+    //     left: 'prev,next today',
+    //     center: 'title',
+    //     right: 'month,agendaWeek,agendaDay,listMonth'
+    //   },
+    //   locale: 'ru'
+    // };
     // this.createCalendar(this.date);
     // this.vacancyService.get(0).subscribe(vacancyRes => {
     //   this.mockVacancy = vacancyRes;
@@ -214,6 +223,28 @@ export class InterviewCalendarComponent implements OnInit, OnChanges {
   }
 
   ngOnChanges(changes: SimpleChanges): void {
+    console.log('res', this.locale);
+    this.calendarOptions.locale = this.locale;
+    console.log('res', this.locale);
+    if (this.locale === 'ru') {
+      this.calendarOptions = {
+        header: {
+          left: 'prev,next today',
+          center: 'title',
+          right: 'month,agendaWeek,agendaDay,listMonth'
+        },
+        locale: this.locale
+      };
+    } else if (this.locale === 'en') {
+
+      this.calendarOptions = {
+        header: {
+          left: 'prev,next today',
+          center: 'title',
+          right: 'month,agendaWeek,agendaDay,listMonth'
+        }, locale: this.locale
+      };
+    }
     this.getCalendarEvents();
   }
 

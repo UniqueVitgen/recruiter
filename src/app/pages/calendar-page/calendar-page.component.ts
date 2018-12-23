@@ -2,6 +2,7 @@ import {Component, Input, OnInit} from '@angular/core';
 import * as moment from 'moment';
 import {InterviewService} from '../../services/interview/interview.service';
 import {Interview, InterviewExtended} from '../../classes/interview';
+import {TranslateWorker} from '../../workers/translate/translate.worker';
 
 
 @Component({
@@ -11,9 +12,16 @@ import {Interview, InterviewExtended} from '../../classes/interview';
 })
 export class CalendarPageComponent implements OnInit {
   interviews: InterviewExtended[];
-  constructor(private interviewService: InterviewService) {}
+  lang: string;
+  constructor(private interviewService: InterviewService,
+              public translateWorker: TranslateWorker) {}
   ngOnInit(): void {
     this.getInterviews();
+    this.lang = this.translateWorker.getLanguage();
+    this.translateWorker.changeValue.subscribe(res => {
+      console.log(res.lang);
+      this.lang = res.lang;
+    });
   }
 
   getInterviews() {

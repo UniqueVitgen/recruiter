@@ -5,6 +5,7 @@ import {VacancyService} from '../../services/vacancy/vacancy.service';
 import {CandidateService} from '../../services/candidate/candidate.service';
 import {Vacancy} from '../../classes/vacancy';
 import {Candidate} from '../../classes/candidate';
+import {TranslateWorker} from '../../workers/translate/translate.worker';
 
 @Component({
   selector: 'app-interview-page',
@@ -17,6 +18,7 @@ export class InterviewPageComponent implements OnInit {
   private mockCandidate: Candidate;
 
   constructor(private interviewService: InterviewService,
+  private translateWorker: TranslateWorker,
   private vacancyService: VacancyService,
   private candidateService: CandidateService) { }
 
