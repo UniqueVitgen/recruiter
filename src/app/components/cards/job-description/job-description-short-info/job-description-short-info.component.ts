@@ -4,6 +4,7 @@ import {JobDescriptionModalComponent} from '../../../modals/job-description/job-
 import {JobDescriptionDialogData} from '../../../../interfaces/dialog/init/job-description-dialog-data';
 import {MatDialog} from '@angular/material';
 import {BaseDialogResult} from '../../../../interfaces/dialog/result/base-dialog-result';
+import {VacancyColorService} from '../../../../services/vacancy/vacancy-color.service';
 
 @Component({
   selector: 'app-job-description-short-info',
@@ -17,7 +18,7 @@ export class JobDescriptionShortInfoComponent implements OnInit {
   @Input() buttonDelete: boolean;
   @Output('deleteVacancy') outputDeleteVacancy: EventEmitter<any> = new EventEmitter();
   @Output('changeVacancy') outputChangeVacancy: EventEmitter<any> = new EventEmitter();
-  constructor(public dialog: MatDialog)  { }
+  constructor(public dialog: MatDialog,private vacancyColorService: VacancyColorService)  { }
 
   ngOnInit() {
   }
@@ -25,7 +26,8 @@ export class JobDescriptionShortInfoComponent implements OnInit {
     const dialogRef = this.dialog.open(JobDescriptionModalComponent, {
         data: <JobDescriptionDialogData> {
           sourceJobDescription: this.vacancy,
-          isEdit: true
+          isEdit: true,
+          dialogWindowTitle: 'Edit'
         },
       disableClose: true
       }

@@ -5,4 +5,5 @@ import {Vacancy} from '../../../classes/vacancy';
 export interface JobDescriptionDialogData {
   sourceJobDescription: Vacancy;
   isEdit?: boolean;
+  dialogWindowTitle: string;
 }

@@ -55,7 +55,8 @@ export class JobDescriptionDashboardComponent implements OnInit, OnChanges {
     const dialogRef = this.dialog.open(JobDescriptionModalComponent, {
         data: <JobDescriptionDialogData> {
           sourceJobDescription: null,
-          isEdit: false
+          isEdit: false,
+          dialogWindowTitle: 'Create'
         },
         disableClose: true
       }
