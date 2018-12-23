@@ -1,19 +1,19 @@
 <app-modal-component>
   <dialog-title>
     <span *ngIf="data.isEdit">
-      Edit Experience
+      {{'Edit Experience' | translate}}
     </span>
     <span *ngIf="!data.isEdit">
-      Add Experience
+      {{'Add Experience' | translate}}
     </span>
   </dialog-title>
   <dialog-body>
     <form [formGroup]="formExperience">
       <mat-form-field class="example-full-width">
-        <input required formControlName="companyName" [(ngModel)]="editedExperience.companyName.name" matInput placeholder="company Name">
+        <input required formControlName="companyName" [(ngModel)]="editedExperience.companyName.name" matInput placeholder="{{'company Name' | translate}}">
       </mat-form-field>
       <mat-form-field>
-        <input required formControlName="dateFrom" matInput [(ngModel)]="editedExperience.dateFrom" [matDatepicker]="picker" placeholder="From">
+        <input required formControlName="dateFrom" matInput [(ngModel)]="editedExperience.dateFrom" [matDatepicker]="picker" placeholder="{{'From' | translate}}">
         <mat-datepicker-toggle name="dateSuffix" matSuffix [for]="picker"></mat-datepicker-toggle>
         <mat-datepicker  #picker></mat-datepicker>
       </mat-form-field>
@@ -21,12 +21,12 @@
       &nbsp;
       <!--<br>-->
       <mat-form-field >
-        <input required matInput formControlName="dateTo"  [(ngModel)]="editedExperience.dateTo" [min]="editedExperience.dateFrom" [matDatepicker]="picker1" placeholder="To">
+        <input required matInput formControlName="dateTo"  [(ngModel)]="editedExperience.dateTo" [min]="editedExperience.dateFrom" [matDatepicker]="picker1" placeholder="{{'To' | translate}}">
         <mat-datepicker-toggle name="dateSuffix1" matSuffix [for]="picker1"></mat-datepicker-toggle>
         <mat-datepicker #picker1></mat-datepicker>
       </mat-form-field>
       <mat-form-field class="example-full-width">
-        <input required formControlName="position" [(ngModel)]="editedExperience.jobPosition" matInput placeholder="Position">
+        <input required formControlName="position" [(ngModel)]="editedExperience.jobPosition" matInput placeholder="{{'Position' | translate}}">
       </mat-form-field>
     </form>
     <!--<mat-form-field class="example-full-width">-->
@@ -34,7 +34,7 @@
     <!--</mat-form-field>-->
   </dialog-body>
   <dialog-footer>
-    <button mat-button (click)="onNoClick()">No Thanks</button>
-    <button mat-raised-button color="primary" [disabled]="formExperience.invalid" (click)="editCandidate()" cdkFocusInitial>Ok</button>
+    <button mat-button (click)="onNoClick()">{{'No Thanks' | translate}}</button>
+    <button mat-raised-button color="primary" [disabled]="formExperience.invalid" (click)="editCandidate()" cdkFocusInitial>{{'Ok' | translate}}</button>
   </dialog-footer>
 </app-modal-component>

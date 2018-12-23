@@ -18,7 +18,9 @@ export class FileWorker {
     link.parentNode.removeChild(link);
   }
   getFilename(url: string) {
-    const filename = url.substring(url.lastIndexOf('/') + 1);
+    let filename: string;
+    filename = url.substring(url.lastIndexOf('/') + 1);
+    filename = url.substring(filename.lastIndexOf('\\') + 1);
     return filename;
     // alert(filename);
   }
