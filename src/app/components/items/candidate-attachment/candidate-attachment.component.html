@@ -4,7 +4,7 @@
       <mat-icon class="file-icon">assignment</mat-icon>
     </div>
     <div class="col-10 center-vertical-text-container">
-      <a [href]="candidateWorker.generatePhotoUrl(attachment)">{{attachment?.filePath}}</a>
+      <a [href]="candidateWorker.generatePhotoUrl(attachment)">{{fileWorker.getFilename(attachment?.filePath)}}</a>
     </div>
   </div>
   <!--<div class="text-center">-->

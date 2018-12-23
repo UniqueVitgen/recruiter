@@ -1,12 +1,12 @@
 <mat-label style="color: gray;">  {{viewOfDate}}</mat-label>
 <mat-card class="backgroundCard">
-  <mat-icon class="delete" matTooltip="Delete" matTooltip="Delete" (click)="delete()">close</mat-icon>
-  <mat-card-title><mat-icon class="myIcon">insert_drive_file</mat-icon> Cv</mat-card-title>
+  <mat-icon class="delete" matTooltip="Delete" matTooltip="{{'Delete' | translate}}" (click)="delete()">close</mat-icon>
+  <mat-card-title><mat-icon class="myIcon">insert_drive_file</mat-icon> {{'CV' | translate}}</mat-card-title>
   <mat-card-content>
     <app-candidate-attachment [attachment]="attachment"></app-candidate-attachment>
     <mat-form-field class="example-full-width custom-form-field">
-      <textarea (blur)="onFocusoutAnyInput()" matInput placeholder="Comment" [(ngModel)]="editedAttachment.comment"></textarea>
-      <button mat-button  matSuffix mat-icon-button aria-label="Clear">
+      <textarea (blur)="onFocusoutAnyInput()" matInput placeholder="{{'Comment' | translate}}" [(ngModel)]="editedAttachment.comment"></textarea>
+      <button mat-button  matSuffix mat-icon-button aria-label="Clear" class="edited-hover-button">
         <mat-icon>edit</mat-icon>
       </button>
     </mat-form-field>

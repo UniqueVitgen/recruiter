@@ -1,12 +1,15 @@
 <mat-label style="color: gray;">  {{viewOfDate}}</mat-label>
 <mat-card class="backgroundCard">
-  <mat-icon class="delete" matTooltip="Delete" (click)="delete()">close</mat-icon>
-  <mat-card-title><mat-icon class="myIcon">description</mat-icon> Experience</mat-card-title>
+  <mat-icon class="delete" matTooltip="{{'Delete' | translate}}" (click)="delete()">close</mat-icon>
+  <mat-card-title><mat-icon class="myIcon">description</mat-icon> {{'Experience' | translate}}</mat-card-title>
   <mat-form-field class="example-full-width custom-form-field">
-    <input (blur)="onFocusoutAnyInput()" [(ngModel)]="editedExperience.companyName.name" matInput placeholder="company Name">
+    <input (blur)="onFocusoutAnyInput()" [(ngModel)]="editedExperience.companyName.name" matInput placeholder="{{'company Name' | translate}}">
+    <button mat-button  matSuffix mat-icon-button aria-label="Clear" class="edited-hover-button">
+      <mat-icon>edit</mat-icon>
+    </button>
   </mat-form-field>
   <mat-form-field class="custom-form-field">
-    <input (blur)="onFocusoutAnyInput()" (dateChange)="onFocusoutAnyInput()" matInput [(ngModel)]="editedExperience.dateFrom" [matDatepicker]="picker" placeholder="From">
+    <input (blur)="onFocusoutAnyInput()" (dateChange)="onFocusoutAnyInput()" matInput [(ngModel)]="editedExperience.dateFrom" [matDatepicker]="picker" placeholder="{{'From' | translate}}">
     <mat-datepicker-toggle name="dateSuffix" matSuffix [for]="picker"></mat-datepicker-toggle>
     <mat-datepicker  #picker></mat-datepicker>
   </mat-form-field>
@@ -14,18 +17,18 @@
   &nbsp;
   <!--<br>-->
   <mat-form-field class="custom-form-field" >
-    <input matInput (blur)="onFocusoutAnyInput()" [(ngModel)]="editedExperience.dateTo" [min]="editedExperience.dateFrom" [matDatepicker]="picker1" placeholder="To">
+    <input matInput (blur)="onFocusoutAnyInput()" [(ngModel)]="editedExperience.dateTo" [min]="editedExperience.dateFrom" [matDatepicker]="picker1" placeholder="{{'To' | translate}}">
     <mat-datepicker-toggle name="dateSuffix1" matSuffix [for]="picker1"></mat-datepicker-toggle>
     <mat-datepicker (dateChange)="onFocusoutAnyInput()" #picker1></mat-datepicker>
   </mat-form-field>
   <mat-form-field class="example-full-width custom-form-field">
-    <input (blur)="onFocusoutAnyInput()" [(ngModel)]="editedExperience.jobPosition" matInput placeholder="Position">
+    <input (blur)="onFocusoutAnyInput()" [(ngModel)]="editedExperience.jobPosition" matInput placeholder="{{'Position' | translate}}">
     <button mat-button  matSuffix mat-icon-button aria-label="Clear" class="edited-hover-button">
       <mat-icon>edit</mat-icon>
     </button>
   </mat-form-field>
   <mat-form-field class="example-full-width custom-form-field">
-    <textarea  (blur)="onFocusoutAnyInput()" matInput placeholder="Comment" [(ngModel)]="editedExperience.comment"></textarea>
+    <textarea  (blur)="onFocusoutAnyInput()" matInput placeholder="{{'Comment' | translate}}" [(ngModel)]="editedExperience.comment"></textarea>
     <button mat-button  matSuffix mat-icon-button aria-label="Clear" class="edited-hover-button">
       <mat-icon>edit</mat-icon>
     </button>

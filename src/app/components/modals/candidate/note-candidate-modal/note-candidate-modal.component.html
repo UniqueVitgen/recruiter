@@ -1,21 +1,21 @@
 <app-modal-component>
   <dialog-title>
     <span *ngIf="data.isEdit">
-      Edit Experience
+      {{'Edit feedback' | translate}}
     </span>
     <span *ngIf="!data.isEdit">
-      Add Experience
+      {{'Add feedback' | translate}}
     </span>
   </dialog-title>
   <dialog-body>
     <form [formGroup]="formNote">
       <mat-form-field class="example-full-width">
-        <mat-select required formControlName="state" placeholder="Feedback State" [(ngModel)]="editedFeedback.feedbackState.name" matInput>
-          <mat-option *ngFor="let state of testFeedbackStates" [value]="state" >{{state}}</mat-option>
+        <mat-select required formControlName="state" placeholder="{{'Feedback State' | translate}}" [(ngModel)]="editedFeedback.feedbackState.name" matInput>
+          <mat-option *ngFor="let state of testFeedbackStates" [value]="state" >{{state | translate}}</mat-option>
         </mat-select>
       </mat-form-field>
       <mat-form-field class="example-full-width">
-        <textarea formControlName="text" required [(ngModel)]="editedFeedback.feedbackText" matInput placeholder="feedback Text"></textarea>
+        <textarea formControlName="text" required [(ngModel)]="editedFeedback.feedbackText" matInput placeholder="{{'Feedback comment' | translate}}"></textarea>
       </mat-form-field>
     </form>
     <!--<mat-form-field class="example-full-width">-->
@@ -38,7 +38,7 @@
     <!--</mat-form-field>-->
   </dialog-body>
   <dialog-footer>
-    <button mat-button (click)="onNoClick()">No Thanks</button>
-    <button mat-raised-button color="primary" [disabled]="formNote.invalid" (click)="editCandidate()" cdkFocusInitial>Ok</button>
+    <button mat-button (click)="onNoClick()">{{'No Thanks' | translate}}</button>
+    <button mat-raised-button color="primary" [disabled]="formNote.invalid" (click)="editCandidate()" cdkFocusInitial>{{'Ok' | translate}}</button>
   </dialog-footer>
 </app-modal-component>

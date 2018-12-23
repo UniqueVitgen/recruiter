@@ -1,8 +1,11 @@
 <mat-label style="color: gray;">  {{viewOfDate}}</mat-label>
 <mat-card class="backgroundCard">
-  <mat-icon class="delete" (click)="delete()">close</mat-icon>
-  <mat-card-title><mat-icon class="myIcon">feedback</mat-icon> Notes</mat-card-title>
+  <mat-icon class="delete" matTooltip="{{'Delete' | translate}}" (click)="delete()">close</mat-icon>
+  <mat-card-title><mat-icon class="myIcon">feedback</mat-icon> {{'Feedback' | translate}}</mat-card-title>
   <mat-form-field class="example-full-width custom-form-field">
-    <textarea (blur)="onFocusoutAnyInput()" [(ngModel)]="editedNote.feedbackText" placeholder="Feedback comment" matInput></textarea>
+    <textarea (blur)="onFocusoutAnyInput()" [(ngModel)]="editedNote.feedbackText" placeholder="{{'Feedback comment' | translate}}" matInput></textarea>
+    <button mat-button  matSuffix mat-icon-button aria-label="Clear" class="edited-hover-button">
+      <mat-icon>edit</mat-icon>
+    </button>
   </mat-form-field>
 </mat-card>
