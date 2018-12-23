@@ -1,4 +1,4 @@
-import {Component, HostListener, Input, OnChanges, OnInit, ViewChild} from '@angular/core';
+import {Component, HostListener, Input, OnChanges, OnInit, SimpleChanges, ViewChild} from '@angular/core';
 import * as moment from 'moment';
 import {Moment} from 'moment';
 import {MatDialog} from '@angular/material';
@@ -22,7 +22,7 @@ import { Options } from 'fullcalendar';
   templateUrl: './interview-calendar.component.html',
   styleUrls: ['./interview-calendar.component.scss']
 })
-export class InterviewCalendarComponent implements OnInit {
+export class InterviewCalendarComponent implements OnInit, OnChanges {
   // private mockVacancy: Vacancy = {
   //   id: 0,
   //   position: 'string',
@@ -159,6 +159,9 @@ export class InterviewCalendarComponent implements OnInit {
     //   });
     // });
     // this.selected  = this.MONTH;
+  }
+
+  ngOnChanges(changes: SimpleChanges): void {
   }
 
 
