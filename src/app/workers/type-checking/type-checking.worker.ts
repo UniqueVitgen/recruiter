@@ -10,4 +10,8 @@ export class TypeCheckingWorker {
 
   public checkType(o: Object, type) {
   }
+
+  public parseObject(object: any) {
+    return JSON.parse(JSON.stringify(object));
+  }
 }

@@ -1,4 +1,4 @@
-import {Component, HostListener, OnChanges, OnInit, ViewChild} from '@angular/core';
+import {Component, HostListener, Input, OnChanges, OnInit, ViewChild} from '@angular/core';
 import * as moment from 'moment';
 import {Moment} from 'moment';
 import {MatDialog} from '@angular/material';
@@ -101,6 +101,7 @@ export class InterviewCalendarComponent implements OnInit {
   // timesArray =  Array.apply(null, {length: 7 * 24});
   // selected: string;
   // appointmentsData = [];
+  @Input() inteviews: InterviewExtended[];
   public calendarOptions: Options;
   @ViewChild(CalendarComponent) ucCalendar: CalendarComponent;
 
@@ -126,7 +127,7 @@ export class InterviewCalendarComponent implements OnInit {
   }
 
   ngOnInit() {
-
+    const dateObj = new Date();
     this.calendarOptions = {
       editable: true,
       eventLimit: false,
@@ -135,8 +136,13 @@ export class InterviewCalendarComponent implements OnInit {
         center: 'title',
         right: 'month,agendaWeek,agendaDay,listMonth'
       }
-      // ,
-      // events: data
+      ,
+      events: [{
+        title: 'All Day Event',
+        start: dateObj.getUTCFullYear() + '-' + (dateObj.getUTCMonth() + 1) +  '-09T16:00:00',
+        end: dateObj.getUTCFullYear() + '-' + (dateObj.getUTCMonth() + 1) +  '-09T19:00:00'
+      }
+      ]
     };
     // this.createCalendar(this.date);
     // this.vacancyService.get(0).subscribe(vacancyRes => {

@@ -7,6 +7,7 @@ import {ContactType} from '../../enums/contact-type.enum';
 import {AttachmentType} from '../../enums/attachment-type.enum';
 import {map} from 'rxjs/operators';
 import {AttachmentForm} from '../../classes/html/attachment-form';
+import {Vacancy} from '../../classes/vacancy';
 
 @Injectable({
   providedIn: 'root'
@@ -238,6 +239,9 @@ export class CandidateService {
     //     ]);
     //   });
     // }
+  }
+  getVacancies(candidate: Candidate): Observable<Vacancy[]> {
+    return this.configService.get('candidate/' + candidate.id + '/vacancies');
   }
 
   getTimeline(candidate: Candidate): Observable<any> {

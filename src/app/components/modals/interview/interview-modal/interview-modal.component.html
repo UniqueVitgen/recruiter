@@ -13,9 +13,9 @@
   <dialog-body>
     <form [formGroup]="interviewForm">
       <mat-form-field class="example-full-width">
-        <input matInput formControlName="Plan Date" [(ngModel)]="editedInterview.planDate" [matDatepicker]="picker" placeholder="From">
+        <input matInput [(ngModel)]="planDate.dateDate" (dateChange)="updateDate($event)" formControlName="from" [(ngModel)]="editedInterview.planDate" [matDatepicker]="picker" placeholder="From">
         <mat-datepicker-toggle name="dateSuffix" matSuffix [for]="picker"></mat-datepicker-toggle>
-        <mat-datepicker  #picker></mat-datepicker>
+        <mat-datepicker #picker></mat-datepicker>
       </mat-form-field>
       <!--<mat-form-field class="example-full-width">-->
 
@@ -37,13 +37,20 @@
       <!--<button [md2DatepickerToggle]="birthday"></button>-->
 
       <mat-form-field class="example-full-width">
-      <input ( matInput placeholder="Start Time"  [format]="24" [ngxTimepicker]="toggleTimepicker">
+      <input formControlName="fromTime" matInput placeholder="Start Time" [(ngModel)]="planDate.timeString"  [format]="24" [ngxTimepicker]="toggleTimepicker">
         <button class="custom-timepicker-toggle" mat-button matSuffix mat-icon-button aria-label="Pick End Time">
         <ngx-material-timepicker-toggle  [for]="toggleTimepicker">
           <mat-icon ngxMaterialTimepickerToggleIcon>access_time</mat-icon>
         </ngx-material-timepicker-toggle>
         </button>
-      <ngx-material-timepicker (timeupdate)="updateTime($event)" [ngxMaterialTimepickerTheme]="darkTheme" #toggleTimepicker></ngx-material-timepicker>
+      <ngx-material-timepicker (timeSet)="updateTime($event)"  [ngxMaterialTimepickerTheme]="darkTheme" #toggleTimepicker></ngx-material-timepicker>
+      </mat-form-field>
+      <mat-form-field>
+        <mat-select [(value)]="sourceVacancy">
+          <mat-option *ngFor="let food of vacancies" [value]="food">
+            {{food.position}}
+          </mat-option>
+        </mat-select>
       </mat-form-field>
 
       <!--<mat-form-field class="example-full-width">-->

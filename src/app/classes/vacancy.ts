@@ -4,7 +4,7 @@ import {Requirement} from './requirement';
 import {Candidate} from './candidate';
 
 export class Vacancy {
-  id?: string | number
+  id?: number
   ;
   position: string; // vacancy's name
   salaryInDollarsFrom?: number;

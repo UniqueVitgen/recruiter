@@ -35,4 +35,19 @@ export class DateTimeWorker {
       return this.getDate(dateWithTime, 'dd MMMM yyyy') + ' at ' + this.getTime(dateWithTime);
     }
   }
+  parseTimeString(timeString: string): {hours: number, minutes: number} {
+    const hours = timeString.substr(0, timeString.indexOf(':'));
+    const minutes = timeString.substr(timeString.indexOf(':') + 1);
+    return {
+      hours: parseInt(hours),
+      minutes: parseInt(minutes)
+    };
+  }
+  parseDate(date: Date): {day: number, month: number, year: number} {
+    return {
+      day: date.getDate(),
+      month: date.getMonth(),
+      year: date.getFullYear()
+    };
+  }
 }
