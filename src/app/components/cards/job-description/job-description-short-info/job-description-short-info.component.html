@@ -3,7 +3,13 @@
   <div *ngIf="!isEdited" name="vacancyInfo" class="vacancyInfo">
     <div name="vacancyHeader" class="vacancyHeader">
       <label class="vacancyName"> {{vacancy?.position}}
-        <span class="vacancyStatus">{{vacancy?.vacancyState}}</span>
+       <!-- <span class="vacancyStatus">{{vacancy?.vacancyState}}</span>-->
+        <span [ngClass]="{'vacancyIsOpened': vacancyColorService.isVacancyOpened(vacancy.vacancyState),
+              'vacancyIsSuspended': vacancyColorService.isVacancySuspended(vacancy.vacancyState),
+              'vacancyIsCanceled': vacancyColorService.isVacancyCanceled(vacancy.vacancyState),
+              'vacancyIsClosed': vacancyColorService.isVacancyClosed(vacancy.vacancyState)}">
+          &#10687;
+              </span>
       </label>
       <button *ngIf="buttonEdit" class="float-right" mat-icon-button [matMenuTriggerFor]="menu" color="primary">
         <mat-icon>more_horiz</mat-icon>

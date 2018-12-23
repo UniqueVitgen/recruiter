@@ -6,10 +6,11 @@ import {FormControl, FormGroup, FormBuilder, Validators, FormArray} from '@angul
 import {SearchWorker} from '../../../../workers/search/search.worker';
 import {CdkDragDrop, moveItemInArray} from '@angular/cdk/drag-drop';
 import {ArrayWorker} from '../../../../workers/array/array.worker';
-import { VacancyService } from '../../../../services/vacancy/vacancy.service';
-import { CandidateDialogResult } from '../../../../interfaces/dialog/result/candidate-dialog-result';
-import { BaseDialogResult } from '../../../../interfaces/dialog/result/base-dialog-result';
-import { RegexpConst } from '../../../../const/regexp.const';
+import {VacancyService} from '../../../../services/vacancy/vacancy.service';
+import {CandidateDialogResult} from '../../../../interfaces/dialog/result/candidate-dialog-result';
+import {BaseDialogResult} from '../../../../interfaces/dialog/result/base-dialog-result';
+import {RegexpConst} from '../../../../const/regexp.const';
+import {VacancyState} from '../../../../enums/vacancy-state.enum';
 
 @Component({
   selector: 'app-job-description-modal',
@@ -24,6 +25,7 @@ export class JobDescriptionModalComponent implements OnInit {
     'TeamLeader',
     'Responsible'
   ];
+  statuses = [VacancyState.OPEN, VacancyState.CLOSE];
 
   constructor(
     public dialogRef: MatDialogRef<JobDescriptionModalComponent>,
@@ -42,9 +44,11 @@ export class JobDescriptionModalComponent implements OnInit {
       this.editedVacancy.requirements = [];
     }
   }
+
   onNoClick(): void {
     this.dialogRef.close();
   }
+
   removeElement(element: any) {
     this.editedVacancy.requirements = this.arrayWorker.removeElement(this.editedVacancy.requirements, element);
   }
