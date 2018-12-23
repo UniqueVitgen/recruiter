@@ -8,6 +8,7 @@ import {CandidateModalComponent} from '../../modals/candidate/candidate-modal/ca
 import {CandidateDialogResult} from '../../../interfaces/dialog/result/candidate-dialog-result';
 import {UserWorker} from '../../../workers/user/user.worker';
 import {Attachment} from '../../../classes/attachment';
+import {TypeCheckingWorker} from '../../../workers/type-checking/type-checking.worker';
 
 @Component({
   selector: 'app-candidate-dashboard',
@@ -22,11 +23,12 @@ export class CandidateDashboardComponent implements OnInit, OnChanges {
   @Input() isClosedIcon: boolean = true;
   @Output('addCandidate') outputAddCandidate: EventEmitter<Candidate> = new EventEmitter();
   @Output('deleteCandidate') outputDeleteCandidate: EventEmitter<any> = new EventEmitter();
+  @Input() limitTo: number;
   public selectedCandidates: Candidate[];
 
   private mockCandidate: Candidate;
 
-  constructor(public dialog: MatDialog, private userWorker: UserWorker) {
+  constructor(public dialog: MatDialog, private userWorker: UserWorker, private typeCheckingWorker: TypeCheckingWorker) {
   }
 
   ngOnInit() {
@@ -47,7 +49,7 @@ export class CandidateDashboardComponent implements OnInit, OnChanges {
           || surname.indexOf(valueLowercase) > -1;
       });
     } else {
-      this.selectedCandidates = this.candidates;
+      this.selectedCandidates = this.typeCheckingWorker.parseObject(this.candidates);
     }
   }
 

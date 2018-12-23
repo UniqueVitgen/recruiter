@@ -15,19 +15,19 @@
         <mat-icon>more_horiz</mat-icon>
       </button>
     </div>
-    <label name="vacancyDescriptionTitle" class="vacancyTitles">Description: </label>
-    <label name="vacancyDescriptionContent" class="vacancyDescriptionContent">Text of description will be here</label>
+    <label name="vacancyDescriptionTitle" class="vacancyTitles">{{'Description' | translate}}: </label>
+    <label name="vacancyDescriptionContent" class="vacancyDescriptionContent">{{'Text of description will be here' | translate}}</label>
 
 
     <div class="row font-weight-bold" >
       <div class="col-6 ">
-        <label name="vacancyRequirementsTitle" class="vacancyTitles">Requirements: </label>
+        <label name="vacancyRequirementsTitle" class="vacancyTitles">{{'Requirements' | translate}}: </label>
       </div>
       <div class="col-2 requirementsColumns">
-        <label name="vacancyRequiredColumnTitle" class="vacancyTitles">Required: </label>
+        <label name="vacancyRequiredColumnTitle" class="vacancyTitles">{{'Required' | translate}}: </label>
       </div>
       <div class="col-2 requirementsColumns">
-        <label name="vacancyPublicColumnTitle" class="vacancyTitles">Public: </label>
+        <label name="vacancyPublicColumnTitle" class="vacancyTitles">{{'Public' | translate}}: </label>
       </div>
     </div>
     <div  class="row" *ngFor="let requirement of vacancy.requirements">
@@ -93,5 +93,5 @@
     </div>-->
 </div>
 <mat-menu #menu="matMenu">
-  <button (click)="clickEdit()" mat-menu-item>Edit</button>
+  <button (click)="clickEdit()" mat-menu-item>{{'Edit' | translate}}</button>
 </mat-menu>

@@ -1,6 +1,6 @@
 <app-modal-component>
   <dialog-title>
-    <span>{{data.dialogWindowTitle}} Vacancy</span>
+    <span>{{data.dialogWindowTitle + ' Vacancy'| translate}}</span>
     <button (click)="onNoClick()" class="float-right" mat-icon-button>
       <mat-icon>close</mat-icon>
     </button>
@@ -8,25 +8,25 @@
   <dialog-body>
     <form name="form">
       <mat-form-field *ngIf="editedVacancy" class="example-full-width">
-        <input [(ngModel)]="editedVacancy.position" name="position" matInput placeholder="Position" required>
+        <input [(ngModel)]="editedVacancy.position" name="position" matInput placeholder="{{'Position' | translate}}" required>
       </mat-form-field>
-      <mat-select placeholder="Status" [(ngModel)]="editedVacancy.vacancyState" name="state">
+      <mat-select placeholder="{{'Status' | translate}}" [(ngModel)]="editedVacancy.vacancyState" name="state">
         <mat-option *ngFor="let state of statuses" [value]="state">
-          {{state}}
+          {{state | translate}}
         </mat-option>
       </mat-select>
       <mat-form-field class="example-full-width">
-        <textarea matInput placeholder="Description"></textarea>
+        <textarea matInput placeholder="{{'Description' | translate}}"></textarea>
       </mat-form-field>
       <div class="row font-weight-bold">
         <div class="col-6">
-          <span>Requirement</span>
+          <span>{{'Requirements' | translate}}</span>
         </div>
         <div class="col-2">
-          <span>Required</span>
+          <span>{{'Required' | translate}}</span>
         </div>
         <div class="col-2">
-          <span>Public</span>
+          <span>{{'Public' | translate}}</span>
         </div>
         <div class="col-2">
         </div>
@@ -38,7 +38,7 @@
           </div>
           <div class="col-5">
             <mat-form-field class="example-full-width">
-              <input [name]="'requirements-' + i" matInput required placeholder="Requirement" [matAutocomplete]="auto"
+              <input [name]="'requirements-' + i" matInput required placeholder="{{'Requirement' | translate}}" [matAutocomplete]="auto"
                      [(ngModel)]="requirement.name">
               <mat-autocomplete required #auto="matAutocomplete">
                 <mat-option *ngFor="let state of searchWorker.search(requirement.name, testRequirements)"
@@ -74,8 +74,8 @@
     <!--</div>-->
   </dialog-body>
   <dialog-footer>
-    <button mat-button (click)="onNoClick()">No Thanks</button>
-    <button mat-button mat-raised-button color="primary" (click)="save()">{{data.dialogWindowTitle}}
+    <button mat-button (click)="onNoClick()">{{'No Thanks' | translate}}</button>
+    <button mat-button mat-raised-button color="primary" (click)="save()">{{data.dialogWindowTitle | translate}}
     </button>
   </dialog-footer>
 </app-modal-component>

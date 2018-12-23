@@ -58,6 +58,7 @@ export class JobDescriptionDashboardComponent implements OnInit, OnChanges {
           isEdit: false,
           dialogWindowTitle: 'Create'
         },
+        minWidth: '700px',
         disableClose: true
       }
     );
