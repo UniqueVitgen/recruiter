@@ -17,18 +17,18 @@
       <div *ngIf="!readonly">
 
         <mat-form-field class="example-full-width custom-form-field">
-          <input (blur)="onFocusoutAnyInput()"   [(ngModel)]="candidate.name"  matInput placeholder="Name" readonly="false" >
+          <input (blur)="onFocusoutAnyInput()"   [(ngModel)]="candidate.name"  matInput [placeholder]="'Name' | translate" readonly="false" >
         </mat-form-field>
         <mat-form-field class="example-full-width custom-form-field">
-          <input (blur)="onFocusoutAnyInput()" [(ngModel)]="candidate.surname" matInput placeholder="Surname" >
+          <input (blur)="onFocusoutAnyInput()" [(ngModel)]="candidate.surname" matInput [placeholder]="'Surname' | translate" >
         </mat-form-field>
         <mat-form-field class="example-full-width custom-form-field">
-          <input (blur)="onFocusoutAnyInput()" matInput placeholder="Position">
+          <input (blur)="onFocusoutAnyInput()" matInput [placeholder]="'Position' | translate">
         </mat-form-field>
         <mat-form-field class="example-full-width custom-form-field">
           <!--<input (blur)="onFocusoutAnyInput()" [(ngModel)]="candidate.candidateState.name" matInput placeholder="Status"> -->
           <mat-select [(ngModel)]="candidate.candidateState.name" matInput (blur)="onFocusoutAnyInput()">
-            <mat-option *ngFor="let state of setStates" [value]="state" >{{state}}</mat-option>
+            <mat-option *ngFor="let state of setStates" [value]="state" >{{state | translate}}</mat-option>
           </mat-select>
         </mat-form-field>
       </div>
@@ -61,12 +61,12 @@
     </mat-card>
     <br>
     <mat-card class="backgroundCard">
-      <mat-card-title>Contacts</mat-card-title>
+      <mat-card-title>{{'Contacts' | translate}}</mat-card-title>
       <mat-card-content>
         <div *ngIf="!readonly">
           <mat-checkbox [(ngModel)]="tests[0].have" (ngModelChange)="changeEmail()">
             <mat-form-field class="example-full-width" *ngIf="tests[0].have && tests[0].object">
-              <input [formControl]="tests[0].control" [(ngModel)]="tests[0].object.contactDetails" (blur)="onFocusoutAnyInput(tests[0].control.valid)" matInput placeholder="Email">
+              <input [formControl]="tests[0].control" [(ngModel)]="tests[0].object.contactDetails" (blur)="onFocusoutAnyInput(tests[0].control.valid)" matInput [placeholder]="'EMAIL' | translate">
             </mat-form-field>
             <span  *ngIf="!tests[0].have">Email</span>
             <!--<mat-error *ngIf="tests[0].control.hasError('pattern') && tests[0].control.touched">-->
@@ -76,14 +76,14 @@
           <br>
           <mat-checkbox [(ngModel)]="tests[1].have" (ngModelChange)="changeSkype()">
             <mat-form-field class="example-full-width" *ngIf="tests[1].have && tests[1].object">
-              <input [formControl]="tests[1].control" [(ngModel)]="tests[1].object.contactDetails" (blur)="onFocusoutAnyInput(tests[1].control.valid)" matInput placeholder="skype">
+              <input [formControl]="tests[1].control" [(ngModel)]="tests[1].object.contactDetails" (blur)="onFocusoutAnyInput(tests[1].control.valid)" matInput [placeholder]="'SKYPE' | translate">
             </mat-form-field>
             <span  *ngIf="!tests[1].have">skype</span>
           </mat-checkbox>
           <br>
           <mat-checkbox [(ngModel)]="tests[2].have" (ngModelChange)="changePhone()">
             <mat-form-field class="example-full-width" *ngIf="tests[2].have && tests[2].object">
-              <input [formControl]="tests[2].control"  [textMask]="{mask: MaskConst.PHONE}" [(ngModel)]="tests[2].object.contactDetails" (blur)="onFocusoutAnyInput(tests[2].control.valid)" matInput placeholder="phone">
+              <input [formControl]="tests[2].control"  [textMask]="{mask: MaskConst.PHONE}" [(ngModel)]="tests[2].object.contactDetails" (blur)="onFocusoutAnyInput(tests[2].control.valid)" matInput [placeholder]="'PHONE' | translate">
             </mat-form-field>
             <span  *ngIf="!tests[2].have">phone</span>
           </mat-checkbox>

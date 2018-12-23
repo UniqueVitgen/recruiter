@@ -1,9 +1,9 @@
 <div class="user-avatar" [ngClass]="{'user-avatar-hover': haveHoverEffect}">
   <img [src]="src" alt="" onerror="this.src = '/assets/candidate/middle-man.jpg'" />
   <mat-icon *ngIf="isStatus" class="fiber-icon-image"
-            matTooltip="Status: {{candidate.candidateState?.name}}" [ngClass]="{'open-fiber': candidate.candidateState?.name== 'Open', 'archive-fiber': candidate.candidateState?.name== 'Archive'}">fiber_manual_record</mat-icon>
+            matTooltip="{{'Status' | translate}}: {{candidate.candidateState?.name | translate}}" [ngClass]="{'open-fiber': candidate.candidateState?.name== 'Open', 'archive-fiber': candidate.candidateState?.name== 'Archive'}">fiber_manual_record</mat-icon>
   <div (click)="clickAvatar()" class="avatar-hover">
-    <mat-icon *ngIf="isClosedIcon" (click)="clickClose(); $event.stopPropagation()" class="close-icon-image" matTooltip="Delete Candidate">cancel</mat-icon>
+    <mat-icon *ngIf="isClosedIcon" (click)="clickClose(); $event.stopPropagation()" class="close-icon-image" [matTooltip]="'Delete Candidate' | translate">cancel</mat-icon>
     <mat-icon *ngIf="isEditedIcon" (click)="clickEdit()" class="edit-icon-image">create</mat-icon>
     <!--<mat-icon *ngIf="isMoreIcon" (click)="clickEdit()" class="more-icon-image">apps</mat-icon>-->
   </div>

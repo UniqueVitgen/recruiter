@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import {NavbarLink} from '../../../classes/html/navbar-link';
+import {TranslateWorker} from '../../../workers/translate/translate.worker';
 
 @Component({
   selector: 'app-navbar-itchar',
@@ -15,7 +16,7 @@ export class NavbarItcharComponent implements OnInit {
     {routerLink: '/interview/0', title: 'Interview', isActive: false}
   ];
 
-  constructor() { }
+  constructor(public translateWorker: TranslateWorker) { }
 
   ngOnInit() {
   }
