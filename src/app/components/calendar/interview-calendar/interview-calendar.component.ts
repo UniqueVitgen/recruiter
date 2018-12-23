@@ -1,4 +1,4 @@
-import {Component, HostListener, Input, OnChanges, OnInit, SimpleChanges, ViewChild} from '@angular/core';
+import {Component, EventEmitter, HostListener, Input, OnChanges, OnInit, Output, SimpleChanges, ViewChild} from '@angular/core';
 import * as moment from 'moment';
 import {Moment} from 'moment';
 import {MatDialog} from '@angular/material';
@@ -105,8 +105,17 @@ export class InterviewCalendarComponent implements OnInit, OnChanges {
   // selected: string;
   // appointmentsData = [];
   @Input() inteviews: InterviewExtended[];
+  @Output('changeInterviews') outputChangeInterviews: EventEmitter<any> = new EventEmitter();
   public calendarEventList: CalendarEvent[];
-  public calendarOptions: Options;
+  public calendarOptions: Options = {
+    editable: true,
+    eventLimit: false,
+    header: {
+      left: 'prev,next today',
+      center: 'title',
+      right: 'month,agendaWeek,agendaDay,listMonth'
+    }
+  };
   @ViewChild(CalendarComponent) ucCalendar: CalendarComponent;
 
   constructor(private dialog: MatDialog,
@@ -126,13 +135,44 @@ export class InterviewCalendarComponent implements OnInit, OnChanges {
       // this.nextMonth();
     }
   }
-  addInterview() {
-    this.dialog.open(InterviewModalComponent, {
+  addInterview(event: CustomEvent) {
+    console.log('add interview', event);
+    console.log('event.detail.date', event.detail.date.toDate());
+    const dialogRef = this.dialog.open(InterviewModalComponent, {
       data: <InterviewDialogData> {
+        sourceDate: event.detail.date.toDate(),
         fixedCandidate: false,
         isEdit: false
       }
     });
+    dialogRef.afterClosed().subscribe(res => {
+      this.outputChangeInterviews.emit(null);
+    });
+  }
+  changeInterview(event) {
+    console.log('change event', event);
+    const dialogRef = this.dialog.open(InterviewModalComponent, {
+      data: <InterviewDialogData> {
+        sourceDate: event.detail.event.interview.planDate,
+        fixedCandidate: false,
+        isEdit: true,
+        sourceInterview: event.detail.event.interview
+      }
+    });
+    dialogRef.afterClosed().subscribe(res => {
+      this.outputChangeInterviews.emit(null);
+    });
+  }
+  dropInterview(event) {
+    console.log('drop Interview', event);
+    if (event) {
+      const startTime = event.detail.event.start.format('YYYY-MM-DD HH:mm:ss');
+      const interview = event.detail.event.interview;
+      interview.planDate = startTime;
+      this.outputChangeInterviews.emit(interview);
+    } else {
+      this.outputChangeInterviews.emit(null);
+    }
   }
 
   ngOnInit() {
@@ -145,13 +185,6 @@ export class InterviewCalendarComponent implements OnInit, OnChanges {
         center: 'title',
         right: 'month,agendaWeek,agendaDay,listMonth'
       }
-      ,
-      events: [{
-        title: 'All Day Event',
-        start: dateObj.getUTCFullYear() + '-' + (dateObj.getUTCMonth() + 1) +  '-09T16:00:00',
-        end: dateObj.getUTCFullYear() + '-' + (dateObj.getUTCMonth() + 1) +  '-09T19:00:00'
-      }
-      ]
     };
     // this.createCalendar(this.date);
     // this.vacancyService.get(0).subscribe(vacancyRes => {
@@ -169,13 +202,19 @@ export class InterviewCalendarComponent implements OnInit, OnChanges {
     // });
     // this.selected  = this.MONTH;
   }
-
-  ngOnChanges(changes: SimpleChanges): void {
+  clickButton(event) {
+    console.log('click button', event);
+  }
+  getCalendarEvents() {
     if (this.inteviews) {
       this.calendarEventList = this.interviewWorker.convertInterviewListToEventList(this.inteviews);
-      this.calendarOptions.events = this.calendarEventList;
-      console.log(this.calendarEventList);
+      console.log('calendarEventList', this.calendarEventList);
+      // this.calendarOptions.events = this.calendarEventList;sole.log(this.calendarEventList);
     }
+  }
+
+  ngOnChanges(changes: SimpleChanges): void {
+    this.getCalendarEvents();
   }
 
 

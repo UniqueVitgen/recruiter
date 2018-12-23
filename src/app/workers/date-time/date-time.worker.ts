@@ -1,5 +1,7 @@
 import {Inject, Injectable, LOCALE_ID} from '@angular/core';
 import {DatePipe} from '@angular/common';
+import {TimeInput} from '../../classes/html/dateTime/time-input';
+import {DateInput} from '../../classes/html/dateTime/date-input';
 
 @Injectable({
   providedIn: 'root'
@@ -39,7 +41,14 @@ export class DateTimeWorker {
       return this.getDate(dateWithTime, 'dd MMMM yyyy') + ' at ' + this.getTime(dateWithTime);
     }
   }
-  parseTimeString(timeString: string): {hours: number, minutes: number} {
+  parseTimeObject(timeObject: Date) {
+    timeObject = new Date(timeObject);
+    return <TimeInput> {
+      minutes: timeObject.getMinutes(),
+      hours: timeObject.getHours()
+    };
+  }
+  parseTimeString(timeString: string): TimeInput {
     const hours = timeString.substr(0, timeString.indexOf(':'));
     const minutes = timeString.substr(timeString.indexOf(':') + 1);
     return {
@@ -47,7 +56,7 @@ export class DateTimeWorker {
       minutes: parseInt(minutes)
     };
   }
-  parseDate(date: Date): {day: number, month: number, year: number} {
+  parseDate(date: Date): DateInput {
     return {
       day: date.getDate(),
       month: date.getMonth(),

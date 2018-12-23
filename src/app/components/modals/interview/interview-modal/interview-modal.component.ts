@@ -56,13 +56,16 @@ export class InterviewModalComponent implements OnInit {
     private canidateService: CandidateService,
     public dialogRef: MatDialogRef<InterviewModalComponent>,
     private dateTimeWorker: DateTimeWorker,
-    private typeCheckingWorker: TypeCheckingWorker,
+    public typeCheckingWorker: TypeCheckingWorker,
     public userWorker: UserWorker,
     private fb: FormBuilder,
     @Inject(MAT_DIALOG_DATA) public data: InterviewDialogData ) {
     if (this.data) {
       if ( this.data.isEdit) {
         this.editedInterview = Object.assign(new Interview(), this.data.sourceInterview);
+        this.sourceVacancy = this.editedInterview.vacancy;
+        this.editedCandidate = this.editedInterview.candidate;
+        this.getVacanccies();
       } else {
         this.editedInterview = new Interview();
       }
@@ -75,6 +78,10 @@ export class InterviewModalComponent implements OnInit {
         this.editedInterview.candidateId = this.data.sourceCandidate.id;
         this.editedCandidate = this.typeCheckingWorker.parseObject(this.data.sourceCandidate);
         this.getVacanccies();
+      }
+      if(this.data.sourceDate) {
+        this.planDate.dateDate = new Date(this.data.sourceDate);
+        this.planDate.timeString = this.dateTimeWorker.getTime(this.data.sourceDate);
       }
     } else {
       this.editedInterview = new Interview();
@@ -103,6 +110,11 @@ export class InterviewModalComponent implements OnInit {
   }
   ngOnInit() {
   }
+  updateDateTime() {
+    this.updateDate();
+    this.updateTime();
+    this.setPlaneDate();
+  }
   updateDate() {
     if (this.planDate.dateDate) {
       const dateInput = <DateInput> this.dateTimeWorker.parseDate(this.planDate.dateDate);
@@ -117,7 +129,10 @@ export class InterviewModalComponent implements OnInit {
     this.getVacanccies();
   }
   setPlaneDate() {
-    this.editedInterview.planDate = new Date(this.planDate.value.year, this.planDate.value.month, this.planDate.value.day, this.planDate.value.hours, this.planDate.value.minutes).toDateString();
+    if (this.planDate.value.year && this.planDate.value.hours) {
+      this.editedInterview.planDate = new Date(this.planDate.value.year, this.planDate.value.month, this.planDate.value.day, this.planDate.value.hours, this.planDate.value.minutes).toISOString();
+      const timeInput = this.dateTimeWorker.parseTimeString(this.editedInterview.planDate)
+    }
   }
   updateTime() {
     const timeInput = <TimeInput> this.dateTimeWorker.parseTimeString(this.planDate.timeString);
@@ -129,6 +144,8 @@ export class InterviewModalComponent implements OnInit {
   }
 
   addInterview() {
+    this.updateDateTime();
+    console.log(this.planDate);
     console.log('editedInterveiw', this.editedInterview);
     this.editedInterview.candidateId = this.editedCandidate.id;
     this.editedInterview.vacancyId = this.sourceVacancy.id;
@@ -140,6 +157,23 @@ export class InterviewModalComponent implements OnInit {
       };
       this.dialogRef.close(this.interviewResult);
     });
+  }
+  editInterview() {
+    this.updateDateTime();
+    this.editedInterview.candidateId = this.editedCandidate.id;
+    this.editedInterview.vacancyId = this.sourceVacancy.id;
+    this.interviewService.update(this.editedInterview).subscribe(resCandidate => {
+      this.interviewResult = {
+        isEdit: false,
+        resObject: null,
+        success: true
+      };
+      this.dialogRef.close(this.interviewResult);
+    });
+  }
+
+  compareObjects(o1: any, o2: any): boolean {
+    return o1.name === o2.name && o1.id === o2.id;
   }
 
 }

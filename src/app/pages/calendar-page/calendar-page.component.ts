@@ -1,7 +1,7 @@
 import {Component, Input, OnInit} from '@angular/core';
 import * as moment from 'moment';
 import {InterviewService} from '../../services/interview/interview.service';
-import {InterviewExtended} from '../../classes/interview';
+import {Interview, InterviewExtended} from '../../classes/interview';
 
 
 @Component({
@@ -17,11 +17,20 @@ export class CalendarPageComponent implements OnInit {
   }
 
   getInterviews() {
+    console.log('getInterviews');
     this.interviewService.getAll().subscribe(resInterviews => {
       this.interviews = resInterviews;
     });
-    // this.interviewService.getAll().subscribe(res => {
-    //   console.log(res);
-    // });
+  }
+  changeInterviews(event: InterviewExtended) {
+    console.log('event', event);
+    if (event) {
+      this.interviewService.update(event).subscribe(res => {
+        this.getInterviews();
+      });
+    }
+    else {
+      this.getInterviews();
+    }
   }
 }
