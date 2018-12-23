@@ -1,4 +1,5 @@
 <!-- <mat-card> -->
+<!--suppress ALL -->
 <div class="row">
   <div class="col-12 col-md-12">
     <app-candidate-avatar [src]="candidateWorker.generatePhotoUrl(photo)" [candidate]="candidate" [isStatus]="true"></app-candidate-avatar>
@@ -11,19 +12,20 @@
 <!--<div class="row">-->
   <!--<div class="col-12 col-md-6">-->
     <br>
-    <mat-card>
+    <mat-card class="backgroundCard">
       <!--<p>-->
       <div *ngIf="!readonly">
-        <mat-form-field class="example-full-width">
-          <input (blur)="onFocusoutAnyInput()" [(ngModel)]="candidate.name"  matInput placeholder="Name">
+
+        <mat-form-field class="example-full-width custom-form-field">
+          <input (blur)="onFocusoutAnyInput()"   [(ngModel)]="candidate.name"  matInput placeholder="Name" readonly="false" >
         </mat-form-field>
-        <mat-form-field class="example-full-width">
+        <mat-form-field class="example-full-width custom-form-field">
           <input (blur)="onFocusoutAnyInput()" [(ngModel)]="candidate.surname" matInput placeholder="Surname" >
         </mat-form-field>
-        <mat-form-field class="example-full-width">
+        <mat-form-field class="example-full-width custom-form-field">
           <input (blur)="onFocusoutAnyInput()" matInput placeholder="Position">
         </mat-form-field>
-        <mat-form-field class="example-full-width">
+        <mat-form-field class="example-full-width custom-form-field">
           <!--<input (blur)="onFocusoutAnyInput()" [(ngModel)]="candidate.candidateState.name" matInput placeholder="Status"> -->
           <mat-select [(ngModel)]="candidate.candidateState.name" matInput (blur)="onFocusoutAnyInput()">
             <mat-option *ngFor="let state of setStates" [value]="state" >{{state}}</mat-option>
@@ -58,7 +60,7 @@
       <!--<p>-->
     </mat-card>
     <br>
-    <mat-card>
+    <mat-card class="backgroundCard">
       <mat-card-title>Contacts</mat-card-title>
       <mat-card-content>
         <div *ngIf="!readonly">

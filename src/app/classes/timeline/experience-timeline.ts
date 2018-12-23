@@ -7,4 +7,5 @@ export class ExperienceTimeline extends BaseTimeline {
   dateTo: Date;
   jobPosition: string;
   comment: string;
+  createdAt?: Date;
 }

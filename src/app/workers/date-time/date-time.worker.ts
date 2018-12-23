@@ -29,4 +29,10 @@ export class DateTimeWorker {
       return this.datePipe.transform(date, format);
     }
   }
+
+  getDateWithTime(dateWithTime, format?) {
+    if (dateWithTime) {
+      return this.getDate(dateWithTime, 'dd MMMM yyyy') + ' at ' + this.getTime(dateWithTime);
+    }
+  }
 }

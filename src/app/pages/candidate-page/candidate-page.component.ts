@@ -74,7 +74,7 @@ export class CandidatePageComponent implements OnInit {
       });
     } else if (this.eventNoteWorker.isNote(object)) {
       this.feedbackService.update(object).subscribe(res => {
-        this.getCandidate();
+        // this.getCandidate();
       });
     } else if (this.eventNoteWorker.isExperience(object)) {
       this.candidate.experiences = this.candidate.experiences.map((attachment) => {
@@ -85,10 +85,12 @@ export class CandidatePageComponent implements OnInit {
         }
       });
     } else if (this.eventNoteWorker.isInterview(object)) {
-      this.interviewService.update(object).subscribe( res => { this.getCandidate(); });
+      this.interviewService.update(object).subscribe( res => {
+        // this.getCandidate();
+      });
     }
     this.candidateService.update(this.candidate).subscribe(resMessage => {
-      this.getCandidate();
+      // this.getCandidate();
     });
   }
   addTimelineItem(candidate: Candidate) {

@@ -1,5 +1,6 @@
 import {Component, EventEmitter, Input, OnInit, Output} from '@angular/core';
 import {ExperienceTimeline} from '../../../../classes/timeline/experience-timeline';
+import {DateTimeWorker} from '../../../../workers/date-time/date-time.worker';
 
 @Component({
   selector: 'app-experience-candidate-timeline-item',
@@ -13,10 +14,12 @@ export class ExperienceCandidateTimelineItemComponent implements OnInit {
   @Output() deleteEvent: EventEmitter<any> = new EventEmitter();
 
   editedExperience: ExperienceTimeline;
-  constructor() { }
+  viewOfDate: string;
+  constructor(private dateTimeWorker: DateTimeWorker) { }
 
   ngOnInit() {
     this.editedExperience = Object.assign({}, this.experience);
+    this.viewOfDate = this.dateTimeWorker.getDateWithTime(this.editedExperience.createdAt);
   }
 
   onFocusoutAnyInput(value: boolean = true) {

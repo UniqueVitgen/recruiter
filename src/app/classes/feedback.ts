@@ -8,4 +8,5 @@ export class Feedback extends EventNote{
   candidateId: number;
   userId: number;
   feedbackState: FeedbackState = new FeedbackState();
+  createdAt?: Date;
 }

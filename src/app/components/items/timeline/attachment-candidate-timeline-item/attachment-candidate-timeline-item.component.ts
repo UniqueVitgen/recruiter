@@ -2,6 +2,7 @@ import {Component, EventEmitter, Input, OnInit, Output} from '@angular/core';
 import {AttachmentTimeline} from '../../../../classes/timeline/attachment-timeline';
 import {Attachment} from '../../../../classes/attachment';
 import {FileWorker} from '../../../../workers/file/file.worker';
+import {DateTimeWorker} from '../../../../workers/date-time/date-time.worker';
 
 @Component({
   selector: 'app-attachment-candidate-timeline-item',
@@ -14,11 +15,14 @@ export class AttachmentCandidateTimelineItemComponent implements OnInit {
   editedAttachment: Attachment;
   @Output() changeCandidate: EventEmitter<any> = new EventEmitter();
   @Output() deleteEvent: EventEmitter<any> = new EventEmitter();
+  viewOfDate: string;
 
-  constructor(public fileWorker: FileWorker) { }
+  constructor(public fileWorker: FileWorker, private dateTimeWorker: DateTimeWorker) { }
 
   ngOnInit() {
     this.editedAttachment = Object.assign({}, this.attachment);
+    this.viewOfDate = this.dateTimeWorker.getDateWithTime(this.editedAttachment.createdAt);
+
   }
 
   onFocusoutAnyInput(value: boolean = true) {

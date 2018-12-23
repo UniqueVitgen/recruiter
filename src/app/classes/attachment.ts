@@ -5,4 +5,5 @@ export class Attachment extends EventNote {
   attachmentType: AttachmentType;
   filePath: string;
   data?: File;
+  createdAt?: Date;
 }

@@ -5,7 +5,7 @@
 <mat-card>
   <!--<br>-->
   <!--<perfect-scrollbar style="max-height: 600px;">-->
-    <div *ngFor="let eventNote of timelineNotes; let i = index" class="example-item">
+    <div *ngFor="let eventNote of editedTimeLine; let i = index" class="example-item">
       <app-interview-candidate-timeline-item *ngIf="checkIfNoteIsInterview(eventNote)" [candidate]="candidate" [interview]="eventNote" (changeCandidate)="changeCandidate($event, i)" (deleteEvent)="deleteEvent(i)"></app-interview-candidate-timeline-item>
       <app-attachment-candidate-timeline-item *ngIf="checkIfNoteISCV(eventNote)" [attachment]="eventNote" [candidate]="candidate" (changeCandidate)="changeCandidate($event, i)" (deleteEvent)="deleteEvent(i)"></app-attachment-candidate-timeline-item>
       <app-image-candiate-timeline-item *ngIf="checkIfNoteISImg(eventNote)" [attachment]="eventNote" [candidate]="candidate" (changeCandidate)="changeCandidate($event, i)" (deleteEvent)="deleteEvent(i)"></app-image-candiate-timeline-item>

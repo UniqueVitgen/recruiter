@@ -1,6 +1,7 @@
 import {Component, EventEmitter, Input, OnInit, Output} from '@angular/core';
 import {InterviewTimeline} from '../../../../classes/timeline/interview-timeline';
 import {Interview} from '../../../../classes/interview';
+import {DateTimeWorker} from '../../../../workers/date-time/date-time.worker';
 
 @Component({
   selector: 'app-interview-candidate-timeline-item',
@@ -13,9 +14,12 @@ export class InterviewCandidateTimelineItemComponent implements OnInit {
   @Output() deleteEvent: EventEmitter<any> = new EventEmitter();
 
   editedInterview: Interview;
-  constructor() { }
+  viewOfDate: string;
+
+  constructor(private dateTimeWorker: DateTimeWorker) { }
   ngOnInit() {
     this.editedInterview = Object.assign({}, this.interview);
+    this.viewOfDate = this.dateTimeWorker.getDateWithTime(this.editedInterview.createdAt);
   }
   onFocusoutAnyInput(value: boolean = true) {
     if (value) {
