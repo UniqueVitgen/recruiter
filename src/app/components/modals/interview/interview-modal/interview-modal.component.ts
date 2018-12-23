@@ -59,6 +59,9 @@ export class InterviewModalComponent implements OnInit {
 
   ngOnInit() {
   }
+  updateTime(event) {
+    console.log(event);
+  }
 
   addInterview() {
     this.interviewService.add(this.editedInterview).subscribe(resCandidate => {

@@ -1,3 +1,4 @@
+<mat-label style="color: gray;">  {{viewOfDate}}</mat-label>
 <mat-card >
   <mat-icon class="delete" matTooltip="Delete" matTooltip="Delete" (click)="delete()">close</mat-icon>
   <mat-card-title><mat-icon class="myIcon">insert_drive_file</mat-icon> Image</mat-card-title>
@@ -8,7 +9,7 @@
 
     <!--<app-candidate-attachment></app-candidate-attachment>-->
     <mat-form-field class="example-full-width">
-      <textarea (blur)="onFocusoutAnyInput()" matInput placeholder="Comment" [(ngModel)]="editedAttachment.comment"></textarea>
+      <textarea (blur)="onFocusoutAnyInput()" matInput placeholder="Comment"></textarea>
     </mat-form-field>
   </mat-card-content>
 </mat-card>
