@@ -26,16 +26,23 @@ textarea {
   }
 }
 
-.mat-form-field {
-  .custom-timepicker-toogle {
-    button {
-      position: absolute;
-      right: 0;
+//.mat-form-field {
+  .custom-timepicker-toggle {
+    &, &.mat-button {
       width: 20px;
-      top: 0;
       height: 20px;
-      padding: 0;
-      color: rgba(0, 0, 0, 0.54);
+      .ngx-material-timepicker-toggle {
+        padding: 0;
+        mat-icon {
+          font-size: 20px !important;
+          border-color: rgba(0, 0, 0, 0.42);
+          color: rgba(0, 0, 0, 0.54);
+        }
+      }
     }
   }
+//}
+
+.custom-timepicker-toggle {
+
 }

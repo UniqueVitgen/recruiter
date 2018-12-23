@@ -17,20 +17,42 @@
         <mat-datepicker-toggle name="dateSuffix" matSuffix [for]="picker"></mat-datepicker-toggle>
         <mat-datepicker  #picker></mat-datepicker>
       </mat-form-field>
-      <mat-form-field class="example-full-width">
+      <!--<mat-form-field class="example-full-width">-->
 
-      <input matInput atp-time-picker>
-      </mat-form-field>
-      <ejs-timepicker placeholder='Select a time' [showClearButton]="false"></ejs-timepicker>
+      <!--<input placeholder="Start Time" matInput atp-time-picker>-->
+        <!--<button mat-button matSuffix mat-icon-button aria-label="Pick Start Time">-->
+          <!--<mat-icon>access_time</mat-icon>-->
+        <!--</button>-->
+      <!--</mat-form-field>-->
+      <!--<mat-form-field class="example-full-width">-->
+
+        <!--<input type="time" placeholder="End time" matInput atp-time-picker>-->
+        <!--<button mat-button matSuffix mat-icon-button aria-label="Pick End Time">-->
+          <!--<mat-icon>access_time</mat-icon>-->
+        <!--</button>-->
+      <!--</mat-form-field>-->
+      <!--<ejs-timepicker placeholder='Select a time' [showClearButton]="false"></ejs-timepicker>-->
       <!--<mdb-time-picker [buttonLabel]="'Done'" [twelvehour]="false" [darktheme]="true" [placeholder]="'Selected time'" [label]="'Dark version, 24hours'"></mdb-time-picker>-->
       <!--<md2-datepicker #birthday></md2-datepicker>-->
       <!--<button [md2DatepickerToggle]="birthday"></button>-->
 
-      <!--<mat-form-field class="example-full-width">-->
-      <!--<input matInput [disableClick]="true" readonly [ngxTimepicker]="toggleTimepicker">-->
+      <mat-form-field class="example-full-width">
+      <input matInput  [format]="24" [ngxTimepicker]="toggleTimepicker">
+
+        <!--<button (click)="toggleTimepicker.focus()" mat-button matSuffix mat-icon-button aria-label="Pick Start Time">-->
+          <!--<mat-icon>access_time</mat-icon>-->
+        <!--</button>-->
+        <button class="custom-timepicker-toggle" mat-button matSuffix mat-icon-button aria-label="Pick End Time">
+        <ngx-material-timepicker-toggle  [for]="toggleTimepicker">
+          <!--<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 30 30" width="30px" height="30px" ngxMaterialTimepickerToggleIcon>-->
+            <!--<path d="M15,3C8.373,3,3,8.373,3,15c0,6.627,5.373,12,12,12s12-5.373,12-12C27,8.373,21.627,3,15,3z M16,16H7.995 C7.445,16,7,15.555,7,15.005v-0.011C7,14.445,7.445,14,7.995,14H14V5.995C14,5.445,14.445,5,14.995,5h0.011 C15.555,5,16,5.445,16,5.995V16z"/>-->
+          <!--</svg>-->
+          <mat-icon ngxMaterialTimepickerToggleIcon>access_time</mat-icon>
+        </ngx-material-timepicker-toggle>
+        </button>
         <!--<ngx-material-timepicker-toggle class="custom-timepicker-toogle" [for]="toggleTimepicker"></ngx-material-timepicker-toggle>-->
-      <!--<ngx-material-timepicker #toggleTimepicker></ngx-material-timepicker>-->
-      <!--</mat-form-field>-->
+      <ngx-material-timepicker  [ngxMaterialTimepickerTheme]="darkTheme" #toggleTimepicker></ngx-material-timepicker>
+      </mat-form-field>
 
       <br>
       <mat-form-field class="example-full-width">

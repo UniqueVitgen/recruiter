@@ -5,6 +5,7 @@ import {Interview} from '../../../../classes/interview';
 import {BaseDialogResult} from '../../../../interfaces/dialog/result/base-dialog-result';
 import {InterviewService} from '../../../../services/interview/interview.service';
 import {FormBuilder, FormGroup, Validators} from '@angular/forms';
+import {NgxMaterialTimepickerTheme} from 'ngx-material-timepicker/src/app/material-timepicker/models/ngx-material-timepicker-theme.interface';
 
 @Component({
   selector: 'app-interview-modal',
@@ -16,6 +17,20 @@ export class InterviewModalComponent implements OnInit {
   public editedInterview: Interview;
   public interviewResult: BaseDialogResult<Interview>;
   public interviewForm: FormGroup;
+  darkTheme: NgxMaterialTimepickerTheme = {
+    container: {
+      // bodyBackgroundColor: '#424242',
+      buttonColor: '#4285f4'
+    },
+    dial: {
+      dialBackgroundColor: '#4285f4',
+    },
+    clockFace: {
+      // clockFaceBackgroundColor: '#555',
+      clockHandColor: '#4285f4',
+      // clockFaceTimeInactiveColor: '#fff'
+    }
+  };
 
   constructor(
     private interviewService: InterviewService,
