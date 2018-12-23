@@ -29,6 +29,7 @@ export class JobDescriptionShortInfoComponent implements OnInit {
           isEdit: true,
           dialogWindowTitle: 'Edit'
         },
+      minWidth: '700px',
       disableClose: true
       }
     );

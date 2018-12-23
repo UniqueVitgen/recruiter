@@ -60,5 +60,18 @@
   "OPEN" : "Open",
   "CLOSED" : "Closed",
   "Create": "Create",
-  "Edit": "Edit"
+  "Edit": "Edit",
+  "Add new" : "Add new",
+  "Info" : "Info",
+  "Total number of candidates" : "Total number of candidates",
+  "Description" : "Description",
+  "Text of description will be here" : "Text of description will be here",
+  "Requirements" : "Requirements",
+  "Required" : "Required",
+  "Public" : "Public",
+  "Selected Candidates" : "Selected candidates",
+  "Possible Candidates" : "Possible candidates",
+  "Edit Vacancy" : "Edit vacancy",
+  "Add Vacancy" : "Add vacancy",
+  "CLOSE" : "Close"
 }
