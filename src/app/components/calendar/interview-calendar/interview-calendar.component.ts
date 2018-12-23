@@ -166,7 +166,7 @@ export class InterviewCalendarComponent implements OnInit, OnChanges {
   dropInterview(event) {
     console.log('drop Interview', event);
     if (event) {
-      const startTime = event.detail.event.start.format('YYYY-MM-DD HH:mm:ss');
+      const startTime = new Date(event.detail.event.start._d);
       const interview = event.detail.event.interview;
       interview.planDate = startTime;
       this.outputChangeInterviews.emit(interview);

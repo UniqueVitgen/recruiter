@@ -2,6 +2,10 @@ import {Inject, Injectable, LOCALE_ID} from '@angular/core';
 import {DatePipe} from '@angular/common';
 import {TimeInput} from '../../classes/html/dateTime/time-input';
 import {DateInput} from '../../classes/html/dateTime/date-input';
+import * as moment from 'moment';
+import _date = moment.unitOfTime._date;
+import {DateTimeForm} from '../../classes/html/dateTime/date-time-form';
+import {DateTimeInput} from '../../classes/html/dateTime/date-time-input';
 
 @Injectable({
   providedIn: 'root'
@@ -40,6 +44,13 @@ export class DateTimeWorker {
     if (dateWithTime) {
       return this.getDate(dateWithTime, 'dd MMMM yyyy') + ' at ' + this.getTime(dateWithTime);
     }
+  }
+  parseDateToDateTimeForm(date: Date): DateTimeForm {
+    return {
+      timeString: this.getTime(date),
+      dateDate: new Date(date),
+      value: new DateTimeInput()
+    };
   }
   parseTimeObject(timeObject: Date) {
     timeObject = new Date(timeObject);
