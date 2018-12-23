@@ -11,7 +11,7 @@ import {ServiceData} from '../../enums/service-data.enum';
 export class ConfigService {
   // static apiUrl = 'https://virtserver.swaggerhub.com/ksenya96/hr_api/1.0.0/';
   static apiUrl = 'http://localhost:8081/';
-  static serviceData: ServiceData = ServiceData.Mock;
+  static serviceData: ServiceData = ServiceData.Real;
 
   constructor(private http: HttpClient
     // ,private sessionService: SessionService

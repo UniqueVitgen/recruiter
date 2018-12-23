@@ -14,6 +14,8 @@ import {CandidateService} from '../../../../services/candidate/candidate.service
 import {Vacancy} from '../../../../classes/vacancy';
 import {Candidate} from '../../../../classes/candidate';
 import {TypeCheckingWorker} from '../../../../workers/type-checking/type-checking.worker';
+import {CandidateWorker} from '../../../../workers/candidate/candidate.worker';
+import {UserWorker} from '../../../../workers/user/user.worker';
 
 @Component({
   selector: 'app-interview-modal',
@@ -27,6 +29,7 @@ export class InterviewModalComponent implements OnInit {
   public interviewForm: FormGroup;
   public vacancies: Vacancy[];
   public sourceVacancy: Vacancy;
+  public candidates: Candidate[];
   darkTheme: NgxMaterialTimepickerTheme = {
     container: {
       // bodyBackgroundColor: '#424242',
@@ -54,6 +57,7 @@ export class InterviewModalComponent implements OnInit {
     public dialogRef: MatDialogRef<InterviewModalComponent>,
     private dateTimeWorker: DateTimeWorker,
     private typeCheckingWorker: TypeCheckingWorker,
+    public userWorker: UserWorker,
     private fb: FormBuilder,
     @Inject(MAT_DIALOG_DATA) public data: InterviewDialogData ) {
     if (this.data) {
@@ -62,8 +66,16 @@ export class InterviewModalComponent implements OnInit {
       } else {
         this.editedInterview = new Interview();
       }
-      this.editedInterview.candidateId = this.data.sourceCandidate.id;
-      this.editedCandidate = this.typeCheckingWorker.parseObject(this.data.sourceCandidate);
+      if (this.data.fixedCandidate) {
+
+      } else {
+        this.getCandidates();
+      }
+      if (this.data.sourceCandidate) {
+        this.editedInterview.candidateId = this.data.sourceCandidate.id;
+        this.editedCandidate = this.typeCheckingWorker.parseObject(this.data.sourceCandidate);
+        this.getVacanccies();
+      }
     } else {
       this.editedInterview = new Interview();
     }
@@ -72,7 +84,6 @@ export class InterviewModalComponent implements OnInit {
       fromTime: ['', Validators.compose([Validators.required])],
       to: ['', Validators.compose([Validators.required])]
     });
-    this.getVacanccies();
     this.updateDate();
     this.updateTime();
   }
@@ -83,6 +94,11 @@ export class InterviewModalComponent implements OnInit {
   getVacanccies() {
     this.canidateService.getVacancies(this.editedCandidate).subscribe(resVacancies => {
       this.vacancies = resVacancies;
+    });
+  }
+  getCandidates() {
+    this.canidateService.getAll().subscribe(res => {
+      this.candidates = res;
     });
   }
   ngOnInit() {
@@ -96,6 +112,9 @@ export class InterviewModalComponent implements OnInit {
       console.log(this.planDate.value);
     }
     this.setPlaneDate();
+  }
+  changeCandidate() {
+    this.getVacanccies();
   }
   setPlaneDate() {
     this.editedInterview.planDate = new Date(this.planDate.value.year, this.planDate.value.month, this.planDate.value.day, this.planDate.value.hours, this.planDate.value.minutes).toDateString();

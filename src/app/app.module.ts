@@ -126,7 +126,8 @@ export function HttpLoaderFactory(http: HttpClient) {
     NoteCandidateModalComponent,
     JobDashboardExpansionPanelComponent,
     ImageCandiateTimelineItemComponent,
-    DeleteVacancyDialogComponent
+    DeleteVacancyDialogComponent,
+    CalendarPageComponent
   ],
   imports: [
     BrowserModule,

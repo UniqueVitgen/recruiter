@@ -5,6 +5,10 @@ import {DatePipe} from '@angular/common';
   providedIn: 'root'
 })
 export class DateTimeWorker {
+  public millisecond = 1;
+  public second = 1000;
+  public minute =  60 * 1000;
+  public hour = 60 * 60 * 1000;
   public datePipe: DatePipe;
   constructor(
     @Inject(LOCALE_ID) private locale: string) {

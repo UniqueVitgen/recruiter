@@ -15,6 +15,9 @@ import {InterviewService} from '../../../services/interview/interview.service';
 import {DateTimeWorker} from '../../../workers/date-time/date-time.worker';
 import {CalendarComponent} from 'ng-fullcalendar';
 import { Options } from 'fullcalendar';
+import {CalendarEvent} from '../../../classes/html/calendar/calendar-event';
+import {InterviewWorker} from '../../../workers/interview/interview.worker';
+import {InterviewDialogData} from '../../../interfaces/dialog/init/interview-dialog-data';
 
 
 @Component({
@@ -102,6 +105,7 @@ export class InterviewCalendarComponent implements OnInit, OnChanges {
   // selected: string;
   // appointmentsData = [];
   @Input() inteviews: InterviewExtended[];
+  public calendarEventList: CalendarEvent[];
   public calendarOptions: Options;
   @ViewChild(CalendarComponent) ucCalendar: CalendarComponent;
 
@@ -109,6 +113,7 @@ export class InterviewCalendarComponent implements OnInit, OnChanges {
               private vacancyService: VacancyService,
               private candidateService: CandidateService,
               public dateTimeWorker: DateTimeWorker,
+              private interviewWorker: InterviewWorker,
               private interviewService: InterviewService) {
     // this.selected  = this.MONTH;
   }
@@ -123,6 +128,10 @@ export class InterviewCalendarComponent implements OnInit, OnChanges {
   }
   addInterview() {
     this.dialog.open(InterviewModalComponent, {
+      data: <InterviewDialogData> {
+        fixedCandidate: false,
+        isEdit: false
+      }
     });
   }
 
@@ -162,6 +171,11 @@ export class InterviewCalendarComponent implements OnInit, OnChanges {
   }
 
   ngOnChanges(changes: SimpleChanges): void {
+    if (this.inteviews) {
+      this.calendarEventList = this.interviewWorker.convertInterviewListToEventList(this.inteviews);
+      this.calendarOptions.events = this.calendarEventList;
+      console.log(this.calendarEventList);
+    }
   }
 
 

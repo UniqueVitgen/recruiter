@@ -45,7 +45,15 @@
         </button>
       <ngx-material-timepicker (timeSet)="updateTime($event)"  [ngxMaterialTimepickerTheme]="darkTheme" #toggleTimepicker></ngx-material-timepicker>
       </mat-form-field>
-      <mat-form-field>
+      <mat-form-field class="example-full-width" *ngIf="!data.fixedCandidate">
+        <mat-select [(value)]="editedCandidate" (selectionChange)="changeCandidate()">
+          <mat-option *ngFor="let food of candidates" [value]="food">
+            {{userWorker.formatFullName(food)}}
+          </mat-option>
+        </mat-select>
+      </mat-form-field>
+
+      <mat-form-field class="example-full-width">
         <mat-select [(value)]="sourceVacancy">
           <mat-option *ngFor="let food of vacancies" [value]="food">
             {{food.position}}
