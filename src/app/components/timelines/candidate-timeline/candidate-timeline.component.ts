@@ -1,4 +1,4 @@
-import {Component, EventEmitter, Input, OnInit, Output} from '@angular/core';
+import {Component, EventEmitter, Input, OnChanges, OnInit, Output, SimpleChanges} from '@angular/core';
 import {Candidate} from '../../../classes/candidate';
 import {Events} from '../../../classes/events';
 import {EventNote} from '../../../classes/event-note';
@@ -20,9 +20,10 @@ import {ArrayWorker} from '../../../workers/array/array.worker';
   templateUrl: './candidate-timeline.component.html',
   styleUrls: ['./candidate-timeline.component.scss']
 })
-export class CandidateTimelineComponent implements OnInit {
+export class CandidateTimelineComponent implements OnInit, OnChanges {
   @Input() candidate: Candidate;
   @Input() timelineNotes: BaseTimeline[];
+  editedTimeLine: BaseTimeline[] = [];
   @Output('clickClose') outputClickClose: EventEmitter<any> = new EventEmitter();
   @Output('changeTimeline') outputChangeTimeline: EventEmitter<any> = new EventEmitter();
   @Output('addTimelineItem') outputAddTimelineItem: EventEmitter<any> = new EventEmitter();
@@ -59,6 +60,12 @@ export class CandidateTimelineComponent implements OnInit {
     // this.candidateService.update(this.candidate).subscribe();
     this.outputClickClose.emit(i);
     console.log(this.candidate);
+  }
+
+  ngOnChanges(changes: SimpleChanges): void {
+    console.log(this.timelineNotes);
+    this.editedTimeLine = JSON.parse(JSON.stringify(this.timelineNotes));
+    console.log(this.editedTimeLine);
   }
 
 }

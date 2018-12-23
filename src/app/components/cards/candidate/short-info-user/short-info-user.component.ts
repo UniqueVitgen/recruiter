@@ -36,6 +36,7 @@ export class ShortInfoUserComponent implements OnInit, OnChanges {
               public candidateWorker: CandidateWorker,
               public  enumWorker: EnumWorker) { }
 
+
   ngOnInit() {
     this.setStates = this.enumWorker.getValuesFromEnum(CandidateState);
   }

@@ -1,6 +1,7 @@
 import {Component, EventEmitter, Input, OnInit, Output} from '@angular/core';
 import {NoteTimeline} from '../../../../classes/timeline/note-timeline';
 import {Feedback} from '../../../../classes/feedback';
+import {DateTimeWorker} from '../../../../workers/date-time/date-time.worker';
 
 @Component({
   selector: 'app-note-candidate-timeline-item',
@@ -12,9 +13,12 @@ export class NoteCandidateTimelineItemComponent implements OnInit {
   @Output() changeCandidate: EventEmitter<any> = new EventEmitter();
   @Output() deleteEvent: EventEmitter<any> = new EventEmitter();
   editedNote: Feedback;
-  constructor() { }
+  viewOfDate: string;
+  constructor(private dateTimeWorker: DateTimeWorker) { }
   ngOnInit() {
     this.editedNote = Object.assign({}, this.note);
+    this.viewOfDate = this.dateTimeWorker.getDateWithTime(this.editedNote.createdAt);
+
   }
   onFocusoutAnyInput(value: boolean = true) {
     if (value) {

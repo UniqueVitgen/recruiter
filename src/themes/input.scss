@@ -25,3 +25,42 @@ textarea {
     resize: none !important;
   }
 }
+
+.custom-form-field {
+  &.mat-form-field {
+    //.mat-input-element {
+    //  border: 1px solid rgba(0, 0, 0, 0);
+    //}
+    .mat-form-field-underline {
+      visibility: hidden;
+    }
+    .edited-hover-button {
+      visibility: hidden;
+    }
+    &:hover{
+
+      .edited-hover-button {
+        visibility: visible;
+      }
+      .mat-input-element {
+        cursor: pointer;
+      }
+    }
+    &.mat-focused {
+      .edited-hover-button {
+        visibility: visible;
+      }
+      //.mat-input-element {
+      //  border-radius: 3px;
+      //  border: 1px solid black;
+      //  background-color: #fff;
+      //}
+      .mat-form-field-underline {
+        visibility: visible;
+      }
+      //.mat-form-field-label {
+      //  color: black;
+      //}
+    }
+  }
+}

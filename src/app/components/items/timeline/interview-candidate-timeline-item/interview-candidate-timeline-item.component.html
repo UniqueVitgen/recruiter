@@ -1,18 +1,19 @@
-<mat-card>
+<mat-label style="color: gray;">{{viewOfDate}}</mat-label>
+<mat-card class="backgroundCard">
   <mat-icon class="delete"  matTooltip="Delete" (click)="delete()">close</mat-icon>
   <mat-card-title><mat-icon class="myIcon">event</mat-icon> Interview</mat-card-title>
-  <mat-form-field >
+  <mat-form-field class="custom-form-field">
     <input (blur)="onFocusoutAnyInput()" (dateChange)="onFocusoutAnyInput()" matInput [(ngModel)]="editedInterview.planDate" [matDatepicker]="picker1" placeholder="PlanDate">
     <mat-datepicker-toggle name="dateSuffix1" matSuffix [for]="picker1"></mat-datepicker-toggle>
     <mat-datepicker #picker1></mat-datepicker>
   </mat-form-field>
   &nbsp;
-  <mat-form-field >
+  <mat-form-field class="custom-form-field">
     <input (blur)="onFocusoutAnyInput()" (dateChange)="onFocusoutAnyInput()" matInput [(ngModel)]="editedInterview.factDate" [matDatepicker]="picker2" placeholder="FactDate">
-    <mat-datepicker-toggle name="dateSuffix1" matSuffix [for]="picker1"></mat-datepicker-toggle>
+    <mat-datepicker-toggle name="dateSuffix1" matSuffix [for]="picker2"></mat-datepicker-toggle>
     <mat-datepicker #picker2></mat-datepicker>
   </mat-form-field>
-  <mat-form-field class="example-full-width">
+  <mat-form-field class="example-full-width custom-form-field">
     <textarea (blur)="onFocusoutAnyInput()" [(ngModel)]="editedInterview.comment" matInput placeholder="Comment"></textarea>
   </mat-form-field>
 </mat-card>
