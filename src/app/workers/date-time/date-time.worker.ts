@@ -7,6 +7,7 @@ import _date = moment.unitOfTime._date;
 import {DateTimeForm} from '../../classes/html/dateTime/date-time-form';
 import {DateTimeInput} from '../../classes/html/dateTime/date-time-input';
 import {TranslateWorker} from '../translate/translate.worker';
+import {LocalDatePipe} from '../../pipes/local-date/local-date.pipe';
 
 @Injectable({
   providedIn: 'root'
@@ -23,6 +24,7 @@ export class DateTimeWorker {
   }
   constructor(
     @Inject(LOCALE_ID) private locale: string,
+    private localDatePipe: LocalDatePipe,
     private translateWorker: TranslateWorker) {
     this.datePipe = new DatePipe(locale);
   }
@@ -46,9 +48,9 @@ export class DateTimeWorker {
     }
   }
 
-  getDateWithTime(dateWithTime, format?) {
+  getDateWithTime(dateWithTime: Date, format?: string ) {
     if (dateWithTime) {
-      return this.getDate(dateWithTime, 'dd MMMM yyyy') + ' at ' + this.getTime(dateWithTime);
+      return this.getDate(dateWithTime, 'dd MMMM yyyy') + ' ' + this.translateWorker.translateWord('at') + ' ' + this.getTime(dateWithTime);
     }
   }
   getYesterday() {

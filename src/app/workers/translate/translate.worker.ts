@@ -1,5 +1,5 @@
 import {EventEmitter, Injectable} from '@angular/core';
-import {TranslateService} from '@ngx-translate/core';
+import {TranslatePipe, TranslateService} from '@ngx-translate/core';
 import { registerLocaleData } from '@angular/common';
 import localeRussian from '@angular/common/locales/ru';
 import localeEnglish from '@angular/common/locales/en';
@@ -10,13 +10,11 @@ import localeEnglish from '@angular/common/locales/en';
 export class TranslateWorker {
   title: string = 'language';
   changeValue: EventEmitter<any> = new EventEmitter();
-  constructor(public translate: TranslateService) {
-    translate.addLangs(['en', 'ru']);
-    translate.setDefaultLang('en');
-
-    const browserLang = translate.getBrowserLang();
-    this.setLanguage(browserLang.match(/en|ru/) ? browserLang : 'en');
-    this.translate.onLangChange.subscribe(res => {
+  constructor(public translateService: TranslateService) {
+    translateService.addLangs(['en', 'ru']);
+    translateService.setDefaultLang('en');
+    this.setLanguage(this.getLanguage());
+    this.translateService.onLangChange.subscribe(res => {
       this.changeValue.emit(res);
     });
   }
@@ -33,14 +31,19 @@ export class TranslateWorker {
         break;
       }
     }
-    this.translate.use(language);
+    this.translateService.use(language);
   }
 
   getLanguage() {
     let language = localStorage.getItem(this.title);
     if (language == null) {
-      language = 'en';
+      const browserLang = this.translateService.getBrowserLang();
+      language = browserLang.match(/en|ru/) ? browserLang : 'en';
     }
     return language;
+  }
+  translateWord(key) {
+    return this.translateService.instant(key);
+    // this.translatePipe.transform(key);
   }
 }

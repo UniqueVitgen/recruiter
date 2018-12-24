@@ -3,6 +3,7 @@ import {AttachmentTimeline} from '../../../../classes/timeline/attachment-timeli
 import {Attachment} from '../../../../classes/attachment';
 import {CandidateWorker} from '../../../../workers/candidate/candidate.worker';
 import {DateTimeWorker} from '../../../../workers/date-time/date-time.worker';
+import {TranslateWorker} from '../../../../workers/translate/translate.worker';
 
 @Component({
   selector: 'app-image-candiate-timeline-item',
@@ -16,11 +17,14 @@ export class ImageCandiateTimelineItemComponent implements OnInit {
   @Output() changeCandidate: EventEmitter<any> = new EventEmitter();
   @Output() deleteEvent: EventEmitter<any> = new EventEmitter();
 
-  constructor(public candidateWorker: CandidateWorker, private dateTimeWorker: DateTimeWorker) { }
+  constructor(public candidateWorker: CandidateWorker, private dateTimeWorker: DateTimeWorker, private translateWorker: TranslateWorker) { }
 
   ngOnInit() {
     this.editedAttachment = Object.assign({}, this.attachment);
     this.viewOfDate = this.dateTimeWorker.getDateWithTime(this.editedAttachment.createdAt);
+    this.translateWorker.changeValue.subscribe((res) => {
+      this.viewOfDate = this.dateTimeWorker.getDateWithTime(this.editedAttachment.createdAt);
+    });
   }
 
   onFocusoutAnyInput(value: boolean = true) {
