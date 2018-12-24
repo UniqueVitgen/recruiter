@@ -1,27 +1,29 @@
-<mat-card class="candidate-dashboard-item" (click)="goToCandidatePage()">
+<mat-card class="candidate-dashboard-item" (click)="clickableCandidate ?goToCandidatePage():''">
   <!--<mat-card-header>-->
-    <!--&lt;!&ndash;<div mat-card-avatar class="example-header-image"></div>&ndash;&gt;-->
-    <!--<mat-card-title class="font-weight-bold">Name: {{userWorker.formatFullName(candidate)}}</mat-card-title>-->
-    <!--&lt;!&ndash;<mat-card-subtitle>Dog Breed</mat-card-subtitle>&ndash;&gt;-->
+  <!--&lt;!&ndash;<div mat-card-avatar class="example-header-image"></div>&ndash;&gt;-->
+  <!--<mat-card-title class="font-weight-bold">Name: {{userWorker.formatFullName(candidate)}}</mat-card-title>-->
+  <!--&lt;!&ndash;<mat-card-subtitle>Dog Breed</mat-card-subtitle>&ndash;&gt;-->
   <!--</mat-card-header>-->
   <!--<div class="row">-->
-    <!--<div class="col-6">-->
-      <app-candidate-avatar [src]="candidateWorker.generatePhotoUrl(photo)" [haveHoverEffect]="haveHoverEffect" [isClosedIcon]="isClosedIcon" [isStatus]="true"  (clickCloseIcon)="deleteCandidate()" [candidate]="candidate"></app-candidate-avatar>
-    <!--</div>-->
-    <!--<div class="col-6">-->
+  <!--<div class="col-6">-->
+  <app-candidate-avatar [src]="candidateWorker.generatePhotoUrl(photo)" [haveHoverEffect]="haveHoverEffect"
+                        [isClosedIcon]="isClosedIcon" [isStatus]="true" (clickCloseIcon)="deleteCandidate()"
+                        [candidate]="candidate"></app-candidate-avatar>
+  <!--</div>-->
+  <!--<div class="col-6">-->
   <div class="user-name user-info">
     <div class="candidate-one-row">
-      <span class="font-weight-bold">{{'Full name' | translate }}:</span>      &nbsp;
+      <span class="font-weight-bold">{{'Full name' | translate }}:</span> &nbsp;
       <span [matTooltip]="userWorker.formatFullName(candidate)">{{userWorker.formatFullName(candidate)}}</span>
     </div>
     <div *ngFor="let contact of candidate.contacts">
-        <div *ngIf="contact.contactDetails !== ''" class="candidate-one-row">
-          <span class="font-weight-bold">{{contact.contactType | translate}}:</span>      &nbsp;
-          <span matTooltip="{{contact.contactDetails}}">{{contact.contactDetails}}</span>
-        </div>
+      <div *ngIf="contact.contactDetails !== ''" class="candidate-one-row">
+        <span class="font-weight-bold">{{contact.contactType | translate}}:</span> &nbsp;
+        <span matTooltip="{{contact.contactDetails}}">{{contact.contactDetails}}</span>
+      </div>
     </div>
   </div>
-    <!--</div>-->
+  <!--</div>-->
   <!--</div>-->
   <!--<br>-->
   <!--<span></span>-->

@@ -12,8 +12,9 @@ export class NavbarItcharComponent implements OnInit {
   routes: NavbarLink[] = [
     {routerLink: '/candidate', title: 'Candidate Dashboard', isActive: true},
     {routerLink: '/job-description', title: 'Job Description Dashboard', isActive: false},
-    {routerLink: '/calendar', title: 'Interview Calendar', isActive: false},
-    {routerLink: '/interview/0', title: 'Interview', isActive: false}
+    {routerLink: '/calendar', title: 'Interview Calendar', isActive: false}
+    // ,
+    // {routerLink: '/interview/0', title: 'Interview', isActive: false}
   ];
 
   constructor(public translateWorker: TranslateWorker) { }

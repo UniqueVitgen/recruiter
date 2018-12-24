@@ -27,97 +27,41 @@ import {TranslateWorker} from '../../../workers/translate/translate.worker';
   styleUrls: ['./interview-calendar.component.scss']
 })
 export class InterviewCalendarComponent implements OnInit, OnChanges {
-  // private mockVacancy: Vacancy = {
-  //   id: 0,
-  //   position: 'string',
-  //   salaryInDollarsFrom: 1.1,
-  //   salaryInDollarsTo: 1.1,
-  //   vacancyState: VacancyState.OPEN,
-  //   experienceYearsRequire: 1.1,
-  //   developerId: 0,
-  //   skills: [
-  //     {
-  //       name: 'string'
-  //     }
-  //   ],
-  //   requirements: [
-  //     {
-  //       name: 'string',
-  //       public: true,
-  //       required: false
-  //     }
-  //   ]
-  // };
-  // private mockCandidate: Candidate = {
-  //   id: 0,
-  //   name: 'string',
-  //   surname: 'string',
-  //   birthday: '2015-07-20',
-  //   salaryInDollars: 1.1,
-  //   candidateState: {
-  //     name: 'string'
-  //   },
-  //   skills: [
-  //     {
-  //       name: 'string'
-  //     }
-  //   ],
-  //   experiences: [
-  //     {
-  //       dateFrom: '2015-07-20',
-  //       dateTo: '2015-07-20',
-  //       jobDescription: {
-  //         id: 0,
-  //         name: 'string'
-  //       },
-  //       jobPosition: 'string',
-  //       companyName: {
-  //         id: 0,
-  //         name: 'string'
-  //       }
-  //     }
-  //   ],
-  //   contacts: [
-  //     {
-  //       contactType: ContactType.EMAIL,
-  //       contactDetails: 'string'
-  //     }
-  //   ],
-  //   attachments: [
-  //     {
-  //       attachmentType: AttachmentType.CV,
-  //       filePath: 'string'
-  //     }
-  //   ],
-  //   responsibilities: [
-  //     {
-  //       name: 'string'
-  //     }
-  //   ]
-  // };
-  // private mockInterview: InterviewExtended;
-  // MONTH = 'Month';
-  // WEEK = 'Week';
-  // daysArray;
-  // title = 'Interview Calendar';
-  // date: Moment = moment();
-  // // daysOfWeekArray = this.createWeekCalendar(this.date);
-  // timesArray =  Array.apply(null, {length: 7 * 24});
-  // selected: string;
-  // appointmentsData = [];
   @Input() inteviews: InterviewExtended[];
   @Input() locale: string;
   @Output('changeInterviews') outputChangeInterviews: EventEmitter<any> = new EventEmitter();
   public calendarEventList: CalendarEvent[];
   public calendarOptions: Options = {
+    allDaySlot: false,
+    allDayDefault: false,
     editable: true,
     eventLimit: false,
     header: {
       left: 'prev,next today',
       center: 'title',
       right: 'month,agendaWeek,agendaDay,listMonth'
-    }
+    },
+    eventTextColor: '#fff',
+    eventColor: '#4285f4'
   };
+  public calendarOptions2: Options = {buttonText: {
+      // prev: 'Предыдущий',
+      // next: 'Следующий',
+      today: 'Сегодня',
+      month: 'Месяц',
+      week: 'Неделя',
+      day: 'День',
+      list: 'Список'
+    },
+    allDaySlot: false,
+    allDayDefault: false,
+    editable: true,
+    eventLimit: false,
+    header: {
+      left: 'prev,next today',
+      center: 'title',
+      right: 'month,agendaWeek,agendaDay,listMonth'
+    }};
   @ViewChild(CalendarComponent) ucCalendar: CalendarComponent;
 
   constructor(private dialog: MatDialog,
@@ -223,28 +167,71 @@ export class InterviewCalendarComponent implements OnInit, OnChanges {
   }
 
   ngOnChanges(changes: SimpleChanges): void {
-    console.log('res', this.locale);
-    this.calendarOptions.locale = this.locale;
-    console.log('res', this.locale);
-    if (this.locale === 'ru') {
-      this.calendarOptions = {
-        header: {
-          left: 'prev,next today',
-          center: 'title',
-          right: 'month,agendaWeek,agendaDay,listMonth'
-        },
-        locale: this.locale
-      };
-    } else if (this.locale === 'en') {
-
-      this.calendarOptions = {
-        header: {
-          left: 'prev,next today',
-          center: 'title',
-          right: 'month,agendaWeek,agendaDay,listMonth'
-        }, locale: this.locale
-      };
-    }
+    // console.log('res locale', this.locale);
+    // this.calendarOptions.locale = this.locale;
+    // if (this.locale === 'ru') {
+    //   this.calendarOptions.buttonText = {
+    //       // prev: 'Предыдущий',
+    //       // next: 'Следующий',
+    //       today: 'Сегодня',
+    //       month: 'Месяц',
+    //       week: 'Неделя',
+    //       day: 'День',
+    //       list: 'Список'
+    //   };
+    //   this.calendarOptions =  { buttonText: {
+    //     // prev: 'Предыдущий',
+    //     // next: 'Следующий',
+    //     today: 'Сегодня',
+    //     month: 'Месяц',
+    //     week: 'Неделя',
+    //     day: 'День',
+    //     list: 'Список'
+    //   },
+    //     allDaySlot: false,
+    //     allDayDefault: false,
+    //     editable: true,
+    //     eventLimit: false,
+    //     header: {
+    //       left: 'prev,next today',
+    //       center: 'title',
+    //       right: 'month,agendaWeek,agendaDay,listMonth'
+    //     }};
+    // } else if (this.locale === 'en') {
+    //   this.calendarOptions.buttonText = {
+    //     // prev: 'Prev',
+    //     // next: 'Next',
+    //     today: 'Today',
+    //     month: 'Month',
+    //     week: 'Week',
+    //     day: 'Day',
+    //     list: 'List'
+    //   };
+    //   this.calendarOptions = {
+    //     buttonText: {
+    //       // prev: 'Предыдущий',
+    //       // next: 'Следующий',
+    //       today: 'Today',
+    //       month: 'Month',
+    //       week: 'Week',
+    //       day: 'Day',
+    //       list: 'List'
+    //     },
+    //     allDaySlot: false,
+    //     allDayDefault: false,
+    //     editable: true,
+    //     eventLimit: false,
+    //     header: {
+    //       left: 'prev,next today',
+    //       center: 'title',
+    //       right: 'month,agendaWeek,agendaDay,listMonth'
+    //     }
+    //   };
+    // }
+    //   this.calendarOptions.locale = this.locale;
+    // // this.ucCalendar.ngOnInit();
+    // this.ucCalendar.updaterOptions();
+      console.log('res alendarOptions', this.calendarOptions);
     this.getCalendarEvents();
   }
 

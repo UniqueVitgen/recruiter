@@ -11,6 +11,8 @@
         <li *ngFor="let route of routes; let i = index" [ngClass]="{'active': route.isActive}" (click)="changeRoute(i)" class="nav-item">
           <a class="nav-link"  [routerLink]="route.routerLink">{{route.title | translate}}</a>
         </li>
+      </ul>
+      <ul class="nav  navbar-nav navbar-right">
         <li class="nav-item dropdown">
           <a class="nav-link dropdown-toggle" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
             {{'Language' | translate}}

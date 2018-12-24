@@ -21,7 +21,7 @@ export class InterviewWorker {
     return {
       title: interview.vacancy.position + ' - ' + interview.candidate.surname,
       start: interview.planDate,
-      end: new Date(date.getTime() + 30 * this.dateTimeWorker.minute).toISOString(),
+      end: new Date(date.getTime() + 60 * this.dateTimeWorker.minute).toISOString(),
       candidate: interview.candidate,
       interview: interview,
       vacancy: interview.vacancy

@@ -73,6 +73,7 @@ import {AngularBootstrapModule} from './modules/angular-bootstrap/angular-bootst
 import {NgxMaterialTimepickerModule} from 'ngx-material-timepicker';
 import {TranslateLoader, TranslateModule} from '@ngx-translate/core';
 import {TranslateHttpLoader} from '@ngx-translate/http-loader';
+import { ExistedCandidatesModalWindowComponent } from './components/modals/existed-candidates-modal-window/existed-candidates-modal-window.component';
 
 export function HttpLoaderFactory(http: HttpClient) {
   return new TranslateHttpLoader(http);
@@ -127,7 +128,8 @@ export function HttpLoaderFactory(http: HttpClient) {
     JobDashboardExpansionPanelComponent,
     ImageCandiateTimelineItemComponent,
     DeleteVacancyDialogComponent,
-    CalendarPageComponent
+    CalendarPageComponent,
+    ExistedCandidatesModalWindowComponent
   ],
   imports: [
     BrowserModule,
@@ -170,7 +172,8 @@ export function HttpLoaderFactory(http: HttpClient) {
     AttachmentCandidateModalComponent,
     ExperienceCandidateModalComponent,
     NoteCandidateModalComponent,
-    DeleteVacancyDialogComponent
+    DeleteVacancyDialogComponent,
+    ExistedCandidatesModalWindowComponent
   ],
   schemas: [NO_ERRORS_SCHEMA] // add this line
 })

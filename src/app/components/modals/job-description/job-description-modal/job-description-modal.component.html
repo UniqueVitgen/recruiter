@@ -50,11 +50,11 @@
             </mat-form-field>
           </div>
           <div class="col-2 checkbox-col">
-            <mat-checkbox [name]="'requred' + i" [(ngModel)]="requirement.required"
+            <mat-checkbox color="primary" [name]="'requred' + i" [(ngModel)]="requirement.required"
                           class="example-margin" ></mat-checkbox>
           </div>
           <div class="col-2 checkbox-col">
-            <mat-checkbox [name]="'public' + i" [(ngModel)]="requirement.public"
+            <mat-checkbox color="primary" [name]="'public' + i" [(ngModel)]="requirement.public"
                           class="example-margin"  ></mat-checkbox>
           </div>
           <div class="col-2 checkbox-col">
@@ -65,7 +65,8 @@
           </div>
         </div>
       </div>
-      <button mat-mini-fab (click)="addRequirement()">+</button>
+      <button color="primary"   mat-icon-button (click)="addRequirement()">
+        <mat-icon aria-label="Example icon-button with a heart icon">add_circle_outline</mat-icon></button>
     </form>
     <!--<div class="row">-->
     <!--<div class="col-12 center-item">-->
