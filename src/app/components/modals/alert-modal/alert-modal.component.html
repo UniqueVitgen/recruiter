@@ -1,0 +1,19 @@
+<!--<mdb-card>-->
+<app-modal-component>
+  <dialog-title>
+    <!--<mdb-card-header class="info-color white-text text-center py-4">-->
+    <!--<h5>-->
+    <!--<strong>Interview</strong>-->
+    <!--</h5>-->
+    <!--</mdb-card-header>-->
+    <div class="center-text"> {{data.title | translate}}
+
+    </div>
+  </dialog-title>
+  <dialog-body>
+    {{data.message}}
+  </dialog-body>
+  <dialog-footer class="example-full-width">
+    <button class="float-right" mat-raised-button color="primary" (click)="onNoClick()">{{'Ok' | translate}}</button>
+  </dialog-footer>
+</app-modal-component>

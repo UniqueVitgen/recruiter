@@ -30,6 +30,7 @@ export class InterviewModalComponent implements OnInit {
   public vacancies: Vacancy[];
   public sourceVacancy: Vacancy;
   public candidates: Candidate[];
+  public minDate: Date;
   darkTheme: NgxMaterialTimepickerTheme = {
     container: {
       // bodyBackgroundColor: '#424242',
@@ -55,11 +56,12 @@ export class InterviewModalComponent implements OnInit {
     private interviewService: InterviewService,
     private canidateService: CandidateService,
     public dialogRef: MatDialogRef<InterviewModalComponent>,
-    private dateTimeWorker: DateTimeWorker,
+    public dateTimeWorker: DateTimeWorker,
     public typeCheckingWorker: TypeCheckingWorker,
     public userWorker: UserWorker,
     private fb: FormBuilder,
     @Inject(MAT_DIALOG_DATA) public data: InterviewDialogData ) {
+    this.minDate = this.dateTimeWorker.getTodayStart();
     if (this.data) {
       if ( this.data.isEdit) {
         this.editedInterview = Object.assign(new Interview(), this.data.sourceInterview);
@@ -130,8 +132,8 @@ export class InterviewModalComponent implements OnInit {
   }
   setPlaneDate() {
     if (this.planDate.value.year && this.planDate.value.hours) {
-      this.editedInterview.planDate = new Date(this.planDate.value.year, this.planDate.value.month, this.planDate.value.day, this.planDate.value.hours, this.planDate.value.minutes).toISOString();
-      const timeInput = this.dateTimeWorker.parseTimeString(this.editedInterview.planDate)
+      this.editedInterview.planDate = this.dateTimeWorker.setUTCDate(this.planDate.value.year, this.planDate.value.month, this.planDate.value.day, this.planDate.value.hours, this.planDate.value.minutes).toISOString();
+      const timeInput = this.dateTimeWorker.parseTimeString(this.editedInterview.planDate);
     }
   }
   updateTime() {
@@ -170,10 +172,6 @@ export class InterviewModalComponent implements OnInit {
       };
       this.dialogRef.close(this.interviewResult);
     });
-  }
-
-  compareObjects(o1: any, o2: any): boolean {
-    return o1.name === o2.name && o1.id === o2.id;
   }
 
 }

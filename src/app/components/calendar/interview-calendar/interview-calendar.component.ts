@@ -1,6 +1,6 @@
 import {Component, EventEmitter, HostListener, Input, OnChanges, OnInit, Output, SimpleChanges, ViewChild} from '@angular/core';
 import * as moment from 'moment';
-import {Moment} from 'moment';
+import {Duration, Moment} from 'moment';
 import {MatDialog} from '@angular/material';
 import {InterviewModalComponent} from '../../modals/interview/interview-modal/interview-modal.component';
 import {InterviewExtended} from '../../../classes/interview';
@@ -19,6 +19,8 @@ import {CalendarEvent} from '../../../classes/html/calendar/calendar-event';
 import {InterviewWorker} from '../../../workers/interview/interview.worker';
 import {InterviewDialogData} from '../../../interfaces/dialog/init/interview-dialog-data';
 import {TranslateWorker} from '../../../workers/translate/translate.worker';
+import {AlertModalComponent} from '../../modals/alert-modal/alert-modal.component';
+import {AlertDialogData} from '../../../interfaces/dialog/init/alert-dialog-data';
 
 
 @Component({
@@ -42,26 +44,38 @@ export class InterviewCalendarComponent implements OnInit, OnChanges {
       right: 'month,agendaWeek,agendaDay,listMonth'
     },
     eventTextColor: '#fff',
-    eventColor: '#4285f4'
+    eventColor: '#4285f4',
+    timeFormat: 'H:mm',
+    nowIndicator: true,
+    slotLabelFormat: 'H:mm'
+    ,
+    timezone: 'UTC',
+    minTime: <any> '08:00:00',
+    maxTime: <any> '23:00:00',
+    visibleRange: {
+      start: this.dateTimeWorker.getYesterday(),
+      end: this.dateTimeWorker.getNextYear()
+    }
   };
-  public calendarOptions2: Options = {buttonText: {
-      // prev: 'Предыдущий',
-      // next: 'Следующий',
-      today: 'Сегодня',
-      month: 'Месяц',
-      week: 'Неделя',
-      day: 'День',
-      list: 'Список'
-    },
-    allDaySlot: false,
-    allDayDefault: false,
-    editable: true,
-    eventLimit: false,
-    header: {
-      left: 'prev,next today',
-      center: 'title',
-      right: 'month,agendaWeek,agendaDay,listMonth'
-    }};
+  // public calendarOptions2: Options = {buttonText: {
+  //     // prev: 'Предыдущий',
+  //     // next: 'Следующий',
+  //     today: 'Сегодня',
+  //     month: 'Месяц',
+  //     week: 'Неделя',
+  //     day: 'День',
+  //     list: 'Список'
+  //   },
+  //   allDaySlot: false,
+  //   allDayDefault: false,
+  //   editable: true,
+  //   eventLimit: false,
+  //   minTime: moment.duration('08:00:00'),
+  //   header: {
+  //     left: 'prev,next today',
+  //     center: 'title',
+  //     right: 'month,agendaWeek,agendaDay,listMonth'
+  //   }};
   @ViewChild(CalendarComponent) ucCalendar: CalendarComponent;
 
   constructor(private dialog: MatDialog,
@@ -71,6 +85,7 @@ export class InterviewCalendarComponent implements OnInit, OnChanges {
               private interviewWorker: InterviewWorker,
               public translateWorker: TranslateWorker,
               private interviewService: InterviewService) {
+    console.log('now', moment.duration('08:00:00'));
     // this.selected  = this.MONTH;
   }
   @HostListener('document:keydown', ['$event'])
@@ -85,16 +100,27 @@ export class InterviewCalendarComponent implements OnInit, OnChanges {
   addInterview(event: CustomEvent) {
     console.log('add interview', event);
     console.log('event.detail.date', event.detail.date.toDate());
-    const dialogRef = this.dialog.open(InterviewModalComponent, {
-      data: <InterviewDialogData> {
-        sourceDate: event.detail.date.toDate(),
-        fixedCandidate: false,
-        isEdit: false
-      }
-    });
-    dialogRef.afterClosed().subscribe(res => {
-      this.outputChangeInterviews.emit(null);
-    });
+    const dateEvent =  event.detail.date.toDate();
+    const todayStart = this.dateTimeWorker.getTodayStart();
+    if (dateEvent.getTime() > todayStart.getTime()) {
+      const dialogRef = this.dialog.open(InterviewModalComponent, {
+        data: <InterviewDialogData> {
+          sourceDate: event.detail.date.toDate(),
+          fixedCandidate: false,
+          isEdit: false
+        }
+      });
+      dialogRef.afterClosed().subscribe(res => {
+        this.outputChangeInterviews.emit(null);
+      });
+    } else {
+      const dialogRef = this.dialog.open(AlertModalComponent, {
+        data: <AlertDialogData> {
+          title: 'Previous dates are disabled!',
+          message: 'You can\'t add events on previous dates.'
+        }
+      });
+    }
   }
   changeInterview(event) {
     console.log('change event', event);
@@ -114,9 +140,19 @@ export class InterviewCalendarComponent implements OnInit, OnChanges {
     console.log('drop Interview', event);
     if (event) {
       const startTime = new Date(event.detail.event.start._d);
-      const interview = event.detail.event.interview;
-      interview.planDate = startTime;
-      this.outputChangeInterviews.emit(interview);
+      if (startTime.getTime() > this.dateTimeWorker.getTodayStart().getTime()) {
+        const interview = event.detail.event.interview;
+        interview.planDate = startTime;
+        this.outputChangeInterviews.emit(interview);
+      } else {
+        this.outputChangeInterviews.emit(null);
+        const dialogRef = this.dialog.open(AlertModalComponent, {
+          data: <AlertDialogData> {
+            title: 'Previous dates are disabled!',
+            message: 'You can\'t drop events on previous dates.'
+          }
+        });
+      }
     } else {
       this.outputChangeInterviews.emit(null);
     }
@@ -124,6 +160,7 @@ export class InterviewCalendarComponent implements OnInit, OnChanges {
 
   ngOnInit() {
     const dateObj = new Date();
+    console.log('now', dateObj);
     // this.l = this.translateWorker.getLanguage();
     // this.translateWorker.changeValue.subscribe(res => {
     //   console.log(res.lang);
@@ -161,6 +198,7 @@ export class InterviewCalendarComponent implements OnInit, OnChanges {
   getCalendarEvents() {
     if (this.inteviews) {
       this.calendarEventList = this.interviewWorker.convertInterviewListToEventList(this.inteviews);
+      this.ucCalendar.fullCalendar('rerenderEvents');
       console.log('calendarEventList', this.calendarEventList);
       // this.calendarOptions.events = this.calendarEventList;sole.log(this.calendarEventList);
     }

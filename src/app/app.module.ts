@@ -74,6 +74,7 @@ import {NgxMaterialTimepickerModule} from 'ngx-material-timepicker';
 import {TranslateLoader, TranslateModule} from '@ngx-translate/core';
 import {TranslateHttpLoader} from '@ngx-translate/http-loader';
 import { ExistedCandidatesModalWindowComponent } from './components/modals/existed-candidates-modal-window/existed-candidates-modal-window.component';
+import { AlertModalComponent } from './components/modals/alert-modal/alert-modal.component';
 
 export function HttpLoaderFactory(http: HttpClient) {
   return new TranslateHttpLoader(http);
@@ -129,7 +130,8 @@ export function HttpLoaderFactory(http: HttpClient) {
     ImageCandiateTimelineItemComponent,
     DeleteVacancyDialogComponent,
     CalendarPageComponent,
-    ExistedCandidatesModalWindowComponent
+    ExistedCandidatesModalWindowComponent,
+    AlertModalComponent
   ],
   imports: [
     BrowserModule,
@@ -173,7 +175,8 @@ export function HttpLoaderFactory(http: HttpClient) {
     ExperienceCandidateModalComponent,
     NoteCandidateModalComponent,
     DeleteVacancyDialogComponent,
-    ExistedCandidatesModalWindowComponent
+    ExistedCandidatesModalWindowComponent,
+    AlertModalComponent
   ],
   schemas: [NO_ERRORS_SCHEMA] // add this line
 })
