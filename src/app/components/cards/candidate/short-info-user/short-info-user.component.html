@@ -73,7 +73,7 @@
       <mat-card-title>{{'Contacts' | translate}}</mat-card-title>
       <mat-card-content>
         <div *ngIf="!readonly">
-          <mat-checkbox [(ngModel)]="tests[0].have" (ngModelChange)="changeEmail()">
+          <mat-checkbox color="primary" [(ngModel)]="tests[0].have" (ngModelChange)="changeEmail()">
             <mat-form-field class="example-full-width" *ngIf="tests[0].have && tests[0].object">
               <input [formControl]="tests[0].control" [(ngModel)]="tests[0].object.contactDetails" (blur)="onFocusoutAnyInput(tests[0].control.valid)" matInput [placeholder]="'EMAIL' | translate">
             </mat-form-field>
@@ -83,14 +83,14 @@
             <!--</mat-error>-->
           </mat-checkbox>
           <br>
-          <mat-checkbox [(ngModel)]="tests[1].have" (ngModelChange)="changeSkype()">
+          <mat-checkbox color="primary" [(ngModel)]="tests[1].have" (ngModelChange)="changeSkype()">
             <mat-form-field class="example-full-width" *ngIf="tests[1].have && tests[1].object">
               <input [formControl]="tests[1].control" [(ngModel)]="tests[1].object.contactDetails" (blur)="onFocusoutAnyInput(tests[1].control.valid)" matInput [placeholder]="'SKYPE' | translate">
             </mat-form-field>
             <span  *ngIf="!tests[1].have">{{'SKYPE' | translate}}</span>
           </mat-checkbox>
           <br>
-          <mat-checkbox [(ngModel)]="tests[2].have" (ngModelChange)="changePhone()">
+          <mat-checkbox color="primary" [(ngModel)]="tests[2].have" (ngModelChange)="changePhone()">
             <mat-form-field class="example-full-width" *ngIf="tests[2].have && tests[2].object">
               <input [formControl]="tests[2].control"  [textMask]="{mask: MaskConst.PHONE}" [(ngModel)]="tests[2].object.contactDetails" (blur)="onFocusoutAnyInput(tests[2].control.valid)" matInput [placeholder]="'PHONE' | translate">
             </mat-form-field>

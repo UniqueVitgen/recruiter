@@ -1,5 +1,5 @@
 import { BrowserModule } from '@angular/platform-browser';
-import {forwardRef, NgModule, NO_ERRORS_SCHEMA} from '@angular/core';
+import {forwardRef, LOCALE_ID, NgModule, NO_ERRORS_SCHEMA} from '@angular/core';
 
 import {HttpClient, HttpClientModule} from '@angular/common/http';
 import { AppRoutingModule } from './app-routing.module';
@@ -61,7 +61,7 @@ import {TextMaskModule} from 'angular2-text-mask';
 import { LimitToDirective } from './directives/limit-to/limit-to.directive';
 import { ExperienceCandidateModalComponent } from './components/modals/candidate/experience-candidate-modal/experience-candidate-modal.component';
 import { NoteCandidateModalComponent } from './components/modals/candidate/note-candidate-modal/note-candidate-modal.component';
-import {MatExpansionModule} from '@angular/material';
+import {MAT_DATE_LOCALE, MatExpansionModule} from '@angular/material';
 import { JobDashboardExpansionPanelComponent } from './components/expansion-panels/job-dashboard-expansion-panel/job-dashboard-expansion-panel.component';
 import { ImageCandiateTimelineItemComponent } from './components/items/timeline/image-candiate-timeline-item/image-candiate-timeline-item.component';
 import { DeleteVacancyDialogComponent } from './components/modals/delete-vacancy-dialog/delete-vacancy-dialog.component';
@@ -75,6 +75,9 @@ import {TranslateLoader, TranslateModule} from '@ngx-translate/core';
 import {TranslateHttpLoader} from '@ngx-translate/http-loader';
 import { ExistedCandidatesModalWindowComponent } from './components/modals/existed-candidates-modal-window/existed-candidates-modal-window.component';
 import { AlertModalComponent } from './components/modals/alert-modal/alert-modal.component';
+import {TranslateWorker} from './workers/translate/translate.worker';
+import { LocalDatePipe } from './pipes/local-date/local-date.pipe';
+import {PipesModule} from './modules/pipes/pipes.module';
 
 export function HttpLoaderFactory(http: HttpClient) {
   return new TranslateHttpLoader(http);
@@ -131,7 +134,8 @@ export function HttpLoaderFactory(http: HttpClient) {
     DeleteVacancyDialogComponent,
     CalendarPageComponent,
     ExistedCandidatesModalWindowComponent,
-    AlertModalComponent
+    AlertModalComponent,
+    LocalDatePipe
   ],
   imports: [
     BrowserModule,
@@ -154,13 +158,21 @@ export function HttpLoaderFactory(http: HttpClient) {
         useFactory: HttpLoaderFactory,
         deps: [HttpClient]
       }
-    })
+    }),
+    PipesModule
     // MDBBootstrapModule.forRoot(),
     // NgxMaterialTimepickerModule.forRoot()
     // ,
     // InternationalPhoneNumberModule
   ],
-  providers: [
+  providers: [{
+    provide: LOCALE_ID,
+    deps: [TranslateWorker],
+    useFactory: (sessionService) => sessionService.getLanguage()
+  },
+    { provide: MAT_DATE_LOCALE,
+      deps: [TranslateWorker],
+      useFactory: (sessionService) => sessionService.getLanguage() }
     ],
   bootstrap: [AppComponent],
   entryComponents: [

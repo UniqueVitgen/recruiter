@@ -1,4 +1,4 @@
-import {Component, EventEmitter, Input, OnInit, Output} from '@angular/core';
+import {Component, EventEmitter, Input, OnChanges, OnInit, Output, SimpleChanges} from '@angular/core';
 import {AttachmentTimeline} from '../../../../classes/timeline/attachment-timeline';
 import {Attachment} from '../../../../classes/attachment';
 import {FileWorker} from '../../../../workers/file/file.worker';
@@ -9,7 +9,7 @@ import {DateTimeWorker} from '../../../../workers/date-time/date-time.worker';
   templateUrl: './attachment-candidate-timeline-item.component.html',
   styleUrls: ['./attachment-candidate-timeline-item.component.scss']
 })
-export class AttachmentCandidateTimelineItemComponent implements OnInit {
+export class AttachmentCandidateTimelineItemComponent implements OnInit, OnChanges {
   @Input() attachment: Attachment;
 
   editedAttachment: Attachment;
@@ -22,7 +22,6 @@ export class AttachmentCandidateTimelineItemComponent implements OnInit {
   ngOnInit() {
     this.editedAttachment = Object.assign({}, this.attachment);
     this.viewOfDate = this.dateTimeWorker.getDateWithTime(this.editedAttachment.createdAt);
-
   }
 
   onFocusoutAnyInput(value: boolean = true) {
@@ -33,5 +32,9 @@ export class AttachmentCandidateTimelineItemComponent implements OnInit {
   }
   delete() {
     this.deleteEvent.emit(this.editedAttachment);
+  }
+
+  ngOnChanges(changes: SimpleChanges): void {
+    this.viewOfDate = this.dateTimeWorker.getDateWithTime(this.editedAttachment.createdAt);
   }
 }

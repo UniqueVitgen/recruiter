@@ -1,4 +1,4 @@
-<mat-label style="color: gray;">{{viewOfDate}}</mat-label>
+<mat-label style="color: gray;">{{viewOfDate}} {{'at' | translate}} {{viewOfTime}}</mat-label>
 <mat-card class="backgroundCard">
   <mat-icon class="delete"  matTooltip="{{'Delete' | translate}}" (click)="delete()">close</mat-icon>
   <mat-card-title><mat-icon class="myIcon">event</mat-icon> {{'Interview' | translate}}</mat-card-title>
