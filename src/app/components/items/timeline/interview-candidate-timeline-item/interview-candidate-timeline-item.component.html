@@ -9,15 +9,18 @@
   </mat-form-field>
 
   &nbsp;
-  <mat-form-field class="custom-form-field">
-    <input matInput placeholder="{{'Start Time' | translate}}" [(ngModel)]="planDate.timeString" (ngModelChange)="onFocusoutAnyInput()" [format]="24" [ngxTimepicker]="toggleTimepicker">
-    <button class="custom-timepicker-toggle" mat-button matSuffix mat-icon-button aria-label="Pick End Time">
-      <ngx-material-timepicker-toggle  [for]="toggleTimepicker">
-        <mat-icon ngxMaterialTimepickerToggleIcon>access_time</mat-icon>
-      </ngx-material-timepicker-toggle>
-    </button>
-    <ngx-material-timepicker  [ngxMaterialTimepickerTheme]="darkTheme" #toggleTimepicker></ngx-material-timepicker>
-  </mat-form-field>
+  <!--<mat-form-field class="custom-form-field">-->
+    <!--<input matInput placeholder="{{'Start Time' | translate}}" [(ngModel)]="planDate.timeString" (ngModelChange)="onFocusoutAnyInput()" [format]="24" [ngxTimepicker]="toggleTimepicker">-->
+    <!--<button class="custom-timepicker-toggle" mat-button matSuffix mat-icon-button aria-label="Pick End Time">-->
+      <!--<ngx-material-timepicker-toggle  [for]="toggleTimepicker">-->
+        <!--<mat-icon ngxMaterialTimepickerToggleIcon>access_time</mat-icon>-->
+      <!--</ngx-material-timepicker-toggle>-->
+    <!--</button>-->
+    <!--<ngx-material-timepicker  [ngxMaterialTimepickerTheme]="darkTheme" #toggleTimepicker></ngx-material-timepicker>-->
+  <!--</mat-form-field>-->
+  <!--<mat-form-field class="custom-form-field">-->
+    <app-custom-timepicker [(ngModel)]="planDate.time" (ngModelChange)="onFocusoutAnyInput()" [hideUnderline]="true"></app-custom-timepicker>
+  <!--</mat-form-field>-->
 
   &nbsp;
   &nbsp;

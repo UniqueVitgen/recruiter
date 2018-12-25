@@ -21,7 +21,7 @@ export class DateTimeWorker {
   public config = {
     minTime: '08:00',
     maxTime: '23:00'
-  }
+  };
   constructor(
     @Inject(LOCALE_ID) private locale: string,
     private localDatePipe: LocalDatePipe,
@@ -50,7 +50,8 @@ export class DateTimeWorker {
 
   getDateWithTime(dateWithTime: Date, format?: string ) {
     if (dateWithTime) {
-      return this.getDate(dateWithTime, 'dd MMMM yyyy') + ' ' + this.translateWorker.translateWord('at') + ' ' + this.getTime(dateWithTime);
+      return this.localDatePipe.transform(dateWithTime, null) + ' ' + this.translateWorker.translateWord('at')
+        + ' ' + this.localDatePipe.transform(dateWithTime, 'shortTime');
     }
   }
   getYesterday() {
@@ -92,7 +93,7 @@ export class DateTimeWorker {
   }
   parseDateToDateTimeForm(date: Date): DateTimeForm {
     return {
-      timeString: this.getTime(date),
+      time: this.getTime(date),
       dateDate: new Date(date),
       value: new DateTimeInput()
     };
@@ -105,12 +106,34 @@ export class DateTimeWorker {
     };
   }
   parseTimeString(timeString: string): TimeInput {
-    const hours = timeString.substr(0, timeString.indexOf(':'));
+    const isAm = timeString.indexOf('am') > -1;
+    const isPm = timeString.indexOf('pm') > -1;
+    let hours;
+    if (isPm) {
+      hours = parseInt(timeString.substr(0, timeString.indexOf(':'))) + 12;
+    } else {
+      hours = timeString.substr(0, timeString.indexOf(':'));
+    }
     const minutes = timeString.substr(timeString.indexOf(':') + 1);
     return {
       hours: parseInt(hours),
       minutes: parseInt(minutes)
     };
+  }
+  parse24FormatToAmPmFormat(time24String: string) {
+    let hours = parseInt(time24String.substr(0, time24String.indexOf(':')));
+    const minutes = parseInt(time24String.substr(time24String.indexOf(':') + 1));
+    const ampm = hours >= 12 ? 'pm' : 'am';
+    hours = hours % 12;
+    hours = hours ? hours : 12; // the hour '0' should be '12'
+    const hoursString = hours < 10 ? '0' + hours : hours;
+    const minutesString = minutes < 10 ? '0' + minutes : minutes;
+    const strTime = hoursString + ':' + minutesString + ' ' + ampm;
+    return strTime;
+  }
+  parse12FormatTo24Format(time12String: string) {
+    const date = new Date('2000-01-01 ' + time12String);
+    return this.datePipe.transform(date, 'HH:mm');
   }
   setUTCDate(year, month, day, hours, minutes) {
     const date = new Date();

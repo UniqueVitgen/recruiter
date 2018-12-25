@@ -78,6 +78,7 @@ import { AlertModalComponent } from './components/modals/alert-modal/alert-modal
 import {TranslateWorker} from './workers/translate/translate.worker';
 import { LocalDatePipe } from './pipes/local-date/local-date.pipe';
 import {PipesModule} from './modules/pipes/pipes.module';
+import { CustomTimepickerComponent } from './components/timepickers/custom-timepicker/custom-timepicker.component';
 
 export function HttpLoaderFactory(http: HttpClient) {
   return new TranslateHttpLoader(http);
@@ -135,7 +136,8 @@ export function HttpLoaderFactory(http: HttpClient) {
     CalendarPageComponent,
     ExistedCandidatesModalWindowComponent,
     AlertModalComponent,
-    LocalDatePipe
+    LocalDatePipe,
+    CustomTimepickerComponent
   ],
   imports: [
     BrowserModule,
@@ -165,14 +167,16 @@ export function HttpLoaderFactory(http: HttpClient) {
     // ,
     // InternationalPhoneNumberModule
   ],
-  providers: [{
-    provide: LOCALE_ID,
-    deps: [TranslateWorker],
-    useFactory: (sessionService) => sessionService.getLanguage()
-  },
-    { provide: MAT_DATE_LOCALE,
-      deps: [TranslateWorker],
-      useFactory: (sessionService) => sessionService.getLanguage() }
+  providers: [
+  //   {
+  //   provide: LOCALE_ID,
+  //   deps: [TranslateWorker],
+  //   useFactory: (sessionService) => sessionService.getLanguage()
+  // }
+  // ,
+  //   { provide: MAT_DATE_LOCALE,
+  //     deps: [TranslateWorker],
+  //     useFactory: (sessionService) => sessionService.getLanguage() }
     ],
   bootstrap: [AppComponent],
   entryComponents: [

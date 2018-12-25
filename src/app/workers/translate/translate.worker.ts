@@ -3,6 +3,7 @@ import {TranslatePipe, TranslateService} from '@ngx-translate/core';
 import { registerLocaleData } from '@angular/common';
 import localeRussian from '@angular/common/locales/ru';
 import localeEnglish from '@angular/common/locales/en';
+import {DateAdapter} from '@angular/material';
 
 @Injectable({
   providedIn: 'root'
@@ -10,7 +11,9 @@ import localeEnglish from '@angular/common/locales/en';
 export class TranslateWorker {
   title: string = 'language';
   changeValue: EventEmitter<any> = new EventEmitter();
-  constructor(public translateService: TranslateService) {
+  constructor(public translateService: TranslateService,
+              private adapter: DateAdapter<any>
+  ) {
     translateService.addLangs(['en', 'ru']);
     translateService.setDefaultLang('en');
     this.setLanguage(this.getLanguage());
@@ -31,6 +34,7 @@ export class TranslateWorker {
         break;
       }
     }
+    this.adapter.setLocale(language);
     this.translateService.use(language);
   }
 

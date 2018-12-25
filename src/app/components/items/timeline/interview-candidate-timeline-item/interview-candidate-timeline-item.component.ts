@@ -18,6 +18,7 @@ export class InterviewCandidateTimelineItemComponent implements OnInit, OnChange
   @Input() interview: Interview;
   @Output() changeCandidate: EventEmitter<any> = new EventEmitter();
   @Output() deleteEvent: EventEmitter<any> = new EventEmitter();
+  time: TimeInput;
   planDate: DateTimeForm;
   darkTheme: NgxMaterialTimepickerTheme = {
     container: {
@@ -52,7 +53,6 @@ export class InterviewCandidateTimelineItemComponent implements OnInit, OnChange
     });
   }
   onFocusoutAnyInput(value: boolean = true) {
-    console.log('timeString', this.planDate.timeString);
     this.updateDateTime();
     if (value) {
       console.log('exp', this.editedInterview);
@@ -62,10 +62,12 @@ export class InterviewCandidateTimelineItemComponent implements OnInit, OnChange
   delete() {
     this.deleteEvent.emit(this.editedInterview);
   }
+  changeTime() {
+    console.log('time', this.time);
+  }
   updateTime() {
-    const timeInput = <TimeInput> this.dateTimeWorker.parseTimeString(this.planDate.timeString);
-    for (const prop in timeInput) {
-      this.planDate.value[prop] = timeInput[prop];
+    for (const prop in this.planDate.time) {
+      this.planDate.value[prop] = this.planDate.time[prop];
     }
     console.log(this.planDate.value);
     this.setPlaneDate();
@@ -73,7 +75,7 @@ export class InterviewCandidateTimelineItemComponent implements OnInit, OnChange
   setPlaneDate() {
     if (this.planDate.value.year && this.planDate.value.hours) {
       this.editedInterview.planDate = new Date(this.planDate.value.year, this.planDate.value.month, this.planDate.value.day, this.planDate.value.hours, this.planDate.value.minutes).toISOString();
-      const timeInput = this.dateTimeWorker.parseTimeString(this.editedInterview.planDate)
+      const timeInput = this.dateTimeWorker.parseTimeString(this.editedInterview.planDate);
     }
   }
   updateDateTime() {

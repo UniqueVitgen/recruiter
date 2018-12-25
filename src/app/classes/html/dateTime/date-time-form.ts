@@ -1,7 +1,8 @@
 import {DateTimeInput} from './date-time-input';
+import {TimeInput} from './time-input';
 
 export class DateTimeForm {
   value: DateTimeInput;
-  timeString: string;
+  time: TimeInput;
   dateDate: Date;
 }
