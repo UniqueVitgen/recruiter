@@ -42,6 +42,8 @@
     "jszip": "^3.1.5",
     "moment": "^2.22.2",
     "ng-fullcalendar": "^1.7.1",
+    "ng2-sticky": "^0.5.0",
+    "ng2-sticky-kit": "^6.1.0",
     "ngx-avatar": "^3.2.0",
     "ngx-material-timepicker": "^2.11.0",
     "ngx-perfect-scrollbar": "^7.1.0",

@@ -2,20 +2,16 @@
   <mat-spinner *ngIf="!candidate">
   </mat-spinner>
   <div class="row">
-    <div class="col-lg-3" >
-      <div class="affix">
+    <div class="col-lg-3 col-12" >
+      <!--<div sticky [sticky-offset-top]="60" ng-reflect-width="auto">-->
+        <div sticky [sticky-offset-top]="60">
       <!--<mat-card>-->
-      <app-short-info-user *ngIf="candidate" [readonly]="false" [candidate]="candidate"></app-short-info-user>
+      <app-short-info-user *ngIf="candidate" [readonly]="false" [candidate]="candidate"></app-short-info-user> <br>
       </div>
-      <!--</mat-card>-->
+    <!--</div>-->
     </div>
-    <div class="col-lg-9">
+
+    <div class="col-lg-9 col-12">
       <app-candidate-timeline *ngIf="candidate"  [candidate]="candidate" (clickClose)="deleteTimelineItem($event)" (addTimelineItem)="addTimelineItem($event)" (changeTimeline)="changeTimelineItem($event)" [timelineNotes]="eventNoteList"></app-candidate-timeline>
-      <!--<mat-card>-->
-      <!--<app-contacts-user *ngIf="candidate" [candidate]="candidate"></app-contacts-user>-->
-      <!--<app-candidate-cv-list *ngIf="candidate" [candidate]="candidate"></app-candidate-cv-list>-->
-      <!--<app-experience-user *ngIf="candidate" [candidate]="candidate"></app-experience-user>-->
-      <!--<app-notes-card *ngIf="notes" [notes]="notes"></app-notes-card>-->
-      <!--</mat-card>-->
     </div>
   </div>

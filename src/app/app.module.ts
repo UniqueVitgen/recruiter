@@ -78,6 +78,8 @@ import { AlertModalComponent } from './components/modals/alert-modal/alert-modal
 import {TranslateWorker} from './workers/translate/translate.worker';
 import { LocalDatePipe } from './pipes/local-date/local-date.pipe';
 import {PipesModule} from './modules/pipes/pipes.module';
+import {StickyModule} from 'ng2-sticky-kit';
+import {Ng2StickyModule} from 'ng2-sticky';
 
 export function HttpLoaderFactory(http: HttpClient) {
   return new TranslateHttpLoader(http);
@@ -159,7 +161,8 @@ export function HttpLoaderFactory(http: HttpClient) {
         deps: [HttpClient]
       }
     }),
-    PipesModule
+    PipesModule,
+    StickyModule
     // MDBBootstrapModule.forRoot(),
     // NgxMaterialTimepickerModule.forRoot()
     // ,
