@@ -19,6 +19,7 @@ const customValueProvider = {
 })
 export class CustomTimepickerComponent implements OnInit, ControlValueAccessor {
   @Input() hideUnderline: boolean;
+  @Input() fullWidth: boolean;
   timeString: string;
   darkTheme: NgxMaterialTimepickerTheme = {
     container: {
@@ -88,6 +89,7 @@ export class CustomTimepickerComponent implements OnInit, ControlValueAccessor {
   writeValue(obj: TimeInput): void {
     if (obj) {
       this.time = obj;
+      this.timeString = this.dateTimeWorker.convertTimeInputToTimeString(this.time, this.format);
     }
   }
 

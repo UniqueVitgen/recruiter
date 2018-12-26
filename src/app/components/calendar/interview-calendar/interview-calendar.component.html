@@ -85,7 +85,9 @@
 <!--</dx-scheduler>-->
 
 <div class="calendar-container" *ngIf="calendarOptions">
-  <ng-fullcalendar #ucCalendar [options]="calendarOptions" (eventDrop)="dropInterview($event)" [(eventsModel)]="calendarEventList"
-                   (clickButton)="clickButton($event)" (dayClick)="addInterview($event)" (eventClick)="changeInterview($event)"
-                   ></ng-fullcalendar>
+  <p-fullCalendar [options]="options" [events]="calendarEventList"></p-fullCalendar>
+  <!--<angular2-fullcalendar [options]="calendarOptions2"></angular2-fullcalendar>-->
+  <!--<ng-fullcalendar [lang]="locale" #ucCalendar [options]="calendarOptions" (eventDrop)="dropInterview($event)" [(eventsModel)]="calendarEventList"-->
+                   <!--(clickButton)="clickButton($event)" (dayClick)="addInterview($event)" (eventClick)="changeInterview($event)"-->
+                   <!--&gt;</ng-fullcalendar>-->
 </div>

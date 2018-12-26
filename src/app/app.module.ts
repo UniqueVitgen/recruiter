@@ -8,6 +8,12 @@ import {ScheduleModule, AgendaService, DayService, WeekService, WorkWeekService,
 // Import your AvatarModule
 import { AvatarModule } from 'ngx-avatar';
 import {FormsModule, NG_VALUE_ACCESSOR, NgControl, ReactiveFormsModule} from '@angular/forms';
+// import {CalendarModule as Calendar2Module} from 'ap-angular2-fullcalendar';
+import * as moment from 'moment';
+import * as $ from 'jquery';
+// import { CalendarComponent } from 'angular2-fullcalendar/src/calendar/calendar';
+// import {CalendarComponent} from 'ap-angular2-fullcalendar/src/calendar/calendar';
+
 
 import { AppComponent } from './app.component';
 import { CandidatePageComponent } from './pages/candidate-page/candidate-page.component';
@@ -79,6 +85,9 @@ import {TranslateWorker} from './workers/translate/translate.worker';
 import { LocalDatePipe } from './pipes/local-date/local-date.pipe';
 import {PipesModule} from './modules/pipes/pipes.module';
 import { CustomTimepickerComponent } from './components/timepickers/custom-timepicker/custom-timepicker.component';
+import {StickyModule} from 'ng2-sticky-kit';
+import {Ng2StickyModule} from 'ng2-sticky';
+import {PrimeNGModule} from './modules/prime-ng/prime-ng.module';
 
 export function HttpLoaderFactory(http: HttpClient) {
   return new TranslateHttpLoader(http);
@@ -138,6 +147,8 @@ export function HttpLoaderFactory(http: HttpClient) {
     AlertModalComponent,
     LocalDatePipe,
     CustomTimepickerComponent
+    // ,
+    // CalendarComponent
   ],
   imports: [
     BrowserModule,
@@ -151,9 +162,11 @@ export function HttpLoaderFactory(http: HttpClient) {
     TextMaskModule,
     MatExpansionModule,
     CalendarModule,
+    // Calendar2Module,
     DevExpressModule,
     SyncfunsionModule,
     AngularBootstrapModule,
+    PrimeNGModule,
     TranslateModule.forRoot({
       loader: {
         provide: TranslateLoader,
@@ -161,7 +174,8 @@ export function HttpLoaderFactory(http: HttpClient) {
         deps: [HttpClient]
       }
     }),
-    PipesModule
+    PipesModule,
+    StickyModule
     // MDBBootstrapModule.forRoot(),
     // NgxMaterialTimepickerModule.forRoot()
     // ,

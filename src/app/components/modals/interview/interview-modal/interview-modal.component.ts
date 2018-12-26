@@ -47,10 +47,10 @@ export class InterviewModalComponent implements OnInit {
   };
   planDate: {
     dateDate: Date,
-    timeString: string,
+    time: TimeInput,
     value?: DateTimeInput
   } = {dateDate: new Date(),
-  timeString: '12:00', value: new DateTimeInput()};
+  time: {hours: 12, minutes: 0}, value: new DateTimeInput()};
 
   constructor(
     private interviewService: InterviewService,
@@ -81,9 +81,9 @@ export class InterviewModalComponent implements OnInit {
         this.editedCandidate = this.typeCheckingWorker.parseObject(this.data.sourceCandidate);
         this.getVacanccies();
       }
-      if(this.data.sourceDate) {
+      if (this.data.sourceDate) {
         this.planDate.dateDate = new Date(this.data.sourceDate);
-        this.planDate.timeString = this.dateTimeWorker.getTime(this.data.sourceDate);
+        this.planDate.time = this.dateTimeWorker.parseTimeObject(this.data.sourceDate);
       }
     } else {
       this.editedInterview = new Interview();
@@ -137,9 +137,8 @@ export class InterviewModalComponent implements OnInit {
     }
   }
   updateTime() {
-    const timeInput = <TimeInput> this.dateTimeWorker.parseTimeString(this.planDate.timeString);
-    for (const prop in timeInput) {
-      this.planDate.value[prop] = timeInput[prop];
+    for (const prop in this.planDate.time) {
+      this.planDate.value[prop] = this.planDate.time[prop];
     }
     console.log(this.planDate.value);
     this.setPlaneDate();

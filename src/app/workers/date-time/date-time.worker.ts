@@ -93,7 +93,7 @@ export class DateTimeWorker {
   }
   parseDateToDateTimeForm(date: Date): DateTimeForm {
     return {
-      time: this.getTime(date),
+      time: this.parseTimeObject(date),
       dateDate: new Date(date),
       value: new DateTimeInput()
     };
@@ -102,8 +102,15 @@ export class DateTimeWorker {
     timeObject = new Date(timeObject);
     return <TimeInput> {
       minutes: timeObject.getMinutes(),
-      hours: timeObject.getHours()
+      hours: timeObject.getUTCHours()
     };
+  }
+  convertTimeInputToTimeString(timeInput: TimeInput, format: number): string {
+    let time = this.transformTimeComponent(timeInput.hours) + ':' + this.transformTimeComponent(timeInput.minutes);
+    if (format === 12) {
+      time = this.parse24FormatToAmPmFormat(time);
+    }
+    return time;
   }
   parseTimeString(timeString: string): TimeInput {
     const isAm = timeString.indexOf('am') > -1;
@@ -135,7 +142,7 @@ export class DateTimeWorker {
     const date = new Date('2000-01-01 ' + time12String);
     return this.datePipe.transform(date, 'HH:mm');
   }
-  setUTCDate(year, month, day, hours, minutes) {
+  setUTCDate(year, month, day, hours, minutes): Date {
     const date = new Date();
     date.setUTCFullYear(year, month, day);
     date.setUTCHours(hours, minutes);
@@ -150,5 +157,8 @@ export class DateTimeWorker {
   }
   transform(value: any, format: string, timezone: string, locale: string) {
     return this.datePipe.transform(value, format, timezone, locale);
+  }
+  transformTimeComponent(num: number) {
+    return num < 10 ? '0' + num : num;
   }
 }

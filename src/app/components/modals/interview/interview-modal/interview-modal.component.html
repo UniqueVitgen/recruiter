@@ -36,15 +36,18 @@
       <!--<md2-datepicker #birthday></md2-datepicker>-->
       <!--<button [md2DatepickerToggle]="birthday"></button>-->
 
-      <mat-form-field class="example-full-width">
-      <input [min]="dateTimeWorker.config.minTime" [max]="dateTimeWorker.config.maxTime" formControlName="fromTime" matInput placeholder="{{'Start Time' | translate}}" [(ngModel)]="planDate.timeString"  [format]="24" [ngxTimepicker]="toggleTimepicker">
-        <button class="custom-timepicker-toggle" mat-button matSuffix mat-icon-button aria-label="Pick End Time">
-        <ngx-material-timepicker-toggle  [for]="toggleTimepicker">
-          <mat-icon ngxMaterialTimepickerToggleIcon>access_time</mat-icon>
-        </ngx-material-timepicker-toggle>
-        </button>
-      <ngx-material-timepicker (timeSet)="updateTime($event)"  [ngxMaterialTimepickerTheme]="darkTheme" #toggleTimepicker></ngx-material-timepicker>
-      </mat-form-field>
+
+      <app-custom-timepicker formControlName="fromTime" [(ngModel)]="planDate.time" [fullWidth]="true" (ngModelChange)="updateTime()"></app-custom-timepicker>
+
+      <!--<mat-form-field class="example-full-width">-->
+      <!--<input [min]="dateTimeWorker.config.minTime" [max]="dateTimeWorker.config.maxTime" formControlName="fromTime" matInput placeholder="{{'Start Time' | translate}}" [(ngModel)]="planDate.timeString"  [format]="24" [ngxTimepicker]="toggleTimepicker">-->
+        <!--<button class="custom-timepicker-toggle" mat-button matSuffix mat-icon-button aria-label="Pick End Time">-->
+        <!--<ngx-material-timepicker-toggle  [for]="toggleTimepicker">-->
+          <!--<mat-icon ngxMaterialTimepickerToggleIcon>access_time</mat-icon>-->
+        <!--</ngx-material-timepicker-toggle>-->
+        <!--</button>-->
+      <!--<ngx-material-timepicker (timeSet)="updateTime($event)"  [ngxMaterialTimepickerTheme]="darkTheme" #toggleTimepicker></ngx-material-timepicker>-->
+      <!--</mat-form-field>-->
       <mat-form-field class="example-full-width" *ngIf="!data.fixedCandidate">
         <mat-select [placeholder]="'Candidate' | translate"
           [compareWith]="typeCheckingWorker.compareObjects" [(value)]="editedCandidate" (selectionChange)="changeCandidate()">
