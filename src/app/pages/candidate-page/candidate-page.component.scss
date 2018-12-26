@@ -1,8 +1,45 @@
-.custom-sticky {
+@media (min-width: 576px) {
+  .custom-sticky-short-info {
   position: relative;
-  top: auto;
-  right: auto;
-  left: auto;
-  bottom: auto;
   width: auto;
+  }
+  .custom-sticky-timeline {
+    width: auto;
+  }
+}
+
+@media (min-width: 768px) {
+  .custom-sticky-short-info {
+  position: relative;
+  width: auto;
+  }
+  .custom-sticky-timeline {
+    width: auto;
+  }
+}
+
+@media (min-width: 992px) {
+  .custom-sticky-short-info {
+    position: fixed;
+    padding-left: 5px;
+    float: left;
+    width: 310px;
+  }
+  .custom-sticky-timeline {
+    float: right;
+    width: 610px;
+  }
+}
+
+@media (min-width: 1200px) {
+  .custom-sticky-short-info {
+    position: fixed;
+    padding-left: 5px;
+    float: left;
+    width: 310px;
+  }
+  .custom-sticky-timeline {
+    float: right;
+    width: 790px;
+  }
 }

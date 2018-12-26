@@ -1,4 +1,4 @@
-import { Component, OnInit, Inject } from '@angular/core';
+import {Component, OnInit, Inject, ViewChild, ElementRef} from '@angular/core';
 import { Candidate } from 'src/app/classes/candidate';
 import { CandidateService } from 'src/app/services/candidate/candidate.service';
 import { NameCandidateModalComponent } from '../name-candidate-modal/name-candidate-modal.component';
@@ -22,6 +22,7 @@ export class AttachmentCandidateModalComponent implements OnInit {
   public editedAttachment: AttachmentForm;
   public attachmentResult: BaseDialogResult<Attachment>;
   public attachmentForm: FormGroup;
+  @ViewChild('fileUpload') fileUpload: ElementRef;
 
   constructor(
     private candidateService: CandidateService,
@@ -45,7 +46,7 @@ export class AttachmentCandidateModalComponent implements OnInit {
   ngOnInit() {
   }
 
-  selectFile(event) {
+  selectFileToUpload(event) {
     console.log(event.target.files[0]);
     this.editedAttachment.file = <File>event.target.files[0];
   }

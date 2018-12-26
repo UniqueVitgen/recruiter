@@ -37,8 +37,10 @@
     <!--<textarea matInput placeholder="Comment" [(ngModel)]="editedExperience."></textarea>-->
     <!--</mat-form-field>-->
   </dialog-body>
-  <dialog-footer>
+  <dialog-footer class="example-full-width">
+    <span class="float-right">
     <button mat-button (click)="onNoClick()">{{'No Thanks' | translate}}</button>
     <button mat-raised-button color="primary" [disabled]="formNote.invalid" (click)="editCandidate()" cdkFocusInitial>{{'Ok' | translate}}</button>
+    </span>
   </dialog-footer>
 </app-modal-component>

@@ -9,6 +9,7 @@ import {CandidateDialogResult} from '../../../interfaces/dialog/result/candidate
 import {UserWorker} from '../../../workers/user/user.worker';
 import {Attachment} from '../../../classes/attachment';
 import {TypeCheckingWorker} from '../../../workers/type-checking/type-checking.worker';
+import {BootstrapCellEnum} from '../../../enums/bootstrap-cell.enum';
 
 @Component({
   selector: 'app-candidate-dashboard',
@@ -21,6 +22,7 @@ export class CandidateDashboardComponent implements OnInit, OnChanges {
   @Input() search;
   @Input() haveHoverEffect: boolean = true;
   @Input() isClosedIcon: boolean = true;
+  @Input() filledCells: BootstrapCellEnum;
   @Output('addCandidate') outputAddCandidate: EventEmitter<Candidate> = new EventEmitter();
   @Output('deleteCandidate') outputDeleteCandidate: EventEmitter<any> = new EventEmitter();
   @Input() limitTo: number;
@@ -36,6 +38,7 @@ export class CandidateDashboardComponent implements OnInit, OnChanges {
 
   ngOnChanges(changes: SimpleChanges): void {
     this.searchValues(this.search);
+    console.log('fillledCells', this.filledCells);
   }
 
   searchValues(value: string) {

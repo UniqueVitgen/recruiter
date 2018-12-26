@@ -172,5 +172,15 @@ export class InterviewModalComponent implements OnInit {
       this.dialogRef.close(this.interviewResult);
     });
   }
+  deleteInterview() {
+    this.interviewService.delete(this.editedInterview).subscribe(res => {
+      this.interviewResult = {
+        isEdit: false,
+        resObject: null,
+        success: true
+      };
+      this.dialogRef.close(this.interviewResult);
+    });
+  }
 
 }

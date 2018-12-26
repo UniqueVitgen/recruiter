@@ -89,7 +89,7 @@
           <!--</mat-card-actions>-->
         <!--</mat-card>-->
       <!--</div>-->
-      <app-candidate-dashboard [candidates]="vacancy.candidates" [limitTo]="3"></app-candidate-dashboard>
+      <app-candidate-dashboard [filledCells]="4" [candidates]="vacancy.candidates" [limitTo]="3"></app-candidate-dashboard>
     </mat-expansion-panel>
 
     <button class="vacancyEditButton" mat-raised-button (click)="goToJobDescriptionPage(vacancy)">{{'Info' | translate}}</button>

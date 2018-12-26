@@ -11,8 +11,8 @@
     <form [formGroup]="attachmentForm">
       <!--<input type="file">-->
       <!--<mat-form-field class="example-full-width">-->
-        <button onclick="document.getElementById('getFile').click()" mat-raised-button color="primary">{{'Choose file' | translate}}...</button>
-      <input (change)="selectFile($event)" formControlName="filePath" type="file" id="getFile" class="hidden-input-upload" *ngIf="editedAttachment != null" placeholder="filePath" [(ngModel)]="editedAttachment.filePath">
+        <button (click)="fileUpload.nativeElement.click()" mat-raised-button color="primary">{{'Choose file' | translate}}...</button>
+      <input (change)="selectFileToUpload($event)" formControlName="filePath" type="file" #fileUpload class="hidden-input-upload" *ngIf="editedAttachment != null" placeholder="filePath" [(ngModel)]="editedAttachment.filePath">
       <!--</mat-form-field>-->
       &nbsp; <span *ngIf="editedAttachment != null">{{editedAttachment.file?.name}}</span>
       <mat-form-field class="example-full-width">
@@ -27,8 +27,10 @@
       </mat-form-field>
     </form>
   </dialog-body>
-  <dialog-footer>
+  <dialog-footer class="example-full-width">
+    <span class="float-right">
     <button mat-button (click)="onNoClick()">{{'No Thanks' | translate}}</button>
     <button mat-raised-button color="primary" [disabled]="attachmentForm.invalid" (click)="editCandidate()" cdkFocusInitial>{{'Ok' | translate}}</button>
+    </span>
   </dialog-footer>
 </app-modal-component>

@@ -64,8 +64,10 @@
       <!--</mat-select>-->
     <!--</mat-form-field>-->
   </dialog-body>
-  <dialog-footer>
-    <button mat-button (click)="onNoClick()">{{'No Thanks' | translate}}</button>
-    <button [disabled]="candidateForm?.invalid" mat-button mat-raised-button color="primary" (click)="editCandidate()" cdkFocusInitial>{{'Ok' | translate}}</button>
+  <dialog-footer class="example-full-width">
+    <span class="float-right">
+      <button mat-button (click)="onNoClick()">{{'No Thanks' | translate}}</button>
+      <button [disabled]="candidateForm?.invalid" mat-button mat-raised-button color="primary" (click)="editCandidate()" cdkFocusInitial>{{'Ok' | translate}}</button>
+    </span>
   </dialog-footer>
 </app-modal-component>

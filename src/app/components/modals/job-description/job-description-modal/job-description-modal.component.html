@@ -74,9 +74,11 @@
     <!--</div>-->
     <!--</div>-->
   </dialog-body>
-  <dialog-footer>
+  <dialog-footer class="example-full-width">
+    <span class="float-right">
     <button mat-button (click)="onNoClick()">{{'No Thanks' | translate}}</button>
     <button mat-button mat-raised-button color="primary" (click)="save()">{{data.dialogWindowTitle | translate}}
     </button>
+    </span>
   </dialog-footer>
 </app-modal-component>

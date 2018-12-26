@@ -83,10 +83,15 @@
       </mat-form-field>
     </form>
   </dialog-body>
-  <dialog-footer>
-    <button mat-button (click)="onNoClick()">{{'No Thanks' | translate}}</button>
-    <button *ngIf="!data.isEdit" mat-raised-button color="primary" [disabled]="interviewForm.invalid" (click)="addInterview()" cdkFocusInitial>{{'Create' | translate}}</button>
-    <button *ngIf="data.isEdit" mat-raised-button color="primary" [disabled]="interviewForm.invalid" (click)="editInterview()" cdkFocusInitial>{{'Edit' | translate}}</button>
+  <dialog-footer class="example-full-width">
+    <span  *ngIf="data.isEdit" class="float-left">
+      <button (click)="deleteInterview()" mat-raised-button color="warn">{{'Delete' | translate}}</button>
+    </span>
+    <span class="float-right">
+      <button mat-button (click)="onNoClick()">{{'No Thanks' | translate}}</button>
+      <button *ngIf="!data.isEdit" mat-raised-button color="primary" [disabled]="interviewForm.invalid" (click)="addInterview()" cdkFocusInitial>{{'Create' | translate}}</button>
+      <button *ngIf="data.isEdit" mat-raised-button color="primary" [disabled]="interviewForm.invalid" (click)="editInterview()" cdkFocusInitial>{{'Edit' | translate}}</button>
+    </span>
   </dialog-footer>
 </app-modal-component>
 <!--</mdb-card>-->
