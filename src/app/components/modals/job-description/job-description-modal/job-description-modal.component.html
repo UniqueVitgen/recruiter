@@ -1,3 +1,5 @@
+
+<form name="form" #vacancyForm="ngForm">
 <app-modal-component>
   <dialog-title>
     <span>{{data.dialogWindowTitle + ' Vacancy'| translate}}</span>
@@ -6,11 +8,10 @@
     </button>
   </dialog-title>
   <dialog-body>
-    <form name="form">
       <mat-form-field *ngIf="editedVacancy" class="example-full-width">
         <input [(ngModel)]="editedVacancy.position" name="position" matInput placeholder="{{'Position' | translate}}" required>
       </mat-form-field>
-      <mat-select placeholder="{{'Status' | translate}}" [(ngModel)]="editedVacancy.vacancyState" name="state">
+      <mat-select placeholder="{{'Status' | translate}}" required [(ngModel)]="editedVacancy.vacancyState" name="state">
         <mat-option *ngFor="let state of statuses" [value]="state">
           {{state | translate}}
         </mat-option>
@@ -67,7 +68,6 @@
       </div>
       <button color="primary"   mat-icon-button (click)="addRequirement()">
         <mat-icon aria-label="Example icon-button with a heart icon">add_circle_outline</mat-icon></button>
-    </form>
     <!--<div class="row">-->
     <!--<div class="col-12 center-item">-->
     <!--<button (click)="addRequirement()" mat-raised-button color="primary">Add Requirement</button>-->
@@ -77,8 +77,9 @@
   <dialog-footer class="example-full-width">
     <span class="float-right">
     <button mat-button (click)="onNoClick()">{{'No Thanks' | translate}}</button>
-    <button mat-button mat-raised-button color="primary" (click)="save()">{{data.dialogWindowTitle | translate}}
+    <button mat-button [disabled]="vacancyForm.form.invalid" mat-raised-button color="primary" (click)="save()">{{data.dialogWindowTitle | translate}}
     </button>
     </span>
   </dialog-footer>
 </app-modal-component>
+</form>
