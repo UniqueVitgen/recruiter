@@ -26,7 +26,10 @@ import {AttachmentType} from '../../../../enums/attachment-type.enum';
 export class ShortInfoUserComponent implements OnInit, OnChanges {
   @Input() candidate: Candidate;
   @Input() readonly: boolean;
+  @Input() haveHoverEffectOnAvatar: boolean;
+  @Input() isEditIconOnAvatar: boolean;
   @Output('editCandidate') outputEditCandidate: EventEmitter<Candidate> = new EventEmitter();
+  @Output('clickAvatar') outputClickAvatar: EventEmitter<Candidate> = new EventEmitter();
   tests: CandidateContactInput[] ;
   MaskConst = MaskConst;
   setStates: string[];
@@ -43,7 +46,9 @@ export class ShortInfoUserComponent implements OnInit, OnChanges {
   ngOnInit() {
     this.setStates = this.enumWorker.getValuesFromEnum(CandidateState);
   }
-
+  clickAvatar() {
+    this.outputClickAvatar.emit(this.candidate);
+  }
   ngOnChanges(changes: SimpleChanges): void {
     this.initContacts();
     this.photo = this.candidateWorker.findPhoto(this.candidate);

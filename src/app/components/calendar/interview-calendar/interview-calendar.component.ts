@@ -171,6 +171,7 @@ export class InterviewCalendarComponent implements OnInit, OnChanges {
     return {
       locale: this.locale,
       buttonText: buttonText,
+      theme: 'bootstrap4',
       header: {
         left: 'prev,next',
         center: 'title',

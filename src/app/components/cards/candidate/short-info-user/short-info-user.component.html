@@ -2,7 +2,7 @@
 <!--suppress ALL -->
 <div class="row">
   <div class="col-12 col-md-12">
-    <app-candidate-avatar [src]="candidateWorker.generatePhotoUrl(photo)" [candidate]="candidate" [isStatus]="true"></app-candidate-avatar>
+    <app-candidate-avatar [haveHoverEffect]="haveHoverEffectOnAvatar" [isEditedIcon]="isEditIconOnAvatar" (click)="clickAvatar()" [src]="candidateWorker.generatePhotoUrl(photo)" [candidate]="candidate" [isStatus]="true"></app-candidate-avatar>
     <!-- <ngx-avatar 
       src="assets/candidate/icons8-person-80.png"
       [round]="false"

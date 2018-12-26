@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, ElementRef, OnInit, ViewChild} from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { CandidateService } from 'src/app/services/candidate/candidate.service';
 import { Candidate } from 'src/app/classes/candidate';
@@ -7,6 +7,8 @@ import {Interview} from '../../classes/interview';
 import {EventNoteWorker} from '../../workers/event-note/event-note.worker';
 import {FeedbackService} from '../../services/feedback/feedback.service';
 import {InterviewService} from '../../services/interview/interview.service';
+import {AttachmentForm} from '../../classes/html/attachment-form';
+import {AttachmentType} from '../../enums/attachment-type.enum';
 
 @Component({
   selector: 'app-candidate-page',
@@ -20,6 +22,7 @@ export class CandidatePageComponent implements OnInit {
   date: '1',
   noteText: '1111111111111111111111111111111111111111111111111111111111111111111111111'};
   eventNoteList: EventNote[];
+  @ViewChild('fileInput') fileInput: ElementRef;
 
   constructor(
     private route: ActivatedRoute,
@@ -36,6 +39,23 @@ export class CandidatePageComponent implements OnInit {
       // this.candidateService.get()
       // Defaults to 0 if no query param provided.
     });
+  }
+  clickAvatar() {
+    console.log(this.fileInput);
+    this.fileInput.nativeElement.click();
+    console.log(this.fileInput);
+  }
+
+  selectFile(event) {
+    console.log(event.target.files[0]);
+    const attachment: AttachmentForm = {
+      attachmentType: AttachmentType.PHOTO,
+      file: event.target.files[0]
+    };
+    this.candidateService.uploadAttachment(this.candidate, attachment).subscribe(res => {
+      this.getCandidate();
+    });
+    // this.editedAttachment.file = <File>event.target.files[0];
   }
   deleteTimelineItem(index: number) {
     const object = this.eventNoteList[index];

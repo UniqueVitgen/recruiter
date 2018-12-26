@@ -9,7 +9,7 @@
           <!--<perfect-scrollbar style="height: 100vh;">-->
           <!--<mat-card>-->
           <div>
-            <app-short-info-user *ngIf="candidate" [readonly]="false" [candidate]="candidate"></app-short-info-user>
+            <app-short-info-user (clickAvatar)="clickAvatar()" *ngIf="candidate" [haveHoverEffectOnAvatar]="true" [isEditIconOnAvatar]="true" [readonly]="false" [candidate]="candidate"></app-short-info-user>
           </div>
           <!--</perfect-scrollbar>-->
         </div>
@@ -20,4 +20,5 @@
     <div class="col-lg-9 col-12">
       <app-candidate-timeline *ngIf="candidate"  [candidate]="candidate" (clickClose)="deleteTimelineItem($event)" (addTimelineItem)="addTimelineItem($event)" (changeTimeline)="changeTimelineItem($event)" [timelineNotes]="eventNoteList"></app-candidate-timeline>
     </div>
+    <input #fileInput (change)="selectFile($event)" formControlName="filePath" type="file" id="getFile" class="hidden-input-upload" placeholder="filePath">
   </div>
