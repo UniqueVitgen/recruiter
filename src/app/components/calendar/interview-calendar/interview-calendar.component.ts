@@ -33,7 +33,46 @@ export class InterviewCalendarComponent implements OnInit, OnChanges {
   @Input() locale: string;
   @Output('changeInterviews') outputChangeInterviews: EventEmitter<any> = new EventEmitter();
   public calendarEventList: CalendarEvent[];
-  public calendarOptions: Options = {
+  public calendarOptionsRU: Options = {
+    allDaySlot: false,
+    allDayDefault: false,
+    editable: true,
+    eventLimit: false,
+    header: {
+      left: 'prev,next today',
+      center: 'title',
+      right: 'month,agendaWeek,agendaDay,listMonth'
+    },
+    eventTextColor: '#fff',
+    eventColor: '#4285f4',
+    timeFormat: 'H:mm',
+    nowIndicator: true,
+    slotLabelFormat: 'H:mm'
+    ,
+    timezone: 'UTC',
+    minTime: <any> '08:00:00',
+    maxTime: <any> '23:00:00',
+    visibleRange: {
+      start: this.dateTimeWorker.getYesterday(),
+      end: this.dateTimeWorker.getNextYear()
+    },
+    buttonText: {
+      prev: 'Предыдущий',
+      next: 'Следующий',
+      today: 'Сегодня',
+      month: 'Месяц',
+      week: 'Неделя',
+      day: 'День',
+      list: 'Список'
+    },
+    monthNames:['Январь', 'Февраль', 'Март', 'Апрель', 'Май', 'Июнь', 'Июль',
+      'Август', 'Сентябрь', 'Октябрь', 'Ноябрь', 'Декабрь'],
+    dayNames: ['Воскресенье', 'Понедельник', 'Вторник', 'Среда',
+      'Четверг', 'Пятница', 'Суббота'],
+    dayNamesShort: ['ВС', 'ПН', 'ВТ', 'СР',
+      'ЧТ', 'ПТ', 'СБ']
+  };
+  public calendarOptionsEN: Options = {
     allDaySlot: false,
     allDayDefault: false,
     editable: true,
