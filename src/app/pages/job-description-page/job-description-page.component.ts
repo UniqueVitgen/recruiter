@@ -99,6 +99,7 @@ export class JobDescriptionPageComponent implements OnInit {
       if (chosenCandidateID.add) {
         this.vacancy.candidates.push(this.candidates[chosenCandidateID.result]);
       }
+      console.log(this.vacancy.position);
       console.log(this.vacancy.candidates);
     });
   }
