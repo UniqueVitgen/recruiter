@@ -90,17 +90,16 @@ export class JobDescriptionPageComponent implements OnInit {
 
   openExistingCandidatesModalWindow(): void {
     const dialogRef = this.dialog.open(ExistedCandidatesModalWindowComponent, {
+        data: {vacancy: this.vacancy},
         disableClose: true,
         height: '500px'
       }
     );
-    dialogRef.afterClosed().subscribe((chosenCandidateID) => {
-      console.log('Close!' + chosenCandidateID);
-      if (chosenCandidateID.add) {
-        this.vacancy.candidates.push(this.candidates[chosenCandidateID.result]);
+    dialogRef.afterClosed().subscribe((existingCandidatesModalWindowResult) => {
+      console.log('Close!' + existingCandidatesModalWindowResult.addCandidate);
+      if (existingCandidatesModalWindowResult.addCandidate) {
+        this.addCandidate(this.candidates[existingCandidatesModalWindowResult.chosenCandidateID]);
       }
-      console.log(this.vacancy.position);
-      console.log(this.vacancy.candidates);
     });
   }
 }

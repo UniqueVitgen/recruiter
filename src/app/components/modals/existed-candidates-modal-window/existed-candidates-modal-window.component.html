@@ -3,7 +3,7 @@
 </h3>
 <button mat-button (click)="close()">X</button>
 <div #candidateView *ngFor="let candidate of candidates; let i = index">
-  <div class="candidate-line">
+  <div *ngIf="isThisCandidateAlreadyHere(candidate)" class="candidate-line">
     <app-candidate-dashboard-item [haveHoverEffect]="false" [isClosedIcon]="false"
                                   [candidate]="candidate" [clickableCandidate]="false"></app-candidate-dashboard-item>
 

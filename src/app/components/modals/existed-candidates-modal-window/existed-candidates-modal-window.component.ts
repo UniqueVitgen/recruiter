@@ -1,8 +1,6 @@
-import {Component, ElementRef, Inject, OnChanges, OnInit, SimpleChanges, ViewChild} from '@angular/core';
+import {Component, Inject, OnChanges, OnInit, SimpleChanges, ViewChild} from '@angular/core';
 import {CandidateService} from '../../../services/candidate/candidate.service';
 import {Candidate} from '../../../classes/candidate';
-import {CandidateWorker} from '../../../workers/candidate/candidate.worker';
-import {UserWorker} from '../../../workers/user/user.worker';
 import {Attachment} from '../../../classes/attachment';
 import {MAT_DIALOG_DATA, MatDialogRef} from '@angular/material';
 import {DeleteVacancyDialogComponent} from '../delete-vacancy-dialog/delete-vacancy-dialog.component';
@@ -21,27 +19,28 @@ export class ExistedCandidatesModalWindowComponent implements OnInit, OnChanges 
               @Inject(MAT_DIALOG_DATA) public data: boolean) {
   }
 
-
   addCandidate(choice: number): void {
-    this.dialogRef.close({add: true, result: choice});
+    console.log('CHOISE RESULT: ' + choice)
+    this.dialogRef.close({addCandidate: true, chosenCandidateID: choice});
 
   }
 
   close(): void {
-    this.dialogRef.close({add: false, result: -1});
+    this.dialogRef.close({addCandidate: false, chosenCandidateID: -1});
   }
 
   ngOnInit() {
     this.getAll();
-
-    // this.mockCandidates = this.candidateService.mockCandidates;
   }
 
+  isThisCandidateAlreadyHere(candidateForCheck: Candidate): boolean {
+    return this.data.vacancy.candidates.every(candidate => {
+      return candidate.id !== candidateForCheck.id;
+    });
+  }
 
   getAll() {
-    console.log('1');
     this.candidateService.getAll().subscribe(res => {
-      console.log(res);
       this.candidates = res;
     }, err => {
       console.log('1' + err);
