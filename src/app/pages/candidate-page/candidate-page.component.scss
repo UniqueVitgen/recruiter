@@ -22,12 +22,14 @@
   .custom-sticky-short-info {
     position: fixed;
     padding-left: 5px;
-    float: left;
+    //float: left;
     width: 310px;
   }
   .custom-sticky-timeline {
-    float: right;
+    //float: right;
     width: 610px;
+    position: relative;
+    left: 320px;
   }
 }
 
@@ -35,11 +37,13 @@
   .custom-sticky-short-info {
     position: fixed;
     padding-left: 5px;
-    float: left;
+    //float: left;
     width: 310px;
   }
   .custom-sticky-timeline {
-    float: right;
+    //float: right;
     width: 790px;
+    position: relative;
+    left: 320px;
   }
 }

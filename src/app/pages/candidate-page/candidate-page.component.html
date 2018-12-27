@@ -1,6 +1,7 @@
 
   <mat-spinner *ngIf="!candidate">
   </mat-spinner>
+  <div class="container">
     <div class="custom-sticky-short-info">
       <!--<div sticky [sticky-offset-top]="60" ng-reflect-width="auto">-->
         <div >
@@ -13,4 +14,6 @@
       <app-candidate-timeline *ngIf="candidate"  [candidate]="candidate" (clickClose)="deleteTimelineItem($event)" (addTimelineItem)="addTimelineItem($event)" (changeTimeline)="changeTimelineItem($event)" [timelineNotes]="eventNoteList"></app-candidate-timeline>
     </div>
   <input #fileInput (change)="selectFile($event)" formControlName="filePath" type="file" id="getFile" class="hidden-input-upload" placeholder="filePath">
+  </div>
+
 
