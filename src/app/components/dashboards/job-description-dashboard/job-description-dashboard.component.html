@@ -3,6 +3,9 @@
     <app-job-description-dashboard-item [jobDescription]="jobDescription" (click)="goToJobDescriptionPage(jobDescription)" (deleteVacancy)="deleteVacancy(i)"></app-job-description-dashboard-item>
     <br>
   </div>-->
+  <div class="col-12 col-md-12 center-item">
+    <button (click)="openJobDescriptionDialog()" class="vacancy-add-buttons" mat-raised-button color="primary">{{'Add new' | translate}}</button>
+  </div>
   <div *ngFor="let vacancy of selectedVacancies; let vacancyID = index" class="vacancy">
 
     <mat-expansion-panel class="vacancyPannel">
@@ -94,8 +97,7 @@
 
     <button class="vacancyEditButton" mat-raised-button (click)="goToJobDescriptionPage(vacancy)">{{'Info' | translate}}</button>
     <button class="vacancyDeleteButton" mat-raised-button (click)="openDeleteVacancyDialog(vacancyID)"><mat-icon>close</mat-icon></button>
-  </div>
-  <div class="col-12 col-md-12 center-item">
-    <button (click)="openJobDescriptionDialog()" class="half-width" mat-raised-button color="primary">{{'Add new' | translate}}</button>
+
+
   </div>
 </mat-card>

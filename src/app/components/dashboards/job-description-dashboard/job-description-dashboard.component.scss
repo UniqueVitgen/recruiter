@@ -21,11 +21,12 @@
 }
 .vacancyEditButton{
   width: 5%;
+  height: 20%;
   background-color: #007bff;
 }
 .vacancyDeleteButton{
   width: 5%;
-
+  height: 20%;
   background-color: #35ccff;
 }
 .addButton{
@@ -43,3 +44,8 @@
 .vacancyIsClosed{
   color: red;
 }
+.vacancy-add-buttons{
+  width: 50%;
+  margin-bottom: 10px;
+}
+

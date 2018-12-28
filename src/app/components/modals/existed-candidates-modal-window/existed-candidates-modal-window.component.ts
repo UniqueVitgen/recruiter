@@ -4,6 +4,7 @@ import {Candidate} from '../../../classes/candidate';
 import {Attachment} from '../../../classes/attachment';
 import {MAT_DIALOG_DATA, MatDialogRef} from '@angular/material';
 import {DeleteVacancyDialogComponent} from '../delete-vacancy-dialog/delete-vacancy-dialog.component';
+import {Vacancy} from '../../../classes/vacancy';
 
 @Component({
   selector: 'app-existed-candidates-modal-window',
@@ -16,11 +17,12 @@ export class ExistedCandidatesModalWindowComponent implements OnInit, OnChanges 
 
   constructor(private candidateService: CandidateService,
               public dialogRef: MatDialogRef<DeleteVacancyDialogComponent>,
-              @Inject(MAT_DIALOG_DATA) public data: boolean) {
+              @Inject(MAT_DIALOG_DATA) public data: { vacancy: Vacancy }) {
   }
 
+
   addCandidate(choice: number): void {
-    console.log('CHOISE RESULT: ' + choice)
+    console.log('CHOISE RESULT: ' + choice);
     this.dialogRef.close({addCandidate: true, chosenCandidateID: choice});
 
   }

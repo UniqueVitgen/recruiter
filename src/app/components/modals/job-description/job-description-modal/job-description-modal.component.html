@@ -39,16 +39,17 @@
           </div>
           <div class="col-5">
             <mat-form-field class="example-full-width">
-              <input [name]="'requirements-' + i" matInput required placeholder="{{'Requirement' | translate}}" [matAutocomplete]="auto"
+              <input [name]="'requirements-' + i" matInput required placeholder="{{'Requirement' | translate}}" [matAutocomplete]="autoGroup"
                      [(ngModel)]="requirement.name">
-              <mat-autocomplete required #auto="matAutocomplete">
-                <mat-option *ngFor="let state of searchWorker.search(requirement.name, testRequirements)"
-                            [value]="state">
-                  <span>{{state}}</span>
-                  <!--<small>Population: {{state.population}}</small>-->
-                </mat-option>
+              <mat-autocomplete #autoGroup="matAutocomplete">
+                <mat-optgroup *ngFor="let group of stateGroupOptions | async" [label]="group.letter">
+                  <mat-option *ngFor="let name of group.names" [value]="name">
+                    {{name}}
+                  </mat-option>
+                </mat-optgroup>
               </mat-autocomplete>
             </mat-form-field>
+
           </div>
           <div class="col-2 checkbox-col">
             <mat-checkbox color="primary" [name]="'requred' + i" [(ngModel)]="requirement.required"
