@@ -20,26 +20,38 @@
 
 @media (min-width: 992px) {
   .custom-sticky-short-info {
-    position: fixed;
-    padding-left: 5px;
-    float: left;
+    position: sticky;
+    top: 4rem;
+    margin-right: 15px;
+    //float: left;
+    display: inline-block;
+    vertical-align: top;
     width: 310px;
   }
   .custom-sticky-timeline {
-    float: right;
-    width: 610px;
+    //float: right;
+    position: relative;
+    display: inline-block;
+    vertical-align: top;
+    width: 600px;
   }
 }
 
 @media (min-width: 1200px) {
   .custom-sticky-short-info {
-    position: fixed;
-    padding-left: 5px;
-    float: left;
+    position: sticky;
+    top: 4rem;
+    margin-right: 15px;
+    //float: left;
+    display: inline-block;
+    vertical-align: top;
     width: 310px;
   }
   .custom-sticky-timeline {
-    float: right;
-    width: 790px;
+    //float: right;
+    position: relative;
+    display: inline-block;
+    vertical-align: top;
+    width: 785px;
   }
 }
