@@ -49,8 +49,8 @@ export class JobDescriptionModalComponent implements OnInit {
               @Inject(MAT_DIALOG_DATA) public data: JobDescriptionDialogData) {
   }
 
-  stateForm: FormGroup = this.fb.group({
-    stateGroup: '',
+  vacancyForm: FormGroup = this.fb.group({
+    requirementsGroup: '',
   });
 
   stateGroups: StateGroup[] = [{
@@ -82,7 +82,7 @@ export class JobDescriptionModalComponent implements OnInit {
       this.editedVacancy.requirements = [];
     }
 
-    this.stateGroupOptions = this.stateForm.get('stateGroup')!.valueChanges
+    this.stateGroupOptions = this.vacancyForm.get('requirementsGroup')!.valueChanges
       .pipe(
         startWith(''),
         map(value => this._filterGroup(value))

@@ -17,7 +17,7 @@ export class ExistedCandidatesModalWindowComponent implements OnInit, OnChanges 
 
   constructor(private candidateService: CandidateService,
               public dialogRef: MatDialogRef<DeleteVacancyDialogComponent>,
-              @Inject(MAT_DIALOG_DATA) public data: { vacancy: Vacancy }) {
+              @Inject(MAT_DIALOG_DATA) public data: { currentVacancy: Vacancy }) {
   }
 
 
@@ -36,7 +36,7 @@ export class ExistedCandidatesModalWindowComponent implements OnInit, OnChanges 
   }
 
   isThisCandidateAlreadyHere(candidateForCheck: Candidate): boolean {
-    return this.data.vacancy.candidates.every(candidate => {
+    return this.data.currentVacancy.candidates.every(candidate => {
       return candidate.id !== candidateForCheck.id;
     });
   }
