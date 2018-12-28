@@ -58,7 +58,7 @@ export class JobDescriptionModalComponent implements OnInit {
     names: ['Java', 'TS', 'JS', 'Python']
   }, {
     letter: 'Speak Lang',
-    names: ['California', 'Colorado', 'Connecticut']
+    names: ['English', 'Spanish', 'Russian']
   }, {
     letter: 'Sex',
     names: ['Male', 'Female']
