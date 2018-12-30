@@ -1,0 +1,38 @@
+<app-modal-component>
+  <dialog-title>
+    <span *ngIf="data.isEdit">
+      {{'Edit avatar' | translate}}
+    </span>
+    <span *ngIf="!data.isEdit">
+      {{'Add avatar' | translate}}
+    </span>
+  </dialog-title>
+  <dialog-body>
+    <button (click)="clickButton()" mat-raised-button color="primary">{{'Choose file' | translate}}...</button>
+<input (change)="fileChangeEvent($event)" type="file" #fileUpload class="hidden-input-upload" placeholder="filePath" [(ngModel)]="editedAttachment.filePath">
+<div>
+  <image-cropper
+    [imageChangedEvent]="imageChangedEvent"
+    [maintainAspectRatio]="true"
+    [aspectRatio]="4 / 3"
+    [resizeToWidth]="250"
+    [roundCropper]="false"
+    format="png"
+    outputType="base64"
+    (imageCropped)="imageCropped($event)"
+    (imageLoaded)="imageLoaded()"
+    (cropperReady)="cropperReady()"
+    (loadImageFailed)="loadImageFailed()"
+    style="max-height: 33vh"
+    [style.display]="showCropper ? null : 'none'"
+  ></image-cropper>
+</div>
+<img [src]="croppedImage" />
+</dialog-body>
+<dialog-footer class="example-full-width">
+    <span class="float-right">
+    <button mat-button (click)="onNoClick()">{{'No Thanks' | translate}}</button>
+    <button mat-raised-button color="primary" (click)="editCandidate()" cdkFocusInitial>{{'Ok' | translate}}</button>
+    </span>
+</dialog-footer>
+</app-modal-component>

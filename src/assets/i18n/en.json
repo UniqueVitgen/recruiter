@@ -82,5 +82,8 @@
   "Candidate": "Candidate",
   "Short info": "Short info",
   "Add": "Add",
-  "feedback":"feedback"
+  "feedback":"feedback",
+  "Add avatar" : "Add avatar",
+  "Do you really want to delete this vacancy?" : "Do you really want to delete this vacancy?",
+  "Alert" : "Warning:"
 }

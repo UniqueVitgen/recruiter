@@ -82,5 +82,8 @@
   "Candidate": "Кандидат",
   "Short info": "Краткая информация",
   "Add": "Добавить",
-  "feedback":"отзыв"
+  "feedback":"отзыв",
+  "Add avatar" : "Добавить аватар",
+  "Do you really want to delete this vacancy?" : "Вы действительно желаете удалить эту вакансию?",
+  "Alert" : "Предупреждение:"
 }

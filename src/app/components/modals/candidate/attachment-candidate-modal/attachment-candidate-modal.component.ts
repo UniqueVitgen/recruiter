@@ -10,6 +10,7 @@ import { EnumWorker } from 'src/app/workers/enum/enum.worker';
 import {BaseDialogResult} from '../../../../interfaces/dialog/result/base-dialog-result';
 import {FormBuilder, FormGroup, Validators} from '@angular/forms';
 import {AttachmentForm} from '../../../../classes/html/attachment-form';
+import {FileWorker} from '../../../../workers/file/file.worker';
 
 @Component({
   selector: 'app-attachment-candidate-modal',
@@ -22,12 +23,17 @@ export class AttachmentCandidateModalComponent implements OnInit {
   public editedAttachment: AttachmentForm;
   public attachmentResult: BaseDialogResult<Attachment>;
   public attachmentForm: FormGroup;
+
+  imageChangedEvent: any = '';
+  croppedImage: any = '';
+  showCropper = false;
   @ViewChild('fileUpload') fileUpload: ElementRef;
 
   constructor(
     private candidateService: CandidateService,
     public dialogRef: MatDialogRef<NameCandidateModalComponent>,
     public enumWorker: EnumWorker,
+    public fileWorker: FileWorker,
     private fb: FormBuilder,
     @Inject(MAT_DIALOG_DATA) public data: AttachmentDialogData ) {
     // console.log('candidate', this.candidate);
@@ -49,6 +55,7 @@ export class AttachmentCandidateModalComponent implements OnInit {
   selectFileToUpload(event) {
     console.log(event.target.files[0]);
     this.editedAttachment.file = <File>event.target.files[0];
+    this.imageChangedEvent = event;
   }
 
   getAttachmentsTypes() {
@@ -74,6 +81,22 @@ export class AttachmentCandidateModalComponent implements OnInit {
 
   onNoClick(): void {
     this.dialogRef.close();
+  }
+
+  imageCropped(event) {
+    this.croppedImage = event.base64;
+    this.editedAttachment.file = this.fileWorker.dataURLtoFile(this.croppedImage, this.editedAttachment.file.name);
+    console.log('1', event, this.editedAttachment.file);
+  }
+  imageLoaded() {
+    this.showCropper = true;
+    console.log('image loaded');
+  }
+  cropperReady() {
+    console.log('cropper ready');
+  }
+  loadImageFailed () {
+    console.log('Load failed');
   }
 
 }

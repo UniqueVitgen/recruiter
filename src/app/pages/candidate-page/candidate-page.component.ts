@@ -9,6 +9,11 @@ import {FeedbackService} from '../../services/feedback/feedback.service';
 import {InterviewService} from '../../services/interview/interview.service';
 import {AttachmentForm} from '../../classes/html/attachment-form';
 import {AttachmentType} from '../../enums/attachment-type.enum';
+import {ImageCropperAvatarComponent} from '../../components/modals/candidate/image-cropper-avatar/image-cropper-avatar.component';
+import {MatDialog} from '@angular/material';
+import {AttachmentCandidateModalComponent} from '../../components/modals/candidate/attachment-candidate-modal/attachment-candidate-modal.component';
+import {CandidateDialogData} from '../../interfaces/dialog/init/candidate-dialog-data';
+import {BaseDialogResult} from '../../interfaces/dialog/result/base-dialog-result';
 
 @Component({
   selector: 'app-candidate-page',
@@ -29,7 +34,8 @@ export class CandidatePageComponent implements OnInit {
     private eventNoteWorker: EventNoteWorker,
     private feedbackService: FeedbackService,
     private candidateService: CandidateService,
-    private interviewService: InterviewService) { }
+    private interviewService: InterviewService,
+    public dialog: MatDialog) { }
 
   ngOnInit() {
     this.route.params
@@ -41,9 +47,21 @@ export class CandidatePageComponent implements OnInit {
     });
   }
   clickAvatar() {
-    console.log(this.fileInput);
-    this.fileInput.nativeElement.click();
-    console.log(this.fileInput);
+    const dialogRef = this.dialog.open(ImageCropperAvatarComponent, {
+        data: <CandidateDialogData> {
+          sourceCandidate: this.candidate
+        },
+        disableClose: true
+      }
+    );
+    dialogRef.afterClosed().subscribe((res: BaseDialogResult<Candidate>) => {
+      this.getCandidate();
+      console.log('res', res);
+      if (res) {
+        console.log('res - ', res);
+        //this.outputChangeTimeline.emit(res.resObject);
+      }
+    });
   }
 
   selectFile(event) {
@@ -110,7 +128,7 @@ export class CandidatePageComponent implements OnInit {
       });
     }
     this.candidateService.update(this.candidate).subscribe(resMessage => {
-      // this.getCandidate();
+      this.getCandidate();
     });
   }
   addTimelineItem(candidate: Candidate) {
@@ -144,5 +162,6 @@ export class CandidatePageComponent implements OnInit {
       console.log('res', res);
     });
   }
+
 
 }

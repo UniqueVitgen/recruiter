@@ -9,6 +9,7 @@
       <app-candidate-timeline *ngIf="candidate"  [candidate]="candidate" (clickClose)="deleteTimelineItem($event)" (addTimelineItem)="addTimelineItem($event)" (changeTimeline)="changeTimelineItem($event)" [timelineNotes]="eventNoteList"></app-candidate-timeline>
     </div>
   </div>
-  <input #fileInput (change)="selectFile($event)" formControlName="filePath" type="file" id="getFile" class="hidden-input-upload" placeholder="filePath">
+
+  <!--<input #fileInput (change)="test()" formControlName="filePath" type="file" id="getFile" class="hidden-input-upload" placeholder="filePath">-->
 
 

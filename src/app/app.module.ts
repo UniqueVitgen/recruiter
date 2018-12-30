@@ -14,7 +14,6 @@ import * as $ from 'jquery';
 // import { CalendarComponent } from 'angular2-fullcalendar/src/calendar/calendar';
 // import {CalendarComponent} from 'ap-angular2-fullcalendar/src/calendar/calendar';
 
-
 import { AppComponent } from './app.component';
 import { CandidatePageComponent } from './pages/candidate-page/candidate-page.component';
 import { ShortInfoUserComponent } from './components/cards/candidate/short-info-user/short-info-user.component';
@@ -91,10 +90,14 @@ import {PrimeNGModule} from './modules/prime-ng/prime-ng.module';
 import {FlexLayoutModule} from '@angular/flex-layout';
 import { VacancyInterviewExpansionPanelComponent } from './components/expansion-panels/vacancy-interview-expansion-panel/vacancy-interview-expansion-panel.component';
 import { CandidateInterviewExpansionPanelComponent } from './components/expansion-panels/candidate-interview-expansion-panel/candidate-interview-expansion-panel.component';
+import { ImageCropperAvatarComponent } from './components/modals/candidate/image-cropper-avatar/image-cropper-avatar.component';
+
+import {ImageCropperModule} from 'ngx-image-cropper';
 
 export function HttpLoaderFactory(http: HttpClient) {
   return new TranslateHttpLoader(http);
 }
+// @ts-ignore
 @NgModule({
   declarations: [
     AppComponent,
@@ -151,7 +154,8 @@ export function HttpLoaderFactory(http: HttpClient) {
     LocalDatePipe,
     CustomTimepickerComponent,
     VacancyInterviewExpansionPanelComponent,
-    CandidateInterviewExpansionPanelComponent
+    CandidateInterviewExpansionPanelComponent,
+    ImageCropperAvatarComponent
     // ,
     // CalendarComponent
   ],
@@ -181,7 +185,9 @@ export function HttpLoaderFactory(http: HttpClient) {
       }
     }),
     PipesModule,
-    StickyModule
+    StickyModule,
+    ImageCropperModule
+
     // MDBBootstrapModule.forRoot(),
     // NgxMaterialTimepickerModule.forRoot()
     // ,
@@ -212,7 +218,8 @@ export function HttpLoaderFactory(http: HttpClient) {
     NoteCandidateModalComponent,
     DeleteVacancyDialogComponent,
     ExistedCandidatesModalWindowComponent,
-    AlertModalComponent
+    AlertModalComponent,
+    ImageCropperAvatarComponent
   ],
   schemas: [NO_ERRORS_SCHEMA] // add this line
 })

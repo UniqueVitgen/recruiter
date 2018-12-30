@@ -10,6 +10,7 @@ import {UserWorker} from '../../../workers/user/user.worker';
 import {Attachment} from '../../../classes/attachment';
 import {TypeCheckingWorker} from '../../../workers/type-checking/type-checking.worker';
 import {BootstrapCellEnum} from '../../../enums/bootstrap-cell.enum';
+import {ImageCropperAvatarComponent} from '../../modals/candidate/image-cropper-avatar/image-cropper-avatar.component';
 
 @Component({
   selector: 'app-candidate-dashboard',
@@ -74,5 +75,6 @@ export class CandidateDashboardComponent implements OnInit, OnChanges {
     console.log('rerew');
     this.outputDeleteCandidate.emit();
   }
+
 
 }
