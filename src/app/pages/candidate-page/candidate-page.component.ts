@@ -14,6 +14,7 @@ import {MatDialog} from '@angular/material';
 import {AttachmentCandidateModalComponent} from '../../components/modals/candidate/attachment-candidate-modal/attachment-candidate-modal.component';
 import {CandidateDialogData} from '../../interfaces/dialog/init/candidate-dialog-data';
 import {BaseDialogResult} from '../../interfaces/dialog/result/base-dialog-result';
+import {DevFeedbackService} from '../../services/dev-feedback/dev-feedback.service';
 
 @Component({
   selector: 'app-candidate-page',
@@ -33,6 +34,7 @@ export class CandidatePageComponent implements OnInit {
     private route: ActivatedRoute,
     private eventNoteWorker: EventNoteWorker,
     private feedbackService: FeedbackService,
+    private devFeedbackService: DevFeedbackService,
     private candidateService: CandidateService,
     private interviewService: InterviewService,
     public dialog: MatDialog) { }
@@ -90,8 +92,11 @@ export class CandidatePageComponent implements OnInit {
       this.feedbackService.delete(<any>object).subscribe(res => {
         this.getCandidate();
       });
-    }
-    else if (this.eventNoteWorker.isExperience(object)) {
+    } else if (this.eventNoteWorker.isDevFeedback(object)) {
+      this.devFeedbackService.delete(<any> object).subscribe(res => {
+        this.getCandidate();
+      });
+    } else if (this.eventNoteWorker.isExperience(object)) {
       this.candidate.experiences = this.candidate.experiences.filter((attachment => {
         return object.id !== attachment.id;
       }));
@@ -114,6 +119,9 @@ export class CandidatePageComponent implements OnInit {
     } else if (this.eventNoteWorker.isNote(object)) {
       this.feedbackService.update(object).subscribe(res => {
         // this.getCandidate();
+      });
+    } else if (this.eventNoteWorker.isDevFeedback(object)) {
+      this.devFeedbackService.update(object).subscribe(res => {
       });
     } else if (this.eventNoteWorker.isExperience(object)) {
       this.candidate.experiences = this.candidate.experiences.map((attachment) => {

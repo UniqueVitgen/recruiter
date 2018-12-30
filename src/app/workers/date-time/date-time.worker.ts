@@ -36,6 +36,11 @@ export class DateTimeWorker {
     }
     return this.datePipe.transform(date, format, 'UTC', this.translateWorker.getLanguage());
   }
+  getTime2(dateWithTime) {
+    const date = new Date(dateWithTime);
+    const time = this.parseTimeObject(date);
+    return this.convertTimeInputToTimeString(time, 12);
+  }
 
   getDate(dateWithTime, format?) {
     if (dateWithTime) {

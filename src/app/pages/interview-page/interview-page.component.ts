@@ -74,6 +74,7 @@ export class InterviewPageComponent implements OnInit {
             this.isFeedbackEdited = true;
             this.feedback = resFeedback;
           } else {
+            this.isFeedbackEdited = false;
             this.feedback = new DevFeedback(this.interview);
             console.log('feedback', this.feedback);
           }
@@ -103,6 +104,11 @@ export class InterviewPageComponent implements OnInit {
   }
   addDevFeedback(event) {
     this.devFeedbackService.add(event).subscribe(res => {
+      this.getInterview();
+    });
+  }
+  clickDeleteFeedback(event) {
+    this.devFeedbackService.delete(event).subscribe(() => {
       this.getInterview();
     });
   }

@@ -10,8 +10,10 @@ import {DevFeedback} from '../../../../classes/dev-feedback';
 export class InterviewFeedbackComponent implements OnInit {
   @Input() isEdit: boolean;
   @Input() feedback: DevFeedback;
+  @Input() buttonEdit: boolean;
   @Output('focusoutAnyInput') outputOnFocusoutAnyInput: EventEmitter<DevFeedback> = new EventEmitter();
   @Output('saveClick') outputSaveClick: EventEmitter<DevFeedback> = new EventEmitter();
+  @Output('clickDelete') outputClickDelete: EventEmitter<DevFeedback> = new EventEmitter();
 
   constructor() { }
 
@@ -24,6 +26,9 @@ export class InterviewFeedbackComponent implements OnInit {
   }
   saveFeedback() {
     this.outputSaveClick.emit(this.feedback);
+  }
+  clickDelete(): void {
+    this.outputClickDelete.emit(this.feedback);
   }
 
 }
