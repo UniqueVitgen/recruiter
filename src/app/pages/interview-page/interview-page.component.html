@@ -5,22 +5,13 @@
   <br>
   <!--<div class="row">-->
     <!--<div class="col-3">-->
-  <app-interview-candidate  [haveHoverEffectOnAvatar]="true" [isEditIconOnAvatar]="true" [src]="photoUrl" [interview]="interview"></app-interview-candidate>
+  <!--<app-interview-candidate  ></app-interview-candidate>-->
   <br>
+  <app-candidate-interview-expansion-panel [haveHoverEffectOnAvatar]="true" [isEditIconOnAvatar]="true" [src]="photoUrl" [candidate]="interview.candidate"></app-candidate-interview-expansion-panel>
+
+  <app-vacancy-interview-expansion-panel [vacancy]="interview.vacancy"></app-vacancy-interview-expansion-panel>
     <!--</div>-->
     <!--<div class="col-3">-->
-  <mat-accordion>
-    <mat-expansion-panel>
-      <mat-expansion-panel-header>
-        <mat-card-title>{{'Vacancy' | translate}}</mat-card-title>
-      </mat-expansion-panel-header>
-      <!--<mat-card class="custom-resize-card">-->
-        <mat-card>
-          <app-job-description-short-info [vacancy]="interview.vacancy"></app-job-description-short-info>
-        </mat-card>
-      <!--</mat-card>-->
-    </mat-expansion-panel>
-  </mat-accordion>
     <!--</div>-->
   <!--</div>-->
   <!--<br>-->

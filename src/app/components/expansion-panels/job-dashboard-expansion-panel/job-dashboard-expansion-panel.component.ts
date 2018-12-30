@@ -1,4 +1,5 @@
-  import { Component, OnInit } from '@angular/core';
+  import {Component, Input, OnInit} from '@angular/core';
+  import {Vacancy} from '../../../classes/vacancy';
 
 @Component({
   selector: 'app-job-dashboard-expansion-panel',
@@ -6,6 +7,7 @@
   styleUrls: ['./job-dashboard-expansion-panel.component.scss']
 })
 export class JobDashboardExpansionPanelComponent implements OnInit {
+  @Input() vacancy: Vacancy;
 
   constructor() { }
 

@@ -8,6 +8,7 @@ import {Interview, InterviewExtended} from '../../../../classes/interview';
 })
 export class InterviewFeedbackComponent implements OnInit {
   @Input() interview: InterviewExtended;
+  @Input() isEdit: boolean;
 
   constructor() { }
 

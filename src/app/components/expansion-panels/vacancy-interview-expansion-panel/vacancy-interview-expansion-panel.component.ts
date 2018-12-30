@@ -1,4 +1,5 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, Input, OnInit} from '@angular/core';
+import {Vacancy} from '../../../classes/vacancy';
 
 @Component({
   selector: 'app-vacancy-interview-expansion-panel',
@@ -6,6 +7,7 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./vacancy-interview-expansion-panel.component.scss']
 })
 export class VacancyInterviewExpansionPanelComponent implements OnInit {
+  @Input() vacancy: Vacancy;
 
   constructor() { }
 

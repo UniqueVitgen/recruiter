@@ -1,3 +1,13 @@
-<p>
-  vacancy-interview-expansion-panel works!
-</p>
+
+<mat-accordion>
+  <mat-expansion-panel>
+    <mat-expansion-panel-header>
+      {{'Vacancy' | translate}}
+    </mat-expansion-panel-header>
+    <!--<mat-card class="custom-resize-card">-->
+    <mat-card>
+      <app-job-description-short-info [vacancy]="vacancy"></app-job-description-short-info>
+    </mat-card>
+    <!--</mat-card>-->
+  </mat-expansion-panel>
+</mat-accordion>
