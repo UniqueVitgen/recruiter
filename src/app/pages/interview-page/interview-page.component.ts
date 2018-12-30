@@ -6,7 +6,7 @@ import {CandidateService} from '../../services/candidate/candidate.service';
 import {Vacancy} from '../../classes/vacancy';
 import {Candidate} from '../../classes/candidate';
 import {TranslateWorker} from '../../workers/translate/translate.worker';
-import {ActivatedRoute} from '@angular/router';
+import {ActivatedRoute, Router} from '@angular/router';
 import {CandidateWorker} from '../../workers/candidate/candidate.worker';
 import {Attachment} from '../../classes/attachment';
 import {InterviewModalComponent} from '../../components/modals/interview/interview-modal/interview-modal.component';
@@ -39,6 +39,7 @@ export class InterviewPageComponent implements OnInit {
   private candidateWorker: CandidateWorker,
               private location: Location,
               private dialog: MatDialog,
+              private router: Router,
   private candidateService: CandidateService) { }
 
   ngOnInit() {
@@ -120,5 +121,4 @@ export class InterviewPageComponent implements OnInit {
       });
     }
   }
-
 }

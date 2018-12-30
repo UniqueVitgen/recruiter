@@ -21,7 +21,7 @@
         <span class="font-weight-bold float-right">{{ 'Candidate' | translate}}:</span>
       </div>
       <div class="col-9">
-        <span>{{userWorker.formatFullName(interview.candidate)}}</span>
+        <a [routerLink]="'/candidate/'+interview.candidate.id">{{userWorker.formatFullName(interview.candidate)}}</a>
       </div>
     </div>
     <div class="row">
@@ -29,7 +29,7 @@
         <span class="font-weight-bold float-right">{{ 'Vacancy' | translate}}:</span>
       </div>
       <div class="col-9">
-        <span>{{interview.vacancy.position}}</span>
+        <a [routerLink]="'/job-description/'+interview.vacancy.id">{{interview.vacancy.position}}</a>
       </div>
     </div>
 
