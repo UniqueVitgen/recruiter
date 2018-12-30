@@ -4,6 +4,9 @@ import { CandidateService } from 'src/app/services/candidate/candidate.service';
 import {SearchWorker} from '../../workers/search/search.worker';
 import {CandidateWorker} from '../../workers/candidate/candidate.worker';
 import {UserWorker} from '../../workers/user/user.worker';
+import {DeleteVacancyDialogComponent} from '../../components/modals/delete-vacancy-dialog/delete-vacancy-dialog.component';
+import {MatDialog} from '@angular/material';
+import {DeleteCandidateModalComponent} from '../../components/modals/candidate/delete-candidate-modal/delete-candidate-modal.component';
 
 @Component({
   selector: 'app-candidate-dashboard-page',
@@ -16,7 +19,8 @@ export class CandidateDashboardPageComponent implements OnInit {
   mockCandidates: Candidate[];
   searchValue: string;
 
-  constructor(private candidateService: CandidateService, private searchWorker: SearchWorker, private userWorker: UserWorker) { }
+  constructor(private candidateService: CandidateService, private searchWorker: SearchWorker, private userWorker: UserWorker,
+              public dialog: MatDialog) { }
 
   ngOnInit() {
     this.getAll();
@@ -34,6 +38,20 @@ export class CandidateDashboardPageComponent implements OnInit {
       this.candidates = res;
     }, err => {
       console.log('1' + err);
+    });
+  }
+  deleteCandidate(candidate: Candidate) {
+    console.log('candidate', candidate);
+    const dialogRef = this.dialog.open(DeleteCandidateModalComponent, {
+      width: '400px',
+      disableClose: true
+    });
+    dialogRef.afterClosed().subscribe(res => {
+      if (res) {
+        this.candidateService.delete(candidate.id).subscribe(res => {
+          this.getAll();
+        });
+      }
     });
   }
 

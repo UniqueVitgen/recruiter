@@ -88,5 +88,6 @@
   "Alert" : "Warning",
   "Past dates are disabled!": "Past dates are disabled!",
   "You can't add events on Past dates.": "You can't add events on Past dates.",
-  "You can't drop events on Past dates.": "You can't drop events on Past dates."
+  "You can't drop events on Past dates.": "You can't drop events on Past dates.",
+  "Do you really want to delete this candidate?": "Do you really want to delete this candidate?"
 }

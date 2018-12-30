@@ -12,7 +12,7 @@ import {CandidateWorker} from '../../../../workers/candidate/candidate.worker';
   styleUrls: ['./candidate-dashboard-item.component.scss']
 })
 export class CandidateDashboardItemComponent implements OnChanges{
-  @Output('deleteCandidate') outputDeleteCandidate: EventEmitter<any> = new EventEmitter();
+  @Output('deleteCandidate') outputDeleteCandidate: EventEmitter<Candidate> = new EventEmitter();
   @Input() candidate: Candidate;
   @Input() haveHoverEffect: boolean;
   @Input() isClosedIcon: boolean;
@@ -32,10 +32,10 @@ export class CandidateDashboardItemComponent implements OnChanges{
 
 
   deleteCandidate() {
-    this.candidateService.delete(this.candidate.id).subscribe(
-      (res) => { console.log('id');
+    // this.candidateService.delete(this.candidate.id).subscribe(
+    //   (res) => { console.log('id');
         this.outputDeleteCandidate.emit(this.candidate);
-      });
+      // });
   }
 
   goToCandidatePage() {
