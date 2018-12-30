@@ -7,25 +7,27 @@
       <app-candidate-avatar [haveHoverEffect]="haveHoverEffectOnAvatar" [isEditedIcon]="isEditIconOnAvatar" (click)="clickAvatar()" [src]="src" [candidate]="candidate" [isStatus]="true"></app-candidate-avatar>
     </div>
     <div class="col-9">
-      <mat-card>
-        <!--<mat-card-title>{{'Short info' | translate}}</mat-card-title>-->
-        <div class="row">
-          <div class="col-12 col-md-3">
-            <span class="font-weight-bold float-right">{{'Name' | translate}}:</span>
+      <div class="center-vertical-text-container example-full-height">
+        <mat-card class="example-full-width">
+          <!--<mat-card-title>{{'Short info' | translate}}</mat-card-title>-->
+          <div class="row">
+            <div class="col-12 col-md-3">
+              <span class="font-weight-bold float-right">{{'Name' | translate}}:</span>
+            </div>
+            <div class="col-12 col-md-9">
+              <span>{{candidate.name}}</span>
+            </div>
           </div>
-          <div class="col-12 col-md-9">
-            <span>{{candidate.name}}</span>
+          <div class="row">
+            <div class="col-3">
+              <span class="font-weight-bold float-right">{{'Surname' | translate}}:</span>
+            </div>
+            <div class="col-9">
+              <span>{{candidate.surname}}</span>
+            </div>
           </div>
-        </div>
-        <div class="row">
-          <div class="col-3">
-            <span class="font-weight-bold float-right">{{'Surname' | translate}}:</span>
-          </div>
-          <div class="col-9">
-            <span>{{candidate.surname}}</span>
-          </div>
-        </div>
-      </mat-card>
+        </mat-card>
+      </div>
       <br>
       <mat-card *ngIf="candidate.contacts && candidate.contacts.length > 0">
         <mat-card-title>{{'Contacts' | translate}}</mat-card-title>
