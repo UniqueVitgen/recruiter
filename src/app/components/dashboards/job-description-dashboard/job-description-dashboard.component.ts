@@ -18,6 +18,7 @@ export class JobDescriptionDashboardComponent implements OnInit, OnChanges {
   @Output('addVacancy') outputAddVacancy: EventEmitter<Vacancy> = new EventEmitter();
   @Input() search;
   @Output('deleteVacancy') outputDeleteVacancy: EventEmitter<any> = new EventEmitter();
+  isClosedIcon: boolean = false;
   public selectedVacancies: Vacancy[];
 
   constructor(

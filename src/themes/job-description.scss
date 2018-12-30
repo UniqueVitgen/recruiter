@@ -53,3 +53,70 @@ $box-shadow: 0 0 0 2px white, 0 0 0 4px #3F51B5;
   }
 
 }
+
+
+//.vacancy{
+//  display: flex;
+//  flex-direction: row;
+//}
+//.vacancyPannel{
+//  background-color: $basic-color;
+//  .mat-expansion-panel-header-title {
+//    color: #fff;
+//  }
+//}
+//.vacancyStatus{
+//  margin-top: 20px;
+//  color: #fff;
+//
+//}
+//.description{
+//  margin-top: 20px;
+//  text-align: right;
+//  color: #fff;
+//}
+//.latestCandidates{
+//  display: flex;
+//  flex-direction: row;
+//}
+//.vacancyEditButton{
+//  background-color: #007bff;
+//  vertical-align: middle;
+//}
+//.vacancyDeleteButton{
+//  background-color: #35ccff;
+//
+//}
+.addButton{
+  background-color: #35ccff;
+}
+.vacancyIsOpened{
+  color: green;
+}
+.vacancyIsSuspended{
+  color: yellow;
+}
+.vacancyIsCanceled{
+  color: gray;
+}
+.vacancyIsClosed{
+  color: red;
+}
+.vacancy-add-buttons{
+  width: 50%;
+  margin-bottom: 10px;
+}
+
+.example-headers-align .mat-expansion-panel-header-title,
+.example-headers-align .mat-expansion-panel-header-description {
+  flex-basis: 0;
+}
+
+.example-headers-align .mat-expansion-panel-header-description {
+  justify-content: space-between;
+  align-items: center;
+}
+.mat-expansion-panel-header-title {
+  align-items: center;
+  font-size: 20px;
+}
