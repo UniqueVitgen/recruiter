@@ -24,4 +24,13 @@ export class FileWorker {
     return filename;
     // alert(filename);
   }
+   dataURLtoFile(dataurl, filename) {
+    const arr = dataurl.split(','), mime = arr[0].match(/:(.*?);/)[1],
+      bstr = atob(arr[1]),  u8arr = new Uint8Array(bstr.length);
+    let n = bstr.length;
+    while (n--) {
+      u8arr[n] = bstr.charCodeAt(n);
+    }
+    return new File([u8arr], filename, {type: mime});
+  }
 }

@@ -1,7 +1,15 @@
-<label class="header-text" >Do you really want to delete this vacancy?</label>
+<app-modal-component>
+  <dialog-title>
+    <span>{{'Alert' | translate}}</span>
+  </dialog-title>
+  <dialog-body>
+  <span>{{'Do you really want to delete this vacancy?' | translate}}</span>
 
-<div name="buttons" class="div-buttons" >
-  <button class="buttons" mat-button (click)="deleteVacancy(true)" >Yes</button>
-  <button class="buttons" mat-button (click)="deleteVacancy(false)" >No</button>
-
-</div>
+  </dialog-body>
+  <dialog-footer class="example-full-width">
+    <span class="float-right">
+    <button mat-button (click)="deleteVacancy(false)">{{'No Thanks' | translate}}</button>
+    <button mat-raised-button color="primary" (click)="deleteVacancy(true)">{{'Ok' | translate}}</button>
+    </span>
+  </dialog-footer>
+</app-modal-component>

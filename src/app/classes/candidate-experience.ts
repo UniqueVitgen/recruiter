@@ -8,5 +8,4 @@ export class CandidateExperience  extends EventNote {
   jobDescription: Project;
   jobPosition: string;
   companyName: Team = new Team();
-  createdAt?: Date;
 }

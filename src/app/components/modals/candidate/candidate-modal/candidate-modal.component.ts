@@ -7,6 +7,9 @@ import {CandidateDialogResult} from '../../../../interfaces/dialog/result/candid
 import {ContactType} from '../../../../enums/contact-type.enum';
 import {FormBuilder, FormGroup, Validators} from '@angular/forms';
 import {RegexpConst} from '../../../../const/regexp.const';
+import {CandidateState} from '../../../../enums/candidate-state.enum';
+import {ArrayWorker} from '../../../../workers/array/array.worker';
+import {EnumWorker} from '../../../../workers/enum/enum.worker';
 
 @Component({
   selector: 'app-candidate-modal',
@@ -18,11 +21,13 @@ export class CandidateModalComponent implements OnInit {
   private dialogResult: CandidateDialogResult;
   public candidateForm: FormGroup;
   public mask = ['+', '3', '7', '5', ' ', '(', /\d/, /\d/, ')', ' ', /\d/, /\d/, /\d/, '-', /\d/, /\d/, '-', /\d/, /\d/];
+  setStates: string[];
 
   constructor(
     public dialogRef: MatDialogRef<CandidateModalComponent>,
     private candidateService: CandidateService,
     private formBuilder: FormBuilder,
+    public  enumWorker: EnumWorker,
     @Inject(MAT_DIALOG_DATA) public data: CandidateDialogData) {
   }
 
@@ -62,6 +67,7 @@ export class CandidateModalComponent implements OnInit {
         email: ['', Validators.compose([Validators.pattern(RegexpConst.EMAIL)])]
       });
     }
+    this.setStates = this.enumWorker.getValuesFromEnum(CandidateState);
   }
   checkForm() {
     console.log(this.candidateForm.controls);

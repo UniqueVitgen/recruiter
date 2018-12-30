@@ -14,7 +14,6 @@ import * as $ from 'jquery';
 // import { CalendarComponent } from 'angular2-fullcalendar/src/calendar/calendar';
 // import {CalendarComponent} from 'ap-angular2-fullcalendar/src/calendar/calendar';
 
-
 import { AppComponent } from './app.component';
 import { CandidatePageComponent } from './pages/candidate-page/candidate-page.component';
 import { ShortInfoUserComponent } from './components/cards/candidate/short-info-user/short-info-user.component';
@@ -98,10 +97,14 @@ import { DevFeedbackTimelineItemComponent } from './components/items/timeline/de
 // import {LyResizingCroppingImageModule} from '@alyle/ui/resizing-cropping-images';
 // import {LyToolbarModule} from '@alyle/ui/toolbar';
 // import { LyCommonModule } from '@alyle/ui';
+import { ImageCropperAvatarComponent } from './components/modals/candidate/image-cropper-avatar/image-cropper-avatar.component';
+
+import {ImageCropperModule} from 'ngx-image-cropper';
 
 export function HttpLoaderFactory(http: HttpClient) {
   return new TranslateHttpLoader(http);
 }
+// @ts-ignore
 @NgModule({
   declarations: [
     AppComponent,
@@ -159,7 +162,8 @@ export function HttpLoaderFactory(http: HttpClient) {
     CustomTimepickerComponent,
     VacancyInterviewExpansionPanelComponent,
     CandidateInterviewExpansionPanelComponent,
-    DevFeedbackTimelineItemComponent
+    DevFeedbackTimelineItemComponent,
+    ImageCropperAvatarComponent
     // ,
     // CalendarComponent
   ],
@@ -200,6 +204,7 @@ export function HttpLoaderFactory(http: HttpClient) {
     // LyButtonModule,
     // LyToolbarModule,
     // LyResizingCroppingImageModule
+    ImageCropperModule
     // MDBBootstrapModule.forRoot(),
     // NgxMaterialTimepickerModule.forRoot()
     // ,
@@ -230,7 +235,8 @@ export function HttpLoaderFactory(http: HttpClient) {
     NoteCandidateModalComponent,
     DeleteVacancyDialogComponent,
     ExistedCandidatesModalWindowComponent,
-    AlertModalComponent
+    AlertModalComponent,
+    ImageCropperAvatarComponent
   ],
   schemas: [NO_ERRORS_SCHEMA] // add this line
 })

@@ -15,6 +15,23 @@
       <input (change)="selectFileToUpload($event)" formControlName="filePath" type="file" #fileUpload class="hidden-input-upload" *ngIf="editedAttachment != null" placeholder="filePath" [(ngModel)]="editedAttachment.filePath">
       <!--</mat-form-field>-->
       &nbsp; <span *ngIf="editedAttachment != null">{{editedAttachment.file?.name}}</span>
+      <div *ngIf="editedAttachment.attachmentType === 'PHOTO'">
+        <image-cropper
+          [imageChangedEvent]="imageChangedEvent"
+          [maintainAspectRatio]="true"
+          [aspectRatio]="4 / 3"
+          [resizeToWidth]="250"
+          [roundCropper]="false"
+          format="png"
+          outputType="base64"
+          (imageCropped)="imageCropped($event)"
+          (imageLoaded)="imageLoaded()"
+          (cropperReady)="cropperReady()"
+          (loadImageFailed)="loadImageFailed()"
+          style="max-height: 33vh"
+          [style.display]="showCropper ? null : 'none'"
+        ></image-cropper>
+      </div>
       <mat-form-field class="example-full-width">
 
         <mat-select [(ngModel)]="editedAttachment.attachmentType" required formControlName="attachmentType" placeholder="{{'Attachment type' | translate}}">
@@ -22,6 +39,7 @@
             {{attachmentsType | translate}}
           </mat-option>
         </mat-select>
+
         <!-- <input *ngIf="editedAttachment != null" placeholder="attachmentType" [(ngModel)]="editedAttachment.attachmentType"
           matInput> -->
       </mat-form-field>

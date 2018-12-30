@@ -9,7 +9,6 @@ export class Interview extends EventNote {
   planDate: string;
   factDate?: string;
   comment?: string;
-  createdAt?: Date;
 }
 
 export class InterviewExtended extends Interview {
