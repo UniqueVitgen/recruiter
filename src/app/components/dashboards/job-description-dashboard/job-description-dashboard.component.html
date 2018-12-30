@@ -7,97 +7,101 @@
     <button (click)="openJobDescriptionDialog()" class="vacancy-add-buttons" mat-raised-button color="primary">{{'Add new' | translate}}</button>
   </div>
   <div *ngFor="let vacancy of selectedVacancies; let vacancyID = index" class="vacancy">
-
-    <mat-expansion-panel class="vacancyPannel">
+  <mat-accordion class="example-headers-align">
+    <mat-expansion-panel class="vacancyPannel" >
       <mat-expansion-panel-header>
 
         <mat-panel-title>
-          <h3>{{vacancy.position}} <label class="vacancyStatus">
+          {{vacancy.position}}
               <span [ngClass]="{'vacancyIsOpened': vacancyColorService.isVacancyOpened(vacancy.vacancyState),
               'vacancyIsSuspended': vacancyColorService.isVacancySuspended(vacancy.vacancyState),
               'vacancyIsCanceled': vacancyColorService.isVacancyCanceled(vacancy.vacancyState),
               'vacancyIsClosed': vacancyColorService.isVacancyClosed(vacancy.vacancyState)}">
                 &#10687;
               </span>
-          </label></h3>
         </mat-panel-title>
 
         <mat-panel-description>
           <span class="description"> {{'Total number of candidates' | translate}}: {{vacancy.candidates.length}}</span>
+         <span><button mat-icon-button (click)="goToJobDescriptionPage(vacancy); $event.stopPropagation() "><mat-icon>info</mat-icon></button>
+          <button mat-icon-button (click)="openDeleteVacancyDialog(vacancyID); $event.stopPropagation()"><mat-icon>close</mat-icon></button></span>
         </mat-panel-description>
 
-      </mat-expansion-panel-header>
-      <!--<div class="latestCandidates">-->
-        <!--<mat-card class="example-card">-->
-          <!--<mat-card-header>-->
-            <!--<mat-card-title>Mike</mat-card-title>-->
-            <!--<mat-card-subtitle>Age: 23</mat-card-subtitle>-->
-          <!--</mat-card-header>-->
-          <!--<img mat-card-image-->
-               <!--src="https://upload.wikimedia.org/wikipedia/commons/3/38/Wikipedia_User-ICON_byNightsight.png"-->
-               <!--alt="Photo of a Shiba Inu">-->
-          <!--<mat-card-content>-->
-            <!--<p>-->
-              <!--Conacts:<br>-->
-              <!--phone: +375292345412-->
-              <!--telegram: mike_mike-->
-            <!--</p>-->
-          <!--</mat-card-content>-->
-          <!--<mat-card-actions>-->
-            <!--<button mat-button class="addButton">Info</button>-->
-            <!--<br>-->
-            <!--<button mat-button class="addButton">Arrange an interview</button>-->
-          <!--</mat-card-actions>-->
-        <!--</mat-card>-->
-        <!--<mat-card class="example-card">-->
-          <!--<mat-card-header>-->
-            <!--<mat-card-title>Alex</mat-card-title>-->
-            <!--<mat-card-subtitle>Age: 20</mat-card-subtitle>-->
-          <!--</mat-card-header>-->
-          <!--<img mat-card-image-->
-               <!--src="https://upload.wikimedia.org/wikipedia/commons/3/38/Wikipedia_User-ICON_byNightsight.png"-->
-               <!--alt="Photo of a Shiba Inu">-->
-          <!--<mat-card-content>-->
-            <!--<p>-->
-              <!--Conacts:<br>-->
-              <!--phone: +375256345634-->
-              <!--telegram:alex_alex-->
-            <!--</p>-->
-          <!--</mat-card-content>-->
-          <!--<mat-card-actions>-->
-            <!--<button mat-button class="addButton">Info</button>-->
-            <!--<br>-->
-            <!--<button mat-button class="addButton">Arrange an interview</button>-->
-          <!--</mat-card-actions>-->
-        <!--</mat-card>-->
-        <!--<mat-card class="example-card">-->
-          <!--<mat-card-header>-->
-            <!--<mat-card-title>Nik</mat-card-title>-->
-            <!--<mat-card-subtitle>Age: 21</mat-card-subtitle>-->
-          <!--</mat-card-header>-->
-          <!--<img mat-card-image-->
-               <!--src="https://upload.wikimedia.org/wikipedia/commons/3/38/Wikipedia_User-ICON_byNightsight.png"-->
-               <!--alt="Photo of a Shiba Inu">-->
-          <!--<mat-card-content>-->
-            <!--<p>-->
-              <!--Conacts:<br>-->
-              <!--phone: +375292534634-->
-              <!--telegram: nik_nik-->
-            <!--</p>-->
-          <!--</mat-card-content>-->
-          <!--<mat-card-actions>-->
-            <!--<button mat-button class="addButton">Info</button>-->
-            <!--<br>-->
-            <!--<button mat-button class="addButton">Arrange an interview</button>-->
-          <!--</mat-card-actions>-->
-        <!--</mat-card>-->
-      <!--</div>-->
-      <app-candidate-dashboard [filledCells]="4" [candidates]="vacancy.candidates" [limitTo]="3"></app-candidate-dashboard>
-    </mat-expansion-panel>
+          <!--<button class="vacancyEditButton" mat-raised-button (click)="goToJobDescriptionPage(vacancy)">{{'Info' | translate}}</button>-->
+          <!--<button mat-icon-button class="vacancyDeleteButton" (click)="openDeleteVacancyDialog(vacancyID)"><mat-icon>close</mat-icon></button>-->
 
-    <button class="vacancyEditButton" mat-raised-button (click)="goToJobDescriptionPage(vacancy)">{{'Info' | translate}}</button>
-    <button class="vacancyDeleteButton" mat-raised-button (click)="openDeleteVacancyDialog(vacancyID)"><mat-icon>close</mat-icon></button>
+      </mat-expansion-panel-header>
+
+      <app-candidate-dashboard [isClosedIcon]="isClosedIcon" [filledCells]="4" [candidates]="vacancy.candidates" [limitTo]="3"></app-candidate-dashboard>
+    </mat-expansion-panel>
+  </mat-accordion>
+
 
 
   </div>
 </mat-card>
+<!--<div class="latestCandidates">-->
+<!--<mat-card class="example-card">-->
+<!--<mat-card-header>-->
+<!--<mat-card-title>Mike</mat-card-title>-->
+<!--<mat-card-subtitle>Age: 23</mat-card-subtitle>-->
+<!--</mat-card-header>-->
+<!--<img mat-card-image-->
+<!--src="https://upload.wikimedia.org/wikipedia/commons/3/38/Wikipedia_User-ICON_byNightsight.png"-->
+<!--alt="Photo of a Shiba Inu">-->
+<!--<mat-card-content>-->
+<!--<p>-->
+<!--Conacts:<br>-->
+<!--phone: +375292345412-->
+<!--telegram: mike_mike-->
+<!--</p>-->
+<!--</mat-card-content>-->
+<!--<mat-card-actions>-->
+<!--<button mat-button class="addButton">Info</button>-->
+<!--<br>-->
+<!--<button mat-button class="addButton">Arrange an interview</button>-->
+<!--</mat-card-actions>-->
+<!--</mat-card>-->
+<!--<mat-card class="example-card">-->
+<!--<mat-card-header>-->
+<!--<mat-card-title>Alex</mat-card-title>-->
+<!--<mat-card-subtitle>Age: 20</mat-card-subtitle>-->
+<!--</mat-card-header>-->
+<!--<img mat-card-image-->
+<!--src="https://upload.wikimedia.org/wikipedia/commons/3/38/Wikipedia_User-ICON_byNightsight.png"-->
+<!--alt="Photo of a Shiba Inu">-->
+<!--<mat-card-content>-->
+<!--<p>-->
+<!--Conacts:<br>-->
+<!--phone: +375256345634-->
+<!--telegram:alex_alex-->
+<!--</p>-->
+<!--</mat-card-content>-->
+<!--<mat-card-actions>-->
+<!--<button mat-button class="addButton">Info</button>-->
+<!--<br>-->
+<!--<button mat-button class="addButton">Arrange an interview</button>-->
+<!--</mat-card-actions>-->
+<!--</mat-card>-->
+<!--<mat-card class="example-card">-->
+<!--<mat-card-header>-->
+<!--<mat-card-title>Nik</mat-card-title>-->
+<!--<mat-card-subtitle>Age: 21</mat-card-subtitle>-->
+<!--</mat-card-header>-->
+<!--<img mat-card-image-->
+<!--src="https://upload.wikimedia.org/wikipedia/commons/3/38/Wikipedia_User-ICON_byNightsight.png"-->
+<!--alt="Photo of a Shiba Inu">-->
+<!--<mat-card-content>-->
+<!--<p>-->
+<!--Conacts:<br>-->
+<!--phone: +375292534634-->
+<!--telegram: nik_nik-->
+<!--</p>-->
+<!--</mat-card-content>-->
+<!--<mat-card-actions>-->
+<!--<button mat-button class="addButton">Info</button>-->
+<!--<br>-->
+<!--<button mat-button class="addButton">Arrange an interview</button>-->
+<!--</mat-card-actions>-->
+<!--</mat-card>-->
+<!--</div>-->
