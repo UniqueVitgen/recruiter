@@ -1,5 +1,6 @@
 import {Component, EventEmitter, Input, OnInit, Output} from '@angular/core';
 import {Interview, InterviewExtended} from '../../../../classes/interview';
+import {DevFeedback} from '../../../../classes/dev-feedback';
 
 @Component({
   selector: 'app-interview-feedback',
@@ -7,13 +8,22 @@ import {Interview, InterviewExtended} from '../../../../classes/interview';
   styleUrls: ['./interview-feedback.component.scss']
 })
 export class InterviewFeedbackComponent implements OnInit {
-  @Input() interview: InterviewExtended;
   @Input() isEdit: boolean;
-  @Output() outputOnFocusoutAnyInput: EventEmitter<InterviewExtended> = new EventEmitter<InterviewExtended>();
+  @Input() feedback: DevFeedback;
+  @Output('focusoutAnyInput') outputOnFocusoutAnyInput: EventEmitter<DevFeedback> = new EventEmitter();
+  @Output('saveClick') outputSaveClick: EventEmitter<DevFeedback> = new EventEmitter();
 
   constructor() { }
 
   ngOnInit() {
+  }
+  onFocusAnyInput() {
+    if (this.isEdit) {
+      this.outputOnFocusoutAnyInput.emit(this.feedback);
+    }
+  }
+  saveFeedback() {
+    this.outputSaveClick.emit(this.feedback);
   }
 
 }

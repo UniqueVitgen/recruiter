@@ -91,6 +91,12 @@ import {PrimeNGModule} from './modules/prime-ng/prime-ng.module';
 import {FlexLayoutModule} from '@angular/flex-layout';
 import { VacancyInterviewExpansionPanelComponent } from './components/expansion-panels/vacancy-interview-expansion-panel/vacancy-interview-expansion-panel.component';
 import { CandidateInterviewExpansionPanelComponent } from './components/expansion-panels/candidate-interview-expansion-panel/candidate-interview-expansion-panel.component';
+// import {AlyleUIModule} from '@alyle/ui';
+// import {LyThemeModule} from '@alyle/ui';
+// import {LyButtonModule} from '@alyle/ui/button';
+// import {LyResizingCroppingImageModule} from '@alyle/ui/resizing-cropping-images';
+// import {LyToolbarModule} from '@alyle/ui/toolbar';
+// import { LyCommonModule } from '@alyle/ui';
 
 export function HttpLoaderFactory(http: HttpClient) {
   return new TranslateHttpLoader(http);
@@ -181,7 +187,17 @@ export function HttpLoaderFactory(http: HttpClient) {
       }
     }),
     PipesModule,
-    StickyModule
+    StickyModule,
+    // AlyleUIModule.forRoot({
+    //   name: 'default'
+    // }),
+    // LyCommonModule,
+    // Set theme
+    // LyThemeModule.setTheme('minima-light'),
+    // Add components
+    // LyButtonModule,
+    // LyToolbarModule,
+    // LyResizingCroppingImageModule
     // MDBBootstrapModule.forRoot(),
     // NgxMaterialTimepickerModule.forRoot()
     // ,

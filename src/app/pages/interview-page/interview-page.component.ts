@@ -14,6 +14,8 @@ import {InterviewDialogData} from '../../interfaces/dialog/init/interview-dialog
 import {MatDialog} from '@angular/material';
 import {BaseDialogResult} from '../../interfaces/dialog/result/base-dialog-result';
 import {Location} from '@angular/common';
+import {DevFeedbackService} from '../../services/dev-feedback/dev-feedback.service';
+import {DevFeedback} from '../../classes/dev-feedback';
 
 
 @Component({
@@ -26,11 +28,14 @@ export class InterviewPageComponent implements OnInit {
   private id: number;
   photo: Attachment;
   photoUrl: string;
+  isFeedbackEdited: boolean;
+  feedback: DevFeedback;
 
   constructor(private interviewService: InterviewService,
   private route: ActivatedRoute,
   private translateWorker: TranslateWorker,
   private vacancyService: VacancyService,
+  private devFeedbackService: DevFeedbackService,
   private candidateWorker: CandidateWorker,
               private location: Location,
               private dialog: MatDialog,
@@ -58,16 +63,25 @@ export class InterviewPageComponent implements OnInit {
     // });
   }
 
-  getInterview() {
+  getInterview(): void {
     this.interviewService.get(this.id).subscribe(res => {
       this.interview = res;
       this.photo = this.candidateWorker.findPhoto(this.interview.candidate);
       this.photoUrl = this.candidateWorker.generatePhotoUrl(this.photo);
       this.candidateWorker.generatePhotoUrl(this.photo);
+      this.devFeedbackService.getByInterview(this.interview).subscribe(resFeedback => {
+          if (resFeedback) {
+            this.isFeedbackEdited = true;
+            this.feedback = resFeedback;
+          } else {
+            this.feedback = new DevFeedback(this.interview);
+            console.log('feedback', this.feedback);
+          }
+      });
       console.log(res);
     });
   }
-  clickEdit(interview: InterviewExtended) {
+  clickEdit(interview: InterviewExtended): void {
     console.log('change event', event);
     const dialogRef = this.dialog.open(InterviewModalComponent, {
       data: <InterviewDialogData> {
@@ -86,6 +100,19 @@ export class InterviewPageComponent implements OnInit {
       }
     });
 
+  }
+  addDevFeedback(event) {
+    this.devFeedbackService.add(event).subscribe(res => {
+      this.getInterview();
+    });
+  }
+  changeDevFeedback(event) {
+    console.log(event);
+    if (this.isFeedbackEdited) {
+      this.devFeedbackService.update(event).subscribe(res => {
+        this.getInterview();
+      });
+    }
   }
 
 }

@@ -1,10 +1,13 @@
 <!--<div class="center-item">-->
-  <mat-card class="custom-resize-card" *ngIf="interview">
+  <mat-card class="custom-resize-card" *ngIf="feedback">
     <mat-card-title><span *ngIf="!isEdit">{{'Add' |translate }}</span> {{'Feedback' | translate}}</mat-card-title>
-    <mat-form-field *ngFor="let requirement of interview.vacancy.requirements" class="example-full-width">
-      <textarea matInput [placeholder]="requirement.name"></textarea>
+    <mat-form-field [ngClass]="{'custom-form-field': isEdit}" *ngFor="let feedbackDetails of feedback.feedbackDetails" class="example-full-width">
+      <textarea (blur)="onFocusAnyInput()" matInput [(ngModel)]="feedbackDetails.feedbackText" [placeholder]="feedbackDetails.requirement.name"></textarea>
+      <button *ngIf="isEdit" mat-button  matSuffix mat-icon-button aria-label="Clear" class="edited-hover-button">
+        <mat-icon>edit</mat-icon>
+      </button>
     </mat-form-field>
-    <button *ngIf="!isEdit" mat-raised-button color="primary">
+    <button *ngIf="!isEdit" (click)="saveFeedback()" mat-raised-button color="primary">
       {{'Create' | translate}}
     </button>
   </mat-card>
