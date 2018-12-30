@@ -171,6 +171,10 @@ export class InterviewCalendarComponent implements OnInit, OnChanges {
       };
     }
     return {
+      allDaySlot: false,
+      allDayDefault: false,
+      minTime: <any> '08:00:00',
+      maxTime: <any> '23:00:00',
       locale: this.locale,
       buttonText: buttonText,
       theme: 'bootstrap4',

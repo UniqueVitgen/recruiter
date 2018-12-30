@@ -91,6 +91,7 @@ import {PrimeNGModule} from './modules/prime-ng/prime-ng.module';
 import {FlexLayoutModule} from '@angular/flex-layout';
 import { VacancyInterviewExpansionPanelComponent } from './components/expansion-panels/vacancy-interview-expansion-panel/vacancy-interview-expansion-panel.component';
 import { CandidateInterviewExpansionPanelComponent } from './components/expansion-panels/candidate-interview-expansion-panel/candidate-interview-expansion-panel.component';
+import { DevFeedbackTimelineItemComponent } from './components/items/timeline/dev-feedback-timeline-item/dev-feedback-timeline-item.component';
 // import {AlyleUIModule} from '@alyle/ui';
 // import {LyThemeModule} from '@alyle/ui';
 // import {LyButtonModule} from '@alyle/ui/button';
@@ -157,7 +158,8 @@ export function HttpLoaderFactory(http: HttpClient) {
     LocalDatePipe,
     CustomTimepickerComponent,
     VacancyInterviewExpansionPanelComponent,
-    CandidateInterviewExpansionPanelComponent
+    CandidateInterviewExpansionPanelComponent,
+    DevFeedbackTimelineItemComponent
     // ,
     // CalendarComponent
   ],

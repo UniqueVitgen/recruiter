@@ -11,6 +11,7 @@
       <app-image-candiate-timeline-item *ngIf="checkIfNoteISImg(eventNote)" [attachment]="eventNote" [candidate]="candidate" (changeCandidate)="changeCandidate($event, i)" (deleteEvent)="deleteEvent(i)"></app-image-candiate-timeline-item>
       <app-experience-candidate-timeline-item *ngIf="checkIfNoteIsExperience(eventNote)" [experience]="eventNote" [candidate]="candidate" (changeCandidate)="changeCandidate($event, i)" (deleteEvent)="deleteEvent(i)"></app-experience-candidate-timeline-item>
       <app-note-candidate-timeline-item *ngIf="checkIfNoteISNote(eventNote)" [note]="eventNote"  [candidate]="candidate" (changeCandidate)="changeCandidate($event, i)" (deleteEvent)="deleteEvent(i)"></app-note-candidate-timeline-item>
+      <app-dev-feedback-timeline-item *ngIf="checkIfNoteIsDevFeedback(eventNote)" [note]="eventNote"  [candidate]="candidate" (changeCandidate)="changeCandidate($event, i)" (deleteEvent)="deleteEvent(i)"></app-dev-feedback-timeline-item>
       <br>
     </div>
 

@@ -72,7 +72,8 @@ export class CandidatePageComponent implements OnInit {
       this.feedbackService.delete(<any>object).subscribe(res => {
         this.getCandidate();
       });
-    } else if (this.eventNoteWorker.isExperience(object)) {
+    }
+    else if (this.eventNoteWorker.isExperience(object)) {
       this.candidate.experiences = this.candidate.experiences.filter((attachment => {
         return object.id !== attachment.id;
       }));

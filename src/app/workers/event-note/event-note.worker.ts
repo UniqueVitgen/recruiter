@@ -5,6 +5,7 @@ import {CandidateExperience} from '../../classes/candidate-experience';
 import {Attachment} from '../../classes/attachment';
 import {Feedback} from '../../classes/feedback';
 import {AttachmentType} from '../../enums/attachment-type.enum';
+import {DevFeedback} from '../../classes/dev-feedback';
 
 @Injectable({
   providedIn: 'root'
@@ -27,6 +28,12 @@ export class EventNoteWorker {
     const note = <Feedback> eventNote;
     if (note) {
       return note.feedbackText;
+    }
+  }
+  public isDevFeedback(eventNote: EventNote) {
+    const note = <DevFeedback> eventNote;
+    if (note) {
+      return note.interviewId && note.candidateId && note.feedbackDetails;
     }
   }
   public isAttachement(eventNote: EventNote) {

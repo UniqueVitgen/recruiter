@@ -44,6 +44,9 @@ export class CandidateTimelineComponent implements OnInit, OnChanges {
   checkIfNoteISNote(eventNote: EventNote) {
     return this.eventNoteWorker.isNote(eventNote);
   }
+  checkIfNoteIsDevFeedback(eventNote: EventNote) {
+    return this.eventNoteWorker.isDevFeedback(eventNote);
+  }
   checkIfNoteISAttachment(eventNote: EventNote) {
     return this.eventNoteWorker.isAttachement(eventNote);
   }
