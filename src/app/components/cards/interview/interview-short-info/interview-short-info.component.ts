@@ -4,6 +4,7 @@ import {CandidateWorker} from '../../../../workers/candidate/candidate.worker';
 import {UserWorker} from '../../../../workers/user/user.worker';
 import {DateTimeWorker} from '../../../../workers/date-time/date-time.worker';
 import {TranslateWorker} from '../../../../workers/translate/translate.worker';
+import {Router} from '@angular/router';
 
 @Component({
   selector: 'app-interview-short-info',
@@ -16,7 +17,9 @@ export class InterviewShortInfoComponent implements OnInit, OnChanges {
   @Output('clickEdit') outputClickEdit: EventEmitter<InterviewExtended> = new EventEmitter();
   public viewOfDate: string;
 
-  constructor(public userWorker: UserWorker, private dateTimeWorker: DateTimeWorker, private translateWorker: TranslateWorker) {
+  constructor(public userWorker: UserWorker,
+              private dateTimeWorker: DateTimeWorker,
+              private translateWorker: TranslateWorker) {
   }
 
   ngOnInit() {
@@ -33,5 +36,4 @@ export class InterviewShortInfoComponent implements OnInit, OnChanges {
       this.viewOfDate = this.dateTimeWorker.getDateWithTime(new Date(this.interview.planDate));
     }
   }
-
 }

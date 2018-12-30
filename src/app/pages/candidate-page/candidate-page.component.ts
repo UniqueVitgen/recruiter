@@ -163,6 +163,10 @@ export class CandidatePageComponent implements OnInit {
       console.log('res', res);
     });
   }
-
+  // goToInterviewPage(object: any) {
+  //   if (this.eventNoteWorker.isInterview(object)) {
+  //     this.router.navigate(['interview', this.candidate.]);
+  //   }
+  // }
 
 }
