@@ -1,4 +1,4 @@
-import {Component, Input, OnInit} from '@angular/core';
+import {Component, EventEmitter, Input, OnInit, Output} from '@angular/core';
 import {Interview, InterviewExtended} from '../../../../classes/interview';
 
 @Component({
@@ -9,6 +9,7 @@ import {Interview, InterviewExtended} from '../../../../classes/interview';
 export class InterviewFeedbackComponent implements OnInit {
   @Input() interview: InterviewExtended;
   @Input() isEdit: boolean;
+  @Output() outputOnFocusoutAnyInput: EventEmitter<InterviewExtended> = new EventEmitter<InterviewExtended>();
 
   constructor() { }
 

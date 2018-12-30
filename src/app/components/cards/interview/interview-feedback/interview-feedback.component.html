@@ -1,8 +1,11 @@
 <!--<div class="center-item">-->
   <mat-card class="custom-resize-card" *ngIf="interview">
-    <mat-card-title>Feedback</mat-card-title>
+    <mat-card-title><span *ngIf="!isEdit">{{'Add' |translate }}</span> {{'Feedback' | translate}}</mat-card-title>
     <mat-form-field *ngFor="let requirement of interview.vacancy.requirements" class="example-full-width">
       <textarea matInput [placeholder]="requirement.name"></textarea>
     </mat-form-field>
+    <button *ngIf="!isEdit" mat-raised-button color="primary">
+      {{'Create' | translate}}
+    </button>
   </mat-card>
 <!--</div>-->
