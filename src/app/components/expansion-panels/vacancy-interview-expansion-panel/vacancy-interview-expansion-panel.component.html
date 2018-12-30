@@ -1,8 +1,14 @@
 
-<mat-accordion>
+<mat-accordion class="example-headers-align">
   <mat-expansion-panel>
     <mat-expansion-panel-header>
+      <mat-panel-title>
       {{'Vacancy' | translate}}
+      </mat-panel-title>
+      <mat-panel-description>
+        <span> </span>
+        <button mat-icon-button [routerLink]="'/job-description/'+vacancy.id"><mat-icon>info</mat-icon></button>
+      </mat-panel-description>
     </mat-expansion-panel-header>
     <!--<mat-card class="custom-resize-card">-->
     <mat-card>

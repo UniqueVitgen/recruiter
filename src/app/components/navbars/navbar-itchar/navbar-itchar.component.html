@@ -19,8 +19,8 @@
             {{'Language' | translate}}
           </a>
           <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-            <a class="dropdown-item" (click)="translateWorker.setLanguage('ru')">{{'Russian' | translate}}</a>
-            <a class="dropdown-item" (click)="translateWorker.setLanguage('en')">{{'English' | translate}}</a>
+            <a class="dropdown-item" (click)="translateWorker.setLanguage('ru')"><img class="flagIcon" [src]="'/assets/icons/russianFlag.svg'"> &nbsp;{{'Russian' | translate}}</a>
+            <a class="dropdown-item" (click)="translateWorker.setLanguage('en')"><img class="flagIcon" [src]="'/assets/icons/usaFlag.svg'"> &nbsp;{{'English' | translate}}</a>
           </div>
         </li>
       </ul>

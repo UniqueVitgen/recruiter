@@ -18,7 +18,7 @@
   <mat-card-title>
     <span>{{'Selected Candidates' | translate}}</span>
     &nbsp;
-    <button mat-mini-fab color="primary" (click)="changeSearchInput()">
+    <button mat-mini-fab color="primary" (click)="changeSearchInputSelected()">
       <mat-icon>search</mat-icon>
     </button>
     &nbsp;
@@ -26,10 +26,10 @@
       <mat-icon>person_add</mat-icon>
     </button>
   </mat-card-title>
-  <app-search-input *ngIf="searchInput" (onSearch)="search($event)"></app-search-input>
+  <app-search-input *ngIf="searchInputSelected" (onSearch)="searchSelected($event)"></app-search-input><br>
   <mat-divider></mat-divider>
 <br>
-<app-candidate-dashboard [search]="searchValue" (addCandidate)="addCandidate($event)" *ngIf="vacancy && vacancy.candidates" [candidates]="vacancy.candidates" [haveAddElement]="true"></app-candidate-dashboard>
+<app-candidate-dashboard [search]="searchValueSelected" (addCandidate)="addCandidate($event)" *ngIf="vacancy && vacancy.candidates" [candidates]="vacancy.candidates" [haveAddElement]="true"></app-candidate-dashboard>
 
 </mat-card>
 <br>
@@ -37,7 +37,7 @@
   <mat-card-title>
     <span>{{'Possible Candidates' | translate}}</span>
     &nbsp;
-    <button mat-mini-fab color="primary">
+    <button mat-mini-fab color="primary" (click)="changeSearchInputPossible()">
       <mat-icon>search</mat-icon>
     </button>
     &nbsp;
@@ -45,8 +45,9 @@
       <mat-icon>person_add</mat-icon>
     </button>
   </mat-card-title>
+  <app-search-input *ngIf="searchInputPossible" (onSearch)="searchPossible($event)"></app-search-input><br>
   <mat-divider></mat-divider>
   <br>
-  <app-candidate-dashboard *ngIf="candidates" [candidates]="candidates"
+  <app-candidate-dashboard [search]="searchValuePossible" *ngIf="candidates" [candidates]="candidates"
                            [haveAddElement]="false"></app-candidate-dashboard>
 </mat-card>

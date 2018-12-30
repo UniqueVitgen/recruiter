@@ -1,7 +1,15 @@
 <!--<mat-card>-->
-  <mat-accordion *ngIf="candidate">
+  <mat-accordion class="example-headers-align" *ngIf="candidate">
     <mat-expansion-panel>
-  <mat-expansion-panel-header>{{'Candidate' | translate}}</mat-expansion-panel-header>
+  <mat-expansion-panel-header>
+    <mat-panel-title>
+    {{'Candidate' | translate}}
+    </mat-panel-title>
+    <mat-panel-description>
+      <span></span>
+      <button mat-icon-button [routerLink]="'/candidate/'+candidate.id"><mat-icon>info</mat-icon></button>
+    </mat-panel-description>
+  </mat-expansion-panel-header>
   <div class="row">
     <div class="col-3">
       <app-candidate-avatar [haveHoverEffect]="haveHoverEffectOnAvatar" [isEditedIcon]="isEditIconOnAvatar" (click)="clickAvatar()" [src]="src" [candidate]="candidate" [isStatus]="true"></app-candidate-avatar>

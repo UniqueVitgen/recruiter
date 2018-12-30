@@ -19,15 +19,18 @@ export class JobDescriptionPageComponent implements OnInit {
   id: number;
   vacancy: Vacancy;
   candidates: Candidate[];
-  searchInput: boolean;
-  searchValue: string;
+  searchInputSelected: boolean;
+  searchInputPossible: boolean;
+  searchValueSelected: string;
+  searchValuePossible: string;
 
   constructor(
     private route: ActivatedRoute,
     private vacancyService: VacancyService,
     public dialog: MatDialog,
     private candidateService: CandidateService) {
-    this.searchInput = false;
+    this.searchInputPossible = false;
+    this.searchInputSelected = false;
   }
 
   ngOnInit() {
@@ -45,12 +48,20 @@ export class JobDescriptionPageComponent implements OnInit {
     });
   }
 
-  changeSearchInput(): void {
-    this.searchInput = !this.searchInput;
+  changeSearchInputSelected(): void {
+    this.searchInputSelected = !this.searchInputSelected;
   }
 
-  search(value: string): void {
-    this.searchValue = value;
+  changeSearchInputPossible(): void {
+    this.searchInputPossible = !this.searchInputPossible;
+  }
+
+  searchSelected(value: string): void {
+    this.searchValueSelected = value;
+  }
+
+  searchPossible(value: string): void {
+    this.searchValuePossible = value;
   }
 
   getVacancy(): void {
