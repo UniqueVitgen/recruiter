@@ -220,8 +220,8 @@ export class InterviewCalendarComponent implements OnInit, OnChanges {
     } else {
       const dialogRef = this.dialog.open(AlertModalComponent, {
         data: <AlertDialogData> {
-          title: 'Past dates are disabled!',
-          message: 'You can\'t add events on Past dates.'
+          title: this.translateWorker.translateWord('Past dates are disabled!'),
+          message: this.translateWorker.translateWord('You can\'t add events on Past dates.')
         }
       });
     }

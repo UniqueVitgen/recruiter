@@ -85,5 +85,8 @@
   "feedback":"отзыв",
   "Add avatar" : "Добавить аватар",
   "Do you really want to delete this vacancy?" : "Вы действительно желаете удалить эту вакансию?",
-  "Alert" : "Предупреждение:"
+  "Alert" : "Предупреждение",
+  "Past dates are disabled!": "Прошлые дни недоступны!",
+  "You can't add events on Past dates.": "Вы не можете добавить интервью на прошлые дни.",
+  "You can't drop events on past dates.": "Вы не можете перетянуть интервью на прошлые дни."
 }

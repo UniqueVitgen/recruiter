@@ -85,5 +85,8 @@
   "feedback":"feedback",
   "Add avatar" : "Add avatar",
   "Do you really want to delete this vacancy?" : "Do you really want to delete this vacancy?",
-  "Alert" : "Warning:"
+  "Alert" : "Warning",
+  "Past dates are disabled!": "Past dates are disabled!",
+  "You can't add events on Past dates.": "You can't add events on Past dates.",
+  "You can't drop events on Past dates.": "You can't drop events on Past dates."
 }

@@ -55,7 +55,7 @@ export class DateTimeWorker {
 
   getDateWithTime(dateWithTime: Date, format?: string ) {
     if (dateWithTime) {
-      return this.localDatePipe.transform(dateWithTime, null) + ' ' + this.translateWorker.translateWord('at')
+      return this.localDatePipe.transform(dateWithTime, 'mediumDate') + ' ' + this.translateWorker.translateWord('at')
         + ' ' + this.localDatePipe.transform(dateWithTime, 'shortTime');
     }
   }
