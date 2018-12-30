@@ -18,29 +18,42 @@
     <label name="vacancyDescriptionTitle" class="vacancyTitles">{{'Description' | translate}}: </label>
     <label name="vacancyDescriptionContent" class="vacancyDescriptionContent">{{'Text of description will be here' | translate}}</label>
 
+    <div  fxShow="false" fxShow.gt-xs="true" *ngIf="vacancy.requirements && vacancy.requirements.length > 0">
+      <div class="row font-weight-bold" >
+        <div class="col-6 ">
+          <label name="vacancyRequirementsTitle" class="vacancyTitles">{{'Requirements' | translate}}: </label>
+        </div>
+        <div class="col-3 requirementsColumns">
+          <label name="vacancyRequiredColumnTitle" class="vacancyTitles">{{'Required' | translate}}: </label>
+        </div>
+        <div class="col-3 requirementsColumns">
+          <label name="vacancyPublicColumnTitle" class="vacancyTitles">{{'Public' | translate}}: </label>
+        </div>
+      </div>
+      <div  class="row" *ngFor="let requirement of vacancy.requirements">
 
-    <div class="row font-weight-bold" >
-      <div class="col-6 ">
-        <label name="vacancyRequirementsTitle" class="vacancyTitles">{{'Requirements' | translate}}: </label>
-      </div>
-      <div class="col-2 requirementsColumns">
-        <label name="vacancyRequiredColumnTitle" class="vacancyTitles">{{'Required' | translate}}: </label>
-      </div>
-      <div class="col-2 requirementsColumns">
-        <label name="vacancyPublicColumnTitle" class="vacancyTitles">{{'Public' | translate}}: </label>
+        <div class="col-6 requirementsColumns">
+          {{ requirement.name }}
+        </div>
+        <div class="col-3 requirementsColumns">
+          <mat-checkbox  [checked]="requirement.required" disabled></mat-checkbox>
+        </div>
+        <div class="col-3 requirementsColumns">
+          <mat-checkbox  [checked]="requirement.public" disabled></mat-checkbox>
+        </div>
       </div>
     </div>
-    <div  class="row" *ngFor="let requirement of vacancy.requirements">
-
-      <div class="col-6 requirementsColumns">
-        {{ requirement.name }}
-      </div>
-      <div class="col-2 requirementsColumns">
-        <mat-checkbox  [checked]="requirement.required" disabled></mat-checkbox>
-      </div>
-      <div class="col-2 requirementsColumns">
-        <mat-checkbox  [checked]="requirement.public" disabled></mat-checkbox>
-      </div>
+    <div fxShow="false" fxShow.xs="true">
+      <mat-card *ngFor="let requirement of vacancy.requirements">
+        <div class="row">
+          <div class="col-3">
+            <span class="font-weight-bold  float-right">{{'Requirement' | translate}}:</span>
+          </div>
+          <div class="col-9">
+            <span>{{requirement.name}}</span>
+          </div>
+        </div>
+      </mat-card>
     </div>
   </div>
 

@@ -43,10 +43,10 @@
       </div>
       <div *ngIf="readonly">
         <div class="row">
-          <div class="col-3">
+          <div class="col-12 col-md-3">
             <span class="font-weight-bold float-right">Name:</span>
           </div>
-          <div class="col-9">
+          <div class="col-12 col-md-9">
             <span>{{candidate.name}}</span>
           </div>
         </div>
@@ -99,10 +99,10 @@
         </div>
         <div *ngIf="readonly">
           <div class="row" *ngFor="let contact of candidate.contacts">
-            <div class="col-3">
+            <div class="col-12 col-md-3">
               <span class="font-weight-bold float-right">{{contact.contactType}}</span>
             </div>
-            <div class="col-9">
+            <div class="col-12 col-md-9">
               <span>{{contact.contactDetails}}</span>
             </div>
           </div>

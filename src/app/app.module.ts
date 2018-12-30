@@ -88,6 +88,9 @@ import { CustomTimepickerComponent } from './components/timepickers/custom-timep
 import {StickyModule} from 'ng2-sticky-kit';
 import {Ng2StickyModule} from 'ng2-sticky';
 import {PrimeNGModule} from './modules/prime-ng/prime-ng.module';
+import {FlexLayoutModule} from '@angular/flex-layout';
+import { VacancyInterviewExpansionPanelComponent } from './components/expansion-panels/vacancy-interview-expansion-panel/vacancy-interview-expansion-panel.component';
+import { CandidateInterviewExpansionPanelComponent } from './components/expansion-panels/candidate-interview-expansion-panel/candidate-interview-expansion-panel.component';
 
 export function HttpLoaderFactory(http: HttpClient) {
   return new TranslateHttpLoader(http);
@@ -146,7 +149,9 @@ export function HttpLoaderFactory(http: HttpClient) {
     ExistedCandidatesModalWindowComponent,
     AlertModalComponent,
     LocalDatePipe,
-    CustomTimepickerComponent
+    CustomTimepickerComponent,
+    VacancyInterviewExpansionPanelComponent,
+    CandidateInterviewExpansionPanelComponent
     // ,
     // CalendarComponent
   ],
@@ -167,6 +172,7 @@ export function HttpLoaderFactory(http: HttpClient) {
     SyncfunsionModule,
     AngularBootstrapModule,
     PrimeNGModule,
+    FlexLayoutModule,
     TranslateModule.forRoot({
       loader: {
         provide: TranslateLoader,

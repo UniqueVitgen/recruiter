@@ -1,5 +1,27 @@
-<app-interview-short-info [interview]="mockInterview"></app-interview-short-info>
-<br>
-<app-interview-candidate [interview]="mockInterview"></app-interview-candidate>
-<br>
-<app-interview-feedback [interview]="mockInterview"></app-interview-feedback>
+<div *ngIf="interview">
+  <app-interview-short-info [interview]="interview" [buttonEdit]="true" (clickEdit)="clickEdit($event)"></app-interview-short-info>
+  <br>
+  <app-interview-feedback [interview]="interview"></app-interview-feedback>
+  <br>
+  <!--<div class="row">-->
+    <!--<div class="col-3">-->
+  <app-interview-candidate  [haveHoverEffectOnAvatar]="true" [isEditIconOnAvatar]="true" [src]="photoUrl" [interview]="interview"></app-interview-candidate>
+  <br>
+    <!--</div>-->
+    <!--<div class="col-3">-->
+  <mat-accordion>
+    <mat-expansion-panel>
+      <mat-expansion-panel-header>
+        <mat-card-title>{{'Vacancy' | translate}}</mat-card-title>
+      </mat-expansion-panel-header>
+      <!--<mat-card class="custom-resize-card">-->
+        <mat-card>
+          <app-job-description-short-info [vacancy]="interview.vacancy"></app-job-description-short-info>
+        </mat-card>
+      <!--</mat-card>-->
+    </mat-expansion-panel>
+  </mat-accordion>
+    <!--</div>-->
+  <!--</div>-->
+  <!--<br>-->
+</div>

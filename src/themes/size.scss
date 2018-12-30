@@ -2,6 +2,18 @@
   width: 100%;
 }
 
+.custom-resize-card {
+  &, & mat-card {
+    @media (min-width: 720px) {
+      padding-right: 200px;
+      img {
+        max-width: 50%;
+        height: 200px;
+      }
+    }
+  }
+}
+
 .half-width {
   width: 50%;
 }

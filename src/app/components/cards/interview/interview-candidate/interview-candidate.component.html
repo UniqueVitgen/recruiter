@@ -1,4 +1,42 @@
-<mat-card>
-  <mat-card-title>Candidate</mat-card-title>
-  <app-short-info-user [readonly]="true" [candidate]="interview.candidate"></app-short-info-user>
+<mat-card *ngIf="interview.candidate">
+  <mat-card-title>{{'Candidate' | translate}}</mat-card-title>
+  <div class="row">
+  <div class="col-3">
+    <app-candidate-avatar [haveHoverEffect]="haveHoverEffectOnAvatar" [isEditedIcon]="isEditIconOnAvatar" (click)="clickAvatar()" [src]="src" [candidate]="interview.candidate" [isStatus]="true"></app-candidate-avatar>
+  </div>
+    <div class="col-9">
+  <mat-card>
+    <!--<mat-card-title>{{'Short info' | translate}}</mat-card-title>-->
+        <div class="row">
+          <div class="col-12 col-md-3">
+            <span class="font-weight-bold float-right">{{'Name' | translate}}:</span>
+          </div>
+          <div class="col-12 col-md-9">
+            <span>{{interview.candidate.name}}</span>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-3">
+            <span class="font-weight-bold float-right">{{'Surname' | translate}}:</span>
+          </div>
+          <div class="col-9">
+            <span>{{interview.candidate.surname}}</span>
+          </div>
+        </div>
+  </mat-card>
+      <br>
+      <mat-card *ngIf="interview.candidate.contacts && interview.candidate.contacts.length > 0">
+        <mat-card-title>{{'Contacts' | translate}}</mat-card-title>
+        <div class="row" *ngFor="let contact of interview.candidate.contacts">
+          <div class="col-12 col-md-3">
+            <span class="font-weight-bold float-right">{{contact.contactType | translate}}:</span>
+          </div>
+          <div class="col-12 col-md-9">
+            <span>{{contact.contactDetails}}</span>
+          </div>
+        </div>
+      </mat-card>
+    </div>
+  </div>
+  <!--<app-short-info-user [readonly]="true" [candidate]="interview.candidate"></app-short-info-user>-->
 </mat-card>

@@ -74,5 +74,11 @@
   "Edit Vacancy" : "Edit vacancy",
   "Add Vacancy" : "Add vacancy",
   "CLOSE" : "Close",
-  "at": "at"
+  "at": "at",
+  "When": "When",
+  "info": "info",
+  "short info": "short info",
+  "Vacancy": "Vacancy",
+  "Candidate": "Candidate",
+  "Short info": "Short info"
 }

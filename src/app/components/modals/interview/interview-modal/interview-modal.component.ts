@@ -177,7 +177,8 @@ export class InterviewModalComponent implements OnInit {
       this.interviewResult = {
         isEdit: false,
         resObject: null,
-        success: true
+        success: true,
+        delete: true
       };
       this.dialogRef.close(this.interviewResult);
     });

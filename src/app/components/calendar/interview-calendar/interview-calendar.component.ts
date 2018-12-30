@@ -24,6 +24,7 @@ import {TranslateWorker} from '../../../workers/translate/translate.worker';
 import {AlertModalComponent} from '../../modals/alert-modal/alert-modal.component';
 import {AlertDialogData} from '../../../interfaces/dialog/init/alert-dialog-data';
 import {TypeCheckingWorker} from '../../../workers/type-checking/type-checking.worker';
+import {Router} from '@angular/router';
 // import {  } from 'fullcalendar';
 // import { FullCalendarOptions, EventObject } from 'ngx-fullcalendar';
 
@@ -137,6 +138,7 @@ export class InterviewCalendarComponent implements OnInit, OnChanges {
               public typeCheckingWorker: TypeCheckingWorker,
               private interviewWorker: InterviewWorker,
               public translateWorker: TranslateWorker,
+              public router: Router,
               private interviewService: InterviewService) {
     // this.selected  = this.MONTH;
   }
@@ -186,7 +188,8 @@ export class InterviewCalendarComponent implements OnInit, OnChanges {
         this.addInterview(e);
       },
       eventClick: (e) => {
-        this.changeInterview(e);
+        this.goToInterviewPage(e);
+        // this.changeInterview(e);
       },
       eventDrop: (e) => {
         this.dropInterview(e);
@@ -232,6 +235,10 @@ export class InterviewCalendarComponent implements OnInit, OnChanges {
     dialogRef.afterClosed().subscribe(res => {
       this.outputChangeInterviews.emit(null);
     });
+  }
+  goToInterviewPage(event) {
+    const interview = event.event.extendedProps.interview;
+    this.router.navigate(['interview', interview.id]);
   }
   dropInterview(event) {
     console.log('drop Interview', event);
