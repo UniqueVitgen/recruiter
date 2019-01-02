@@ -85,7 +85,7 @@
   </dialog-body>
   <dialog-footer class="example-full-width">
     <span  *ngIf="data.isEdit" class="float-left">
-      <button (click)="deleteInterview()" mat-raised-button color="warn">{{'Delete' | translate}}</button>
+      <button (click)="clickDeleteInterview()" mat-raised-button color="warn">{{'Delete' | translate}}</button>
     </span>
     <span class="float-right">
       <button mat-button (click)="onNoClick()">{{'No Thanks' | translate}}</button>

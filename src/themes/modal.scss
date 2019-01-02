@@ -1,3 +1,9 @@
-.mat-dialog-container {
-  width: 600px;
+//.mat-dialog-container {
+//  width: 600px;
+//}
+.select-modal {
+  .mat-dialog-content {
+    //overflow: inherit;
+    //max-height: none;
+  }
 }

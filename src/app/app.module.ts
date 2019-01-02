@@ -101,6 +101,8 @@ import { ImageCropperAvatarComponent } from './components/modals/candidate/image
 
 import {ImageCropperModule} from 'ngx-image-cropper';
 import { DeleteCandidateModalComponent } from './components/modals/candidate/delete-candidate-modal/delete-candidate-modal.component';
+import { DeleteInterviewModalComponent } from './components/modals/interview/delete-interview-modal/delete-interview-modal.component';
+import { AlertWithButtonModalComponent } from './components/modals/alert-with-button-modal/alert-with-button-modal.component';
 
 export function HttpLoaderFactory(http: HttpClient) {
   return new TranslateHttpLoader(http);
@@ -165,7 +167,9 @@ export function HttpLoaderFactory(http: HttpClient) {
     CandidateInterviewExpansionPanelComponent,
     DevFeedbackTimelineItemComponent,
     ImageCropperAvatarComponent,
-    DeleteCandidateModalComponent
+    DeleteCandidateModalComponent,
+    DeleteInterviewModalComponent,
+    AlertWithButtonModalComponent
     // ,
     // CalendarComponent
   ],
@@ -239,7 +243,9 @@ export function HttpLoaderFactory(http: HttpClient) {
     ExistedCandidatesModalWindowComponent,
     AlertModalComponent,
     ImageCropperAvatarComponent,
-    DeleteCandidateModalComponent
+    DeleteCandidateModalComponent,
+    DeleteInterviewModalComponent,
+    AlertWithButtonModalComponent
   ],
   schemas: [NO_ERRORS_SCHEMA] // add this line
 })

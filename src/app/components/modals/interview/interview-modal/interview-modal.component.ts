@@ -1,6 +1,6 @@
-import {Component, Inject, OnInit} from '@angular/core';
-import {MAT_DIALOG_DATA, MatDialogRef} from '@angular/material';
-import {InterviewDialogData} from '../../../../interfaces/dialog/init/interview-dialog-data';
+import {Component, EventEmitter, Inject, OnInit, Output} from '@angular/core';
+import {MAT_DIALOG_DATA, MatDialog, MatDialogRef} from '@angular/material';
+import {InterviewDialogDataInterface} from '../../../../interfaces/dialog/init/interview-dialog-data-interface';
 import {Interview, InterviewExtended} from '../../../../classes/interview';
 import {BaseDialogResult} from '../../../../interfaces/dialog/result/base-dialog-result';
 import {InterviewService} from '../../../../services/interview/interview.service';
@@ -16,6 +16,10 @@ import {Candidate} from '../../../../classes/candidate';
 import {TypeCheckingWorker} from '../../../../workers/type-checking/type-checking.worker';
 import {CandidateWorker} from '../../../../workers/candidate/candidate.worker';
 import {UserWorker} from '../../../../workers/user/user.worker';
+import {DeleteCandidateModalComponent} from '../../candidate/delete-candidate-modal/delete-candidate-modal.component';
+import {DeleteInterviewModalComponent} from '../delete-interview-modal/delete-interview-modal.component';
+import * as moment from 'moment';
+import Base = moment.unitOfTime.Base;
 
 @Component({
   selector: 'app-interview-modal',
@@ -31,6 +35,8 @@ export class InterviewModalComponent implements OnInit {
   public sourceVacancy: Vacancy;
   public candidates: Candidate[];
   public minDate: Date;
+  @Output('clickSave') outputClickSave: EventEmitter<BaseDialogResult<InterviewExtended>> = new EventEmitter();
+  @Output('clickDelete') outputClickDelete: EventEmitter<BaseDialogResult<InterviewExtended>> = new EventEmitter();
   darkTheme: NgxMaterialTimepickerTheme = {
     container: {
       // bodyBackgroundColor: '#424242',
@@ -58,9 +64,10 @@ export class InterviewModalComponent implements OnInit {
     public dialogRef: MatDialogRef<InterviewModalComponent>,
     public dateTimeWorker: DateTimeWorker,
     public typeCheckingWorker: TypeCheckingWorker,
+    public dialog: MatDialog,
     public userWorker: UserWorker,
     private fb: FormBuilder,
-    @Inject(MAT_DIALOG_DATA) public data: InterviewDialogData ) {
+    @Inject(MAT_DIALOG_DATA) public data: InterviewDialogDataInterface ) {
     this.minDate = this.dateTimeWorker.getTodayStart();
     if (this.data) {
       if ( this.data.isEdit) {
@@ -146,31 +153,63 @@ export class InterviewModalComponent implements OnInit {
 
   addInterview() {
     this.updateDateTime();
-    console.log(this.planDate);
-    console.log('editedInterveiw', this.editedInterview);
+    // console.log(this.planDate);
+    // console.log('editedInterveiw', this.editedInterview);
     this.editedInterview.candidateId = this.editedCandidate.id;
     this.editedInterview.vacancyId = this.sourceVacancy.id;
-    this.interviewService.add(this.editedInterview).subscribe(resCandidate => {
-      this.interviewResult = {
-        isEdit: false,
-        resObject: null,
-        success: true
-      };
-      this.dialogRef.close(this.interviewResult);
+    this.outputClickSave.emit({
+      resObject: this.editedInterview,
+      isEdit: false,
+      delete: false,
+      success: true
     });
+    // this.interviewService.add(this.editedInterview).subscribe(resCandidate => {
+    //   this.interviewResult = {
+    //     isEdit: false,
+    //     resObject: null,
+    //     success: true
+    //   };
+    //   this.dialogRef.close(this.interviewResult);
+    // });
   }
   editInterview() {
     this.updateDateTime();
     this.editedInterview.candidateId = this.editedCandidate.id;
     this.editedInterview.vacancyId = this.sourceVacancy.id;
-    this.interviewService.update(this.editedInterview).subscribe(resCandidate => {
-      this.interviewResult = {
-        isEdit: false,
-        resObject: null,
-        success: true
-      };
-      this.dialogRef.close(this.interviewResult);
+    // this.interviewService.update(this.editedInterview).subscribe(resCandidate => {
+    //   this.interviewResult = {
+    //     isEdit: false,
+    //     resObject: null,
+    //     success: true
+    //   };
+    //   this.dialogRef.close(this.interviewResult);
+    // });
+    this.outputClickSave.emit({
+      resObject: this.editedInterview,
+      isEdit: true,
+      delete: false,
+      success: true
     });
+  }
+  clickDeleteInterview() {
+    this.outputClickDelete.emit({
+      delete: true,
+      success: true,
+      resObject: this.editedInterview,
+      isEdit: true
+    });
+    // const dialogRef = this.dialog.open(DeleteInterviewModalComponent, {
+    //   width: '400px',
+    //   disableClose: true
+    // });
+    // dialogRef.afterClosed().subscribe(res => {
+    //   if (res) {
+    //     this.deleteInterview();
+    //     // this.candidateService.delete(candidate.id).subscribe(res => {
+    //     //   this.getAll();
+    //     // });
+    //   }
+    // });
   }
   deleteInterview() {
     this.interviewService.delete(this.editedInterview).subscribe(res => {

@@ -1,0 +1,22 @@
+<!--<mdb-card>-->
+<app-modal-component>
+  <dialog-title>
+    <!--<mdb-card-header class="info-color white-text text-center py-4">-->
+    <!--<h5>-->
+    <!--<strong>Interview</strong>-->
+    <!--</h5>-->
+    <!--</mdb-card-header>-->
+    <div> {{data.title | translate}}
+
+    </div>
+  </dialog-title>
+  <dialog-body>
+    {{data.message | translate}}
+  </dialog-body>
+  <dialog-footer class="example-full-width">
+    <span class="float-right">
+      <button mat-button (click)="onNoClick()">{{'No Thanks' | translate}}</button>
+      <button autofocus mat-raised-button (click)="clickOk()" color="primary">{{data.buttonText | translate}}</button>
+    </span>
+  </dialog-footer>
+</app-modal-component>

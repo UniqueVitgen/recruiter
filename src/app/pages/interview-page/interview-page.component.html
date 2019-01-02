@@ -1,5 +1,6 @@
 <div *ngIf="interview">
-  <app-interview-short-info [interview]="interview" [buttonEdit]="true" (clickEdit)="clickEdit($event)"></app-interview-short-info>
+  <app-interview-short-info [interview]="interview" [buttonEdit]="true"
+                            (clickEdit)="clickEdit($event)" (clickDelete)="clickDelete($event)"></app-interview-short-info>
   <br>
   <app-interview-feedback [feedback]="feedback" [isEdit]="isFeedbackEdited" [buttonEdit]="true"
                           (focusoutAnyInput)="changeDevFeedback($event)" (saveClick)="addDevFeedback($event)"

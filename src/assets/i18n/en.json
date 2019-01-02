@@ -89,5 +89,16 @@
   "Past dates are disabled!": "Past dates are disabled!",
   "You can't add events on Past dates.": "You can't add events on Past dates.",
   "You can't drop events on Past dates.": "You can't drop events on Past dates.",
-  "Do you really want to delete this candidate?": "Do you really want to delete this candidate?"
+  "Do you really want to delete this candidate?": "Do you really want to delete this candidate?",
+  "Do you really want to delete this interview?": "Do you really want to delete this interview?",
+  "Do you really want to delete this attachment?": "Do you really want to delete this attachment?",
+  "Do you really want to delete this experience?": "Do you really want to delete this experience?",
+  "Do you really want to delete this image?": "Do you really want to delete this image?",
+  "Do you really want to delete this feedback?": "Do you really want to delete this feedback?",
+  "Do you really want to delete this interview feedback?": "Do you really want to delete this interview feedback?",
+  "Start Experience": "Start Experience",
+  "End Experience": "End Experience",
+  "Select candidate": "Select candidate",
+  "Delete confirm": "Delete confirm",
+  "Confirm delete": "Confirm delete"
 }

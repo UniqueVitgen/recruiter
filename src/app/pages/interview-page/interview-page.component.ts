@@ -1,6 +1,6 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, EventEmitter, OnInit} from '@angular/core';
 import {InterviewService} from '../../services/interview/interview.service';
-import {InterviewExtended} from '../../classes/interview';
+import {Interview, InterviewExtended} from '../../classes/interview';
 import {VacancyService} from '../../services/vacancy/vacancy.service';
 import {CandidateService} from '../../services/candidate/candidate.service';
 import {Vacancy} from '../../classes/vacancy';
@@ -10,12 +10,14 @@ import {ActivatedRoute, Router} from '@angular/router';
 import {CandidateWorker} from '../../workers/candidate/candidate.worker';
 import {Attachment} from '../../classes/attachment';
 import {InterviewModalComponent} from '../../components/modals/interview/interview-modal/interview-modal.component';
-import {InterviewDialogData} from '../../interfaces/dialog/init/interview-dialog-data';
+import {InterviewDialogDataInterface} from '../../interfaces/dialog/init/interview-dialog-data-interface';
 import {MatDialog} from '@angular/material';
 import {BaseDialogResult} from '../../interfaces/dialog/result/base-dialog-result';
 import {Location} from '@angular/common';
 import {DevFeedbackService} from '../../services/dev-feedback/dev-feedback.service';
 import {DevFeedback} from '../../classes/dev-feedback';
+import {Subscription} from 'rxjs';
+import {DeleteInterviewModalComponent} from '../../components/modals/interview/delete-interview-modal/delete-interview-modal.component';
 
 
 @Component({
@@ -64,8 +66,8 @@ export class InterviewPageComponent implements OnInit {
     // });
   }
 
-  getInterview(): void {
-    this.interviewService.get(this.id).subscribe(res => {
+  getInterview(): Subscription {
+    return this.interviewService.get(this.id).subscribe(res => {
       this.interview = res;
       this.photo = this.candidateWorker.findPhoto(this.interview.candidate);
       this.photoUrl = this.candidateWorker.generatePhotoUrl(this.photo);
@@ -86,7 +88,7 @@ export class InterviewPageComponent implements OnInit {
   clickEdit(interview: InterviewExtended): void {
     console.log('change event', event);
     const dialogRef = this.dialog.open(InterviewModalComponent, {
-      data: <InterviewDialogData> {
+      data: <InterviewDialogDataInterface> {
         sourceDate: new Date(interview.planDate),
         fixedCandidate: false,
         isEdit: true,
@@ -94,12 +96,46 @@ export class InterviewPageComponent implements OnInit {
         sourceInterview: interview
       }
     });
-    dialogRef.afterClosed().subscribe((res: BaseDialogResult<InterviewExtended>) => {
-      if (res.delete) {
-        this.location.back();
-      } else {
-        this.getInterview();
+    dialogRef.componentInstance.outputClickSave.subscribe((resInterview: BaseDialogResult<InterviewExtended>) => {
+      console.log(resInterview);
+      // if (resInterview.isEdit) {
+        this.updateInterview(resInterview.resObject).add(() => {
+          this.getInterview().add(() => {
+            dialogRef.close();
+          });
+        });
+      // }
+    });
+    dialogRef.componentInstance.outputClickDelete.subscribe((resInterview: BaseDialogResult<InterviewExtended>) => {
+      // this.deleteInterview(resInterview.resObject).add(() => {
+      //   this.getInterview().add(() => {
+      //     dialogRef.close();
+      //   });
+      // });
+      this.clickDelete(resInterview.resObject);
+    });
+  }
+  updateInterview(interview: InterviewExtended): Subscription {
+    return this.interviewService.update(interview).subscribe(resInterview => {
+    });
+  }
+  clickDelete(interview: InterviewExtended) {
+    const dialogRef = this.dialog.open(DeleteInterviewModalComponent, {
+      width: '400px',
+      disableClose: true
+    });
+    dialogRef.afterClosed().subscribe(res => {
+      if (res) {
+        this.deleteInterview(this.interview);
+        // this.candidateService.delete(candidate.id).subscribe(res => {
+        //   this.getAll();
+        // });
       }
+    });
+  }
+  deleteInterview(interview: InterviewExtended): Subscription {
+    return this.interviewService.delete(interview).subscribe(resInterview => {
+      this.location.back();
     });
 
   }

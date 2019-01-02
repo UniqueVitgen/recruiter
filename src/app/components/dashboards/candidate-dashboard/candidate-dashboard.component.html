@@ -1,5 +1,5 @@
 
-<div class="row">
+<div *ngIf="selectedCandidates" class="row">
   <div *ngFor="let candidate of selectedCandidates | slice:0:limitTo ? limitTo : selectedCandidates.length; let i = index" [ngClass]=" filledCells ? 'col-md-' + filledCells : 'col-md-3'" class="col-12 center-item heightitem">
     <app-candidate-dashboard-item [clickableCandidate]="true" [haveHoverEffect]="haveHoverEffect"  [isClosedIcon]="isClosedIcon" (deleteCandidate)="deleteCandidate($event)" [candidate]="candidate"></app-candidate-dashboard-item>
   </div>

@@ -13,7 +13,7 @@
         <input required formControlName="companyName" [(ngModel)]="editedExperience.companyName.name" matInput placeholder="{{'company Name' | translate}}">
       </mat-form-field>
       <mat-form-field>
-        <input required formControlName="dateFrom" matInput [(ngModel)]="editedExperience.dateFrom" [matDatepicker]="picker" placeholder="{{'From' | translate}}">
+        <input required formControlName="dateFrom" matInput [(ngModel)]="editedExperience.dateFrom" [matDatepicker]="picker" placeholder="{{'Start Experience' | translate}}">
         <mat-datepicker-toggle name="dateSuffix" matSuffix [for]="picker"></mat-datepicker-toggle>
         <mat-datepicker  #picker></mat-datepicker>
       </mat-form-field>
@@ -21,7 +21,7 @@
       &nbsp;
       <!--<br>-->
       <mat-form-field >
-        <input required matInput formControlName="dateTo"  [(ngModel)]="editedExperience.dateTo" [min]="editedExperience.dateFrom" [matDatepicker]="picker1" placeholder="{{'To' | translate}}">
+        <input required matInput formControlName="dateTo"  [(ngModel)]="editedExperience.dateTo" [min]="editedExperience.dateFrom" [matDatepicker]="picker1" placeholder="{{'End Experience' | translate}}">
         <mat-datepicker-toggle name="dateSuffix1" matSuffix [for]="picker1"></mat-datepicker-toggle>
         <mat-datepicker #picker1></mat-datepicker>
       </mat-form-field>

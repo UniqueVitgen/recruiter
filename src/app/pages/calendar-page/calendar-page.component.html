@@ -1,3 +1,4 @@
-<app-interview-calendar [inteviews]="interviews" [locale]="lang" (changeInterviews)="changeInterviews($event)"></app-interview-calendar>
+<app-interview-calendar [inteviews]="interviews" [locale]="lang"
+                        (clickEvent)="changeInterview($event)" (clickDay)="addInterview($event)" (dropEvent)="dropEvent($event)"></app-interview-calendar>
 
 

@@ -1,4 +1,4 @@
-<mat-card class="candidate-dashboard-item" (click)="clickableCandidate ?goToCandidatePage():''">
+<mat-card class="candidate-dashboard-item" [ngClass]="{'candidate-have-hover': haveHoverEffect}" (click)="clickableCandidate ?goToCandidatePage():''">
   <!--<mat-card-header>-->
   <!--&lt;!&ndash;<div mat-card-avatar class="example-header-image"></div>&ndash;&gt;-->
   <!--<mat-card-title class="font-weight-bold">Name: {{userWorker.formatFullName(candidate)}}</mat-card-title>-->

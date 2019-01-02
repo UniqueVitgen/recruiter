@@ -15,6 +15,13 @@ import {AttachmentCandidateModalComponent} from '../../components/modals/candida
 import {CandidateDialogData} from '../../interfaces/dialog/init/candidate-dialog-data';
 import {BaseDialogResult} from '../../interfaces/dialog/result/base-dialog-result';
 import {DevFeedbackService} from '../../services/dev-feedback/dev-feedback.service';
+import {Attachment} from '../../classes/attachment';
+import {AlertWithButtonModalComponent} from '../../components/modals/alert-with-button-modal/alert-with-button-modal.component';
+import {AlertWithButtonDialogData} from '../../interfaces/dialog/init/alert-with-button-dialog-data';
+import {Subscription} from 'rxjs';
+import {Feedback} from '../../classes/feedback';
+import {DevFeedback} from '../../classes/dev-feedback';
+import {CandidateExperience} from '../../classes/candidate-experience';
 
 @Component({
   selector: 'app-candidate-page',
@@ -61,7 +68,7 @@ export class CandidatePageComponent implements OnInit {
       console.log('res', res);
       if (res) {
         console.log('res - ', res);
-        //this.outputChangeTimeline.emit(res.resObject);
+        // this.outputChangeTimeline.emit(res.resObject);
       }
     });
   }
@@ -80,32 +87,19 @@ export class CandidatePageComponent implements OnInit {
   deleteTimelineItem(index: number) {
     const object = this.eventNoteList[index];
     console.log(object);
-    if (this.eventNoteWorker.isAttachement(object)) {
-      this.candidate.attachments = this.candidate.attachments.filter((attachment => {
-        return object.id !== attachment.id;
-      }));
+    if (this.eventNoteWorker.isCV(object)) {
+      this.alertDeleteAttachment(<Attachment>object);
     } else if (this.eventNoteWorker.isImg(object)) {
-      this.candidate.attachments = this.candidate.attachments.filter((attachment => {
-        return object.id !== attachment.id;
-      }));
+      this.alertDeleteImg(<Attachment>object);
     } else if (this.eventNoteWorker.isNote(object)) {
-      this.feedbackService.delete(<any>object).subscribe(res => {
-        this.getCandidate();
-      });
+      this.alertDeleteFeedback(<any>object);
     } else if (this.eventNoteWorker.isDevFeedback(object)) {
-      this.devFeedbackService.delete(<any> object).subscribe(res => {
-        this.getCandidate();
-      });
+      this.alertDeleteDevFeedback(<any>object);
     } else if (this.eventNoteWorker.isExperience(object)) {
-      this.candidate.experiences = this.candidate.experiences.filter((attachment => {
-        return object.id !== attachment.id;
-      }));
+      this.alertDeleteExperience(<any>object);
     } else if (this.eventNoteWorker.isInterview(object)) {
-        this.interviewService.delete(<Interview>object).subscribe( res => { this.getCandidate(); });
+        this.alertDeleteInverview(<Interview>object);
       }
-    this.candidateService.update(this.candidate).subscribe(resMessage => {
-      this.getCandidate();
-    });
   }
   changeTimelineItem(object: any) {
     if (this.eventNoteWorker.isAttachement(object)) {
@@ -136,45 +130,142 @@ export class CandidatePageComponent implements OnInit {
         // this.getCandidate();
       });
     }
-    this.candidateService.update(this.candidate).subscribe(resMessage => {
-      this.getCandidate();
+    // this.candidateService.update(this.candidate).subscribe(resMessage => {
+    //   this.getCandidate();
+    // });
+  }
+  alertDeleteAttachment(attachment: Attachment) {
+    const dialogRef = this.dialog.open(AlertWithButtonModalComponent, {
+        data: <AlertWithButtonDialogData> {
+          buttonText: 'Delete',
+          message: 'Do you really want to delete this attachment?',
+          title: 'Confirm delete'
+        },
+        disableClose: true
+      }
+    );
+    dialogRef.componentInstance.outputClickOk.subscribe((resAnswer: boolean) => {
+      this.deleteAttachment(attachment).add(() => {
+        this.getCandidate().add(() => {dialogRef.close(); } );
+      });
     });
+  }
+  alertDeleteExperience(experience: CandidateExperience): void {
+    const dialogRef = this.dialog.open(AlertWithButtonModalComponent, {
+        data: <AlertWithButtonDialogData> {
+          buttonText: 'Delete',
+          message: 'Do you really want to delete this experience?',
+          title: 'Confirm delete'
+        },
+        disableClose: true
+      }
+    );
+    dialogRef.componentInstance.outputClickOk.subscribe((resAnswer: boolean) => {
+      this.deleteExperience(experience).add(() => {
+        this.getCandidate().add(() => {dialogRef.close(); } );
+      });
+    });
+  }
+  alertDeleteImg(attachment: Attachment) {
+    const dialogRef = this.dialog.open(AlertWithButtonModalComponent, {
+        data: <AlertWithButtonDialogData> {
+          buttonText: 'Delete',
+          message: 'Do you really want to delete this image?',
+          title: 'Confirm delete'
+        },
+        disableClose: true
+      }
+    );
+    dialogRef.componentInstance.outputClickOk.subscribe((resAnswer: boolean) => {
+      this.deleteAttachment(attachment).add(() => {
+        this.getCandidate().add(() => {dialogRef.close(); } );
+      });
+    });
+  }
+  alertDeleteFeedback(feedback: Feedback) {
+    const dialogRef = this.dialog.open(AlertWithButtonModalComponent, {
+        data: <AlertWithButtonDialogData> {
+          buttonText: 'Delete',
+          message: 'Do you really want to delete this feedback?',
+          title: 'Confirm delete'
+        },
+        disableClose: true
+      }
+    );
+    dialogRef.componentInstance.outputClickOk.subscribe((resAnswer: boolean) => {
+      this.deleteFeedback(feedback).add(() => {
+        this.getCandidate().add(() => {dialogRef.close();
+        });
+      });
+    });
+  }
+  alertDeleteDevFeedback(devFeedback: DevFeedback) {
+    const dialogRef = this.dialog.open(AlertWithButtonModalComponent, {
+        data: <AlertWithButtonDialogData> {
+          buttonText: 'Delete',
+          message: 'Do you really want to delete this interview feedback?',
+          title: 'Confirm delete'
+        },
+        disableClose: true
+      }
+    );
+    dialogRef.componentInstance.outputClickOk.subscribe((resAnswer: boolean) => {
+      this.deleteDevFeedback(devFeedback).add(() => {
+        this.getCandidate().add(() => {dialogRef.close();
+        });
+      });
+    });
+  }
+  alertDeleteInverview(interview: Interview) {
+    const dialogRef = this.dialog.open(AlertWithButtonModalComponent, {
+        data: <AlertWithButtonDialogData> {
+          buttonText: 'Delete',
+          message: 'Do you really want to delete this interview?',
+          title: 'Confirm delete'
+        },
+        disableClose: true
+      }
+    );
+    dialogRef.componentInstance.outputClickOk.subscribe((resAnswer: boolean) => {
+      this.deleteInterview(interview).add(() => {
+        this.getCandidate().add(() => {dialogRef.close();
+        });
+      });
+    });
+  }
+  deleteExperience(experience: CandidateExperience): Subscription {
+    this.candidate.experiences = this.candidate.experiences.filter((attachment => {
+      return experience.id !== attachment.id;
+    }));
+    return this.candidateService.update(this.candidate).subscribe(resCandidate => {});
+  }
+  deleteAttachment(object: Attachment): Subscription {
+    this.candidate.attachments = this.candidate.attachments.filter((attachment => {
+      return object.id !== attachment.id;
+    }));
+    return this.candidateService.update(this.candidate).subscribe(resCandidate => {});
+  }
+  deleteFeedback(object: Feedback): Subscription {
+    return this.feedbackService.delete(object).subscribe(res => {});
+  }
+  deleteDevFeedback(object: DevFeedback): Subscription {
+    return this.devFeedbackService.delete(object).subscribe(res => {});
+  }
+  deleteInterview(interview: Interview): Subscription {
+    return this.interviewService.delete(interview).subscribe(res => {});
   }
   addTimelineItem(candidate: Candidate) {
     this.getCandidate();
   }
-  getCandidate() {
-    this.candidateService.get(this.id).subscribe(res => {
+  getCandidate(): Subscription {
+    return this.candidateService.get(this.id).subscribe(res => {
       this.candidate = res;
       this.candidateService.getTimeline(this.candidate).subscribe(resTimeline => {
         this.eventNoteList = resTimeline;
       });
-
-      // const interviewers = <InterviewTimeline[]> [
-      //   {
-      //     when: new Date(),
-      //     where: '',
-      //     whoConducts: '',
-      //     comment: '',
-      //     type: EventTimelineType.Interview
-      //   }
-      //   ];
-      // const noteList = <NoteTimeline[]> [
-      //   {
-      //     comment: '',
-      //     type: EventTimelineType.Note
-      //   }
-      // ];
-      // .concat(interviewers)
-      // .concat(noteList);
       console.log(this.eventNoteList);
       console.log('res', res);
     });
   }
-  // goToInterviewPage(object: any) {
-  //   if (this.eventNoteWorker.isInterview(object)) {
-  //     this.router.navigate(['interview', this.candidate.]);
-  //   }
-  // }
 
 }

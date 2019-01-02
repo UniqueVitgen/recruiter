@@ -1,15 +1,26 @@
-<h3>
-  Chose
-</h3>
-<button mat-button (click)="close()">X</button>
-<div #candidateView *ngFor="let candidate of candidates; let i = index">
-  <div *ngIf="isThisCandidateAlreadyHere(candidate)" class="candidate-line">
-    <app-candidate-dashboard-item [haveHoverEffect]="false" [isClosedIcon]="false"
-                                  [candidate]="candidate" [clickableCandidate]="false"></app-candidate-dashboard-item>
+<app-modal-component class="select-modal">
+  <dialog-title class="example-full-width">
+    {{'Select candidate' | translate}}
+    <!--<span class="float-right">-->
+      <!--<button mat-icon-button (click)="close()"><mat-icon>close</mat-icon></button>-->
+    <!--</span>-->
+  </dialog-title>
+  <dialog-body>
+    <div #candidateView *ngFor="let candidate of candidates; let i = index">
+      <div *ngIf="isThisCandidateAlreadyHere(candidate)"  (click)="addCandidate(i)" class="candidate-line example-full-width">
+        <app-candidate-dashboard-item [haveHoverEffect]="true" [isClosedIcon]="false"
+                                      [candidate]="candidate" [clickableCandidate]="false"></app-candidate-dashboard-item>
 
-    <button mat-button (click)="addCandidate(i)" >Add</button>
-  </div>
-</div>
+        <button class="example-full-width" mat-button ><mat-icon>add</mat-icon></button>
+      </div>
+    </div>
+  </dialog-body>
+  <dialog-footer class="example-full-width">
+    <span class="float-right">
+      <button cdk-focus-initial autofocus mat-raised-button color="primary" (click)="close()">{{'No Thanks' | translate}}</button>
+    </span>
+  </dialog-footer>
+</app-modal-component>
 
 
 

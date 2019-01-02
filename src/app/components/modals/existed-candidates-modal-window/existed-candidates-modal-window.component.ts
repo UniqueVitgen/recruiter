@@ -52,5 +52,9 @@ export class ExistedCandidatesModalWindowComponent implements OnInit, OnChanges 
   ngOnChanges(changes: SimpleChanges): void {
   }
 
+  onNoClick() {
+    this.dialogRef.close();
+  }
+
 
 }

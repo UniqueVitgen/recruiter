@@ -1,6 +1,6 @@
 import {Component, Inject, OnInit} from '@angular/core';
 import {MAT_DIALOG_DATA, MatDialogRef} from '@angular/material';
-import {InterviewDialogData} from '../../../interfaces/dialog/init/interview-dialog-data';
+import {InterviewDialogDataInterface} from '../../../interfaces/dialog/init/interview-dialog-data-interface';
 import {AlertDialogData} from '../../../interfaces/dialog/init/alert-dialog-data';
 
 @Component({

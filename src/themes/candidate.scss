@@ -51,13 +51,15 @@
     .user-avatar-hover:hover {
       background-color: rgba(0, 0, 0, .3);
     }
-    &:hover {
-      cursor: pointer;
-      background-color: rgba(0, 0, 0, .3);
-      //border-color: #00b0f0;
-      .user-avatar-hover {
-        .avatar-hover {
-          display: block;
+    &.candidate-have-hover {
+      &:hover {
+        cursor: pointer;
+        background-color: rgba(0, 0, 0, .3);
+        //border-color: #00b0f0;
+        .user-avatar-hover {
+          .avatar-hover {
+            display: block;
+          }
         }
       }
     }
@@ -80,6 +82,26 @@
     }
     .user-avatar {
       //width: 200px;
+    }
+  }
+}
+
+.candidate-line {
+  &:hover {
+    .candidate-have-hover {
+      & {
+        cursor: pointer;
+        background-color: rgba(0, 0, 0, .05);
+        //border-color: #00b0f0;
+        .user-avatar-hover {
+          .avatar-hover {
+            display: block;
+          }
+        }
+      }
+    }
+    .mat-button {
+      background-color: rgba(0, 0, 0, .05) !important;
     }
   }
 }

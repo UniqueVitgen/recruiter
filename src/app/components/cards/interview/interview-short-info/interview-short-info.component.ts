@@ -15,6 +15,7 @@ export class InterviewShortInfoComponent implements OnInit, OnChanges {
   @Input() interview: InterviewExtended;
   @Input() buttonEdit: boolean;
   @Output('clickEdit') outputClickEdit: EventEmitter<InterviewExtended> = new EventEmitter();
+  @Output('clickDelete') outputClickDelete: EventEmitter<InterviewExtended> = new EventEmitter();
   public viewOfDate: string;
 
   constructor(public userWorker: UserWorker,
@@ -33,7 +34,9 @@ export class InterviewShortInfoComponent implements OnInit, OnChanges {
   clickEdit(): void {
     this.outputClickEdit.emit(this.interview);
   }
-
+  clickDelete(): void {
+    this.outputClickDelete.emit(this.interview);
+  }
   ngOnChanges(changes: SimpleChanges): void {
     if (this.interview) {
       const date = new Date (this.interview.planDate);

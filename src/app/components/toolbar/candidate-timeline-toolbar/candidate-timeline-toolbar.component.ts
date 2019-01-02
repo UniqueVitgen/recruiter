@@ -13,7 +13,7 @@ import {NoteCandidateModalComponent} from '../../modals/candidate/note-candidate
 import {NoteDialogData} from '../../../interfaces/dialog/init/note-dialog-data';
 import {Feedback} from '../../../classes/feedback';
 import {InterviewModalComponent} from '../../modals/interview/interview-modal/interview-modal.component';
-import {InterviewDialogData} from '../../../interfaces/dialog/init/interview-dialog-data';
+import {InterviewDialogDataInterface} from '../../../interfaces/dialog/init/interview-dialog-data-interface';
 @Component({
   selector: 'app-candidate-timeline-toolbar',
   templateUrl: './candidate-timeline-toolbar.component.html',
@@ -64,7 +64,7 @@ export class CandidateTimelineToolbarComponent implements OnChanges {
     // });
     // this.outputChangeTimeline.emit(this.internalTimeLineList);
     const dialogRef = this.dialog.open(InterviewModalComponent, {
-        data: <InterviewDialogData> {
+        data: <InterviewDialogDataInterface> {
           sourceCandidate: this.editedCandidate,
           fixedCandidate: true
         }

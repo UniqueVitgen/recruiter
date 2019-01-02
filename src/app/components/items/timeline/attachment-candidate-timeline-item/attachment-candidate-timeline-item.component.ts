@@ -39,6 +39,8 @@ export class AttachmentCandidateTimelineItemComponent implements OnInit, OnChang
   }
 
   ngOnChanges(changes: SimpleChanges): void {
-    this.viewOfDate = this.dateTimeWorker.getDateWithTime(this.editedAttachment.createdAt);
+    if (this.editedAttachment) {
+      this.viewOfDate = this.dateTimeWorker.getDateWithTime(this.editedAttachment.createdAt);
+    }
   }
 }

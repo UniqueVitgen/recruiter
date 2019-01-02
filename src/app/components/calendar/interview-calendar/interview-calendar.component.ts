@@ -19,12 +19,13 @@ import {CalendarComponent} from 'ng-fullcalendar';
 // import { Options } from 'fullcalendar';
 import {CalendarEvent} from '../../../classes/html/calendar/calendar-event';
 import {InterviewWorker} from '../../../workers/interview/interview.worker';
-import {InterviewDialogData} from '../../../interfaces/dialog/init/interview-dialog-data';
+import {InterviewDialogDataInterface} from '../../../interfaces/dialog/init/interview-dialog-data-interface';
 import {TranslateWorker} from '../../../workers/translate/translate.worker';
 import {AlertModalComponent} from '../../modals/alert-modal/alert-modal.component';
 import {AlertDialogData} from '../../../interfaces/dialog/init/alert-dialog-data';
 import {TypeCheckingWorker} from '../../../workers/type-checking/type-checking.worker';
 import {Router} from '@angular/router';
+import {InterviewCalendarEvent} from '../../../classes/event/interview-calendar-event';
 // import {  } from 'fullcalendar';
 // import { FullCalendarOptions, EventObject } from 'ngx-fullcalendar';
 
@@ -38,6 +39,9 @@ export class InterviewCalendarComponent implements OnInit, OnChanges {
   @Input() inteviews: InterviewExtended[];
   @Input() locale: string;
   @Output('changeInterviews') outputChangeInterviews: EventEmitter<any> = new EventEmitter();
+  @Output('clickDay') outputClickDay: EventEmitter<InterviewCalendarEvent> = new EventEmitter();
+  @Output('clickEvent') outputClickEvent: EventEmitter<InterviewCalendarEvent> = new EventEmitter();
+  @Output('dropEvent') outputDropEvent: EventEmitter<InterviewCalendarEvent> = new EventEmitter();
   // options: FullCalendarOptions;
   // events: EventObject[];
   options;
@@ -152,7 +156,7 @@ export class InterviewCalendarComponent implements OnInit, OnChanges {
     }
   }
   determineOptions() {{
-    let buttonText;
+    let buttonText, firstDay;
     if (this.locale === 'ru') {
       buttonText = {
         month:    'Месяц',
@@ -161,6 +165,7 @@ export class InterviewCalendarComponent implements OnInit, OnChanges {
         day:      'Лист',
         list:     'Список'
       };
+      firstDay = 1;
     } else {
       buttonText = {
         month:    'Month',
@@ -169,6 +174,7 @@ export class InterviewCalendarComponent implements OnInit, OnChanges {
         day:      'Day',
         list:     'List'
       };
+      firstDay = 0;
     }
     return {
       allDaySlot: false,
@@ -177,6 +183,7 @@ export class InterviewCalendarComponent implements OnInit, OnChanges {
       maxTime: <any> '23:00:00',
       locale: this.locale,
       buttonText: buttonText,
+      firstDay: firstDay,
       theme: 'bootstrap4',
       header: {
         left: 'prev,next',
@@ -192,8 +199,8 @@ export class InterviewCalendarComponent implements OnInit, OnChanges {
         this.addInterview(e);
       },
       eventClick: (e) => {
-        this.goToInterviewPage(e);
-        // this.changeInterview(e);
+        // this.goToInterviewPage(e);
+        this.clickInterview(e);
       },
       eventDrop: (e) => {
         this.dropInterview(e);
@@ -205,40 +212,46 @@ export class InterviewCalendarComponent implements OnInit, OnChanges {
     console.log('add interview', event);
     console.log('event.detail.date', event.date);
     const dateEvent: Date =  event.date;
-    const todayStart: Date = this.dateTimeWorker.getTodayStart();
-    if (dateEvent.getTime() > todayStart.getTime()) {
-      const dialogRef = this.dialog.open(InterviewModalComponent, {
-        data: <InterviewDialogData> {
-          sourceDate: event.date,
-          fixedCandidate: false,
-          isEdit: false
-        }
-      });
-      dialogRef.afterClosed().subscribe(res => {
-        this.outputChangeInterviews.emit(null);
-      });
-    } else {
-      const dialogRef = this.dialog.open(AlertModalComponent, {
-        data: <AlertDialogData> {
-          title: this.translateWorker.translateWord('Past dates are disabled!'),
-          message: this.translateWorker.translateWord('You can\'t add events on Past dates.')
-        }
-      });
-    }
+    this.outputClickDay.emit({
+      targetDate: dateEvent
+    });
+    // if (dateEvent.getTime() > todayStart.getTime()) {
+    //   const dialogRef = this.dialog.open(InterviewModalComponent, {
+    //     data: <InterviewDialogDataInterface> {
+    //       sourceDate: event.date,
+    //       fixedCandidate: false,
+    //       isEdit: false
+    //     }
+    //   });
+    //   // dialogRef.afterClosed().subscribe(res => {
+    //   //   this.outputChangeInterviews.emit(null);
+    //   // });
+    // } else {
+    //   const dialogRef = this.dialog.open(AlertModalComponent, {
+    //     data: <AlertDialogData> {
+    //       title: this.translateWorker.translateWord('Past dates are disabled!'),
+    //       message: this.translateWorker.translateWord('You can\'t add events on Past dates.')
+    //     }
+    //   });
+    // }
   }
-  changeInterview(event) {
+  clickInterview(event) {
+    this.outputClickEvent.emit({
+      targetDate: event.event.extendedProps.interview.planDate,
+      interview: event.event.extendedProps.interview
+    });
     console.log('change event', event);
-    const dialogRef = this.dialog.open(InterviewModalComponent, {
-      data: <InterviewDialogData> {
-        sourceDate: event.event.extendedProps.interview.planDate,
-        fixedCandidate: false,
-        isEdit: true,
-        sourceInterview: event.event.extendedProps.interview
-      }
-    });
-    dialogRef.afterClosed().subscribe(res => {
-      this.outputChangeInterviews.emit(null);
-    });
+    // const dialogRef = this.dialog.open(InterviewModalComponent, {
+    //   data: <InterviewDialogDataInterface> {
+    //     sourceDate: event.event.extendedProps.interview.planDate,
+    //     fixedCandidate: false,
+    //     isEdit: true,
+    //     sourceInterview: event.event.extendedProps.interview
+    //   }
+    // });
+    // dialogRef.afterClosed().subscribe(res => {
+    //   this.outputChangeInterviews.emit(null);
+    // });
   }
   goToInterviewPage(event) {
     const interview = event.event.extendedProps.interview;
@@ -246,28 +259,32 @@ export class InterviewCalendarComponent implements OnInit, OnChanges {
   }
   dropInterview(event) {
     console.log('drop Interview', event);
-    if (event) {
-      const startTime: Date = event.event.start;
-      console.log(event.event.start.getUTCHours());
-      console.log(event.event.start.getHours());
-      if (startTime.getTime() > this.dateTimeWorker.getTodayStart().getTime()) {
-        const interview: InterviewExtended  = event.event.def.extendedProps.interview;
-        interview.planDate = this.dateTimeWorker.setUTCDate(startTime.getFullYear(),
-          startTime.getMonth(), startTime.getDate(), startTime.getHours(),
-          startTime.getMinutes()).toISOString();
-        this.outputChangeInterviews.emit(interview);
-      } else {
-        this.outputChangeInterviews.emit(null);
-        const dialogRef = this.dialog.open(AlertModalComponent, {
-          data: <AlertDialogData> {
-            title: 'Past dates are disabled!',
-            message: 'You can\'t drop events on past dates.'
-          }
-        });
-      }
-    } else {
-      this.outputChangeInterviews.emit(null);
-    }
+    this.outputDropEvent.emit({
+      targetDate: event.event.start,
+      interview: event.event.def.extendedProps.interview
+    });
+    // if (event) {
+    //   const startTime: Date = event.event.start;
+    //   console.log(event.event.start.getUTCHours());
+    //   console.log(event.event.start.getHours());
+    //   if (startTime.getTime() > this.dateTimeWorker.getTodayStart().getTime()) {
+    //     const interview: InterviewExtended  = event.event.def.extendedProps.interview;
+    //     interview.planDate = this.dateTimeWorker.setUTCDate(startTime.getFullYear(),
+    //       startTime.getMonth(), startTime.getDate(), startTime.getHours(),
+    //       startTime.getMinutes()).toISOString();
+    //     this.outputChangeInterviews.emit(interview);
+    //   } else {
+    //     this.outputChangeInterviews.emit(null);
+    //     const dialogRef = this.dialog.open(AlertModalComponent, {
+    //       data: <AlertDialogData> {
+    //         title: 'Past dates are disabled!',
+    //         message: 'You can\'t drop events on past dates.'
+    //       }
+    //     });
+    //   }
+    // } else {
+    //   this.outputChangeInterviews.emit(null);
+    // }
   }
 
   ngOnInit() {

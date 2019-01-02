@@ -38,8 +38,10 @@ export class CandidateDashboardComponent implements OnInit, OnChanges {
   }
 
   ngOnChanges(changes: SimpleChanges): void {
-    this.searchValues(this.search);
-    console.log('fillledCells', this.filledCells);
+    if (this.candidates) {
+      this.searchValues(this.search);
+      console.log('fillledCells', this.filledCells);
+    }
   }
 
   searchValues(value: string) {

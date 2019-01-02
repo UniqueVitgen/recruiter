@@ -26,7 +26,10 @@
       <mat-icon>person_add</mat-icon>
     </button>
   </mat-card-title>
-  <app-search-input *ngIf="searchInputSelected" (onSearch)="searchSelected($event)"></app-search-input><br>
+  <div *ngIf="searchInputSelected">
+    <app-search-input (onSearch)="searchSelected($event)"></app-search-input>
+    <br>
+  </div>
   <mat-divider></mat-divider>
 <br>
 <app-candidate-dashboard [search]="searchValueSelected" (addCandidate)="addCandidate($event)" *ngIf="vacancy && vacancy.candidates" [candidates]="vacancy.candidates" [haveAddElement]="true"></app-candidate-dashboard>
@@ -45,7 +48,9 @@
       <mat-icon>person_add</mat-icon>
     </button>
   </mat-card-title>
-  <app-search-input *ngIf="searchInputPossible" (onSearch)="searchPossible($event)"></app-search-input><br>
+  <div *ngIf="searchInputPossible">
+    <app-search-input (onSearch)="searchPossible($event)"></app-search-input><br>
+  </div>
   <mat-divider></mat-divider>
   <br>
   <app-candidate-dashboard [search]="searchValuePossible" *ngIf="candidates" [candidates]="candidates"
