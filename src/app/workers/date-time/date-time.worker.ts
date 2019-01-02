@@ -107,7 +107,7 @@ export class DateTimeWorker {
     timeObject = new Date(timeObject);
     return <TimeInput> {
       minutes: timeObject.getMinutes(),
-      hours: timeObject.getUTCHours()
+      hours: timeObject.getHours()
     };
   }
   convertTimeInputToTimeString(timeInput: TimeInput, format: number): string {
@@ -151,6 +151,12 @@ export class DateTimeWorker {
     const date = new Date();
     date.setUTCFullYear(year, month, day);
     date.setUTCHours(hours, minutes);
+    return date;
+  }
+  setDate(year, month, day, hours, minutes): Date {
+    const date = new Date();
+    date.setFullYear(year, month, day);
+    date.setHours(hours, minutes);
     return date;
   }
   parseDate(date: Date): DateInput {

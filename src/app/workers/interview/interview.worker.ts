@@ -22,8 +22,10 @@ export class InterviewWorker {
     const dateEnd = new Date(date.getTime() + 60 * this.dateTimeWorker.minute);
     return {
       title: interview.vacancy.position + ' - ' + interview.candidate.surname,
-      start: this.dateTimeWorker.transform(date, 'yyyy-MM-ddT', 'UTC', this.translateWorker.getLanguage()) + this.dateTimeWorker.getTime(date, 'HH:mm') + ':' + '00' ,
-      end: this.dateTimeWorker.transform((dateEnd), 'yyyy-MM-ddT', 'UTC', this.translateWorker.getLanguage()) + this.dateTimeWorker.getTime(dateEnd, 'HH:mm') + ':' + '00',
+      start: date.toISOString(),
+      end: date.toISOString(),
+      // start: this.dateTimeWorker.transform(date, 'yyyy-MM-ddT', 'UTC', this.translateWorker.getLanguage()) + this.dateTimeWorker.getTime(date, 'HH:mm') + ':' + '00' ,
+      // end: this.dateTimeWorker.transform((dateEnd), 'yyyy-MM-ddT', 'UTC', this.translateWorker.getLanguage()) + this.dateTimeWorker.getTime(dateEnd, 'HH:mm') + ':' + '00',
       candidate: interview.candidate,
       interview: interview,
       vacancy: interview.vacancy

@@ -153,7 +153,7 @@ export class InterviewPageComponent implements OnInit {
     console.log(event);
     if (this.isFeedbackEdited) {
       this.devFeedbackService.update(event).subscribe(res => {
-        this.getInterview();
+        // this.getInterview();
       });
     }
   }

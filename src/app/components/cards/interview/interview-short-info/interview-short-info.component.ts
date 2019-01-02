@@ -26,8 +26,8 @@ export class InterviewShortInfoComponent implements OnInit, OnChanges {
   ngOnInit() {
     this.translateWorker.changeValue.subscribe(res => {
       const date = new Date (this.interview.planDate);
-      date.setHours(date.getUTCHours());
-      console.log(date.getUTCHours());
+      // date.setHours(date.getUTCHours());
+      // console.log(date.getUTCHours());
       this.viewOfDate = this.dateTimeWorker.getDateWithTime(date);
     });
   }
@@ -40,8 +40,8 @@ export class InterviewShortInfoComponent implements OnInit, OnChanges {
   ngOnChanges(changes: SimpleChanges): void {
     if (this.interview) {
       const date = new Date (this.interview.planDate);
-      console.log(date.getUTCHours());
-      date.setHours(date.getUTCHours());
+      // console.log(date.getUTCHours());
+      // date.setHours(date.getUTCHours());
       this.viewOfDate = this.dateTimeWorker.getDateWithTime(date);
     }
   }

@@ -139,7 +139,7 @@ export class InterviewModalComponent implements OnInit {
   }
   setPlaneDate() {
     if (this.planDate.value.year && this.planDate.value.hours) {
-      this.editedInterview.planDate = this.dateTimeWorker.setUTCDate(this.planDate.value.year, this.planDate.value.month, this.planDate.value.day, this.planDate.value.hours, this.planDate.value.minutes).toISOString();
+      this.editedInterview.planDate = this.dateTimeWorker.setDate(this.planDate.value.year, this.planDate.value.month, this.planDate.value.day, this.planDate.value.hours, this.planDate.value.minutes).toISOString();
       const timeInput = this.dateTimeWorker.parseTimeString(this.editedInterview.planDate);
     }
   }

@@ -7,7 +7,7 @@
       </button>
     </mat-card-title>
     <mat-form-field [ngClass]="{'custom-form-field': isEdit}" *ngFor="let feedbackDetails of feedback.feedbackDetails" class="example-full-width">
-      <textarea (blur)="onFocusAnyInput()" matInput [(ngModel)]="feedbackDetails.feedbackText" [placeholder]="feedbackDetails.requirement.name"></textarea>
+      <textarea (blur)="onFocusAnyInput()" [required]="feedbackDetails.requirement.required" matInput [(ngModel)]="feedbackDetails.feedbackText" [placeholder]="feedbackDetails.requirement.name"></textarea>
       <button *ngIf="isEdit" mat-button  matSuffix mat-icon-button aria-label="Clear" class="edited-hover-button">
         <mat-icon>edit</mat-icon>
       </button>

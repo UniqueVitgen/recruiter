@@ -79,9 +79,10 @@ export class CalendarPageComponent implements OnInit {
       const startTime: Date = event.targetDate;
       if (startTime.getTime() > this.dateTimeWorker.getTodayStart().getTime()) {
         const interview: InterviewExtended  = event.interview;
-        interview.planDate = this.dateTimeWorker.setUTCDate(startTime.getFullYear(),
-          startTime.getMonth(), startTime.getDate(), startTime.getHours(),
-          startTime.getMinutes()).toISOString();
+        // interview.planDate = this.dateTimeWorker.setUTCDate(startTime.getFullYear(),
+        //   startTime.getMonth(), startTime.getDate(), startTime.getHours(),
+        //   startTime.getMinutes()).toISOString();
+        interview.planDate = startTime.toISOString();
         this.interviewService.update(interview).subscribe(res => {
           this.getInterviews();
         });
