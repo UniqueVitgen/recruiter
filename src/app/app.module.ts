@@ -85,7 +85,7 @@ import { LocalDatePipe } from './pipes/local-date/local-date.pipe';
 import {PipesModule} from './modules/pipes/pipes.module';
 import { CustomTimepickerComponent } from './components/timepickers/custom-timepicker/custom-timepicker.component';
 import {StickyModule} from 'ng2-sticky-kit';
-import {Ng2StickyModule} from 'ng2-sticky';
+// import {StickyModule} from 'ng2-sticky-kit';
 import {PrimeNGModule} from './modules/prime-ng/prime-ng.module';
 import {FlexLayoutModule} from '@angular/flex-layout';
 import { VacancyInterviewExpansionPanelComponent } from './components/expansion-panels/vacancy-interview-expansion-panel/vacancy-interview-expansion-panel.component';
@@ -103,6 +103,7 @@ import {ImageCropperModule} from 'ngx-image-cropper';
 import { DeleteCandidateModalComponent } from './components/modals/candidate/delete-candidate-modal/delete-candidate-modal.component';
 import { DeleteInterviewModalComponent } from './components/modals/interview/delete-interview-modal/delete-interview-modal.component';
 import { AlertWithButtonModalComponent } from './components/modals/alert-with-button-modal/alert-with-button-modal.component';
+import { StickyTopDirective } from './directives/sticky-top/sticky-top.directive';
 
 export function HttpLoaderFactory(http: HttpClient) {
   return new TranslateHttpLoader(http);
@@ -169,7 +170,8 @@ export function HttpLoaderFactory(http: HttpClient) {
     ImageCropperAvatarComponent,
     DeleteCandidateModalComponent,
     DeleteInterviewModalComponent,
-    AlertWithButtonModalComponent
+    AlertWithButtonModalComponent,
+    StickyTopDirective
     // ,
     // CalendarComponent
   ],

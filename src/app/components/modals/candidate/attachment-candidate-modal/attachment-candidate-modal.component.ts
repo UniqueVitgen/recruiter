@@ -1,4 +1,4 @@
-import {Component, OnInit, Inject, ViewChild, ElementRef} from '@angular/core';
+import {Component, OnInit, Inject, ViewChild, ElementRef, Output, EventEmitter} from '@angular/core';
 import { Candidate } from 'src/app/classes/candidate';
 import { CandidateService } from 'src/app/services/candidate/candidate.service';
 import { NameCandidateModalComponent } from '../name-candidate-modal/name-candidate-modal.component';
@@ -23,6 +23,7 @@ export class AttachmentCandidateModalComponent implements OnInit {
   public editedAttachment: AttachmentForm;
   public attachmentResult: BaseDialogResult<Attachment>;
   public attachmentForm: FormGroup;
+  @Output('clickSave') outputClickSave: EventEmitter<AttachmentForm> = new EventEmitter();
 
   imageChangedEvent: any = '';
   croppedImage: any = '';
@@ -66,17 +67,18 @@ export class AttachmentCandidateModalComponent implements OnInit {
 
   editCandidate() {
     console.log(this.editedAttachment);
-    if (this.editedCandidate.attachments == null) {
-      this.editedCandidate.attachments = [];
-    }
-    this.candidateService.uploadAttachment(this.editedCandidate, this.editedAttachment).subscribe(resCandidate => {
-      this.attachmentResult = {
-        isEdit: false,
-        resObject: resCandidate,
-        success: true
-      };
-      this.dialogRef.close(this.attachmentResult);
-    });
+    this.outputClickSave.emit(this.editedAttachment);
+    // if (this.editedCandidate.attachments == null) {
+    //   this.editedCandidate.attachments = [];
+    // }
+    // this.candidateService.uploadAttachment(this.editedCandidate, this.editedAttachment).subscribe(resCandidate => {
+    //   this.attachmentResult = {
+    //     isEdit: false,
+    //     resObject: resCandidate,
+    //     success: true
+    //   };
+    //   this.dialogRef.close(this.attachmentResult);
+    // });
   }
 
   onNoClick(): void {

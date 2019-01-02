@@ -1,15 +1,47 @@
 
   <mat-spinner *ngIf="!candidate">
   </mat-spinner>
+  <!--<div class="row">-->
+    <!--<div class="col-4">-->
+      <!--<div appStickyTop>-->
+
+      <!--</div>-->
+    <!--</div>-->
+    <!--<div class="col-8">-->
+  <!--<div class="container-sticky">-->
+    <!--<div class="custom-sticky-short-info">-->
+      <!--<app-short-info-user (clickAvatar)="clickAvatar()" *ngIf="candidate" [haveHoverEffectOnAvatar]="true" [isEditIconOnAvatar]="true" [readonly]="false" [candidate]="candidate"></app-short-info-user>-->
+    <!--</div>-->
+    <!--<div  class="custom-sticky-timeline">-->
+      <!--<app-candidate-timeline *ngIf="candidate"  [candidate]="candidate" (clickClose)="deleteTimelineItem($event)"-->
+                              <!--(addTimelineItem)="addTimelineItem($event)" (changeTimeline)="changeTimelineItem($event)"-->
+                              <!--(clickTimelineToolbar)="clickToolbar($event)"-->
+                              <!--[timelineNotes]="eventNoteList"></app-candidate-timeline>-->
+    <!--</div>-->
+  <!--</div>-->
   <div class="container-sticky">
     <div class="custom-sticky-short-info">
       <app-short-info-user (clickAvatar)="clickAvatar()" *ngIf="candidate" [haveHoverEffectOnAvatar]="true" [isEditIconOnAvatar]="true" [readonly]="false" [candidate]="candidate"></app-short-info-user>
     </div>
     <div  class="custom-sticky-timeline">
-      <app-candidate-timeline *ngIf="candidate"  [candidate]="candidate" (clickClose)="deleteTimelineItem($event)" (addTimelineItem)="addTimelineItem($event)" (changeTimeline)="changeTimelineItem($event)" [timelineNotes]="eventNoteList"></app-candidate-timeline>
+      <app-candidate-timeline *ngIf="candidate"  [candidate]="candidate" (clickClose)="deleteTimelineItem($event)"
+                              (addTimelineItem)="addTimelineItem($event)" (changeTimeline)="changeTimelineItem($event)"
+                              (clickTimelineToolbar)="clickToolbar($event)"
+                              [timelineNotes]="eventNoteList"></app-candidate-timeline>
     </div>
   </div>
-
+  <!--<div>-->
+    <!--<div sticky-width="30" style="width: 250px" [sticky-offset-bottom]="100" sticky sticky-orientation="left">-->
+      <!--<app-short-info-user (clickAvatar)="clickAvatar()" *ngIf="candidate" [haveHoverEffectOnAvatar]="true" [isEditIconOnAvatar]="true" [readonly]="false" [candidate]="candidate"></app-short-info-user>-->
+    <!--</div>-->
+    <!--<div  style="margin-left: 300px;" class="custom-sticky-timeline">-->
+      <!--<app-candidate-timeline *ngIf="candidate"  [candidate]="candidate" (clickClose)="deleteTimelineItem($event)"-->
+                              <!--(addTimelineItem)="addTimelineItem($event)" (changeTimeline)="changeTimelineItem($event)"-->
+                              <!--(clickTimelineToolbar)="clickToolbar($event)"-->
+                              <!--[timelineNotes]="eventNoteList"></app-candidate-timeline>-->
+    <!--</div>-->
+  <!--</div>-->
+  <!--</div>-->
   <!--<input #fileInput (change)="test()" formControlName="filePath" type="file" id="getFile" class="hidden-input-upload" placeholder="filePath">-->
 
 

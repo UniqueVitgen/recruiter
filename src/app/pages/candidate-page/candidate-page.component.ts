@@ -1,17 +1,14 @@
 import {Component, ElementRef, OnInit, ViewChild} from '@angular/core';
-import { ActivatedRoute } from '@angular/router';
-import { CandidateService } from 'src/app/services/candidate/candidate.service';
-import { Candidate } from 'src/app/classes/candidate';
+import {ActivatedRoute} from '@angular/router';
+import {CandidateService} from 'src/app/services/candidate/candidate.service';
+import {Candidate} from 'src/app/classes/candidate';
 import {EventNote} from '../../classes/event-note';
-import {Interview} from '../../classes/interview';
+import {Interview, InterviewExtended} from '../../classes/interview';
 import {EventNoteWorker} from '../../workers/event-note/event-note.worker';
 import {FeedbackService} from '../../services/feedback/feedback.service';
 import {InterviewService} from '../../services/interview/interview.service';
-import {AttachmentForm} from '../../classes/html/attachment-form';
-import {AttachmentType} from '../../enums/attachment-type.enum';
 import {ImageCropperAvatarComponent} from '../../components/modals/candidate/image-cropper-avatar/image-cropper-avatar.component';
 import {MatDialog} from '@angular/material';
-import {AttachmentCandidateModalComponent} from '../../components/modals/candidate/attachment-candidate-modal/attachment-candidate-modal.component';
 import {CandidateDialogData} from '../../interfaces/dialog/init/candidate-dialog-data';
 import {BaseDialogResult} from '../../interfaces/dialog/result/base-dialog-result';
 import {DevFeedbackService} from '../../services/dev-feedback/dev-feedback.service';
@@ -22,6 +19,12 @@ import {Subscription} from 'rxjs';
 import {Feedback} from '../../classes/feedback';
 import {DevFeedback} from '../../classes/dev-feedback';
 import {CandidateExperience} from '../../classes/candidate-experience';
+import {EventTimelineType} from '../../enums/event-timeline-type.enum';
+import {InterviewModalComponent} from '../../components/modals/interview/interview-modal/interview-modal.component';
+import {InterviewDialogDataInterface} from '../../interfaces/dialog/init/interview-dialog-data-interface';
+import {AttachmentCandidateModalComponent} from '../../components/modals/candidate/attachment-candidate-modal/attachment-candidate-modal.component';
+import {ExperienceCandidateModalComponent} from '../../components/modals/candidate/experience-candidate-modal/experience-candidate-modal.component';
+import {NoteCandidateModalComponent} from '../../components/modals/candidate/note-candidate-modal/note-candidate-modal.component';
 
 @Component({
   selector: 'app-candidate-page',
@@ -31,9 +34,6 @@ import {CandidateExperience} from '../../classes/candidate-experience';
 export class CandidatePageComponent implements OnInit {
   id: number;
   candidate: Candidate;
-  notes = { interviewer: 'Вася',
-  date: '1',
-  noteText: '1111111111111111111111111111111111111111111111111111111111111111111111111'};
   eventNoteList: EventNote[];
   @ViewChild('fileInput') fileInput: ElementRef;
 
@@ -64,25 +64,98 @@ export class CandidatePageComponent implements OnInit {
       }
     );
     dialogRef.afterClosed().subscribe((res: BaseDialogResult<Candidate>) => {
-      this.getCandidate();
-      console.log('res', res);
-      if (res) {
-        console.log('res - ', res);
-        // this.outputChangeTimeline.emit(res.resObject);
-      }
+      setTimeout(() => {
+        this.getCandidate();
+      }, 500);
     });
   }
-
-  selectFile(event) {
-    console.log(event.target.files[0]);
-    const attachment: AttachmentForm = {
-      attachmentType: AttachmentType.PHOTO,
-      file: event.target.files[0]
-    };
-    this.candidateService.uploadAttachment(this.candidate, attachment).subscribe(res => {
-      this.getCandidate();
+  clickToolbar(eventTimelineType: EventTimelineType) {
+    console.log('eventTimelineType', eventTimelineType);
+    if (eventTimelineType === EventTimelineType.Interview) {
+      this.addInterview();
+    } else if (eventTimelineType === EventTimelineType.Attachment) {
+      this.addAttachment();
+    } else if (eventTimelineType === EventTimelineType.Experience) {
+      this.addExperience();
+    } else if (eventTimelineType === EventTimelineType.Note) {
+      this.addNote();
+    }
+  }
+  addInterview() {
+    const todayStart: Date = new Date();
+      const dialogRef = this.dialog.open(InterviewModalComponent, {
+        data: <InterviewDialogDataInterface> {
+                sourceCandidate: this.candidate,
+                fixedCandidate: true
+        }
+      });
+      dialogRef.componentInstance.outputClickSave.subscribe((resInterview: BaseDialogResult<InterviewExtended>) => {
+        this.interviewService.add(resInterview.resObject).subscribe(res => {
+          // this.getInterviews().add(() => {
+          //   dialogRef.close();
+          // });
+          this.getCandidate().add(() => {
+              dialogRef.close();
+          });
+        });
+      });
+  }
+  addAttachment() {
+    const dialogRef = this.dialog.open(AttachmentCandidateModalComponent, {
+        data: <CandidateDialogData> {
+          sourceCandidate: this.candidate
+        },
+        disableClose: true
+      }
+    );
+    dialogRef.componentInstance.outputClickSave.subscribe(resAttachment => {
+      if (this.candidate.attachments == null) {
+        this.candidate.attachments = [];
+      }
+      this.candidateService.uploadAttachment(this.candidate, resAttachment).subscribe(resCandidate => {
+        setTimeout(() => {
+          this.getCandidate().add(() => {
+            dialogRef.close();
+          });
+        }, 500);
+      });
     });
-    // this.editedAttachment.file = <File>event.target.files[0];
+  }
+  addExperience() {
+    const dialogRef = this.dialog.open(ExperienceCandidateModalComponent, {
+        data: <CandidateDialogData> {
+          sourceCandidate: this.candidate
+        },
+        disableClose: true
+      }
+    );
+    dialogRef.componentInstance.outputClickSave.subscribe(resExperience => {
+      if (this.candidate.experiences == null) {
+        this.candidate.experiences = [];
+      }
+      this.candidate.experiences.push(resExperience);
+      this.candidateService.update(this.candidate).subscribe(resCandidate => {
+        this.getCandidate().add(() => {
+          dialogRef.close();
+        });
+      });
+    });
+  }
+  addNote() {
+    const dialogRef = this.dialog.open(NoteCandidateModalComponent, {
+        data: <CandidateDialogData> {
+          sourceCandidate: this.candidate
+        },
+        disableClose: true
+      }
+    );
+    dialogRef.componentInstance.outputClickSave.subscribe((resFeedback: Feedback) => {
+      this.feedbackService.add(resFeedback).subscribe(res => {
+        this.getCandidate().add(() => {
+          dialogRef.close();
+        });
+      });
+    });
   }
   deleteTimelineItem(index: number) {
     const object = this.eventNoteList[index];

@@ -14,6 +14,7 @@ import Base = moment.unitOfTime.Base;
 import {BaseTimeline} from '../../../classes/timeline/base-timeline';
 import {CandidateService} from '../../../services/candidate/candidate.service';
 import {ArrayWorker} from '../../../workers/array/array.worker';
+import {EventTimelineType} from '../../../enums/event-timeline-type.enum';
 
 @Component({
   selector: 'app-candidate-timeline',
@@ -27,6 +28,7 @@ export class CandidateTimelineComponent implements OnInit, OnChanges {
   @Output('clickClose') outputClickClose: EventEmitter<any> = new EventEmitter();
   @Output('changeTimeline') outputChangeTimeline: EventEmitter<any> = new EventEmitter();
   @Output('addTimelineItem') outputAddTimelineItem: EventEmitter<any> = new EventEmitter();
+  @Output('clickTimelineToolbar') outputClickTimelineToolbar: EventEmitter<EventTimelineType> = new EventEmitter<EventTimelineType>();
   constructor(private typeCheckingWorker: TypeCheckingWorker,
               private eventTimelineWorker: EventTimelineWorker,
               private eventNoteWorker: EventNoteWorker,
@@ -69,6 +71,9 @@ export class CandidateTimelineComponent implements OnInit, OnChanges {
     // this.candidateService.update(this.candidate).subscribe();
     this.outputClickClose.emit(i);
     console.log(this.candidate);
+  }
+  clickTimelineItem(eventType: EventTimelineType) {
+    this.outputClickTimelineToolbar.emit(eventType);
   }
 
   ngOnChanges(changes: SimpleChanges): void {

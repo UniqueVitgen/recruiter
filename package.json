@@ -62,6 +62,7 @@
     "primeng": "^7.0.3",
     "rxjs": "^6.0.0",
     "rxjs-compat": "6.0.0",
+    "sticky-sidebar": "^3.3.1",
     "zone.js": "~0.8.26"
   },
   "devDependencies": {

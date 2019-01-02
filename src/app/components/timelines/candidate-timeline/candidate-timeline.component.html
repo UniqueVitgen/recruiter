@@ -1,5 +1,5 @@
 
-<app-candidate-timeline-toolbar [timelineNotes]="timelineNotes" [candidate]="candidate" (changeTimeline)="changeTimeLine($event) "></app-candidate-timeline-toolbar>
+<app-candidate-timeline-toolbar (clickTimelineItem)="clickTimelineItem($event)" [timelineNotes]="timelineNotes" [candidate]="candidate" (changeTimeline)="changeTimeLine($event) "></app-candidate-timeline-toolbar>
 
 
 <mat-card>

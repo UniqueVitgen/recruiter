@@ -1,4 +1,4 @@
-import {Component, Inject, OnInit} from '@angular/core';
+import {Component, EventEmitter, Inject, OnInit, Output} from '@angular/core';
 import {Candidate} from '../../../../classes/candidate';
 import {CandidateService} from '../../../../services/candidate/candidate.service';
 import {MAT_DIALOG_DATA, MatDialogRef} from '@angular/material';
@@ -25,6 +25,7 @@ export class NoteCandidateModalComponent implements OnInit {
   public experienceResult: BaseDialogResult<Feedback>;
   public testFeedbackStates = ['OPEN', 'CLOSED'];
   public formNote: FormGroup;
+  @Output('clickSave') outputClickSave: EventEmitter<Feedback> = new EventEmitter();
 
   constructor(
     private candidateService: CandidateService,
@@ -51,14 +52,15 @@ export class NoteCandidateModalComponent implements OnInit {
   }
 
   editCandidate() {
-    this.feedbackService.add(this.editedFeedback).subscribe(res => {
-        this.experienceResult = {
-          isEdit: false,
-          resObject: res,
-          success: true
-        };
-        this.dialogRef.close(this.experienceResult);
-    });
+    this.outputClickSave.emit(this.editedFeedback);
+    // this.feedbackService.add(this.editedFeedback).subscribe(res => {
+    //     this.experienceResult = {
+    //       isEdit: false,
+    //       resObject: res,
+    //       success: true
+    //     };
+    //     this.dialogRef.close(this.experienceResult);
+    // });
     // if (this.editedCandidate.experiences == null) {
     //   this.editedCandidate.experiences = [];
     // }
