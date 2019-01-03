@@ -17,6 +17,7 @@ export class CandidateDashboardItemComponent implements OnChanges{
   @Input() haveHoverEffect: boolean;
   @Input() isClosedIcon: boolean;
   @Input() clickableCandidate: boolean;
+  @Input() haveBoxShadow: boolean;
   public photo: Attachment;
   constructor(
     private router: Router,

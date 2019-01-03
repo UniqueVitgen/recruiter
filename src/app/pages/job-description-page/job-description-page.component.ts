@@ -20,16 +20,16 @@ export class JobDescriptionPageComponent implements OnInit {
   vacancy: Vacancy;
   candidates: Candidate[];
   searchInputSelected: boolean;
-  searchInputPossible: boolean;
+  //searchInputPossible: boolean;
   searchValueSelected: string;
-  searchValuePossible: string;
+  //searchValuePossible: string;
 
   constructor(
     private route: ActivatedRoute,
     private vacancyService: VacancyService,
     public dialog: MatDialog,
     private candidateService: CandidateService) {
-    this.searchInputPossible = false;
+    //this.searchInputPossible = false;
     this.searchInputSelected = false;
   }
 
@@ -52,17 +52,17 @@ export class JobDescriptionPageComponent implements OnInit {
     this.searchInputSelected = !this.searchInputSelected;
   }
 
-  changeSearchInputPossible(): void {
-    this.searchInputPossible = !this.searchInputPossible;
-  }
+  // changeSearchInputPossible(): void {
+  //   this.searchInputPossible = !this.searchInputPossible;
+  // }
 
   searchSelected(value: string): void {
     this.searchValueSelected = value;
   }
 
-  searchPossible(value: string): void {
-    this.searchValuePossible = value;
-  }
+  // searchPossible(value: string): void {
+  //   this.searchValuePossible = value;
+  // }
 
   getVacancy(): void {
     this.route.params
@@ -102,9 +102,8 @@ export class JobDescriptionPageComponent implements OnInit {
   openExistingCandidatesModalWindow(): void {
     const dialogRef = this.dialog.open(ExistedCandidatesModalWindowComponent, {
         data: {currentVacancy: this.vacancy},
-        disableClose: true,
+        disableClose: true
         // height: '650px',
-        minWidth: '400px'
       }
     );
     dialogRef.afterClosed().subscribe((existingCandidatesModalWindowResult) => {
