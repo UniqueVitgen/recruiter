@@ -14,9 +14,11 @@ export class CandidateAvatarComponent implements OnInit {
   @Input() src: string;
   @Input() isEditedIcon: boolean;
   @Input() isClosedIcon: boolean;
+  @Input() isDeleteIcon: boolean;
   @Input() isStatus: boolean;
   @Input() isMoreIcon: boolean;
   @Output() clickEditIcon: EventEmitter<any> = new EventEmitter();
+  @Output('clickDeleteIcon') outputClickDeleteIcon: EventEmitter<any> = new EventEmitter();
   @Output('clickCloseIcon') outputClickCloseIcon: EventEmitter<any> = new EventEmitter();
   @Output('clickRemoveFromBaseIcon') outputClickRemoveFromBaseIcon: EventEmitter<any> = new EventEmitter();
   @Output('clickAvatar') outputClickAvatar: EventEmitter<any> = new EventEmitter();
@@ -32,6 +34,9 @@ export class CandidateAvatarComponent implements OnInit {
 
   clickClose() {
     this.outputClickCloseIcon.emit();
+  }
+  clickDelete() {
+    this.outputClickDeleteIcon.emit();
   }
   clickRemoveFromBase() {
     this.outputClickRemoveFromBaseIcon.emit();

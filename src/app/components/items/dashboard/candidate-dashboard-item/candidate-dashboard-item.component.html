@@ -7,7 +7,7 @@
   <!--<div class="row">-->
   <!--<div class="col-6">-->
   <app-candidate-avatar [src]="candidateWorker.generatePhotoUrl(photo)" [haveHoverEffect]="haveHoverEffect"
-                        [isClosedIcon]="isClosedIcon" [isStatus]="true" (clickCloseIcon)="deleteCandidate()" (clickRemoveFromBaseIcon)="deleteCandidateFromTheBase()"
+                        [isDeleteIcon]="isDeleteIcon" [isClosedIcon]="isClosedIcon" [isStatus]="true" (clickDeleteIcon)="deleteCandidateFromTheBase()" (clickCloseIcon)="deleteCandidate()" (clickRemoveFromBaseIcon)="deleteCandidateFromTheBase()"
                         [candidate]="candidate"  ></app-candidate-avatar>
   <!--</div>-->
   <!--<div class="col-6">-->
