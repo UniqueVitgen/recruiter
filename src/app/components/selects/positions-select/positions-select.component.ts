@@ -4,7 +4,6 @@ import {ReplaySubject, Subject} from 'rxjs';
 import {Vacancy} from '../../../classes/vacancy';
 import {MatSelect} from '@angular/material';
 import {take, takeUntil} from 'rxjs/operators';
-import {CustomTimepickerComponent} from '../../timepickers/custom-timepicker/custom-timepicker.component';
 
 const customValueProvider = {
   provide: NG_VALUE_ACCESSOR,
