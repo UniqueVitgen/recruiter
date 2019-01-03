@@ -3,13 +3,14 @@ import {Interview, InterviewExtended} from './interview';
 import {FeedbackDetails, FeedbackDetailsExtended} from './feedback-details';
 import {EventNote} from './event-note';
 import {Candidate} from './candidate';
+import {Vacancy} from './vacancy';
 
 export class DevFeedback extends EventNote{
   interviewId: number;
   candidateId: number;
   feedbackState: FeedbackState;
   feedbackDetails: FeedbackDetailsExtended[] = [];
-  interview?: Interview;
+  interview?: InterviewExtended;
   candidate?: Candidate;
   constructor(interview?: InterviewExtended) {
     super();
