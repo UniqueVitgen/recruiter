@@ -93,6 +93,7 @@ export class CalendarPageComponent implements OnInit {
             message: 'You can\'t drop events on past dates.'
           }
         });
+        this.getInterviews();
       }
   }
 }

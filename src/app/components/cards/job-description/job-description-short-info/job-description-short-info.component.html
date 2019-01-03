@@ -4,12 +4,17 @@
     <div name="vacancyHeader" class="vacancyHeader">
       <label class="vacancyName"> {{vacancy?.position}}
        <!-- <span class="vacancyStatus">{{vacancy?.vacancyState}}</span>-->
-        <span [ngClass]="{'vacancyIsOpened': vacancyColorService.isVacancyOpened(vacancy.vacancyState),
-              'vacancyIsSuspended': vacancyColorService.isVacancySuspended(vacancy.vacancyState),
-              'vacancyIsCanceled': vacancyColorService.isVacancyCanceled(vacancy.vacancyState),
-              'vacancyIsClosed': vacancyColorService.isVacancyClosed(vacancy.vacancyState)}">
-          &#10687;
-              </span>
+        <!--<span [ngClass]="{'vacancyIsOpened': vacancyColorService.isVacancyOpened(vacancy.vacancyState),-->
+              <!--'vacancyIsSuspended': vacancyColorService.isVacancySuspended(vacancy.vacancyState),-->
+              <!--'vacancyIsCanceled': vacancyColorService.isVacancyCanceled(vacancy.vacancyState),-->
+              <!--'vacancyIsClosed': vacancyColorService.isVacancyClosed(vacancy.vacancyState)}">-->
+          <!--&#10687;-->
+              <!--</span>-->
+        <mat-icon class="fiber-icon-image"
+                  matTooltip="{{'Status' | translate}}: {{vacancy.vacancyState | translate}}"
+                  [ngClass]="{
+                    'open-fiber': vacancyColorService.isVacancyOpened(vacancy.vacancyState),
+                  'archive-fiber': vacancyColorService.isVacancyClosed(vacancy.vacancyState)}">fiber_manual_record</mat-icon>
       </label>
       <button *ngIf="buttonEdit" class="float-right" mat-icon-button [matMenuTriggerFor]="menu" color="primary">
         <mat-icon>more_horiz</mat-icon>
