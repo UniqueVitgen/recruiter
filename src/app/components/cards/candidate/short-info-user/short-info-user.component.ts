@@ -10,7 +10,7 @@ import {ContactType} from '../../../../enums/contact-type.enum';
 import {ArrayWorker} from '../../../../workers/array/array.worker';
 import {StringWorker} from '../../../../workers/string/string.worker';
 import {CandidateContactInput} from '../../../../classes/html/candidate-contact-input';
-import {FormControl, Validators} from '@angular/forms';
+import {FormBuilder, FormControl, FormGroup, Validators} from '@angular/forms';
 import {RegexpConst} from '../../../../const/regexp.const';
 import {MaskConst} from '../../../../const/mask.const';
 import {CandidateState} from '../../../../enums/candidate-state.enum';
@@ -28,7 +28,7 @@ import {TypeCheckingWorker} from '../../../../workers/type-checking/type-checkin
   templateUrl: './short-info-user.component.html',
   styleUrls: ['./short-info-user.component.scss']
 })
-export class ShortInfoUserComponent implements OnInit, OnDestroy, AfterViewInit, OnChanges {
+export class ShortInfoUserComponent implements OnInit, OnDestroy, OnChanges {
   @Input() candidate: Candidate;
   @Input() readonly: boolean;
   @Input() haveHoverEffectOnAvatar: boolean;
@@ -36,16 +36,14 @@ export class ShortInfoUserComponent implements OnInit, OnDestroy, AfterViewInit,
   @Input() vacancies: Vacancy[];
   @Output('editCandidate') outputEditCandidate: EventEmitter<Candidate> = new EventEmitter();
   @Output('clickAvatar') outputClickAvatar: EventEmitter<Candidate> = new EventEmitter();
+  public editedCandidate: Candidate;
+  public candidateForm: FormGroup;
   tests: CandidateContactInput[] ;
   MaskConst = MaskConst;
   setStates: string[];
   photo: Attachment;
-  //
-  // public vacancyCtrl: FormControl = new FormControl();
-  // public vacancyFilterCtrl: FormControl = new FormControl();
-  // public filteredVacancies: ReplaySubject<Vacancy[]> = new ReplaySubject<Vacancy[]>(1);
-  // @ViewChild('singleSelect') singleSelect: MatSelect;
-  // private _onDestroy = new Subject<void>();
+  isSaved: boolean = true;
+  isSavedCandidate: boolean = true;
 
   constructor(public dialog: MatDialog,
               private candidateSerivce: CandidateService,
@@ -53,6 +51,7 @@ export class ShortInfoUserComponent implements OnInit, OnDestroy, AfterViewInit,
               private stringWorker: StringWorker,
               private arrayWorker: ArrayWorker,
               public typeCheckingWorker: TypeCheckingWorker,
+              private fb: FormBuilder,
               public  enumWorker: EnumWorker) { }
 
 
@@ -60,68 +59,23 @@ export class ShortInfoUserComponent implements OnInit, OnDestroy, AfterViewInit,
 
     this.setStates = this.enumWorker.getValuesFromEnum(CandidateState);
 
-
-  }
-
-  //
-  ngAfterViewInit() {
-    this.setInitialValue();
   }
 
   ngOnDestroy() {
-    // this._onDestroy.next();
-    // this._onDestroy.complete();
   }
-  private setInitialValue() {
-    // this.filteredVacancies
-    //   .pipe(take(1), takeUntil(this._onDestroy))
-    //   .subscribe(() => {
-    //     // setting the compareWith property to a comparison function
-    //     // triggers initializing the selection according to the initial value of
-    //     // the form control (i.e. _initializeSelection())
-    //     // this needs to be done after the filteredBanks are loaded initially
-    //     // and after the mat-option elements are available
-    //     this.singleSelect.compareWith = (a: string, b: string) => a === b;
-    //   });
-  }
-  // private filterVacancies() {
-  //   if (!this.vacancies) {
-  //     return;
-  //   }
-  //   // get the search keyword
-  //   let search = this.vacancyFilterCtrl.value;
-  //   if (!search) {
-  //     this.filteredVacancies.next(this.vacancies.slice());
-  //     return;
-  //   } else {
-  //     search = search.toLowerCase();
-  //   }
-  //   // filter the banks0
-  //   this.filteredVacancies.next(
-  //     this.vacancies.filter(vacancy => vacancy.position.toLowerCase().indexOf(search) > -1)
-  //   );
-  // }
-  //
   clickAvatar() {
     this.outputClickAvatar.emit(this.candidate);
   }
   ngOnChanges(changes: SimpleChanges): void {
-    this.initContacts();
+    if (this.isSaved) {
+      this.initContacts();
+    }
+    if (this.isSavedCandidate) {
+      this.editedCandidate = this.typeCheckingWorker.parseObject(this.candidate);
+      this.candidateForm = this.
+    }
     this.photo = this.candidateWorker.findPhoto(this.candidate);
     console.log('photo', this.photo);
-  //   if (this.vacancies) {
-  //     // this./ = this.vacancies.map((vacancy) => vacancy.position)
-  //     // this.vacancyCtrl.setValue(this.candidate.position);
-  //     this.vacancyCtrl.valueChanges.subscribe(res => {
-  //       console.log(res);
-  //     })
-  //     this.filteredVacancies.next(this.vacancies.slice());
-  //   }
-  //   this.vacancyFilterCtrl.valueChanges
-  //     .pipe(takeUntil(this._onDestroy))
-  //     .subscribe(() => {
-  //        this.filterVacancies();
-  //     });
   }
   findPhoto() {
     console.log('attachments', this.candidate.attachments);
@@ -130,11 +84,6 @@ export class ShortInfoUserComponent implements OnInit, OnDestroy, AfterViewInit,
     });
   }
   initContacts() {
-    // this.tests = [
-    //   phone: this.candidateWorker.havePhone(this.candidate),
-    //   skype: this.candidateWorker.haveSkype(this.candidate),
-    //   email: this.candidateWorker.haveEmail(this.candidate)
-    // ];
     this.tests = [
       {have: this.candidateWorker.haveEmail(this.candidate),
         value: ContactType.EMAIL,
@@ -151,9 +100,18 @@ export class ShortInfoUserComponent implements OnInit, OnDestroy, AfterViewInit,
       }
     ];
     console.log(this.tests);
-    if (this.tests[0].have) { this.tests[0].object = this.candidateWorker.getEmailObject(this.candidate); }
-    if (this.tests[1].have) { this.tests[1].object = this.candidateWorker.getSkypeObject(this.candidate); }
-    if (this.tests[2].have) { this.tests[2].object = this.candidateWorker.getPhoneObject(this.candidate); }
+    if (this.tests[0].have) {
+      this.tests[0].object = this.candidateWorker.getEmailObject(this.candidate);
+      this.tests[0].control.setValue(this.tests[0].object.contactDetails);
+    }
+    if (this.tests[1].have) {
+      this.tests[1].object = this.candidateWorker.getSkypeObject(this.candidate);
+      this.tests[1].control.setValue(this.tests[1].object.contactDetails);
+    }
+    if (this.tests[2].have) {
+      this.tests[2].object = this.candidateWorker.getPhoneObject(this.candidate);
+      this.tests[2].control.setValue(this.tests[2].object.contactDetails);
+    }
   }
   changeContactProperty(value: CandidateContactInput) {
     console.log(value);
@@ -168,7 +126,13 @@ export class ShortInfoUserComponent implements OnInit, OnDestroy, AfterViewInit,
             contactDetails: ''
           };
         }
-        this.candidate.contacts.push(skypeObject);
+        if (this.tests[0].control.valid && this.tests[1].control.valid &&
+          this.tests[2].control.valid) {
+          this.isSaved = true;
+          this.candidate.contacts.push(skypeObject);
+        } else {
+          this.isSaved = false;
+        }
         value.object = skypeObject;
         // this.tests[] = skypeObject;
       }
@@ -176,10 +140,16 @@ export class ShortInfoUserComponent implements OnInit, OnDestroy, AfterViewInit,
       const method = value.methodName;
       console.log(method);
       if (this.candidateWorker[method](this.candidate) != null) {
-        this.candidate.contacts = this.arrayWorker.removeElement(this.candidate.contacts, value.object);
-        this.candidateSerivce.update(this.candidate).subscribe(res => {
-          console.log(res);
-        });
+        if (this.tests[0].control.valid && this.tests[1].control.valid &&
+          this.tests[2].control.valid) {
+          this.isSaved = true;
+          this.candidate.contacts = this.arrayWorker.removeElement(this.candidate.contacts, value.object);
+          this.candidateSerivce.update(this.candidate).subscribe(res => {
+            console.log(res);
+          });
+        } else {
+          this.isSaved = false;
+        }
       }
     }
     console.log('after', value);
@@ -192,45 +162,11 @@ export class ShortInfoUserComponent implements OnInit, OnDestroy, AfterViewInit,
 
   changeEmail() {
     this.changeContactProperty(this.tests[0]);
-    // if (this.tests.email) {
-    //   if (this.candidateWorker.getEmailObject(this.candidate) == null) {
-    //     const emailObject: ContactDetails = {
-    //       contactType: ContactType.EMAIL,
-    //       contactDetails: ''
-    //     };
-    //     this.candidate.contacts.push(emailObject);
-    //     this.tests.emailObject = emailObject;
-    //   }
-    // } else {
-    //   if (this.candidateWorker.getEmailObject(this.candidate) != null) {
-    //     this.candidate.contacts = this.arrayWorker.removeElement(this.candidate.contacts, this.tests.emailObject);
-    //     this.candidateSerivce.update(this.candidate).subscribe(res => {
-    //       console.log(res);
-    //     });
-    //   }
-    // }
 
   }
 
   changePhone() {
     this.changeContactProperty(this.tests[2]);
-    // if (this.tests.phone) {
-    //   if (this.candidateWorker.getPhoneObject(this.candidate) == null) {
-    //     const phoneObject: ContactDetails = {
-    //       contactType: ContactType.PHONE,
-    //       contactDetails: ''
-    //     };
-    //     this.candidate.contacts.push(phoneObject);
-    //     this.tests.phoneObject = phoneObject;
-    //   }
-    // } else {
-    //   if (this.candidateWorker.getPhoneObject(this.candidate) != null) {
-    //     this.candidate.contacts = this.arrayWorker.removeElement(this.candidate.contacts, this.tests.phoneObject);
-    //     this.candidateSerivce.update(this.candidate).subscribe(res => {
-    //       console.log(res);
-    //     });
-    //   }
-    // }
   }
 
   openStatusDialog(): void {

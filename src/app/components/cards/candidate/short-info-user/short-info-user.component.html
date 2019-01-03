@@ -17,13 +17,13 @@
       <div *ngIf="!readonly">
 
         <mat-form-field class="example-full-width custom-form-field">
-          <input (blur)="onFocusoutAnyInput()"   [(ngModel)]="candidate.name"  matInput [placeholder]="'Name' | translate" readonly="false" >
+          <input (blur)="onFocusoutAnyInput()"   [(ngModel)]="editedCandidate.name"  matInput [placeholder]="'Name' | translate" readonly="false" >
           <button mat-button  matSuffix mat-icon-button aria-label="Clear" class="edited-hover-button">
             <mat-icon>edit</mat-icon>
           </button>
         </mat-form-field>
         <mat-form-field class="example-full-width custom-form-field">
-          <input (blur)="onFocusoutAnyInput()" [(ngModel)]="candidate.surname" matInput [placeholder]="'Surname' | translate" >
+          <input (blur)="onFocusoutAnyInput()" [(ngModel)]="editedCandidate.surname" matInput [placeholder]="'Surname' | translate" >
           <button mat-button  matSuffix mat-icon-button aria-label="Clear" class="edited-hover-button">
             <mat-icon>edit</mat-icon>
           </button>
@@ -36,10 +36,10 @@
             <!--</mat-option>-->
           <!--</mat-select>-->
         <!--</mat-form-field>-->
-        <!--<app-positions-select [(ngModel)]="candidate.position" (ngModelChange)="onFocusoutAnyInput()" [vacancies]="vacancies" [visibleUnderline]="true"></app-positions-select>-->
+        <app-positions-select [(ngModel)]="editedCandidate.position" (ngModelChange)="onFocusoutAnyInput()" [vacancies]="vacancies" [visibleUnderline]="true"></app-positions-select>
         <mat-form-field class="example-full-width custom-form-field">
           <!--<input (blur)="onFocusoutAnyInput()" [(ngModel)]="candidate.candidateState.name" matInput placeholder="Status"> -->
-          <mat-select [(ngModel)]="candidate.candidateState.name" matInput (blur)="onFocusoutAnyInput()">
+          <mat-select [(ngModel)]="editedCandidate.candidateState.name" matInput (blur)="onFocusoutAnyInput()">
             <mat-option *ngFor="let state of setStates" [value]="state" >{{state | translate}}</mat-option>
           </mat-select>
         </mat-form-field>
@@ -50,7 +50,7 @@
             <span class="font-weight-bold float-right">Name:</span>
           </div>
           <div class="col-12 col-md-9">
-            <span>{{candidate.name}}</span>
+            <span>{{editedCandidate.name}}</span>
           </div>
         </div>
         <div class="row">
@@ -58,7 +58,7 @@
             <span class="font-weight-bold float-right">Surname:</span>
           </div>
           <div class="col-9">
-            <span>{{candidate.surname}}</span>
+            <span>{{editedCandidate.surname}}</span>
           </div>
         </div>
       </div>
@@ -77,7 +77,7 @@
       <mat-card-content>
         <div *ngIf="!readonly">
           <mat-checkbox color="primary" [(ngModel)]="tests[0].have" (ngModelChange)="changeEmail()">
-            <mat-form-field class="example-full-width" *ngIf="tests[0].have && tests[0].object">
+            <mat-form-field class="example-full-width" *ngIf="tests[0].have && tests[0].object && tests[0].object.contactDetails != null">
               <input [formControl]="tests[0].control" [(ngModel)]="tests[0].object.contactDetails" (blur)="onFocusoutAnyInput(tests[0].control.valid)" matInput [placeholder]="'EMAIL' | translate">
               <mat-error class="multi-row-text" *ngIf="tests[0].control.hasError('pattern')">
               {{'Please enter a valid email address' | translate}}
@@ -108,7 +108,7 @@
           </mat-checkbox>
         </div>
         <div *ngIf="readonly">
-          <div class="row" *ngFor="let contact of candidate.contacts">
+          <div class="row" *ngFor="let contact of editedCandidate.contacts">
             <div class="col-12 col-md-3">
               <span class="font-weight-bold float-right">{{contact.contactType}}</span>
             </div>
