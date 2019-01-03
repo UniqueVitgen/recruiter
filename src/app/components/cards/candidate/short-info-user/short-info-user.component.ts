@@ -67,6 +67,7 @@ export class ShortInfoUserComponent implements OnInit, OnDestroy, OnChanges {
     this.outputClickAvatar.emit(this.candidate);
   }
   ngOnChanges(changes: SimpleChanges): void {
+    console.log('candidate', this.candidate, this.isSavedCandidate);
     if (this.isSaved) {
       this.initContacts();
     }
@@ -171,7 +172,8 @@ export class ShortInfoUserComponent implements OnInit, OnDestroy, OnChanges {
 
   onFocusoutAnyInput(value: boolean = true) {
     if (value) {
-      console.log('candidate', this.editedCandidate);
+      console.log('candidate 1', this.editedCandidate);
+      console.log('candidate form', this.candidateForm);
       if (this.candidateForm.valid) {
         this.isSavedCandidate = true;
         this.candidateSerivce.update(this.editedCandidate).subscribe(res => {
