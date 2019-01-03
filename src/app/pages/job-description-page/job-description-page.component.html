@@ -32,7 +32,7 @@
   </div>
   <mat-divider></mat-divider>
 <br>
-<app-candidate-dashboard [search]="searchValueSelected" (addCandidate)="addCandidate($event)" *ngIf="vacancy && vacancy.candidates" [candidates]="vacancy.candidates" [haveAddElement]="true"></app-candidate-dashboard>
+<app-candidate-dashboard (deleteCandidate)="deleteCandidate($event)" [search]="searchValueSelected" (addCandidate)="addCandidate($event)" *ngIf="vacancy && vacancy.candidates" [candidates]="vacancy.candidates" [haveAddElement]="true"></app-candidate-dashboard>
 
 </mat-card>
 <br>

@@ -34,6 +34,8 @@ export class CandidateDashboardItemComponent implements OnChanges{
   deleteCandidate() {
     // this.candidateService.delete(this.candidate.id).subscribe(
     //   (res) => { console.log('id');
+    console.log('`Candidate to delete 2:');
+    console.log(this.candidate);
         this.outputDeleteCandidate.emit(this.candidate);
       // });
   }

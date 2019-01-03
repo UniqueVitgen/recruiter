@@ -25,7 +25,7 @@ export class CandidateDashboardComponent implements OnInit, OnChanges {
   @Input() isClosedIcon: boolean = true;
   @Input() filledCells: BootstrapCellEnum;
   @Output('addCandidate') outputAddCandidate: EventEmitter<Candidate> = new EventEmitter();
-  @Output('deleteCandidate') outputDeleteCandidate: EventEmitter<Candidate> = new EventEmitter();
+  @Output('deleteCandidate') outputDeleteCandidate: EventEmitter<number> = new EventEmitter();
   @Input() limitTo: number;
   public selectedCandidates: Candidate[];
 
@@ -73,9 +73,9 @@ export class CandidateDashboardComponent implements OnInit, OnChanges {
     });
   }
 
-  deleteCandidate(candidate: Candidate) {
-    console.log('rerew');
-    this.outputDeleteCandidate.emit(candidate);
+  deleteCandidate(candidateID: number) {
+    console.log('`Candidate to delete 22:');
+    this.outputDeleteCandidate.emit(candidateID);
   }
 
 

@@ -90,6 +90,17 @@ export class JobDescriptionPageComponent implements OnInit {
     });
   }
 
+  deleteCandidate(candidateID: number){
+    console.log('Delete candidate page:');
+    console.log(candidateID);
+    this.vacancy.candidates.splice(candidateID, 1);
+    console.log(this.vacancy.candidates);
+    this.vacancyService.update(this.vacancy).subscribe(resVacancy => {
+      console.log(resVacancy);
+      this.getVacancy();
+    });
+  }
+
   changeVacancy(vacancy: Vacancy) {
     this.getVacancy();
   }
@@ -114,4 +125,5 @@ export class JobDescriptionPageComponent implements OnInit {
       }
     });
   }
+
 }
