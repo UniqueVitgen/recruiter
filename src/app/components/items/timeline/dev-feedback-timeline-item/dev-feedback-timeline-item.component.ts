@@ -15,12 +15,17 @@ export class DevFeedbackTimelineItemComponent implements OnInit {
   @Output() deleteEvent: EventEmitter<any> = new EventEmitter();
   editedNote: DevFeedback;
   viewOfDate: string;
+  viewOfInterview: string;
   constructor(private dateTimeWorker: DateTimeWorker, private translateWorker: TranslateWorker) { }
   ngOnInit() {
     this.editedNote = Object.assign({}, this.note);
     this.viewOfDate = this.dateTimeWorker.getDateWithTime(this.editedNote.createdAt);
     this.translateWorker.changeValue.subscribe((res) => {
       this.viewOfDate = this.dateTimeWorker.getDateWithTime(this.editedNote.createdAt);
+    });
+    this.viewOfInterview = this.dateTimeWorker.getDateWithTime(new Date(this.editedNote.interview.planDate));
+    this.translateWorker.changeValue.subscribe((res) => {
+      this.viewOfInterview = this.dateTimeWorker.getDateWithTime(new Date(this.editedNote.interview.planDate));
     });
 
   }

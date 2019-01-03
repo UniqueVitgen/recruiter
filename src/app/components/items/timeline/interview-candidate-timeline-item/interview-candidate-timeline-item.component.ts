@@ -43,12 +43,12 @@ export class InterviewCandidateTimelineItemComponent implements OnInit, OnChange
   }
   ngOnInit() {
     this.editedInterview = Object.assign({}, this.interview);
-    this.viewOfDate = this.localDatePipe.transform(this.editedInterview.createdAt, null);
+    this.viewOfDate = this.localDatePipe.transform(this.editedInterview.createdAt, 'mediumDate');
     this.viewOfTime = this.localDatePipe.transform(this.editedInterview.createdAt, 'shortTime');
     this.planDate = this.dateTimeWorker.parseDateToDateTimeForm(new Date(this.editedInterview.planDate));
     this.translateWorker.changeValue.subscribe(res => {
       // this.viewOfDate = this.dateTimeWorker.getDateWithTime(this.editedInterview.createdAt);
-      this.viewOfDate = this.localDatePipe.transform(this.editedInterview.createdAt, null);
+      this.viewOfDate = this.localDatePipe.transform(this.editedInterview.createdAt, 'mediumDate');
       this.viewOfTime = this.localDatePipe.transform(this.editedInterview.createdAt, 'shortTime');
     });
   }
