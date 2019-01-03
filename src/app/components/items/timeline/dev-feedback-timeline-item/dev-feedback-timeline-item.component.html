@@ -12,7 +12,7 @@
       (feedbackIndex === 0 || editedNote.feedbackDetails[feedbackIndex - 1].requirement.public == true)">{{'Private' | translate}}</mat-card-title>
       <form #myForm="ngForm">
         <mat-form-field  class="example-full-width custom-form-field">
-          <textarea (blur)="onFocusoutAnyInput(myForm.form.valid)" [required]="feedbackDetails.requirement.required" [(ngModel)]="feedbackDetails.feedbackText" placeholder="{{feedbackDetails.requirement.name | translate}}" matInput></textarea>
+          <textarea (blur)="onFocusoutAnyInput(myForm.form.valid)" [name]="feedbackDetails.requirement.name" [required]="feedbackDetails.requirement.required" [(ngModel)]="feedbackDetails.feedbackText" placeholder="{{feedbackDetails.requirement.name | translate}}" matInput></textarea>
           <button mat-button  matSuffix mat-icon-button aria-label="Clear" class="edited-hover-button">
             <mat-icon>edit</mat-icon>
           </button>

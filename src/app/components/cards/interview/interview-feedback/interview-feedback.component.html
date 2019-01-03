@@ -14,7 +14,7 @@
       (feedbackIndex === 0 || feedback.feedbackDetails[feedbackIndex - 1].requirement.public == true)">{{'Private' | translate}}</mat-card-title>
       <!--<mat-card-content *ngIf="feedbackIndex === 0">Public</mat-card-content>-->
       <mat-form-field [ngClass]="{'custom-form-field': isEdit}"  class="example-full-width">
-        <textarea (blur)="onFocusAnyInput()" [name]="feedbackDetails.requirement.name" [required]="feedbackDetails.requirement.required" matInput [(ngModel)]="feedbackDetails.feedbackText" [placeholder]="feedbackDetails.requirement.name"></textarea>
+        <textarea (blur)="onFocusAnyInput(myForm.form.valid)" [name]="feedbackDetails.requirement.name" [required]="feedbackDetails.requirement.required" matInput [(ngModel)]="feedbackDetails.feedbackText" [placeholder]="feedbackDetails.requirement.name"></textarea>
         <button *ngIf="isEdit" mat-button  matSuffix mat-icon-button aria-label="Clear" class="edited-hover-button">
           <mat-icon>edit</mat-icon>
         </button>
