@@ -1,7 +1,7 @@
 import {Component, Inject, OnInit} from '@angular/core';
 import {MAT_DIALOG_DATA, MatDialogRef} from '@angular/material';
 import {JobDescriptionDialogData} from '../../../../interfaces/dialog/init/job-description-dialog-data';
-import {Vacancy} from '../../../../classes/vacancy';
+import {Vacancy, VacancyForm} from '../../../../classes/vacancy';
 import {FormControl, FormGroup, FormBuilder, Validators, FormArray} from '@angular/forms';
 import {SearchWorker} from '../../../../workers/search/search.worker';
 import {CdkDragDrop, moveItemInArray} from '@angular/cdk/drag-drop';
@@ -32,7 +32,7 @@ export const _filter = (opt: string[], value: string): string[] => {
 })
 export class JobDescriptionModalComponent implements OnInit {
   private dialogResult: BaseDialogResult<Vacancy>;
-  editedVacancy: Vacancy;
+  editedVacancy: VacancyForm;
   testRequirements = [
     'Communicable',
     'TeamLeader',
@@ -71,29 +71,24 @@ export class JobDescriptionModalComponent implements OnInit {
       'Implementer', 'Completer Finisher', 'Specialist']
   }];
 
-  stateGroupOptions: Observable<StateGroup[]>;
 
 
   ngOnInit() {
     if (this.data.isEdit) {
-      this.editedVacancy = Object.assign({}, this.data.sourceJobDescription);
+      this.editedVacancy = <any>Object.assign({}, this.data.sourceJobDescription);
     } else {
-      this.editedVacancy = new Vacancy();
+      this.editedVacancy = new VacancyForm();
       this.editedVacancy.requirements = [];
     }
-
-    this.stateGroupOptions = this.vacancyForm.get('requirementsGroup')!.valueChanges
-      .pipe(
-        startWith(''),
-        map(value => this._filterGroup(value))
-      );
   }
 
-  private _filterGroup(value: string): StateGroup[] {
+  public filterGroup(value: string): StateGroup[] {
     if (value) {
+      const filterValue = value.toLowerCase();
       return this.stateGroups
         .map(group => ({letter: group.letter, names: _filter(group.names, value)}))
-        .filter(group => group.names.length > 0);
+        .filter(req => req.names.filter( name => {
+          return name.toLowerCase().indexOf(filterValue) > -1; }).length > 0);
     }
 
     return this.stateGroups;
@@ -111,11 +106,16 @@ export class JobDescriptionModalComponent implements OnInit {
     if (this.editedVacancy.requirements == null) {
       this.editedVacancy.requirements = [];
     }
-    this.editedVacancy.requirements.push({
+    this.editedVacancy.requirements.push(<any>{
       name: '',
       public: false,
-      required: false
+      required: false,
+      options: this.stateGroups
     });
+  }
+
+  changeRequirments(name: string, index: number) {
+    this.editedVacancy.requirements[index].options = this.filterGroup(name);
   }
 
   drop(event: CdkDragDrop<string[]>) {
