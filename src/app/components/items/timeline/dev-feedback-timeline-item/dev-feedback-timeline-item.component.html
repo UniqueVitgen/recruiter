@@ -4,7 +4,7 @@
   <mat-card-title><mat-icon class="myIcon">feedback</mat-icon> {{'Feedback' | translate}}</mat-card-title>
   <mat-card>
     <div *ngFor="let feedbackDetails of editedNote.feedbackDetails; let feedbackIndex = index">
-      <mat-card-title *ngIf="feedbackIndex === 0">{{'Public' | translate}}</mat-card-title>
+      <mat-card-title *ngIf="feedbackIndex === 0 && feedbackDetails.requirement.public == true">{{'Public' | translate}}</mat-card-title>
       <mat-card-title *ngIf="feedbackDetails.requirement.public == false &&
       (feedbackIndex === 0 || editedNote.feedbackDetails[feedbackIndex - 1].requirement.public == true)">{{'Private' | translate}}</mat-card-title>
       <mat-form-field  class="example-full-width custom-form-field">

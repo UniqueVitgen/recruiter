@@ -1,7 +1,8 @@
 import {Component, EventEmitter, Input, OnChanges, OnInit, Output, SimpleChanges} from '@angular/core';
 import {Interview, InterviewExtended} from '../../../../classes/interview';
 import {DevFeedback} from '../../../../classes/dev-feedback';
-import {FormBuilder, FormGroup} from '@angular/forms';
+import {FormBuilder, FormControl, FormGroup, Validators} from '@angular/forms';
+import {valid} from 'semver';
 
 @Component({
   selector: 'app-interview-feedback',
@@ -15,8 +16,7 @@ export class InterviewFeedbackComponent implements OnInit, OnChanges {
   @Output('focusoutAnyInput') outputOnFocusoutAnyInput: EventEmitter<DevFeedback> = new EventEmitter();
   @Output('saveClick') outputSaveClick: EventEmitter<DevFeedback> = new EventEmitter();
   @Output('clickDelete') outputClickDelete: EventEmitter<DevFeedback> = new EventEmitter();
-  // public feedbackForm: FormGroup;
-
+  public feedbackForm: FormGroup;
   constructor(private fb: FormBuilder) { }
 
   ngOnInit() {
