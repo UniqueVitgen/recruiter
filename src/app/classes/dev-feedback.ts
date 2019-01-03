@@ -1,13 +1,16 @@
 import {FeedbackState} from './feedback-state';
-import {InterviewExtended} from './interview';
+import {Interview, InterviewExtended} from './interview';
 import {FeedbackDetails, FeedbackDetailsExtended} from './feedback-details';
 import {EventNote} from './event-note';
+import {Candidate} from './candidate';
 
 export class DevFeedback extends EventNote{
   interviewId: number;
   candidateId: number;
   feedbackState: FeedbackState;
   feedbackDetails: FeedbackDetailsExtended[] = [];
+  interview?: Interview;
+  candidate?: Candidate;
   constructor(interview?: InterviewExtended) {
     super();
     if (interview) {

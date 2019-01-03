@@ -1,7 +1,9 @@
 <mat-label style="color: gray;">  {{viewOfDate}}</mat-label>
 <mat-card class="backgroundCard">
   <mat-icon class="delete" matTooltip="{{'Delete' | translate}}" (click)="delete()">close</mat-icon>
-  <mat-card-title><mat-icon class="myIcon">feedback</mat-icon> {{'Feedback' | translate}}</mat-card-title>
+  <mat-card-title><mat-icon class="myIcon">feedback</mat-icon> {{'Interview Feedback' | translate}}</mat-card-title>
+  <div>{{'Interview' | translate}}: <a [routerLink]="'/interview/'+editedNote.interview.id">{{viewOfInterview}}</a></div>
+  <br>
   <mat-card>
     <div *ngFor="let feedbackDetails of editedNote.feedbackDetails; let feedbackIndex = index">
       <mat-card-title *ngIf="feedbackIndex === 0 && feedbackDetails.requirement.public == true">{{'Public' | translate}}</mat-card-title>
