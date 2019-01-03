@@ -6,5 +6,12 @@
     <mat-icon ngxMaterialTimepickerToggleIcon>access_time</mat-icon>
   </ngx-material-timepicker-toggle>
 </button>
-<ngx-material-timepicker  [ngxMaterialTimepickerTheme]="darkTheme" #toggleTimepicker></ngx-material-timepicker>
+<ngx-material-timepicker [cancelBtnTmpl]="cancelBtn"
+                         [confirmBtnTmpl]="confirmBtn" [ngxMaterialTimepickerTheme]="darkTheme" #toggleTimepicker></ngx-material-timepicker>
 </mat-form-field>
+<ng-template #cancelBtn>
+  <button class="float-right margin-right-button" mat-button>{{'No Thanks' | translate}}</button> &nbsp;
+</ng-template>
+<ng-template #confirmBtn>
+  <button class="float-right" mat-raised-button color="primary">{{'Ok' | translate}}</button>
+</ng-template>
