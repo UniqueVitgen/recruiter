@@ -16,6 +16,7 @@ export class DevFeedbackTimelineItemComponent implements OnInit {
   editedNote: DevFeedback;
   viewOfDate: string;
   viewOfInterview: string;
+  private isSaved: boolean = true;
   constructor(private dateTimeWorker: DateTimeWorker, private translateWorker: TranslateWorker) { }
   ngOnInit() {
     this.editedNote = Object.assign({}, this.note);

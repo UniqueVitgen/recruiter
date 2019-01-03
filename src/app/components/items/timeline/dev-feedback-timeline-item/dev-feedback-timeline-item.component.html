@@ -9,12 +9,14 @@
       <mat-card-title *ngIf="feedbackIndex === 0 && feedbackDetails.requirement.public == true">{{'Public' | translate}}</mat-card-title>
       <mat-card-title *ngIf="feedbackDetails.requirement.public == false &&
       (feedbackIndex === 0 || editedNote.feedbackDetails[feedbackIndex - 1].requirement.public == true)">{{'Private' | translate}}</mat-card-title>
-      <mat-form-field  class="example-full-width custom-form-field">
-        <textarea (blur)="onFocusoutAnyInput()" [required]="feedbackDetails.requirement.required" [(ngModel)]="feedbackDetails.feedbackText" placeholder="{{feedbackDetails.requirement.name | translate}}" matInput></textarea>
-        <button mat-button  matSuffix mat-icon-button aria-label="Clear" class="edited-hover-button">
-          <mat-icon>edit</mat-icon>
-        </button>
-      </mat-form-field>
+      <form #myForm="ngForm">
+        <mat-form-field  class="example-full-width custom-form-field">
+          <textarea (blur)="onFocusoutAnyInput(myForm.form.valid)" [required]="feedbackDetails.requirement.required" [(ngModel)]="feedbackDetails.feedbackText" placeholder="{{feedbackDetails.requirement.name | translate}}" matInput></textarea>
+          <button mat-button  matSuffix mat-icon-button aria-label="Clear" class="edited-hover-button">
+            <mat-icon>edit</mat-icon>
+          </button>
+        </mat-form-field>
+      </form>
     </div>
   </mat-card>
 </mat-card>
