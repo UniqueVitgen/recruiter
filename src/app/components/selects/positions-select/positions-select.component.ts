@@ -42,11 +42,6 @@ export class PositionsSelectComponent implements OnDestroy, AfterViewInit, OnCha
     this.filteredVacancies
       .pipe(take(1), takeUntil(this._onDestroy))
       .subscribe(() => {
-        // setting the compareWith property to a comparison function
-        // triggers initializing the selection according to the initial value of
-        // the form control (i.e. _initializeSelection())
-        // this needs to be done after the filteredBanks are loaded initially
-        // and after the mat-option elements are available
         this.singleSelect.compareWith = (a: string, b: string) => a === b;
       });
   }
@@ -54,7 +49,6 @@ export class PositionsSelectComponent implements OnDestroy, AfterViewInit, OnCha
     if (!this.vacancies) {
       return;
     }
-    // get the search keyword
     let search = this.vacancyFilterCtrl.value;
     if (!search) {
       this.filteredVacancies.next(this.vacancies.slice());
@@ -62,14 +56,12 @@ export class PositionsSelectComponent implements OnDestroy, AfterViewInit, OnCha
     } else {
       search = search.toLowerCase();
     }
-    // filter the banks0
     this.filteredVacancies.next(
       this.vacancies.filter(vacancy => vacancy.position.toLowerCase().indexOf(search) > -1)
     );
   }
   ngOnChanges() {
     if (this.vacancies) {
-      //
       this.filteredVacancies.next(this.vacancies.slice());
     }
     this.vacancyFilterCtrl.valueChanges

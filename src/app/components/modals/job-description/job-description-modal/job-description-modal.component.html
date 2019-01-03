@@ -40,9 +40,9 @@
           <div class="col-6">
             <mat-form-field class="example-full-width">
               <input [name]="'requirements-' + i" matInput required placeholder="{{'Requirement' | translate}}" [matAutocomplete]="autoGroup"
-                     [(ngModel)]="requirement.name">
+                     [(ngModel)]="requirement.name" (ngModelChange)="changeRequirments(requirement.name, i)">
               <mat-autocomplete #autoGroup="matAutocomplete">
-                <mat-optgroup *ngFor="let group of stateGroupOptions | async" [label]="group.letter">
+                <mat-optgroup *ngFor="let group of requirement.options" [label]="group.letter">
                   <mat-option *ngFor="let name of group.names" [value]="name">
                     {{name}}
                   </mat-option>
