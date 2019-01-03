@@ -21,12 +21,13 @@
 @media (min-width: 992px) {
   .custom-sticky-short-info {
     position: sticky;
-    top: 4rem;
+    bottom: 4rem;
     margin-right: 15px;
     //float: left;
     display: inline-block;
     vertical-align: top;
     width: 310px;
+    height: 20rem;
   }
   .custom-sticky-timeline {
     //float: right;
@@ -40,12 +41,13 @@
 @media (min-width: 1200px) {
   .custom-sticky-short-info {
     position: sticky;
-    top: 4rem;
+    bottom: 4rem;
     margin-right: 15px;
     //float: left;
     display: inline-block;
     vertical-align: top;
     width: 310px;
+    height: 20rem;
   }
   .custom-sticky-timeline {
     //float: right;
