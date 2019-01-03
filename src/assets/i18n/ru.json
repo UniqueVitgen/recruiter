@@ -107,5 +107,7 @@
   "Private": "Приватно",
   "No matching vacancy found" : "Не найдено подходящей вакансии",
   "Find vacancy" : "Найти вакансию...",
-  "Interview Feedback" : "Отзыв об интервью"
+  "Interview Feedback" : "Отзыв об интервью",
+  "Add existed candidate": "Добавить существующего кандидата",
+  "Add new candidate": "Создать нового кандидата"
 }

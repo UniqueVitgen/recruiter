@@ -107,5 +107,7 @@
   "Private": "Private",
   "No matching vacancy found" : "No matching vacancy found",
   "Find vacancy" : "Find vacancy...",
-  "Interview Feedback" : "Interview feedback"
+  "Interview Feedback" : "Interview feedback",
+  "Add existed candidate": "Add existed candidate",
+  "Add new candidate": "Add new candidate"
 }
