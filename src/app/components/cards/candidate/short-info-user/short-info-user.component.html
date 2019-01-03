@@ -15,31 +15,47 @@
     <mat-card class="backgroundCard">
       <!--<p>-->
       <div *ngIf="!readonly">
-
-        <mat-form-field class="example-full-width custom-form-field">
-          <input (blur)="onFocusoutAnyInput()"   [(ngModel)]="candidate.name"  matInput [placeholder]="'Name' | translate" readonly="false" >
-          <button mat-button  matSuffix mat-icon-button aria-label="Clear" class="edited-hover-button">
-            <mat-icon>edit</mat-icon>
-          </button>
-        </mat-form-field>
-        <mat-form-field class="example-full-width custom-form-field">
-          <input (blur)="onFocusoutAnyInput()" [(ngModel)]="candidate.surname" matInput [placeholder]="'Surname' | translate" >
-          <button mat-button  matSuffix mat-icon-button aria-label="Clear" class="edited-hover-button">
-            <mat-icon>edit</mat-icon>
-          </button>
-        </mat-form-field>
-        <mat-form-field class="example-full-width custom-form-field">
-          <input (blur)="onFocusoutAnyInput()" matInput [placeholder]="'Position' | translate">
-          <button mat-button  matSuffix mat-icon-button aria-label="Clear" class="edited-hover-button">
-            <mat-icon>edit</mat-icon>
-          </button>
-        </mat-form-field>
-        <mat-form-field class="example-full-width custom-form-field">
-          <!--<input (blur)="onFocusoutAnyInput()" [(ngModel)]="candidate.candidateState.name" matInput placeholder="Status"> -->
-          <mat-select [(ngModel)]="candidate.candidateState.name" matInput (blur)="onFocusoutAnyInput()">
-            <mat-option *ngFor="let state of setStates" [value]="state" >{{state | translate}}</mat-option>
-          </mat-select>
-        </mat-form-field>
+        <form *ngIf="candidateForm" [formGroup]="candidateForm">
+          <mat-form-field class="example-full-width custom-form-field">
+            <input (blur)="onFocusoutAnyInput()" formControlName="name"   [(ngModel)]="editedCandidate.name"  matInput [placeholder]="'Name' | translate" readonly="false" >
+            <button mat-button  matSuffix mat-icon-button aria-label="Clear" class="edited-hover-button">
+              <mat-icon>edit</mat-icon>
+            </button>
+            <mat-error *ngIf="candidateForm.controls['name'].hasError('required')">
+              {{'Name is required' | translate}}
+            </mat-error>
+            <mat-error *ngIf="candidateForm.controls['name'].hasError('pattern')">
+              {{'Name must contain only latin characters' | translate}}
+            </mat-error>
+          </mat-form-field>
+          <mat-form-field class="example-full-width custom-form-field">
+            <input (blur)="onFocusoutAnyInput()" formControlName="surname" [(ngModel)]="editedCandidate.surname" matInput [placeholder]="'Surname' | translate" >
+            <button mat-button  matSuffix mat-icon-button aria-label="Clear" class="edited-hover-button">
+              <mat-icon>edit</mat-icon>
+            </button>
+            <mat-error *ngIf="candidateForm.controls['surname'].hasError('required')">
+              {{'Surname is required' | translate}}
+            </mat-error>
+            <mat-error *ngIf="candidateForm.controls['surname'].hasError('pattern')">
+              {{'Surname must contain only latin characters' | translate}}
+            </mat-error>
+          </mat-form-field>
+          <!--<mat-form-field class="example-full-width custom-form-field">-->
+          <!--<mat-select [compareWith]="compareStrings" [(ngModel)]="candidate.position" [formControl]="vacancyCtrl" [placeholder]="'Position' | translate"  matInput (ngModelChange)="onFocusoutAnyInput()" #singleSelect>-->
+          <!--<ngx-mat-select-search [formControl]="vacancyFilterCtrl"></ngx-mat-select-search>-->
+          <!--<mat-option *ngFor="let vacancy of filteredVacancies | async" [value]="vacancy.position">-->
+          <!--{{vacancy.position}}-->
+          <!--</mat-option>-->
+          <!--</mat-select>-->
+          <!--</mat-form-field>-->
+          <app-positions-select  formControlName="position" [(ngModel)]="editedCandidate.position" (ngModelChange)="onFocusoutAnyInput()" [vacancies]="vacancies" [visibleUnderline]="true"></app-positions-select>
+          <mat-form-field class="example-full-width custom-form-field">
+            <!--<input (blur)="onFocusoutAnyInput()" [(ngModel)]="candidate.candidateState.name" matInput placeholder="Status"> -->
+            <mat-select formControlName="status" [(ngModel)]="editedCandidate.candidateState.name" matInput (blur)="onFocusoutAnyInput()">
+              <mat-option *ngFor="let state of setStates" [value]="state" >{{state | translate}}</mat-option>
+            </mat-select>
+          </mat-form-field>
+        </form>
       </div>
       <div *ngIf="readonly">
         <div class="row">
@@ -47,7 +63,7 @@
             <span class="font-weight-bold float-right">Name:</span>
           </div>
           <div class="col-12 col-md-9">
-            <span>{{candidate.name}}</span>
+            <span>{{editedCandidate.name}}</span>
           </div>
         </div>
         <div class="row">
@@ -55,7 +71,7 @@
             <span class="font-weight-bold float-right">Surname:</span>
           </div>
           <div class="col-9">
-            <span>{{candidate.surname}}</span>
+            <span>{{editedCandidate.surname}}</span>
           </div>
         </div>
       </div>
@@ -74,7 +90,7 @@
       <mat-card-content>
         <div *ngIf="!readonly">
           <mat-checkbox color="primary" [(ngModel)]="tests[0].have" (ngModelChange)="changeEmail()">
-            <mat-form-field class="example-full-width" *ngIf="tests[0].have && tests[0].object">
+            <mat-form-field class="example-full-width" *ngIf="tests[0].have && tests[0].object && tests[0].object.contactDetails != null">
               <input [formControl]="tests[0].control" [(ngModel)]="tests[0].object.contactDetails" (blur)="onFocusoutAnyInput(tests[0].control.valid)" matInput [placeholder]="'EMAIL' | translate">
               <mat-error class="multi-row-text" *ngIf="tests[0].control.hasError('pattern')">
               {{'Please enter a valid email address' | translate}}
@@ -105,7 +121,7 @@
           </mat-checkbox>
         </div>
         <div *ngIf="readonly">
-          <div class="row" *ngFor="let contact of candidate.contacts">
+          <div class="row" *ngFor="let contact of editedCandidate.contacts">
             <div class="col-12 col-md-3">
               <span class="font-weight-bold float-right">{{contact.contactType}}</span>
             </div>

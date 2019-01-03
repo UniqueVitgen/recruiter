@@ -104,6 +104,8 @@ import { DeleteCandidateModalComponent } from './components/modals/candidate/del
 import { DeleteInterviewModalComponent } from './components/modals/interview/delete-interview-modal/delete-interview-modal.component';
 import { AlertWithButtonModalComponent } from './components/modals/alert-with-button-modal/alert-with-button-modal.component';
 import { StickyTopDirective } from './directives/sticky-top/sticky-top.directive';
+import {NgxMatSelectSearchModule} from 'ngx-mat-select-search';
+import { PositionsSelectComponent } from './components/selects/positions-select/positions-select.component';
 
 export function HttpLoaderFactory(http: HttpClient) {
   return new TranslateHttpLoader(http);
@@ -171,7 +173,8 @@ export function HttpLoaderFactory(http: HttpClient) {
     DeleteCandidateModalComponent,
     DeleteInterviewModalComponent,
     AlertWithButtonModalComponent,
-    StickyTopDirective
+    StickyTopDirective,
+    PositionsSelectComponent
     // ,
     // CalendarComponent
   ],
@@ -212,7 +215,8 @@ export function HttpLoaderFactory(http: HttpClient) {
     // LyButtonModule,
     // LyToolbarModule,
     // LyResizingCroppingImageModule
-    ImageCropperModule
+    ImageCropperModule,
+    NgxMatSelectSearchModule
     // MDBBootstrapModule.forRoot(),
     // NgxMaterialTimepickerModule.forRoot()
     // ,

@@ -103,5 +103,8 @@
   "Confirm delete": "Подтверждение удаление",
   "You have already added all candidates": "Вы уже добавили всех кандидатов",
   "Remove from the system": "Удалить из системы",
-  "Remove from this vacancy": "Удалить из вакансии"
+  "Remove from this vacancy": "Удалить из вакансии",
+  "Private": "Приватно",
+  "No matching vacancy found" : "Не найдено подходящей вакансии",
+  "Find vacancy" : "Найти вакансию..."
 }

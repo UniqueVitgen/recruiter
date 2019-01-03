@@ -4,3 +4,6 @@ export class Requirement {
   public: boolean;
   required: boolean;
 }
+export class RequirementForm extends Requirement {
+  options: any;
+}

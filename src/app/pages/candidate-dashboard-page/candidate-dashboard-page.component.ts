@@ -7,6 +7,8 @@ import {UserWorker} from '../../workers/user/user.worker';
 import {DeleteVacancyDialogComponent} from '../../components/modals/delete-vacancy-dialog/delete-vacancy-dialog.component';
 import {MatDialog} from '@angular/material';
 import {DeleteCandidateModalComponent} from '../../components/modals/candidate/delete-candidate-modal/delete-candidate-modal.component';
+import {Vacancy} from '../../classes/vacancy';
+import {VacancyService} from '../../services/vacancy/vacancy.service';
 
 @Component({
   selector: 'app-candidate-dashboard-page',
@@ -18,12 +20,14 @@ export class CandidateDashboardPageComponent implements OnInit {
   selectedCandidates: Candidate[];
   mockCandidates: Candidate[];
   searchValue: string;
+  vacancies: Vacancy[];
 
   constructor(private candidateService: CandidateService, private searchWorker: SearchWorker, private userWorker: UserWorker,
-              public dialog: MatDialog) { }
+              public dialog: MatDialog, public vacancyService: VacancyService) { }
 
   ngOnInit() {
     this.getAll();
+    this.getVacancies();
     // this.mockCandidates = this.candidateService.mockCandidates;
   }
 
@@ -52,6 +56,11 @@ export class CandidateDashboardPageComponent implements OnInit {
           this.getAll();
         });
       }
+    });
+  }
+  getVacancies() {
+    this.vacancyService.getAll().subscribe( res => {
+      this.vacancies = res;
     });
   }
 

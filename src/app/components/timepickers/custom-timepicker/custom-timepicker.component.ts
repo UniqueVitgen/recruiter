@@ -20,6 +20,8 @@ const customValueProvider = {
 export class CustomTimepickerComponent implements OnInit, ControlValueAccessor {
   @Input() hideUnderline: boolean;
   @Input() fullWidth: boolean;
+  @Input() min: string;
+  @Input() max: string;
   timeString: string;
   darkTheme: NgxMaterialTimepickerTheme = {
     container: {

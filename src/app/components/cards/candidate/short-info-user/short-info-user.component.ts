@@ -1,6 +1,6 @@
-import {Component, EventEmitter, Input, OnChanges, OnInit, Output, SimpleChanges} from '@angular/core';
+import {AfterViewInit, Component, EventEmitter, Input, OnChanges, OnDestroy, OnInit, Output, SimpleChanges, ViewChild} from '@angular/core';
 import {Candidate} from 'src/app/classes/candidate';
-import {MatDialog} from '@angular/material';
+import {MatDialog, MatSelect} from '@angular/material';
 import {NameCandidateModalComponent} from '../../../modals/candidate/name-candidate-modal/name-candidate-modal.component';
 import {StatusCandidateModalComponent} from '../../../modals/candidate/status-candidate-modal/status-candidate-modal.component';
 import {CandidateWorker} from '../../../../workers/candidate/candidate.worker';
@@ -10,63 +10,80 @@ import {ContactType} from '../../../../enums/contact-type.enum';
 import {ArrayWorker} from '../../../../workers/array/array.worker';
 import {StringWorker} from '../../../../workers/string/string.worker';
 import {CandidateContactInput} from '../../../../classes/html/candidate-contact-input';
-import {FormControl, Validators} from '@angular/forms';
+import {FormBuilder, FormControl, FormGroup, Validators} from '@angular/forms';
 import {RegexpConst} from '../../../../const/regexp.const';
 import {MaskConst} from '../../../../const/mask.const';
 import {CandidateState} from '../../../../enums/candidate-state.enum';
 import {EnumWorker} from '../../../../workers/enum/enum.worker';
 import {Attachment} from '../../../../classes/attachment';
 import {AttachmentType} from '../../../../enums/attachment-type.enum';
+import {ReplaySubject, Subject} from 'rxjs';
+import {take, takeUntil} from 'rxjs/operators';
+import {Vacancy} from '../../../../classes/vacancy';
+import {TypeCheckingWorker} from '../../../../workers/type-checking/type-checking.worker';
+
 
 @Component({
   selector: 'app-short-info-user',
   templateUrl: './short-info-user.component.html',
   styleUrls: ['./short-info-user.component.scss']
 })
-export class ShortInfoUserComponent implements OnInit, OnChanges {
+export class ShortInfoUserComponent implements OnInit, OnDestroy, OnChanges {
   @Input() candidate: Candidate;
   @Input() readonly: boolean;
   @Input() haveHoverEffectOnAvatar: boolean;
   @Input() isEditIconOnAvatar: boolean;
+  @Input() vacancies: Vacancy[];
   @Output('editCandidate') outputEditCandidate: EventEmitter<Candidate> = new EventEmitter();
   @Output('clickAvatar') outputClickAvatar: EventEmitter<Candidate> = new EventEmitter();
+  public editedCandidate: Candidate;
+  public candidateForm: FormGroup;
   tests: CandidateContactInput[] ;
   MaskConst = MaskConst;
   setStates: string[];
   photo: Attachment;
+  isSaved: boolean = true;
+  isSavedCandidate: boolean = true;
 
   constructor(public dialog: MatDialog,
               private candidateSerivce: CandidateService,
               public candidateWorker: CandidateWorker,
               private stringWorker: StringWorker,
               private arrayWorker: ArrayWorker,
+              public typeCheckingWorker: TypeCheckingWorker,
+              private fb: FormBuilder,
               public  enumWorker: EnumWorker) { }
 
 
   ngOnInit() {
+
     this.setStates = this.enumWorker.getValuesFromEnum(CandidateState);
+
+  }
+
+  ngOnDestroy() {
   }
   clickAvatar() {
     this.outputClickAvatar.emit(this.candidate);
   }
   ngOnChanges(changes: SimpleChanges): void {
-    this.initContacts();
+    if (this.isSaved) {
+      this.initContacts();
+    }
+    if (this.isSavedCandidate) {
+      this.editedCandidate = this.typeCheckingWorker.parseObject(this.candidate);
+      console.log('editedCandidate -', this.editedCandidate);
+      this.candidateForm = this.fb.group({
+        name: [this.editedCandidate.name, Validators.compose([Validators.required, Validators.pattern(RegexpConst.LATIN_NAME)])],
+        surname: [this.editedCandidate.surname, Validators.compose([Validators.required, Validators.pattern(RegexpConst.LATIN_NAME)])],
+        position: [this.editedCandidate.position],
+        status: [this.editedCandidate.candidateState.name]
+      });
+    }
     this.photo = this.candidateWorker.findPhoto(this.candidate);
     console.log('photo', this.photo);
   }
-
-  findPhoto() {
-    console.log('attachments', this.candidate.attachments);
-    this.photo = this.candidate.attachments.find((attachment) => {
-      return attachment.attachmentType === AttachmentType.PHOTO;
-    });
-  }
   initContacts() {
-    // this.tests = [
-    //   phone: this.candidateWorker.havePhone(this.candidate),
-    //   skype: this.candidateWorker.haveSkype(this.candidate),
-    //   email: this.candidateWorker.haveEmail(this.candidate)
-    // ];
     this.tests = [
       {have: this.candidateWorker.haveEmail(this.candidate),
         value: ContactType.EMAIL,
@@ -83,9 +100,18 @@ export class ShortInfoUserComponent implements OnInit, OnChanges {
       }
     ];
     console.log(this.tests);
-    if (this.tests[0].have) { this.tests[0].object = this.candidateWorker.getEmailObject(this.candidate); }
-    if (this.tests[1].have) { this.tests[1].object = this.candidateWorker.getSkypeObject(this.candidate); }
-    if (this.tests[2].have) { this.tests[2].object = this.candidateWorker.getPhoneObject(this.candidate); }
+    if (this.tests[0].have) {
+      this.tests[0].object = this.candidateWorker.getEmailObject(this.candidate);
+      this.tests[0].control.setValue(this.tests[0].object.contactDetails);
+    }
+    if (this.tests[1].have) {
+      this.tests[1].object = this.candidateWorker.getSkypeObject(this.candidate);
+      this.tests[1].control.setValue(this.tests[1].object.contactDetails);
+    }
+    if (this.tests[2].have) {
+      this.tests[2].object = this.candidateWorker.getPhoneObject(this.candidate);
+      this.tests[2].control.setValue(this.tests[2].object.contactDetails);
+    }
   }
   changeContactProperty(value: CandidateContactInput) {
     console.log(value);
@@ -100,7 +126,13 @@ export class ShortInfoUserComponent implements OnInit, OnChanges {
             contactDetails: ''
           };
         }
-        this.candidate.contacts.push(skypeObject);
+        if (this.tests[0].control.valid && this.tests[1].control.valid &&
+          this.tests[2].control.valid) {
+          this.isSaved = true;
+          this.candidate.contacts.push(skypeObject);
+        } else {
+          this.isSaved = false;
+        }
         value.object = skypeObject;
         // this.tests[] = skypeObject;
       }
@@ -108,10 +140,16 @@ export class ShortInfoUserComponent implements OnInit, OnChanges {
       const method = value.methodName;
       console.log(method);
       if (this.candidateWorker[method](this.candidate) != null) {
-        this.candidate.contacts = this.arrayWorker.removeElement(this.candidate.contacts, value.object);
-        this.candidateSerivce.update(this.candidate).subscribe(res => {
-          console.log(res);
-        });
+        if (this.tests[0].control.valid && this.tests[1].control.valid &&
+          this.tests[2].control.valid) {
+          this.isSaved = true;
+          this.candidate.contacts = this.arrayWorker.removeElement(this.candidate.contacts, value.object);
+          this.candidateSerivce.update(this.candidate).subscribe(res => {
+            console.log(res);
+          });
+        } else {
+          this.isSaved = false;
+        }
       }
     }
     console.log('after', value);
@@ -124,77 +162,24 @@ export class ShortInfoUserComponent implements OnInit, OnChanges {
 
   changeEmail() {
     this.changeContactProperty(this.tests[0]);
-    // if (this.tests.email) {
-    //   if (this.candidateWorker.getEmailObject(this.candidate) == null) {
-    //     const emailObject: ContactDetails = {
-    //       contactType: ContactType.EMAIL,
-    //       contactDetails: ''
-    //     };
-    //     this.candidate.contacts.push(emailObject);
-    //     this.tests.emailObject = emailObject;
-    //   }
-    // } else {
-    //   if (this.candidateWorker.getEmailObject(this.candidate) != null) {
-    //     this.candidate.contacts = this.arrayWorker.removeElement(this.candidate.contacts, this.tests.emailObject);
-    //     this.candidateSerivce.update(this.candidate).subscribe(res => {
-    //       console.log(res);
-    //     });
-    //   }
-    // }
 
   }
 
   changePhone() {
     this.changeContactProperty(this.tests[2]);
-    // if (this.tests.phone) {
-    //   if (this.candidateWorker.getPhoneObject(this.candidate) == null) {
-    //     const phoneObject: ContactDetails = {
-    //       contactType: ContactType.PHONE,
-    //       contactDetails: ''
-    //     };
-    //     this.candidate.contacts.push(phoneObject);
-    //     this.tests.phoneObject = phoneObject;
-    //   }
-    // } else {
-    //   if (this.candidateWorker.getPhoneObject(this.candidate) != null) {
-    //     this.candidate.contacts = this.arrayWorker.removeElement(this.candidate.contacts, this.tests.phoneObject);
-    //     this.candidateSerivce.update(this.candidate).subscribe(res => {
-    //       console.log(res);
-    //     });
-    //   }
-    // }
-  }
-
-  openStatusDialog(): void {
-    const dialogRef = this.dialog.open(StatusCandidateModalComponent, {
-      data: this.candidate
-      }
-    );
-
-    dialogRef.afterClosed().subscribe(result => {
-      console.log('The dialog was closed');
-      // this.animal = result;
-    });
-  }
-
-  openNameDialog(): void {
-    const dialogRef = this.dialog.open(NameCandidateModalComponent, {
-      data: this.candidate
-      }
-    );
-
-    dialogRef.afterClosed().subscribe(result => {
-      console.log('The dialog was closed');
-      // this.animal = result;
-    });
   }
 
   onFocusoutAnyInput(value: boolean = true) {
     if (value) {
-      console.log('candidate', this.candidate);
-      this.candidateSerivce.update(this.candidate).subscribe(res => {
-        this.outputEditCandidate.emit(res);
-      });
+      console.log('candidate', this.editedCandidate);
+      if (this.candidateForm.valid) {
+        this.isSavedCandidate = true;
+        this.candidateSerivce.update(this.editedCandidate).subscribe(res => {
+          this.outputEditCandidate.emit(res);
+        });
+      } else {
+        this.isSavedCandidate = false;
+      }
     }
   }
 

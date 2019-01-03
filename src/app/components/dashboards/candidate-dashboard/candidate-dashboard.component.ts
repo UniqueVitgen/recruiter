@@ -11,6 +11,7 @@ import {Attachment} from '../../../classes/attachment';
 import {TypeCheckingWorker} from '../../../workers/type-checking/type-checking.worker';
 import {BootstrapCellEnum} from '../../../enums/bootstrap-cell.enum';
 import {ImageCropperAvatarComponent} from '../../modals/candidate/image-cropper-avatar/image-cropper-avatar.component';
+import {Vacancy} from '../../../classes/vacancy';
 
 @Component({
   selector: 'app-candidate-dashboard',
@@ -21,6 +22,7 @@ export class CandidateDashboardComponent implements OnInit, OnChanges {
   @Input() candidates: Candidate[];
   @Input() haveAddElement: boolean;
   @Input() search;
+  @Input() vacancies;
   @Input() haveHoverEffect: boolean = true;
   @Input() isClosedIcon: boolean = true;
   @Input() filledCells: BootstrapCellEnum;
@@ -62,7 +64,7 @@ export class CandidateDashboardComponent implements OnInit, OnChanges {
 
   addCandidate() {
     const dialogRef = this.dialog.open(CandidateModalComponent, {
-        data: <CandidateDialogData> {},
+        data: <CandidateDialogData> { sourceVacancies: this.vacancies },
         disableClose: true
       }
     );

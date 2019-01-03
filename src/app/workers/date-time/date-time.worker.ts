@@ -20,7 +20,7 @@ export class DateTimeWorker {
   public datePipe: DatePipe;
   public config = {
     minTime: '08:00',
-    maxTime: '23:00'
+    maxTime: '22:00'
   };
   constructor(
     @Inject(LOCALE_ID) private locale: string,

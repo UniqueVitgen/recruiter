@@ -1,6 +1,6 @@
 import {VacancyState} from '../enums/vacancy-state.enum';
 import {Skill} from './skill';
-import {Requirement} from './requirement';
+import {Requirement, RequirementForm} from './requirement';
 import {Candidate} from './candidate';
 
 export class Vacancy {
@@ -15,6 +15,9 @@ export class Vacancy {
   skills: Skill[];
   requirements: Requirement[] = [];
   candidates?: Candidate[] = [];
+  description: string;
 
-
+}
+export class VacancyForm extends Vacancy {
+  requirements: RequirementForm[] = [];
 }

@@ -25,6 +25,8 @@ import {InterviewDialogDataInterface} from '../../interfaces/dialog/init/intervi
 import {AttachmentCandidateModalComponent} from '../../components/modals/candidate/attachment-candidate-modal/attachment-candidate-modal.component';
 import {ExperienceCandidateModalComponent} from '../../components/modals/candidate/experience-candidate-modal/experience-candidate-modal.component';
 import {NoteCandidateModalComponent} from '../../components/modals/candidate/note-candidate-modal/note-candidate-modal.component';
+import {VacancyService} from '../../services/vacancy/vacancy.service';
+import {Vacancy} from '../../classes/vacancy';
 
 @Component({
   selector: 'app-candidate-page',
@@ -35,6 +37,7 @@ export class CandidatePageComponent implements OnInit {
   id: number;
   candidate: Candidate;
   eventNoteList: EventNote[];
+  vacancies: Vacancy[];
   @ViewChild('fileInput') fileInput: ElementRef;
 
   constructor(
@@ -44,6 +47,7 @@ export class CandidatePageComponent implements OnInit {
     private devFeedbackService: DevFeedbackService,
     private candidateService: CandidateService,
     private interviewService: InterviewService,
+    private vacancyService: VacancyService,
     public dialog: MatDialog) { }
 
   ngOnInit() {
@@ -51,10 +55,20 @@ export class CandidatePageComponent implements OnInit {
     .subscribe(params => {
       this.id = params['id'];
       this.getCandidate();
+      this.getVacancies();
       // this.candidateService.get()
       // Defaults to 0 if no query param provided.
     });
   }
+
+  getVacancies() {
+    this.vacancyService.getAll().subscribe( res => {
+      this.vacancies = res;
+      console.log('2', this.vacancies);
+    });
+
+  }
+
   clickAvatar() {
     const dialogRef = this.dialog.open(ImageCropperAvatarComponent, {
         data: <CandidateDialogData> {
