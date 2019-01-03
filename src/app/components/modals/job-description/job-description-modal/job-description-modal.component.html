@@ -32,12 +32,12 @@
         <div class="col-2">
         </div>
       </div>
-      <div cdkDropList (cdkDropListDropped)="drop($event)">
-        <div cdkDrag class="row" *ngFor="let requirement of editedVacancy.requirements; let i = index">
-          <div class="col-1 checkbox-col">
-            <mat-icon>format_line_spacing</mat-icon>
-          </div>
-          <div class="col-5">
+      <div (cdkDropListDropped)="drop($event)">
+        <div class="row" *ngFor="let requirement of editedVacancy.requirements; let i = index">
+          <!--<div class="col-1 checkbox-col">-->
+            <!--<mat-icon>format_line_spacing</mat-icon>-->
+          <!--</div>-->
+          <div class="col-6">
             <mat-form-field class="example-full-width">
               <input [name]="'requirements-' + i" matInput required placeholder="{{'Requirement' | translate}}" [matAutocomplete]="autoGroup"
                      [(ngModel)]="requirement.name">
