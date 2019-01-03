@@ -4,6 +4,7 @@
     [ngClass]=" filledCells ? 'col-md-' + filledCells : 'col-md-3'" class="col-12 center-item heightitem">
     <app-candidate-dashboard-item [clickableCandidate]="true" [haveHoverEffect]="haveHoverEffect"
                                   [isClosedIcon]="isClosedIcon" (deleteCandidate)="deleteCandidate(i)"
+                                  (deleteCandidateFromTheBase)="deleteCandidateFromTheBase(candidate.id)"
                                   [candidate]="candidate"></app-candidate-dashboard-item>
   </div>
   <div *ngIf="haveAddElement" [ngClass]=" filledCells ? 'col-md-' + filledCells : 'col-md-3'" (click)="addCandidate()"
