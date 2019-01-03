@@ -25,6 +25,7 @@ export class CandidateDashboardComponent implements OnInit, OnChanges {
   @Input() vacancies;
   @Input() haveHoverEffect: boolean = true;
   @Input() isClosedIcon: boolean = true;
+  @Input() isDeleteIcon: boolean = true;
   @Input() filledCells: BootstrapCellEnum;
   @Output('addCandidate') outputAddCandidate: EventEmitter<Candidate> = new EventEmitter();
   @Output('deleteCandidate') outputDeleteCandidate: EventEmitter<number> = new EventEmitter();
@@ -81,7 +82,7 @@ export class CandidateDashboardComponent implements OnInit, OnChanges {
     this.outputDeleteCandidate.emit(candidateID);
   }
   deleteCandidateFromTheBase(candidateID: number) {
-    console.log('`Candidate to delete 22:');
+    console.log('`Candidate to delete 22:', candidateID);
     this.outputDeleteCandidateFromTheBase.emit(candidateID);
   }
 
