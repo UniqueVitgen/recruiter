@@ -21,7 +21,7 @@
   <!--</div>-->
   <div class="container-sticky">
     <div class="custom-sticky-short-info">
-      <app-short-info-user (clickAvatar)="clickAvatar()" *ngIf="candidate" [haveHoverEffectOnAvatar]="true" [isEditIconOnAvatar]="true" [readonly]="false" [candidate]="candidate"></app-short-info-user>
+      <app-short-info-user (clickAvatar)="clickAvatar()" *ngIf="candidate" [haveHoverEffectOnAvatar]="true" [isEditIconOnAvatar]="true" [readonly]="false" [candidate]="candidate" [vacancies]="vacancies"></app-short-info-user>
     </div>
     <div  class="custom-sticky-timeline">
       <app-candidate-timeline *ngIf="candidate"  [candidate]="candidate" (clickClose)="deleteTimelineItem($event)"

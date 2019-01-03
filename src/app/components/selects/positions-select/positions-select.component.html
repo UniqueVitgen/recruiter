@@ -1,0 +1,8 @@
+<mat-form-field [ngClass]="{'custom-form-field' : visibleUnderline}" class="example-full-width">
+  <mat-select [(ngModel)]="value" [formControl]="vacancyCtrl" [placeholder]="'Position' | translate" (ngModelChange)="changeValue()" matInput #singleSelect>
+    <ngx-mat-select-search [formControl]="vacancyFilterCtrl"></ngx-mat-select-search>
+    <mat-option *ngFor="let vacancy of filteredVacancies | async" [value]="vacancy.position">
+      {{vacancy.position}}
+    </mat-option>
+  </mat-select>
+</mat-form-field>

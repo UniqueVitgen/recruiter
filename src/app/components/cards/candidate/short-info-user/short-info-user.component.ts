@@ -1,6 +1,6 @@
-import {Component, EventEmitter, Input, OnChanges, OnInit, Output, SimpleChanges} from '@angular/core';
+import {AfterViewInit, Component, EventEmitter, Input, OnChanges, OnDestroy, OnInit, Output, SimpleChanges, ViewChild} from '@angular/core';
 import {Candidate} from 'src/app/classes/candidate';
-import {MatDialog} from '@angular/material';
+import {MatDialog, MatSelect} from '@angular/material';
 import {NameCandidateModalComponent} from '../../../modals/candidate/name-candidate-modal/name-candidate-modal.component';
 import {StatusCandidateModalComponent} from '../../../modals/candidate/status-candidate-modal/status-candidate-modal.component';
 import {CandidateWorker} from '../../../../workers/candidate/candidate.worker';
@@ -17,35 +17,91 @@ import {CandidateState} from '../../../../enums/candidate-state.enum';
 import {EnumWorker} from '../../../../workers/enum/enum.worker';
 import {Attachment} from '../../../../classes/attachment';
 import {AttachmentType} from '../../../../enums/attachment-type.enum';
+import {ReplaySubject, Subject} from 'rxjs';
+import {take, takeUntil} from 'rxjs/operators';
+import {Vacancy} from '../../../../classes/vacancy';
+import {TypeCheckingWorker} from '../../../../workers/type-checking/type-checking.worker';
+
 
 @Component({
   selector: 'app-short-info-user',
   templateUrl: './short-info-user.component.html',
   styleUrls: ['./short-info-user.component.scss']
 })
-export class ShortInfoUserComponent implements OnInit, OnChanges {
+export class ShortInfoUserComponent implements OnInit, OnDestroy, AfterViewInit, OnChanges {
   @Input() candidate: Candidate;
   @Input() readonly: boolean;
   @Input() haveHoverEffectOnAvatar: boolean;
   @Input() isEditIconOnAvatar: boolean;
+  @Input() vacancies: Vacancy[];
   @Output('editCandidate') outputEditCandidate: EventEmitter<Candidate> = new EventEmitter();
   @Output('clickAvatar') outputClickAvatar: EventEmitter<Candidate> = new EventEmitter();
   tests: CandidateContactInput[] ;
   MaskConst = MaskConst;
   setStates: string[];
   photo: Attachment;
+  //
+  // public vacancyCtrl: FormControl = new FormControl();
+  // public vacancyFilterCtrl: FormControl = new FormControl();
+  // public filteredVacancies: ReplaySubject<Vacancy[]> = new ReplaySubject<Vacancy[]>(1);
+  // @ViewChild('singleSelect') singleSelect: MatSelect;
+  // private _onDestroy = new Subject<void>();
 
   constructor(public dialog: MatDialog,
               private candidateSerivce: CandidateService,
               public candidateWorker: CandidateWorker,
               private stringWorker: StringWorker,
               private arrayWorker: ArrayWorker,
+              public typeCheckingWorker: TypeCheckingWorker,
               public  enumWorker: EnumWorker) { }
 
 
   ngOnInit() {
+
     this.setStates = this.enumWorker.getValuesFromEnum(CandidateState);
+
+
   }
+
+  //
+  ngAfterViewInit() {
+    this.setInitialValue();
+  }
+
+  ngOnDestroy() {
+    // this._onDestroy.next();
+    // this._onDestroy.complete();
+  }
+  private setInitialValue() {
+    // this.filteredVacancies
+    //   .pipe(take(1), takeUntil(this._onDestroy))
+    //   .subscribe(() => {
+    //     // setting the compareWith property to a comparison function
+    //     // triggers initializing the selection according to the initial value of
+    //     // the form control (i.e. _initializeSelection())
+    //     // this needs to be done after the filteredBanks are loaded initially
+    //     // and after the mat-option elements are available
+    //     this.singleSelect.compareWith = (a: string, b: string) => a === b;
+    //   });
+  }
+  // private filterVacancies() {
+  //   if (!this.vacancies) {
+  //     return;
+  //   }
+  //   // get the search keyword
+  //   let search = this.vacancyFilterCtrl.value;
+  //   if (!search) {
+  //     this.filteredVacancies.next(this.vacancies.slice());
+  //     return;
+  //   } else {
+  //     search = search.toLowerCase();
+  //   }
+  //   // filter the banks0
+  //   this.filteredVacancies.next(
+  //     this.vacancies.filter(vacancy => vacancy.position.toLowerCase().indexOf(search) > -1)
+  //   );
+  // }
+  //
   clickAvatar() {
     this.outputClickAvatar.emit(this.candidate);
   }
@@ -53,8 +109,20 @@ export class ShortInfoUserComponent implements OnInit, OnChanges {
     this.initContacts();
     this.photo = this.candidateWorker.findPhoto(this.candidate);
     console.log('photo', this.photo);
+  //   if (this.vacancies) {
+  //     // this./ = this.vacancies.map((vacancy) => vacancy.position)
+  //     // this.vacancyCtrl.setValue(this.candidate.position);
+  //     this.vacancyCtrl.valueChanges.subscribe(res => {
+  //       console.log(res);
+  //     })
+  //     this.filteredVacancies.next(this.vacancies.slice());
+  //   }
+  //   this.vacancyFilterCtrl.valueChanges
+  //     .pipe(takeUntil(this._onDestroy))
+  //     .subscribe(() => {
+  //        this.filterVacancies();
+  //     });
   }
-
   findPhoto() {
     console.log('attachments', this.candidate.attachments);
     this.photo = this.candidate.attachments.find((attachment) => {

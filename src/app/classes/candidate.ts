@@ -18,4 +18,5 @@ export class Candidate {
   attachments?: Attachment[];
   responsibilities?: Responsibility[];
   timelines?: any[];
+  position?: string;
 }

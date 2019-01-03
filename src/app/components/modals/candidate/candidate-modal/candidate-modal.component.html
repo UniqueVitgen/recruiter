@@ -28,9 +28,7 @@
             {{'Surname must contain only latin characters' | translate}}
           </mat-error>
         </mat-form-field>
-        <mat-form-field class="example-full-width">
-          <input formControlName="position" matInput placeholder="{{'Position' | translate}}">
-        </mat-form-field>
+        <app-positions-select formControlName="position" [(ngModel)]="editedCandidate.position" [vacancies]="data.sourceVacancies" [visibleUnderline]="false"></app-positions-select>
         <mat-form-field class="example-full-width">
           <mat-select formControlName="status" [placeholder]="'Status' | translate" [(ngModel)]="editedCandidate.candidateState.name">
             <mat-option *ngFor="let state of setStates" [value]="state" >{{state | translate}}</mat-option>
