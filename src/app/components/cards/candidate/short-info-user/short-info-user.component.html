@@ -36,7 +36,7 @@
             <!--</mat-option>-->
           <!--</mat-select>-->
         <!--</mat-form-field>-->
-        <app-positions-select [(ngModel)]="candidate.position" (ngModelChange)="onFocusoutAnyInput()" [vacancies]="vacancies" [visibleUnderline]="true"></app-positions-select>
+        <!--<app-positions-select [(ngModel)]="candidate.position" (ngModelChange)="onFocusoutAnyInput()" [vacancies]="vacancies" [visibleUnderline]="true"></app-positions-select>-->
         <mat-form-field class="example-full-width custom-form-field">
           <!--<input (blur)="onFocusoutAnyInput()" [(ngModel)]="candidate.candidateState.name" matInput placeholder="Status"> -->
           <mat-select [(ngModel)]="candidate.candidateState.name" matInput (blur)="onFocusoutAnyInput()">

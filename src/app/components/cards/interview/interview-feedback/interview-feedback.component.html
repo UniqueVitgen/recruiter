@@ -1,21 +1,30 @@
 <!--<div class="center-item">-->
+<form #myForm="ngForm">
   <mat-card class="custom-resize-card" *ngIf="feedback">
     <mat-card-title><span *ngIf="!isEdit">{{'Add' |translate }}</span> {{'Feedback' | translate}}
-
       <button *ngIf="isEdit && buttonEdit" class="float-right" mat-icon-button [matMenuTriggerFor]="menu" color="primary">
         <mat-icon>more_horiz</mat-icon>
       </button>
     </mat-card-title>
-    <mat-form-field [ngClass]="{'custom-form-field': isEdit}" *ngFor="let feedbackDetails of feedback.feedbackDetails" class="example-full-width">
-      <textarea (blur)="onFocusAnyInput()" [required]="feedbackDetails.requirement.required" matInput [(ngModel)]="feedbackDetails.feedbackText" [placeholder]="feedbackDetails.requirement.name"></textarea>
-      <button *ngIf="isEdit" mat-button  matSuffix mat-icon-button aria-label="Clear" class="edited-hover-button">
-        <mat-icon>edit</mat-icon>
-      </button>
-    </mat-form-field>
-    <button *ngIf="!isEdit" (click)="saveFeedback()" mat-raised-button color="primary">
+    <mat-divider></mat-divider>
+    <br>
+    <div *ngFor="let feedbackDetails of feedback.feedbackDetails; let feedbackIndex = index">
+      <mat-card-title *ngIf="feedbackIndex === 0">{{'Public' | translate }}</mat-card-title>
+      <mat-card-title *ngIf="feedbackDetails.requirement.public == false &&
+      (feedbackIndex === 0 || feedback.feedbackDetails[feedbackIndex - 1].requirement.public == true)">{{'Private' | translate}}</mat-card-title>
+      <!--<mat-card-content *ngIf="feedbackIndex === 0">Public</mat-card-content>-->
+      <mat-form-field [ngClass]="{'custom-form-field': isEdit}"  class="example-full-width">
+        <textarea (blur)="onFocusAnyInput()" [name]="feedbackDetails.requirement.name" [required]="feedbackDetails.requirement.required" matInput [(ngModel)]="feedbackDetails.feedbackText" [placeholder]="feedbackDetails.requirement.name"></textarea>
+        <button *ngIf="isEdit" mat-button  matSuffix mat-icon-button aria-label="Clear" class="edited-hover-button">
+          <mat-icon>edit</mat-icon>
+        </button>
+      </mat-form-field>
+    </div>
+    <button *ngIf="!isEdit" [disabled]="myForm.form.invalid" (click)="saveFeedback()" mat-raised-button color="primary">
       {{'Create' | translate}}
     </button>
   </mat-card>
+</form>
 <mat-menu #menu="matMenu">
   <button [disabled]="!isEdit" (click)="clickDelete()" mat-menu-item>{{'Delete' | translate}}</button>
 </mat-menu>
