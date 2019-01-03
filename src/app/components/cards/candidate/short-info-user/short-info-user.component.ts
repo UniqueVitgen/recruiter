@@ -72,16 +72,16 @@ export class ShortInfoUserComponent implements OnInit, OnDestroy, OnChanges {
     }
     if (this.isSavedCandidate) {
       this.editedCandidate = this.typeCheckingWorker.parseObject(this.candidate);
-      this.candidateForm = this.
+      console.log('editedCandidate -', this.editedCandidate);
+      this.candidateForm = this.fb.group({
+        name: [this.editedCandidate.name, Validators.compose([Validators.required, Validators.pattern(RegexpConst.LATIN_NAME)])],
+        surname: [this.editedCandidate.surname, Validators.compose([Validators.required, Validators.pattern(RegexpConst.LATIN_NAME)])],
+        position: [this.editedCandidate.position],
+        status: [this.editedCandidate.candidateState.name]
+      });
     }
     this.photo = this.candidateWorker.findPhoto(this.candidate);
     console.log('photo', this.photo);
-  }
-  findPhoto() {
-    console.log('attachments', this.candidate.attachments);
-    this.photo = this.candidate.attachments.find((attachment) => {
-      return attachment.attachmentType === AttachmentType.PHOTO;
-    });
   }
   initContacts() {
     this.tests = [
@@ -169,36 +169,17 @@ export class ShortInfoUserComponent implements OnInit, OnDestroy, OnChanges {
     this.changeContactProperty(this.tests[2]);
   }
 
-  openStatusDialog(): void {
-    const dialogRef = this.dialog.open(StatusCandidateModalComponent, {
-      data: this.candidate
-      }
-    );
-
-    dialogRef.afterClosed().subscribe(result => {
-      console.log('The dialog was closed');
-      // this.animal = result;
-    });
-  }
-
-  openNameDialog(): void {
-    const dialogRef = this.dialog.open(NameCandidateModalComponent, {
-      data: this.candidate
-      }
-    );
-
-    dialogRef.afterClosed().subscribe(result => {
-      console.log('The dialog was closed');
-      // this.animal = result;
-    });
-  }
-
   onFocusoutAnyInput(value: boolean = true) {
     if (value) {
-      console.log('candidate', this.candidate);
-      this.candidateSerivce.update(this.candidate).subscribe(res => {
-        this.outputEditCandidate.emit(res);
-      });
+      console.log('candidate', this.editedCandidate);
+      if (this.candidateForm.valid) {
+        this.isSavedCandidate = true;
+        this.candidateSerivce.update(this.editedCandidate).subscribe(res => {
+          this.outputEditCandidate.emit(res);
+        });
+      } else {
+        this.isSavedCandidate = false;
+      }
     }
   }
 
