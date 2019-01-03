@@ -11,11 +11,13 @@
       <mat-form-field *ngIf="editedVacancy" class="example-full-width">
         <input [(ngModel)]="editedVacancy.position" name="position" matInput placeholder="{{'Position' | translate}}" required>
       </mat-form-field>
-      <mat-select placeholder="{{'Status' | translate}}" required [(ngModel)]="editedVacancy.vacancyState" name="state">
-        <mat-option *ngFor="let state of statuses" [value]="state">
-          {{state | translate}}
-        </mat-option>
-      </mat-select>
+      <mat-form-field class="example-full-width">
+        <mat-select placeholder="{{'Status' | translate}}" required [(ngModel)]="editedVacancy.vacancyState" name="state">
+          <mat-option *ngFor="let state of statuses" [value]="state">
+            {{state | translate}}
+          </mat-option>
+        </mat-select>
+      </mat-form-field>
       <mat-form-field class="example-full-width">
         <textarea matInput [(ngModel)]="editedVacancy.description" name="description" placeholder="{{'Description' | translate}}"></textarea>
       </mat-form-field>

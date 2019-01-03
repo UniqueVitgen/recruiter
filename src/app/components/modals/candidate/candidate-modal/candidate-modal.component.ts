@@ -39,7 +39,7 @@ export class CandidateModalComponent implements OnInit {
         name: '',
         surname: '',
         candidateState: {
-          name: ''
+          name: 'Open'
         },
         contacts: [
           {
@@ -61,7 +61,7 @@ export class CandidateModalComponent implements OnInit {
         surname: ['', Validators.compose([Validators.required, Validators.pattern(RegexpConst.LATIN_NAME)])],
         state: [''],
         position: [''],
-        status: [''],
+        status: ['Open', Validators.compose([Validators.required])],
         skype: [''],
         phone: ['', Validators.compose([Validators.pattern(RegexpConst.BELLARUSSIAN_PHONE)])],
         email: ['', Validators.compose([Validators.pattern(RegexpConst.EMAIL)])]

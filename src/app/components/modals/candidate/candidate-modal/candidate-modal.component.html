@@ -11,7 +11,7 @@
     <div *ngIf="editedCandidate && candidateForm">
       <form [formGroup]="candidateForm">
         <mat-form-field class="example-full-width">
-          <input class="star-input" formControlName="name" [(ngModel)]="editedCandidate.name"  matInput placeholder="{{'Name' | translate}}*">
+          <input class="star-input" required formControlName="name" [(ngModel)]="editedCandidate.name"  matInput placeholder="{{'Name' | translate}}">
           <mat-error *ngIf="candidateForm.controls['name'].hasError('required')">
             {{'Name is required' | translate}}
           </mat-error>
@@ -20,7 +20,7 @@
           </mat-error>
         </mat-form-field>
         <mat-form-field class="example-full-width">
-          <input class="star-input" formControlName="surname" [(ngModel)]="editedCandidate.surname" matInput placeholder="{{'Surname' | translate}}*" >
+          <input class="star-input" required formControlName="surname" [(ngModel)]="editedCandidate.surname" matInput placeholder="{{'Surname' | translate}}" >
           <mat-error *ngIf="candidateForm.controls['surname'].hasError('required')">
             {{'Surname is required' | translate}}
           </mat-error>
@@ -30,7 +30,7 @@
         </mat-form-field>
         <app-positions-select formControlName="position" [(ngModel)]="editedCandidate.position" [vacancies]="data.sourceVacancies" [visibleUnderline]="false"></app-positions-select>
         <mat-form-field class="example-full-width">
-          <mat-select formControlName="status" [placeholder]="'Status' | translate" [(ngModel)]="editedCandidate.candidateState.name">
+          <mat-select required formControlName="status" [placeholder]="'Status' | translate" [(ngModel)]="editedCandidate.candidateState.name">
             <mat-option *ngFor="let state of setStates" [value]="state" >{{state | translate}}</mat-option>
           </mat-select>
         </mat-form-field>
