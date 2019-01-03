@@ -18,6 +18,7 @@ export class CandidateAvatarComponent implements OnInit {
   @Input() isMoreIcon: boolean;
   @Output() clickEditIcon: EventEmitter<any> = new EventEmitter();
   @Output('clickCloseIcon') outputClickCloseIcon: EventEmitter<any> = new EventEmitter();
+  @Output('clickRemoveFromBaseIcon') outputClickRemoveFromBaseIcon: EventEmitter<any> = new EventEmitter();
   @Output('clickAvatar') outputClickAvatar: EventEmitter<any> = new EventEmitter();
 
   constructor(public userWorker: UserWorker) { }
@@ -32,7 +33,9 @@ export class CandidateAvatarComponent implements OnInit {
   clickClose() {
     this.outputClickCloseIcon.emit();
   }
-
+  clickRemoveFromBase() {
+    this.outputClickRemoveFromBaseIcon.emit();
+  }
   clickAvatar() {
     this.outputClickAvatar.emit();
   }

@@ -23,6 +23,7 @@ export class AlertWithButtonModalComponent implements OnInit {
   }
   clickOk() {
     this.outputClickOk.emit(true);
+    this.dialogRef.close();
   }
 
 }

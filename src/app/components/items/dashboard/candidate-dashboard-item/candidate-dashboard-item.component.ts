@@ -1,6 +1,6 @@
 import {Component, OnChanges, Input, Output, EventEmitter, SimpleChanges} from '@angular/core';
-import { Router } from '@angular/router';
-import { Candidate } from 'src/app/classes/candidate';
+import {Router} from '@angular/router';
+import {Candidate} from 'src/app/classes/candidate';
 import {UserWorker} from '../../../../workers/user/user.worker';
 import {CandidateService} from '../../../../services/candidate/candidate.service';
 import {Attachment} from '../../../../classes/attachment';
@@ -11,13 +11,15 @@ import {CandidateWorker} from '../../../../workers/candidate/candidate.worker';
   templateUrl: './candidate-dashboard-item.component.html',
   styleUrls: ['./candidate-dashboard-item.component.scss']
 })
-export class CandidateDashboardItemComponent implements OnChanges{
+export class CandidateDashboardItemComponent implements OnChanges {
   @Output('deleteCandidate') outputDeleteCandidate: EventEmitter<Candidate> = new EventEmitter();
+  @Output('deleteCandidateFromTheBase') outputDeleteCandidateFromTheBase: EventEmitter<Candidate> = new EventEmitter();
   @Input() candidate: Candidate;
   @Input() haveHoverEffect: boolean;
   @Input() isClosedIcon: boolean;
   @Input() clickableCandidate: boolean;
   public photo: Attachment;
+
   constructor(
     private router: Router,
     public userWorker: UserWorker,
@@ -31,14 +33,20 @@ export class CandidateDashboardItemComponent implements OnChanges{
   }
 
 
-  deleteCandidate() {
+  deleteCandidate(): void {
     // this.candidateService.delete(this.candidate.id).subscribe(
     //   (res) => { console.log('id');
-        this.outputDeleteCandidate.emit(this.candidate);
-      // });
+    console.log(this.candidate);
+    this.outputDeleteCandidate.emit(this.candidate);
+    // });
   }
 
-  goToCandidatePage() {
+  deleteCandidateFromTheBase(): void {
+    console.log('deleteCandidateFromTheBase');
+    this.outputDeleteCandidateFromTheBase.emit(this.candidate);
+  }
+
+  goToCandidatePage(): void {
     this.router.navigate(['candidate', this.candidate.id]);
   }
 

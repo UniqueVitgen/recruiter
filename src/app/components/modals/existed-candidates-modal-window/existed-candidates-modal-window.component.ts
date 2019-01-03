@@ -11,9 +11,11 @@ import {Vacancy} from '../../../classes/vacancy';
   templateUrl: './existed-candidates-modal-window.component.html',
   styleUrls: ['./existed-candidates-modal-window.component.scss']
 })
-export class ExistedCandidatesModalWindowComponent implements OnInit, OnChanges {
-  candidates: Candidate[];
+export class ExistedCandidatesModalWindowComponent implements OnInit {
+  public candidates: Candidate[];
   public photo: Attachment;
+  public numberOfAvailableCandidates: number;
+  public noCandidateToAdd: boolean;
 
   constructor(private candidateService: CandidateService,
               public dialogRef: MatDialogRef<DeleteVacancyDialogComponent>,
@@ -44,12 +46,14 @@ export class ExistedCandidatesModalWindowComponent implements OnInit, OnChanges 
   getAll() {
     this.candidateService.getAll().subscribe(res => {
       this.candidates = res;
+      this.numberOfAvailableCandidates = res.length - this.data.currentVacancy.candidates.length;
+      this.noCandidateToAdd = this.numberOfAvailableCandidates === 0;
     }, err => {
       console.log('1' + err);
     });
-  }
+    console.log('candidates');
 
-  ngOnChanges(changes: SimpleChanges): void {
+    //
   }
 
   onNoClick() {

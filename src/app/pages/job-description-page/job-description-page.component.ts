@@ -1,4 +1,4 @@
-import {Component, OnInit} from '@angular/core';
+import {Component, DoCheck, OnInit} from '@angular/core';
 import {ActivatedRoute} from '@angular/router';
 import {VacancyService} from '../../services/vacancy/vacancy.service';
 import {Vacancy} from '../../classes/vacancy';
@@ -9,6 +9,8 @@ import {JobDescriptionModalComponent} from '../../components/modals/job-descript
 import {BaseDialogResult} from '../../interfaces/dialog/result/base-dialog-result';
 import {ExistedCandidatesModalWindowComponent} from '../../components/modals/existed-candidates-modal-window/existed-candidates-modal-window.component';
 import {MatDialog} from '@angular/material';
+import {AlertWithButtonModalComponent} from '../../components/modals/alert-with-button-modal/alert-with-button-modal.component';
+import {AlertWithButtonDialogData} from '../../interfaces/dialog/init/alert-with-button-dialog-data';
 
 @Component({
   selector: 'app-job-description-page',
@@ -38,7 +40,7 @@ export class JobDescriptionPageComponent implements OnInit {
     this.getAllCondidates();
   }
 
-  getAllCondidates() {
+  getAllCondidates(): void {
     console.log('1');
     this.candidateService.getAll().subscribe(res => {
       console.log(res);
@@ -90,7 +92,65 @@ export class JobDescriptionPageComponent implements OnInit {
     });
   }
 
-  changeVacancy(vacancy: Vacancy) {
+  deleteCandidate(candidateID: number): void {
+    console.log('Delete candidate page:');
+    console.log(candidateID);
+    this.vacancy.candidates.splice(candidateID, 1);
+    console.log(this.vacancy.candidates);
+    this.vacancyService.update(this.vacancy).subscribe(resVacancy => {
+      console.log(resVacancy);
+      this.getVacancy();
+    });
+  }
+
+  askForDeleteCandidate(candidateID: number) {
+    const dialogRef = this.dialog.open(AlertWithButtonModalComponent, {
+        data: <AlertWithButtonDialogData> {
+          buttonText: 'Delete',
+          message: 'Do you really want to delete this candidate?',
+          title: 'Confirm delete'
+        },
+        disableClose: true
+      }
+    );
+    dialogRef.componentInstance.outputClickOk.subscribe((resAnswer: boolean) => {
+      if (resAnswer) {
+        this.deleteCandidate(candidateID);
+      }
+    });
+
+  }
+
+  deleteCandidateFromTheBase(candidateID: number): void {
+    console.log('Delete candidate page:');
+    console.log(candidateID);
+    this.candidates.splice(candidateID, 1);
+    console.log(this.vacancy.candidates);
+    this.candidateService.delete(candidateID).subscribe(res => {
+      this.getAllCondidates();
+      this.getVacancy();
+    });
+  }
+
+  askForDeleteCandidateFromTheBase(candidateID: number) {
+    const dialogRef = this.dialog.open(AlertWithButtonModalComponent, {
+        data: <AlertWithButtonDialogData> {
+          buttonText: 'Delete',
+          message: 'Do you really want to delete this candidate?',
+          title: 'Confirm delete'
+        },
+        disableClose: true
+      }
+    );
+    dialogRef.componentInstance.outputClickOk.subscribe((resAnswer: boolean) => {
+      if (resAnswer) {
+        this.deleteCandidateFromTheBase(candidateID);
+      }
+    });
+
+  }
+
+  changeVacancy(vacancy: Vacancy): void {
     this.getVacancy();
   }
 
@@ -114,4 +174,5 @@ export class JobDescriptionPageComponent implements OnInit {
       }
     });
   }
+
 }

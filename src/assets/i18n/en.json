@@ -101,6 +101,9 @@
   "Select candidate": "Select candidate",
   "Delete confirm": "Delete confirm",
   "Confirm delete": "Confirm delete",
+  "You have already added all candidates": "You have already added all candidates",
+  "Remove from the system": "Remove from the system",
+  "Remove from this vacancy": "Remove from this vacancy",
   "Private": "Private",
   "No matching vacancy found" : "No matching vacancy found",
   "Find vacancy" : "Find vacancy..."
