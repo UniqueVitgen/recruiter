@@ -11,6 +11,9 @@ import {ExistedCandidatesModalWindowComponent} from '../../components/modals/exi
 import {MatDialog} from '@angular/material';
 import {AlertWithButtonModalComponent} from '../../components/modals/alert-with-button-modal/alert-with-button-modal.component';
 import {AlertWithButtonDialogData} from '../../interfaces/dialog/init/alert-with-button-dialog-data';
+import {CandidateModalComponent} from '../../components/modals/candidate/candidate-modal/candidate-modal.component';
+import {CandidateDialogData} from '../../interfaces/dialog/init/candidate-dialog-data';
+import {CandidateDialogResult} from '../../interfaces/dialog/result/candidate-dialog-result';
 
 @Component({
   selector: 'app-job-description-page',
@@ -52,6 +55,23 @@ export class JobDescriptionPageComponent implements OnInit {
 
   changeSearchInputSelected(): void {
     this.searchInputSelected = !this.searchInputSelected;
+  }
+
+  addModalCandidate() {
+    const vacancies: Vacancy[] = [this.vacancy];
+    const dialogRef = this.dialog.open(CandidateModalComponent, {
+        data: <CandidateDialogData> {
+          sourceVacancies: vacancies
+        },
+        disableClose: true
+      }
+    );
+    dialogRef.afterClosed().subscribe((res: CandidateDialogResult) => {
+      if (res) {
+        console.log('res - ', res);
+        this.addCandidate(res.resCandidate);
+      }
+    });
   }
 
   // changeSearchInputPossible(): void {

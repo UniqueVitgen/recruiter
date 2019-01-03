@@ -22,9 +22,15 @@
       <mat-icon>search</mat-icon>
     </button>
     &nbsp;
-    <button mat-mini-fab color="primary" (click)="openExistingCandidatesModalWindow()" >
-      <mat-icon>person_add</mat-icon>
+    <button  (click)="$event.stopPropagation()"  mat-mini-fab color="primary" [matMenuTriggerFor]="menu">
+      <mat-icon class="close-icon-image" [matTooltip]="'Add canidates' | translate">person_add</mat-icon>
     </button>
+    <!--<button mat-mini-fab color="primary" (click)="openExistingCandidatesModalWindow()" >-->
+      <!--<mat-icon>person_add</mat-icon>-->
+    <!--</button>-->
+    <!--<button mat-mini-fab color="primary" (click)="addModalCandidate()" >-->
+      <!--<mat-icon>person_add</mat-icon>-->
+    <!--</button>-->
   </mat-card-title>
   <div *ngIf="searchInputSelected">
     <app-search-input (onSearch)="searchSelected($event)"></app-search-input>
@@ -36,6 +42,10 @@
 
 
 </mat-card>
+<mat-menu #menu="matMenu">
+  <button (click)="openExistingCandidatesModalWindow()" mat-menu-item>{{'Add existed candidate'| translate}}</button>
+  <button (click)="addModalCandidate()" mat-menu-item>{{'Add new candidate'| translate}}</button>
+</mat-menu>
 <!--<mat-card>-->
   <!--<mat-card-title>-->
     <!--<span>{{'Possible Candidates' | translate}}</span>-->
