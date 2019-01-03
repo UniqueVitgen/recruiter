@@ -101,5 +101,7 @@
   "Select candidate": "Select candidate",
   "Delete confirm": "Delete confirm",
   "Confirm delete": "Confirm delete",
-  "Private": "Private"
+  "Private": "Private",
+  "No matching vacancy found" : "No matching vacancy found",
+  "Find vacancy" : "Find vacancy..."
 }

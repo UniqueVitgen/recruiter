@@ -101,5 +101,7 @@
   "Select candidate": "Выбрать кандидата",
   "Delete confirm": "Подтверждение удаление",
   "Confirm delete": "Подтверждение удаление",
-  "Private": "Приватно"
+  "Private": "Приватно",
+  "No matching vacancy found" : "Не найдено подходящей вакансии",
+  "Find vacancy" : "Найти вакансию..."
 }

@@ -15,6 +15,6 @@ export class Vacancy {
   skills: Skill[];
   requirements: Requirement[] = [];
   candidates?: Candidate[] = [];
-
+  description: string;
 
 }

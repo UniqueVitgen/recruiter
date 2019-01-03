@@ -16,7 +16,7 @@
       </button>
     </div>
     <label name="vacancyDescriptionTitle" class="vacancyTitles">{{'Description' | translate}}: </label>
-    <label name="vacancyDescriptionContent" class="vacancyDescriptionContent">{{'Text of description will be here' | translate}}</label>
+    <label name="vacancyDescriptionContent" class="vacancyDescriptionContent" >{{vacancy.description}}</label>
 
     <div  fxShow="false" fxShow.gt-xs="true" *ngIf="vacancy.requirements && vacancy.requirements.length > 0">
       <div class="row font-weight-bold" >
