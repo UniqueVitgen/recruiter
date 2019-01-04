@@ -2,15 +2,15 @@
 
 
   <dialog-title class="example-full-width">
-    <div *ngIf="noCandidateToAdd">
+    <span *ngIf="noCandidateToAdd">
       {{'You have already added all candidates' | translate}}
-    </div>
-    <div *ngIf="!noCandidateToAdd">
+    </span>
+    <span *ngIf="!noCandidateToAdd">
       {{'Select candidate' | translate}}({{numberOfAvailableCandidates}})
-      <button (click)="onNoClick()" class="float-right" mat-icon-button>
-        <mat-icon [matTooltip]="'To close' | translate">close</mat-icon>
-      </button>
-    </div>
+    </span>
+    <button (click)="onNoClick()" class="float-right" mat-icon-button>
+      <mat-icon [matTooltip]="'To close' | translate">close</mat-icon>
+    </button>
 
 
     <!--<span class="float-right">-->

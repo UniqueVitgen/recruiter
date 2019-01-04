@@ -80,7 +80,7 @@
   <dialog-footer class="example-full-width">
     <span class="float-right">
     <button mat-button (click)="onNoClick()">{{'No Thanks' | translate}}</button>
-    <button autofocus mat-button [disabled]="vacancyForm.form.invalid" mat-raised-button color="primary" (click)="save()">{{data.dialogWindowTitle | translate}}
+    <button autofocus cdkFocusInitial mat-button [disabled]="vacancyForm.form.invalid" mat-raised-button color="primary" (click)="save()">{{data.dialogWindowTitle | translate}}
     </button>
     </span>
   </dialog-footer>
