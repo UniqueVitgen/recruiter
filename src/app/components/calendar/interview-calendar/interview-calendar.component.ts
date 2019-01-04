@@ -156,7 +156,7 @@ export class InterviewCalendarComponent implements OnInit, OnChanges {
     }
   }
   determineOptions() {{
-    let buttonText, firstDay;
+    let buttonText, firstDay, titleFormat;
     if (this.locale === 'ru') {
       buttonText = {
         month:    'Месяц',
@@ -166,6 +166,7 @@ export class InterviewCalendarComponent implements OnInit, OnChanges {
         list:     'Список'
       };
       firstDay = 1;
+      titleFormat = 'MMM YYYY';
     } else {
       buttonText = {
         month:    'Month',
@@ -175,6 +176,7 @@ export class InterviewCalendarComponent implements OnInit, OnChanges {
         list:     'List'
       };
       firstDay = 0;
+      titleFormat = 'MMM YYYY';
     }
     return {
       allDaySlot: false,
@@ -182,6 +184,7 @@ export class InterviewCalendarComponent implements OnInit, OnChanges {
       minTime: <any> '08:00:00',
       maxTime: <any> '23:00:00',
       locale: this.locale,
+      titleFormat: titleFormat,
       buttonText: buttonText,
       firstDay: firstDay,
       theme: 'bootstrap4',
