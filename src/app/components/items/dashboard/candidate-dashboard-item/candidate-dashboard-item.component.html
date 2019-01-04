@@ -8,11 +8,12 @@
   <!--</mat-card-header>-->
   <!--<div class="row">-->
   <!--<div class="col-6">-->
+
   <app-candidate-avatar [src]="candidateWorker.generatePhotoUrl(photo)" [haveHoverEffect]="haveHoverEffect"
                         [isDeleteIcon]="isDeleteIcon" [isClosedIcon]="isClosedIcon" [isStatus]="true"
                         (clickDeleteIcon)="deleteCandidateFromTheBase()" (clickCloseIcon)="deleteCandidate()"
                         (clickRemoveFromBaseIcon)="deleteCandidateFromTheBase()"
-                        [candidate]="candidate"></app-candidate-avatar>
+                        [candidate]="candidate" [isSelect]="isSelect" [(checkBox)]="select" (checkBoxChange)="changeValue($event)" ></app-candidate-avatar>
   <!--</div>-->
   <!--<div class="col-6">-->
   <div class="user-name user-info">
@@ -27,6 +28,8 @@
       </div>
     </div>
   </div>
+
+
   <!--</div>-->
   <!--</div>-->
   <!--<br>-->

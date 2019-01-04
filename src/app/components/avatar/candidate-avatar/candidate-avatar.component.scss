@@ -56,6 +56,12 @@
     bottom: 0;
     right: 0;
   }
+  .modal-select-checkbox{
+    top: 5px;
+    right: 5px;
+    position: absolute;
+    color: whitesmoke;
+  }
   .close-icon-image {
     &:hover{
       cursor: pointer;
