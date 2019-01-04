@@ -1,13 +1,16 @@
-import { Component, OnInit } from '@angular/core';
+import {AfterViewChecked, ChangeDetectorRef, Component, Input, OnChanges, OnInit, SimpleChanges} from '@angular/core';
 import {NavbarLink} from '../../../classes/html/navbar-link';
 import {TranslateWorker} from '../../../workers/translate/translate.worker';
+import {ModalWorker} from '../../../workers/modal/modal.worker';
 
 @Component({
   selector: 'app-navbar-itchar',
   templateUrl: './navbar-itchar.component.html',
   styleUrls: ['./navbar-itchar.component.scss']
 })
-export class NavbarItcharComponent implements OnInit {
+export class NavbarItcharComponent implements OnInit, OnChanges {
+  @Input() disabled: boolean;
+  public editedDisabled: boolean;
 
   routes: NavbarLink[] = [
     {routerLink: '/candidate', title: 'Candidate Dashboard', isActive: true},
@@ -17,7 +20,8 @@ export class NavbarItcharComponent implements OnInit {
     // {routerLink: '/interview/0', title: 'Interview', isActive: false}
   ];
 
-  constructor(public translateWorker: TranslateWorker) { }
+  constructor(public translateWorker: TranslateWorker,
+              public modalWorker: ModalWorker, private cd: ChangeDetectorRef) { }
 
   ngOnInit() {
   }
@@ -29,6 +33,12 @@ export class NavbarItcharComponent implements OnInit {
         el.isActive = false;
       }
     });
+  }
+
+  ngOnChanges(changes: SimpleChanges): void {
+    // setTimeout(() => {
+      this.editedDisabled = this.disabled;
+    // }, 200);
   }
 
 }
