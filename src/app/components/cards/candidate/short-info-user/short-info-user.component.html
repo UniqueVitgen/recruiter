@@ -40,15 +40,10 @@
               {{'Surname must contain only latin characters' | translate}}
             </mat-error>
           </mat-form-field>
-          <!--<mat-form-field class="example-full-width custom-form-field">-->
-          <!--<mat-select [compareWith]="compareStrings" [(ngModel)]="candidate.position" [formControl]="vacancyCtrl" [placeholder]="'Position' | translate"  matInput (ngModelChange)="onFocusoutAnyInput()" #singleSelect>-->
-          <!--<ngx-mat-select-search [formControl]="vacancyFilterCtrl"></ngx-mat-select-search>-->
-          <!--<mat-option *ngFor="let vacancy of filteredVacancies | async" [value]="vacancy.position">-->
-          <!--{{vacancy.position}}-->
-          <!--</mat-option>-->
-          <!--</mat-select>-->
-          <!--</mat-form-field>-->
-          <app-positions-select  formControlName="position" [(ngModel)]="editedCandidate.position" (ngModelChange)="onFocusoutAnyInput()" [vacancies]="vacancies" [visibleUnderline]="true"></app-positions-select>
+          <mat-form-field class="example-full-width custom-form-field">
+            <input (blur)="onFocusoutAnyInput()" formControlName="position"   [(ngModel)]="editedCandidate.position.name"  matInput [placeholder]="'Position' | translate" readonly="false" >
+          </mat-form-field>
+          <!--<app-positions-select  formControlName="position" [(ngModel)]="editedCandidate.position.name" (ngModelChange)="onFocusoutAnyInput()" [vacancies]="vacancies" [visibleUnderline]="true"></app-positions-select>-->
           <mat-form-field class="example-full-width custom-form-field">
             <!--<input (blur)="onFocusoutAnyInput()" [(ngModel)]="candidate.candidateState.name" matInput placeholder="Status"> -->
             <mat-select placeholder="{{'Status' | translate}}" formControlName="status" [(ngModel)]="editedCandidate.candidateState.name" matInput (blur)="onFocusoutAnyInput()">

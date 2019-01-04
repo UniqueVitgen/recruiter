@@ -33,11 +33,6 @@ export const _filter = (opt: string[], value: string): string[] => {
 export class JobDescriptionModalComponent implements OnInit {
   private dialogResult: BaseDialogResult<Vacancy>;
   editedVacancy: VacancyForm;
-  testRequirements = [
-    'Communicable',
-    'TeamLeader',
-    'Responsible'
-  ];
   statuses = [VacancyState.OPEN, VacancyState.CLOSE];
 
   constructor(private fb: FormBuilder,

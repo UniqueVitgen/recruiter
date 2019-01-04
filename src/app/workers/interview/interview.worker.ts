@@ -21,7 +21,7 @@ export class InterviewWorker {
     const date = new Date(interview.planDate);
     const dateEnd = new Date(date.getTime() + 60 * this.dateTimeWorker.minute);
     return {
-      title: interview.vacancy.position + ' - ' + interview.candidate.surname,
+      title: interview.vacancy.position.name + ' - ' + interview.candidate.surname,
       start: date.toISOString(),
       end: date.toISOString(),
       // start: this.dateTimeWorker.transform(date, 'yyyy-MM-ddT', 'UTC', this.translateWorker.getLanguage()) + this.dateTimeWorker.getTime(date, 'HH:mm') + ':' + '00' ,

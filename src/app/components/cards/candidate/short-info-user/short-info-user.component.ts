@@ -73,11 +73,12 @@ export class ShortInfoUserComponent implements OnInit, OnDestroy, OnChanges {
     }
     if (this.isSavedCandidate) {
       this.editedCandidate = this.typeCheckingWorker.parseObject(this.candidate);
+      // if (this.editedCandidate.position == null) {this.editedCandidate.position = new Position(); }
       console.log('editedCandidate -', this.editedCandidate);
       this.candidateForm = this.fb.group({
         name: [this.editedCandidate.name, Validators.compose([Validators.required, Validators.pattern(RegexpConst.LATIN_NAME)])],
         surname: [this.editedCandidate.surname, Validators.compose([Validators.required, Validators.pattern(RegexpConst.LATIN_NAME)])],
-        position: [this.editedCandidate.position],
+        position: [this.editedCandidate.position ? this.editedCandidate.position.name : ''],
         status: [this.editedCandidate.candidateState.name]
       });
     }

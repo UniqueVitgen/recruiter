@@ -1,9 +1,10 @@
-import { Skill } from "./skill";
-import { CandidateExperience } from "./candidate-experience";
-import { ContactDetails } from "./contact-details";
-import { Attachment } from "./attachment";
-import { CandidateState } from "./candidate-state";
+import { Skill } from './skill';
+import { CandidateExperience } from './candidate-experience';
+import { ContactDetails } from './contact-details';
+import { Attachment } from './attachment';
+import { CandidateState } from './candidate-state';
 import {Responsibility} from './responsibility';
+import {Position} from './position';
 
 export class Candidate {
   id?: number;
@@ -18,5 +19,5 @@ export class Candidate {
   attachments?: Attachment[];
   responsibilities?: Responsibility[];
   timelines?: any[];
-  position?: string;
+  position?: Position = new Position();
 }

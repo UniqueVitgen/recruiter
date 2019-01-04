@@ -63,7 +63,7 @@
       <mat-form-field class="example-full-width">
         <mat-select [placeholder]="'Vacancy' | translate" [compareWith]="typeCheckingWorker.compareObjects" [(value)]="sourceVacancy">
           <mat-option *ngFor="let food of vacancies" [value]="food">
-            {{food.position}}
+            {{food.position.name}}
           </mat-option>
         </mat-select>
       </mat-form-field>

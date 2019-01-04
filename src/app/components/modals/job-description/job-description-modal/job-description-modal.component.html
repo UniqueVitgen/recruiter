@@ -9,7 +9,7 @@
   </dialog-title>
   <dialog-body>
       <mat-form-field *ngIf="editedVacancy" class="example-full-width">
-        <input [(ngModel)]="editedVacancy.position" name="position" matInput placeholder="{{'Position' | translate}}" required>
+        <input [(ngModel)]="editedVacancy.position.name" name="position" matInput placeholder="{{'Position' | translate}}" required>
       </mat-form-field>
       <mat-form-field class="example-full-width">
         <mat-select placeholder="{{'Status' | translate}}" required [(ngModel)]="editedVacancy.vacancyState" name="state">

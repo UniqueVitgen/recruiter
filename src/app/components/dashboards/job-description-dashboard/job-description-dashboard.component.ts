@@ -45,7 +45,7 @@ export class JobDescriptionDashboardComponent implements OnInit, OnChanges {
     if (value) {
       const valueLowercase = value.toLowerCase();
       this.selectedVacancies = this.jobDescriptionList.filter((vacancy) => {
-        const position = vacancy.position.toLowerCase();
+        const position = vacancy.position.name.toLowerCase();
         return position.indexOf(valueLowercase) > -1;
       });
     } else {

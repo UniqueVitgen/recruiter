@@ -55,6 +55,10 @@ export class CandidateModalComponent implements OnInit {
             contactDetails: ''
           }
         ]
+        ,
+        position: {
+          name: ''
+        }
       };
       this.candidateForm = this.formBuilder.group({
         name: ['', Validators.compose([Validators.required, Validators.pattern(RegexpConst.LATIN_NAME)])],
@@ -66,6 +70,7 @@ export class CandidateModalComponent implements OnInit {
         phone: ['', Validators.compose([Validators.pattern(RegexpConst.BELLARUSSIAN_PHONE)])],
         email: ['', Validators.compose([Validators.pattern(RegexpConst.EMAIL)])]
       });
+      console.log(this.editedCandidate);
     }
     this.setStates = this.enumWorker.getValuesFromEnum(CandidateState);
   }
@@ -77,6 +82,7 @@ export class CandidateModalComponent implements OnInit {
   }
 
   editCandidate() {
+    console.log(this.editedCandidate);
     if (this.data.isEdit) {
       this.candidateService.update(this.editedCandidate).subscribe(res => {
         this.dialogResult = {

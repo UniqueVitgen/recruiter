@@ -57,7 +57,7 @@ export class PositionsSelectComponent implements OnDestroy, AfterViewInit, OnCha
       search = search.toLowerCase();
     }
     this.filteredVacancies.next(
-      this.vacancies.filter(vacancy => vacancy.position.toLowerCase().indexOf(search) > -1)
+      this.vacancies.filter(vacancy => vacancy.position.name.toLowerCase().indexOf(search) > -1)
     );
   }
   ngOnChanges() {
