@@ -89,15 +89,15 @@ export class ShortInfoUserComponent implements OnInit, OnDestroy, OnChanges {
       {have: this.candidateWorker.haveEmail(this.candidate),
         value: ContactType.EMAIL,
         methodName: 'getEmailObject',
-        control: new FormControl('', Validators.compose([Validators.pattern(RegexpConst.EMAIL)]))
+        control: new FormControl('', Validators.compose([Validators.pattern(RegexpConst.EMAIL), Validators.required]))
       },
       {have: this.candidateWorker.haveSkype(this.candidate),
         value: ContactType.SKYPE, methodName: 'getSkypeObject',
-        control: new FormControl('', Validators.compose([]))},
+        control: new FormControl('', Validators.compose([Validators.required]))},
       {have: this.candidateWorker.havePhone(this.candidate),
         value: ContactType.PHONE,
         methodName: 'getPhoneObject',
-        control: new FormControl('', Validators.compose([Validators.pattern(RegexpConst.BELLARUSSIAN_PHONE)]))
+        control: new FormControl('', Validators.compose([Validators.pattern(RegexpConst.BELLARUSSIAN_PHONE), Validators.required]))
       }
     ];
     console.log(this.tests);
