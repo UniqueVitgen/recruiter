@@ -8,9 +8,8 @@ import {ModalWorker} from '../../../workers/modal/modal.worker';
   templateUrl: './navbar-itchar.component.html',
   styleUrls: ['./navbar-itchar.component.scss']
 })
-export class NavbarItcharComponent implements OnInit, OnChanges {
+export class NavbarItcharComponent implements OnInit {
   @Input() disabled: boolean;
-  public editedDisabled: boolean;
 
   routes: NavbarLink[] = [
     {routerLink: '/candidate', title: 'Candidate Dashboard', isActive: true},
@@ -20,8 +19,7 @@ export class NavbarItcharComponent implements OnInit, OnChanges {
     // {routerLink: '/interview/0', title: 'Interview', isActive: false}
   ];
 
-  constructor(public translateWorker: TranslateWorker,
-              public modalWorker: ModalWorker, private cd: ChangeDetectorRef) { }
+  constructor(public translateWorker: TranslateWorker) { }
 
   ngOnInit() {
   }
@@ -33,12 +31,6 @@ export class NavbarItcharComponent implements OnInit, OnChanges {
         el.isActive = false;
       }
     });
-  }
-
-  ngOnChanges(changes: SimpleChanges): void {
-    // setTimeout(() => {
-      this.editedDisabled = this.disabled;
-    // }, 200);
   }
 
 }
