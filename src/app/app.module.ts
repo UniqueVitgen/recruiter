@@ -106,6 +106,7 @@ import { AlertWithButtonModalComponent } from './components/modals/alert-with-bu
 import { StickyTopDirective } from './directives/sticky-top/sticky-top.directive';
 import {NgxMatSelectSearchModule} from 'ngx-mat-select-search';
 import { PositionsSelectComponent } from './components/selects/positions-select/positions-select.component';
+import {NgxPaginationModule} from 'ngx-pagination';
 
 export function HttpLoaderFactory(http: HttpClient) {
   return new TranslateHttpLoader(http);
@@ -216,7 +217,8 @@ export function HttpLoaderFactory(http: HttpClient) {
     // LyToolbarModule,
     // LyResizingCroppingImageModule
     ImageCropperModule,
-    NgxMatSelectSearchModule
+    NgxMatSelectSearchModule,
+    NgxPaginationModule
     // MDBBootstrapModule.forRoot(),
     // NgxMaterialTimepickerModule.forRoot()
     // ,

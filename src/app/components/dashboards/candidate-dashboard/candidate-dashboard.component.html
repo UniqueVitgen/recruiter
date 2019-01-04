@@ -1,8 +1,8 @@
 <div *ngIf="selectedCandidates" class="row">
   <div
-    *ngFor="let candidate of selectedCandidates | slice:0:limitTo ? limitTo : selectedCandidates.length; let i = index"
+    *ngFor="let candidate of selectedCandidates | paginate: { itemsPerPage: itemsPerPage, currentPage: p } | slice:0:limitTo ? limitTo : selectedCandidates.length; let i = index"
     [ngClass]=" filledCells ? 'col-md-' + filledCells : 'col-md-3'" class="col-12 center-item heightitem">
-    <app-candidate-dashboard-item [clickableCandidate]="true" [haveHoverEffect]="haveHoverEffect"
+    <app-candidate-dashboard-item  [clickableCandidate]="true" [haveHoverEffect]="haveHoverEffect"
                                   [isDeleteIcon]="isDeleteIcon" [isClosedIcon]="isClosedIcon" (deleteCandidate)="deleteCandidate(i)" (deleteCandidateFromTheBase)="deleteCandidateFromTheBase(candidate.id)"
                                   [candidate]="candidate"></app-candidate-dashboard-item>
   </div>
@@ -14,3 +14,4 @@
   </div>
 
 </div>
+<pagination-controls *ngIf="isPagination" class="custom-pagination" autoHide="true" responsive="true" (pageChange)="p = $event"></pagination-controls>
