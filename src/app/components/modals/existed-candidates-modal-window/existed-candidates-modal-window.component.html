@@ -4,9 +4,12 @@
   <dialog-title class="example-full-width">
     <div *ngIf="noCandidateToAdd">
       {{'You have already added all candidates' | translate}}
-    </div >
+    </div>
     <div *ngIf="!noCandidateToAdd">
       {{'Select candidate' | translate}}({{numberOfAvailableCandidates}})
+      <button (click)="onNoClick()" class="float-right" mat-icon-button>
+        <mat-icon [matTooltip]="'To close' | translate">close</mat-icon>
+      </button>
     </div>
 
 
@@ -15,28 +18,43 @@
     <!--</span>-->
   </dialog-title>
   <dialog-body>
+
     <div #candidateView *ngFor="let candidate of candidates; let i = index">
       <!--<div *ngIf="isThisCandidateAlreadyHere(candidate)" (click)="addCandidate(i)"-->
-           <!--class="candidate-line example-full-width">-->
-        <!--<app-candidate-dashboard-item [haveHoverEffect]="true" [isClosedIcon]="false"-->
-                                      <!--[candidate]="candidate"-->
-                                      <!--[clickableCandidate]="false"></app-candidate-dashboard-item>-->
+      <!--class="candidate-line example-full-width">-->
+      <!--<app-candidate-dashboard-item [haveHoverEffect]="true" [isClosedIcon]="false"-->
+      <!--[candidate]="candidate"-->
+      <!--[clickableCandidate]="false"></app-candidate-dashboard-item>-->
 
-        <!--<button class="example-full-width" mat-button>-->
-          <!--<mat-icon>add</mat-icon>-->
-        <!--</button>-->
-      <div *ngIf="isThisCandidateAlreadyHere(candidate)"  (click)="addCandidate(i)" >
-        <app-candidate-dashboard-item  [haveBoxShadow]="true" [haveHoverEffect]="false" [isClosedIcon]="false"
-                                      [candidate]="candidate" [clickableCandidate]="false"></app-candidate-dashboard-item>
+      <!--<button class="example-full-width" mat-button>-->
+      <!--<mat-icon>add</mat-icon>-->
+      <!--</button>-->
 
-        <!--<button class="example-full-width" mat-button><mat-icon>add</mat-icon></button>-->
+      <div class="row">
+        <div *ngIf="isThisCandidateAlreadyHere(candidate)" (click)="addMoreCandidates ? '' : addCandidate(i)"
+             [ngClass]="{'chosen-hoover': addMoreCandidates && isThisCandidateChosen(i)}">
+          <app-candidate-dashboard-item [haveBoxShadow]="true && !addMoreCandidates"
+                                        [haveHoverEffect]="false" [isClosedIcon]="false"
+                                        [candidate]="candidate"
+                                        [clickableCandidate]="false"></app-candidate-dashboard-item>
+
+          <!--<button class="example-full-width" mat-button><mat-icon>add</mat-icon></button>-->
+
+        </div>
+        <mat-checkbox class="modal-select-checkbox" *ngIf="isThisCandidateAlreadyHere(candidate)"
+                      [matTooltipPosition]="matToolTipPositionSelect"
+                      [matTooltip]="'Select' | translate" (change)="selectClick(i)"></mat-checkbox>
       </div>
       <br>
     </div>
   </dialog-body>
   <dialog-footer class="example-full-width">
-    <span class="float-right">
+    <span class="float-left">
       <button cdk-focus-initial autofocus mat-raised-button color="primary" (click)="close()">{{'No Thanks' | translate}}</button>
+    </span>
+    <span class="float-right" *ngIf="addMoreCandidates">
+      <button cdk-focus-initial autofocus mat-raised-button color="primary"
+              (click)="addaSelectedCanidates()">{{'Add selected' | translate}}</button>
     </span>
   </dialog-footer>
 </app-modal-component>
