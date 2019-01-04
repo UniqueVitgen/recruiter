@@ -20,3 +20,6 @@ export class Candidate {
   timelines?: any[];
   position?: string;
 }
+export class CandidateSelected extends Candidate {
+  select: boolean;
+}

@@ -1,6 +1,6 @@
 import {Component, Inject, OnChanges, OnInit, SimpleChanges, ViewChild} from '@angular/core';
 import {CandidateService} from '../../../services/candidate/candidate.service';
-import {Candidate} from '../../../classes/candidate';
+import {Candidate, CandidateSelected} from '../../../classes/candidate';
 import {Attachment} from '../../../classes/attachment';
 import {MAT_DIALOG_DATA, MatDialogRef, TooltipPosition} from '@angular/material';
 import {DeleteVacancyDialogComponent} from '../delete-vacancy-dialog/delete-vacancy-dialog.component';
@@ -12,13 +12,13 @@ import {Vacancy} from '../../../classes/vacancy';
   styleUrls: ['./existed-candidates-modal-window.component.scss']
 })
 export class ExistedCandidatesModalWindowComponent implements OnInit {
-  public candidates: Candidate[];
+  public candidates: CandidateSelected[];
   public photo: Attachment;
   public numberOfAvailableCandidates: number;
   public noCandidateToAdd: boolean;
   public addMoreCandidates: boolean;
-  public matToolTipPositionSelect: TooltipPosition = 'above';
   public selectedCandidatesIDs: number[] = [];
+  isCheck: boolean;
 
   constructor(private candidateService: CandidateService,
               public dialogRef: MatDialogRef<DeleteVacancyDialogComponent>,
@@ -88,5 +88,8 @@ export class ExistedCandidatesModalWindowComponent implements OnInit {
     }
     this.addMoreCandidates = this.selectedCandidatesIDs.length > 0;
     console.log(this.selectedCandidatesIDs);
+  }
+  clickSelect(value) {
+    console.log('select', value);
   }
 }

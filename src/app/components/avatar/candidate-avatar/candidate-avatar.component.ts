@@ -17,12 +17,26 @@ export class CandidateAvatarComponent implements OnInit {
   @Input() isDeleteIcon: boolean;
   @Input() isStatus: boolean;
   @Input() isMoreIcon: boolean;
+  @Input() isSelect: boolean;
+  @Input() isCheck: boolean;
   @Output() clickEditIcon: EventEmitter<any> = new EventEmitter();
   @Output('clickDeleteIcon') outputClickDeleteIcon: EventEmitter<any> = new EventEmitter();
   @Output('clickCloseIcon') outputClickCloseIcon: EventEmitter<any> = new EventEmitter();
   @Output('clickRemoveFromBaseIcon') outputClickRemoveFromBaseIcon: EventEmitter<any> = new EventEmitter();
   @Output('clickAvatar') outputClickAvatar: EventEmitter<any> = new EventEmitter();
+  checkBoxValue: boolean;
+  @Input()
+  get checkBox() {
+    return this.checkBoxValue;
+  }
+  @Output() checkBoxChange: EventEmitter<any> =  new EventEmitter();
 
+  set checkBox(value) {
+    console.log('select23', value)
+    this.checkBoxValue = value;
+    this.checkBoxChange.emit(this.checkBoxValue);
+  }
+  
   constructor(public userWorker: UserWorker) { }
 
   ngOnInit() {
@@ -45,4 +59,12 @@ export class CandidateAvatarComponent implements OnInit {
     this.outputClickAvatar.emit();
   }
 
+  changeValue(value: boolean) {
+    console.log('select2', value)
+    if (value) {
+      this.checkBoxValue = false;
+    } else {
+      this.checkBoxValue = true;    }
+
+  }
 }

@@ -36,14 +36,11 @@
             <app-candidate-dashboard-item [haveBoxShadow]="true && !addMoreCandidates"
                                           [haveHoverEffect]="false" [isClosedIcon]="false"
                                           [candidate]="candidate"
-                                          [clickableCandidate]="false"></app-candidate-dashboard-item>
+                                          [clickableCandidate]="false" (click)="selectClick(i)" [isSelect]="true" [(checkBox)]="candidate.select" (checkBoxChange)="clickSelect($event)" ></app-candidate-dashboard-item>
 
             <!--<button class="example-full-width" mat-button><mat-icon>add</mat-icon></button>-->
 
           </div>
-          <mat-checkbox class="modal-select-checkbox" *ngIf="isThisCandidateAlreadyHere(candidate)"
-                        [matTooltipPosition]="matToolTipPositionSelect"
-                        [matTooltip]="'Select' | translate" (change)="selectClick(i)"></mat-checkbox>
         </div>
         <br>
       </div>

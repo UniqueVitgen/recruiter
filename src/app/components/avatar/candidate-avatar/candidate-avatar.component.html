@@ -2,6 +2,8 @@
   <img [src]="src" alt="" onerror="this.src = '/assets/candidate/middle-man.jpg'" />
   <mat-icon *ngIf="isStatus" class="fiber-icon-image"
             matTooltip="{{'Status' | translate}}: {{candidate.candidateState?.name | translate}}" [ngClass]="{'open-fiber': candidate.candidateState?.name== 'Open', 'archive-fiber': candidate.candidateState?.name== 'Archive'}">fiber_manual_record</mat-icon>
+  <mat-checkbox *ngIf="isSelect" class="modal-select-checkbox"
+                [matTooltip]="'Select' | translate" [(ngModel)]="checkBoxValue" (change)="changeValue($event.checked)"></mat-checkbox>
   <div (click)="clickAvatar()" class="avatar-hover">
     <mat-icon *ngIf="isClosedIcon" (click)="$event.stopPropagation()"  mat-icon-button [matMenuTriggerFor]="menu" class="close-icon-image" [matTooltip]="'Delete Candidate' | translate">more_horiz</mat-icon>
     <mat-icon *ngIf="isDeleteIcon" (click)="clickDelete(); $event.stopPropagation()"  mat-icon-button class="close-icon-image" [matTooltip]="'Delete Candidate' | translate">close</mat-icon>
