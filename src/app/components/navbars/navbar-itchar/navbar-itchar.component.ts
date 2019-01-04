@@ -1,6 +1,7 @@
-import { Component, OnInit } from '@angular/core';
+import {AfterViewChecked, ChangeDetectorRef, Component, Input, OnChanges, OnInit, SimpleChanges} from '@angular/core';
 import {NavbarLink} from '../../../classes/html/navbar-link';
 import {TranslateWorker} from '../../../workers/translate/translate.worker';
+import {ModalWorker} from '../../../workers/modal/modal.worker';
 
 @Component({
   selector: 'app-navbar-itchar',
@@ -8,6 +9,7 @@ import {TranslateWorker} from '../../../workers/translate/translate.worker';
   styleUrls: ['./navbar-itchar.component.scss']
 })
 export class NavbarItcharComponent implements OnInit {
+  @Input() disabled: boolean;
 
   routes: NavbarLink[] = [
     {routerLink: '/candidate', title: 'Candidate Dashboard', isActive: true},
