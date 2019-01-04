@@ -6,6 +6,9 @@
     <span *ngIf="!data.isEdit">
       {{'Add attachment' | translate}}
     </span>
+    <button (click)="onNoClick()" class="float-right" mat-icon-button>
+      <mat-icon [matTooltip]="'To close' | translate">close</mat-icon>
+    </button>
   </dialog-title>
   <dialog-body>
     <form [formGroup]="attachmentForm">

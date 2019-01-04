@@ -7,7 +7,9 @@
     <!--</h5>-->
     <!--</mdb-card-header>-->
     <div> {{data.title | translate}}
-
+      <button (click)="onNoClick()" class="float-right" mat-icon-button>
+        <mat-icon [matTooltip]="'To close' | translate">close</mat-icon>
+      </button>
     </div>
   </dialog-title>
   <dialog-body>

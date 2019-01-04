@@ -1,6 +1,9 @@
 <app-modal-component>
   <dialog-title>
     <span>{{'Alert' | translate}}</span>
+    <button (click)="deleteVacancy(false)" class="float-right" mat-icon-button>
+      <mat-icon [matTooltip]="'To close' | translate">close</mat-icon>
+    </button>
   </dialog-title>
   <dialog-body>
     <span>{{'Do you really want to delete this candidate?' | translate}}</span>

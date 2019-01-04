@@ -1,5 +1,9 @@
 <app-modal-component>
-  <dialog-title>Edit status candidate</dialog-title>
+  <dialog-title>Edit status candidate
+    <button (click)="onNoClick()" class="float-right" mat-icon-button>
+      <mat-icon [matTooltip]="'To close' | translate">close</mat-icon>
+    </button>
+  </dialog-title>
   <dialog-body>
     <mat-form-field class="example-full-width">
       <input *ngIf="editedCandidate.candidateState.name" placeholder="candidate status" [(ngModel)]="editedCandidate.candidateState.name"
