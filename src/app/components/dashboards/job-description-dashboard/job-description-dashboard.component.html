@@ -4,39 +4,44 @@
     <br>
   </div>-->
   <div class="col-12 col-md-12 center-item">
-    <button (click)="openJobDescriptionDialog()" class="vacancy-add-buttons" mat-raised-button color="primary">{{'Add new' | translate}}</button>
+    <button (click)="openJobDescriptionDialog()" class="vacancy-add-buttons" mat-raised-button color="primary">{{'Add
+      new' | translate}}
+    </button>
   </div>
   <br>
   <div *ngFor="let vacancy of selectedVacancies; let vacancyID = index" class="vacancy">
-  <mat-accordion class="example-headers-align">
-    <mat-expansion-panel class="vacancyPannel" >
-      <mat-expansion-panel-header>
+    <mat-accordion class="example-headers-align">
+      <mat-expansion-panel class="vacancyPannel">
+        <mat-expansion-panel-header>
 
-        <mat-panel-title>
-          {{vacancy.position }}
-          &nbsp;
-          <mat-icon class="fiber-icon-image"
-                    matTooltip="{{'Status' | translate}}: {{vacancy.vacancyState | translate}}"
-                    [ngClass]="{
+          <mat-panel-title>
+            {{vacancy.position }}
+            &nbsp;
+            <mat-icon class="fiber-icon-image"
+                      matTooltip="{{'Status' | translate}}: {{vacancy.vacancyState | translate}}"
+                      [ngClass]="{
                     'success-fiber': vacancyColorService.isVacancyOpened(vacancy.vacancyState),
-                  'fail-fiber': vacancyColorService.isVacancyClosed(vacancy.vacancyState)}">fiber_manual_record</mat-icon>
-        </mat-panel-title>
+                  'fail-fiber': vacancyColorService.isVacancyClosed(vacancy.vacancyState)}">fiber_manual_record
+            </mat-icon>
+          </mat-panel-title>
 
-        <mat-panel-description>
-          <span class="description"> {{'Total number of candidates' | translate}}: {{vacancy.candidates.length}}</span>
-         <span><button mat-icon-button (click)="goToJobDescriptionPage(vacancy); $event.stopPropagation() "><mat-icon>info</mat-icon></button>
-          <button mat-icon-button (click)="openDeleteVacancyDialog(vacancyID); $event.stopPropagation()"><mat-icon>close</mat-icon></button></span>
-        </mat-panel-description>
+          <mat-panel-description>
+            <span
+              class="description"> {{'Total number of candidates' | translate}}: {{vacancy.candidates.length}}</span>
+            <span><button mat-icon-button (click)="goToJobDescriptionPage(vacancy); $event.stopPropagation() "
+            ><mat-icon [matTooltip]="'Vacancy info' | translate">info</mat-icon></button>
+          <button mat-icon-button (click)="openDeleteVacancyDialog(vacancyID); $event.stopPropagation()"><mat-icon [matTooltip]="'Delete this vacancy' | translate" >close</mat-icon></button></span>
+          </mat-panel-description>
 
           <!--<button class="vacancyEditButton" mat-raised-button (click)="goToJobDescriptionPage(vacancy)">{{'Info' | translate}}</button>-->
           <!--<button mat-icon-button class="vacancyDeleteButton" (click)="openDeleteVacancyDialog(vacancyID)"><mat-icon>close</mat-icon></button>-->
 
-      </mat-expansion-panel-header>
+        </mat-expansion-panel-header>
 
-      <app-candidate-dashboard [isDeleteIcon]="false" [isClosedIcon]="isClosedIcon" [filledCells]="4" [candidates]="vacancy.candidates" [limitTo]="3"></app-candidate-dashboard>
-    </mat-expansion-panel>
-  </mat-accordion>
-
+        <app-candidate-dashboard [isDeleteIcon]="false" [isClosedIcon]="isClosedIcon" [filledCells]="4"
+                                 [candidates]="vacancy.candidates" [limitTo]="3"></app-candidate-dashboard>
+      </mat-expansion-panel>
+    </mat-accordion>
 
 
   </div>

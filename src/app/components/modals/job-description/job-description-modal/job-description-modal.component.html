@@ -4,7 +4,7 @@
   <dialog-title>
     <span>{{data.dialogWindowTitle + ' Vacancy'| translate}}</span>
     <button (click)="onNoClick()" class="float-right" mat-icon-button>
-      <mat-icon>close</mat-icon>
+      <mat-icon [matTooltip]="'To close' | translate" >close</mat-icon>
     </button>
   </dialog-title>
   <dialog-body>
@@ -64,13 +64,13 @@
           <div class="col-2 checkbox-col">
             <button (click)="removeElement(editedVacancy.requirements, requirement)" class="float-right"
                     mat-icon-button>
-              <mat-icon>close</mat-icon>
+              <mat-icon [matTooltip]="'Delete' | translate">close</mat-icon>
             </button>
           </div>
         </div>
       </div>
       <button color="primary"   mat-icon-button (click)="addRequirement()">
-        <mat-icon aria-label="Example icon-button with a heart icon">add_circle_outline</mat-icon></button>
+        <mat-icon aria-label="Example icon-button with a heart icon" [matTooltip]="'Add new requirement' | translate" >add_circle_outline</mat-icon></button>
     <!--<div class="row">-->
     <!--<div class="col-12 center-item">-->
     <!--<button (click)="addRequirement()" mat-raised-button color="primary">Add Requirement</button>-->

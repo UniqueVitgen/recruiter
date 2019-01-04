@@ -109,5 +109,11 @@
   "Find vacancy" : "Find vacancy...",
   "Interview Feedback" : "Interview feedback",
   "Add existed candidate": "Add existed candidate",
-  "Add new candidate": "Add new candidate"
+  "Add new candidate": "Add new candidate",
+  "Vacancy info": "Vacancy info",
+  "Delete this vacancy": "Delete this vacancy",
+  "Search": "Search",
+  "More": "More",
+  "To close": "Close",
+  "Add new requirement": "Add new requirement"
 }

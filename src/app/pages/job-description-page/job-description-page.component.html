@@ -18,12 +18,12 @@
   <mat-card-title>
     <span>{{'Selected Candidates' | translate}}</span>
     &nbsp;
-    <button mat-mini-fab color="primary" (click)="changeSearchInputSelected()">
+    <button [matTooltip]="'Search' | translate" mat-mini-fab color="primary" (click)="changeSearchInputSelected()">
       <mat-icon>search</mat-icon>
     </button>
     &nbsp;
     <button  (click)="$event.stopPropagation()"  mat-mini-fab color="primary" [matMenuTriggerFor]="menu">
-      <mat-icon class="close-icon-image" [matTooltip]="'Add canidates' | translate">person_add</mat-icon>
+      <mat-icon class="close-icon-image" [matTooltip]="'Add Candidate' | translate">person_add</mat-icon>
     </button>
     <!--<button mat-mini-fab color="primary" (click)="openExistingCandidatesModalWindow()" >-->
       <!--<mat-icon>person_add</mat-icon>-->

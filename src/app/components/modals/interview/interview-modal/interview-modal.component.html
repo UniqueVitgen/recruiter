@@ -7,8 +7,11 @@
       <!--</h5>-->
     <!--</mdb-card-header>-->
     <div class="center-text"> {{'Interview' | translate}}
-
+      <button (click)="onNoClick()" class="float-right" mat-icon-button>
+        <mat-icon [matTooltip]="'To close' | translate" >close</mat-icon>
+      </button>
     </div>
+
   </dialog-title>
   <dialog-body>
     <form [formGroup]="interviewForm">

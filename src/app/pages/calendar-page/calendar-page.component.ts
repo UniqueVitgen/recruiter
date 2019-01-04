@@ -52,7 +52,8 @@ export class CalendarPageComponent implements OnInit {
           sourceDate: event.targetDate,
           fixedCandidate: false,
           isEdit: false
-        }
+        },
+        disableClose: true
       });
       dialogRef.componentInstance.outputClickSave.subscribe((resInterview: BaseDialogResult<InterviewExtended>) => {
         this.interviewService.add(resInterview.resObject).subscribe(res => {

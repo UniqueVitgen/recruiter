@@ -17,7 +17,7 @@
                   'fail-fiber': vacancyColorService.isVacancyClosed(vacancy.vacancyState)}">fiber_manual_record</mat-icon>
       </label>
       <button *ngIf="buttonEdit" class="float-right" mat-icon-button [matMenuTriggerFor]="menu" color="primary">
-        <mat-icon>more_horiz</mat-icon>
+        <mat-icon [matTooltip]="'More' | translate">more_horiz</mat-icon>
       </button>
 
     </div>

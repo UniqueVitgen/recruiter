@@ -109,5 +109,11 @@
   "Find vacancy" : "Найти вакансию...",
   "Interview Feedback" : "Отзыв об интервью",
   "Add existed candidate": "Добавить существующего кандидата",
-  "Add new candidate": "Создать нового кандидата"
+  "Add new candidate": "Создать нового кандидата",
+  "Vacancy info": "Информация о вакансии",
+  "Delete this vacancy": "Удалить эту вакансию",
+  "Search": "Поиск",
+  "More": "Еще",
+  "To close": "Закрыть",
+  "Add new requirement": "Добавить новое требование"
 }

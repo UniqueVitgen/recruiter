@@ -101,7 +101,8 @@ export class CandidatePageComponent implements OnInit {
         data: <InterviewDialogDataInterface> {
                 sourceCandidate: this.candidate,
                 fixedCandidate: true
-        }
+        },
+        disableClose: true
       });
       dialogRef.componentInstance.outputClickSave.subscribe((resInterview: BaseDialogResult<InterviewExtended>) => {
         this.interviewService.add(resInterview.resObject).subscribe(res => {
