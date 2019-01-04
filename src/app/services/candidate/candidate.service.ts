@@ -256,7 +256,11 @@ export class CandidateService {
     return this.configService.put('candidate/' + candidate.id, candidate);
   }
 
-  delete(id: number): Observable<any> {
+  delete(candidate: Candidate): Observable<any> {
+    return this.configService.delete('candidate/' + candidate.id);
+  }
+
+  deleteById(id: number): Observable<any> {
     return this.configService.delete('candidate/' + id);
   }
 

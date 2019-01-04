@@ -44,15 +44,14 @@ export class CandidateDashboardPageComponent implements OnInit {
       console.log('1' + err);
     });
   }
-  deleteCandidate(id: number) {
-    console.log('123', id);
+  deleteCandidate(candidate: Candidate) {
     const dialogRef = this.dialog.open(DeleteCandidateModalComponent, {
       width: '400px',
       disableClose: true
     });
     dialogRef.afterClosed().subscribe(res => {
       if (res) {
-        this.candidateService.delete(id).subscribe(res => {
+        this.candidateService.delete(candidate).subscribe(res => {
           this.getAll();
         });
       }
