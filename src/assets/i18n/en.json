@@ -114,10 +114,12 @@
   "Add new candidate": "Add new candidate",
   "Vacancy info": "Vacancy info",
   "Delete this vacancy": "Delete this vacancy",
-  "Search": "Search",
   "More": "More",
   "To close": "Close",
   "Add new requirement": "Add new requirement",
   "Add selected": "Add selected",
-  "Select": "Select"
+  "Select": "Select",
+  "Phone is required" : "Phone is required",
+  "Email is required" : "Email is required",
+  "Skype is required" : "Skype is required"
 }
