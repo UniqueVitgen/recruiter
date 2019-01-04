@@ -6,6 +6,9 @@
     <span *ngIf="!data.isEdit">
       {{'Add Candidate' | translate}}
     </span>
+    <button (click)="onNoClick()" class="float-right" mat-icon-button>
+      <mat-icon [matTooltip]="'To close' | translate">close</mat-icon>
+    </button>
   </dialog-title>
   <dialog-body>
     <div *ngIf="editedCandidate && candidateForm">

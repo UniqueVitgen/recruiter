@@ -14,7 +14,9 @@ import {AlertWithButtonDialogData} from '../../interfaces/dialog/init/alert-with
 import {CandidateModalComponent} from '../../components/modals/candidate/candidate-modal/candidate-modal.component';
 import {CandidateDialogData} from '../../interfaces/dialog/init/candidate-dialog-data';
 import {CandidateDialogResult} from '../../interfaces/dialog/result/candidate-dialog-result';
+import {forEach} from '@angular/router/src/utils/collection';
 import {ArrayWorker} from '../../workers/array/array.worker';
+
 
 @Component({
   selector: 'app-job-description-page',
@@ -27,6 +29,9 @@ export class JobDescriptionPageComponent implements OnInit {
   candidates: Candidate[];
   searchInputSelected: boolean;
   searchValueSelected: string;
+
+
+  //searchValuePossible: string;
 
   constructor(
     private route: ActivatedRoute,
@@ -106,7 +111,7 @@ export class JobDescriptionPageComponent implements OnInit {
     }
     this.vacancy.candidates.push(candidate);
     this.vacancyService.update(this.vacancy).subscribe(resVacancy => {
-      console.log(resVacancy);
+     // console.log(resVacancy);
       this.getVacancy();
     });
   }
@@ -180,14 +185,21 @@ export class JobDescriptionPageComponent implements OnInit {
   openExistingCandidatesModalWindow(): void {
     const dialogRef = this.dialog.open(ExistedCandidatesModalWindowComponent, {
         data: {currentVacancy: this.vacancy},
-        disableClose: true
-        // height: '650px',
+        disableClose: true,
+        // width: '350px'
       }
     );
     dialogRef.afterClosed().subscribe((existingCandidatesModalWindowResult) => {
       console.log('Close!' + existingCandidatesModalWindowResult.addCandidate);
       if (existingCandidatesModalWindowResult.addCandidate) {
-        this.addCandidate(this.candidates[existingCandidatesModalWindowResult.chosenCandidateID]);
+        if (!existingCandidatesModalWindowResult.addArray) {
+          this.addCandidate(this.candidates[existingCandidatesModalWindowResult.chosenCandidateID]);
+        } else {
+          existingCandidatesModalWindowResult.chosenCandidateID.forEach( candidateID => {
+            this.addCandidate(this.candidates[candidateID]);
+          });
+        }
+
       }
     });
   }

@@ -15,14 +15,14 @@
         <mat-expansion-panel-header>
 
           <mat-panel-title>
-            {{vacancy.position }}
-            &nbsp;
-            <mat-icon class="fiber-icon-image"
+            <mat-icon class="fiber-icon-image vacancy-status"
                       matTooltip="{{'Status' | translate}}: {{vacancy.vacancyState | translate}}"
                       [ngClass]="{
                     'success-fiber': vacancyColorService.isVacancyOpened(vacancy.vacancyState),
                   'fail-fiber': vacancyColorService.isVacancyClosed(vacancy.vacancyState)}">fiber_manual_record
             </mat-icon>
+            {{vacancy.position }}
+
           </mat-panel-title>
 
           <mat-panel-description>
