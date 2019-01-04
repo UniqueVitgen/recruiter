@@ -38,7 +38,7 @@
   </div>
   <mat-divider></mat-divider>
 <br>
-<app-candidate-dashboard [isDeleteIcon]="false" [isClosedIcon]="true" (deleteCandidate)="askForDeleteCandidate($event)" (deleteCandidateFromTheBase)="askForDeleteCandidateFromTheBase($event)" [search]="searchValueSelected" (addCandidate)="addCandidate($event)" *ngIf="vacancy && vacancy.candidates" [candidates]="vacancy.candidates" [haveAddElement]="false"></app-candidate-dashboard>
+<app-candidate-dashboard [isPagination]="false" [isDeleteIcon]="false" [isClosedIcon]="true" (deleteCandidate)="askForDeleteCandidate($event)" (deleteCandidateFromTheBase)="askForDeleteCandidateFromTheBase($event)" [search]="searchValueSelected" (addCandidate)="addCandidate($event)" *ngIf="vacancy && vacancy.candidates" [candidates]="vacancy.candidates" [haveAddElement]="false"></app-candidate-dashboard>
 
 
 </mat-card>

@@ -1,0 +1,19 @@
+.custom-pagination /deep/ .ngx-pagination {
+  width: 100%;
+  text-align: center;
+}
+.custom-pagination /deep/ .ngx-pagination .pagination-previous{
+  display: none;
+}
+.custom-pagination /deep/ .ngx-pagination .pagination-next{
+  display: none;
+}
+.custom-pagination /deep/ .ngx-pagination li{
+  border-radius: 50%;
+  font-weight: bold;
+}
+.custom-pagination /deep/ .ngx-pagination a{
+  background-color: white;
+  border-radius: 50%;
+  font-weight: bold;
+}

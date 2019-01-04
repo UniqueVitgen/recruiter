@@ -184,7 +184,7 @@ export class InterviewCalendarComponent implements OnInit, OnChanges {
       minTime: <any> '08:00:00',
       maxTime: <any> '23:00:00',
       locale: this.locale,
-      titleFormat: titleFormat,
+      // titleFormat: 'MMM YYYY',
       buttonText: buttonText,
       firstDay: firstDay,
       theme: 'bootstrap4',
