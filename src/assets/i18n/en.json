@@ -90,6 +90,8 @@
   "You can't add events on Past dates.": "You can't add events on Past dates.",
   "You can't drop events on Past dates.": "You can't drop events on Past dates.",
   "Do you really want to delete this candidate?": "Do you really want to delete this candidate?",
+  "Do you really want to delete this candidate from the base?" : "Do you really want to delete this candidate from the base?",
+  "Do you really want to delete this candidate from the vacancy?" : "Do you really want to delete this candidate from the vacancy?",
   "Do you really want to delete this interview?": "Do you really want to delete this interview?",
   "Do you really want to delete this attachment?": "Do you really want to delete this attachment?",
   "Do you really want to delete this experience?": "Do you really want to delete this experience?",

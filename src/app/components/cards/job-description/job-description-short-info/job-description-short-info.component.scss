@@ -65,7 +65,8 @@
  justify-content: center;
 }
 .requirementsFirstColumn{
-  margin-left: 10%;
+  display: flex;
+  flex-direction: row;
 }
 .vacancyIsOpened{
   color: green;

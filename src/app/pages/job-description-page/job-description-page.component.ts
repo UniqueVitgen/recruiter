@@ -15,6 +15,8 @@ import {CandidateModalComponent} from '../../components/modals/candidate/candida
 import {CandidateDialogData} from '../../interfaces/dialog/init/candidate-dialog-data';
 import {CandidateDialogResult} from '../../interfaces/dialog/result/candidate-dialog-result';
 import {forEach} from '@angular/router/src/utils/collection';
+import {ArrayWorker} from '../../workers/array/array.worker';
+
 
 @Component({
   selector: 'app-job-description-page',
@@ -26,8 +28,8 @@ export class JobDescriptionPageComponent implements OnInit {
   vacancy: Vacancy;
   candidates: Candidate[];
   searchInputSelected: boolean;
-  //searchInputPossible: boolean;
   searchValueSelected: string;
+
 
   //searchValuePossible: string;
 
@@ -35,8 +37,8 @@ export class JobDescriptionPageComponent implements OnInit {
     private route: ActivatedRoute,
     private vacancyService: VacancyService,
     public dialog: MatDialog,
+    private arrayWorker: ArrayWorker,
     private candidateService: CandidateService) {
-    //this.searchInputPossible = false;
     this.searchInputSelected = false;
   }
 
@@ -114,10 +116,11 @@ export class JobDescriptionPageComponent implements OnInit {
     });
   }
 
-  deleteCandidate(candidateID: number): void {
+  deleteCandidate(candidate: Candidate): void {
     console.log('Delete candidate page:');
-    console.log(candidateID);
-    this.vacancy.candidates.splice(candidateID, 1);
+    // console.log(candidateID);
+    this.vacancy.candidates = this.arrayWorker.removeElement(this.vacancy.candidates, candidate);
+    // this.vacancy.candidates.splice(candidateID, 1);
     console.log(this.vacancy.candidates);
     this.vacancyService.update(this.vacancy).subscribe(resVacancy => {
       console.log(resVacancy);
@@ -125,11 +128,11 @@ export class JobDescriptionPageComponent implements OnInit {
     });
   }
 
-  askForDeleteCandidate(candidateID: number) {
+  askForDeleteCandidate(candidate: Candidate) {
     const dialogRef = this.dialog.open(AlertWithButtonModalComponent, {
         data: <AlertWithButtonDialogData> {
           buttonText: 'Delete',
-          message: 'Do you really want to delete this candidate?',
+          message: 'Do you really want to delete this candidate from the vacancy?',
           title: 'Confirm delete'
         },
         disableClose: true
@@ -137,28 +140,26 @@ export class JobDescriptionPageComponent implements OnInit {
     );
     dialogRef.componentInstance.outputClickOk.subscribe((resAnswer: boolean) => {
       if (resAnswer) {
-        this.deleteCandidate(candidateID);
+        this.deleteCandidate(candidate);
       }
     });
 
   }
 
-  deleteCandidateFromTheBase(candidateID: number): void {
+  deleteCandidateFromTheBase(candidate: Candidate): void {
     console.log('Delete candidate page:');
-    console.log(candidateID);
-    this.candidates.splice(candidateID, 1);
-    console.log(this.vacancy.candidates);
-    this.candidateService.delete(candidateID).subscribe(res => {
+    console.log(candidate);
+    this.candidateService.delete(candidate).subscribe(res => {
       this.getAllCondidates();
       this.getVacancy();
     });
   }
 
-  askForDeleteCandidateFromTheBase(candidateID: number) {
+  askForDeleteCandidateFromTheBase(candidate: Candidate) {
     const dialogRef = this.dialog.open(AlertWithButtonModalComponent, {
         data: <AlertWithButtonDialogData> {
           buttonText: 'Delete',
-          message: 'Do you really want to delete this candidate?',
+          message: 'Do you really want to delete this candidate from the base?',
           title: 'Confirm delete'
         },
         disableClose: true
@@ -166,7 +167,7 @@ export class JobDescriptionPageComponent implements OnInit {
     );
     dialogRef.componentInstance.outputClickOk.subscribe((resAnswer: boolean) => {
       if (resAnswer) {
-        this.deleteCandidateFromTheBase(candidateID);
+        this.deleteCandidateFromTheBase(candidate);
       }
     });
 

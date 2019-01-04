@@ -7,6 +7,8 @@ import {JobDescriptionDialogData} from '../../../interfaces/dialog/init/job-desc
 import {BaseDialogResult} from '../../../interfaces/dialog/result/base-dialog-result';
 import {DeleteVacancyDialogComponent} from '../../modals/delete-vacancy-dialog/delete-vacancy-dialog.component';
 import {VacancyColorService} from '../../../services/vacancy/vacancy-color.service';
+import {AlertWithButtonModalComponent} from '../../modals/alert-with-button-modal/alert-with-button-modal.component';
+import {AlertWithButtonDialogData} from '../../../interfaces/dialog/init/alert-with-button-dialog-data';
 
 @Component({
   selector: 'app-job-description-dashboard',
@@ -74,12 +76,18 @@ export class JobDescriptionDashboardComponent implements OnInit, OnChanges {
 
   openDeleteVacancyDialog(vacancyID: number): void {
     console.log(vacancyID);
-    const dialogRef = this.dialog.open(DeleteVacancyDialogComponent, {
-      width: '400px',
+    const dialogRef = this.dialog.open(AlertWithButtonModalComponent, {
+      data: <AlertWithButtonDialogData> {
+        buttonText: 'Delete',
+        message: 'Do you really want to delete this vacancy?',
+        title: 'Confirm delete'
+      },
       disableClose: true
     });
-    dialogRef.afterClosed().subscribe(res => {
-      if (res) this.deleteVacancy(vacancyID);
+    dialogRef.componentInstance.outputClickOk.subscribe((resAnswer: boolean) => {
+      if (resAnswer) {
+        this.deleteVacancy(vacancyID);
+      }
     });
 
   }

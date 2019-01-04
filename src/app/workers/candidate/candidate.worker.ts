@@ -86,7 +86,8 @@ export class CandidateWorker {
   }
   findPhoto(candidate: Candidate) {
     if (candidate) {
-      return candidate.attachments.reverse().find((attachment) => {
+      const attachments = candidate.attachments.slice();
+      return  attachments.reverse().find((attachment) => {
         return attachment.attachmentType === AttachmentType.PHOTO;
       });
     }

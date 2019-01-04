@@ -1,11 +1,11 @@
-import { Component, OnInit, Inject } from '@angular/core';
+import {Component, OnInit, Inject, OnDestroy} from '@angular/core';
 import {MatDialog, MatDialogRef, MAT_DIALOG_DATA} from '@angular/material';
 @Component({
   selector: 'app-modal-component',
   templateUrl: './modal-component.component.html',
   styleUrls: ['./modal-component.component.scss']
 })
-export class ModalComponentComponent implements OnInit {
+export class ModalComponentComponent implements OnInit, OnDestroy {
 
   constructor(
     public dialogRef: MatDialogRef<ModalComponentComponent>) { }
@@ -15,6 +15,9 @@ export class ModalComponentComponent implements OnInit {
 
   onNoClick(): void {
     this.dialogRef.close();
+  }
+
+  ngOnDestroy(): void {
   }
 
 }
