@@ -127,7 +127,7 @@ export class JobDescriptionPageComponent implements OnInit {
     const dialogRef = this.dialog.open(AlertWithButtonModalComponent, {
         data: <AlertWithButtonDialogData> {
           buttonText: 'Delete',
-          message: 'Do you really want to delete this candidate?',
+          message: 'Do you really want to delete this candidate from the vacancy?',
           title: 'Confirm delete'
         },
         disableClose: true
@@ -156,7 +156,7 @@ export class JobDescriptionPageComponent implements OnInit {
     const dialogRef = this.dialog.open(AlertWithButtonModalComponent, {
         data: <AlertWithButtonDialogData> {
           buttonText: 'Delete',
-          message: 'Do you really want to delete this candidate?',
+          message: 'Do you really want to delete this candidate from the base?',
           title: 'Confirm delete'
         },
         disableClose: true
