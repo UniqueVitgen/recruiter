@@ -31,12 +31,12 @@
       <!--</button>-->
       <div *ngIf="isThisCandidateAlreadyHere(candidate)">
         <div class="row">
-          <div
-            [ngClass]="{'chosen-hoover': addMoreCandidates && isThisCandidateChosen(i)}">
-            <app-candidate-dashboard-item [haveBoxShadow]="true && !addMoreCandidates"
+          <div>
+           <!-- [ngClass]="{'chosen-hoover': addMoreCandidates && isThisCandidateChosen(i)}" -->
+            <app-candidate-dashboard-item [haveBoxShadow]="true"
                                           [haveHoverEffect]="false" [isClosedIcon]="false"
                                           [candidate]="candidate"
-                                          [clickableCandidate]="false" (click)="selectClick(i)" [isSelect]="true" [(checkBox)]="candidate.select" (checkBoxChange)="clickSelect($event)" ></app-candidate-dashboard-item>
+                                          [clickableCandidate]="false" (click)="selectClick(i)" [isSelect]="true" [(checkBox)]="candidate.select" [selectBoxShadow]="candidate.select" ></app-candidate-dashboard-item>
 
             <!--<button class="example-full-width" mat-button><mat-icon>add</mat-icon></button>-->
 

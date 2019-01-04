@@ -31,12 +31,12 @@ export class CandidateAvatarComponent implements OnInit {
   }
   @Output() checkBoxChange: EventEmitter<any> =  new EventEmitter();
 
-  set checkBox(value) {
-    console.log('select23', value)
-    this.checkBoxValue = value;
+  set checkBox(val) {
+    console.log('select23', val)
+    this.checkBoxValue = val;
     this.checkBoxChange.emit(this.checkBoxValue);
   }
-  
+
   constructor(public userWorker: UserWorker) { }
 
   ngOnInit() {
@@ -59,12 +59,11 @@ export class CandidateAvatarComponent implements OnInit {
     this.outputClickAvatar.emit();
   }
 
-  changeValue(value: boolean) {
-    console.log('select2', value)
-    if (value) {
+  changeValue(val) {
+    console.log('select2', val)
+    if (val) {
       this.checkBoxValue = false;
     } else {
-      this.checkBoxValue = true;    }
-
+      this.checkBoxValue = true; }
   }
 }
