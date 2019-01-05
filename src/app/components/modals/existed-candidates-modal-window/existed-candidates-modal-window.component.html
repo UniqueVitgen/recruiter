@@ -6,7 +6,7 @@
       {{'You have already added all candidates' | translate}}
     </span>
     <span *ngIf="!noCandidateToAdd">
-      {{'Select candidate' | translate}}({{numberOfAvailableCandidates}})
+      {{'Select candidate' | translate}} ({{numberOfAvailableCandidates}})
     </span>
     <button (click)="onNoClick()" class="float-right" mat-icon-button>
       <mat-icon [matTooltip]="'To close' | translate">close</mat-icon>
@@ -52,7 +52,7 @@
     </span>
     <span class="float-right" *ngIf="addMoreCandidates">
       <button cdk-focus-initial autofocus mat-raised-button color="primary"
-              (click)="addaSelectedCanidates()">{{'Add selected' | translate}}</button>
+              (click)="addaSelectedCanidates()">{{'Add' | translate}} {{selectedCandidatesIDs.length}}</button>
     </span>
   </dialog-footer>
 </app-modal-component>
