@@ -16,7 +16,7 @@
         <!--<span>{{position.name}}</span>-->
       <!--</mat-option>-->
     <!--</mat-autocomplete>-->
-    <app-position-input name="position" [visibleUnderline]="true" [fullWidth]="true" [positions]="positions" [(ngModel)]="editedVacancy.position.name" required></app-position-input>
+    <app-autocomplete-input  [placeholder]="'Position'" [searchProperty]="'name'" name="position" [visibleUnderline]="true" [fullWidth]="true" [positions]="positions" [(ngModel)]="editedVacancy.position.name" required></app-autocomplete-input>
     <mat-form-field class="example-full-width">
         <mat-select placeholder="{{'Status' | translate}}" required [(ngModel)]="editedVacancy.vacancyState" name="state">
           <mat-option *ngFor="let state of statuses" [value]="state">

@@ -28,7 +28,7 @@
         <mat-datepicker-toggle name="dateSuffix1" matSuffix [for]="picker1"></mat-datepicker-toggle>
         <mat-datepicker #picker1></mat-datepicker>
       </mat-form-field>
-      <app-position-input name="position" formControlName="position" [visibleUnderline]="true" [fullWidth]="true" [positions]="positions" [(ngModel)]="editedExperience.jobPosition.name" required></app-position-input>
+      <app-autocomplete-input name="position" [placeholder]="'Position'" [searchProperty]="'name'" formControlName="position" [visibleUnderline]="true" [fullWidth]="true" [positions]="positions" [(ngModel)]="editedExperience.jobPosition.name" required></app-autocomplete-input>
       <!--<mat-form-field class="example-full-width">-->
         <!--<input required [matAutocomplete]="auto" formControlName="position" [(ngModel)]="editedExperience.jobPosition.name" (ngModelChange)="changePosition()" matInput placeholder="{{'Position' | translate}}">-->
 

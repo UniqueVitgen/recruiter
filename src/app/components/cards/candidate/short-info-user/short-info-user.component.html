@@ -41,7 +41,7 @@
             </mat-error>
           </mat-form-field>
           <!--<mat-form-field class="example-full-width custom-form-field">-->
-            <app-position-input [visibleUnderline]="false" [fullWidth]="true" [positions]="positions" [(ngModel)]="editedCandidate.position.name" (blur)="onFocusoutAnyInput()" formControlName="position"></app-position-input>
+            <app-autocomplete-input  [placeholder]="'Position'" [searchProperty]="'name'" [visibleUnderline]="false" [fullWidth]="true" [positions]="positions" [(ngModel)]="editedCandidate.position.name" (blur)="onFocusoutAnyInput()" formControlName="position"></app-autocomplete-input>
             <!--<input (blur)="onFocusoutAnyInput()" formControlName="position"  [matAutocomplete]="auto"  [(ngModel)]="editedCandidate.position.name" (ngModelChange)="changePosition()"  matInput [placeholder]="'Position' | translate" readonly="false" >-->
           <!--</mat-form-field>-->
           <mat-autocomplete #auto="matAutocomplete">

@@ -213,14 +213,14 @@ export class CandidatePageComponent implements OnInit {
           return attachment;
         }
       });
+      this.candidateService.update(this.candidate).subscribe(resMessage => {
+        this.getCandidate();
+      });
     } else if (this.eventNoteWorker.isInterview(object)) {
       this.interviewService.update(object).subscribe( res => {
         // this.getCandidate();
       });
     }
-    // this.candidateService.update(this.candidate).subscribe(resMessage => {
-    //   this.getCandidate();
-    // });
   }
   alertDeleteAttachment(attachment: Attachment) {
     const dialogRef = this.dialog.open(AlertWithButtonModalComponent, {

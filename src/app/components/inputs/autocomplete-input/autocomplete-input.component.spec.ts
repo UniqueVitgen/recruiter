@@ -1,20 +1,20 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { PositionInputComponent } from './position-input.component';
+import { AutocompleteInputComponent } from './autocomplete-input.component';
 
-describe('PositionInputComponent', () => {
-  let component: PositionInputComponent;
-  let fixture: ComponentFixture<PositionInputComponent>;
+describe('AutocompleteInputComponent', () => {
+  let component: AutocompleteInputComponent;
+  let fixture: ComponentFixture<AutocompleteInputComponent>;
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ PositionInputComponent ]
+      declarations: [ AutocompleteInputComponent ]
     })
     .compileComponents();
   }));
 
   beforeEach(() => {
-    fixture = TestBed.createComponent(PositionInputComponent);
+    fixture = TestBed.createComponent(AutocompleteInputComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });

@@ -27,7 +27,7 @@
       <!--<mat-icon>edit</mat-icon>-->
     <!--</button>-->
   <!--</mat-form-field>-->
-  <app-position-input [fullWidth]="true" [visibleUnderline]="false" [positions]="positions" (blur)="onFocusoutAnyInput()" [(ngModel)]="editedExperience.jobPosition.name"></app-position-input>
+  <app-autocomplete-input  [placeholder]="'Position'" [searchProperty]="'name'" [fullWidth]="true" [visibleUnderline]="false" [positions]="positions" (blur)="onFocusoutAnyInput()" [(ngModel)]="editedExperience.jobPosition.name"></app-autocomplete-input>
   <!--<mat-form-field class="example-full-width custom-form-field">-->
     <!--<textarea  (blur)="onFocusoutAnyInput()" matInput placeholder="{{'Comment' | translate}}" [(ngModel)]="editedExperience.comment"></textarea>-->
     <!--<button mat-button  matSuffix mat-icon-button aria-label="Clear" class="edited-hover-button">-->

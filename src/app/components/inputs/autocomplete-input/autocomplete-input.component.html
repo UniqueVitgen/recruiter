@@ -1,6 +1,6 @@
 
 <mat-form-field  [ngClass]="{'custom-form-field' : !visibleUnderline, 'example-full-width': fullWidth}">
-<input [matAutocomplete]="auto" (focus)="focus()" (blur)="blur.emit(value)" [(ngModel)]="value" [required]="required" (ngModelChange)="changeValue()" matInput placeholder="{{'Position' | translate}}">
+<input [matAutocomplete]="auto" (focus)="focus()" (blur)="blur.emit(value)" [(ngModel)]="value" [required]="required" (ngModelChange)="changeValue()" matInput placeholder="{{placeholder | translate}}">
 
 <mat-autocomplete #auto="matAutocomplete">
   <mat-option *ngFor="let position of selectedPositions" [value]="position.name">

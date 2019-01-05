@@ -6,20 +6,22 @@ import {SearchWorker} from '../../../workers/search/search.worker';
 
 const customValueProvider = {
   provide: NG_VALUE_ACCESSOR,
-  useExisting: forwardRef(() => PositionInputComponent),
+  useExisting: forwardRef(() => AutocompleteInputComponent),
   multi: true
 };
 @Component({
-  selector: 'app-position-input',
-  templateUrl: './position-input.component.html',
-  styleUrls: ['./position-input.component.scss'],
+  selector: 'app-autocomplete-input',
+  templateUrl: './autocomplete-input.component.html',
+  styleUrls: ['./autocomplete-input.component.scss'],
   providers: [customValueProvider]
 })
-export class PositionInputComponent implements OnInit, ControlValueAccessor, OnChanges {
+export class AutocompleteInputComponent implements OnInit, ControlValueAccessor, OnChanges {
   @Input() fullWidth: boolean;
   @Input() visibleUnderline: boolean;
   @Input() required: boolean;
   @Input() positions: PositionModel[];
+  @Input() searchProperty: string;
+  @Input() placeholder: string;
   @Output() blur: EventEmitter<string> = new EventEmitter<string>();
   // @Output() blur: EventEmitter<string> = new EventEmitter();
   public selectedPositions: PositionModel[];
@@ -50,7 +52,7 @@ export class PositionInputComponent implements OnInit, ControlValueAccessor, OnC
   }
   searchPositions() {
     if (this.value) {
-      this.selectedPositions = this.searchWorker.searchValueInsideProperty(this.value, this.positions, 'name');
+      this.selectedPositions = this.searchWorker.searchValueInsideProperty(this.value, this.positions, this.searchProperty);
     } else {
       this.selectedPositions = this.positions;
     }
