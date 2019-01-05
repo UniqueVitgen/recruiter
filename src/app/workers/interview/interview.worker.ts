@@ -20,6 +20,10 @@ export class InterviewWorker {
   convertInterviewToCalendarEvent(interview: InterviewExtended): CalendarEvent {
     const date = new Date(interview.planDate);
     const dateEnd = new Date(date.getTime() + 60 * this.dateTimeWorker.minute);
+    let color;
+    if (interview.factDate) {
+      color = 'lawngreen';
+    }
     return {
       title: interview.vacancy.position.name + ' - ' + interview.candidate.surname,
       start: date.toISOString(),
@@ -28,7 +32,8 @@ export class InterviewWorker {
       // end: this.dateTimeWorker.transform((dateEnd), 'yyyy-MM-ddT', 'UTC', this.translateWorker.getLanguage()) + this.dateTimeWorker.getTime(dateEnd, 'HH:mm') + ':' + '00',
       candidate: interview.candidate,
       interview: interview,
-      vacancy: interview.vacancy
+      vacancy: interview.vacancy,
+      color: color
     };
   }
 }

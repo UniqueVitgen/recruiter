@@ -98,7 +98,7 @@ export class InterviewModalComponent implements OnInit {
     this.interviewForm = this.fb.group({
       from: ['', Validators.compose([Validators.required])],
       fromTime: ['', Validators.compose([Validators.required])],
-      to: ['', Validators.compose([Validators.required])]
+      to: ['', Validators.compose([])]
     });
     this.updateDate();
     this.updateTime();
