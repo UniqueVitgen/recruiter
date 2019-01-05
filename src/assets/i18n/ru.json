@@ -117,10 +117,13 @@
   "More": "Еще",
   "To close": "Закрыть",
   "Add new requirement": "Добавить новое требование",
-  "Add": "Добавить",
   "Select": "Выбрать",
   "Phone is required" : "Телефон обязателен для заполнения",
   "Email is required" : "Почта обязательна для заполнения",
   "Skype is required" : "Скайп обязателен для заполнения",
-  "ItemPerPage" : "Кандидатов на странице"
+  "ItemPerPage" : "Кандидатов на странице",
+  "New" : "Новый",
+  "Accepted for interview" : "Приглашен на интервью",
+  "CV rejected" : "Резюме отклонено",
+  "CV accepted" : "Резюме принято"
 }

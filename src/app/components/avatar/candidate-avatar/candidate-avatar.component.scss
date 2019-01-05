@@ -79,11 +79,19 @@
     position: absolute;
     bottom: 0;
     left: 0;
-    &.open-fiber {
+    //text-shadow: whitesmoke 1px 1px 0, whitesmoke -1px -1px 0,
+    //whitesmoke -1px 1px 0, whitesmoke 1px -1px 0;
+    &.cv-accepted {
       color: lawngreen;
     }
-    &.archive-fiber {
-      color: #8a3700;
+    &.cv-rejected {
+      color: red;
+    }
+    &.accepted-for-interview {
+      color: yellow;
+    }
+    &.new {
+      color: #2199e8;
     }
   }
   .avatar-hover {

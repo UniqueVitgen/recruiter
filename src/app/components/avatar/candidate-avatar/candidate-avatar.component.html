@@ -1,7 +1,11 @@
 <div class="user-avatar" [ngClass]="{'user-avatar-hover': haveHoverEffect}">
   <img [src]="src" alt="" onerror="this.src = '/assets/candidate/middle-man.jpg'" />
   <mat-icon *ngIf="isStatus" class="fiber-icon-image"
-            matTooltip="{{'Status' | translate}}: {{candidate.candidateState?.name | translate}}" [ngClass]="{'open-fiber': candidate.candidateState?.name== 'Open', 'archive-fiber': candidate.candidateState?.name== 'Archive'}">fiber_manual_record</mat-icon>
+            matTooltip="{{'Status' | translate}}: {{candidate.candidateState?.name | translate}}"
+            [ngClass]="{'cv-accepted': candidate.candidateState?.name== 'CV accepted',
+            'cv-rejected': candidate.candidateState?.name== 'CV rejected',
+            'accepted-for-interview': candidate.candidateState?.name== 'Accepted for interview',
+            'new' : candidate.candidateState?.name== 'New'}">fiber_manual_record</mat-icon>
   <input type="checkbox" *ngIf="isSelect" class="modal-select-checkbox"
               [matTooltip]="'Select' | translate" [(ngModel)]="checkBoxValue">
   <div (click)="clickAvatar()" class="avatar-hover">
