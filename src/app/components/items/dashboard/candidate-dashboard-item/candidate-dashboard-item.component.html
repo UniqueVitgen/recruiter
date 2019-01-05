@@ -1,5 +1,5 @@
 <mat-card class="candidate-dashboard-item"
-          [ngClass]="{'candidate-have-hover': haveHoverEffect , 'box-shadow-element' : haveBoxShadow}"
+          [ngClass]="{'candidate-have-hover': haveHoverEffect , 'box-shadow-element' : haveBoxShadow , 'box-shadow-element-select' : selectBoxShadow}"
           (click)=" clickableCandidate ? goToCandidatePage() : '' ">
   <!--<mat-card-header>-->
   <!--&lt;!&ndash;<div mat-card-avatar class="example-header-image"></div>&ndash;&gt;-->
@@ -13,7 +13,7 @@
                         [isDeleteIcon]="isDeleteIcon" [isClosedIcon]="isClosedIcon" [isStatus]="true"
                         (clickDeleteIcon)="deleteCandidateFromTheBase()" (clickCloseIcon)="deleteCandidate()"
                         (clickRemoveFromBaseIcon)="deleteCandidateFromTheBase()"
-                        [candidate]="candidate" [isSelect]="isSelect" [(checkBox)]="select" (checkBoxChange)="changeValue($event)" ></app-candidate-avatar>
+                        [candidate]="candidate" [isSelect]="isSelect" [(checkBox)]="checkBoxValue" ></app-candidate-avatar>
   <!--</div>-->
   <!--<div class="col-6">-->
   <div class="user-name user-info">

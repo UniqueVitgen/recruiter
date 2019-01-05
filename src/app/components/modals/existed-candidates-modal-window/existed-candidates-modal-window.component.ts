@@ -74,8 +74,6 @@ export class ExistedCandidatesModalWindowComponent implements OnInit {
   }
 
   selectClick(candidateID: number): void {
-    console.log('Selected #');
-    console.log(candidateID);
     if (!this.selectedCandidatesIDs.some((item: number) => {
       return item === candidateID;
     })
@@ -87,9 +85,11 @@ export class ExistedCandidatesModalWindowComponent implements OnInit {
       });
     }
     this.addMoreCandidates = this.selectedCandidatesIDs.length > 0;
+    if (this.candidates[candidateID].select) {
+      this.candidates[candidateID].select = false;
+    } else {
+      this.candidates[candidateID].select = true;
+    }
     console.log(this.selectedCandidatesIDs);
-  }
-  clickSelect(value) {
-    console.log('select', value);
   }
 }

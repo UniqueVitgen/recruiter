@@ -21,6 +21,7 @@ export class CandidateDashboardItemComponent implements OnChanges {
   @Input() isDeleteIcon: boolean;
   @Input() clickableCandidate: boolean;
   @Input() haveBoxShadow: boolean;
+  @Input() selectBoxShadow: boolean;
   @Input() isSelect: boolean;
   @Input() isCheck: boolean;
   select: boolean;
@@ -33,6 +34,7 @@ export class CandidateDashboardItemComponent implements OnChanges {
   @Output() checkBoxChange: EventEmitter<any> =  new EventEmitter();
 
   set checkBox(value) {
+    console.log('sele', value);
     this.checkBoxValue = value;
     this.checkBoxChange.emit(this.checkBoxValue);
   }
@@ -66,12 +68,12 @@ export class CandidateDashboardItemComponent implements OnChanges {
     this.router.navigate(['candidate', this.candidate.id]);
   }
 
-  changeValue(value: boolean) {
-    console.log('select1', value)
-    if (value) {
+  changeValue(val) {
+    console.log('select1', val)
+    if (val) {
       this.checkBoxValue = false;
     } else {
-      this.checkBoxValue = true;    }
+      this.checkBoxValue = true; }
 
   }
 
