@@ -29,7 +29,7 @@ export class DevFeedbackTimelineItemComponent implements OnInit, OnChanges {
     this.translateWorker.changeValue.subscribe((res) => {
       this.viewOfInterview = this.dateTimeWorker.getDateWithTime(new Date(this.editedNote.interview.planDate));
     });
-
+  console.log('position', this.editedNote.interview.vacancy.position);
   }
   onFocusoutAnyInput(value: boolean = true) {
     if (value) {

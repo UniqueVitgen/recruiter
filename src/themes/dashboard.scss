@@ -1,19 +1,21 @@
 .custom-pagination /deep/ .ngx-pagination {
-  width: 100%;
-  text-align: center;
+  padding: 0;
+  margin: 0;
 }
-.custom-pagination /deep/ .ngx-pagination .pagination-previous{
-  display: none;
+.custom-pagination /deep/ .ngx-pagination .pagination-next a::after, .custom-pagination /deep/ .ngx-pagination .pagination-next.disabled::after {
+  margin: 0;
+  content: '>';
 }
-.custom-pagination /deep/ .ngx-pagination .pagination-next{
-  display: none;
+.custom-pagination /deep/ .ngx-pagination .pagination-previous a::before, .custom-pagination /deep/ .ngx-pagination .pagination-previous.disabled::before {
+  margin: 0;
+  content: '<';
 }
-.custom-pagination /deep/ .ngx-pagination li{
-  border-radius: 50%;
-  font-weight: bold;
+.height-div {
+  height: 30px;
 }
-.custom-pagination /deep/ .ngx-pagination a{
-  background-color: white;
-  border-radius: 50%;
-  font-weight: bold;
+.padding-element {
+  padding: 0 !important;
+}
+.padding-element-right {
+  padding-right: 10px !important;
 }

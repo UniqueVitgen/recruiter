@@ -23,6 +23,7 @@ export class CandidateDashboardPageComponent implements OnInit {
   mockCandidates: Candidate[];
   searchValue: string;
   vacancies: Vacancy[];
+  itemsPerPageValues: number[] = [3, 7, 11];
 
   constructor(private candidateService: CandidateService, private searchWorker: SearchWorker, private userWorker: UserWorker,
               public dialog: MatDialog, public vacancyService: VacancyService) { }
