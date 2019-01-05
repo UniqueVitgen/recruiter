@@ -22,7 +22,7 @@
     <mat-datepicker (dateChange)="onFocusoutAnyInput()" #picker1></mat-datepicker>
   </mat-form-field>
   <mat-form-field class="example-full-width custom-form-field">
-    <input (blur)="onFocusoutAnyInput()" [(ngModel)]="editedExperience.jobPosition" matInput placeholder="{{'Position' | translate}}">
+    <input (blur)="onFocusoutAnyInput()" [(ngModel)]="editedExperience.jobPosition.name" matInput placeholder="{{'Position' | translate}}">
     <button mat-button  matSuffix mat-icon-button aria-label="Clear" class="edited-hover-button">
       <mat-icon>edit</mat-icon>
     </button>
