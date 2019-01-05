@@ -61,7 +61,7 @@
   "CLOSED": "Закрыто",
   "Create": "Создать",
   "Edit": "Изменить",
-  "Add new": "Добавить новую вакансию",
+  "Add new vacancy": "Добавить новую вакансию",
   "Info": "Инфо",
   "Total number of candidates": "Всего кандидатов",
   "Description": "Описание",
@@ -111,7 +111,7 @@
   "Find vacancy": "Найти вакансию...",
   "Interview Feedback": "Отзыв об интервью",
   "Add existed candidate": "Добавить существующего кандидата",
-  "Add new candidate": "Создать нового кандидата",
+  "Add new candidate": "Добавить нового кандидата",
   "Vacancy info": "Информация о вакансии",
   "Delete this vacancy": "Удалить эту вакансию",
   "More": "Еще",
@@ -125,5 +125,6 @@
   "New" : "Новый",
   "Accepted for interview" : "Приглашен на интервью",
   "CV rejected" : "Резюме отклонено",
-  "CV accepted" : "Резюме принято"
+  "CV accepted" : "Резюме принято",
+  "VacancyPerPage" : "Вакансий на странице"
 }

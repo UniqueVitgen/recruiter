@@ -1,5 +1,5 @@
-<div class="row" *ngIf="isPagination && selectedCandidates.length > 0">
-
+<mat-card >
+<div *ngIf="isPagination && selectedCandidates.length > 0" class="row" >
   <div class="col-3 padding-element">
     <span class="height-div"></span>
     <mat-form-field class="float-right">
@@ -8,15 +8,19 @@
     </mat-select>
     </mat-form-field>
   </div>
-  <div class="col-4 center-vertical-text-container" >
-    <pagination-controls *ngIf="isPagination" [previousLabel]="''" [nextLabel]="''" [directionLinks]="true" class="custom-pagination float-left " autoHide="true" responsive="true" (pageChange)="p = $event">
+  <div class="col-5 center-vertical-text-container" >
+    <pagination-controls *ngIf="isPagination" [id]="1" [previousLabel]="''" [nextLabel]="''" [directionLinks]="true" class="custom-pagination float-left " [autoHide]="true" [responsive]="true" (pageChange)="p = $event">
     </pagination-controls>
   </div>
-  <div class="col-6"></div>
+  <div class="col-4 center-item">
+    <button (click)="addCandidate()" class="vacancy-add-buttons" mat-raised-button color="primary">{{'Add new candidate' | translate}}
+    </button>
+  </div>
 </div>
+
 <div *ngIf="selectedCandidates" class="row">
   <div
-    *ngFor="let candidate of selectedCandidates | paginate: { itemsPerPage: itemsPerPage, currentPage: p } | slice:0:limitTo ? limitTo : selectedCandidates.length; let i = index"
+    *ngFor="let candidate of selectedCandidates | paginate: { itemsPerPage: itemsPerPage, currentPage: p, id: 1 } | slice:0:limitTo ? limitTo : selectedCandidates.length; let i = index"
     [ngClass]=" filledCells ? 'col-md-' + filledCells : 'col-md-3'" class="col-12 center-item heightitem">
     <app-candidate-dashboard-item [clickableCandidate]="true" [haveHoverEffect]="haveHoverEffect"
                                   [isDeleteIcon]="isDeleteIcon" [isClosedIcon]="isClosedIcon" (deleteCandidate)="deleteCandidate(candidate)" (deleteCandidateFromTheBase)="deleteCandidateFromTheBase(candidate)"
@@ -29,6 +33,5 @@
       <mat-icon>add</mat-icon>
     </mat-card>
   </div>
-
 </div>
-
+</mat-card>

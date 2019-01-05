@@ -3,13 +3,28 @@
     <app-job-description-dashboard-item [jobDescription]="jobDescription" (click)="goToJobDescriptionPage(jobDescription)" (deleteVacancy)="deleteVacancy(i)"></app-job-description-dashboard-item>
     <br>
   </div>-->
-  <div class="col-12 col-md-12 center-item">
-    <button (click)="openJobDescriptionDialog()" class="vacancy-add-buttons" mat-raised-button color="primary">{{'Add
-      new' | translate}}
+
+  <div class="row">
+    <div class="col-3 padding-element">
+      <span class="height-div"></span>
+      <mat-form-field class="float-right">
+        <mat-select [placeholder]="'VacancyPerPage' | translate" [(ngModel)]="itemsPerPage" matInput>
+          <mat-option *ngFor="let state of itemsPerPageValues" [value]="state">{{state}}</mat-option>
+        </mat-select>
+      </mat-form-field>
+    </div>
+    <div class="col-5 center-vertical-text-container" >
+      <pagination-controls [id]="2" class="custom-pagination float-left" [nextLabel]="''" [previousLabel]="''" [responsive]="true" [autoHide]="true" (pageChange)="p = $event">
+      </pagination-controls>
+    </div>
+
+  <div class="col-4 center-item">
+    <button (click)="openJobDescriptionDialog()" class="vacancy-add-buttons" mat-raised-button color="primary">{{'Add new vacancy' | translate}}
     </button>
   </div>
+  </div>
   <br>
-  <div *ngFor="let vacancy of selectedVacancies; let vacancyID = index" class="vacancy">
+  <div *ngFor="let vacancy of selectedVacancies | paginate: { itemsPerPage: itemsPerPage, currentPage: p, id: 2 } ; let vacancyID = index" class="vacancy">
     <mat-accordion class="example-headers-align">
       <mat-expansion-panel class="vacancyPannel">
         <mat-expansion-panel-header>

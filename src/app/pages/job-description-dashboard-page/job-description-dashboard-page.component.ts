@@ -10,6 +10,7 @@ import {VacancyService} from '../../services/vacancy/vacancy.service';
 export class JobDescriptionDashboardPageComponent implements OnInit {
   jobDescriptionList: Vacancy[];
   searchValue: string;
+  itemsPerPageValues: number[] = [5, 10, 20];
   constructor(private vacancyService: VacancyService) { }
 
   ngOnInit() {
