@@ -107,6 +107,8 @@ import { StickyTopDirective } from './directives/sticky-top/sticky-top.directive
 import {NgxMatSelectSearchModule} from 'ngx-mat-select-search';
 import { PositionsSelectComponent } from './components/selects/positions-select/positions-select.component';
 import {NgxPaginationModule} from 'ngx-pagination';
+import { PositionComponent } from './position/position.component';
+import { PositionInputComponent } from './components/inputs/position-input/position-input.component';
 
 export function HttpLoaderFactory(http: HttpClient) {
   return new TranslateHttpLoader(http);
@@ -175,7 +177,9 @@ export function HttpLoaderFactory(http: HttpClient) {
     DeleteInterviewModalComponent,
     AlertWithButtonModalComponent,
     StickyTopDirective,
-    PositionsSelectComponent
+    PositionsSelectComponent,
+    PositionComponent,
+    PositionInputComponent
     // ,
     // CalendarComponent
   ],

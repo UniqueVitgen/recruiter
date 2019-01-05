@@ -13,6 +13,8 @@ import {RegexpConst} from '../../../../const/regexp.const';
 import {VacancyState} from '../../../../enums/vacancy-state.enum';
 import {Observable} from 'rxjs';
 import {map, startWith} from 'rxjs/operators';
+import {PositionModel} from '../../../../classes/position-model';
+import {PositionService} from '../../../../services/position/position.service';
 
 export interface StateGroup {
   letter: string;
@@ -34,6 +36,8 @@ export class JobDescriptionModalComponent implements OnInit {
   private dialogResult: BaseDialogResult<Vacancy>;
   editedVacancy: VacancyForm;
   statuses = [VacancyState.OPEN, VacancyState.CLOSE];
+  positions: PositionModel[];
+  selectedPositions: PositionModel[];
 
   constructor(private fb: FormBuilder,
               public dialogRef: MatDialogRef<JobDescriptionModalComponent>,
@@ -41,6 +45,7 @@ export class JobDescriptionModalComponent implements OnInit {
               private vacancyService: VacancyService,
               private arrayWorker: ArrayWorker,
               private formBuilder: FormBuilder,
+              private positionService: PositionService,
               @Inject(MAT_DIALOG_DATA) public data: JobDescriptionDialogData) {
   }
 
@@ -75,6 +80,17 @@ export class JobDescriptionModalComponent implements OnInit {
       this.editedVacancy = new VacancyForm();
       this.editedVacancy.requirements = [];
     }
+    console.log('editedVacancy', this.editedVacancy);
+    this.getPositions();
+  }
+  changePosition() {
+    this.selectedPositions = this.searchWorker.searchObject(this.editedVacancy.position, this.positions, 'name');
+  }
+  getPositions() {
+    this.positionService.getAll().subscribe((resPositions: PositionModel[]) => {
+      this.positions = resPositions;
+      this.selectedPositions = this.positions;
+    });
   }
 
   public filterGroup(value: string): StateGroup[] {

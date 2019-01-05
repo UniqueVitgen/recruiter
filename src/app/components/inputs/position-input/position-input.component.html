@@ -1,0 +1,8 @@
+
+<input required [matAutocomplete]="auto" [(ngModel)]="editedExperience.jobPosition.name" (ngModelChange)="changePosition()" matInput placeholder="{{'Position' | translate}}">
+
+<mat-autocomplete #auto="matAutocomplete">
+  <mat-option *ngFor="let position of selectedPositions" [value]="position.name">
+    <span>{{position.name}}</span>
+  </mat-option>
+</mat-autocomplete>

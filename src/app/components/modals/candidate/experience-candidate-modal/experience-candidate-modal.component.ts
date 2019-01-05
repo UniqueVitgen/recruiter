@@ -9,6 +9,9 @@ import {CandidateExperience} from '../../../../classes/candidate-experience';
 import {ExperienceDialogData} from '../../../../interfaces/dialog/init/experience-dialog-data';
 import {FormBuilder, FormGroup, Validators} from '@angular/forms';
 import {AttachmentForm} from '../../../../classes/html/attachment-form';
+import {PositionService} from '../../../../services/position/position.service';
+import {PositionModel} from '../../../../classes/position-model';
+import {SearchWorker} from '../../../../workers/search/search.worker';
 
 @Component({
   selector: 'app-experience-candidate-modal',
@@ -21,12 +24,16 @@ export class ExperienceCandidateModalComponent implements OnInit {
   public editedExperience: CandidateExperience;
   public experienceResult: BaseDialogResult<CandidateExperience>;
   public formExperience: FormGroup;
+  public positions: PositionModel[];
+  public selectedPositions: PositionModel[];
   @Output('clickSave') outputClickSave: EventEmitter<CandidateExperience> = new EventEmitter();
 
   constructor(
     private candidateService: CandidateService,
     public dialogRef: MatDialogRef<NameCandidateModalComponent>,
     public enumWorker: EnumWorker,
+    public positionService: PositionService,
+    private searchWorker: SearchWorker,
     private fb: FormBuilder,
     @Inject(MAT_DIALOG_DATA) public data: ExperienceDialogData ) {
     // console.log('candidate', this.candidate);
@@ -42,9 +49,16 @@ export class ExperienceCandidateModalComponent implements OnInit {
       dateTo: ['', Validators.compose([Validators.required])],
       position: ['', Validators.compose([Validators.required])]
     });
+    this.getPositions();
   }
 
   ngOnInit() {
+  }
+  getPositions() {
+    this.positionService.getAll().subscribe((resPositions) => {
+      this.positions = resPositions;
+      this.selectedPositions = this.positions;
+    });
   }
 
   editCandidate() {
@@ -61,6 +75,9 @@ export class ExperienceCandidateModalComponent implements OnInit {
     //   };
     //   this.dialogRef.close(this.experienceResult);
     // });
+  }
+  changePosition() {
+    this.selectedPositions = this.searchWorker.searchObject(this.editedExperience.jobPosition, this.positions, 'name');
   }
 
   onNoClick(): void {

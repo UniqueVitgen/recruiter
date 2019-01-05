@@ -29,7 +29,13 @@
         <mat-datepicker #picker1></mat-datepicker>
       </mat-form-field>
       <mat-form-field class="example-full-width">
-        <input required formControlName="position" [(ngModel)]="editedExperience.jobPosition.name" matInput placeholder="{{'Position' | translate}}">
+        <input required [matAutocomplete]="auto" formControlName="position" [(ngModel)]="editedExperience.jobPosition.name" (ngModelChange)="changePosition()" matInput placeholder="{{'Position' | translate}}">
+
+        <mat-autocomplete #auto="matAutocomplete">
+          <mat-option *ngFor="let position of selectedPositions" [value]="position.name">
+            <span>{{position.name}}</span>
+          </mat-option>
+        </mat-autocomplete>
       </mat-form-field>
     </form>
     <!--<mat-form-field class="example-full-width">-->

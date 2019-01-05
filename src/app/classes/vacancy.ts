@@ -2,12 +2,12 @@ import {VacancyState} from '../enums/vacancy-state.enum';
 import {Skill} from './skill';
 import {Requirement, RequirementForm} from './requirement';
 import {Candidate} from './candidate';
-import {Position} from './position';
+import {PositionModel} from './position-model';
 
 export class Vacancy {
   id?: number
   ;
-  position: Position = new Position(); // vacancy's name
+  position: PositionModel = new PositionModel(); // vacancy's name
   salaryInDollarsFrom?: number;
   salaryInDollarsTo?: number;
   vacancyState: VacancyState;

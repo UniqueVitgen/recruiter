@@ -20,7 +20,10 @@ import {AttachmentType} from '../../../../enums/attachment-type.enum';
 import {ReplaySubject, Subject} from 'rxjs';
 import {take, takeUntil} from 'rxjs/operators';
 import {Vacancy} from '../../../../classes/vacancy';
+import {PositionModel} from '../../../../classes/position-model';
 import {TypeCheckingWorker} from '../../../../workers/type-checking/type-checking.worker';
+import {PositionService} from '../../../../services/position/position.service';
+import {SearchWorker} from '../../../../workers/search/search.worker';
 
 
 @Component({
@@ -38,6 +41,8 @@ export class ShortInfoUserComponent implements OnInit, OnDestroy, OnChanges {
   @Output('clickAvatar') outputClickAvatar: EventEmitter<Candidate> = new EventEmitter();
   public editedCandidate: Candidate;
   public candidateForm: FormGroup;
+  public positions: PositionModel[];
+  public selectedPositions: PositionModel[];
   tests: CandidateContactInput[] ;
   MaskConst = MaskConst;
   setStates: string[];
@@ -47,8 +52,10 @@ export class ShortInfoUserComponent implements OnInit, OnDestroy, OnChanges {
 
   constructor(public dialog: MatDialog,
               private candidateSerivce: CandidateService,
+              private positionService: PositionService,
               public candidateWorker: CandidateWorker,
               private stringWorker: StringWorker,
+              private searchWorker: SearchWorker,
               private arrayWorker: ArrayWorker,
               public typeCheckingWorker: TypeCheckingWorker,
               private fb: FormBuilder,
@@ -73,7 +80,7 @@ export class ShortInfoUserComponent implements OnInit, OnDestroy, OnChanges {
     }
     if (this.isSavedCandidate) {
       this.editedCandidate = this.typeCheckingWorker.parseObject(this.candidate);
-      // if (this.editedCandidate.position == null) {this.editedCandidate.position = new Position(); }
+      // if (this.editedCandidate.position == null) {this.editedCandidate.position = new PositionModel(); }
       console.log('editedCandidate -', this.editedCandidate);
       this.candidateForm = this.fb.group({
         name: [this.editedCandidate.name, Validators.compose([Validators.required, Validators.pattern(RegexpConst.LATIN_NAME)])],
@@ -83,6 +90,7 @@ export class ShortInfoUserComponent implements OnInit, OnDestroy, OnChanges {
       });
     }
     this.photo = this.candidateWorker.findPhoto(this.candidate);
+    this.getPositions();
     console.log('photo', this.photo);
   }
   initContacts() {
@@ -114,6 +122,15 @@ export class ShortInfoUserComponent implements OnInit, OnDestroy, OnChanges {
       this.tests[2].object = this.candidateWorker.getPhoneObject(this.candidate);
       this.tests[2].control.setValue(this.tests[2].object.contactDetails);
     }
+  }
+  getPositions() {
+    this.positionService.getAll().subscribe((resPositions: PositionModel[]) => {
+      this.positions = resPositions;
+      this.selectedPositions = resPositions;
+    });
+  }
+  changePosition() {
+    this.selectedPositions = this.searchWorker.searchObject(this.editedCandidate.position, this.positions, 'name');
   }
   changeContactProperty(value: CandidateContactInput) {
     console.log(value);
