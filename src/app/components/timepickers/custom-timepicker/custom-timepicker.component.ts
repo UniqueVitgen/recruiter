@@ -1,6 +1,6 @@
 import {Component, forwardRef, Input, OnInit} from '@angular/core';
 import {NgxMaterialTimepickerTheme} from 'ngx-material-timepicker/src/app/material-timepicker/models/ngx-material-timepicker-theme.interface';
-import {ControlValueAccessor, NG_VALUE_ACCESSOR} from '@angular/forms';
+import {ControlValueAccessor, FormControl, NG_VALUE_ACCESSOR} from '@angular/forms';
 import {TimeInput} from '../../../classes/html/dateTime/time-input';
 import {DateTimeWorker} from '../../../workers/date-time/date-time.worker';
 import {TranslateWorker} from '../../../workers/translate/translate.worker';
@@ -22,6 +22,7 @@ export class CustomTimepickerComponent implements OnInit, ControlValueAccessor {
   @Input() fullWidth: boolean;
   @Input() min: string;
   @Input() max: string;
+  @Input() required: boolean;
   timeString: string;
   darkTheme: NgxMaterialTimepickerTheme = {
     container: {

@@ -46,7 +46,11 @@ export class CalendarPageComponent implements OnInit {
   }
   addInterview(event: InterviewCalendarEvent) {
     const todayStart: Date = this.dateTimeWorker.getTodayStart();
+    const now: Date = this.dateTimeWorker.getNow();
     if (event.targetDate.getTime() > todayStart.getTime()) {
+      if (event.targetDate.getTime() < now.getTime()) {
+        event.targetDate = now;
+      }
       const dialogRef = this.dialog.open(InterviewModalComponent, {
         data: <InterviewDialogDataInterface> {
           sourceDate: event.targetDate,

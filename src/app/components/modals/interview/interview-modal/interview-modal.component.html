@@ -40,7 +40,7 @@
       <!--<button [md2DatepickerToggle]="birthday"></button>-->
 
 
-      <app-custom-timepicker formControlName="fromTime" [min]="dateTimeWorker.config.minTime" [max]="dateTimeWorker.config.maxTime" [(ngModel)]="planDate.time" [fullWidth]="true" (ngModelChange)="updateTime()"></app-custom-timepicker>
+      <app-custom-timepicker required formControlName="fromTime" [min]="dateTimeWorker.config.minTime" [max]="dateTimeWorker.config.maxTime" [(ngModel)]="planDate.time" [fullWidth]="true" (ngModelChange)="updateTime()"></app-custom-timepicker>
 
       <!--<mat-form-field class="example-full-width">-->
       <!--<input [min]="dateTimeWorker.config.minTime" [max]="dateTimeWorker.config.maxTime" formControlName="fromTime" matInput placeholder="{{'Start Time' | translate}}" [(ngModel)]="planDate.timeString"  [format]="24" [ngxTimepicker]="toggleTimepicker">-->

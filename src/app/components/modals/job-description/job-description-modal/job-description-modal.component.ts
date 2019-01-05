@@ -2,17 +2,13 @@ import {Component, Inject, OnInit} from '@angular/core';
 import {MAT_DIALOG_DATA, MatDialogRef} from '@angular/material';
 import {JobDescriptionDialogData} from '../../../../interfaces/dialog/init/job-description-dialog-data';
 import {Vacancy, VacancyForm} from '../../../../classes/vacancy';
-import {FormControl, FormGroup, FormBuilder, Validators, FormArray} from '@angular/forms';
+import {FormBuilder, FormGroup} from '@angular/forms';
 import {SearchWorker} from '../../../../workers/search/search.worker';
 import {CdkDragDrop, moveItemInArray} from '@angular/cdk/drag-drop';
 import {ArrayWorker} from '../../../../workers/array/array.worker';
 import {VacancyService} from '../../../../services/vacancy/vacancy.service';
-import {CandidateDialogResult} from '../../../../interfaces/dialog/result/candidate-dialog-result';
 import {BaseDialogResult} from '../../../../interfaces/dialog/result/base-dialog-result';
-import {RegexpConst} from '../../../../const/regexp.const';
 import {VacancyState} from '../../../../enums/vacancy-state.enum';
-import {Observable} from 'rxjs';
-import {map, startWith} from 'rxjs/operators';
 import {PositionModel} from '../../../../classes/position-model';
 import {PositionService} from '../../../../services/position/position.service';
 
@@ -78,6 +74,7 @@ export class JobDescriptionModalComponent implements OnInit {
       this.editedVacancy = <any>Object.assign({}, this.data.sourceJobDescription);
     } else {
       this.editedVacancy = new VacancyForm();
+      this.editedVacancy.vacancyState = VacancyState.OPEN;
       this.editedVacancy.requirements = [];
     }
     console.log('editedVacancy', this.editedVacancy);
@@ -89,7 +86,9 @@ export class JobDescriptionModalComponent implements OnInit {
   getPositions() {
     this.positionService.getAll().subscribe((resPositions: PositionModel[]) => {
       this.positions = resPositions;
-      this.selectedPositions = this.positions;
+      this.selectedPositions = this.positions.filter((position) => {
+        return position.name.trim();
+      });
     });
   }
 

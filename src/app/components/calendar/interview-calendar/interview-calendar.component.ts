@@ -215,6 +215,7 @@ export class InterviewCalendarComponent implements OnInit, OnChanges {
     console.log('add interview', event);
     console.log('event.detail.date', event.date);
     const dateEvent: Date =  event.date;
+    dateEvent.setHours(12);
     this.outputClickDay.emit({
       targetDate: dateEvent
     });

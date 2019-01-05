@@ -61,8 +61,8 @@ export class CandidateModalComponent implements OnInit {
         }
       };
       this.candidateForm = this.formBuilder.group({
-        name: ['', Validators.compose([Validators.required, Validators.pattern(RegexpConst.LATIN_NAME)])],
-        surname: ['', Validators.compose([Validators.required, Validators.pattern(RegexpConst.LATIN_NAME)])],
+        name: ['', Validators.compose([Validators.required, Validators.pattern(RegexpConst.LATIN_OR_CYRILIC_NAME)])],
+        surname: ['', Validators.compose([Validators.required, Validators.pattern(RegexpConst.LATIN_OR_CYRILIC_NAME)])],
         state: [''],
         position: [''],
         status: ['New', Validators.compose([Validators.required])],

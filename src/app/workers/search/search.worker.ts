@@ -18,7 +18,7 @@ export class SearchWorker {
       value = value.toLowerCase();
       if (list) {
         return list.filter(item => {
-          return item[property].toLowerCase().indexOf(value) > -1;
+          return item[property].toLowerCase().indexOf(value) > -1 && item[property];
         });
       }
     }

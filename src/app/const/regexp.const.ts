@@ -4,4 +4,5 @@ export class RegexpConst {
   public static BELLARUSSIAN_PHONE = /^\+375 \((17|29|33|44)\) [0-9]{3}-[0-9]{2}-[0-9]{2}$/;
   public static LATIN_NAME = /^[A-Za-z]*$/;
   public static CYRILIC_NAME = /^[А-Яа-я]$/;
+  public static LATIN_OR_CYRILIC_NAME = /(^[А-Яа-я]*$|^[A-Za-z]*$)/;
 }

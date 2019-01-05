@@ -19,7 +19,7 @@
             {{'Name is required' | translate}}
           </mat-error>
           <mat-error *ngIf="candidateForm.controls['name'].hasError('pattern')">
-            {{'Name must contain only latin characters' | translate}}
+            {{'Name must contain only latin characters or only cyrillic characters' | translate}}
           </mat-error>
         </mat-form-field>
         <mat-form-field class="example-full-width">
@@ -28,7 +28,7 @@
             {{'Surname is required' | translate}}
           </mat-error>
           <mat-error *ngIf="candidateForm.controls['surname'].hasError('pattern')">
-            {{'Surname must contain only latin characters' | translate}}
+            {{'Surname must contain only latin characters or only cyrillic characters' | translate}}
           </mat-error>
         </mat-form-field>
         <mat-form-field class="example-full-width">

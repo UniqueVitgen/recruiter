@@ -77,6 +77,9 @@ export class DateTimeWorker {
     date.setHours(23, 59, 59);
     return date;
   }
+  getNow() {
+    return new Date();
+  }
   isToday(date: Date): boolean {
     return date.getTime() > this.getTodayStart().getTime() && date.getTime() < this.getTodayEnd().getTime();
   }
@@ -127,10 +130,12 @@ export class DateTimeWorker {
       hours = timeString.substr(0, timeString.indexOf(':'));
     }
     const minutes = timeString.substr(timeString.indexOf(':') + 1);
-    return {
-      hours: parseInt(hours),
-      minutes: parseInt(minutes)
-    };
+    if (hours && minutes) {
+      return {
+        hours: parseInt(hours),
+        minutes: parseInt(minutes)
+      };
+    }
   }
   parse24FormatToAmPmFormat(time24String: string) {
     let hours = parseInt(time24String.substr(0, time24String.indexOf(':')));

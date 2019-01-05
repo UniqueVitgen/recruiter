@@ -74,7 +74,7 @@ export class InterviewModalComponent implements OnInit {
         this.editedInterview = Object.assign(new Interview(), this.data.sourceInterview);
         this.sourceVacancy = this.editedInterview.vacancy;
         this.editedCandidate = this.editedInterview.candidate;
-        this.getVacanccies();
+        this.getVacancies();
       } else {
         this.editedInterview = new Interview();
       }
@@ -86,7 +86,7 @@ export class InterviewModalComponent implements OnInit {
       if (this.data.sourceCandidate) {
         this.editedInterview.candidateId = this.data.sourceCandidate.id;
         this.editedCandidate = this.typeCheckingWorker.parseObject(this.data.sourceCandidate);
-        this.getVacanccies();
+        this.getVacancies();
       }
       if (this.data.sourceDate) {
         this.planDate.dateDate = new Date(this.data.sourceDate);
@@ -107,7 +107,7 @@ export class InterviewModalComponent implements OnInit {
   onNoClick(): void {
     this.dialogRef.close();
   }
-  getVacanccies() {
+  getVacancies() {
     this.canidateService.getVacancies(this.editedCandidate).subscribe(resVacancies => {
       this.vacancies = resVacancies;
     });
@@ -135,7 +135,7 @@ export class InterviewModalComponent implements OnInit {
     this.setPlaneDate();
   }
   changeCandidate() {
-    this.getVacanccies();
+    this.getVacancies();
   }
   setPlaneDate() {
     if (this.planDate.value.year && this.planDate.value.hours) {
@@ -149,6 +149,7 @@ export class InterviewModalComponent implements OnInit {
     }
     console.log(this.planDate.value);
     this.setPlaneDate();
+    console.log(this.interviewForm);
   }
 
   addInterview() {

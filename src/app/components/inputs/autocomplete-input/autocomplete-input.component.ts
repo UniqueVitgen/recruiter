@@ -54,7 +54,9 @@ export class AutocompleteInputComponent implements OnInit, ControlValueAccessor,
     if (this.value) {
       this.selectedPositions = this.searchWorker.searchValueInsideProperty(this.value, this.positions, this.searchProperty);
     } else {
-      this.selectedPositions = this.positions;
+      this.selectedPositions = this.positions.filter((position) => {
+        return position.name;
+      });
     }
   }
 
