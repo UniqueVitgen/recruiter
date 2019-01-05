@@ -12,9 +12,11 @@
   </dialog-title>
   <dialog-body>
     <form [formGroup]="formExperience">
-      <mat-form-field class="example-full-width">
-        <input required formControlName="companyName" [(ngModel)]="editedExperience.companyName.name" matInput placeholder="{{'company Name' | translate}}">
-      </mat-form-field>
+      <!--<mat-form-field class="example-full-width">-->
+        <!--<input required formControlName="companyName" [(ngModel)]="editedExperience.companyName.name" matInput placeholder="{{'company Name' | translate}}">-->
+      <!--</mat-form-field>-->
+      <app-autocomplete-input formControlName="companyName" [placeholder]="'company Name'" [searchProperty]="'name'" [visibleUnderline]="true" [fullWidth]="true" [positions]="teams" [(ngModel)]="editedExperience.companyName.name" required></app-autocomplete-input>
+
       <mat-form-field>
         <input required formControlName="dateFrom" matInput [(ngModel)]="editedExperience.dateFrom" [matDatepicker]="picker" placeholder="{{'Start Experience' | translate}}">
         <mat-datepicker-toggle name="dateSuffix" matSuffix [for]="picker"></mat-datepicker-toggle>

@@ -12,6 +12,8 @@ import {AttachmentForm} from '../../../../classes/html/attachment-form';
 import {PositionService} from '../../../../services/position/position.service';
 import {PositionModel} from '../../../../classes/position-model';
 import {SearchWorker} from '../../../../workers/search/search.worker';
+import {TeamService} from '../../../../services/team/team.service';
+import {Team} from '../../../../classes/team';
 
 @Component({
   selector: 'app-experience-candidate-modal',
@@ -25,6 +27,7 @@ export class ExperienceCandidateModalComponent implements OnInit {
   public experienceResult: BaseDialogResult<CandidateExperience>;
   public formExperience: FormGroup;
   public positions: PositionModel[];
+  public teams: Team[];
   public selectedPositions: PositionModel[];
   @Output('clickSave') outputClickSave: EventEmitter<CandidateExperience> = new EventEmitter();
 
@@ -33,6 +36,7 @@ export class ExperienceCandidateModalComponent implements OnInit {
     public dialogRef: MatDialogRef<NameCandidateModalComponent>,
     public enumWorker: EnumWorker,
     public positionService: PositionService,
+    private teamService: TeamService,
     private searchWorker: SearchWorker,
     private fb: FormBuilder,
     @Inject(MAT_DIALOG_DATA) public data: ExperienceDialogData ) {
@@ -50,6 +54,7 @@ export class ExperienceCandidateModalComponent implements OnInit {
       position: ['', Validators.compose([Validators.required])]
     });
     this.getPositions();
+    this.getTeams();
   }
 
   ngOnInit() {
@@ -58,6 +63,11 @@ export class ExperienceCandidateModalComponent implements OnInit {
     this.positionService.getAll().subscribe((resPositions) => {
       this.positions = resPositions;
       this.selectedPositions = this.positions;
+    });
+  }
+  getTeams() {
+    this.teamService.getAll().subscribe(resTeams => {
+      this.teams = resTeams;
     });
   }
 

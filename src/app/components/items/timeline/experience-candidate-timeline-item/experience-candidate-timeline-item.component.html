@@ -2,12 +2,14 @@
 <mat-card class="backgroundCard">
   <mat-icon class="delete" matTooltip="{{'Delete' | translate}}" (click)="delete()">close</mat-icon>
   <mat-card-title><mat-icon class="myIcon">description</mat-icon> {{'Experience' | translate}}</mat-card-title>
-  <mat-form-field class="example-full-width custom-form-field">
-    <input (blur)="onFocusoutAnyInput()" [(ngModel)]="editedExperience.companyName.name" matInput placeholder="{{'company Name' | translate}}">
-    <button mat-button  matSuffix mat-icon-button aria-label="Clear" class="edited-hover-button">
-      <mat-icon>edit</mat-icon>
-    </button>
-  </mat-form-field>
+  <!--<mat-form-field class="example-full-width custom-form-field">-->
+    <!--<input (blur)="onFocusoutAnyInput()" [(ngModel)]="editedExperience.companyName.name" matInput placeholder="{{'company Name' | translate}}">-->
+    <!--<button mat-button  matSuffix mat-icon-button aria-label="Clear" class="edited-hover-button">-->
+      <!--<mat-icon>edit</mat-icon>-->
+    <!--</button>-->
+  <!--</mat-form-field>-->
+  <app-autocomplete-input [placeholder]="'company Name'" [searchProperty]="'name'" [visibleUnderline]="true" [fullWidth]="true" [positions]="teams" [(ngModel)]="editedExperience.companyName.name" required></app-autocomplete-input>
+
   <mat-form-field class="custom-form-field">
     <input (blur)="onFocusoutAnyInput()" (dateChange)="onFocusoutAnyInput()" matInput [(ngModel)]="editedExperience.dateFrom" [matDatepicker]="picker" placeholder="{{'From' | translate}}">
     <mat-datepicker-toggle name="dateSuffix" matSuffix [for]="picker"></mat-datepicker-toggle>
@@ -27,7 +29,7 @@
       <!--<mat-icon>edit</mat-icon>-->
     <!--</button>-->
   <!--</mat-form-field>-->
-  <app-autocomplete-input  [placeholder]="'Position'" [searchProperty]="'name'" [fullWidth]="true" [visibleUnderline]="false" [positions]="positions" (blur)="onFocusoutAnyInput()" [(ngModel)]="editedExperience.jobPosition.name"></app-autocomplete-input>
+  <app-autocomplete-input required [placeholder]="'Position'" [searchProperty]="'name'" [fullWidth]="true" [visibleUnderline]="false" [positions]="positions" (blur)="onFocusoutAnyInput()" [(ngModel)]="editedExperience.jobPosition.name"></app-autocomplete-input>
   <!--<mat-form-field class="example-full-width custom-form-field">-->
     <!--<textarea  (blur)="onFocusoutAnyInput()" matInput placeholder="{{'Comment' | translate}}" [(ngModel)]="editedExperience.comment"></textarea>-->
     <!--<button mat-button  matSuffix mat-icon-button aria-label="Clear" class="edited-hover-button">-->
