@@ -1,4 +1,7 @@
 <mat-card >
+  <!--<mat-card-title>{{'Candidates' | translate}}</mat-card-title>-->
+  <!--<mat-divider></mat-divider>-->
+  <!--<br>-->
 <div *ngIf="isPagination && selectedCandidates.length > 0" class="row" >
   <div class="col-3 padding-element">
     <span class="height-div"></span>
@@ -17,6 +20,7 @@
     </button>
   </div>
 </div>
+  <!--<mat-divider></mat-divider>-->
 
 <div *ngIf="selectedCandidates" class="row">
   <div

@@ -22,7 +22,7 @@ export class InterviewWorker {
     const dateEnd = new Date(date.getTime() + 60 * this.dateTimeWorker.minute);
     let color;
     if (interview.factDate) {
-      color = 'lawngreen';
+      color = 'darkgreen';
     }
     return {
       title: interview.vacancy.position.name + ' - ' + interview.candidate.surname,

@@ -48,7 +48,7 @@ export class CandidateDashboardComponent implements OnInit, OnChanges {
   ngOnChanges(changes: SimpleChanges): void {
     if (this.isPagination) {
       if (this.itemsPerPage == null) {
-        this.itemsPerPage = 3;
+        this.itemsPerPage = 4;
       }
     }
     if (this.candidates) {
