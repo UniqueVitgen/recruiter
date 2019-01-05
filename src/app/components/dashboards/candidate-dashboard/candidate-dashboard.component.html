@@ -1,19 +1,18 @@
 <div class="row">
 
-  <div class="col-2 padding-element">
-    <span class="float-right height-div">ItemPerPage:</span>
-  </div>
-  <div class="col-1 padding-element-right">
-    <mat-select  [(ngModel)]="itemsPerPage" matInput>
+  <div class="col-3 padding-element">
+    <span class="height-div"></span>
+    <mat-form-field class="float-right">
+    <mat-select [placeholder]="'ItemPerPage' | translate" [(ngModel)]="itemsPerPage" matInput>
       <mat-option *ngFor="let state of itemsPerPageValues" [value]="state">{{state}}</mat-option>
     </mat-select>
+    </mat-form-field>
   </div>
-
-  <div class="col-4" >
-    <pagination-controls *ngIf="isPagination" [previousLabel]="''" [nextLabel]="''" [directionLinks]="true" class="custom-pagination float-left" autoHide="true" responsive="true" (pageChange)="p = $event">
+  <div class="col-4 center-vertical-text-container" >
+    <pagination-controls *ngIf="isPagination" [previousLabel]="''" [nextLabel]="''" [directionLinks]="true" class="custom-pagination float-left " autoHide="true" responsive="true" (pageChange)="p = $event">
     </pagination-controls>
   </div>
-  <div class="col-5"></div>
+  <div class="col-6"></div>
 </div>
 <div *ngIf="selectedCandidates" class="row">
   <div

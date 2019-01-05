@@ -121,5 +121,6 @@
   "Select": "Select",
   "Phone is required" : "Phone is required",
   "Email is required" : "Email is required",
-  "Skype is required" : "Skype is required"
+  "Skype is required" : "Skype is required",
+  "ItemPerPage" : "Candidates per page"
 }
