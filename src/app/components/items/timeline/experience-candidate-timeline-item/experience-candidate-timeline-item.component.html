@@ -8,7 +8,7 @@
       <!--<mat-icon>edit</mat-icon>-->
     <!--</button>-->
   <!--</mat-form-field>-->
-  <app-autocomplete-input [placeholder]="'company Name'" [searchProperty]="'name'" [visibleUnderline]="true" [fullWidth]="true" [positions]="teams" [(ngModel)]="editedExperience.companyName.name" required></app-autocomplete-input>
+  <app-autocomplete-input [placeholder]="'company Name'" [searchProperty]="'name'" [visibleUnderline]="false" [fullWidth]="true" [positions]="teams" [(ngModel)]="editedExperience.companyName.name" (blur)="onFocusoutAnyInput()" required></app-autocomplete-input>
 
   <mat-form-field class="custom-form-field">
     <input (blur)="onFocusoutAnyInput()" (dateChange)="onFocusoutAnyInput()" matInput [(ngModel)]="editedExperience.dateFrom" [matDatepicker]="picker" placeholder="{{'From' | translate}}">

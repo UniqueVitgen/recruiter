@@ -29,7 +29,7 @@ export class CandidateDashboardComponent implements OnInit, OnChanges {
   @Input() filledCells: BootstrapCellEnum;
   @Input() isPagination: boolean;
   @Input() itemsPerPageValues: number[];
-  itemsPerPage: number = 3;
+  itemsPerPage: number;
   p: number = 1;
   @Output('addCandidate') outputAddCandidate: EventEmitter<Candidate> = new EventEmitter();
   @Output('deleteCandidate') outputDeleteCandidate: EventEmitter<number> = new EventEmitter();
@@ -46,6 +46,11 @@ export class CandidateDashboardComponent implements OnInit, OnChanges {
   }
 
   ngOnChanges(changes: SimpleChanges): void {
+    if (this.isPagination) {
+      if (this.itemsPerPage == null) {
+        this.itemsPerPage = 3;
+      }
+    }
     if (this.candidates) {
       this.searchValues(this.search);
       console.log('fillledCells', this.filledCells);
