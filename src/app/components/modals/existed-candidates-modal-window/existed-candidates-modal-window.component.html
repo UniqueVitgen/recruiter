@@ -8,7 +8,7 @@
     <span *ngIf="!noCandidateToAdd">
       {{'Select candidate' | translate}}({{numberOfAvailableCandidates}})
     </span>
-    <button (click)="onNoClick()" class="float-right" mat-icon-button>
+    <button (click)="close()" class="float-right" mat-icon-button>
       <mat-icon [matTooltip]="'To close' | translate">close</mat-icon>
     </button>
 

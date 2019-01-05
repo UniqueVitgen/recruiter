@@ -7,13 +7,15 @@
     <!--</h5>-->
     <!--</mdb-card-header>-->
     <div class="center-text"> {{data.title | translate}}
-
+      <button (click)="onNoClick()" class="float-right" mat-icon-button>
+        <mat-icon [matTooltip]="'To close' | translate">close</mat-icon>
+      </button>
     </div>
   </dialog-title>
   <dialog-body>
     {{data.message | translate}}
   </dialog-body>
   <dialog-footer class="example-full-width">
-    <button class="float-right" mat-raised-button color="primary" (click)="onNoClick()">{{'Ok' | translate}}</button>
+    <button class="float-right" cdk-focus-initial mat-raised-button color="primary" (click)="onNoClick()">{{'Ok' | translate}}</button>
   </dialog-footer>
 </app-modal-component>
