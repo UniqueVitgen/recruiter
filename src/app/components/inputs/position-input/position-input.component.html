@@ -1,8 +1,10 @@
 
-<input required [matAutocomplete]="auto" [(ngModel)]="editedExperience.jobPosition.name" (ngModelChange)="changePosition()" matInput placeholder="{{'Position' | translate}}">
+<mat-form-field  [ngClass]="{'custom-form-field' : !visibleUnderline, 'example-full-width': fullWidth}">
+<input [matAutocomplete]="auto" (focus)="focus()" (blur)="blur.emit(value)" [(ngModel)]="value" [required]="required" (ngModelChange)="changeValue()" matInput placeholder="{{'Position' | translate}}">
 
 <mat-autocomplete #auto="matAutocomplete">
   <mat-option *ngFor="let position of selectedPositions" [value]="position.name">
     <span>{{position.name}}</span>
   </mat-option>
 </mat-autocomplete>
+</mat-form-field>

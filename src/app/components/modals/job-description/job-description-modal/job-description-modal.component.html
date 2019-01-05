@@ -8,15 +8,16 @@
     </button>
   </dialog-title>
   <dialog-body>
-      <mat-form-field *ngIf="editedVacancy" class="example-full-width">
-        <input [(ngModel)]="editedVacancy.position.name"   [matAutocomplete]="auto" (ngModelChange)="changePosition()" name="position" matInput placeholder="{{'Position' | translate}}" required>
-      </mat-form-field>
-    <mat-autocomplete #auto="matAutocomplete">
-      <mat-option *ngFor="let position of selectedPositions" [value]="position.name">
-        <span>{{position.name}}</span>
-      </mat-option>
-    </mat-autocomplete>
-      <mat-form-field class="example-full-width">
+      <!--<mat-form-field *ngIf="editedVacancy" class="example-full-width">-->
+        <!--<input [(ngModel)]="editedVacancy.position.name"   [matAutocomplete]="auto" (ngModelChange)="changePosition()" name="position" matInput placeholder="{{'Position' | translate}}" required>-->
+      <!--</mat-form-field>-->
+    <!--<mat-autocomplete #auto="matAutocomplete">-->
+      <!--<mat-option *ngFor="let position of selectedPositions" [value]="position.name">-->
+        <!--<span>{{position.name}}</span>-->
+      <!--</mat-option>-->
+    <!--</mat-autocomplete>-->
+    <app-position-input name="position" [visibleUnderline]="true" [fullWidth]="true" [positions]="positions" [(ngModel)]="editedVacancy.position.name" required></app-position-input>
+    <mat-form-field class="example-full-width">
         <mat-select placeholder="{{'Status' | translate}}" required [(ngModel)]="editedVacancy.vacancyState" name="state">
           <mat-option *ngFor="let state of statuses" [value]="state">
             {{state | translate}}
