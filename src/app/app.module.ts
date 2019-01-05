@@ -177,7 +177,6 @@ export function HttpLoaderFactory(http: HttpClient) {
     AlertWithButtonModalComponent,
     StickyTopDirective,
     PositionsSelectComponent,
-    PositionComponent,
     PositionInputComponent
     // ,
     // CalendarComponent
