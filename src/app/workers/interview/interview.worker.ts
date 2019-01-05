@@ -4,6 +4,7 @@ import {InterviewExtended} from '../../classes/interview';
 import {CalendarEvent} from '../../classes/html/calendar/calendar-event';
 import {DateTimeWorker} from '../date-time/date-time.worker';
 import {TranslateWorker} from '../translate/translate.worker';
+import {text} from '@angular/core/src/render3/instructions';
 
 @Injectable({
   providedIn: 'root'
@@ -20,9 +21,11 @@ export class InterviewWorker {
   convertInterviewToCalendarEvent(interview: InterviewExtended): CalendarEvent {
     const date = new Date(interview.planDate);
     const dateEnd = new Date(date.getTime() + 60 * this.dateTimeWorker.minute);
-    let color;
+    let color, textColor;
     if (interview.factDate) {
       color = 'darkgreen';
+    } else {
+      // color = '#4285f4';
     }
     return {
       title: interview.vacancy.position.name + ' - ' + interview.candidate.surname,

@@ -7,6 +7,7 @@ export class CalendarEvent {
   start: string;
   end: string;
   color?: string;
+  textColor?: string;
   candidate?: Candidate;
   vacancy: Vacancy;
   interview: Interview;
