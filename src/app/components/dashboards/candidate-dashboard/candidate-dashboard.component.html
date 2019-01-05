@@ -23,9 +23,9 @@
 
                                   [candidate]="candidate"></app-candidate-dashboard-item>
   </div>
-  <div *ngIf="haveAddElement" [ngClass]=" filledCells ? 'col-md-' + filledCells : 'col-md-3'" (click)="addCandidate()"
+  <div *ngIf="haveAddElement" [ngClass]=" filledCells ? 'col-md-' + filledCells : 'col-md-3'"
        class="col-12 center-item">
-    <mat-card class="candidate-dashboard-item add-item">
+    <mat-card class="candidate-dashboard-item add-item" (click)="addCandidate()">
       <mat-icon>add</mat-icon>
     </mat-card>
   </div>
