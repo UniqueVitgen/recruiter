@@ -61,7 +61,7 @@
   "CLOSED": "Closed",
   "Create": "Create",
   "Edit": "Edit",
-  "Add new": "Add new",
+  "Add new vacancy": "Add new vacancy",
   "Info": "Info",
   "Total number of candidates": "Total number of candidates",
   "Description": "Description",
@@ -125,5 +125,6 @@
   "New" : "New",
   "Accepted for interview" : "Accepted for interview",
   "CV rejected" : "CV rejected",
-  "CV accepted" : "CV accepted"
+  "CV accepted" : "CV accepted",
+  "VacancyPerPage" : "Vacancy per page"
 }
