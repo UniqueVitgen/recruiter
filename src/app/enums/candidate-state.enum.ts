@@ -1,4 +1,6 @@
 export enum CandidateState {
-  Open = 'Open',
-  Archive = 'Archive'
+  New = 'New',
+  AcceptedForInterview = 'Accepted for interview',
+  CvRejected = 'CV rejected',
+  CvAccepted = 'CV accepted'
 }
