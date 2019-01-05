@@ -19,7 +19,7 @@
     <!--<ngx-material-timepicker  [ngxMaterialTimepickerTheme]="darkTheme" #toggleTimepicker></ngx-material-timepicker>-->
   <!--</mat-form-field>-->
   <!--<mat-form-field class="custom-form-field">-->
-    <app-custom-timepicker [(ngModel)]="planDate.time" (ngModelChange)="onFocusoutAnyInput()" [hideUnderline]="true"></app-custom-timepicker>
+    <app-custom-timepicker [min]="dateTimeWorker.config.minTime" [max]="dateTimeWorker.config.maxTime" [(ngModel)]="planDate.time" (ngModelChange)="onFocusoutAnyInput()" [hideUnderline]="true"></app-custom-timepicker>
   &nbsp;
   <!--</mat-form-field>-->
   <mat-form-field class="custom-form-field">

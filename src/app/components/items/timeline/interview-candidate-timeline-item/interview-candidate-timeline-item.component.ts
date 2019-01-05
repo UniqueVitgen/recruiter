@@ -39,7 +39,7 @@ export class InterviewCandidateTimelineItemComponent implements OnInit, OnChange
   viewOfDate: string;
   viewOfTime: string;
 
-  constructor(private dateTimeWorker: DateTimeWorker, private translateWorker: TranslateWorker, private localDatePipe: LocalDatePipe) {
+  constructor(public dateTimeWorker: DateTimeWorker, private translateWorker: TranslateWorker, private localDatePipe: LocalDatePipe) {
   }
   ngOnInit() {
     this.editedInterview = Object.assign({}, this.interview);
