@@ -44,7 +44,7 @@
       <app-custom-timepicker [placeholder]="'End time'" required formControlName="toTime" [min]="planDate.timeString || dateTimeWorker.config.minTime" [max]="dateTimeWorker.config.maxTime" [(ngModel)]="planDate.endTime" [fullWidth]="true" (ngModelChange)="updateTime()"></app-custom-timepicker>
       <mat-form-field class="example-full-width" *ngIf="!data.fixedCandidate">
         <mat-select [placeholder]="'Candidate' | translate" required formControlName="candidate"
-          [compareWith]="typeCheckingWorker.compareObjects" [(value)]="editedCandidate" (selectionChange)="changeCandidate()">
+          [compareWith]="typeCheckingWorker.compareObjects" [(ngModel)]="editedCandidate" (selectionChange)="changeCandidate()">
           <mat-option *ngFor="let food of candidates" [value]="food">
             {{userWorker.formatFullName(food)}}
           </mat-option>
@@ -52,7 +52,7 @@
       </mat-form-field>
 
       <mat-form-field class="example-full-width">
-        <mat-select [placeholder]="'Vacancy' | translate" required formControlName="vacancy" [compareWith]="typeCheckingWorker.compareObjects" [(value)]="sourceVacancy">
+        <mat-select [placeholder]="'Vacancy' | translate" required formControlName="vacancy" [compareWith]="typeCheckingWorker.compareObjects" [(ngModel)]="sourceVacancy">
           <mat-option *ngFor="let food of vacancies" [value]="food">
             {{food.position.name}}
           </mat-option>

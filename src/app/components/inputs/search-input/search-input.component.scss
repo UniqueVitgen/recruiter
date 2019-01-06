@@ -13,3 +13,20 @@ border-color:#ccc;
   border:0;
   background:transparent;
 }
+.advanced-search {
+}
+.advanced-search-group {
+  input {
+    border-right: 0;
+  }
+  .input-group-append {
+    &, .input-group-text {
+      a {
+        font-size: 0.8em;
+        color: #007ad9;
+      }
+      background: white;
+      border-left: 0;
+    }
+  }
+}

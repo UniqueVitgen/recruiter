@@ -90,6 +90,7 @@ export class InterviewPageComponent implements OnInit {
     const dialogRef = this.dialog.open(InterviewModalComponent, {
       data: <InterviewDialogDataInterface> {
         sourceDate: new Date(interview.planDate),
+        sourceEndDate: new Date(interview.planEndDate),
         fixedCandidate: false,
         isEdit: true,
         sourceCandidate: interview.candidate,

@@ -1,0 +1,19 @@
+
+<mat-card>
+  <mat-form-field class="custom-multiple-select">
+    <mat-select [(ngModel)]="selectedStatuses" multiple placeholder="{{'Statuses' | translate}}">
+      <mat-select-trigger>
+        <span *ngIf="selectedStatuses.length === statusesList.length">{{'All' | translate}}</span>
+        <span *ngIf="selectedStatuses.length !== statusesList.length">{{selectedStatuses[0] | translate}}
+          <span *ngIf="selectedStatuses.length > 1">(+{{selectedStatuses.length - 1}}
+            {{selectedStatuses.length === 2 ? 'other' : 'others' | translate }})</span></span>
+        <!--{{toppings.value ? toppings.value[0] : ''}}-->
+        <!--<span *ngIf="toppings.value?.length > 1" class="example-additional-selection">-->
+        <!--(+{{toppings.value.length - 1}} {{toppings.value?.length === 2 ? 'other' : 'others'}})-->
+        <!--</span>-->
+      </mat-select-trigger>
+      <mat-option *ngFor="let topping of statusesList" [value]="topping">{{topping | translate}}</mat-option>
+    </mat-select>
+  </mat-form-field>
+  <!--<nouislider [connect]="true" [min]="0" [max]="15" [step]="1" [(ngModel)]="someRange" (ngModelChange)="onChange($event)"></nouislider-->
+</mat-card>

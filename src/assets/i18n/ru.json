@@ -131,5 +131,18 @@
   "Accepted for interview" : "Приглашен на интервью",
   "CV rejected" : "Резюме отклонено",
   "CV accepted" : "Резюме принято",
-  "VacancyPerPage" : "Вакансий на странице"
+  "VacancyPerPage" : "Вакансий на странице",
+  "Cannot add interview feedback to this interview, because vacancy have not requirements!": "Нельзя добавить отзыв по данному интервью, у вакансии нет требований!",
+  "Salary in dollars from": "Зарплата в долларах от",
+  "Salary in dollars to": "Зарплата в долларах до",
+  "Experience years required": "Требуемый опыт работы",
+  "years": "лет",
+  "Salary": "Зарплата",
+  "From salary": "Зарплата от",
+  "To salary": "Зарплата до",
+  "Advanced search": "Расширенный поиск",
+  "All": "Все",
+  "Statuses": "Статусы",
+  "other": "другой",
+  "others": "другие"
 }

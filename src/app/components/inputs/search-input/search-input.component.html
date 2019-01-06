@@ -1,11 +1,14 @@
 <div class="row">
   <div class="col-12">
     <div id="imaginary_container">
-      <div class="input-group stylish-input-group">
+      <div [ngClass]="{'advanced-search-group': isAdvancedSearch}" class="input-group stylish-input-group">
         <div class="input-group-prepend">
           <span class="input-group-text" id="basic-addon1"><mat-icon>search</mat-icon></span>
         </div>
         <input type="text" (input)="search($event.target.value)" class="form-control" placeholder="{{'Search'| translate}}">
+        <div *ngIf="isAdvancedSearch" class="input-group-append">
+          <span class="input-group-text" id="inputGroupFileAddon02"><a>{{'Advanced search' | translate}}</a></span>
+        </div>
         <!-- <span class="input-group-addon">
           <button type="submit">
             <span class="glyphicon glyphicon-search"></span>

@@ -51,9 +51,11 @@ export class CalendarPageComponent implements OnInit {
       if (event.targetDate.getTime() < now.getTime()) {
         event.targetDate = now;
       }
+      const targetEndDate: Date = new Date(event.targetDate.getTime() + this.dateTimeWorker.hour);
       const dialogRef = this.dialog.open(InterviewModalComponent, {
         data: <InterviewDialogDataInterface> {
           sourceDate: event.targetDate,
+          sourceEndDate: targetEndDate,
           fixedCandidate: false,
           isEdit: false
         },

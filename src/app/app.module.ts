@@ -108,6 +108,12 @@ import {NgxMatSelectSearchModule} from 'ngx-mat-select-search';
 import { PositionsSelectComponent } from './components/selects/positions-select/positions-select.component';
 import {NgxPaginationModule} from 'ngx-pagination';
 import { AutocompleteInputComponent } from './components/inputs/autocomplete-input/autocomplete-input.component';
+import {OnlyNumbersDirective} from './directives/only-numbers/only-numbers.directive';
+import { MinDirective } from './directives/min/min.directive';
+import { OnlyDigitsDirective } from './directives/only-digits/only-digits.directive';
+import { MaxDirective } from './directives/max/max.directive';
+import { NouisliderModule } from 'ng2-nouislider';
+import { JobDescriptionFilterToolbarComponent } from './components/toolbar/job-description-filter-toolbar/job-description-filter-toolbar.component';
 
 export function HttpLoaderFactory(http: HttpClient) {
   return new TranslateHttpLoader(http);
@@ -176,8 +182,13 @@ export function HttpLoaderFactory(http: HttpClient) {
     DeleteInterviewModalComponent,
     AlertWithButtonModalComponent,
     StickyTopDirective,
+    OnlyNumbersDirective,
     PositionsSelectComponent,
-    AutocompleteInputComponent
+    AutocompleteInputComponent,
+    MinDirective,
+    OnlyDigitsDirective,
+    MaxDirective,
+    JobDescriptionFilterToolbarComponent
     // ,
     // CalendarComponent
   ],
@@ -220,7 +231,8 @@ export function HttpLoaderFactory(http: HttpClient) {
     // LyResizingCroppingImageModule
     ImageCropperModule,
     NgxMatSelectSearchModule,
-    NgxPaginationModule
+    NgxPaginationModule,
+    NouisliderModule
     // MDBBootstrapModule.forRoot(),
     // NgxMaterialTimepickerModule.forRoot()
     // ,

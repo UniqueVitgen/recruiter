@@ -4,6 +4,7 @@ import {EventEmitter} from '@angular/core';
 
 export interface InterviewDialogDataInterface {
   sourceDate: Date;
+  sourceEndDate: Date;
   sourceCandidate: Candidate;
   fixedCandidate: boolean;
   sourceInterview?: Interview;

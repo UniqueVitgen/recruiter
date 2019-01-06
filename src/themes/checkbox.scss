@@ -1,4 +1,15 @@
 @import "variables";
+.mat-option {
+  .mat-pseudo-checkbox-checked::after {
+    top: 2.4px;
+    left: 1px;
+    width: 10px;
+    height: 5px;
+    border-left: 2px solid currentColor;
+    transform: rotate(-45deg);
+    opacity: 1;
+  }
+}
 //.mat-checkbox{
 //  &.mat-checkbox-checked {
 //    .mat-checkbox-frame {

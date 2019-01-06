@@ -77,6 +77,15 @@ export class InterviewModalComponent implements OnInit {
     private fb: FormBuilder,
     @Inject(MAT_DIALOG_DATA) public data: InterviewDialogDataInterface ) {
     this.minDate = this.dateTimeWorker.getTodayStart();
+    this.interviewForm = this.fb.group({
+      from: ['', Validators.compose([Validators.required])],
+      fromTime: ['', Validators.compose([Validators.required])],
+      toTime: ['', Validators.compose([Validators.required])],
+      validTime: [true, Validators.compose([Validators.requiredTrue])],
+      candidate: ['', Validators.compose([Validators.required])],
+      vacancy: ['', Validators.compose([Validators.required])],
+      to: ['', Validators.compose([])]
+    });
     if (this.data) {
       if ( this.data.isEdit) {
         this.editedInterview = Object.assign(new Interview(), this.data.sourceInterview);
@@ -99,19 +108,11 @@ export class InterviewModalComponent implements OnInit {
       if (this.data.sourceDate) {
         this.planDate.dateDate = new Date(this.data.sourceDate);
         this.planDate.time = this.dateTimeWorker.parseTimeObject(this.data.sourceDate);
+        this.planDate.endTime = this.dateTimeWorker.parseTimeObject(this.data.sourceEndDate);
       }
     } else {
       this.editedInterview = new Interview();
     }
-    this.interviewForm = this.fb.group({
-      from: ['', Validators.compose([Validators.required])],
-      fromTime: ['', Validators.compose([Validators.required])],
-      toTime: ['', Validators.compose([Validators.required])],
-      validTime: [true, Validators.compose([Validators.requiredTrue])],
-      candidate: ['', Validators.compose([Validators.required])],
-      vacancy: ['', Validators.compose([Validators.required])],
-      to: ['', Validators.compose([])]
-    });
     this.updateDate();
     this.updateTime();
   }

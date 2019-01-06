@@ -3,13 +3,6 @@
   <div *ngIf="!isEdited" name="vacancyInfo" class="vacancyInfo">
     <div name="vacancyHeader" class="vacancyHeader">
       <label class="vacancyName"> {{vacancy?.position.name}}
-       <!-- <span class="vacancyStatus">{{vacancy?.vacancyState}}</span>-->
-        <!--<span [ngClass]="{'vacancyIsOpened': vacancyColorService.isVacancyOpened(vacancy.vacancyState),-->
-              <!--'vacancyIsSuspended': vacancyColorService.isVacancySuspended(vacancy.vacancyState),-->
-              <!--'vacancyIsCanceled': vacancyColorService.isVacancyCanceled(vacancy.vacancyState),-->
-              <!--'vacancyIsClosed': vacancyColorService.isVacancyClosed(vacancy.vacancyState)}">-->
-          <!--&#10687;-->
-              <!--</span>-->
         <mat-icon class="fiber-icon-image"
                   matTooltip="{{'Status' | translate}}: {{vacancy.vacancyState | translate}}"
                   [ngClass]="{
@@ -20,6 +13,23 @@
         <mat-icon [matTooltip]="'More' | translate">more_horiz</mat-icon>
       </button>
 
+    </div>
+    <div *ngIf="vacancy.salaryInDollarsTo || vacancy.salaryInDollarsFrom">
+      <span class="font-weight-bold">{{'Salary' | translate}}:</span>
+      &nbsp;
+      &nbsp;
+      <span><span *ngIf="vacancy.salaryInDollarsFrom" matTooltip="{{'From salary' | translate}}">{{vacancy.salaryInDollarsFrom}}$</span>
+        <span *ngIf="vacancy.salaryInDollarsTo && vacancy.salaryInDollarsFrom">-</span>
+        <span *ngIf="vacancy.salaryInDollarsTo" matTooltip="{{'To salary' | translate}}">{{vacancy.salaryInDollarsTo}}$</span>
+      </span>
+    </div>
+    <div *ngIf="vacancy.experienceYearsRequire">
+      <span class="font-weight-bold">{{'Experience years required' | translate}}:</span>
+      &nbsp;
+      &nbsp;
+      <span>
+        {{vacancy.experienceYearsRequire}} {{'years' | translate}}
+      </span>
     </div>
     <label name="vacancyDescriptionTitle" class="vacancyTitles">{{'Description' | translate}}: </label>
     <label name="vacancyDescriptionContent" class="vacancyDescriptionContent" >{{vacancy.description}}</label>

@@ -1,6 +1,6 @@
 export enum VacancyState {
   OPEN = 'OPEN',
-  SUSPENDED = 'SUSPENDED',
-  CANCELED = 'CANCELED',
+  // SUSPENDED = 'SUSPENDED',
+  // CANCELED = 'CANCELED',
   CLOSE = 'CLOSE'
 }

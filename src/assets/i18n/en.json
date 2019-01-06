@@ -131,5 +131,18 @@
   "Accepted for interview" : "Accepted for interview",
   "CV rejected" : "CV rejected",
   "CV accepted" : "CV accepted",
-  "VacancyPerPage" : "Vacancy per page"
+  "VacancyPerPage" : "Vacancy per page",
+  "Cannot add interview feedback to this interview, because vacancy have not requirements!": "Cannot add interview feedback to this interview, because vacancy have not requirements!",
+  "Salary in dollars from": "Salary in dollars from",
+  "Salary in dollars to": "Salary in dollars to",
+  "Experience years required": "Experience years required",
+  "years": "years",
+  "Salary": "Salary",
+  "From salary": "From salary",
+  "To salary": "To salary",
+  "Advanced search": "Advanced search",
+  "All": "All",
+  "Statuses": "Statuses",
+  "other": "other",
+  "others": "others"
 }

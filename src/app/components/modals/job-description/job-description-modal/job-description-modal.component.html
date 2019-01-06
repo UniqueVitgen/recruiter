@@ -25,6 +25,15 @@
         </mat-select>
       </mat-form-field>
       <mat-form-field class="example-full-width">
+        <input matInput only-numbers [(ngModel)]="editedVacancy.salaryInDollarsFrom" name="salaryInDollarsFrom" placeholder="{{'Salary in dollars from' | translate}}">
+      </mat-form-field>
+    <mat-form-field class="example-full-width">
+      <input matInput only-numbers [min]="editedVacancy.salaryInDollarsFrom" [(ngModel)]="editedVacancy.salaryInDollarsTo" name="salaryInDollarsTo" placeholder="{{'Salary in dollars to' | translate}}">
+    </mat-form-field>
+    <mat-form-field class="example-full-width">
+      <input matInput only-numbers [max]="50" [(ngModel)]="editedVacancy.experienceYearsRequire" name="Required years" placeholder="{{'Experience years required' | translate}}">
+    </mat-form-field>
+      <mat-form-field class="example-full-width">
         <textarea matInput [(ngModel)]="editedVacancy.description" name="description" placeholder="{{'Description' | translate}}"></textarea>
       </mat-form-field>
       <div class="row font-weight-bold">

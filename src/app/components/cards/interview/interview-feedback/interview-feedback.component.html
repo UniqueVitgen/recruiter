@@ -1,5 +1,5 @@
 <!--<div class="center-item">-->
-<form #myForm="ngForm">
+<form *ngIf="feedback.feedbackDetails.length > 0" #myForm="ngForm">
   <mat-card class="custom-resize-card" *ngIf="feedback">
     <mat-card-title><span *ngIf="!isEdit">{{'Add' |translate }}</span> {{'Feedback' | translate}}
       <button *ngIf="isEdit && buttonEdit" class="float-right" mat-icon-button [matMenuTriggerFor]="menu" color="primary">
@@ -28,4 +28,8 @@
 <mat-menu #menu="matMenu">
   <button [disabled]="!isEdit" (click)="clickDelete()" mat-menu-item>{{'Delete' | translate}}</button>
 </mat-menu>
+<mat-card *ngIf="feedback.feedbackDetails.length == 0">
+  <mat-card-title>{{'Interview Feedback' | translate}}</mat-card-title>
+  <mat-card-content>{{'Cannot add interview feedback to this interview, because vacancy have not requirements!' | translate}}</mat-card-content>
+</mat-card>
 <!--</div>-->
