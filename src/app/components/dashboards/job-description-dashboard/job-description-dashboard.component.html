@@ -13,19 +13,23 @@
         </mat-select>
       </mat-form-field>
     </div>
-    <div class="col-5 center-vertical-text-container" >
-      <pagination-controls [id]="2" class="custom-pagination float-left" [nextLabel]="''" [previousLabel]="''" [responsive]="true" [autoHide]="true" (pageChange)="p = $event">
+    <div class="col-5 center-vertical-text-container">
+      <pagination-controls [id]="2" class="custom-pagination float-left" [nextLabel]="''" [previousLabel]="''"
+                           [responsive]="true" [autoHide]="true" (pageChange)="p = $event">
       </pagination-controls>
     </div>
 
-  <div class="col-4 center-item">
-    <button (click)="openJobDescriptionDialog()" class="vacancy-add-buttons" mat-raised-button color="primary">{{'Add new vacancy' | translate}}
-    </button>
-  </div>
+    <div class="col-4 center-item">
+      <button (click)="openJobDescriptionDialog()" class="vacancy-add-buttons" mat-raised-button color="primary">{{'Add
+        new vacancy' | translate}}
+      </button>
+    </div>
   </div>
   <br>
-  <div *ngFor="let vacancy of selectedVacancies | paginate: { itemsPerPage: itemsPerPage, currentPage: p, id: 2 } ; let vacancyID = index" class="vacancy">
-    <mat-accordion class="example-headers-align">
+  <div
+    *ngFor="let vacancy of selectedVacancies | paginate: { itemsPerPage: itemsPerPage, currentPage: p, id: 2 } ; let vacancyID = index"
+    class="vacancy">
+   <!-- <mat-accordion class="example-headers-align">
       <mat-expansion-panel class="vacancyPannel">
         <mat-expansion-panel-header>
 
@@ -45,18 +49,27 @@
               class="description"> {{'Total number of candidates' | translate}}: {{vacancy.candidates.length}}</span>
             <span><button mat-icon-button (click)="goToJobDescriptionPage(vacancy); $event.stopPropagation() "
             ><mat-icon [matTooltip]="'Vacancy info' | translate">info</mat-icon></button>
-          <button mat-icon-button (click)="openDeleteVacancyDialog(vacancyID); $event.stopPropagation()"><mat-icon [matTooltip]="'Delete this vacancy' | translate" >close</mat-icon></button></span>
+          <button mat-icon-button (click)="openDeleteVacancyDialog(vacancyID); $event.stopPropagation()"><mat-icon
+            [matTooltip]="'Delete this vacancy' | translate">close</mat-icon></button></span>
           </mat-panel-description>
 
-          <!--<button class="vacancyEditButton" mat-raised-button (click)="goToJobDescriptionPage(vacancy)">{{'Info' | translate}}</button>-->
-          <!--<button mat-icon-button class="vacancyDeleteButton" (click)="openDeleteVacancyDialog(vacancyID)"><mat-icon>close</mat-icon></button>-->
+          &lt;!&ndash;<button class="vacancyEditButton" mat-raised-button (click)="goToJobDescriptionPage(vacancy)">{{'Info' | translate}}</button>&ndash;&gt;
+          &lt;!&ndash;<button mat-icon-button class="vacancyDeleteButton" (click)="openDeleteVacancyDialog(vacancyID)"><mat-icon>close</mat-icon></button>&ndash;&gt;
 
         </mat-expansion-panel-header>
 
-        <app-candidate-dashboard [isPagination]="false" [isDeleteIcon]="false" [isClosedIcon]="isClosedIcon" [filledCells]="4"
+        <app-candidate-dashboard [isPagination]="false" [isDeleteIcon]="false" [isClosedIcon]="isClosedIcon"
+                                 [haveAddButton]="false"
+                                 [filledCells]="4" [haveAddElement]="false"
                                  [candidates]="vacancy.candidates" [limitTo]="3"></app-candidate-dashboard>
       </mat-expansion-panel>
-    </mat-accordion>
+    </mat-accordion>-->
+    <app-vacancy-accordion [vacancy]="vacancy"
+                           [vacancyID]="vacancyID"
+                           (onGoToJobDescriptionPage)="goToJobDescriptionPage($event)"
+                           (onOpenDeleteVacancyDialog)="openDeleteVacancyDialog($event)"
+
+    ></app-vacancy-accordion>
 
 
   </div>

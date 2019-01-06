@@ -1,4 +1,4 @@
 <app-search-input (onSearch)="search($event)"></app-search-input>
 <br>
-<app-candidate-dashboard [search]="searchValue" (addCandidate)="getAll()" [isClosedIcon]="false" [isDeleteIcon]="true" (deleteCandidateFromTheBase)="deleteCandidate($event)" [haveAddElement]="false" [candidates]="candidates" [isPagination]="true" [itemsPerPageValues]="itemsPerPageValues" [vacancies]="vacancies"></app-candidate-dashboard>
+<app-candidate-dashboard [search]="searchValue" (addCandidate)="getAll()" [isClosedIcon]="false" [isDeleteIcon]="true" (deleteCandidateFromTheBase)="deleteCandidate($event)" [haveAddButton]="true" [haveAddElement]="false" [candidates]="candidates" [isPagination]="true" [itemsPerPageValues]="itemsPerPageValues" [vacancies]="vacancies"></app-candidate-dashboard>
 
