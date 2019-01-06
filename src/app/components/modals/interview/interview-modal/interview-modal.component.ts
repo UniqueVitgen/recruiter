@@ -54,9 +54,17 @@ export class InterviewModalComponent implements OnInit {
   planDate: {
     dateDate: Date,
     time: TimeInput,
-    value?: DateTimeInput
+    timeString?: string,
+    endTime: TimeInput,
+    endTimeString?: string,
+    value?: DateTimeInput,
+    endValue?: DateTimeInput
   } = {dateDate: new Date(),
-  time: {hours: 12, minutes: 0}, value: new DateTimeInput()};
+  time: {hours: 12, minutes: 0},
+    endTime: {hours: 13, minutes: 0},
+    value: new DateTimeInput(),
+    endValue: new DateTimeInput()
+  };
 
   constructor(
     private interviewService: InterviewService,
@@ -98,6 +106,10 @@ export class InterviewModalComponent implements OnInit {
     this.interviewForm = this.fb.group({
       from: ['', Validators.compose([Validators.required])],
       fromTime: ['', Validators.compose([Validators.required])],
+      toTime: ['', Validators.compose([Validators.required])],
+      validTime: [true, Validators.compose([Validators.requiredTrue])],
+      candidate: ['', Validators.compose([Validators.required])],
+      vacancy: ['', Validators.compose([Validators.required])],
       to: ['', Validators.compose([])]
     });
     this.updateDate();
@@ -129,6 +141,7 @@ export class InterviewModalComponent implements OnInit {
       const dateInput = <DateInput> this.dateTimeWorker.parseDate(this.planDate.dateDate);
       for (const prop in dateInput) {
         this.planDate.value[prop] = dateInput[prop];
+        this.planDate.endValue[prop] = dateInput[prop];
       }
       console.log(this.planDate.value);
     }
@@ -139,15 +152,27 @@ export class InterviewModalComponent implements OnInit {
   }
   setPlaneDate() {
     if (this.planDate.value.year && this.planDate.value.hours) {
-      this.editedInterview.planDate = this.dateTimeWorker.setDate(this.planDate.value.year, this.planDate.value.month, this.planDate.value.day, this.planDate.value.hours, this.planDate.value.minutes).toISOString();
-      const timeInput = this.dateTimeWorker.parseTimeString(this.editedInterview.planDate);
+      this.editedInterview.planDate = this.dateTimeWorker.setDateFromDateTimeInput(this.planDate.value).toISOString();
+      this.editedInterview.planEndDate = this.dateTimeWorker.setDateFromDateTimeInput(this.planDate.endValue).toISOString();
+    }
+    if (this.editedInterview.planDate > this.editedInterview.planEndDate) {
+      this.interviewForm.controls.validTime.setValue(false);
+    } else {
+      this.interviewForm.controls.validTime.setValue(true);
     }
   }
   updateTime() {
     for (const prop in this.planDate.time) {
       this.planDate.value[prop] = this.planDate.time[prop];
+      this.planDate.endValue[prop] = this.planDate.endTime[prop];
     }
-    console.log(this.planDate.value);
+    if (this.planDate.time) {
+      this.planDate.timeString = this.dateTimeWorker.convertTimeInputToTimeString(this.planDate.time, 24);
+    }
+    if (this.planDate.endTime) {
+      this.planDate.endTimeString = this.dateTimeWorker.convertTimeInputToTimeString(this.planDate.endTime, 24);
+    }
+    console.log(this.planDate);
     this.setPlaneDate();
     console.log(this.interviewForm);
   }

@@ -23,6 +23,7 @@ export class CustomTimepickerComponent implements OnInit, ControlValueAccessor {
   @Input() min: string;
   @Input() max: string;
   @Input() required: boolean;
+  @Input() placeholder: string;
   timeString: string;
   darkTheme: NgxMaterialTimepickerTheme = {
     container: {

@@ -40,19 +40,10 @@
       <!--<button [md2DatepickerToggle]="birthday"></button>-->
 
 
-      <app-custom-timepicker required formControlName="fromTime" [min]="dateTimeWorker.config.minTime" [max]="dateTimeWorker.config.maxTime" [(ngModel)]="planDate.time" [fullWidth]="true" (ngModelChange)="updateTime()"></app-custom-timepicker>
-
-      <!--<mat-form-field class="example-full-width">-->
-      <!--<input [min]="dateTimeWorker.config.minTime" [max]="dateTimeWorker.config.maxTime" formControlName="fromTime" matInput placeholder="{{'Start Time' | translate}}" [(ngModel)]="planDate.timeString"  [format]="24" [ngxTimepicker]="toggleTimepicker">-->
-        <!--<button class="custom-timepicker-toggle" mat-button matSuffix mat-icon-button aria-label="Pick End Time">-->
-        <!--<ngx-material-timepicker-toggle  [for]="toggleTimepicker">-->
-          <!--<mat-icon ngxMaterialTimepickerToggleIcon>access_time</mat-icon>-->
-        <!--</ngx-material-timepicker-toggle>-->
-        <!--</button>-->
-      <!--<ngx-material-timepicker (timeSet)="updateTime($event)"  [ngxMaterialTimepickerTheme]="darkTheme" #toggleTimepicker></ngx-material-timepicker>-->
-      <!--</mat-form-field>-->
+      <app-custom-timepicker [placeholder]="'Start time'" required formControlName="fromTime" [min]="dateTimeWorker.config.minTime" [max]="dateTimeWorker.config.maxTime" [(ngModel)]="planDate.time" [fullWidth]="true" (ngModelChange)="updateTime()"></app-custom-timepicker>
+      <app-custom-timepicker [placeholder]="'End time'" required formControlName="toTime" [min]="planDate.timeString || dateTimeWorker.config.minTime" [max]="dateTimeWorker.config.maxTime" [(ngModel)]="planDate.endTime" [fullWidth]="true" (ngModelChange)="updateTime()"></app-custom-timepicker>
       <mat-form-field class="example-full-width" *ngIf="!data.fixedCandidate">
-        <mat-select [placeholder]="'Candidate' | translate"
+        <mat-select [placeholder]="'Candidate' | translate" required formControlName="candidate"
           [compareWith]="typeCheckingWorker.compareObjects" [(value)]="editedCandidate" (selectionChange)="changeCandidate()">
           <mat-option *ngFor="let food of candidates" [value]="food">
             {{userWorker.formatFullName(food)}}
@@ -61,7 +52,7 @@
       </mat-form-field>
 
       <mat-form-field class="example-full-width">
-        <mat-select [placeholder]="'Vacancy' | translate" [compareWith]="typeCheckingWorker.compareObjects" [(value)]="sourceVacancy">
+        <mat-select [placeholder]="'Vacancy' | translate" required formControlName="vacancy" [compareWith]="typeCheckingWorker.compareObjects" [(value)]="sourceVacancy">
           <mat-option *ngFor="let food of vacancies" [value]="food">
             {{food.position.name}}
           </mat-option>

@@ -26,6 +26,7 @@ import {AlertDialogData} from '../../../interfaces/dialog/init/alert-dialog-data
 import {TypeCheckingWorker} from '../../../workers/type-checking/type-checking.worker';
 import {Router} from '@angular/router';
 import {InterviewCalendarEvent} from '../../../classes/event/interview-calendar-event';
+// import {EventObject, ViewObject} from 'fullcalendar';
 // import {  } from 'fullcalendar';
 // import { FullCalendarOptions, EventObject } from 'ngx-fullcalendar';
 
@@ -42,6 +43,7 @@ export class InterviewCalendarComponent implements OnInit, OnChanges {
   @Output('clickDay') outputClickDay: EventEmitter<InterviewCalendarEvent> = new EventEmitter();
   @Output('clickEvent') outputClickEvent: EventEmitter<InterviewCalendarEvent> = new EventEmitter();
   @Output('dropEvent') outputDropEvent: EventEmitter<InterviewCalendarEvent> = new EventEmitter();
+  @Output('resizeEvent') outputResizeEvent: EventEmitter<InterviewCalendarEvent> = new EventEmitter();
   // options: FullCalendarOptions;
   // events: EventObject[];
   options;
@@ -70,69 +72,6 @@ export class InterviewCalendarComponent implements OnInit, OnChanges {
       end: this.dateTimeWorker.getNextYear()
     }
   };
-  // public calendarOptions2: Object = {
-  //   height: 'parent',
-  //   fixedWeekCount : false,
-  //   defaultDate: '2016-09-12',
-  //   editable: true,
-  //   eventLimit: true, // allow "more" link when too many events
-  //   events: [
-  //     {
-  //       title: 'All Day Event',
-  //       start: '2016-09-01'
-  //     },
-  //     {
-  //       title: 'Long Event',
-  //       start: '2016-09-07',
-  //       end: '2016-09-10'
-  //     },
-  //     {
-  //       id: 999,
-  //       title: 'Repeating Event',
-  //       start: '2016-09-09T16:00:00'
-  //     },
-  //     {
-  //       id: 999,
-  //       title: 'Repeating Event',
-  //       start: '2016-09-16T16:00:00'
-  //     },
-  //     {
-  //       title: 'Conference',
-  //       start: '2016-09-11',
-  //       end: '2016-09-13'
-  //     },
-  //     {
-  //       title: 'Meeting',
-  //       start: '2016-09-12T10:30:00',
-  //       end: '2016-09-12T12:30:00'
-  //     },
-  //     {
-  //       title: 'Lunch',
-  //       start: '2016-09-12T12:00:00'
-  //     },
-  //     {
-  //       title: 'Meeting',
-  //       start: '2016-09-12T14:30:00'
-  //     },
-  //     {
-  //       title: 'Happy Hour',
-  //       start: '2016-09-12T17:30:00'
-  //     },
-  //     {
-  //       title: 'Dinner',
-  //       start: '2016-09-12T20:00:00'
-  //     },
-  //     {
-  //       title: 'Birthday Party',
-  //       start: '2016-09-13T07:00:00'
-  //     },
-  //     {
-  //       title: 'Click for Google',
-  //       url: 'http://google.com/',
-  //       start: '2016-09-28'
-  //     }
-  //   ]
-  // };
   @ViewChild(CalendarComponent) ucCalendar: CalendarComponent;
 
   constructor(private dialog: MatDialog,
@@ -144,7 +83,6 @@ export class InterviewCalendarComponent implements OnInit, OnChanges {
               public translateWorker: TranslateWorker,
               public router: Router,
               private interviewService: InterviewService) {
-    // this.selected  = this.MONTH;
   }
   @HostListener('document:keydown', ['$event'])
   handleKeyboardEvent(event: KeyboardEvent) {
@@ -156,6 +94,7 @@ export class InterviewCalendarComponent implements OnInit, OnChanges {
     }
   }
   determineOptions() {{
+    const that = this;
     let buttonText, firstDay, titleFormat;
     if (this.locale === 'ru') {
       buttonText = {
@@ -208,6 +147,10 @@ export class InterviewCalendarComponent implements OnInit, OnChanges {
       eventDrop: (e) => {
         this.dropInterview(e);
       }
+      ,
+      eventResize(event, jsEvent: MouseEvent, ui: any, view): void {
+        that.resizeEvent(event);
+      }
     };
   }
   }
@@ -219,25 +162,6 @@ export class InterviewCalendarComponent implements OnInit, OnChanges {
     this.outputClickDay.emit({
       targetDate: dateEvent
     });
-    // if (dateEvent.getTime() > todayStart.getTime()) {
-    //   const dialogRef = this.dialog.open(InterviewModalComponent, {
-    //     data: <InterviewDialogDataInterface> {
-    //       sourceDate: event.date,
-    //       fixedCandidate: false,
-    //       isEdit: false
-    //     }
-    //   });
-    //   // dialogRef.afterClosed().subscribe(res => {
-    //   //   this.outputChangeInterviews.emit(null);
-    //   // });
-    // } else {
-    //   const dialogRef = this.dialog.open(AlertModalComponent, {
-    //     data: <AlertDialogData> {
-    //       title: this.translateWorker.translateWord('Past dates are disabled!'),
-    //       message: this.translateWorker.translateWord('You can\'t add events on Past dates.')
-    //     }
-    //   });
-    // }
   }
   clickInterview(event) {
     this.outputClickEvent.emit({
@@ -245,17 +169,6 @@ export class InterviewCalendarComponent implements OnInit, OnChanges {
       interview: event.event.extendedProps.interview
     });
     console.log('change event', event);
-    // const dialogRef = this.dialog.open(InterviewModalComponent, {
-    //   data: <InterviewDialogDataInterface> {
-    //     sourceDate: event.event.extendedProps.interview.planDate,
-    //     fixedCandidate: false,
-    //     isEdit: true,
-    //     sourceInterview: event.event.extendedProps.interview
-    //   }
-    // });
-    // dialogRef.afterClosed().subscribe(res => {
-    //   this.outputChangeInterviews.emit(null);
-    // });
   }
   goToInterviewPage(event) {
     const interview = event.event.extendedProps.interview;
@@ -265,30 +178,17 @@ export class InterviewCalendarComponent implements OnInit, OnChanges {
     console.log('drop Interview', event);
     this.outputDropEvent.emit({
       targetDate: event.event.start,
+      targetEndDate: event.event.end,
       interview: event.event.def.extendedProps.interview
     });
-    // if (event) {
-    //   const startTime: Date = event.event.start;
-    //   console.log(event.event.start.getUTCHours());
-    //   console.log(event.event.start.getHours());
-    //   if (startTime.getTime() > this.dateTimeWorker.getTodayStart().getTime()) {
-    //     const interview: InterviewExtended  = event.event.def.extendedProps.interview;
-    //     interview.planDate = this.dateTimeWorker.setUTCDate(startTime.getFullYear(),
-    //       startTime.getMonth(), startTime.getDate(), startTime.getHours(),
-    //       startTime.getMinutes()).toISOString();
-    //     this.outputChangeInterviews.emit(interview);
-    //   } else {
-    //     this.outputChangeInterviews.emit(null);
-    //     const dialogRef = this.dialog.open(AlertModalComponent, {
-    //       data: <AlertDialogData> {
-    //         title: 'Past dates are disabled!',
-    //         message: 'You can\'t drop events on past dates.'
-    //       }
-    //     });
-    //   }
-    // } else {
-    //   this.outputChangeInterviews.emit(null);
-    // }
+  }
+  resizeEvent(event) {
+    console.log('resize Interview', event);
+    this.outputResizeEvent.emit({
+      targetDate: event.event.start,
+      targetEndDate: event.event.end,
+      interview: event.event.def.extendedProps.interview
+    });
   }
 
   ngOnInit() {
@@ -309,24 +209,6 @@ export class InterviewCalendarComponent implements OnInit, OnChanges {
   ngOnChanges(changes: SimpleChanges): void {
     this.getCalendarEvents();
     this.options = this.determineOptions();
-    // if (this.locale === 'ru') {
-    //   newOptions.buttonText = {
-    //     month:    'Месяц',
-    //     // today:    '>',
-    //     week:     'Неделя',
-    //     day:      'Лист',
-    //     list:     'Список'
-    //   };
-    // } else {
-    //   newOptions.buttonText = {
-    //     month:    'Month',
-    //     // today:    'Today',
-    //     week:     'Week',
-    //     day:      'Day',
-    //     list:     'List'
-    //   };
-    // }
-    // this.options = newOptions;
   }
 
 

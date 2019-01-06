@@ -20,7 +20,7 @@ export class InterviewWorker {
 
   convertInterviewToCalendarEvent(interview: InterviewExtended): CalendarEvent {
     const date = new Date(interview.planDate);
-    const dateEnd = new Date(date.getTime() + 60 * this.dateTimeWorker.minute);
+    const dateEnd = new Date(interview.planEndDate);
     let color, textColor;
     if (interview.factDate) {
       color = 'darkgreen';
@@ -30,7 +30,7 @@ export class InterviewWorker {
     return {
       title: interview.vacancy.position.name + ' - ' + interview.candidate.surname,
       start: date.toISOString(),
-      end: date.toISOString(),
+      end: dateEnd.toISOString(),
       // start: this.dateTimeWorker.transform(date, 'yyyy-MM-ddT', 'UTC', this.translateWorker.getLanguage()) + this.dateTimeWorker.getTime(date, 'HH:mm') + ':' + '00' ,
       // end: this.dateTimeWorker.transform((dateEnd), 'yyyy-MM-ddT', 'UTC', this.translateWorker.getLanguage()) + this.dateTimeWorker.getTime(dateEnd, 'HH:mm') + ':' + '00',
       candidate: interview.candidate,

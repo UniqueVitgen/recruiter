@@ -80,14 +80,15 @@ export class CalendarPageComponent implements OnInit {
     this.router.navigate(['interview', event.interview.id]);
   }
   dropEvent(event: InterviewCalendarEvent) {
-
       const startTime: Date = event.targetDate;
+      const endTime: Date = event.targetEndDate;
       if (startTime.getTime() > this.dateTimeWorker.getTodayStart().getTime()) {
         const interview: InterviewExtended  = event.interview;
         // interview.planDate = this.dateTimeWorker.setUTCDate(startTime.getFullYear(),
         //   startTime.getMonth(), startTime.getDate(), startTime.getHours(),
         //   startTime.getMinutes()).toISOString();
         interview.planDate = startTime.toISOString();
+        interview.planEndDate = endTime.toISOString();
         this.interviewService.update(interview).subscribe(res => {
           this.getInterviews();
         });
@@ -100,5 +101,29 @@ export class CalendarPageComponent implements OnInit {
         });
         this.getInterviews();
       }
+  }
+  resizeEvent(event) {
+    console.log('resize event 2', event);
+    const startTime: Date = event.targetDate;
+    const endTime: Date = event.targetEndDate;
+    if (startTime.getTime() > this.dateTimeWorker.getTodayStart().getTime()) {
+      const interview: InterviewExtended  = event.interview;
+      // interview.planDate = this.dateTimeWorker.setUTCDate(startTime.getFullYear(),
+      //   startTime.getMonth(), startTime.getDate(), startTime.getHours(),
+      //   startTime.getMinutes()).toISOString();
+      interview.planDate = startTime.toISOString();
+      interview.planEndDate = endTime.toISOString();
+      this.interviewService.update(interview).subscribe(res => {
+        this.getInterviews();
+      });
+    } else {
+      const dialogRef = this.dialog.open(AlertModalComponent, {
+        data: <AlertDialogData> {
+          title: 'Past dates are disabled!',
+          message: 'You can\'t drop events on past dates.'
+        }
+      });
+      this.getInterviews();
+    }
   }
 }

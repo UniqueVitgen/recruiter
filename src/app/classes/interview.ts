@@ -7,6 +7,7 @@ export class Interview extends EventNote {
   candidateId: number;
   vacancyId: number;
   planDate: string;
+  planEndDate: string;
   factDate?: string;
   comment?: string;
 }

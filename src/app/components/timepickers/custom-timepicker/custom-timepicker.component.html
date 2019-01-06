@@ -1,6 +1,6 @@
 
 <mat-form-field [ngClass]="{'custom-form-field': hideUnderline, 'example-full-width': fullWidth}">
-<input matInput required placeholder="{{'Start Time' | translate}}" [min]="min" [max]="max" [(ngModel)]="timeString" (ngModelChange)="changeTime()" [format]="format" [ngxTimepicker]="toggleTimepicker">
+<input matInput required placeholder="{{placeholder | translate}}" [min]="min" [max]="max" [(ngModel)]="timeString" (ngModelChange)="changeTime()" [format]="format" [ngxTimepicker]="toggleTimepicker">
 <button class="custom-timepicker-toggle" mat-button matSuffix mat-icon-button aria-label="Pick End Time">
   <ngx-material-timepicker-toggle  [for]="toggleTimepicker">
     <mat-icon ngxMaterialTimepickerToggleIcon>access_time</mat-icon>

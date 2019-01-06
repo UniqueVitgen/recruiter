@@ -71,7 +71,7 @@ export class AutocompleteInputComponent implements OnInit, ControlValueAccessor,
   }
 
   ngOnChanges(changes: SimpleChanges): void {
-    console.log('onChanges');
+    // console.log('onChanges');
     // this.searchPositions();
   }
   // changePosition() {

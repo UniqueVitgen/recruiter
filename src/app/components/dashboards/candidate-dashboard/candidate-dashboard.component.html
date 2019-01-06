@@ -2,10 +2,10 @@
   <!--<mat-card-title>{{'Candidates' | translate}}</mat-card-title>-->
   <!--<mat-divider></mat-divider>-->
   <!--<br>-->
-<div *ngIf="isPagination && selectedCandidates.length > 0" class="row" >
+<div class="row" >
   <div class="col-3 padding-element">
     <span class="height-div"></span>
-    <mat-form-field class="float-right">
+    <mat-form-field  *ngIf="isPagination && selectedCandidates.length > 0" class="float-right">
     <mat-select [placeholder]="'ItemPerPage' | translate" [(ngModel)]="itemsPerPage" matInput>
       <mat-option *ngFor="let state of itemsPerPageValues" [value]="state">{{state}}</mat-option>
     </mat-select>

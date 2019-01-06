@@ -71,39 +71,39 @@ export class ShortInfoUserComponent implements OnInit, OnDestroy, OnChanges {
   ngOnDestroy() {
   }
   clickAvatar() {
-    this.outputClickAvatar.emit(this.candidate);
+    this.outputClickAvatar.emit(this.editedCandidate);
   }
   ngOnChanges(changes: SimpleChanges): void {
-    console.log('candidate', this.candidate, this.isSavedCandidate);
-    if (this.isSaved) {
-      this.initContacts();
-    }
+    console.log('candidate', this.editedCandidate, this.isSavedCandidate);
     if (this.isSavedCandidate) {
       this.editedCandidate = this.typeCheckingWorker.parseObject(this.candidate);
       // if (this.editedCandidate.position == null) {this.editedCandidate.position = new PositionModel(); }
       console.log('editedCandidate -', this.editedCandidate);
       this.candidateForm = this.fb.group({
-        name: [this.editedCandidate.name, Validators.compose([Validators.required, Validators.pattern(RegexpConst.LATIN_NAME)])],
-        surname: [this.editedCandidate.surname, Validators.compose([Validators.required, Validators.pattern(RegexpConst.LATIN_NAME)])],
+        name: [this.editedCandidate.name, Validators.compose([Validators.required, Validators.pattern(RegexpConst.LATIN_OR_CYRILIC_NAME)])],
+        surname: [this.editedCandidate.surname, Validators.compose([Validators.required, Validators.pattern(RegexpConst.LATIN_OR_CYRILIC_NAME)])],
         position: [this.editedCandidate.position ? this.editedCandidate.position.name : ''],
         status: [this.editedCandidate.candidateState.name]
       });
     }
-    this.photo = this.candidateWorker.findPhoto(this.candidate);
+    if (this.isSaved) {
+      this.initContacts();
+    }
+    this.photo = this.candidateWorker.findPhoto(this.editedCandidate);
     this.getPositions();
     console.log('photo', this.photo);
   }
   initContacts() {
     this.tests = [
-      {have: this.candidateWorker.haveEmail(this.candidate),
+      {have: this.candidateWorker.haveEmail(this.editedCandidate),
         value: ContactType.EMAIL,
         methodName: 'getEmailObject',
         control: new FormControl('', Validators.compose([Validators.pattern(RegexpConst.EMAIL), Validators.required]))
       },
-      {have: this.candidateWorker.haveSkype(this.candidate),
+      {have: this.candidateWorker.haveSkype(this.editedCandidate),
         value: ContactType.SKYPE, methodName: 'getSkypeObject',
         control: new FormControl('', Validators.compose([Validators.required]))},
-      {have: this.candidateWorker.havePhone(this.candidate),
+      {have: this.candidateWorker.havePhone(this.editedCandidate),
         value: ContactType.PHONE,
         methodName: 'getPhoneObject',
         control: new FormControl('', Validators.compose([Validators.pattern(RegexpConst.BELLARUSSIAN_PHONE), Validators.required]))
@@ -111,15 +111,15 @@ export class ShortInfoUserComponent implements OnInit, OnDestroy, OnChanges {
     ];
     console.log(this.tests);
     if (this.tests[0].have) {
-      this.tests[0].object = this.candidateWorker.getEmailObject(this.candidate);
+      this.tests[0].object = this.candidateWorker.getEmailObject(this.editedCandidate);
       this.tests[0].control.setValue(this.tests[0].object.contactDetails);
     }
     if (this.tests[1].have) {
-      this.tests[1].object = this.candidateWorker.getSkypeObject(this.candidate);
+      this.tests[1].object = this.candidateWorker.getSkypeObject(this.editedCandidate);
       this.tests[1].control.setValue(this.tests[1].object.contactDetails);
     }
     if (this.tests[2].have) {
-      this.tests[2].object = this.candidateWorker.getPhoneObject(this.candidate);
+      this.tests[2].object = this.candidateWorker.getPhoneObject(this.editedCandidate);
       this.tests[2].control.setValue(this.tests[2].object.contactDetails);
     }
   }
@@ -134,8 +134,9 @@ export class ShortInfoUserComponent implements OnInit, OnDestroy, OnChanges {
   }
   changeContactProperty(value: CandidateContactInput) {
     console.log(value);
+    console.log('tests', this.tests);
     if (value.have) {
-      if (this.candidateWorker[value.methodName](this.candidate) == null) {
+      if (this.candidateWorker[value.methodName](this.editedCandidate) == null) {
         let skypeObject: ContactDetails;
         if (value.object) {
           skypeObject = value.object;
@@ -145,10 +146,11 @@ export class ShortInfoUserComponent implements OnInit, OnDestroy, OnChanges {
             contactDetails: ''
           };
         }
-        if (this.tests[0].control.valid && this.tests[1].control.valid &&
-          this.tests[2].control.valid) {
+        if ((!this.tests[0].have || this.tests[0].control.valid) &&
+          (!this.tests[1].have || this.tests[1].control.valid) &&
+          (!this.tests[2].have || this.tests[2].control.valid)) {
           this.isSaved = true;
-          this.candidate.contacts.push(skypeObject);
+          this.editedCandidate.contacts.push(skypeObject);
         } else {
           this.isSaved = false;
         }
@@ -158,12 +160,14 @@ export class ShortInfoUserComponent implements OnInit, OnDestroy, OnChanges {
     } else {
       const method = value.methodName;
       console.log(method);
-      if (this.candidateWorker[method](this.candidate) != null) {
-        if (this.tests[0].control.valid && this.tests[1].control.valid &&
-          this.tests[2].control.valid) {
+      if (this.candidateWorker[method](this.editedCandidate) != null) {
+        console.log(this.tests);
+        if ((!this.tests[0].have || this.tests[0].control.valid) &&
+          (!this.tests[1].have || this.tests[1].control.valid) &&
+          (!this.tests[2].have || this.tests[2].control.valid)) {
           this.isSaved = true;
-          this.candidate.contacts = this.arrayWorker.removeElement(this.candidate.contacts, value.object);
-          this.candidateSerivce.update(this.candidate).subscribe(res => {
+          this.editedCandidate.contacts = this.arrayWorker.removeElement(this.editedCandidate.contacts, value.object);
+          this.candidateSerivce.update(this.editedCandidate).subscribe(res => {
             console.log(res);
           });
         } else {
@@ -189,6 +193,7 @@ export class ShortInfoUserComponent implements OnInit, OnDestroy, OnChanges {
   }
 
   onFocusoutAnyInput(value: boolean = true) {
+    console.log('candidate 1', this.editedCandidate);
     if (value) {
       console.log('candidate 1', this.editedCandidate);
       console.log('candidate form', this.candidateForm);

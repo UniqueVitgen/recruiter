@@ -164,6 +164,11 @@ export class DateTimeWorker {
     date.setHours(hours, minutes);
     return date;
   }
+  setDateFromDateTimeInput(dateTimeInput: DateTimeInput) {
+    return new Date(dateTimeInput.year,
+      dateTimeInput.month, dateTimeInput.day,
+      dateTimeInput.hours, dateTimeInput.minutes);
+  }
   parseDate(date: Date): DateInput {
     return {
       day: date.getDate(),
