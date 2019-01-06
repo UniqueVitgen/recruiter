@@ -108,6 +108,7 @@ import {NgxMatSelectSearchModule} from 'ngx-mat-select-search';
 import { PositionsSelectComponent } from './components/selects/positions-select/positions-select.component';
 import {NgxPaginationModule} from 'ngx-pagination';
 import { AutocompleteInputComponent } from './components/inputs/autocomplete-input/autocomplete-input.component';
+import { VacancyAccordionComponent } from './components/accordions/vacancy-accordion/vacancy-accordion.component';
 
 export function HttpLoaderFactory(http: HttpClient) {
   return new TranslateHttpLoader(http);
@@ -177,7 +178,8 @@ export function HttpLoaderFactory(http: HttpClient) {
     AlertWithButtonModalComponent,
     StickyTopDirective,
     PositionsSelectComponent,
-    AutocompleteInputComponent
+    AutocompleteInputComponent,
+    VacancyAccordionComponent
     // ,
     // CalendarComponent
   ],

@@ -15,7 +15,7 @@
     <pagination-controls *ngIf="isPagination" [id]="1" [previousLabel]="''" [nextLabel]="''" [directionLinks]="true" class="custom-pagination float-left " [autoHide]="true" [responsive]="true" (pageChange)="p = $event">
     </pagination-controls>
   </div>
-  <div class="col-4 center-item">
+  <div *ngIf="haveAddButton" class="col-4 center-item">
     <button (click)="addCandidate()" class="vacancy-add-buttons" mat-raised-button color="primary">{{'Add new candidate' | translate}}
     </button>
   </div>

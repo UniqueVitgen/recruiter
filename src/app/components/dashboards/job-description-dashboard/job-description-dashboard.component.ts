@@ -1,4 +1,4 @@
-import {Component, Input, OnInit, Output, EventEmitter, SimpleChanges, OnChanges} from '@angular/core';
+import {Component, Input, OnInit, Output, EventEmitter, SimpleChanges, OnChanges, HostListener} from '@angular/core';
 import {Vacancy} from '../../../classes/vacancy';
 import {Router} from '@angular/router';
 import {MatDialog} from '@angular/material';
@@ -22,6 +22,10 @@ export class JobDescriptionDashboardComponent implements OnInit, OnChanges {
   @Output('deleteVacancy') outputDeleteVacancy: EventEmitter<any> = new EventEmitter();
   @Input() itemsPerPageValues: number[];
   @Input() isPagination: boolean;
+  showInfoAndDeleteIcon: boolean = false;
+  @HostListener('mouseenter') setShowInfoAndDeleteIcon(){
+    this.showInfoAndDeleteIcon = !this.showInfoAndDeleteIcon;
+  }
   itemsPerPage: number = 5;
   p: number = 1;
   isClosedIcon: boolean = false;

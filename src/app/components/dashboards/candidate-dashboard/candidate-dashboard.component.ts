@@ -21,6 +21,7 @@ import {Vacancy} from '../../../classes/vacancy';
 export class CandidateDashboardComponent implements OnInit, OnChanges {
   @Input() candidates: Candidate[];
   @Input() haveAddElement: boolean;
+  @Input() haveAddButton: boolean;
   @Input() search;
   @Input() vacancies;
   @Input() haveHoverEffect: boolean = true;
