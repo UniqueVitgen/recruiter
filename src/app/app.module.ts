@@ -118,6 +118,7 @@ import { JobDescriptionFilterToolbarComponent } from './components/toolbar/job-d
 
 import { VacancyAccordionComponent } from './components/accordions/vacancy-accordion/vacancy-accordion.component';
 import { Ng5SliderModule } from 'ng5-slider';
+import { JobDescriptionPaginationToolbarComponent } from './components/toolbar/job-description-pagination-toolbar/job-description-pagination-toolbar.component';
 
 
 export function HttpLoaderFactory(http: HttpClient) {
@@ -194,7 +195,8 @@ export function HttpLoaderFactory(http: HttpClient) {
     OnlyDigitsDirective,
     MaxDirective,
     JobDescriptionFilterToolbarComponent,
-    VacancyAccordionComponent
+    VacancyAccordionComponent,
+    JobDescriptionPaginationToolbarComponent
   ],
   imports: [
     BrowserModule,

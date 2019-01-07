@@ -32,8 +32,8 @@ export class JobDescriptionDashboardComponent implements OnInit, OnChanges {
   @HostListener('mouseenter') setShowInfoAndDeleteIcon(){
     this.showInfoAndDeleteIcon = !this.showInfoAndDeleteIcon;
   }
-  itemsPerPage: number = 5;
-  p: number = 1;
+  @Input() itemsPerPage: number;
+  @Input() p: number;
   isClosedIcon: boolean = false;
   public selectedVacancies: Vacancy[];
 
@@ -51,6 +51,7 @@ export class JobDescriptionDashboardComponent implements OnInit, OnChanges {
   }
 
   ngOnChanges(changes: SimpleChanges): void {
+    console.log('2', this.p, this.itemsPerPage);
     this.selectedVacancies = this.searchValues(this.search);
     if (this.isFilter) {
       this.selectedVacancies = this.filterByStatus(this.selectedVacancies, this.filterStatuses);
@@ -101,27 +102,6 @@ export class JobDescriptionDashboardComponent implements OnInit, OnChanges {
     } else {
       return vacancies;
     }
-  }
-
-  openJobDescriptionDialog(): void {
-    console.log('i');
-    const dialogRef = this.dialog.open(JobDescriptionModalComponent, {
-        data: <JobDescriptionDialogData> {
-          sourceJobDescription: null,
-          isEdit: false,
-          dialogWindowTitle: 'Create'
-        },
-        minWidth: '700px',
-        disableClose: true
-      }
-    );
-    dialogRef.afterClosed().subscribe((res: BaseDialogResult<Vacancy>) => {
-      if (res) {
-        if (res.success) {
-          this.outputAddVacancy.emit(res.resObject);
-        }
-      }
-    });
   }
 
   openDeleteVacancyDialog(vacancyID: number): void {

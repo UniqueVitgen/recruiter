@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, OnChanges, OnInit} from '@angular/core';
 import {Vacancy} from '../../classes/vacancy';
 import {VacancyService} from '../../services/vacancy/vacancy.service';
 import {EnumWorker} from '../../workers/enum/enum.worker';
@@ -6,6 +6,10 @@ import {VacancyState} from '../../enums/vacancy-state.enum';
 import {TypeCheckingWorker} from '../../workers/type-checking/type-checking.worker';
 import {ArrayWorker} from '../../workers/array/array.worker';
 import {Subscription} from 'rxjs';
+import {JobDescriptionModalComponent} from '../../components/modals/job-description/job-description-modal/job-description-modal.component';
+import {JobDescriptionDialogData} from '../../interfaces/dialog/init/job-description-dialog-data';
+import {BaseDialogResult} from '../../interfaces/dialog/result/base-dialog-result';
+import {MatDialog} from '@angular/material';
 
 @Component({
   selector: 'app-job-description-dashboard-page',
@@ -17,6 +21,8 @@ export class JobDescriptionDashboardPageComponent implements OnInit {
   private selectedJobDescriptionList: Vacancy[];
   searchValue: string;
   itemsPerPageValues: number[] = [5, 10, 20];
+  page: number;
+  size: number;
   minSalary: number;
   maxSalary: number;
   lowSalary: number;
@@ -29,6 +35,7 @@ export class JobDescriptionDashboardPageComponent implements OnInit {
   public toppingList: string[];
   public selectedList: string[];
   constructor(private vacancyService: VacancyService,
+              public dialog: MatDialog,
               private typeCheckingWorker: TypeCheckingWorker,
               private arrayWorker: ArrayWorker,
               private enumWorker: EnumWorker) { }
@@ -65,6 +72,27 @@ export class JobDescriptionDashboardPageComponent implements OnInit {
   }
   clickAdvancedSearch() {
     this.isFilter = !this.isFilter;
+  }
+
+  openJobDescriptionDialog(): void {
+    console.log('i');
+    const dialogRef = this.dialog.open(JobDescriptionModalComponent, {
+        data: <JobDescriptionDialogData> {
+          sourceJobDescription: null,
+          isEdit: false,
+          dialogWindowTitle: 'Create'
+        },
+        minWidth: '700px',
+        disableClose: true
+      }
+    );
+    dialogRef.afterClosed().subscribe((res: BaseDialogResult<Vacancy>) => {
+      if (res) {
+        if (res.success) {
+          this.getVacancies();
+        }
+      }
+    });
   }
 
 }

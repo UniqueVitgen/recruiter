@@ -13,12 +13,24 @@
                                     [(maxYearsRequired)]="maxYearRequired"
                                     [(selectedStatuses)]="selectedList" (selectedStatusesChanged)="changeStatusFilter()"></app-job-description-filter-toolbar>
 <br>
-<app-job-description-dashboard [isPagination]="true" [isFilter]="isFilter"
-                               [filterStatuses]="selectedList" [itemsPerPageValues]="itemsPerPageValues" [search]="searchValue"
-                               [minSalary]="minSalary"
-                               [maxSalary]="maxSalary"
-                               [minYearsRequired]="minYearRequired"
-                               [maxYearsRequired]="maxYearRequired"
-                               [jobDescriptionList]="jobDescriptionList"
-                               (addVacancy)="getVacancies()" (deleteVacancy)="deleteVacancy($event)"></app-job-description-dashboard>
+<mat-card>
+  <app-job-description-pagination-toolbar
+    [itemsPerPageValues]="itemsPerPageValues"
+    [(size)]="size"
+    [(page)]="page"
+    (clickAddButton)="openJobDescriptionDialog()"
+  >
+  </app-job-description-pagination-toolbar>
 
+  <app-job-description-dashboard [isPagination]="true" [isFilter]="isFilter"
+                                 [filterStatuses]="selectedList" [itemsPerPageValues]="itemsPerPageValues" [search]="searchValue"
+                                 [minSalary]="minSalary"
+                                 [maxSalary]="maxSalary"
+                                 [minYearsRequired]="minYearRequired"
+                                 [maxYearsRequired]="maxYearRequired"
+                                 [jobDescriptionList]="jobDescriptionList"
+                                 [itemsPerPage]="size"
+                                 [p]="page"
+                                 (addVacancy)="getVacancies()" (deleteVacancy)="deleteVacancy($event)"></app-job-description-dashboard>
+
+</mat-card>
