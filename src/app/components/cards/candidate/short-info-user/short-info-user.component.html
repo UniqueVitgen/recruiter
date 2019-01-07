@@ -17,7 +17,7 @@
       <div *ngIf="!readonly">
         <form *ngIf="candidateForm" [formGroup]="candidateForm">
           <mat-form-field class="example-full-width custom-form-field">
-            <input (blur)="onFocusoutAnyInput()" formControlName="name"   [(ngModel)]="editedCandidate.name"  matInput [placeholder]="'Name' | translate" readonly="false" >
+            <input (blur)="onFocusoutAnyInput()" formControlName="name"  matInput [placeholder]="'Name' | translate" readonly="false" >
             <button mat-button  matSuffix mat-icon-button aria-label="Clear" class="edited-hover-button">
               <mat-icon>edit</mat-icon>
             </button>
@@ -29,7 +29,7 @@
             </mat-error>
           </mat-form-field>
           <mat-form-field class="example-full-width custom-form-field">
-            <input (blur)="onFocusoutAnyInput()" formControlName="surname" [(ngModel)]="editedCandidate.surname" matInput [placeholder]="'Surname' | translate" >
+            <input (blur)="onFocusoutAnyInput()" formControlName="surname" matInput [placeholder]="'Surname' | translate" >
             <button mat-button  matSuffix mat-icon-button aria-label="Clear" class="edited-hover-button">
               <mat-icon>edit</mat-icon>
             </button>
@@ -41,18 +41,18 @@
             </mat-error>
           </mat-form-field>
           <!--<mat-form-field class="example-full-width custom-form-field">-->
-            <app-autocomplete-input  [placeholder]="'Position'" [searchProperty]="'name'" [visibleUnderline]="false" [fullWidth]="true" [positions]="positions" [(ngModel)]="editedCandidate.position.name" (blur)="onFocusoutAnyInput()" formControlName="position"></app-autocomplete-input>
+            <app-autocomplete-input  [placeholder]="'Position'" [searchProperty]="'name'" [visibleUnderline]="false" [fullWidth]="true" [positions]="positions" (blur)="onFocusoutAnyInput()" formControlName="position"></app-autocomplete-input>
             <!--<input (blur)="onFocusoutAnyInput()" formControlName="position"  [matAutocomplete]="auto"  [(ngModel)]="editedCandidate.position.name" (ngModelChange)="changePosition()"  matInput [placeholder]="'Position' | translate" readonly="false" >-->
           <!--</mat-form-field>-->
-          <mat-autocomplete #auto="matAutocomplete">
-            <mat-option *ngFor="let position of selectedPositions" [value]="position.name">
-              <span>{{position.name}}</span>
-            </mat-option>
-          </mat-autocomplete>
+          <!--<mat-autocomplete #auto="matAutocomplete">-->
+            <!--<mat-option *ngFor="let position of selectedPositions" [value]="position.name">-->
+              <!--<span>{{position.name}}</span>-->
+            <!--</mat-option>-->
+          <!--</mat-autocomplete>-->
           <!--<app-positions-select  formControlName="position" [(ngModel)]="editedCandidate.position.name" (ngModelChange)="onFocusoutAnyInput()" [vacancies]="vacancies" [visibleUnderline]="true"></app-positions-select>-->
           <mat-form-field class="example-full-width custom-form-field">
             <!--<input (blur)="onFocusoutAnyInput()" [(ngModel)]="candidate.candidateState.name" matInput placeholder="Status"> -->
-            <mat-select placeholder="{{'Status' | translate}}" formControlName="status" [(ngModel)]="editedCandidate.candidateState.name" matInput (blur)="onFocusoutAnyInput()">
+            <mat-select placeholder="{{'Status' | translate}}" formControlName="candidateState" (ngModelChange)="onFocusoutAnyInput()" matInput (blur)="onFocusoutAnyInput()">
               <mat-option *ngFor="let state of setStates" [value]="state" >{{state | translate}}</mat-option>
             </mat-select>
           </mat-form-field>
@@ -92,7 +92,7 @@
         <div *ngIf="!readonly">
           <mat-checkbox color="primary" [(ngModel)]="tests[0].have" (ngModelChange)="changeEmail()">
             <mat-form-field class="example-full-width" *ngIf="tests[0].have && tests[0].object && tests[0].object.contactDetails != null">
-              <input [formControl]="tests[0].control" [(ngModel)]="tests[0].object.contactDetails" (blur)="onFocusoutAnyInput(tests[0].control.valid)" matInput [placeholder]="'EMAIL' | translate" required>
+              <input [formControl]="tests[0].control" [(ngModel)]="tests[0].object.contactDetails" (blur)="onFocusoutAnyInput()" matInput [placeholder]="'EMAIL' | translate" required>
               <mat-error class="multi-row-text" *ngIf="tests[0].control.hasError('pattern')">
               {{'Please enter a valid email address' | translate}}
             </mat-error>
@@ -108,7 +108,7 @@
           <br>
           <mat-checkbox color="primary" [(ngModel)]="tests[1].have" (ngModelChange)="changeSkype()">
             <mat-form-field class="example-full-width" *ngIf="tests[1].have && tests[1].object">
-              <input [formControl]="tests[1].control" [(ngModel)]="tests[1].object.contactDetails" (blur)="onFocusoutAnyInput(tests[1].control.valid)" matInput [placeholder]="'SKYPE' | translate" required>
+              <input [formControl]="tests[1].control" [(ngModel)]="tests[1].object.contactDetails" (blur)="onFocusoutAnyInput()" matInput [placeholder]="'SKYPE' | translate" required>
               <mat-error class="multi-row-text" *ngIf="tests[1].control.hasError('required')">
                 {{'Skype is required' | translate}}
               </mat-error>
@@ -119,7 +119,7 @@
           <br>
           <mat-checkbox color="primary" [(ngModel)]="tests[2].have" (ngModelChange)="changePhone()">
             <mat-form-field class="example-full-width" *ngIf="tests[2].have && tests[2].object">
-              <input [formControl]="tests[2].control"  [textMask]="{mask: MaskConst.PHONE}" [(ngModel)]="tests[2].object.contactDetails" (blur)="onFocusoutAnyInput(tests[2].control.valid)" matInput [placeholder]="'PHONE' | translate" required>
+              <input [formControl]="tests[2].control"  [textMask]="{mask: MaskConst.PHONE}" [(ngModel)]="tests[2].object.contactDetails" (blur)="onFocusoutAnyInput()" matInput [placeholder]="'PHONE' | translate" required>
               <mat-error class="multi-row-text" *ngIf="tests[2].control.hasError('pattern')">
                 {{'Please enter a valid phone number with valida operator code like 17, 29, 33, 44' | translate}}
               </mat-error>

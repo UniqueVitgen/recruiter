@@ -1,8 +1,6 @@
 import {AfterViewInit, Component, EventEmitter, Input, OnChanges, OnDestroy, OnInit, Output, SimpleChanges, ViewChild} from '@angular/core';
 import {Candidate} from 'src/app/classes/candidate';
 import {MatDialog, MatSelect} from '@angular/material';
-import {NameCandidateModalComponent} from '../../../modals/candidate/name-candidate-modal/name-candidate-modal.component';
-import {StatusCandidateModalComponent} from '../../../modals/candidate/status-candidate-modal/status-candidate-modal.component';
 import {CandidateWorker} from '../../../../workers/candidate/candidate.worker';
 import {ContactDetails} from '../../../../classes/contact-details';
 import {CandidateService} from '../../../../services/candidate/candidate.service';
@@ -16,9 +14,6 @@ import {MaskConst} from '../../../../const/mask.const';
 import {CandidateState} from '../../../../enums/candidate-state.enum';
 import {EnumWorker} from '../../../../workers/enum/enum.worker';
 import {Attachment} from '../../../../classes/attachment';
-import {AttachmentType} from '../../../../enums/attachment-type.enum';
-import {ReplaySubject, Subject} from 'rxjs';
-import {take, takeUntil} from 'rxjs/operators';
 import {Vacancy} from '../../../../classes/vacancy';
 import {PositionModel} from '../../../../classes/position-model';
 import {TypeCheckingWorker} from '../../../../workers/type-checking/type-checking.worker';
@@ -49,7 +44,6 @@ export class ShortInfoUserComponent implements OnInit, OnDestroy, OnChanges {
   photo: Attachment;
   isSaved: boolean = true;
   isSavedCandidate: boolean = true;
-
   constructor(public dialog: MatDialog,
               private candidateSerivce: CandidateService,
               private positionService: PositionService,
@@ -60,12 +54,8 @@ export class ShortInfoUserComponent implements OnInit, OnDestroy, OnChanges {
               public typeCheckingWorker: TypeCheckingWorker,
               private fb: FormBuilder,
               public  enumWorker: EnumWorker) { }
-
-
   ngOnInit() {
-
     this.setStates = this.enumWorker.getValuesFromEnum(CandidateState);
-
   }
 
   ngOnDestroy() {
@@ -83,7 +73,7 @@ export class ShortInfoUserComponent implements OnInit, OnDestroy, OnChanges {
         name: [this.editedCandidate.name, Validators.compose([Validators.required, Validators.pattern(RegexpConst.LATIN_OR_CYRILIC_NAME)])],
         surname: [this.editedCandidate.surname, Validators.compose([Validators.required, Validators.pattern(RegexpConst.LATIN_OR_CYRILIC_NAME)])],
         position: [this.editedCandidate.position ? this.editedCandidate.position.name : ''],
-        status: [this.editedCandidate.candidateState.name]
+        candidateState: [this.editedCandidate.candidateState.name]
       });
     }
     if (this.isSaved) {
@@ -129,9 +119,6 @@ export class ShortInfoUserComponent implements OnInit, OnDestroy, OnChanges {
       this.selectedPositions = resPositions;
     });
   }
-  changePosition() {
-    this.selectedPositions = this.searchWorker.searchObject(this.editedCandidate.position, this.positions, 'name');
-  }
   changeContactProperty(value: CandidateContactInput) {
     console.log(value);
     console.log('tests', this.tests);
@@ -146,37 +133,22 @@ export class ShortInfoUserComponent implements OnInit, OnDestroy, OnChanges {
             contactDetails: ''
           };
         }
-        if ((!this.tests[0].have || this.tests[0].control.valid) &&
-          (!this.tests[1].have || this.tests[1].control.valid) &&
-          (!this.tests[2].have || this.tests[2].control.valid)) {
-          this.isSaved = true;
-          this.editedCandidate.contacts.push(skypeObject);
-        } else {
-          this.isSaved = false;
-        }
         value.object = skypeObject;
         // this.tests[] = skypeObject;
       }
     } else {
       const method = value.methodName;
-      console.log(method);
       if (this.candidateWorker[method](this.editedCandidate) != null) {
         console.log(this.tests);
         if ((!this.tests[0].have || this.tests[0].control.valid) &&
           (!this.tests[1].have || this.tests[1].control.valid) &&
           (!this.tests[2].have || this.tests[2].control.valid)) {
           this.isSaved = true;
-          this.editedCandidate.contacts = this.arrayWorker.removeElement(this.editedCandidate.contacts, value.object);
-          this.candidateSerivce.update(this.editedCandidate).subscribe(res => {
-            console.log(res);
-          });
         } else {
           this.isSaved = false;
         }
       }
     }
-    console.log('after', value);
-
   }
 
   changeSkype() {
@@ -187,25 +159,44 @@ export class ShortInfoUserComponent implements OnInit, OnDestroy, OnChanges {
     this.changeContactProperty(this.tests[0]);
 
   }
-
   changePhone() {
     this.changeContactProperty(this.tests[2]);
   }
-
+  saveInfoFormValue(candidate: Candidate) {
+    const editedCandidate = this.typeCheckingWorker.parseObject(candidate);
+    for (const field in this.candidateForm.controls) { // 'field' is a string
+      const control = this.candidateForm.get(field); // 'control' is a FormControl
+      if (control.valid) {
+        if (field === 'position' || field === 'candidateState') {
+          editedCandidate[field].name = control.value;
+        } else {
+          editedCandidate[field] = control.value;
+        }
+      }
+    }
+    return editedCandidate;
+  }
   onFocusoutAnyInput(value: boolean = true) {
-    console.log('candidate 1', this.editedCandidate);
     if (value) {
-      console.log('candidate 1', this.editedCandidate);
-      console.log('candidate form', this.candidateForm);
       if (this.candidateForm.valid) {
         this.isSavedCandidate = true;
-        this.candidateSerivce.update(this.editedCandidate).subscribe(res => {
-          this.outputEditCandidate.emit(res);
-        });
       } else {
         this.isSavedCandidate = false;
       }
+      if ((!this.tests[0].have || this.tests[0].control.valid) &&
+        (!this.tests[1].have || this.tests[1].control.valid) &&
+        (!this.tests[2].have || this.tests[2].control.valid)) {
+        this.isSaved = true;
+      } else {
+        this.isSaved = false;
+      }
+      console.log('editedCandidate', this.editedCandidate);
+      const contacts = this.candidateWorker.transformCandidateContactInputArrayToContactArray(this.tests, this.editedCandidate.contacts);
+      this.editedCandidate.contacts = contacts;
+      this.editedCandidate = this.saveInfoFormValue(this.editedCandidate);
+      this.candidateSerivce.update(this.editedCandidate).subscribe(res => {
+        this.outputEditCandidate.emit(res);
+      });
     }
   }
-
 }

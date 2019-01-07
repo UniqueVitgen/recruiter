@@ -4,11 +4,15 @@ import {ContactType} from '../../enums/contact-type.enum';
 import {ContactDetails} from '../../classes/contact-details';
 import {AttachmentType} from '../../enums/attachment-type.enum';
 import {Attachment} from '../../classes/attachment';
+import {CandidateContactInput} from '../../classes/html/candidate-contact-input';
+import {TypeCheckingWorker} from '../type-checking/type-checking.worker';
 
 @Injectable({
   providedIn: 'root'
 })
 export class CandidateWorker {
+  constructor(private typeCheckingWorker: TypeCheckingWorker) {
+  }
   haveEmail(candidate: Candidate): boolean {
     if (candidate.contacts) {
       const targetContact = candidate.contacts.find((value) => {
@@ -31,7 +35,7 @@ export class CandidateWorker {
       const targetContact = candidate.contacts.find((value) => {
         return value.contactType === ContactType.EMAIL;
       });
-      return targetContact;
+      return this.typeCheckingWorker.parseObject(targetContact);
     }
   }
   havePhone(candidate: Candidate): boolean {
@@ -56,7 +60,7 @@ export class CandidateWorker {
       const targetContact = candidate.contacts.find((value) => {
         return value.contactType === ContactType.PHONE;
       });
-      return targetContact;
+      return this.typeCheckingWorker.parseObject(targetContact);
     }
   }
   haveSkype(candidate: Candidate): boolean {
@@ -81,7 +85,7 @@ export class CandidateWorker {
       const targetContact = candidate.contacts.find((value) => {
         return value.contactType === ContactType.SKYPE;
       });
-      return targetContact;
+      return this.typeCheckingWorker.parseObject(targetContact);
     }
   }
   findPhoto(candidate: Candidate) {
@@ -91,6 +95,22 @@ export class CandidateWorker {
         return attachment.attachmentType === AttachmentType.PHOTO;
       });
     }
+  }
+  transformCandidateContactInputArrayToContactArray(candidateContactInputArray: CandidateContactInput[],
+                                                    oldContacts: ContactDetails[]): ContactDetails[] {
+    return candidateContactInputArray.filter(candidateContactInput => {
+      return candidateContactInput.have;
+    })
+      .map(candidateContactInput => {
+        if (candidateContactInput.control.valid) {
+          return candidateContactInput.object;
+        }
+        else {
+          return oldContacts.find((contact) => {
+            return contact.contactType === candidateContactInput.object.contactType;
+          });
+        }
+      });
   }
   generatePhotoUrl(photo: Attachment) {
     if (photo) {

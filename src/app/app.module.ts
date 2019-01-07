@@ -119,6 +119,7 @@ import { JobDescriptionFilterToolbarComponent } from './components/toolbar/job-d
 import { VacancyAccordionComponent } from './components/accordions/vacancy-accordion/vacancy-accordion.component';
 import { Ng5SliderModule } from 'ng5-slider';
 import { PaginationToolbarComponent } from './components/toolbar/pagination-toolbar/pagination-toolbar.component';
+import { CandidateFilterToolbarComponent } from './components/toolbar/candidate-filter-toolbar/candidate-filter-toolbar.component';
 
 
 export function HttpLoaderFactory(http: HttpClient) {
@@ -196,7 +197,8 @@ export function HttpLoaderFactory(http: HttpClient) {
     MaxDirective,
     JobDescriptionFilterToolbarComponent,
     VacancyAccordionComponent,
-    PaginationToolbarComponent
+    PaginationToolbarComponent,
+    CandidateFilterToolbarComponent
   ],
   imports: [
     BrowserModule,

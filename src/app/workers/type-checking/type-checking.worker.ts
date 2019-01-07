@@ -12,7 +12,9 @@ export class TypeCheckingWorker {
   }
 
   public parseObject(object: any) {
-    return JSON.parse(JSON.stringify(object));
+    if (object) {
+      return JSON.parse(JSON.stringify(object));
+    }
   }
 
   public compareObjects(o1: any, o2: any): boolean {
