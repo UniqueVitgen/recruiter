@@ -5,6 +5,7 @@ import {EnumWorker} from '../../workers/enum/enum.worker';
 import {VacancyState} from '../../enums/vacancy-state.enum';
 import {TypeCheckingWorker} from '../../workers/type-checking/type-checking.worker';
 import {ArrayWorker} from '../../workers/array/array.worker';
+import {Subscription} from 'rxjs';
 
 @Component({
   selector: 'app-job-description-dashboard-page',
@@ -16,6 +17,15 @@ export class JobDescriptionDashboardPageComponent implements OnInit {
   private selectedJobDescriptionList: Vacancy[];
   searchValue: string;
   itemsPerPageValues: number[] = [5, 10, 20];
+  minSalary: number;
+  maxSalary: number;
+  lowSalary: number;
+  topSalary: number;
+  lowYearRequired: number;
+  topYearRequired: number;
+  minYearRequired: number;
+  maxYearRequired: number;
+  public isFilter;
   public toppingList: string[];
   public selectedList: string[];
   constructor(private vacancyService: VacancyService,
@@ -24,16 +34,15 @@ export class JobDescriptionDashboardPageComponent implements OnInit {
               private enumWorker: EnumWorker) { }
 
   ngOnInit() {
-    this.getVacancies();
+    this.getVacancies().add(() => {
+      this.lowSalary = this.arrayWorker.calculateMin(this.jobDescriptionList, 'salaryInDollarsFrom');
+      this.topSalary = this.arrayWorker.calculateMax(this.jobDescriptionList, 'salaryInDollarsTo');
+      this.lowYearRequired = this.arrayWorker.calculateMin(this.jobDescriptionList, 'experienceYearsRequire');
+      this.topYearRequired = this.arrayWorker.calculateMax(this.jobDescriptionList, 'experienceYearsRequire');
+    });
     this.getStatuses();
   }
   changeStatusFilter() {
-    console.log('filter selectedJobDescriptionList');
-    if (this.jobDescriptionList) {
-      this.selectedJobDescriptionList = this.jobDescriptionList.filter((jobDescription) => {
-        return this.selectedList.includes(jobDescription.vacancyState);
-      });
-    }
   }
   search(value: string) {
     this.searchValue = value;
@@ -42,8 +51,8 @@ export class JobDescriptionDashboardPageComponent implements OnInit {
     this.toppingList = this.enumWorker.getKeysFromEnum(VacancyState);
     this.selectedList = this.enumWorker.getKeysFromEnum(VacancyState);
   }
-  getVacancies() {
-    this.vacancyService.getAll().subscribe(res => {
+  getVacancies(): Subscription {
+    return this.vacancyService.getAll().subscribe(res => {
       console.log(res);
       this.jobDescriptionList = res;
       this.selectedJobDescriptionList = this.typeCheckingWorker.parseObject(res);
@@ -53,6 +62,9 @@ export class JobDescriptionDashboardPageComponent implements OnInit {
   deleteVacancy(index: number) {
     const object = this.jobDescriptionList[index];
     this.vacancyService.delete(object).subscribe(res => { this.getVacancies(); });
+  }
+  clickAdvancedSearch() {
+    this.isFilter = !this.isFilter;
   }
 
 }

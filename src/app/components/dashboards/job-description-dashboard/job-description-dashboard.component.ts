@@ -17,11 +17,17 @@ import {AlertWithButtonDialogData} from '../../../interfaces/dialog/init/alert-w
 })
 export class JobDescriptionDashboardComponent implements OnInit, OnChanges {
   @Input() jobDescriptionList: Vacancy[];
-  @Output('addVacancy') outputAddVacancy: EventEmitter<Vacancy> = new EventEmitter();
   @Input() search;
-  @Output('deleteVacancy') outputDeleteVacancy: EventEmitter<any> = new EventEmitter();
   @Input() itemsPerPageValues: number[];
   @Input() isPagination: boolean;
+  @Input() isFilter: boolean;
+  @Input() filterStatuses: string[];
+  @Input() minSalary: number;
+  @Input() maxSalary: number;
+  @Input() minYearsRequired: number;
+  @Input() maxYearsRequired: number;
+  @Output('deleteVacancy') outputDeleteVacancy: EventEmitter<any> = new EventEmitter();
+  @Output('addVacancy') outputAddVacancy: EventEmitter<Vacancy> = new EventEmitter();
   showInfoAndDeleteIcon: boolean = false;
   @HostListener('mouseenter') setShowInfoAndDeleteIcon(){
     this.showInfoAndDeleteIcon = !this.showInfoAndDeleteIcon;
@@ -41,23 +47,59 @@ export class JobDescriptionDashboardComponent implements OnInit, OnChanges {
   }
 
   goToJobDescriptionPage(vacancy: Vacancy) {
-    console.log('job description');
     this.router.navigate(['job-description', vacancy.id]);
   }
 
   ngOnChanges(changes: SimpleChanges): void {
-    this.searchValues(this.search);
+    this.selectedVacancies = this.searchValues(this.search);
+    if (this.isFilter) {
+      this.selectedVacancies = this.filterByStatus(this.selectedVacancies, this.filterStatuses);
+      this.selectedVacancies = this.filterBySalary(this.selectedVacancies, this.minSalary, this.maxSalary);
+      this.selectedVacancies = this.filterByYearsRequire(this.selectedVacancies, this.minYearsRequired, this.maxYearsRequired);
+    }
   }
 
-  searchValues(value: string) {
+  searchValues(value: string): Vacancy[] {
+    let selectedVacancy: Vacancy[];
     if (value) {
       const valueLowercase = value.toLowerCase();
-      this.selectedVacancies = this.jobDescriptionList.filter((vacancy) => {
+      selectedVacancy = this.jobDescriptionList.filter((vacancy) => {
         const position = vacancy.position.name.toLowerCase();
         return position.indexOf(valueLowercase) > -1;
       });
     } else {
-      this.selectedVacancies = this.jobDescriptionList;
+      selectedVacancy = this.jobDescriptionList;
+    }
+    return selectedVacancy;
+  }
+  filterByStatus(vacancies: Vacancy[], statuses: string[]) {
+    if (vacancies) {
+      return vacancies.filter(vacancy => {
+        return statuses.includes(vacancy.vacancyState);
+      });
+    }
+  }
+  filterBySalary(vacancies: Vacancy[], minSalary: number, maxSalary: number) {
+    if (minSalary && maxSalary) {
+      return vacancies.filter((vacancy) => {
+        return (vacancy.salaryInDollarsFrom >= minSalary
+          && vacancy.salaryInDollarsFrom <= maxSalary)
+          ||
+          (vacancy.salaryInDollarsTo >= minSalary
+            && vacancy.salaryInDollarsTo <= maxSalary);
+      });
+    } else {
+      return vacancies;
+    }
+  }
+  filterByYearsRequire(vacancies: Vacancy[], minYearsRequired: number, maxYearsRequired: number) {
+    if (minYearsRequired && maxYearsRequired) {
+      return vacancies.filter((vacancy) => {
+        return (vacancy.experienceYearsRequire >= minYearsRequired
+          && vacancy.experienceYearsRequire <= maxYearsRequired);
+      });
+    } else {
+      return vacancies;
     }
   }
 

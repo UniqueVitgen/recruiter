@@ -32,7 +32,7 @@ export class CandidateAvatarComponent implements OnInit {
   @Output() checkBoxChange: EventEmitter<any> =  new EventEmitter();
 
   set checkBox(val) {
-    console.log('select23', val)
+    // console.log('select23', val)
     this.checkBoxValue = val;
     this.checkBoxChange.emit(this.checkBoxValue);
   }
@@ -60,7 +60,7 @@ export class CandidateAvatarComponent implements OnInit {
   }
 
   changeValue(val) {
-    console.log('select2', val)
+    // console.log('select2', val)
     if (val) {
       this.checkBoxValue = false;
     } else {

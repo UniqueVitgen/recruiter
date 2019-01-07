@@ -141,8 +141,15 @@
   "From salary": "Зарплата от",
   "To salary": "Зарплата до",
   "Advanced search": "Расширенный поиск",
+  "advanced search": "расширенный поиск",
+  "Turn on": "Включить",
+  "Turn off": "Выключить",
   "All": "Все",
   "Statuses": "Статусы",
   "other": "другой",
-  "others": "другие"
+  "others": "другие",
+  "Min salary": "Мин. зп.",
+  "Max salary": "Макс. зп.",
+  "Min year required": "Мин. опыт",
+  "Max year required": "Макс. опыт"
 }

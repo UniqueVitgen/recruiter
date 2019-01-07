@@ -6,8 +6,8 @@
           <span class="input-group-text" id="basic-addon1"><mat-icon>search</mat-icon></span>
         </div>
         <input type="text" (input)="search($event.target.value)" class="form-control" placeholder="{{'Search'| translate}}">
-        <div *ngIf="isAdvancedSearch" class="input-group-append">
-          <span class="input-group-text" id="inputGroupFileAddon02"><a>{{'Advanced search' | translate}}</a></span>
+        <div *ngIf="isAdvancedSearch" (click)="clickAdvancedSearch()" class="input-group-append">
+          <span class="input-group-text" id="inputGroupFileAddon02"><a>{{(isTurnOnAdvancedSearch ? 'Turn off' : 'Turn on') | translate}} {{'advanced search' | translate}}</a></span>
         </div>
         <!-- <span class="input-group-addon">
           <button type="submit">

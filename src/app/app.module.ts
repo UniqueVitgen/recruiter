@@ -113,10 +113,11 @@ import {OnlyNumbersDirective} from './directives/only-numbers/only-numbers.direc
 import { MinDirective } from './directives/min/min.directive';
 import { OnlyDigitsDirective } from './directives/only-digits/only-digits.directive';
 import { MaxDirective } from './directives/max/max.directive';
-import { NouisliderModule } from 'ng2-nouislider';
+// import { NouisliderModule } from 'ng2-nouislider';
 import { JobDescriptionFilterToolbarComponent } from './components/toolbar/job-description-filter-toolbar/job-description-filter-toolbar.component';
 
 import { VacancyAccordionComponent } from './components/accordions/vacancy-accordion/vacancy-accordion.component';
+import { Ng5SliderModule } from 'ng5-slider';
 
 
 export function HttpLoaderFactory(http: HttpClient) {
@@ -235,7 +236,7 @@ export function HttpLoaderFactory(http: HttpClient) {
     ImageCropperModule,
     NgxMatSelectSearchModule,
     NgxPaginationModule,
-    NouisliderModule
+    Ng5SliderModule
     // MDBBootstrapModule.forRoot(),
     // NgxMaterialTimepickerModule.forRoot()
     // ,

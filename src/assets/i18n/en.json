@@ -141,8 +141,15 @@
   "From salary": "From salary",
   "To salary": "To salary",
   "Advanced search": "Advanced search",
+  "advanced search": "advanced search",
+  "Turn on": "Turn on",
+  "Turn off": "Turn off",
   "All": "All",
   "Statuses": "Statuses",
   "other": "other",
-  "others": "others"
+  "others": "others",
+  "Min salary": "Min salary",
+  "Max salary": "Max salary",
+  "Min year required": "Min year required",
+  "Max year required": "Max year required"
 }

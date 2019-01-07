@@ -54,7 +54,7 @@ export class CandidateDashboardComponent implements OnInit, OnChanges {
     }
     if (this.candidates) {
       this.searchValues(this.search);
-      console.log('fillledCells', this.filledCells);
+      // console.log('fillledCells', this.filledCells);
     }
   }
 
@@ -88,11 +88,11 @@ export class CandidateDashboardComponent implements OnInit, OnChanges {
   }
 
   deleteCandidate(candidateID: number) {
-    console.log('`Candidate to delete 22:');
+    // console.log('`Candidate to delete 22:');
     this.outputDeleteCandidate.emit(candidateID);
   }
   deleteCandidateFromTheBase(candidateID: number) {
-    console.log('`Candidate to delete 22:', candidateID);
+    // console.log('`Candidate to delete 22:', candidateID);
     this.outputDeleteCandidateFromTheBase.emit(candidateID);
   }
 

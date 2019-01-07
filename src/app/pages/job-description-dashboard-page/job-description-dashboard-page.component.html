@@ -1,6 +1,24 @@
-<app-search-input [isAdvancedSearch]="true" (onSearch)="search($event)"></app-search-input>
-<app-job-description-filter-toolbar [statusesList]="toppingList"
+<app-search-input [isAdvancedSearch]="true" (onSearch)="search($event)"
+                  (clickAdvancedSearch)="clickAdvancedSearch()"
+></app-search-input>
+<app-job-description-filter-toolbar *ngIf="isFilter"
+                                    [statusesList]="toppingList"
+                                    [(minSalary)]="minSalary"
+                                    [(maxSalary)]="maxSalary"
+                                    [salaryLow]="lowSalary"
+                                    [salaryTop]="topSalary"
+                                    [yearsRequiredLow]="lowYearRequired"
+                                    [yearsRequiredTop]="topYearRequired"
+                                    [(minYearsRequired)]="minYearRequired"
+                                    [(maxYearsRequired)]="maxYearRequired"
                                     [(selectedStatuses)]="selectedList" (selectedStatusesChanged)="changeStatusFilter()"></app-job-description-filter-toolbar>
 <br>
-<app-job-description-dashboard [isPagination]="true" [itemsPerPageValues]="itemsPerPageValues" [search]="searchValue" [jobDescriptionList]="jobDescriptionList" (addVacancy)="getVacancies()" (deleteVacancy)="deleteVacancy($event)"></app-job-description-dashboard>
+<app-job-description-dashboard [isPagination]="true" [isFilter]="isFilter"
+                               [filterStatuses]="selectedList" [itemsPerPageValues]="itemsPerPageValues" [search]="searchValue"
+                               [minSalary]="minSalary"
+                               [maxSalary]="maxSalary"
+                               [minYearsRequired]="minYearRequired"
+                               [maxYearsRequired]="maxYearRequired"
+                               [jobDescriptionList]="jobDescriptionList"
+                               (addVacancy)="getVacancies()" (deleteVacancy)="deleteVacancy($event)"></app-job-description-dashboard>
 
