@@ -45,6 +45,7 @@ export class CandidateDashboardPageComponent implements OnInit {
   topYearRequired: number;
   minYearRequired: number;
   maxYearRequired: number;
+  includeUndefinedBirthday: boolean = true;
   constructor(private candidateService: CandidateService, private searchWorker: SearchWorker, private userWorker: UserWorker,
               private enumWorker: EnumWorker,
               private dateTimeWorker: DateTimeWorker,
@@ -55,14 +56,13 @@ export class CandidateDashboardPageComponent implements OnInit {
     this.getAll().add(() => {
       this.lowSalary = this.arrayWorker.calculateMin(this.candidates, 'salaryInDollars');
       this.topSalary = this.arrayWorker.calculateMax(this.candidates, 'salaryInDollars');
-      const candidateYears = this.candidates.map(candidate => {
-        const now = new Date();
-        const candidateBirthday = new Date(candidate.birthday);
-        return this.dateTimeWorker.calculateAge(candidateBirthday);
-      });
-      this.lowYearRequired = this.arrayWorker.calculateMinSimpleArray(candidateYears);
-      this.topYearRequired = this.arrayWorker.calculateMaxSimpleArray(candidateYears);
-      console.log('candidateYears', candidateYears, this.minYearRequired);
+      this.minSalary = this.lowSalary;
+      this.maxSalary = this.topSalary;
+      const candidateWithAges = this.candidates.filter(candidate => !isNaN(candidate.age) && candidate.age);
+      this.lowYearRequired = this.arrayWorker.calculateMin(candidateWithAges, 'age');
+      this.topYearRequired = this.arrayWorker.calculateMax(candidateWithAges, 'age');
+      this.minYearRequired = this.lowYearRequired;
+      this.maxYearRequired = this.topYearRequired;
     });
     this.getVacancies();
     this.sourceStatuses = this.enumWorker.getValuesFromEnum(CandidateState);

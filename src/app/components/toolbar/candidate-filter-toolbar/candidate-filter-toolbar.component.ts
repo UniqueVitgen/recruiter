@@ -33,6 +33,8 @@ export class CandidateFilterToolbarComponent implements OnInit, OnChanges {
   maxYearsRequired: number;
   @Output()
   maxYearsRequiredChange: EventEmitter<number> = new  EventEmitter();
+  @Input() includeUndefinedBirthday: boolean;
+  @Output() includeUndefinedBirthdayChange: EventEmitter<boolean> = new EventEmitter();
   salaryOptions: Options;
   yearsRequiredOptions: Options;
 
@@ -85,10 +87,10 @@ export class CandidateFilterToolbarComponent implements OnInit, OnChanges {
       translate: (value:  number, label: LabelType): string => {
         switch (label) {
           case LabelType.Low:
-            return '<b>' + this.translateWorker.translateWord('Min year required') + ': </b>' + value + ' '
+            return '<b>' + this.translateWorker.translateWord('Min year') + ': </b>' + value + ' '
               + this.translateWorker.translateWord('years');
           case LabelType.High:
-            return '<b>' + this.translateWorker.translateWord('Max year required') + ':</b>' + value + ' '
+            return '<b>' + this.translateWorker.translateWord('Max year') + ':</b>' + value + ' '
               + this.translateWorker.translateWord('years');
           default:
             return  value + ' '
@@ -111,6 +113,9 @@ export class CandidateFilterToolbarComponent implements OnInit, OnChanges {
   }
   changeMaxYearsRequired() {
     this.maxYearsRequiredChange.emit(this.maxYearsRequired);
+  }
+  changeIncludeUndefinedBirthday() {
+    this.includeUndefinedBirthdayChange.emit(this.includeUndefinedBirthday);
   }
 
 }

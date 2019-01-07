@@ -152,6 +152,13 @@
   "Max salary": "Max salary",
   "Min year required": "Min year required",
   "Max year required": "Max year required",
+  "Min experience year required": "Min experience year required",
+  "Max experience year required": "Max experience year required",
+  "Min year": "Min year",
+  "Max year": "Max year",
+  "Min experience year": "Min experience year",
+  "Max experience year": "Max experience year",
   "Required salary": "Required salary",
-  "Birthday": "Birthday"
+  "Birthday": "Birthday",
+  "Show candidates with undefined birthday": "Show candidates with undefined birthday"
 }

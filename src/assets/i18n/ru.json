@@ -150,8 +150,15 @@
   "others": "другие",
   "Min salary": "Мин. зп.",
   "Max salary": "Макс. зп.",
-  "Min year required": "Мин. опыт",
-  "Max year required": "Макс. опыт",
+  "Min year required": "Мин. возвраст",
+  "Max year required": "Макс. возраст",
+  "Min experience year required": "Мин. опыт",
+  "Max experience year required": "Макс. опыт",
+  "Min year": "Мин. возвраст",
+  "Max year": "Макс. возраст",
+  "Min experience year": "Мин. опыт",
+  "Max experience year": "Макс. опыт",
   "Required salary": "Требуемая зарплата",
-  "Birthday": "День рождения"
+  "Birthday": "День рождения",
+  "Show candidates with undefined birthday": "Показывать кандидатов с неопределенной датой рождения"
 }

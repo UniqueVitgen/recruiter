@@ -39,6 +39,7 @@ export class CandidateDashboardComponent implements OnInit, OnChanges {
   @Input() maxSalary: number;
   @Input() minYearsRequired: number;
   @Input() maxYearsRequired: number;
+  @Input() includeUndefinedBirthday: boolean;
   itemsPerPage: number;
   @Output('addCandidate') outputAddCandidate: EventEmitter<Candidate> = new EventEmitter();
   @Output('deleteCandidate') outputDeleteCandidate: EventEmitter<number> = new EventEmitter();
@@ -63,8 +64,10 @@ export class CandidateDashboardComponent implements OnInit, OnChanges {
       if (this.isFilter) {
         this.selectedCandidates = this.filterByStatus(this.selectedCandidates, this.filterStatuses);
         this.selectedCandidates = this.filterBySalary(this.selectedCandidates, this.minSalary, this.maxSalary);
-        this.selectedCandidates = this.filterByAge(this.selectedCandidates, this.minYearsRequired, this.maxYearsRequired);
+        this.selectedCandidates = this.filterByAge(this.selectedCandidates, this.minYearsRequired, this.maxYearsRequired, this.includeUndefinedBirthday);
         console.log('filtered', this.selectedCandidates);
+        console.log('include', this.includeUndefinedBirthday);
+        console.log('years', this.minYearsRequired, this.maxYearsRequired);
       }
     }
   }
@@ -89,9 +92,14 @@ export class CandidateDashboardComponent implements OnInit, OnChanges {
       return candidates;
     }
   }
-  filterByAge(candidates: CandidateDashboardItem[], minYearsRequired: number, maxYearsRequired: number) {
+  filterByAge(candidates: CandidateDashboardItem[], minYearsRequired: number, maxYearsRequired: number, includeUndefinedBirthday: boolean) {
     if (minYearsRequired && maxYearsRequired) {
       return candidates.filter(candidate => {
+        if (includeUndefinedBirthday) {
+          if (candidate.age == null) {
+            return true;
+          }
+        }
         return candidate.age >= minYearsRequired
         && candidate.age <= maxYearsRequired;
       });

@@ -86,10 +86,10 @@ export class JobDescriptionFilterToolbarComponent implements OnInit, OnChanges {
       translate: (value:  number, label: LabelType): string => {
         switch (label) {
           case LabelType.Low:
-            return '<b>' + this.translateWorker.translateWord('Min year required') + ': </b>' + value + ' '
+            return '<b>' + this.translateWorker.translateWord('Min experience year') + ': </b>' + value + ' '
             + this.translateWorker.translateWord('years');
           case LabelType.High:
-            return '<b>' + this.translateWorker.translateWord('Max year required') + ':</b>' + value + ' '
+            return '<b>' + this.translateWorker.translateWord('Max experience year') + ':</b>' + value + ' '
               + this.translateWorker.translateWord('years');
           default:
             return  value + ' '

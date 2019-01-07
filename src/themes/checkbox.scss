@@ -10,6 +10,11 @@
     opacity: 1;
   }
 }
+.checkbox-with-multiline-text {
+  .mat-checkbox-label {
+    white-space: normal;
+  }
+}
 //.mat-checkbox{
 //  &.mat-checkbox-checked {
 //    .mat-checkbox-frame {
