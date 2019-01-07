@@ -10,6 +10,7 @@ import {RegexpConst} from '../../../../const/regexp.const';
 import {CandidateState} from '../../../../enums/candidate-state.enum';
 import {ArrayWorker} from '../../../../workers/array/array.worker';
 import {EnumWorker} from '../../../../workers/enum/enum.worker';
+import {UserWorker} from '../../../../workers/user/user.worker';
 
 @Component({
   selector: 'app-candidate-modal',
@@ -22,16 +23,21 @@ export class CandidateModalComponent implements OnInit {
   public candidateForm: FormGroup;
   public mask = ['+', '3', '7', '5', ' ', '(', /\d/, /\d/, ')', ' ', /\d/, /\d/, /\d/, '-', /\d/, /\d/, '-', /\d/, /\d/];
   setStates: string[];
+  public minBirthdayDate: Date;
+  public maxBirthdayDate: Date;
 
   constructor(
     public dialogRef: MatDialogRef<CandidateModalComponent>,
     private candidateService: CandidateService,
     private formBuilder: FormBuilder,
     public  enumWorker: EnumWorker,
+    private userWorker: UserWorker,
     @Inject(MAT_DIALOG_DATA) public data: CandidateDialogData) {
   }
 
   ngOnInit() {
+    this.minBirthdayDate = this.userWorker.generateRequiredStartDate();
+    this.maxBirthdayDate = this.userWorker.generateRequiredEndDate();
     if (this.data.isEdit) {
       this.editedCandidate = Object.assign({}, this.data.sourceCandidate);
     } else {
@@ -65,6 +71,8 @@ export class CandidateModalComponent implements OnInit {
         surname: ['', Validators.compose([Validators.required, Validators.pattern(RegexpConst.LATIN_OR_CYRILIC_NAME)])],
         state: [''],
         position: [''],
+        salaryInDollars: [''],
+        birthday: [''],
         status: ['New', Validators.compose([Validators.required])],
         skype: [''],
         phone: ['', Validators.compose([Validators.pattern(RegexpConst.BELLARUSSIAN_PHONE)])],

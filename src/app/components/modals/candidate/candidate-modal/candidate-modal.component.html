@@ -34,6 +34,17 @@
         <mat-form-field class="example-full-width">
           <input class="star-input" formControlName="position" [(ngModel)]="editedCandidate.position.name" matInput placeholder="{{'Position' | translate}}" >
         </mat-form-field>
+        <mat-form-field class="example-full-width">
+          <input class="star-input" only-numbers formControlName="salaryInDollars" [(ngModel)]="editedCandidate.salaryInDollars" matInput placeholder="{{'Required salary' | translate}}" >
+        </mat-form-field>
+        <!--<mat-form-field class="example-full-width">-->
+          <!--<input class="star-input" only-numbers formControlName="birthday" [(ngModel)]="editedCandidate.birthday" matInput placeholder="{{'Required salary' | translate}}" >-->
+        <!--</mat-form-field>-->
+        <mat-form-field class="example-full-width">
+          <input matInput formControlName="birthday" [min]="minBirthdayDate" [max]="maxBirthdayDate"  [(ngModel)]="editedCandidate.birthday" [matDatepicker]="picker" placeholder="{{'Birthday' | translate}}">
+          <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+          <mat-datepicker #picker startView="multi-year" [(ngModel)]="editedCandidate.birthday"></mat-datepicker>
+        </mat-form-field>
         <!--<app-positions-select formControlName="position" [(ngModel)]="editedCandidate.position" [vacancies]="data.sourceVacancies" [visibleUnderline]="false"></app-positions-select>-->
         <mat-form-field class="example-full-width">
           <mat-select required formControlName="status" [placeholder]="'Status' | translate" [(ngModel)]="editedCandidate.candidateState.name">

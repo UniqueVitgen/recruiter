@@ -151,5 +151,7 @@
   "Min salary": "Мин. зп.",
   "Max salary": "Макс. зп.",
   "Min year required": "Мин. опыт",
-  "Max year required": "Макс. опыт"
+  "Max year required": "Макс. опыт",
+  "Required salary": "Требуемая зарплата",
+  "Birthday": "День рождения"
 }

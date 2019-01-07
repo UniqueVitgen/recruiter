@@ -151,5 +151,7 @@
   "Min salary": "Min salary",
   "Max salary": "Max salary",
   "Min year required": "Min year required",
-  "Max year required": "Max year required"
+  "Max year required": "Max year required",
+  "Required salary": "Required salary",
+  "Birthday": "Birthday"
 }

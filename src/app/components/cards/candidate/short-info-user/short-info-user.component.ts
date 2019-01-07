@@ -19,6 +19,7 @@ import {PositionModel} from '../../../../classes/position-model';
 import {TypeCheckingWorker} from '../../../../workers/type-checking/type-checking.worker';
 import {PositionService} from '../../../../services/position/position.service';
 import {SearchWorker} from '../../../../workers/search/search.worker';
+import {UserWorker} from '../../../../workers/user/user.worker';
 
 
 @Component({
@@ -44,6 +45,8 @@ export class ShortInfoUserComponent implements OnInit, OnDestroy, OnChanges {
   photo: Attachment;
   isSaved: boolean = true;
   isSavedCandidate: boolean = true;
+  minBirthdayDate: Date;
+  maxBirthdayDate: Date;
   constructor(public dialog: MatDialog,
               private candidateSerivce: CandidateService,
               private positionService: PositionService,
@@ -51,11 +54,14 @@ export class ShortInfoUserComponent implements OnInit, OnDestroy, OnChanges {
               private stringWorker: StringWorker,
               private searchWorker: SearchWorker,
               private arrayWorker: ArrayWorker,
+              private userWorker: UserWorker,
               public typeCheckingWorker: TypeCheckingWorker,
               private fb: FormBuilder,
               public  enumWorker: EnumWorker) { }
   ngOnInit() {
     this.setStates = this.enumWorker.getValuesFromEnum(CandidateState);
+    this.minBirthdayDate = this.userWorker.generateRequiredStartDate();
+    this.maxBirthdayDate = this.userWorker.generateRequiredEndDate();
   }
 
   ngOnDestroy() {
@@ -72,7 +78,9 @@ export class ShortInfoUserComponent implements OnInit, OnDestroy, OnChanges {
       this.candidateForm = this.fb.group({
         name: [this.editedCandidate.name, Validators.compose([Validators.required, Validators.pattern(RegexpConst.LATIN_OR_CYRILIC_NAME)])],
         surname: [this.editedCandidate.surname, Validators.compose([Validators.required, Validators.pattern(RegexpConst.LATIN_OR_CYRILIC_NAME)])],
+        salaryInDollars: [this.editedCandidate.salaryInDollars],
         position: [this.editedCandidate.position ? this.editedCandidate.position.name : ''],
+        birthday: [this.editedCandidate.birthday],
         candidateState: [this.editedCandidate.candidateState.name]
       });
     }
