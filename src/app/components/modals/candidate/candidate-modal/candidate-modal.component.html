@@ -43,7 +43,7 @@
         <mat-form-field class="example-full-width">
           <input matInput formControlName="birthday" [min]="minBirthdayDate" [max]="maxBirthdayDate"  [(ngModel)]="editedCandidate.birthday" [matDatepicker]="picker" placeholder="{{'Birthday' | translate}}">
           <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
-          <mat-datepicker #picker startView="multi-year" [(ngModel)]="editedCandidate.birthday"></mat-datepicker>
+          <mat-datepicker #picker startView="multi-year"></mat-datepicker>
         </mat-form-field>
         <!--<app-positions-select formControlName="position" [(ngModel)]="editedCandidate.position" [vacancies]="data.sourceVacancies" [visibleUnderline]="false"></app-positions-select>-->
         <mat-form-field class="example-full-width">
@@ -69,17 +69,6 @@
         </mat-form-field>
       </form>
     </div>
-    <!--<mat-form-field class="example-full-width">-->
-      <!--<input *ngIf="editedAttachment != null" placeholder="filePath" [(ngModel)]="editedAttachment.filePath" matInput>-->
-    <!--</mat-form-field>-->
-    <!--<mat-form-field class="example-full-width">-->
-
-      <!--<mat-select placeholder="Attachment type">-->
-        <!--<mat-option *ngFor="let food of getAttachmentsTypes()" [value]="food">-->
-          <!--{{food}}-->
-        <!--</mat-option>-->
-      <!--</mat-select>-->
-    <!--</mat-form-field>-->
   </dialog-body>
   <dialog-footer class="example-full-width">
     <span class="float-right">

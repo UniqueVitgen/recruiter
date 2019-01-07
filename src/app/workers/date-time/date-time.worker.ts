@@ -13,10 +13,12 @@ import {LocalDatePipe} from '../../pipes/local-date/local-date.pipe';
   providedIn: 'root'
 })
 export class DateTimeWorker {
-  public millisecond = 1;
-  public second = 1000;
-  public minute =  60 * 1000;
-  public hour = 60 * 60 * 1000;
+  public millisecond;
+  public second;
+  public minute;
+  public hour;
+  public day;
+  public year;
   public datePipe: DatePipe;
   public config = {
     minTime: '08:00',
@@ -27,6 +29,16 @@ export class DateTimeWorker {
     private localDatePipe: LocalDatePipe,
     private translateWorker: TranslateWorker) {
     this.datePipe = new DatePipe(locale);
+    this.millisecond = 1;
+    this.second = this.millisecond * 1000;
+    this.minute = this.second * 60;
+    this.hour = this.minute * 60;
+    this.day = this.hour * 24;
+  }
+  calculateAge(birthday: Date) { // birthday is a date
+    const ageDifMs = Date.now() - birthday.getTime();
+    const ageDate = new Date(ageDifMs); // miliseconds from epoch
+    return Math.abs(ageDate.getUTCFullYear() - 1970);
   }
 
   getTime(dateWithTime, format?) {

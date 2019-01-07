@@ -24,9 +24,15 @@ export class ArrayWorker {
       return value[property];
     }));
   }
+  public calculateMaxSimpleArray(array) {
+    return Math.max(...array);
+  }
   public calculateMin(array, property: string) {
     return Math.min(...array.map(value => {
       return value[property];
     }));
+  }
+  public calculateMinSimpleArray(array) {
+    return Math.min(...array);
   }
 }

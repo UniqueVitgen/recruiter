@@ -49,7 +49,7 @@
           <mat-form-field class="example-full-width custom-form-field">
             <input matInput [min]="minBirthdayDate" [max]="maxBirthdayDate" formControlName="birthday" [matDatepicker]="picker" placeholder="{{'Birthday' | translate}}">
             <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
-            <mat-datepicker #picker startView="multi-year" [(ngModel)]="editedCandidate.birthday"></mat-datepicker>
+            <mat-datepicker #picker startView="multi-year"></mat-datepicker>
           </mat-form-field>
           <!--<mat-form-field class="example-full-width custom-form-field">-->
             <app-autocomplete-input  [placeholder]="'Position'" [searchProperty]="'name'" [visibleUnderline]="false" [fullWidth]="true" [positions]="positions" (blur)="onFocusoutAnyInput()" formControlName="position"></app-autocomplete-input>

@@ -24,3 +24,6 @@ export class Candidate {
 export class CandidateSelected extends Candidate {
   select: boolean;
 }
+export class CandidateDashboardItem extends Candidate {
+  age: number;
+}

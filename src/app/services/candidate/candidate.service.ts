@@ -77,7 +77,7 @@ export class CandidateService {
     // }
   }
 
-  getAll(): Observable<Candidate[] | any> {
+  getAll(): Observable<Candidate[]> {
     console.log(ConfigService.serviceData);
     // if (ConfigService.serviceData === ServiceData.Real) {
       return this.configService.get('candidates');

@@ -1,4 +1,18 @@
 <app-search-input [isAdvancedSearch]="true" (clickAdvancedSearch)="clickAdvancedSearch()" (onSearch)="search($event)"></app-search-input>
+<mat-card  *ngIf="isFilter">
+  <app-candidate-filter-toolbar
+                                        [statusesList]="sourceStatuses"
+                                        [(selectedStatuses)]="selectedStatuses"
+                                        [(minSalary)]="minSalary"
+                                        [(maxSalary)]="maxSalary"
+                                        [salaryLow]="lowSalary"
+                                        [salaryTop]="topSalary"
+                                        [yearsRequiredLow]="lowYearRequired"
+                                        [yearsRequiredTop]="topYearRequired"
+                                        [(minYearsRequired)]="minYearRequired"
+                                        [(maxYearsRequired)]="maxYearRequired"
+  ></app-candidate-filter-toolbar>
+</mat-card>
 <br>
 <mat-card>
   <app-pagination-toolbar
@@ -22,6 +36,12 @@
                            [itemsPerPageValues]="itemsPerPageValues"
                            [size]="size"
                            [page]="page"
+                           [isFilter]="isFilter"
+                           [filterStatuses]="selectedStatuses"
+                           [minSalary]="minSalary"
+                           [maxSalary]="maxSalary"
+                           [minYearsRequired]="minYearRequired"
+                           [maxYearsRequired]="maxYearRequired"
                            [vacancies]="vacancies"></app-candidate-dashboard>
 </mat-card>
 

@@ -1,5 +1,5 @@
 import {Component, OnInit, Input, Output, EventEmitter, OnChanges, SimpleChanges} from '@angular/core';
-import {Candidate} from 'src/app/classes/candidate';
+import {Candidate, CandidateDashboardItem} from 'src/app/classes/candidate';
 import {MatDialog} from '@angular/material';
 import {JobDescriptionModalComponent} from '../../modals/job-description/job-description-modal/job-description-modal.component';
 import {JobDescriptionDialogData} from '../../../interfaces/dialog/init/job-description-dialog-data';
@@ -19,7 +19,7 @@ import {Vacancy} from '../../../classes/vacancy';
   styleUrls: ['./candidate-dashboard.component.scss']
 })
 export class CandidateDashboardComponent implements OnInit, OnChanges {
-  @Input() candidates: Candidate[];
+  @Input() candidates: CandidateDashboardItem[];
   @Input() haveAddElement: boolean;
   @Input() haveAddButton: boolean;
   @Input() search;
@@ -33,14 +33,18 @@ export class CandidateDashboardComponent implements OnInit, OnChanges {
   @Input() size: number;
   @Input() page: number;
   @Input() idPagination: number;
+  @Input() isFilter: boolean;
+  @Input() filterStatuses: string[];
+  @Input() minSalary: number;
+  @Input() maxSalary: number;
+  @Input() minYearsRequired: number;
+  @Input() maxYearsRequired: number;
   itemsPerPage: number;
   @Output('addCandidate') outputAddCandidate: EventEmitter<Candidate> = new EventEmitter();
   @Output('deleteCandidate') outputDeleteCandidate: EventEmitter<number> = new EventEmitter();
   @Output('deleteCandidateFromTheBase') outputDeleteCandidateFromTheBase: EventEmitter<number> = new EventEmitter();
   @Input() limitTo: number;
-  public selectedCandidates: Candidate[];
-
-  private mockCandidate: Candidate;
+  public selectedCandidates: CandidateDashboardItem[];
 
   constructor(public dialog: MatDialog, private userWorker: UserWorker, private typeCheckingWorker: TypeCheckingWorker) {
   }
@@ -56,10 +60,45 @@ export class CandidateDashboardComponent implements OnInit, OnChanges {
     }
     if (this.candidates) {
       this.searchValues(this.search);
-      // console.log('fillledCells', this.filledCells);
+      if (this.isFilter) {
+        this.selectedCandidates = this.filterByStatus(this.selectedCandidates, this.filterStatuses);
+        this.selectedCandidates = this.filterBySalary(this.selectedCandidates, this.minSalary, this.maxSalary);
+        this.selectedCandidates = this.filterByAge(this.selectedCandidates, this.minYearsRequired, this.maxYearsRequired);
+        console.log('filtered', this.selectedCandidates);
+      }
     }
   }
-
+  filterByStatus(candidates: CandidateDashboardItem[], statuses: string[]) {
+    if (candidates) {
+      if (statuses) {
+        return candidates.filter(candidate => {
+          return statuses.includes(candidate.candidateState.name);
+        });
+      } else {
+        return candidates;
+      }
+    }
+  }
+  filterBySalary(candidates: CandidateDashboardItem[], minSalary: number, maxSalary: number) {
+    if (minSalary && maxSalary) {
+      return candidates.filter((candidate) => {
+        return (candidate.salaryInDollars >= minSalary
+          && candidate.salaryInDollars <= maxSalary);
+      });
+    } else {
+      return candidates;
+    }
+  }
+  filterByAge(candidates: CandidateDashboardItem[], minYearsRequired: number, maxYearsRequired: number) {
+    if (minYearsRequired && maxYearsRequired) {
+      return candidates.filter(candidate => {
+        return candidate.age >= minYearsRequired
+        && candidate.age <= maxYearsRequired;
+      });
+    } else {
+      return candidates;
+    }
+  }
   searchValues(value: string) {
     if (value) {
       const valueLowercase = value.toLowerCase();
