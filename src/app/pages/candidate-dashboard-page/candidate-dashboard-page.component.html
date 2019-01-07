@@ -1,4 +1,27 @@
-<app-search-input (onSearch)="search($event)"></app-search-input>
+<app-search-input [isAdvancedSearch]="true" (clickAdvancedSearch)="clickAdvancedSearch()" (onSearch)="search($event)"></app-search-input>
 <br>
-<app-candidate-dashboard [search]="searchValue" (addCandidate)="getAll()" [isClosedIcon]="false" [isDeleteIcon]="true" (deleteCandidateFromTheBase)="deleteCandidate($event)" [haveAddButton]="true" [haveAddElement]="false" [candidates]="candidates" [isPagination]="true" [itemsPerPageValues]="itemsPerPageValues" [vacancies]="vacancies"></app-candidate-dashboard>
+<mat-card>
+  <app-pagination-toolbar
+    [itemsPerPageValues]="itemsPerPageValues"
+    [placeholder]="'ItemPerPage'"
+    [addButtonText]="'Add new candidate'"
+    [(size)]="size"
+    [(page)]="page"
+    [idPagination]="idPagination"
+    (clickAddButton)="addCandidate()"
+  >
+  </app-pagination-toolbar>
+  <app-candidate-dashboard [search]="searchValue"
+                           (addCandidate)="getAll()"
+                           [isClosedIcon]="false"
+                           [isDeleteIcon]="true"
+                           [idPagination]="idPagination"
+                           (deleteCandidateFromTheBase)="deleteCandidate($event)"
+                           [haveAddButton]="true" [haveAddElement]="false"
+                           [candidates]="candidates" [isPagination]="true"
+                           [itemsPerPageValues]="itemsPerPageValues"
+                           [size]="size"
+                           [page]="page"
+                           [vacancies]="vacancies"></app-candidate-dashboard>
+</mat-card>
 

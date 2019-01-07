@@ -11,6 +11,9 @@ import {Vacancy} from '../../classes/vacancy';
 import {VacancyService} from '../../services/vacancy/vacancy.service';
 import {AlertWithButtonModalComponent} from '../../components/modals/alert-with-button-modal/alert-with-button-modal.component';
 import {AlertWithButtonDialogData} from '../../interfaces/dialog/init/alert-with-button-dialog-data';
+import {CandidateModalComponent} from '../../components/modals/candidate/candidate-modal/candidate-modal.component';
+import {CandidateDialogData} from '../../interfaces/dialog/init/candidate-dialog-data';
+import {CandidateDialogResult} from '../../interfaces/dialog/result/candidate-dialog-result';
 
 @Component({
   selector: 'app-candidate-dashboard-page',
@@ -24,6 +27,10 @@ export class CandidateDashboardPageComponent implements OnInit {
   searchValue: string;
   vacancies: Vacancy[];
   itemsPerPageValues: number[] = [4, 8, 12];
+  page: number;
+  size: number;
+  idPagination: number = 1;
+  isFilter: boolean;
 
   constructor(private candidateService: CandidateService, private searchWorker: SearchWorker, private userWorker: UserWorker,
               public dialog: MatDialog, public vacancyService: VacancyService) { }
@@ -32,6 +39,9 @@ export class CandidateDashboardPageComponent implements OnInit {
     this.getAll();
     this.getVacancies();
     // this.mockCandidates = this.candidateService.mockCandidates;
+  }
+  clickAdvancedSearch() {
+    this.isFilter = !this.isFilter;
   }
 
   search(value: string) {
@@ -70,6 +80,20 @@ export class CandidateDashboardPageComponent implements OnInit {
   getVacancies() {
     this.vacancyService.getAll().subscribe( res => {
       this.vacancies = res;
+    });
+  }
+
+  addCandidate() {
+    const dialogRef = this.dialog.open(CandidateModalComponent, {
+        data: <CandidateDialogData> { sourceVacancies: this.vacancies },
+        disableClose: true
+      }
+    );
+    dialogRef.afterClosed().subscribe((res: CandidateDialogResult) => {
+      if (res) {
+        console.log('res - ', res);
+        this.getAll();
+      }
     });
   }
 

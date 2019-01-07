@@ -26,6 +26,7 @@ export class JobDescriptionDashboardComponent implements OnInit, OnChanges {
   @Input() maxSalary: number;
   @Input() minYearsRequired: number;
   @Input() maxYearsRequired: number;
+  @Input() idPagination: number;
   @Output('deleteVacancy') outputDeleteVacancy: EventEmitter<any> = new EventEmitter();
   @Output('addVacancy') outputAddVacancy: EventEmitter<Vacancy> = new EventEmitter();
   showInfoAndDeleteIcon: boolean = false;

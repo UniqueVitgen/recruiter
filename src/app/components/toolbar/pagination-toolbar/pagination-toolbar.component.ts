@@ -1,13 +1,16 @@
 import {Component, EventEmitter, Input, OnChanges, OnInit, Output, SimpleChanges} from '@angular/core';
 
 @Component({
-  selector: 'app-job-description-pagination-toolbar',
-  templateUrl: './job-description-pagination-toolbar.component.html',
-  styleUrls: ['./job-description-pagination-toolbar.component.scss']
+  selector: 'app-pagination-toolbar',
+  templateUrl: './pagination-toolbar.component.html',
+  styleUrls: ['./pagination-toolbar.component.scss']
 })
-export class JobDescriptionPaginationToolbarComponent implements OnInit, OnChanges {
+export class PaginationToolbarComponent implements OnInit, OnChanges {
   @Input() itemsPerPageValues: number[];
   @Input() page: number;
+  @Input() idPagination: number;
+  @Input() placeholder: string;
+  @Input() addButtonText: string;
   @Output() pageChange: EventEmitter<number> = new EventEmitter();
   @Input() size: number;
   @Output() sizeChange: EventEmitter<number> = new EventEmitter();

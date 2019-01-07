@@ -30,8 +30,10 @@ export class CandidateDashboardComponent implements OnInit, OnChanges {
   @Input() filledCells: BootstrapCellEnum;
   @Input() isPagination: boolean;
   @Input() itemsPerPageValues: number[];
+  @Input() size: number;
+  @Input() page: number;
+  @Input() idPagination: number;
   itemsPerPage: number;
-  p: number = 1;
   @Output('addCandidate') outputAddCandidate: EventEmitter<Candidate> = new EventEmitter();
   @Output('deleteCandidate') outputDeleteCandidate: EventEmitter<number> = new EventEmitter();
   @Output('deleteCandidateFromTheBase') outputDeleteCandidateFromTheBase: EventEmitter<number> = new EventEmitter();

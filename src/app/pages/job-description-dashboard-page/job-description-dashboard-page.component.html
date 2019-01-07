@@ -14,13 +14,16 @@
                                     [(selectedStatuses)]="selectedList" (selectedStatusesChanged)="changeStatusFilter()"></app-job-description-filter-toolbar>
 <br>
 <mat-card>
-  <app-job-description-pagination-toolbar
+  <app-pagination-toolbar
     [itemsPerPageValues]="itemsPerPageValues"
+    [placeholder]="'VacancyPerPage'"
+    [addButtonText]="'Add new vacancy'"
     [(size)]="size"
     [(page)]="page"
+    [idPagination]="idPagination"
     (clickAddButton)="openJobDescriptionDialog()"
   >
-  </app-job-description-pagination-toolbar>
+  </app-pagination-toolbar>
 
   <app-job-description-dashboard [isPagination]="true" [isFilter]="isFilter"
                                  [filterStatuses]="selectedList" [itemsPerPageValues]="itemsPerPageValues" [search]="searchValue"
@@ -28,6 +31,7 @@
                                  [maxSalary]="maxSalary"
                                  [minYearsRequired]="minYearRequired"
                                  [maxYearsRequired]="maxYearRequired"
+                                 [idPagination]="idPagination"
                                  [jobDescriptionList]="jobDescriptionList"
                                  [itemsPerPage]="size"
                                  [p]="page"

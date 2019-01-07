@@ -31,6 +31,7 @@ export class JobDescriptionDashboardPageComponent implements OnInit {
   topYearRequired: number;
   minYearRequired: number;
   maxYearRequired: number;
+  idPagination: number = 2;
   public isFilter;
   public toppingList: string[];
   public selectedList: string[];
