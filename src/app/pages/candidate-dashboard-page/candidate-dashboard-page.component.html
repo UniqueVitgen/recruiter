@@ -24,6 +24,8 @@
     [(page)]="page"
     [idPagination]="idPagination"
     (clickAddButton)="addCandidate()"
+    [numberOfVacancies]="candidates?.length"
+    [numberOfVacanciesTitle]="'Total number of candidates' | translate "
   >
   </app-pagination-toolbar>
   <app-candidate-dashboard [search]="searchValue"

@@ -160,5 +160,7 @@
   "Max experience year": "Max experience year",
   "Required salary": "Required salary",
   "Birthday": "Birthday",
-  "Show candidates with undefined birthday": "Show candidates with undefined birthday"
+  "Show candidates with undefined birthday": "Show candidates with undefined birthday",
+  "Total number of candidates":"Total number of candidates",
+  "Total number of vacancies":"Total number of vacancies"
 }

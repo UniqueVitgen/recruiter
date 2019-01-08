@@ -160,5 +160,7 @@
   "Max experience year": "Макс. опыт",
   "Required salary": "Требуемая зарплата",
   "Birthday": "День рождения",
-  "Show candidates with undefined birthday": "Показывать кандидатов с неопределенной датой рождения"
+  "Show candidates with undefined birthday": "Показывать кандидатов с неопределенной датой рождения",
+  "Total number of candidates":"Всего кандидатов",
+  "Total number of vacancies":"Всего вакансий"
 }
