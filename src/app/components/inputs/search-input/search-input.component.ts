@@ -7,6 +7,7 @@ import {Component, EventEmitter, Input, OnInit, Output} from '@angular/core';
 })
 export class SearchInputComponent implements OnInit {
   @Input() isAdvancedSearch: boolean;
+  @Input() autocompleteList: string[];
   @Output('onSearch') outputOnSearch: EventEmitter<string> = new EventEmitter();
   @Output('clickAdvancedSearch') outputClickAdvancedSearch: EventEmitter<boolean> = new EventEmitter();
   public isTurnOnAdvancedSearch: boolean;

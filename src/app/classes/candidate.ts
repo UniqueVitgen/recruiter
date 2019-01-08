@@ -22,8 +22,8 @@ export class Candidate {
   position?: PositionModel = new PositionModel();
 }
 export class CandidateSelected extends Candidate {
-  select: boolean;
+  select?: boolean;
 }
 export class CandidateDashboardItem extends Candidate {
-  age: number;
+  age?: number;
 }

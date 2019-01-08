@@ -20,6 +20,8 @@ import {VacancyState} from '../../enums/vacancy-state.enum';
 import {Subscription} from 'rxjs';
 import {ArrayWorker} from '../../workers/array/array.worker';
 import {DateTimeWorker} from '../../workers/date-time/date-time.worker';
+import {PositionService} from '../../services/position/position.service';
+import {PositionModel} from '../../classes/position-model';
 
 @Component({
   selector: 'app-candidate-dashboard-page',
@@ -28,6 +30,7 @@ import {DateTimeWorker} from '../../workers/date-time/date-time.worker';
 })
 export class CandidateDashboardPageComponent implements OnInit {
   candidates: CandidateDashboardItem[];
+  positions: PositionModel[];
   sourceStatuses: string[];
   selectedStatuses: string[];
   searchValue: string;
@@ -50,6 +53,7 @@ export class CandidateDashboardPageComponent implements OnInit {
               private enumWorker: EnumWorker,
               private dateTimeWorker: DateTimeWorker,
               private arrayWorker: ArrayWorker,
+              private positionService: PositionService,
               public dialog: MatDialog, public vacancyService: VacancyService) { }
 
   ngOnInit() {
@@ -65,6 +69,7 @@ export class CandidateDashboardPageComponent implements OnInit {
       this.maxYearRequired = this.topYearRequired;
     });
     this.getVacancies();
+    this.getPositions();
     this.sourceStatuses = this.enumWorker.getValuesFromEnum(CandidateState);
     this.selectedStatuses = this.enumWorker.getValuesFromEnum(CandidateState);
     // this.mockCandidates = this.candidateService.mockCandidates;
@@ -118,6 +123,11 @@ export class CandidateDashboardPageComponent implements OnInit {
     this.vacancyService.getAll().subscribe( res => {
       this.vacancies = res;
     });
+  }
+  getPositions() {
+    this.positionService.getAll().subscribe(resPositions => {
+      this.positions = resPositions;
+    })
   }
 
   addCandidate() {

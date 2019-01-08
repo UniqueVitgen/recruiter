@@ -27,6 +27,8 @@ import {ExperienceCandidateModalComponent} from '../../components/modals/candida
 import {NoteCandidateModalComponent} from '../../components/modals/candidate/note-candidate-modal/note-candidate-modal.component';
 import {VacancyService} from '../../services/vacancy/vacancy.service';
 import {Vacancy} from '../../classes/vacancy';
+import {PositionService} from '../../services/position/position.service';
+import {PositionModel} from '../../classes/position-model';
 
 @Component({
   selector: 'app-candidate-page',
@@ -38,6 +40,8 @@ export class CandidatePageComponent implements OnInit {
   candidate: Candidate;
   eventNoteList: EventNote[];
   vacancies: Vacancy[];
+
+  positions: PositionModel[];
   @ViewChild('fileInput') fileInput: ElementRef;
 
   constructor(
@@ -56,8 +60,6 @@ export class CandidatePageComponent implements OnInit {
       this.id = params['id'];
       this.getCandidate();
       this.getVacancies();
-      // this.candidateService.get()
-      // Defaults to 0 if no query param provided.
     });
   }
 
@@ -214,7 +216,7 @@ export class CandidatePageComponent implements OnInit {
         }
       });
       this.candidateService.update(this.candidate).subscribe(resMessage => {
-        this.getCandidate();
+        // this.getCandidate();
       });
     } else if (this.eventNoteWorker.isInterview(object)) {
       this.interviewService.update(object).subscribe( res => {

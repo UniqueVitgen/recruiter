@@ -1,7 +1,9 @@
 
 <mat-form-field  [ngClass]="{'custom-form-field' : !visibleUnderline, 'example-full-width': fullWidth}">
 <input [matAutocomplete]="auto" (focus)="focus()" (blur)="blur.emit(value)" [(ngModel)]="value" [required]="required" (ngModelChange)="changeValue()" matInput placeholder="{{placeholder | translate}}">
-
+  <button *ngIf="!visibleUnderline" mat-button  matSuffix mat-icon-button aria-label="Clear" class="edited-hover-button">
+    <mat-icon>edit</mat-icon>
+  </button>
 <mat-autocomplete #auto="matAutocomplete">
   <mat-option *ngFor="let position of selectedPositions" [value]="position.name">
     <span>{{position.name}}</span>

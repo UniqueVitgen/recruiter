@@ -40,6 +40,9 @@ export class JobDescriptionFilterToolbarComponent implements OnInit, OnChanges {
               private translateWorker: TranslateWorker) { }
 
   ngOnInit() {
+    this.translateWorker.changeValue.subscribe(resLang => {
+      this.ngOnChanges(null);
+    });
   }
 
   ngOnChanges(changes: SimpleChanges): void {

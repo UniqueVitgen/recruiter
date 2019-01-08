@@ -60,7 +60,7 @@ export class ExistedCandidatesModalWindowComponent implements OnInit {
 
   getAll(): void {
     this.candidateService.getAll().subscribe(res => {
-      this.candidates = res;
+      this.candidates = <CandidateSelected[]>res;
       this.numberOfAvailableCandidates = res.length - this.data.currentVacancy.candidates.length;
       this.noCandidateToAdd = this.numberOfAvailableCandidates === 0;
     }, err => {

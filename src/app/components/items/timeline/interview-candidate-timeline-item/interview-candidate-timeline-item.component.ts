@@ -8,6 +8,7 @@ import {TimeInput} from '../../../../classes/html/dateTime/time-input';
 import {DateInput} from '../../../../classes/html/dateTime/date-input';
 import {TranslateWorker} from '../../../../workers/translate/translate.worker';
 import {LocalDatePipe} from '../../../../pipes/local-date/local-date.pipe';
+import {DateTimeFormWorker} from '../../../../workers/date-time-form/date-time-form.worker';
 
 @Component({
   selector: 'app-interview-candidate-timeline-item',
@@ -39,13 +40,18 @@ export class InterviewCandidateTimelineItemComponent implements OnInit, OnChange
   viewOfDate: string;
   viewOfTime: string;
 
-  constructor(public dateTimeWorker: DateTimeWorker, private translateWorker: TranslateWorker, private localDatePipe: LocalDatePipe) {
+  constructor(public dateTimeWorker: DateTimeWorker,
+              private dateTimeFormWorker: DateTimeFormWorker,
+              private translateWorker: TranslateWorker, private localDatePipe: LocalDatePipe) {
   }
   ngOnInit() {
     this.editedInterview = Object.assign({}, this.interview);
     this.viewOfDate = this.localDatePipe.transform(this.editedInterview.createdAt, 'mediumDate');
     this.viewOfTime = this.localDatePipe.transform(this.editedInterview.createdAt, 'shortTime');
-    this.planDate = this.dateTimeWorker.parseDateToDateTimeForm(new Date(this.editedInterview.planDate));
+    this.planDate = this.dateTimeWorker.parseDateToDateTimeForm(new Date(this.editedInterview.planDate),
+      new Date(this.editedInterview.planEndDate));
+    const result = this.dateTimeFormWorker.updateDateTime(this.editedInterview, this.planDate);
+    this.planDate = result.planDate;
     this.translateWorker.changeValue.subscribe(res => {
       // this.viewOfDate = this.dateTimeWorker.getDateWithTime(this.editedInterview.createdAt);
       this.viewOfDate = this.localDatePipe.transform(this.editedInterview.createdAt, 'mediumDate');
@@ -66,11 +72,8 @@ export class InterviewCandidateTimelineItemComponent implements OnInit, OnChange
     console.log('time', this.time);
   }
   updateTime() {
-    for (const prop in this.planDate.time) {
-      this.planDate.value[prop] = this.planDate.time[prop];
-    }
-    console.log(this.planDate.value);
-    this.setPlaneDate();
+    this.planDate = this.dateTimeFormWorker.updateTime(this.planDate);
+    // console.log(this.interviewForm);
   }
   setPlaneDate() {
     if (this.planDate.value.year && this.planDate.value.hours) {
@@ -79,19 +82,12 @@ export class InterviewCandidateTimelineItemComponent implements OnInit, OnChange
     }
   }
   updateDateTime() {
-    this.updateDate();
-    this.updateTime();
-    this.setPlaneDate();
+    const result = this.dateTimeFormWorker.updateDateTime(this.editedInterview, this.planDate);
+    this.interview = result.interview;
+    this.planDate = result.planDate;
   }
   updateDate() {
-    if (this.planDate.dateDate) {
-      const dateInput = <DateInput> this.dateTimeWorker.parseDate(this.planDate.dateDate);
-      for (const prop in dateInput) {
-        this.planDate.value[prop] = dateInput[prop];
-      }
-      console.log(this.planDate.value);
-    }
-    this.setPlaneDate();
+    this.planDate = this.dateTimeFormWorker.updateDate(this.planDate);
   }
 
   ngOnChanges(changes: SimpleChanges): void {

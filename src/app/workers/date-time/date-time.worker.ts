@@ -111,11 +111,13 @@ export class DateTimeWorker {
 
     return date;
   }
-  parseDateToDateTimeForm(date: Date): DateTimeForm {
+  parseDateToDateTimeForm(date: Date, endDate: Date): DateTimeForm {
     return {
       time: this.parseTimeObject(date),
+      endTime: this.parseTimeObject(endDate),
       dateDate: new Date(date),
-      value: new DateTimeInput()
+      value: new DateTimeInput(),
+      endValue: new DateTimeInput()
     };
   }
   parseTimeObject(timeObject: Date) {

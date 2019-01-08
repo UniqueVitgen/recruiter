@@ -41,6 +41,9 @@ export class CandidateFilterToolbarComponent implements OnInit, OnChanges {
   constructor(private translateWorker: TranslateWorker) { }
 
   ngOnInit() {
+    this.translateWorker.changeValue.subscribe(resLanguage => {
+      this.ngOnChanges(null);
+    });
   }
 
   ngOnChanges(changes: SimpleChanges): void {

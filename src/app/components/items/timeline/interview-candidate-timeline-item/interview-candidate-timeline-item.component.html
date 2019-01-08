@@ -3,34 +3,17 @@
   <mat-icon class="delete"  matTooltip="{{'Delete' | translate}}" (click)="delete()">close</mat-icon>
   <mat-card-title><mat-icon class="myIcon">event</mat-icon> <a [routerLink]="'/interview/'+interview.id"> {{'Interview' | translate}}</a></mat-card-title>
   <mat-form-field class="custom-form-field">
-    <input (dateChange)="onFocusoutAnyInput()" matInput [(ngModel)]="planDate.dateDate" [matDatepicker]="picker1" placeholder="{{'Plan Date' | translate}}">
+    <input required (dateChange)="onFocusoutAnyInput()" matInput [(ngModel)]="planDate.dateDate" [matDatepicker]="picker1" placeholder="{{'Plan Date' | translate}}">
     <mat-datepicker-toggle name="dateSuffix1" matSuffix [for]="picker1"></mat-datepicker-toggle>
     <mat-datepicker #picker1></mat-datepicker>
   </mat-form-field>
+    <app-custom-timepicker required placeholder="Start time" [min]="dateTimeWorker.config.minTime" [max]="planDate.endTimeString || dateTimeWorker.config.maxTime" [(ngModel)]="planDate.time" (ngModelChange)="onFocusoutAnyInput()" [hideUnderline]="true"></app-custom-timepicker>
   &nbsp;
+    <app-custom-timepicker required placeholder="End time" [min]="planDate.timeString || dateTimeWorker.config.minTime" [max]="dateTimeWorker.config.maxTime" [(ngModel)]="planDate.endTime" (ngModelChange)="onFocusoutAnyInput()" [hideUnderline]="true"></app-custom-timepicker>
   &nbsp;
-  <!--<mat-form-field class="custom-form-field">-->
-    <!--<input matInput placeholder="{{'Start Time' | translate}}" [(ngModel)]="planDate.timeString" (ngModelChange)="onFocusoutAnyInput()" [format]="24" [ngxTimepicker]="toggleTimepicker">-->
-    <!--<button class="custom-timepicker-toggle" mat-button matSuffix mat-icon-button aria-label="Pick End Time">-->
-      <!--<ngx-material-timepicker-toggle  [for]="toggleTimepicker">-->
-        <!--<mat-icon ngxMaterialTimepickerToggleIcon>access_time</mat-icon>-->
-      <!--</ngx-material-timepicker-toggle>-->
-    <!--</button>-->
-    <!--<ngx-material-timepicker  [ngxMaterialTimepickerTheme]="darkTheme" #toggleTimepicker></ngx-material-timepicker>-->
-  <!--</mat-form-field>-->
-  <!--<mat-form-field class="custom-form-field">-->
-    <app-custom-timepicker [min]="dateTimeWorker.config.minTime" [max]="dateTimeWorker.config.maxTime" [(ngModel)]="planDate.time" (ngModelChange)="onFocusoutAnyInput()" [hideUnderline]="true"></app-custom-timepicker>
-  &nbsp;
-  <!--</mat-form-field>-->
   <mat-form-field class="custom-form-field">
     <input (blur)="onFocusoutAnyInput()" (dateChange)="onFocusoutAnyInput()" matInput [(ngModel)]="editedInterview.factDate" [matDatepicker]="picker2" placeholder="{{'Fact Date' | translate}}">
     <mat-datepicker-toggle name="dateSuffix1" matSuffix [for]="picker2"></mat-datepicker-toggle>
     <mat-datepicker #picker2></mat-datepicker>
   </mat-form-field>
-  <!--<mat-form-field class="example-full-width custom-form-field">-->
-    <!--<textarea (blur)="onFocusoutAnyInput()" [(ngModel)]="editedInterview.comment" matInput placeholder="{{'Comment' | translate}}"></textarea>-->
-    <!--<button mat-button  matSuffix mat-icon-button aria-label="Clear" class="edited-hover-button">-->
-      <!--<mat-icon>edit</mat-icon>-->
-    <!--</button>-->
-  <!--</mat-form-field>-->
 </mat-card>
