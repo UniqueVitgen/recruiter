@@ -160,5 +160,12 @@
   "Max experience year": "Max experience year",
   "Required salary": "Required salary",
   "Birthday": "Birthday",
-  "Show candidates with undefined birthday": "Show candidates with undefined birthday"
+  "Show candidates with undefined birthday": "Show candidates with undefined birthday",
+  "fullname": "fullname",
+  "Field": "Field",
+  "Direction": "Direction",
+  "ASCENDING": "Ascending",
+  "DESCENDING": "Descending",
+  "Fullname": "Fullname",
+  "Age": "Age"
 }

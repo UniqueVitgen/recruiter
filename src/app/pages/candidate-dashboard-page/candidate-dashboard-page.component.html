@@ -13,6 +13,12 @@
                                         [(maxYearsRequired)]="maxYearRequired"
                                         [(includeUndefinedBirthday)]="includeUndefinedBirthday"
   ></app-candidate-filter-toolbar>
+  <app-candidate-sort-toolbar
+    [sourceProperties]="sourceProperties"
+    [sourceDirections]="sourceDirections"
+    [(sortDirection)]="sortDirection"
+    [(selectedProperty)]="sortedProperty"
+  ></app-candidate-sort-toolbar>
 </mat-card>
 <br>
 <mat-card>
@@ -44,6 +50,9 @@
                            [minYearsRequired]="minYearRequired"
                            [maxYearsRequired]="maxYearRequired"
                            [includeUndefinedBirthday]="includeUndefinedBirthday"
+                           [isSort]="isFilter"
+                           [sortedDirection]="sortDirection"
+                           [sortedProperty]="sortedProperty"
                            [vacancies]="vacancies"></app-candidate-dashboard>
 </mat-card>
 

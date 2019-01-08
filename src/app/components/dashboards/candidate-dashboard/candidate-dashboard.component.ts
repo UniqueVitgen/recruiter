@@ -1,17 +1,13 @@
-import {Component, OnInit, Input, Output, EventEmitter, OnChanges, SimpleChanges} from '@angular/core';
+import {Component, EventEmitter, Input, OnChanges, OnInit, Output, SimpleChanges} from '@angular/core';
 import {Candidate, CandidateDashboardItem} from 'src/app/classes/candidate';
 import {MatDialog} from '@angular/material';
-import {JobDescriptionModalComponent} from '../../modals/job-description/job-description-modal/job-description-modal.component';
-import {JobDescriptionDialogData} from '../../../interfaces/dialog/init/job-description-dialog-data';
 import {CandidateDialogData} from '../../../interfaces/dialog/init/candidate-dialog-data';
 import {CandidateModalComponent} from '../../modals/candidate/candidate-modal/candidate-modal.component';
 import {CandidateDialogResult} from '../../../interfaces/dialog/result/candidate-dialog-result';
 import {UserWorker} from '../../../workers/user/user.worker';
-import {Attachment} from '../../../classes/attachment';
 import {TypeCheckingWorker} from '../../../workers/type-checking/type-checking.worker';
 import {BootstrapCellEnum} from '../../../enums/bootstrap-cell.enum';
-import {ImageCropperAvatarComponent} from '../../modals/candidate/image-cropper-avatar/image-cropper-avatar.component';
-import {Vacancy} from '../../../classes/vacancy';
+import {SortDirection} from '../../../enums/sort-direction.enum';
 
 @Component({
   selector: 'app-candidate-dashboard',
@@ -40,6 +36,9 @@ export class CandidateDashboardComponent implements OnInit, OnChanges {
   @Input() minYearsRequired: number;
   @Input() maxYearsRequired: number;
   @Input() includeUndefinedBirthday: boolean;
+  @Input() isSort: boolean;
+  @Input() sortedProperty: string;
+  @Input() sortedDirection: SortDirection;
   itemsPerPage: number;
   @Output('addCandidate') outputAddCandidate: EventEmitter<Candidate> = new EventEmitter();
   @Output('deleteCandidate') outputDeleteCandidate: EventEmitter<number> = new EventEmitter();
@@ -64,11 +63,14 @@ export class CandidateDashboardComponent implements OnInit, OnChanges {
       if (this.isFilter) {
         this.selectedCandidates = this.filterByStatus(this.selectedCandidates, this.filterStatuses);
         this.selectedCandidates = this.filterBySalary(this.selectedCandidates, this.minSalary, this.maxSalary);
-        this.selectedCandidates = this.filterByAge(this.selectedCandidates, this.minYearsRequired, this.maxYearsRequired, this.includeUndefinedBirthday);
-        console.log('filtered', this.selectedCandidates);
-        console.log('include', this.includeUndefinedBirthday);
-        console.log('years', this.minYearsRequired, this.maxYearsRequired);
+        this.selectedCandidates = this.filterByAge(this.selectedCandidates,
+          this.minYearsRequired, this.maxYearsRequired, this.includeUndefinedBirthday);
       }
+      if (this.isSort) {
+        console.log('isSort', this.isSort, this.sortedProperty);
+        this.selectedCandidates = this.sortByProperty(this.selectedCandidates, this.sortedProperty);
+      }
+      console.log('selectedCandidates', this.selectedCandidates);
     }
   }
   filterByStatus(candidates: CandidateDashboardItem[], statuses: string[]) {
@@ -107,6 +109,21 @@ export class CandidateDashboardComponent implements OnInit, OnChanges {
       return candidates;
     }
   }
+  sortByProperty(candidates: CandidateDashboardItem[], property: string): CandidateDashboardItem[] {
+    let direction: number;
+    this.sortedDirection === SortDirection.ASCENDING ? direction = 1 : direction = -1;
+    return candidates.sort((value, value2) => {
+      if (property === 'fullname') {
+        return this.userWorker.sortByFullname(value, value2) * direction;
+      } else if (property === 'age') {
+        return this.userWorker.sortByAge(value, value2) * direction;
+      } else if (property === 'salaryInDollars') {
+        return this.userWorker.sortBySalaryInDollars(value, value2) * direction;
+      } else if (property === 'candidateState') {
+        return this.userWorker.sortByCandidateState(value, value2) * direction;
+      }
+    });
+  }
   searchValues(value: string) {
     if (value) {
       const valueLowercase = value.toLowerCase();
@@ -114,7 +131,6 @@ export class CandidateDashboardComponent implements OnInit, OnChanges {
         const fullname = this.userWorker.formatFullName(candidate).toLowerCase();
         const surname = candidate.surname.toLowerCase();
         return fullname.indexOf(valueLowercase) > -1
-          // || name.indexOf(valueLowercase) > -1
           || surname.indexOf(valueLowercase) > -1;
       });
     } else {
@@ -137,11 +153,9 @@ export class CandidateDashboardComponent implements OnInit, OnChanges {
   }
 
   deleteCandidate(candidateID: number) {
-    // console.log('`Candidate to delete 22:');
     this.outputDeleteCandidate.emit(candidateID);
   }
   deleteCandidateFromTheBase(candidateID: number) {
-    // console.log('`Candidate to delete 22:', candidateID);
     this.outputDeleteCandidateFromTheBase.emit(candidateID);
   }
 

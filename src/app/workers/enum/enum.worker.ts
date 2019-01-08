@@ -4,9 +4,13 @@ import { Injectable } from '@angular/core';
   providedIn: 'root'
 })
 export class EnumWorker {
-  getKeysFromEnum(E: any) {
+  getKeysFromEnum(E: any): string[] {
+    // const keys = []
+    // for (var enumMember in E) {
+    //   keys.push(enumMember);
+    // }
     const keys = Object.keys(E); // ["A", "B"]
-    // console.log(keys);
+    // console.log('keys', keys);
     return keys;
   }
 

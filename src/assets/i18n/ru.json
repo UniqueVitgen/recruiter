@@ -160,5 +160,12 @@
   "Max experience year": "Макс. опыт",
   "Required salary": "Требуемая зарплата",
   "Birthday": "День рождения",
-  "Show candidates with undefined birthday": "Показывать кандидатов с неопределенной датой рождения"
+  "Show candidates with undefined birthday": "Показывать кандидатов с неопределенной датой рождения",
+  "fullname": "полное имя",
+  "Field": "Поле",
+  "Direction": "Направление",
+  "ASCENDING": "По возрастанию",
+  "DESCENDING": "По убыванию",
+  "Fullname": "Полное имя",
+  "Age": "Возвраст"
 }

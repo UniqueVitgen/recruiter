@@ -22,6 +22,8 @@ import {ArrayWorker} from '../../workers/array/array.worker';
 import {DateTimeWorker} from '../../workers/date-time/date-time.worker';
 import {PositionService} from '../../services/position/position.service';
 import {PositionModel} from '../../classes/position-model';
+import {SortDirection} from '../../enums/sort-direction.enum';
+import {SortField} from '../../classes/html/sort-field';
 
 @Component({
   selector: 'app-candidate-dashboard-page',
@@ -49,6 +51,10 @@ export class CandidateDashboardPageComponent implements OnInit {
   minYearRequired: number;
   maxYearRequired: number;
   includeUndefinedBirthday: boolean = true;
+  sourceProperties: SortField[];
+  sourceDirections: string[];
+  sortDirection: SortDirection;
+  sortedProperty: string;
   constructor(private candidateService: CandidateService, private searchWorker: SearchWorker, private userWorker: UserWorker,
               private enumWorker: EnumWorker,
               private dateTimeWorker: DateTimeWorker,
@@ -57,6 +63,14 @@ export class CandidateDashboardPageComponent implements OnInit {
               public dialog: MatDialog, public vacancyService: VacancyService) { }
 
   ngOnInit() {
+    this.sourceProperties = [
+      {field: 'fullname', text: 'Fullname'},
+      {field: 'age', text: 'Age'},
+      {field: 'salaryInDollars', text: 'Required salary'},
+      {field: 'candidateState', text: 'Status'}
+    ];
+    this.sourceDirections = this.enumWorker.getKeysFromEnum(SortDirection);
+    console.log('sourceProperties', this.sourceProperties);
     this.getAll().add(() => {
       this.lowSalary = this.arrayWorker.calculateMin(this.candidates, 'salaryInDollars');
       this.topSalary = this.arrayWorker.calculateMax(this.candidates, 'salaryInDollars');
@@ -127,7 +141,7 @@ export class CandidateDashboardPageComponent implements OnInit {
   getPositions() {
     this.positionService.getAll().subscribe(resPositions => {
       this.positions = resPositions;
-    })
+    });
   }
 
   addCandidate() {

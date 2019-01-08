@@ -26,4 +26,7 @@ export class CandidateSelected extends Candidate {
 }
 export class CandidateDashboardItem extends Candidate {
   age?: number;
+  get fullname():string {
+    return this.name;
+  }
 }

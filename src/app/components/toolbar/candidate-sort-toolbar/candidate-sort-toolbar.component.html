@@ -1,0 +1,16 @@
+<div class="row">
+  <div class="col-6">
+    <mat-form-field class="example-full-width">
+      <mat-select [(ngModel)]="selectedProperty" (ngModelChange)="changeSelectedProperty()" placeholder="{{'Field' | translate}}">
+        <mat-option *ngFor="let topping of sourceProperties" [value]="topping.field">{{topping.text | translate}}</mat-option>
+      </mat-select>
+    </mat-form-field>
+  </div>
+  <div class="col-6">
+    <mat-form-field class="example-full-width">
+      <mat-select [(ngModel)]="sortDirection" (ngModelChange)="changeSortDirection()" placeholder="{{'Direction' | translate}}">
+        <mat-option *ngFor="let topping of sourceDirections" [value]="topping">{{topping | translate}}</mat-option>
+      </mat-select>
+    </mat-form-field>
+  </div>
+</div>
