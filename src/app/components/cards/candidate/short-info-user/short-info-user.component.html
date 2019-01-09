@@ -47,7 +47,7 @@
             </button>
           </mat-form-field>
           <mat-form-field class="example-full-width custom-form-field">
-            <input matInput [min]="minBirthdayDate" [max]="maxBirthdayDate" formControlName="birthday" [matDatepicker]="picker" placeholder="{{'Birthday' | translate}}">
+            <input matInput [min]="minBirthdayDate" [max]="maxBirthdayDate" (ngModelChange)="onFocusoutAnyInput()" formControlName="birthday" [matDatepicker]="picker" placeholder="{{'Birthday' | translate}}">
             <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
             <mat-datepicker #picker startView="multi-year"></mat-datepicker>
           </mat-form-field>
