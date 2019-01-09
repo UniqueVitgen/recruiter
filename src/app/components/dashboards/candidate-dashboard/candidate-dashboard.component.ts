@@ -85,10 +85,10 @@ export class CandidateDashboardComponent implements OnInit, OnChanges {
     }
   }
   filterBySalary(candidates: CandidateDashboardItem[], minSalary: number, maxSalary: number) {
-    if (minSalary && maxSalary) {
+    if (minSalary != null && maxSalary != null) {
       return candidates.filter((candidate) => {
-        return (candidate.salaryInDollars >= minSalary
-          && candidate.salaryInDollars <= maxSalary);
+        return candidate.salaryInDollars >= minSalary
+          && candidate.salaryInDollars <= maxSalary;
       });
     } else {
       return candidates;

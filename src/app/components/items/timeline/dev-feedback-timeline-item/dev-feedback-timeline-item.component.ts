@@ -4,6 +4,7 @@ import {DateTimeWorker} from '../../../../workers/date-time/date-time.worker';
 import {TranslateWorker} from '../../../../workers/translate/translate.worker';
 import {DevFeedback} from '../../../../classes/dev-feedback';
 import {TypeCheckingWorker} from '../../../../workers/type-checking/type-checking.worker';
+import {PositionModel} from '../../../../classes/position-model';
 
 @Component({
   selector: 'app-dev-feedback-timeline-item',
@@ -18,7 +19,8 @@ export class DevFeedbackTimelineItemComponent implements OnInit, OnChanges {
   viewOfDate: string;
   viewOfInterview: string;
   private isSaved: boolean = true;
-  constructor(private dateTimeWorker: DateTimeWorker, private translateWorker: TranslateWorker, private typeCheckingWorker: TypeCheckingWorker) { }
+  constructor(private dateTimeWorker: DateTimeWorker,
+              private translateWorker: TranslateWorker, private typeCheckingWorker: TypeCheckingWorker) { }
   ngOnInit() {
     this.editedNote = Object.assign({}, this.note);
     this.viewOfDate = this.dateTimeWorker.getDateWithTime(this.editedNote.createdAt);
@@ -29,7 +31,6 @@ export class DevFeedbackTimelineItemComponent implements OnInit, OnChanges {
     this.translateWorker.changeValue.subscribe((res) => {
       this.viewOfInterview = this.dateTimeWorker.getDateWithTime(new Date(this.editedNote.interview.planDate));
     });
-  console.log('position', this.editedNote.interview.vacancy.position);
   }
   onFocusoutAnyInput(value: boolean = true) {
     if (value) {
