@@ -11,6 +11,7 @@ import {BaseDialogResult} from '../../../../interfaces/dialog/result/base-dialog
 import {VacancyState} from '../../../../enums/vacancy-state.enum';
 import {PositionModel} from '../../../../classes/position-model';
 import {PositionService} from '../../../../services/position/position.service';
+import {TypeCheckingWorker} from '../../../../workers/type-checking/type-checking.worker';
 
 export interface StateGroup {
   letter: string;
@@ -38,6 +39,7 @@ export class JobDescriptionModalComponent implements OnInit {
   constructor(private fb: FormBuilder,
               public dialogRef: MatDialogRef<JobDescriptionModalComponent>,
               public searchWorker: SearchWorker,
+              private typeCheckingWorker: TypeCheckingWorker,
               private vacancyService: VacancyService,
               private arrayWorker: ArrayWorker,
               private formBuilder: FormBuilder,
@@ -71,7 +73,7 @@ export class JobDescriptionModalComponent implements OnInit {
 
   ngOnInit() {
     if (this.data.isEdit) {
-      this.editedVacancy = <any>Object.assign({}, this.data.sourceJobDescription);
+      this.editedVacancy = this.typeCheckingWorker.parseObject(this.data.sourceJobDescription);
     } else {
       this.editedVacancy = new VacancyForm();
       this.editedVacancy.vacancyState = VacancyState.OPEN;

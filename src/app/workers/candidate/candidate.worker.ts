@@ -16,7 +16,9 @@ export class CandidateWorker {
   haveEmail(candidate: Candidate): boolean {
     if (candidate.contacts) {
       const targetContact = candidate.contacts.find((value) => {
-        return value.contactType === ContactType.EMAIL;
+        if (value) {
+          return value.contactType === ContactType.EMAIL;
+        }
       });
       return targetContact != null;
     }
@@ -25,7 +27,9 @@ export class CandidateWorker {
   getEmailValue(candidate: Candidate): string {
     if (candidate.contacts) {
       const targetContact = candidate.contacts.find((value) => {
-        return value.contactType === ContactType.EMAIL;
+        if (value) {
+          return value.contactType === ContactType.EMAIL;
+        }
       });
       return targetContact.contactDetails;
     }
@@ -33,7 +37,9 @@ export class CandidateWorker {
   getEmailObject(candidate: Candidate): ContactDetails {
     if (candidate.contacts) {
       const targetContact = candidate.contacts.find((value) => {
-        return value.contactType === ContactType.EMAIL;
+        if (value) {
+          return value.contactType === ContactType.EMAIL;
+        }
       });
       return this.typeCheckingWorker.parseObject(targetContact);
     }
@@ -41,7 +47,9 @@ export class CandidateWorker {
   havePhone(candidate: Candidate): boolean {
     if (candidate.contacts) {
       const targetContact = candidate.contacts.find((value) => {
-        return value.contactType === ContactType.PHONE;
+        if (value) {
+          return value.contactType === ContactType.PHONE;
+        }
       });
       return targetContact != null;
     }
@@ -50,7 +58,9 @@ export class CandidateWorker {
   getPhoneValue(candidate: Candidate): string {
     if (candidate.contacts) {
       const targetContact = candidate.contacts.find((value) => {
-        return value.contactType === ContactType.PHONE;
+        if (value) {
+          return value.contactType === ContactType.PHONE;
+        }
       });
       return targetContact.contactDetails;
     }
@@ -58,7 +68,9 @@ export class CandidateWorker {
   getPhoneObject(candidate: Candidate): ContactDetails {
     if (candidate.contacts) {
       const targetContact = candidate.contacts.find((value) => {
-        return value.contactType === ContactType.PHONE;
+        if (value) {
+          return value.contactType === ContactType.PHONE;
+        }
       });
       return this.typeCheckingWorker.parseObject(targetContact);
     }
@@ -66,7 +78,9 @@ export class CandidateWorker {
   haveSkype(candidate: Candidate): boolean {
     if (candidate.contacts) {
       const targetContact = candidate.contacts.find((value) => {
-        return value.contactType === ContactType.SKYPE;
+        if (value) {
+          return value.contactType === ContactType.SKYPE;
+        }
       });
       return targetContact != null;
       // return
@@ -75,7 +89,9 @@ export class CandidateWorker {
   getSkypeValue(candidate: Candidate): string {
     if (candidate.contacts) {
       const targetContact = candidate.contacts.find((value) => {
-        return value.contactType === ContactType.SKYPE;
+        if (value) {
+          return value.contactType === ContactType.SKYPE;
+        }
       });
       return targetContact.contactDetails;
     }
@@ -83,7 +99,9 @@ export class CandidateWorker {
   getSkypeObject(candidate: Candidate): ContactDetails {
     if (candidate.contacts) {
       const targetContact = candidate.contacts.find((value) => {
-        return value.contactType === ContactType.SKYPE;
+        if (value) {
+          return value.contactType === ContactType.SKYPE;
+        }
       });
       return this.typeCheckingWorker.parseObject(targetContact);
     }

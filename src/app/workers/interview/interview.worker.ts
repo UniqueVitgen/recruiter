@@ -23,7 +23,7 @@ export class InterviewWorker {
     const dateEnd = new Date(interview.planEndDate);
     let color, textColor;
     if (interview.factDate) {
-      color = 'darkgreen';
+      color = 'darkgray';
     } else {
       // color = '#4285f4';
     }

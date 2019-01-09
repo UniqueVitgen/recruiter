@@ -101,7 +101,7 @@
       <mat-card-title>{{'Contacts' | translate}}</mat-card-title>
       <mat-card-content>
         <div *ngIf="!readonly">
-          <mat-checkbox color="primary" [(ngModel)]="tests[0].have" (ngModelChange)="changeEmail(); onFocusoutAnyInput()">
+          <mat-checkbox color="primary" [(ngModel)]="tests[0].have" (ngModelChange)="changeEmail();">
             <mat-form-field class="example-full-width" *ngIf="tests[0].have && tests[0].object && tests[0].object.contactDetails != null">
               <input [formControl]="tests[0].control" [(ngModel)]="tests[0].object.contactDetails" (blur)="onFocusoutAnyInput()" matInput [placeholder]="'EMAIL' | translate" required>
               <mat-error class="multi-row-text" *ngIf="tests[0].control.hasError('pattern')">
@@ -117,7 +117,7 @@
             <!--</mat-error>-->
           </mat-checkbox>
           <br>
-          <mat-checkbox color="primary" [(ngModel)]="tests[1].have" (ngModelChange)="changeSkype(); onFocusoutAnyInput()">
+          <mat-checkbox color="primary" [(ngModel)]="tests[1].have" (ngModelChange)="changeSkype();">
             <mat-form-field class="example-full-width" *ngIf="tests[1].have && tests[1].object">
               <input [formControl]="tests[1].control" [(ngModel)]="tests[1].object.contactDetails" (blur)="onFocusoutAnyInput()" matInput [placeholder]="'SKYPE' | translate" required>
               <mat-error class="multi-row-text" *ngIf="tests[1].control.hasError('required')">
@@ -128,7 +128,7 @@
             <span  *ngIf="!tests[1].have">{{'SKYPE' | translate}}</span>
           </mat-checkbox>
           <br>
-          <mat-checkbox color="primary" [(ngModel)]="tests[2].have" (ngModelChange)="changePhone(); onFocusoutAnyInput()">
+          <mat-checkbox color="primary" [(ngModel)]="tests[2].have" (ngModelChange)="changePhone();">
             <mat-form-field class="example-full-width" *ngIf="tests[2].have && tests[2].object">
               <input [formControl]="tests[2].control"  [textMask]="{mask: MaskConst.PHONE}" [(ngModel)]="tests[2].object.contactDetails" (blur)="onFocusoutAnyInput()" matInput [placeholder]="'PHONE' | translate" required>
               <mat-error class="multi-row-text" *ngIf="tests[2].control.hasError('pattern')">

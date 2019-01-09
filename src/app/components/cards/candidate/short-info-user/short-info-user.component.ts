@@ -156,6 +156,7 @@ export class ShortInfoUserComponent implements OnInit, OnDestroy, OnChanges {
           this.isSaved = false;
         }
       }
+      this.onFocusoutAnyInput();
     }
   }
 
