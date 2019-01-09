@@ -125,7 +125,9 @@ export class CandidateWorker {
         }
         else {
           return oldContacts.find((contact) => {
-            return contact.contactType === candidateContactInput.object.contactType;
+            if (contact) {
+              return contact.contactType === candidateContactInput.object.contactType;
+            }
           });
         }
       });
