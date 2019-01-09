@@ -1,11 +1,12 @@
 import {Component, OnChanges, Input, Output, EventEmitter, SimpleChanges} from '@angular/core';
 import {Router} from '@angular/router';
-import {Candidate} from 'src/app/classes/candidate';
+import {Candidate, CandidateDashboardItem} from 'src/app/classes/candidate';
 import {UserWorker} from '../../../../workers/user/user.worker';
 import {CandidateService} from '../../../../services/candidate/candidate.service';
 import {Attachment} from '../../../../classes/attachment';
 import {CandidateWorker} from '../../../../workers/candidate/candidate.worker';
 import {TooltipPosition} from '@angular/material';
+import {DateTimeWorker} from '../../../../workers/date-time/date-time.worker';
 
 @Component({
   selector: 'app-candidate-dashboard-item',
@@ -15,7 +16,7 @@ import {TooltipPosition} from '@angular/material';
 export class CandidateDashboardItemComponent implements OnChanges {
   @Output('deleteCandidate') outputDeleteCandidate: EventEmitter<Candidate> = new EventEmitter();
   @Output('deleteCandidateFromTheBase') outputDeleteCandidateFromTheBase: EventEmitter<Candidate> = new EventEmitter();
-  @Input() candidate: Candidate;
+  @Input() candidate: CandidateDashboardItem;
   @Input() haveHoverEffect: boolean;
   @Input() isClosedIcon: boolean;
   @Input() isDeleteIcon: boolean;
@@ -43,7 +44,8 @@ export class CandidateDashboardItemComponent implements OnChanges {
     private router: Router,
     public userWorker: UserWorker,
     public candidateWorker: CandidateWorker,
-    public candidateService: CandidateService) {
+    public candidateService: CandidateService,
+    public  dateTimeWorker: DateTimeWorker) {
     // this.photo = this.candidateWorker.findPhoto(this.candidate);
   }
 

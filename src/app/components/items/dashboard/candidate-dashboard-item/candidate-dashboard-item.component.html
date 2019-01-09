@@ -18,15 +18,26 @@
   <!--<div class="col-6">-->
   <div class="user-name user-info">
     <div class="candidate-one-row">
-      <span class="font-weight-bold">{{'Full name' | translate }}:</span> &nbsp;
-      <span [matTooltip]="userWorker.formatFullName(candidate)">{{userWorker.formatFullName(candidate)}}</span>
+      <span class="font-weight-bold" [matTooltip]="userWorker.formatFullName(candidate)">{{userWorker.formatFullName(candidate)}}</span>
+    </div>
+    <div *ngIf="candidate.age">
+      <span class="font-weight-bold"> {{'Age' | translate}}:</span>
+      <span [matTooltip]="candidate.age"> {{candidate.age}} </span>
+    </div>
+    <div *ngIf="candidate.salaryInDollars">
+      <span class="font-weight-bold">{{'Salary' | translate}}:</span>
+      <span [matTooltip]="candidate.salaryInDollars"> {{candidate.salaryInDollars}}$</span>
     </div>
     <div *ngFor="let contact of candidate.contacts">
       <div *ngIf="contact.contactDetails !== ''" class="candidate-one-row">
-        <span class="font-weight-bold">{{contact.contactType | translate}}:</span> &nbsp;
-        <span matTooltip="{{contact.contactDetails}}">{{contact.contactDetails}}</span>
+        <mat-icon *ngIf="contact.contactType.toString() === 'SKYPE'" svgIcon="skype-business"></mat-icon>
+        <mat-icon *ngIf="contact.contactType.toString() == 'PHONE'" svgIcon="phone"></mat-icon>
+        <mat-icon *ngIf="contact.contactType.toString() == 'EMAIL'" svgIcon="email-outline"></mat-icon>
+        &nbsp;
+        <span [matTooltip]="contact.contactDetails">{{contact.contactDetails}}</span>
       </div>
     </div>
+
   </div>
 
 
