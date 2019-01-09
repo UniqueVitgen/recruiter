@@ -10,6 +10,9 @@ import {JobDescriptionModalComponent} from '../../components/modals/job-descript
 import {JobDescriptionDialogData} from '../../interfaces/dialog/init/job-description-dialog-data';
 import {BaseDialogResult} from '../../interfaces/dialog/result/base-dialog-result';
 import {MatDialog} from '@angular/material';
+import {PositionService} from '../../services/position/position.service';
+import {PositionModel} from '../../classes/position-model';
+import {PositionWorker} from '../../workers/position/position.worker';
 
 @Component({
   selector: 'app-job-description-dashboard-page',
@@ -35,10 +38,13 @@ export class JobDescriptionDashboardPageComponent implements OnInit {
   public isFilter;
   public toppingList: string[];
   public selectedList: string[];
+  public positions: string[];
   constructor(private vacancyService: VacancyService,
               public dialog: MatDialog,
               private typeCheckingWorker: TypeCheckingWorker,
+              private positionWorker: PositionWorker,
               private arrayWorker: ArrayWorker,
+              private positionService: PositionService,
               private enumWorker: EnumWorker) { }
 
   ngOnInit() {
@@ -49,6 +55,7 @@ export class JobDescriptionDashboardPageComponent implements OnInit {
       this.topYearRequired = this.arrayWorker.calculateMax(this.jobDescriptionList, 'experienceYearsRequire');
     });
     this.getStatuses();
+    this.getPositions();
   }
   changeStatusFilter() {
   }
@@ -65,6 +72,11 @@ export class JobDescriptionDashboardPageComponent implements OnInit {
       this.jobDescriptionList = res;
       this.selectedJobDescriptionList = this.typeCheckingWorker.parseObject(res);
       console.log('this.jobDescriptionList', this.jobDescriptionList);
+    });
+  }
+  getPositions(): Subscription {
+    return this.positionService.getAll().subscribe(resPositions => {
+      this.positions = this.positionWorker.getStringKeys(resPositions);
     });
   }
   deleteVacancy(index: number) {

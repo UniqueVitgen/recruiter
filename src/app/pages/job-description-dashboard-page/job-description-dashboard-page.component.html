@@ -1,4 +1,5 @@
-<app-search-input [isAdvancedSearch]="true" (onSearch)="search($event)"
+<app-search-input [isAdvancedSearch]="true" [autocompleteList]="positions"
+                  (onSearch)="search($event)"
                   (clickAdvancedSearch)="clickAdvancedSearch()"
 ></app-search-input>
 <app-job-description-filter-toolbar *ngIf="isFilter"
