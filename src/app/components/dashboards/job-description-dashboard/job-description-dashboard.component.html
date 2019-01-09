@@ -1,75 +1,12 @@
 <div class="example-full-width">
-  <!--<div *ngFor="let jobDescription of selectedVacancies; let i = index" class="col-12 col-md-12">
-    <app-job-description-dashboard-item [jobDescription]="jobDescription" (click)="goToJobDescriptionPage(jobDescription)" (deleteVacancy)="deleteVacancy(i)"></app-job-description-dashboard-item>
-    <br>
-  </div>-->
-
-  <!--<div class="row">-->
-    <!--<div class="col-3 padding-element">-->
-      <!--<span class="height-div"></span>-->
-      <!--<mat-form-field class="float-right">-->
-        <!--<mat-select [placeholder]="'VacancyPerPage' | translate" [(ngModel)]="itemsPerPage" matInput>-->
-          <!--<mat-option *ngFor="let state of itemsPerPageValues" [value]="state">{{state}}</mat-option>-->
-        <!--</mat-select>-->
-      <!--</mat-form-field>-->
-    <!--</div>-->
-    <!--<div class="col-5 center-vertical-text-container">-->
-      <!--<pagination-controls [id]="2" class="custom-pagination float-left" [nextLabel]="''" [previousLabel]="''"-->
-                           <!--[responsive]="true" [autoHide]="true" (pageChange)="p = $event">-->
-      <!--</pagination-controls>-->
-    <!--</div>-->
-
-    <!--<div class="col-4 center-item">-->
-      <!--<button (click)="openJobDescriptionDialog()" class="vacancy-add-buttons" mat-raised-button color="primary">{{'Add new vacancy' | translate}}-->
-      <!--</button>-->
-    <!--</div>-->
-  <!--</div>-->
   <br>
   <div
     *ngFor="let vacancy of selectedVacancies | paginate: { itemsPerPage: itemsPerPage, currentPage: p, id: idPagination } ; let vacancyID = index"
     class="vacancy">
-   <!-- <mat-accordion class="example-headers-align">
-      <mat-expansion-panel class="vacancyPannel">
-        <mat-expansion-panel-header>
-
-          <mat-panel-title>
-            <mat-icon class="fiber-icon-image vacancy-status"
-                      matTooltip="{{'Status' | translate}}: {{vacancy.vacancyState | translate}}"
-                      [ngClass]="{
-                    'success-fiber': vacancyColorService.isVacancyOpened(vacancy.vacancyState),
-                  'fail-fiber': vacancyColorService.isVacancyClosed(vacancy.vacancyState)}">fiber_manual_record
-            </mat-icon>
-            {{vacancy.position.name }}
-
-          </mat-panel-title>
-
-          <mat-panel-description>
-            <span
-              class="description"> {{'Total number of candidates' | translate}}: {{vacancy.candidates.length}}</span>
-            <span><button mat-icon-button (click)="goToJobDescriptionPage(vacancy); $event.stopPropagation() "
-            ><mat-icon [matTooltip]="'Vacancy info' | translate">info</mat-icon></button>
-          <button mat-icon-button (click)="openDeleteVacancyDialog(vacancyID); $event.stopPropagation()"><mat-icon
-            [matTooltip]="'Delete this vacancy' | translate">close</mat-icon></button></span>
-          </mat-panel-description>
-
-          &lt;!&ndash;<button class="vacancyEditButton" mat-raised-button (click)="goToJobDescriptionPage(vacancy)">{{'Info' | translate}}</button>&ndash;&gt;
-          &lt;!&ndash;<button mat-icon-button class="vacancyDeleteButton" (click)="openDeleteVacancyDialog(vacancyID)"><mat-icon>close</mat-icon></button>&ndash;&gt;
-
-        </mat-expansion-panel-header>
-
-        <app-candidate-dashboard [isPagination]="false" [isDeleteIcon]="false" [isClosedIcon]="isClosedIcon"
-                                 [haveAddButton]="false"
-                                 [filledCells]="4" [haveAddElement]="false"
-                                 [candidates]="vacancy.candidates" [limitTo]="3"></app-candidate-dashboard>
-      </mat-expansion-panel>
-    </mat-accordion>-->
     <app-vacancy-accordion [vacancy]="vacancy"
                            [vacancyID]="vacancyID"
                            (onGoToJobDescriptionPage)="goToJobDescriptionPage($event)"
-                           (onOpenDeleteVacancyDialog)="openDeleteVacancyDialog($event)"
-
-    ></app-vacancy-accordion>
-
-
+                           (onOpenDeleteVacancyDialog)="openDeleteVacancyDialog($event)">
+    </app-vacancy-accordion>
   </div>
 </div>

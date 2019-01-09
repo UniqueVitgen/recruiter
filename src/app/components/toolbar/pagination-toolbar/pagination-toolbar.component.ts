@@ -13,6 +13,8 @@ export class PaginationToolbarComponent implements OnInit, OnChanges {
   @Input() addButtonText: string;
   @Output() pageChange: EventEmitter<number> = new EventEmitter();
   @Input() size: number;
+  @Input()numberOfVacancies: number;
+  @Input()numberOfVacanciesTitle: string;
   @Output() sizeChange: EventEmitter<number> = new EventEmitter();
   @Output('clickAddButton') outputClickAddButton: EventEmitter<any> = new EventEmitter();
 

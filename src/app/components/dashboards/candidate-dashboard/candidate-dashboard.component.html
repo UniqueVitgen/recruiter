@@ -1,27 +1,4 @@
 <div >
-  <!--<mat-card-title>{{'Candidates' | translate}}</mat-card-title>-->
-  <!--<mat-divider></mat-divider>-->
-  <!--<br>-->
-<!--<div class="row" >-->
-  <!--<div class="col-3 padding-element">-->
-    <!--<span class="height-div"></span>-->
-    <!--<mat-form-field  *ngIf="isPagination && selectedCandidates && selectedCandidates.length > 0" class="float-right">-->
-    <!--<mat-select [placeholder]="'ItemPerPage' | translate" [(ngModel)]="itemsPerPage" matInput>-->
-      <!--<mat-option *ngFor="let state of itemsPerPageValues" [value]="state">{{state}}</mat-option>-->
-    <!--</mat-select>-->
-    <!--</mat-form-field>-->
-  <!--</div>-->
-  <!--<div class="col-5 center-vertical-text-container" >-->
-    <!--<pagination-controls *ngIf="isPagination" [id]="1" [previousLabel]="''" [nextLabel]="''" [directionLinks]="true" class="custom-pagination float-left " [autoHide]="true" [responsive]="true" (pageChange)="p = $event">-->
-    <!--</pagination-controls>-->
-  <!--</div>-->
-  <!--<div *ngIf="haveAddButton" class="col-4 center-item">-->
-    <!--<button (click)="addCandidate()" class="vacancy-add-buttons" mat-raised-button color="primary">{{'Add new candidate' | translate}}-->
-    <!--</button>-->
-  <!--</div>-->
-<!--</div>-->
-  <!--<mat-divider></mat-divider>-->
-
 <div *ngIf="selectedCandidates" class="row">
   <div
     *ngFor="let candidate of selectedCandidates | paginate: { itemsPerPage: size, currentPage: page, id: idPagination } | slice:0:limitTo ? limitTo : selectedCandidates.length; let i = index"

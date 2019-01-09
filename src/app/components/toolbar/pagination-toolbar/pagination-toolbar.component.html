@@ -3,11 +3,15 @@
 <div class="row">
   <div class="col-3 padding-element">
     <span class="height-div"></span>
-    <mat-form-field class="float-right">
-      <mat-select [placeholder]="placeholder | translate" [(ngModel)]="size" (ngModelChange)="changeSize()">
-        <mat-option *ngFor="let state of itemsPerPageValues" [value]="state">{{state}}</mat-option>
-      </mat-select>
-    </mat-form-field>
+    <div class="column">
+      <label class="number-of-vacanies">{{numberOfVacanciesTitle}} ({{numberOfVacancies}})</label>
+      <mat-form-field class="number-of-vacanies">
+        <mat-select [placeholder]="placeholder | translate" [(ngModel)]="size" (ngModelChange)="changeSize()">
+          <mat-option *ngFor="let state of itemsPerPageValues" [value]="state">{{state}}</mat-option>
+        </mat-select>
+      </mat-form-field>
+    </div>
+
   </div>
   <div class="col-5 center-vertical-text-container">
     <pagination-controls class="custom-pagination float-left" [nextLabel]="''" [previousLabel]="''"
