@@ -1,20 +1,20 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { CandidateSortToolbarComponent } from './candidate-sort-toolbar.component';
+import { SortToolbarComponent } from './sort-toolbar.component';
 
-describe('CandidateSortToolbarComponent', () => {
-  let component: CandidateSortToolbarComponent;
-  let fixture: ComponentFixture<CandidateSortToolbarComponent>;
+describe('SortToolbarComponent', () => {
+  let component: SortToolbarComponent;
+  let fixture: ComponentFixture<SortToolbarComponent>;
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ CandidateSortToolbarComponent ]
+      declarations: [ SortToolbarComponent ]
     })
     .compileComponents();
   }));
 
   beforeEach(() => {
-    fixture = TestBed.createComponent(CandidateSortToolbarComponent);
+    fixture = TestBed.createComponent(SortToolbarComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });

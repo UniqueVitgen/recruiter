@@ -13,6 +13,8 @@ import {MatDialog} from '@angular/material';
 import {PositionService} from '../../services/position/position.service';
 import {PositionModel} from '../../classes/position-model';
 import {PositionWorker} from '../../workers/position/position.worker';
+import {SortDirection} from '../../enums/sort-direction.enum';
+import {SortField} from '../../classes/html/sort-field';
 
 @Component({
   selector: 'app-job-description-dashboard-page',
@@ -39,6 +41,10 @@ export class JobDescriptionDashboardPageComponent implements OnInit {
   public toppingList: string[];
   public selectedList: string[];
   public positions: string[];
+  sourceProperties: SortField[];
+  sourceDirections: string[];
+  sortDirection: SortDirection;
+  sortedProperty: string;
   constructor(private vacancyService: VacancyService,
               public dialog: MatDialog,
               private typeCheckingWorker: TypeCheckingWorker,
@@ -48,6 +54,7 @@ export class JobDescriptionDashboardPageComponent implements OnInit {
               private enumWorker: EnumWorker) { }
 
   ngOnInit() {
+    this.initSort();
     this.getVacancies().add(() => {
       this.lowSalary = this.arrayWorker.calculateMin(this.jobDescriptionList, 'salaryInDollarsFrom');
       this.topSalary = this.arrayWorker.calculateMax(this.jobDescriptionList, 'salaryInDollarsTo');
@@ -56,6 +63,18 @@ export class JobDescriptionDashboardPageComponent implements OnInit {
     });
     this.getStatuses();
     this.getPositions();
+  }
+  initSort() {
+    this.sourceProperties = [
+      {field: 'position', text: 'Position'},
+      {field: 'salaryInDollarsFrom', text: 'Min required salary'},
+      {field: 'salaryInDollarsTo', text: 'Max required salary'},
+      {field: 'vacancyState', text: 'Status'},
+      {field: 'experienceYearsRequire', text: 'Required experience years'}
+    ];
+    this.sourceDirections = this.enumWorker.getKeysFromEnum(SortDirection);
+    this.sortedProperty = this.sourceProperties[0].field;
+    this.sortDirection = <any>this.sourceDirections[0];
   }
   changeStatusFilter() {
   }

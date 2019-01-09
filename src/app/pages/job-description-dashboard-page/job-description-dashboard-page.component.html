@@ -2,17 +2,25 @@
                   (onSearch)="search($event)"
                   (clickAdvancedSearch)="clickAdvancedSearch()"
 ></app-search-input>
-<app-job-description-filter-toolbar *ngIf="isFilter"
-                                    [statusesList]="toppingList"
-                                    [(minSalary)]="minSalary"
-                                    [(maxSalary)]="maxSalary"
-                                    [salaryLow]="lowSalary"
-                                    [salaryTop]="topSalary"
-                                    [yearsRequiredLow]="lowYearRequired"
-                                    [yearsRequiredTop]="topYearRequired"
-                                    [(minYearsRequired)]="minYearRequired"
-                                    [(maxYearsRequired)]="maxYearRequired"
-                                    [(selectedStatuses)]="selectedList" (selectedStatusesChanged)="changeStatusFilter()"></app-job-description-filter-toolbar>
+<mat-card  *ngIf="isFilter">
+  <app-job-description-filter-toolbar
+                                      [statusesList]="toppingList"
+                                      [(minSalary)]="minSalary"
+                                      [(maxSalary)]="maxSalary"
+                                      [salaryLow]="lowSalary"
+                                      [salaryTop]="topSalary"
+                                      [yearsRequiredLow]="lowYearRequired"
+                                      [yearsRequiredTop]="topYearRequired"
+                                      [(minYearsRequired)]="minYearRequired"
+                                      [(maxYearsRequired)]="maxYearRequired"
+                                      [(selectedStatuses)]="selectedList" (selectedStatusesChanged)="changeStatusFilter()"></app-job-description-filter-toolbar>
+  <app-sort-toolbar
+    [sourceProperties]="sourceProperties"
+    [sourceDirections]="sourceDirections"
+    [(sortDirection)]="sortDirection"
+    [(selectedProperty)]="sortedProperty"
+  ></app-sort-toolbar>
+</mat-card>
 <br>
 <mat-card>
   <app-pagination-toolbar
@@ -38,6 +46,9 @@
                                  [jobDescriptionList]="jobDescriptionList"
                                  [itemsPerPage]="size"
                                  [p]="page"
+                                 [isSort]="isFilter"
+                                 [sortedDirection]="sortDirection"
+                                 [sortedProperty]="sortedProperty"
                                  (addVacancy)="getVacancies()" (deleteVacancy)="deleteVacancy($event)"></app-job-description-dashboard>
 
 </mat-card>

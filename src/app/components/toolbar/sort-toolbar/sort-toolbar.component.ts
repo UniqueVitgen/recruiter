@@ -3,11 +3,11 @@ import {SortDirection} from '../../../enums/sort-direction.enum';
 import {SortField} from '../../../classes/html/sort-field';
 
 @Component({
-  selector: 'app-candidate-sort-toolbar',
-  templateUrl: './candidate-sort-toolbar.component.html',
-  styleUrls: ['./candidate-sort-toolbar.component.scss']
+  selector: 'app-sort-toolbar',
+  templateUrl: './sort-toolbar.component.html',
+  styleUrls: ['./sort-toolbar.component.scss']
 })
-export class CandidateSortToolbarComponent implements OnInit {
+export class SortToolbarComponent implements OnInit {
   @Input() sourceProperties: SortField[];
   @Input() sourceDirections: string[];
   @Input() selectedProperty: string;

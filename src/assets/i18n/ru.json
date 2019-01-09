@@ -167,5 +167,8 @@
   "DESCENDING": "По убыванию",
   "Fullname": "Полное имя",
   "Age": "Возвраст",
-  "Total number of vacancies":"Всего вакансий"
+  "Total number of vacancies":"Всего вакансий",
+  "Min required salary": "Минимальная зарплата",
+  "Max required salary": "Максимальная зарплата",
+  "Required experience years": "Требуемый опыт работы"
 }

@@ -120,7 +120,7 @@ import { VacancyAccordionComponent } from './components/accordions/vacancy-accor
 import { Ng5SliderModule } from 'ng5-slider';
 import { PaginationToolbarComponent } from './components/toolbar/pagination-toolbar/pagination-toolbar.component';
 import { CandidateFilterToolbarComponent } from './components/toolbar/candidate-filter-toolbar/candidate-filter-toolbar.component';
-import { CandidateSortToolbarComponent } from './components/toolbar/candidate-sort-toolbar/candidate-sort-toolbar.component';
+import { SortToolbarComponent } from './components/toolbar/sort-toolbar/sort-toolbar.component';
 
 
 export function HttpLoaderFactory(http: HttpClient) {
@@ -200,7 +200,7 @@ export function HttpLoaderFactory(http: HttpClient) {
     VacancyAccordionComponent,
     PaginationToolbarComponent,
     CandidateFilterToolbarComponent,
-    CandidateSortToolbarComponent
+    SortToolbarComponent
   ],
   imports: [
     BrowserModule,

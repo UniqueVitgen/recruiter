@@ -9,6 +9,9 @@ import {DeleteVacancyDialogComponent} from '../../modals/delete-vacancy-dialog/d
 import {VacancyColorService} from '../../../services/vacancy/vacancy-color.service';
 import {AlertWithButtonModalComponent} from '../../modals/alert-with-button-modal/alert-with-button-modal.component';
 import {AlertWithButtonDialogData} from '../../../interfaces/dialog/init/alert-with-button-dialog-data';
+import {CandidateDashboardItem} from '../../../classes/candidate';
+import {SortDirection} from '../../../enums/sort-direction.enum';
+import {VacancyWorker} from '../../../workers/vacancy/vacancy.worker';
 
 @Component({
   selector: 'app-job-description-dashboard',
@@ -35,12 +38,16 @@ export class JobDescriptionDashboardComponent implements OnInit, OnChanges {
   }
   @Input() itemsPerPage: number;
   @Input() p: number;
+  @Input() isSort: boolean;
+  @Input() sortedProperty: string;
+  @Input() sortedDirection: SortDirection;
   isClosedIcon: boolean = false;
   public selectedVacancies: Vacancy[];
 
   constructor(
     public dialog: MatDialog,
     private router: Router,
+    private vacancyWorker: VacancyWorker,
     private vacancyColorService: VacancyColorService) {
   }
 
@@ -59,6 +66,11 @@ export class JobDescriptionDashboardComponent implements OnInit, OnChanges {
       this.selectedVacancies = this.filterBySalary(this.selectedVacancies, this.minSalary, this.maxSalary);
       this.selectedVacancies = this.filterByYearsRequire(this.selectedVacancies, this.minYearsRequired, this.maxYearsRequired);
     }
+    if (this.isSort) {
+      console.log('isSort', this.isSort, this.sortedProperty);
+      this.selectedVacancies = this.sortByProperty(this.selectedVacancies, this.sortedProperty);
+    }
+    console.log('selectedVacancies', this.selectedVacancies);
   }
 
   searchValues(value: string): Vacancy[] {
@@ -103,6 +115,23 @@ export class JobDescriptionDashboardComponent implements OnInit, OnChanges {
     } else {
       return vacancies;
     }
+  }
+  sortByProperty(vacancies: Vacancy[], property: string): Vacancy[] {
+    let direction: number;
+    this.sortedDirection === SortDirection.ASCENDING ? direction = 1 : direction = -1;
+    return vacancies.sort((value, value2) => {
+      if (property === 'position') {
+        return this.vacancyWorker.sortByPosition(value, value2) * direction;
+      } else if (property === 'vacancyState') {
+        return this.vacancyWorker.sortByVacancyState(value, value2) * direction;
+      } else if (property === 'salaryInDollarsFrom') {
+        return this.vacancyWorker.sortBySalaryInDollarsFrom(value, value2) * direction;
+      } else if (property === 'salaryInDollarsTo') {
+        return this.vacancyWorker.sortBySalaryInDollarsTo(value, value2) * direction;
+      } else if (property === 'experienceYearsRequire') {
+        return this.vacancyWorker.sortByExperienceYearsRequire(value, value2) * direction;
+      }
+    });
   }
 
   openDeleteVacancyDialog(vacancyID: number): void {

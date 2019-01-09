@@ -168,5 +168,8 @@
   "DESCENDING": "Descending",
   "Fullname": "Fullname",
   "Age": "Age",
-  "Total number of vacancies":"Total number of vacancies"
+  "Total number of vacancies":"Total number of vacancies",
+  "Min required salary": "Min required salary",
+  "Max required salary": "Max required salary",
+  "Required experience years": "Required experience years"
 }
