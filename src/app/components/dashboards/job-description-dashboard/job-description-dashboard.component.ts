@@ -129,7 +129,10 @@ export class JobDescriptionDashboardComponent implements OnInit, OnChanges {
       } else if (property === 'salaryInDollarsTo') {
         return this.vacancyWorker.sortBySalaryInDollarsTo(value, value2) * direction;
       } else if (property === 'experienceYearsRequire') {
+        console.log('experienceYearsRequire', value.experienceYearsRequire, value2.experienceYearsRequire);
         return this.vacancyWorker.sortByExperienceYearsRequire(value, value2) * direction;
+      } else if (property === 'candidates') {
+        return this.vacancyWorker.sortByCandidates(value, value2) * direction;
       }
     });
   }

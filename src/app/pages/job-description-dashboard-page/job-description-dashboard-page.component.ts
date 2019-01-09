@@ -70,7 +70,8 @@ export class JobDescriptionDashboardPageComponent implements OnInit {
       {field: 'salaryInDollarsFrom', text: 'Min required salary'},
       {field: 'salaryInDollarsTo', text: 'Max required salary'},
       {field: 'vacancyState', text: 'Status'},
-      {field: 'experienceYearsRequire', text: 'Required experience years'}
+      {field: 'experienceYearsRequire', text: 'Required experience years'},
+      {field: 'candidates', text: 'Count candidates'}
     ];
     this.sourceDirections = this.enumWorker.getKeysFromEnum(SortDirection);
     this.sortedProperty = this.sourceProperties[0].field;

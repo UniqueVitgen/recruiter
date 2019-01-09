@@ -55,7 +55,20 @@ export class VacancyWorker {
   }
   sortByExperienceYearsRequire(value: Vacancy, value2: Vacancy): number {
     if (value.experienceYearsRequire != null && value2.experienceYearsRequire != null) {
-      return value.experienceYearsRequire - value2.experienceYearsRequire;
+      if (value.experienceYearsRequire > value2.experienceYearsRequire) {
+        return 1;
+      } else if (value.experienceYearsRequire < value2.experienceYearsRequire) {
+        return - 1;
+      } else {
+        return 0;
+      }
+    } else {
+      return this.sortByNull(value, value2);
+    }
+  }
+  sortByCandidates(value: Vacancy, value2: Vacancy): number {
+    if (value.candidates.length != null && value2.candidates.length != null) {
+      return value.candidates.length - value2.candidates.length;
     } else {
       return this.sortByNull(value, value2);
     }
