@@ -1,8 +1,8 @@
-export class CandidateFilterDashboard {
-  isFilter: boolean;
+import {FilterDashboard} from './filter-dashboard';
+
+export class CandidateFilterDashboard extends FilterDashboard{
   minSalary: number;
   maxSalary: number;
-  selectedStatuses: string[];
   minYearRequired: number;
   maxYearRequired: number;
   includeUndefinedBirthday: boolean;

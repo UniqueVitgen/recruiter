@@ -13,12 +13,19 @@
                                       [yearsRequiredTop]="topYearRequired"
                                       [(minYearsRequired)]="minYearRequired"
                                       [(maxYearsRequired)]="maxYearRequired"
-                                      [(selectedStatuses)]="selectedList" (selectedStatusesChanged)="changeStatusFilter()"></app-job-description-filter-toolbar>
+                                      [(selectedStatuses)]="selectedList"
+                                      (maxYearsRequiredChange)="changeFilterObject()"
+                                      (minYearsRequiredChange)="changeFilterObject()"
+                                      (minSalaryChange)="changeFilterObject()"
+                                      (maxSalaryChange)="changeFilterObject()"
+                                      (selectedStatusesChange)="changeFilterObject()"></app-job-description-filter-toolbar>
   <app-sort-toolbar
     [sourceProperties]="sourceProperties"
     [sourceDirections]="sourceDirections"
     [(sortDirection)]="sortDirection"
     [(selectedProperty)]="sortedProperty"
+    (sortDirectionChange)="changeSortObject()"
+    (selectedPropertyChange)="changeSortObject()"
   ></app-sort-toolbar>
 </mat-card>
 <br>

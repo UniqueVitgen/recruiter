@@ -15,6 +15,9 @@ import {PositionModel} from '../../classes/position-model';
 import {PositionWorker} from '../../workers/position/position.worker';
 import {SortDirection} from '../../enums/sort-direction.enum';
 import {SortField} from '../../classes/html/sort-field';
+import {SortStorage} from '../../storages/sort.storage';
+import {FilterStorage} from '../../storages/filter.storage';
+import {CandidateState} from '../../enums/candidate-state.enum';
 
 @Component({
   selector: 'app-job-description-dashboard-page',
@@ -49,6 +52,8 @@ export class JobDescriptionDashboardPageComponent implements OnInit {
               public dialog: MatDialog,
               private typeCheckingWorker: TypeCheckingWorker,
               private positionWorker: PositionWorker,
+              private sortStorage: SortStorage,
+              private filterStorage: FilterStorage,
               private arrayWorker: ArrayWorker,
               private positionService: PositionService,
               private enumWorker: EnumWorker) { }
@@ -60,6 +65,22 @@ export class JobDescriptionDashboardPageComponent implements OnInit {
       this.topSalary = this.arrayWorker.calculateMax(this.jobDescriptionList, 'salaryInDollarsTo');
       this.lowYearRequired = this.arrayWorker.calculateMin(this.jobDescriptionList, 'experienceYearsRequire');
       this.topYearRequired = this.arrayWorker.calculateMax(this.jobDescriptionList, 'experienceYearsRequire');
+      const filterObject = this.filterStorage.getVacancyFilter();
+      if (filterObject) {
+        this.minSalary = filterObject.minSalary;
+        this.maxSalary = filterObject.maxSalary;
+        this.minYearRequired = filterObject.minYearRequired;
+        this.maxYearRequired = filterObject.maxYearRequired;
+        this.selectedList = filterObject.selectedStatuses;
+        this.isFilter = filterObject.isFilter;
+      } else {
+        this.minSalary = this.lowSalary;
+        this.maxSalary = this.topSalary;
+        this.minYearRequired = this.lowYearRequired;
+        this.maxYearRequired = this.topYearRequired;
+        this.selectedList = this.enumWorker.getValuesFromEnum(VacancyState);
+        this.isFilter = false;
+      }
     });
     this.getStatuses();
     this.getPositions();
@@ -74,10 +95,14 @@ export class JobDescriptionDashboardPageComponent implements OnInit {
       {field: 'candidates', text: 'Count candidates'}
     ];
     this.sourceDirections = this.enumWorker.getKeysFromEnum(SortDirection);
-    this.sortedProperty = this.sourceProperties[0].field;
-    this.sortDirection = <any>this.sourceDirections[0];
-  }
-  changeStatusFilter() {
+    const sortObject = this.sortStorage.getVacancySort();
+    if (sortObject) {
+      this.sortedProperty = <any>sortObject.field;
+      this.sortDirection = sortObject.direction;
+    } else {
+      this.sortedProperty = this.sourceProperties[0].field;
+      this.sortDirection = <any>this.sourceDirections[0];
+    }
   }
   search(value: string) {
     this.searchValue = value;
@@ -125,6 +150,22 @@ export class JobDescriptionDashboardPageComponent implements OnInit {
           this.getVacancies();
         }
       }
+    });
+  }
+  changeSortObject() {
+    this.sortStorage.setVacancySort({
+      direction: this.sortDirection,
+      field: <any> this.sortedProperty
+    });
+  }
+  changeFilterObject() {
+    this.filterStorage.setVacancyFilter({
+      minSalary: this.minSalary,
+      maxSalary: this.maxSalary,
+      minYearRequired: this.minYearRequired,
+      maxYearRequired: this.maxYearRequired,
+      selectedStatuses: this.selectedList,
+      isFilter: this.isFilter
     });
   }
 
