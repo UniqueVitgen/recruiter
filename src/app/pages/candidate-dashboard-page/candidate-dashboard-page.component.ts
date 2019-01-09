@@ -32,7 +32,7 @@ import {SortField} from '../../classes/html/sort-field';
 })
 export class CandidateDashboardPageComponent implements OnInit {
   candidates: CandidateDashboardItem[];
-  positions: PositionModel[];
+  positions: string[];
   sourceStatuses: string[];
   selectedStatuses: string[];
   searchValue: string;
@@ -142,7 +142,9 @@ export class CandidateDashboardPageComponent implements OnInit {
   }
   getPositions() {
     this.positionService.getAll().subscribe(resPositions => {
-      this.positions = resPositions;
+      this.positions = resPositions.map((itemPosition) => {
+        return itemPosition.name;
+      });
     });
   }
 

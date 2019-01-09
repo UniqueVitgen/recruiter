@@ -5,7 +5,11 @@
         <div class="input-group-prepend">
           <span class="input-group-text" id="basic-addon1"><mat-icon>search</mat-icon></span>
         </div>
-        <input type="text" (input)="search($event.target.value)" class="form-control" placeholder="{{'Search'| translate}}">
+        <!--<p-autoComplete [(ngModel)]="value" [suggestions]="autocompleteList" (completeMethod)="search(value)"></p-autoComplete>-->
+        <input type="text"
+               [(ngModel)]="value"
+               (ngModelChange)="search(value)"
+               (focus)="focus()" (blur)="blur()" class="form-control" placeholder="{{'Search'| translate}}">
         <div *ngIf="isAdvancedSearch" (click)="clickAdvancedSearch()" class="input-group-append">
           <span class="input-group-text" id="inputGroupFileAddon02"><a>{{(isTurnOnAdvancedSearch ? 'Turn off' : 'Turn on') | translate}} {{'advanced search' | translate}}</a></span>
         </div>
@@ -15,11 +19,13 @@
           </button>
         </span> -->
       </div>
+      <div *ngIf="isFocus" class="custom-dropdown-content example-full-width">
+        <div class="custom-dropdown-item" *ngFor="let item of filteredAutocompleteList | slice:0:limitTo" (click)="setValue(item);">
+          <span>{{item}}</span>
+        </div>
+      </div>
     </div>
   </div>
-  <div class="col-12 dropdown-content">
-      <div *ngFor="let item of filteredAutocompleteList">
-        <span>{{item}}</span>
-      </div>
-  </div>
+  <!--<div class="col-12">-->
+  <!--</div>-->
 </div>

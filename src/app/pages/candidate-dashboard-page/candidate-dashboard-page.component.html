@@ -1,4 +1,6 @@
-<app-search-input [isAdvancedSearch]="true" (clickAdvancedSearch)="clickAdvancedSearch()" (onSearch)="search($event)"></app-search-input>
+<app-search-input [isAdvancedSearch]="true"
+                  [autocompleteList]="positions"
+                  (clickAdvancedSearch)="clickAdvancedSearch()" (onSearch)="search($event)"></app-search-input>
 <mat-card  *ngIf="isFilter">
   <app-candidate-filter-toolbar
                                         [statusesList]="sourceStatuses"
