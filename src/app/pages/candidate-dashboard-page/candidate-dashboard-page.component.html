@@ -7,6 +7,9 @@
                                         [(selectedStatuses)]="selectedStatuses"
                                         [(minSalary)]="minSalary"
                                         [(maxSalary)]="maxSalary"
+                                        (selectedStatusesChange)="changeFilterObject()"
+                                        (minSalaryChange)="changeFilterObject()"
+                                        (maxSalaryChange)="changeFilterObject()"
                                         [salaryLow]="lowSalary"
                                         [salaryTop]="topSalary"
                                         [yearsRequiredLow]="lowYearRequired"
@@ -14,12 +17,17 @@
                                         [(minYearsRequired)]="minYearRequired"
                                         [(maxYearsRequired)]="maxYearRequired"
                                         [(includeUndefinedBirthday)]="includeUndefinedBirthday"
+                                        (minYearsRequiredChange)="changeFilterObject()"
+                                        (maxYearsRequiredChange)="changeFilterObject()"
+                                        (includeUndefinedBirthdayChange)="changeFilterObject()"
   ></app-candidate-filter-toolbar>
   <app-sort-toolbar
     [sourceProperties]="sourceProperties"
     [sourceDirections]="sourceDirections"
     [(sortDirection)]="sortDirection"
     [(selectedProperty)]="sortedProperty"
+    (selectedPropertyChange)="changeSortObject()"
+    (sortDirectionChange)="changeSortObject()"
   ></app-sort-toolbar>
 </mat-card>
 <br>

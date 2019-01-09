@@ -2,11 +2,8 @@ import {Component, OnChanges, OnInit, SimpleChanges} from '@angular/core';
 import {Candidate, CandidateDashboardItem} from 'src/app/classes/candidate';
 import { CandidateService } from 'src/app/services/candidate/candidate.service';
 import {SearchWorker} from '../../workers/search/search.worker';
-import {CandidateWorker} from '../../workers/candidate/candidate.worker';
 import {UserWorker} from '../../workers/user/user.worker';
-import {DeleteVacancyDialogComponent} from '../../components/modals/delete-vacancy-dialog/delete-vacancy-dialog.component';
 import {MatDialog} from '@angular/material';
-import {DeleteCandidateModalComponent} from '../../components/modals/candidate/delete-candidate-modal/delete-candidate-modal.component';
 import {Vacancy} from '../../classes/vacancy';
 import {VacancyService} from '../../services/vacancy/vacancy.service';
 import {AlertWithButtonModalComponent} from '../../components/modals/alert-with-button-modal/alert-with-button-modal.component';
@@ -16,14 +13,15 @@ import {CandidateDialogData} from '../../interfaces/dialog/init/candidate-dialog
 import {CandidateDialogResult} from '../../interfaces/dialog/result/candidate-dialog-result';
 import {EnumWorker} from '../../workers/enum/enum.worker';
 import {CandidateState} from '../../enums/candidate-state.enum';
-import {VacancyState} from '../../enums/vacancy-state.enum';
 import {Subscription} from 'rxjs';
 import {ArrayWorker} from '../../workers/array/array.worker';
 import {DateTimeWorker} from '../../workers/date-time/date-time.worker';
 import {PositionService} from '../../services/position/position.service';
-import {PositionModel} from '../../classes/position-model';
 import {SortDirection} from '../../enums/sort-direction.enum';
 import {SortField} from '../../classes/html/sort-field';
+import {SortStorage} from '../../storages/sort.storage';
+import {SortDashboard} from '../../classes/dashboard/sort-dashboard';
+import {FilterStorage} from '../../storages/filter.storage';
 
 @Component({
   selector: 'app-candidate-dashboard-page',
@@ -50,7 +48,7 @@ export class CandidateDashboardPageComponent implements OnInit {
   topYearRequired: number;
   minYearRequired: number;
   maxYearRequired: number;
-  includeUndefinedBirthday: boolean = true;
+  includeUndefinedBirthday: boolean;
   sourceProperties: SortField[];
   sourceDirections: string[];
   sortDirection: SortDirection;
@@ -60,6 +58,8 @@ export class CandidateDashboardPageComponent implements OnInit {
               private dateTimeWorker: DateTimeWorker,
               private arrayWorker: ArrayWorker,
               private positionService: PositionService,
+              private sortStorage: SortStorage,
+              private filterStorage: FilterStorage,
               public dialog: MatDialog, public vacancyService: VacancyService) { }
 
   ngOnInit() {
@@ -72,26 +72,46 @@ export class CandidateDashboardPageComponent implements OnInit {
     this.sourceDirections = this.enumWorker.getKeysFromEnum(SortDirection);
     console.log('sourceProperties', this.sourceProperties);
     this.getAll().add(() => {
+      const filterObject = this.filterStorage.getCandidateFilter();
       this.lowSalary = this.arrayWorker.calculateMin(this.candidates, 'salaryInDollars');
       this.topSalary = this.arrayWorker.calculateMax(this.candidates, 'salaryInDollars');
-      this.minSalary = this.lowSalary;
-      this.maxSalary = this.topSalary;
       const candidateWithAges = this.candidates.filter(candidate => !isNaN(candidate.age) && candidate.age);
       this.lowYearRequired = this.arrayWorker.calculateMin(candidateWithAges, 'age');
       this.topYearRequired = this.arrayWorker.calculateMax(candidateWithAges, 'age');
-      this.minYearRequired = this.lowYearRequired;
-      this.maxYearRequired = this.topYearRequired;
+      this.sourceStatuses = this.enumWorker.getValuesFromEnum(CandidateState);
+      if (filterObject) {
+        this.minSalary = filterObject.minSalary;
+        this.maxSalary = filterObject.maxSalary;
+        this.minYearRequired = filterObject.minYearRequired;
+        this.maxYearRequired = filterObject.maxYearRequired;
+        this.selectedStatuses = filterObject.selectedStatuses;
+        this.includeUndefinedBirthday = filterObject.includeUndefinedBirthday;
+        this.isFilter = filterObject.isFilter;
+      } else {
+        this.minSalary = this.lowSalary;
+        this.maxSalary = this.topSalary;
+        this.minYearRequired = this.lowYearRequired;
+        this.maxYearRequired = this.topYearRequired;
+        this.selectedStatuses = this.enumWorker.getValuesFromEnum(CandidateState);
+        this.includeUndefinedBirthday = true;
+        this.isFilter = false;
+      }
     });
     this.getVacancies();
     this.getPositions();
-    this.sourceStatuses = this.enumWorker.getValuesFromEnum(CandidateState);
-    this.selectedStatuses = this.enumWorker.getValuesFromEnum(CandidateState);
-    this.sortedProperty = this.sourceProperties[0].field;
-    this.sortDirection = <any>this.sourceDirections[0];
+    const sortObject: SortDashboard = this.sortStorage.getCandidateSort();
+    if (sortObject) {
+      this.sortedProperty = <any> sortObject.field;
+      this.sortDirection = sortObject.direction;
+    } else {
+      this.sortedProperty = this.sourceProperties[0].field;
+      this.sortDirection = <any>this.sourceDirections[0];
+    }
     // this.mockCandidates = this.candidateService.mockCandidates;
   }
   clickAdvancedSearch() {
     this.isFilter = !this.isFilter;
+    this.changeFilterObject();
   }
 
   search(value: string) {
@@ -147,7 +167,6 @@ export class CandidateDashboardPageComponent implements OnInit {
       });
     });
   }
-
   addCandidate() {
     const dialogRef = this.dialog.open(CandidateModalComponent, {
         data: <CandidateDialogData> { sourceVacancies: this.vacancies },
@@ -161,5 +180,21 @@ export class CandidateDashboardPageComponent implements OnInit {
       }
     });
   }
-
+  changeSortObject() {
+    this.sortStorage.setCandidateSort({
+      direction: this.sortDirection,
+      field: <any> this.sortedProperty
+    });
+  }
+  changeFilterObject() {
+    this.filterStorage.setCandidateFilter({
+      includeUndefinedBirthday: this.includeUndefinedBirthday,
+      minSalary: this.minSalary,
+      maxSalary: this.maxSalary,
+      minYearRequired: this.minYearRequired,
+      maxYearRequired: this.maxYearRequired,
+      selectedStatuses: this.selectedStatuses,
+      isFilter: this.isFilter
+    });
+  }
 }
