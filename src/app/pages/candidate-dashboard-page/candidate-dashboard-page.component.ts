@@ -86,6 +86,8 @@ export class CandidateDashboardPageComponent implements OnInit {
     this.getPositions();
     this.sourceStatuses = this.enumWorker.getValuesFromEnum(CandidateState);
     this.selectedStatuses = this.enumWorker.getValuesFromEnum(CandidateState);
+    this.sortedProperty = this.sourceProperties[0].field;
+    this.sortDirection = <any>this.sourceDirections[0];
     // this.mockCandidates = this.candidateService.mockCandidates;
   }
   clickAdvancedSearch() {

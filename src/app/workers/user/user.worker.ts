@@ -50,12 +50,20 @@ export class UserWorker {
     }
   }
   sortByAge(value: Candidate, value2: Candidate): number {
-    const age = this.dateTimeWorker.calculateAge(new Date(value.birthday));
-    const age2 = this.dateTimeWorker.calculateAge(new Date(value2.birthday));
-    if (age && age2) {
-      return age - age2;
+    const birthday = value.birthday;
+    const birthday2 = value2.birthday;
+    // const age = this.dateTimeWorker.calculateAge(new Date(value.birthday));
+    // const age2 = this.dateTimeWorker.calculateAge(new Date(value2.birthday));
+    if (birthday && birthday2) {
+      if (birthday < birthday2) {
+        return 1;
+      } else if (birthday > birthday2) {
+        return -1;
+      } else {
+        return 0;
+      }
     } else {
-      return this.sortByNull(age, age2);
+      return this.sortByNull(birthday, birthday2);
     }
   }
   sortBySalaryInDollars(value: Candidate, value2: Candidate): number {
