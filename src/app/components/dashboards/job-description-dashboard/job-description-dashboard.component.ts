@@ -94,7 +94,7 @@ export class JobDescriptionDashboardComponent implements OnInit, OnChanges {
     }
   }
   filterBySalary(vacancies: Vacancy[], minSalary: number, maxSalary: number) {
-    if (minSalary && maxSalary) {
+    if (minSalary != null && maxSalary != null) {
       return vacancies.filter((vacancy) => {
         return (vacancy.salaryInDollarsFrom >= minSalary
           && vacancy.salaryInDollarsFrom <= maxSalary)
@@ -107,7 +107,7 @@ export class JobDescriptionDashboardComponent implements OnInit, OnChanges {
     }
   }
   filterByYearsRequire(vacancies: Vacancy[], minYearsRequired: number, maxYearsRequired: number) {
-    if (minYearsRequired && maxYearsRequired) {
+    if (minYearsRequired != null && maxYearsRequired != null) {
       return vacancies.filter((vacancy) => {
         return (vacancy.experienceYearsRequire >= minYearsRequired
           && vacancy.experienceYearsRequire <= maxYearsRequired);
