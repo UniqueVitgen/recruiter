@@ -20,4 +20,9 @@ export class TypeCheckingWorker {
   public compareObjects(o1: any, o2: any): boolean {
     return o1.id === o2.id;
   }
+
+  public compareStrings(o1: any, o2: any): boolean {
+    console.log('strings', o1, typeof o1, o2, typeof  o2, o1 === <any> o2);
+    return o1 === <any> o2;
+  }
 }

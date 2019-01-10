@@ -1,0 +1,61 @@
+
+<form name="form" #vacancyForm="ngForm"><app-modal-component>
+  <dialog-title>
+    <span *ngIf="data.isEdit">
+      {{'Edit Contacts' | translate}}
+    </span>
+    <span *ngIf="!data.isEdit">
+      {{'Add Contacts' | translate}}
+    </span>
+    <button (click)="onNoClick()" class="float-right" mat-icon-button>
+      <mat-icon [matTooltip]="'To close' | translate">close</mat-icon>
+    </button>
+  </dialog-title>
+  <dialog-body>
+    <div *ngIf="editedCandidate">
+      <div class="row" *ngFor="let requirement of editedCandidate.contacts; let i = index">
+        <!--<div class="col-1 checkbox-col">-->
+        <!--<mat-icon>format_line_spacing</mat-icon>-->
+        <!--</div>-->
+        <div class="col-3">
+          <mat-form-field class="example-full-width">
+            <mat-select [name]="'requirements-' + i" required placeholder="{{'Contact type' | translate}}"
+                        [compareWith]="typeCheckingWorker.compareStrings"
+                   [(value)]="requirement.contactType">
+              <mat-option *ngFor="let attachmentsType of contactTypes" [value]="attachmentsType">
+                {{attachmentsType | translate}}
+              </mat-option>
+            </mat-select>
+          </mat-form-field>
+
+        </div>
+        <div class="col-6">
+          <mat-form-field class="example-full-width">
+            <input [name]="'requirements-' + i" matInput required placeholder="{{'Contact details' | translate}}"
+                   [pattern]="getPattern(requirement)"
+                   [(ngModel)]="requirement.contactDetails">
+          </mat-form-field>
+
+        </div>
+        <div classs="col-3">
+          <button (click)="deleteContact(i)" color="primary" mat-icon-button>
+            <mat-icon>delete</mat-icon>
+          </button>
+        </div>
+      </div>
+    </div>
+    <button color="primary" (click)="addContact()"  mat-icon-button>
+      <mat-icon aria-label="Example icon-button with a heart icon" [matTooltip]="'Add new requirement' | translate" >add_circle_outline</mat-icon>
+    </button>
+  </dialog-body>
+  <dialog-footer>
+    <span class="float-right">
+    <button mat-button (click)="onNoClick()">{{'No Thanks' | translate}}</button>
+    <button [disabled]="vacancyForm.invalid" autofocus cdkFocusInitial mat-button mat-raised-button color="primary" (click)="save()">
+      <span *ngIf="data.isEdit">{{'Edit'| translate}}</span>
+      <span *ngIf="!data.isEdit">{{'Create' | translate}}</span>
+    </button>
+    </span>
+  </dialog-footer>
+</app-modal-component>
+</form>

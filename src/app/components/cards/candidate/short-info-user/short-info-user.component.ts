@@ -35,6 +35,7 @@ export class ShortInfoUserComponent implements OnInit, OnDestroy, OnChanges {
   @Input() vacancies: Vacancy[];
   @Output('editCandidate') outputEditCandidate: EventEmitter<Candidate> = new EventEmitter();
   @Output('clickAvatar') outputClickAvatar: EventEmitter<Candidate> = new EventEmitter();
+  @Output('clickEditContacts') outputClickEditContacts: EventEmitter<boolean> = new EventEmitter();
   public editedCandidate: Candidate;
   public candidateForm: FormGroup;
   public positions: PositionModel[];
@@ -159,7 +160,9 @@ export class ShortInfoUserComponent implements OnInit, OnDestroy, OnChanges {
       this.onFocusoutAnyInput();
     }
   }
-
+  clickEditContacts() {
+    this.outputClickEditContacts.emit();
+  }
   changeSkype() {
     this.changeContactProperty(this.tests[1]);
   }

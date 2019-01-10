@@ -121,6 +121,7 @@ import { Ng5SliderModule } from 'ng5-slider';
 import { PaginationToolbarComponent } from './components/toolbar/pagination-toolbar/pagination-toolbar.component';
 import { CandidateFilterToolbarComponent } from './components/toolbar/candidate-filter-toolbar/candidate-filter-toolbar.component';
 import { SortToolbarComponent } from './components/toolbar/sort-toolbar/sort-toolbar.component';
+import { ContactsCandidateModalComponent } from './components/modals/candidate/contacts-candidate-modal/contacts-candidate-modal.component';
 
 
 export function HttpLoaderFactory(http: HttpClient) {
@@ -200,7 +201,8 @@ export function HttpLoaderFactory(http: HttpClient) {
     VacancyAccordionComponent,
     PaginationToolbarComponent,
     CandidateFilterToolbarComponent,
-    SortToolbarComponent
+    SortToolbarComponent,
+    ContactsCandidateModalComponent
   ],
   imports: [
     BrowserModule,
@@ -277,7 +279,8 @@ export function HttpLoaderFactory(http: HttpClient) {
     ImageCropperAvatarComponent,
     DeleteCandidateModalComponent,
     DeleteInterviewModalComponent,
-    AlertWithButtonModalComponent
+    AlertWithButtonModalComponent,
+    ContactsCandidateModalComponent
   ],
   schemas: [NO_ERRORS_SCHEMA] // add this line
 })

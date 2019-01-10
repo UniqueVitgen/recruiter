@@ -19,9 +19,12 @@
                               <!--[timelineNotes]="eventNoteList"></app-candidate-timeline>-->
     <!--</div>-->
   <!--</div>-->
-  <div class="container-sticky">
-    <div class="custom-sticky-short-info" [ngStyle]="{'top': 'calc(100vh - ' + h + 'px - 1rem)'}" id="short-info">
-      <app-short-info-user id="short" (clickAvatar)="clickAvatar()" *ngIf="candidate" [haveHoverEffectOnAvatar]="true" [isEditIconOnAvatar]="true" [readonly]="false" [candidate]="candidate" [vacancies]="vacancies"></app-short-info-user>
+  <div #containerSticky class="container-sticky">
+    <div #stickyChild class="custom-sticky-short-info" [ngStyle]="{'top': 'calc(100vh - ' + h + 'px - 1rem)'}" id="short-info">
+      <app-short-info-user id="short" (clickAvatar)="clickAvatar()" (clickEditContacts)="clickEditContacts()"
+                           *ngIf="candidate"
+                           [haveHoverEffectOnAvatar]="true" [isEditIconOnAvatar]="true" [readonly]="false"
+                           [candidate]="candidate" [vacancies]="vacancies"></app-short-info-user>
     </div>
     <div  class="custom-sticky-timeline">
       <app-candidate-timeline *ngIf="candidate"  [candidate]="candidate" (clickClose)="deleteTimelineItem($event)"

@@ -171,5 +171,12 @@
   "Min required salary": "Минимальная зарплата",
   "Max required salary": "Максимальная зарплата",
   "Required experience years": "Требуемый опыт работы",
-  "Count candidates": "Количество кандидатов"
+  "Count candidates": "Количество кандидатов",
+  "List of contacts is empty": "Список контактов пуст",
+  "Add contacts": "Добавить контакты",
+  "Edit contacts": "Редактировать контакты",
+  "Add Contacts": "Добавить Контакты",
+  "Edit Contacts": "Редактировать Контакты",
+  "Contact type": "Тип контакта",
+  "Contact details": "данные контакт"
 }

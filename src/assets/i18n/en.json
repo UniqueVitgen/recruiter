@@ -172,5 +172,12 @@
   "Min required salary": "Min required salary",
   "Max required salary": "Max required salary",
   "Required experience years": "Required experience years",
-  "Count candidates": "Count candidates"
+  "Count candidates": "Count candidates",
+  "List of contacts is empty": "List of contacts is empty",
+  "Add contacts": "Add contacts",
+  "Edit contacts": "Edit contacts",
+  "Add Contacts": "Add Contacts",
+  "Edit Contacts": "Edit Contacts",
+  "Contact type": "Contact type",
+  "Contact details": "Contact details"
 }

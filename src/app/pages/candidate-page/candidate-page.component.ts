@@ -29,6 +29,7 @@ import {VacancyService} from '../../services/vacancy/vacancy.service';
 import {Vacancy} from '../../classes/vacancy';
 import {PositionService} from '../../services/position/position.service';
 import {PositionModel} from '../../classes/position-model';
+import {ContactsCandidateModalComponent} from '../../components/modals/candidate/contacts-candidate-modal/contacts-candidate-modal.component';
 
 @Component({
   selector: 'app-candidate-page',
@@ -43,6 +44,7 @@ export class CandidatePageComponent implements OnInit, AfterContentChecked, Afte
   h: number;
   positions: PositionModel[];
   @ViewChild('fileInput') fileInput: ElementRef;
+  @ViewChild('containerSticky') stickyContainer: ElementRef;
 
   constructor(
     private route: ActivatedRoute,
@@ -67,10 +69,29 @@ export class CandidatePageComponent implements OnInit, AfterContentChecked, Afte
 
   }
   ngAfterViewChecked() {
-    setTimeout(() => {this.h = $('#short-info').height() }, 2000);
+    // setTimeout(() => {
+      this.h = $('#short-info').height();
+    // }, 2000);
   }
 
   ngAfterContentChecked() {
+  }
+  clickEditContacts() {
+    const dialogRef = this.dialog.open(ContactsCandidateModalComponent, {
+        data: <CandidateDialogData> {
+          sourceCandidate: this.candidate,
+          isEdit: true
+        },
+        disableClose: true
+      }
+    );
+    dialogRef.componentInstance.outputClickSave.subscribe(resCandidate => {
+      this.candidateService.update(resCandidate).subscribe(updatedCandidate => {
+        this.getCandidate().add(() => {
+          dialogRef.close();
+        });
+      });
+    });
   }
 
   getVacancies() {
