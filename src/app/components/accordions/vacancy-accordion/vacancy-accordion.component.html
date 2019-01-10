@@ -2,7 +2,7 @@
 
   <mat-accordion class="example-headers-align">
     <mat-expansion-panel class="vacancyPannel">
-      <mat-expansion-panel-header>
+      <mat-expansion-panel-header >
 
         <mat-panel-title>
           <mat-icon class="fiber-icon-image vacancy-status"
@@ -18,6 +18,11 @@
         <mat-panel-description>
             <span
               class="description"> {{'Total number of candidates' | translate}}: {{vacancy.candidates.length}}</span>
+          <span
+            class="description"> {{'Salary' | translate}}: ${{vacancy.salaryInDollarsFrom}} - ${{vacancy.salaryInDollarsTo}}</span>
+          <span
+            class="description"> {{'Experience years required' | translate}}: {{vacancy.experienceYearsRequire}}</span>
+
           <span><button *ngIf="showInfoAndDeleteIcons"  mat-icon-button (click)="goToJobDescriptionPage(vacancy); $event.stopPropagation() "
           ><mat-icon [matTooltip]="'Vacancy info' | translate">info</mat-icon></button>
 
