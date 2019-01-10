@@ -1,6 +1,6 @@
 <mat-label style="color: gray;">  {{viewOfDate}}</mat-label>
 <mat-card class="backgroundCard">
-  <mat-icon class="delete" matTooltip="{{'Delete' | translate}}" (click)="delete()">close</mat-icon>
+  <mat-icon class="delete" matTooltip="{{'Delete' | translate}}" (click)="delete()">delete</mat-icon>
   <mat-card-title><mat-icon class="myIcon">feedback</mat-icon> {{'Interview Feedback' | translate}}</mat-card-title>
   <div>{{'Interview' | translate}}: <a [routerLink]="'/interview/'+editedNote.interview.id">{{viewOfInterview}}</a></div>
   <div>{{'Vacancy' | translate}}: <a [routerLink]="'/job-description/'+editedNote.interview.vacancy.id">{{editedNote.interview.vacancy.position.name}}</a></div>

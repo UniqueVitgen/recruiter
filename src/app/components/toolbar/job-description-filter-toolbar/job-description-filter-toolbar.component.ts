@@ -2,6 +2,7 @@ import {Component, EventEmitter, Input, OnChanges, OnInit, Output, SimpleChanges
 import {TypeCheckingWorker} from '../../../workers/type-checking/type-checking.worker';
 import {Options, LabelType} from 'ng5-slider';
 import {TranslateWorker} from '../../../workers/translate/translate.worker';
+import {NumberWorker} from '../../../workers/number/number.worker';
 
 @Component({
   selector: 'app-job-description-filter-toolbar',
@@ -37,7 +38,8 @@ export class JobDescriptionFilterToolbarComponent implements OnInit, OnChanges {
   salaryOptions: Options;
   yearsRequiredOptions: Options;
   constructor(private typeCheckingWorker: TypeCheckingWorker,
-              private translateWorker: TranslateWorker) { }
+              private translateWorker: TranslateWorker,
+              private numberWorker: NumberWorker) { }
 
   ngOnInit() {
     this.translateWorker.changeValue.subscribe(resLang => {
@@ -89,14 +91,13 @@ export class JobDescriptionFilterToolbarComponent implements OnInit, OnChanges {
       translate: (value:  number, label: LabelType): string => {
         switch (label) {
           case LabelType.Low:
-            return '<b>' + this.translateWorker.translateWord('Min experience year') + ': </b>' + value + ' '
-            + this.translateWorker.translateWord('years');
+            return '<b>' + this.translateWorker.translateWord('Min experience year')
+              + ': </b>' + this.numberWorker.formatYears(value);
           case LabelType.High:
-            return '<b>' + this.translateWorker.translateWord('Max experience year') + ':</b>' + value + ' '
-              + this.translateWorker.translateWord('years');
+            return '<b>' + this.translateWorker.translateWord('Max experience year')
+              + ':</b>' + this.numberWorker.formatYears(value);
           default:
-            return  value + ' '
-              + this.translateWorker.translateWord('years');
+            return  this.numberWorker.formatYears(value);
         }
       }
     };

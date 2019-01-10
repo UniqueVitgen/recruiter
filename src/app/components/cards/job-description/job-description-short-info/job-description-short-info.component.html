@@ -25,10 +25,14 @@
     </div>
     <div *ngIf="vacancy.experienceYearsRequire">
       <span class="font-weight-bold">{{'Experience years required' | translate}}:</span>
-      &nbsp;
-      &nbsp;
       <span>
-        {{vacancy.experienceYearsRequire}} {{'years' | translate}}
+        {{numberWorker.formatYears(vacancy.experienceYearsRequire) | translate}}
+      </span>
+    </div>
+    <div *ngIf="!vacancy.experienceYearsRequire">
+      <span class="font-weight-bold">{{'Experience years required' | translate}}:</span>
+      <span>
+        {{'Not required' | translate}}
       </span>
     </div>
     <label name="vacancyDescriptionTitle" class="vacancyTitles">{{'Description' | translate}}: </label>

@@ -1,6 +1,6 @@
 <mat-label style="color: gray;">  {{viewOfDate}}</mat-label>
 <mat-card class="backgroundCard">
-  <mat-icon class="delete" matTooltip="Delete" matTooltip="{{'Delete' | translate}}" (click)="delete()">close</mat-icon>
+  <mat-icon class="delete" matTooltip="Delete" matTooltip="{{'Delete' | translate}}" (click)="delete()">delete</mat-icon>
   <mat-card-title><mat-icon class="myIcon">insert_drive_file</mat-icon> {{attachment.attachmentType | translate}}</mat-card-title>
   <mat-card-content>
     <app-candidate-attachment [attachment]="attachment"></app-candidate-attachment>
