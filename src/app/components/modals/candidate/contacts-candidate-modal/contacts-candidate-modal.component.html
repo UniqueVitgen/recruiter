@@ -48,7 +48,7 @@
       <mat-icon aria-label="Example icon-button with a heart icon" [matTooltip]="'Add new requirement' | translate" >add_circle_outline</mat-icon>
     </button>
   </dialog-body>
-  <dialog-footer>
+  <dialog-footer class="example-full-width">
     <span class="float-right">
     <button mat-button (click)="onNoClick()">{{'No Thanks' | translate}}</button>
     <button [disabled]="vacancyForm.invalid" autofocus cdkFocusInitial mat-button mat-raised-button color="primary" (click)="save()">

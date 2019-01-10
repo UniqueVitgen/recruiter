@@ -21,9 +21,7 @@ export class VacancyWorker {
     }
   }
   sortByNull<T>(value: T, value2: T): number {
-    if (value != null && value2 != null) {
-      return 0;
-    } else if (value != null) {
+    if (value != null) {
       return 1;
     } else if (value2 != null) {
       return -1;
@@ -55,13 +53,7 @@ export class VacancyWorker {
   }
   sortByExperienceYearsRequire(value: Vacancy, value2: Vacancy): number {
     if (value.experienceYearsRequire != null && value2.experienceYearsRequire != null) {
-      if (value.experienceYearsRequire > value2.experienceYearsRequire) {
-        return 1;
-      } else if (value.experienceYearsRequire < value2.experienceYearsRequire) {
-        return - 1;
-      } else {
-        return 0;
-      }
+      return value.experienceYearsRequire - value2.experienceYearsRequire;
     } else {
       return this.sortByNull(value, value2);
     }
