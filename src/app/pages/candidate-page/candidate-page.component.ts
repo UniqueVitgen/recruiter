@@ -1,4 +1,4 @@
-import {Component, ElementRef, OnInit, ViewChild} from '@angular/core';
+import {AfterContentChecked, AfterViewChecked, Component, ElementRef, OnChanges, OnInit, ViewChild} from '@angular/core';
 import {ActivatedRoute} from '@angular/router';
 import {CandidateService} from 'src/app/services/candidate/candidate.service';
 import {Candidate} from 'src/app/classes/candidate';
@@ -35,12 +35,12 @@ import {PositionModel} from '../../classes/position-model';
   templateUrl: './candidate-page.component.html',
   styleUrls: ['./candidate-page.component.scss']
 })
-export class CandidatePageComponent implements OnInit {
+export class CandidatePageComponent implements OnInit, AfterContentChecked, AfterViewChecked, OnChanges {
   id: number;
   candidate: Candidate;
   eventNoteList: EventNote[];
   vacancies: Vacancy[];
-
+  h: number;
   positions: PositionModel[];
   @ViewChild('fileInput') fileInput: ElementRef;
 
@@ -61,6 +61,16 @@ export class CandidatePageComponent implements OnInit {
       this.getCandidate();
       this.getVacancies();
     });
+  }
+
+  ngOnChanges() {
+
+  }
+  ngAfterViewChecked() {
+    setTimeout(() => {this.h = $('#short-info').height() }, 2000);
+  }
+
+  ngAfterContentChecked() {
   }
 
   getVacancies() {
