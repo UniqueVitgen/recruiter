@@ -22,7 +22,7 @@
           ><mat-icon [matTooltip]="'Vacancy info' | translate">info</mat-icon></button>
 
           <button *ngIf="showInfoAndDeleteIcons"  mat-icon-button (click)="openDeleteVacancyDialog(vacancyID); $event.stopPropagation()"><mat-icon
-            [matTooltip]="'Delete this vacancy' | translate">close</mat-icon></button></span>
+            [matTooltip]="'Delete this vacancy' | translate">delete</mat-icon></button></span>
         </mat-panel-description>
 
         <!--<button class="vacancyEditButton" mat-raised-button (click)="goToJobDescriptionPage(vacancy)">{{'Info' | translate}}</button>-->

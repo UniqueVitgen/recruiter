@@ -1,6 +1,6 @@
 <mat-label style="color: gray;">{{viewOfDate}} {{'at' | translate}} {{viewOfTime}}</mat-label>
 <mat-card class="backgroundCard">
-  <mat-icon class="delete"  matTooltip="{{'Delete' | translate}}" (click)="delete()">close</mat-icon>
+  <mat-icon class="delete"  matTooltip="{{'Delete' | translate}}" (click)="delete()">delete</mat-icon>
   <mat-card-title><mat-icon class="myIcon">event</mat-icon> <a [routerLink]="'/interview/'+interview.id"> {{'Interview' | translate}}</a></mat-card-title>
   <mat-form-field class="custom-form-field">
     <input required (dateChange)="onFocusoutAnyInput()" matInput [(ngModel)]="planDate.dateDate" [matDatepicker]="picker1" placeholder="{{'Plan Date' | translate}}">

@@ -10,8 +10,8 @@ export class VacancyWorker {
   constructor(private vacancyStateEnumWorker: VacancyStateEnumWorker) {
   }
   sortByPosition(value: Vacancy, value2: Vacancy): number {
-    const position = value.position.name;
-    const position2 = value2.position.name;
+    const position = value.position.name.toLowerCase();
+    const position2 = value2.position.name.toLowerCase();
     if (position && position2) {
       if (position < position2) { return -1; }
       if (position > position2) { return 1; }

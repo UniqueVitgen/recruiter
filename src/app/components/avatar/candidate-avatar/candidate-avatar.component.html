@@ -10,7 +10,7 @@
               [matTooltip]="'Select' | translate" [(ngModel)]="checkBoxValue">
   <div (click)="clickAvatar()" class="avatar-hover">
     <mat-icon *ngIf="isClosedIcon" (click)="$event.stopPropagation()"  mat-icon-button [matMenuTriggerFor]="menu" class="close-icon-image" [matTooltip]="'Delete Candidate' | translate">more_horiz</mat-icon>
-    <mat-icon *ngIf="isDeleteIcon" (click)="clickDelete(); $event.stopPropagation()"  mat-icon-button class="close-icon-image" [matTooltip]="'Delete Candidate' | translate">close</mat-icon>
+    <mat-icon *ngIf="isDeleteIcon" (click)="clickDelete(); $event.stopPropagation()"  mat-icon-button class="close-icon-image" [matTooltip]="'Delete Candidate' | translate">delete</mat-icon>
     <mat-icon *ngIf="isEditedIcon" (click)="clickEdit()" class="edit-icon-image">create</mat-icon>
     <!--<mat-icon *ngIf="isMoreIcon" (click)="clickEdit()" class="more-icon-image">apps</mat-icon>-->
   </div>

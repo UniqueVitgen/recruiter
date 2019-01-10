@@ -3,6 +3,7 @@
 //::ng-deep {
 .custom-slider {
   .ng5-slider {
+    padding:.6375em 0;
     .ng5-slider-bar {
       background: #ffe4d1;
       height: 2px;
@@ -47,5 +48,12 @@
       background: $basic-color;
     }
   }
+}
+.custom-label-slider {
+  font-size: 12px;
+  color: rgba(0,0,0,.4);
+  font-weight: bold;
+  position: absolute;
+  left: 18px;
 }
 //}

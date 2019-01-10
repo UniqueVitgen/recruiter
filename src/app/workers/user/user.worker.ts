@@ -28,8 +28,8 @@ export class UserWorker {
     return now;
   }
   sortByFullname(value: Candidate, value2: Candidate): number {
-    const fullname = this.formatFullName(value);
-    const fullname2 = this.formatFullName(value2);
+    const fullname = this.formatFullName(value).toLowerCase();
+    const fullname2 = this.formatFullName(value2).toLowerCase();
     if (fullname && fullname2) {
       if (fullname < fullname2) { return -1; }
       if (fullname > fullname2) { return 1; }
