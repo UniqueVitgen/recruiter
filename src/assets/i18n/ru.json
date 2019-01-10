@@ -183,5 +183,6 @@
   "yearsA" : "года",
   "yearsB" : "лет",
   "yearsC" : "год",
-  "Not required" : "не требуется"
+  "Not required" : "не требуется",
+  "of" : "из"
 }
