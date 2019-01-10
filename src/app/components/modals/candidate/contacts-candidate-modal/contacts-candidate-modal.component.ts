@@ -39,7 +39,7 @@ export class ContactsCandidateModalComponent implements OnInit {
       this.editedCandidate.contacts = [];
     }
     this.editedCandidate.contacts.push({
-      contactType: '',
+      contactType: <any>'',
       contactDetails: ''
     });
   }

@@ -4,10 +4,10 @@
   <div class="col-3 padding-element">
     <span class="height-div"></span>
     <div class="column">
-      <label class="number-of-vacanies">{{numberOfVacanciesTitle}} ({{numberOfVacancies}})</label>
-      <mat-form-field class="number-of-vacanies">
+      <!--<label class="number-of-vacanies">{{numberOfVacanciesTitle}} ({{numberOfVacancies}})</label>-->
+      <mat-form-field class="number-of-vacancies">
         <mat-select [placeholder]="placeholder | translate" [(ngModel)]="size" (ngModelChange)="changeSize()">
-          <mat-option *ngFor="let state of itemsPerPageValues" [value]="state">{{state}}</mat-option>
+          <mat-option *ngFor="let state of itemsPerPageValues" [value]="state">{{state}} {{'of' | translate}} {{numberOfVacancies}}</mat-option>
         </mat-select>
       </mat-form-field>
     </div>
@@ -20,7 +20,7 @@
     </pagination-controls>
   </div>
 
-  <div class="col-4 center-item">
+  <div *ngIf="isButtonAdd" class="col-4 center-item">
     <button (click)="clickAddButton()" class="vacancy-add-buttons" mat-raised-button color="primary">{{addButtonText | translate}}
     </button>
   </div>

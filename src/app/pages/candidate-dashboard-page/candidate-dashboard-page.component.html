@@ -31,19 +31,22 @@
   ></app-sort-toolbar>
 </mat-card>
 <br>
+
 <mat-card>
-  <app-pagination-toolbar
-    [itemsPerPageValues]="itemsPerPageValues"
-    [placeholder]="'ItemPerPage'"
-    [addButtonText]="'Add new candidate'"
-    [(size)]="size"
-    [(page)]="page"
-    [idPagination]="idPagination"
-    (clickAddButton)="addCandidate()"
-    [numberOfVacancies]="candidates?.length"
-    [numberOfVacanciesTitle]="'Total number of candidates' | translate "
-  >
-  </app-pagination-toolbar>
+  <div class="row">
+    <div class="col-3 padding-element">
+      <div class="column">
+        <label style="margin-left: 50px;">{{'Total number of candidates' | translate}} ({{candidates?.length}})</label>
+      </div>
+   </div>
+    <div class="col-5">
+    </div>
+    <div class="col-4 item-center">
+      <button (click)="addCandidate()" class="vacancy-add-buttons" mat-raised-button color="primary">{{'Add new candidate' | translate}}
+      </button>
+    </div>
+  </div>
+  <!--<div style="min-height: 600px;">-->
   <app-candidate-dashboard [search]="searchValue"
                            (addCandidate)="getAll()"
                            [isClosedIcon]="false"
@@ -66,5 +69,20 @@
                            [sortedDirection]="sortDirection"
                            [sortedProperty]="sortedProperty"
                            [vacancies]="vacancies"></app-candidate-dashboard>
+  <!--</div>-->
+  <br>
+  <app-pagination-toolbar
+    [itemsPerPageValues]="itemsPerPageValues"
+    [placeholder]="'ItemPerPage'"
+    [addButtonText]="'Add new candidate'"
+    [(size)]="size"
+    [(page)]="page"
+    [idPagination]="idPagination"
+    (clickAddButton)="addCandidate()"
+    [numberOfVacancies]="candidates?.length"
+    [numberOfVacanciesTitle]="'Total number of candidates' | translate "
+    [isButtonAdd]="false"
+  >
+  </app-pagination-toolbar>
 </mat-card>
 

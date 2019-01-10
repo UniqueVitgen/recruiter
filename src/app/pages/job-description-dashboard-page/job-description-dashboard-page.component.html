@@ -30,18 +30,20 @@
 </mat-card>
 <br>
 <mat-card>
-  <app-pagination-toolbar
-    [itemsPerPageValues]="itemsPerPageValues"
-    [placeholder]="'VacancyPerPage'"
-    [addButtonText]="'Add new vacancy'"
-    [numberOfVacancies]="jobDescriptionList?.length"
-    [numberOfVacanciesTitle]="'Total number of vacancies' | translate "
-    [(size)]="size"
-    [(page)]="page"
-    [idPagination]="idPagination"
-    (clickAddButton)="openJobDescriptionDialog()"
-  >
-  </app-pagination-toolbar>
+  <div class="row">
+    <div class="col-3 padding-element">
+      <div class="column">
+        <label style="margin-left: 50px;">{{'Total number of vacancies' | translate}} ({{jobDescriptionList?.length}})</label>
+      </div>
+    </div>
+    <div class="col-5">
+    </div>
+    <div class="col-4 item-center">
+      <button (click)="openJobDescriptionDialog()" class="vacancy-add-buttons" mat-raised-button color="primary">{{'Add new vacancy' | translate}}
+      </button>
+    </div>
+  </div>
+
 
   <app-job-description-dashboard [isPagination]="true" [isFilter]="isFilter"
                                  [filterStatuses]="selectedList" [itemsPerPageValues]="itemsPerPageValues" [search]="searchValue"
@@ -57,5 +59,17 @@
                                  [sortedDirection]="sortDirection"
                                  [sortedProperty]="sortedProperty"
                                  (addVacancy)="getVacancies()" (deleteVacancy)="deleteVacancy($event)"></app-job-description-dashboard>
+  <br>
+  <app-pagination-toolbar
+    [itemsPerPageValues]="itemsPerPageValues"
+    [placeholder]="'VacancyPerPage'"
+    [addButtonText]="'Add new vacancy'"
+    [numberOfVacancies]="jobDescriptionList?.length"
+    [numberOfVacanciesTitle]="'Total number of vacancies' | translate "
+    [(size)]="size"
+    [(page)]="page"
+    [idPagination]="idPagination"
+    (clickAddButton)="openJobDescriptionDialog()"  >
+  </app-pagination-toolbar>
 
 </mat-card>
