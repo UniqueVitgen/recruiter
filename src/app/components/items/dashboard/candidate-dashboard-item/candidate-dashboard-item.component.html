@@ -24,10 +24,10 @@
       <span class="font-weight-bold"> {{'Age' | translate}}:</span>
       <span [matTooltip]="candidate.age"> {{candidate.age}} </span>
     </div>
-    <div *ngIf="candidate.salaryInDollars">
-      <span class="font-weight-bold">{{'Salary' | translate}}:</span>
-      <span [matTooltip]="candidate.salaryInDollars"> {{candidate.salaryInDollars}}$</span>
-    </div>
+    <!--<div *ngIf="candidate.salaryInDollars">-->
+      <!--<span class="font-weight-bold">{{'Salary' | translate}}:</span>-->
+      <!--<span [matTooltip]="candidate.salaryInDollars"> {{candidate.salaryInDollars}}$</span>-->
+    <!--</div>-->
     <div *ngIf="candidate.interviews && candidate.interviews.length > 0">
       <span class="font-weight-bold">{{'Interview' | translate}}:</span>
       <a  [routerLink]="'/interview/'+candidate.interviews[0].id" [matTooltip]="dateTimeWorker.getShortDateWithTime(candidate.interviews[0].planDate, 'short')"> {{dateTimeWorker.getShortDateWithTime(candidate.interviews[0].planDate, 'short')}}</a>
