@@ -25,7 +25,7 @@
 @media (min-width: 992px) {
   .custom-sticky-short-info {
     position: sticky;
-
+    top: auto;
     margin-right: 15px;
     //float: left;
     display: inline-block;
@@ -46,6 +46,7 @@
 @media (min-width: 1200px) {
   .custom-sticky-short-info {
     position: sticky;
+    top: auto;
     //top: calc(100vh - 870px - 1rem);
     margin-right: 15px;
     //float: left;
