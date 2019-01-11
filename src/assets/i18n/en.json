@@ -191,5 +191,6 @@
   "Completed": "Completed",
   "completed": "completed",
   "not completed": "not completed",
-  "Interview can be completed only in past": "Interview can be completed only in past"
+  "Interview can be completed only in past": "Interview can be completed only in past",
+  "preferred contact" : "Preferred contact"
 }

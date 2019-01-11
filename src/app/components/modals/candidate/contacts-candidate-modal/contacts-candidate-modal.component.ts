@@ -42,7 +42,8 @@ export class ContactsCandidateModalComponent implements OnInit {
     }
     this.editedCandidate.contacts.push({
       contactType: <any>'',
-      contactDetails: ''
+      contactDetails: '',
+      preferred: false
     });
   }
   deleteContact(index: number): void {
@@ -62,6 +63,18 @@ export class ContactsCandidateModalComponent implements OnInit {
 
   onNoClick(): void {
     this.dialogRef.close();
+  }
+
+  radioClick(event, i) {
+    console.log(event, i);
+    this.editedCandidate.contacts = this.editedCandidate.contacts.map( (contact, index) => {
+      if (index === i) {
+        contact.preferred = true;
+      } else {
+        contact.preferred = false;
+      }
+      return contact;
+    });
   }
 
 }
