@@ -1,6 +1,7 @@
 import {Candidate} from './candidate';
 import {Vacancy} from './vacancy';
 import {EventNote} from './event-note';
+import {Interviewer} from './interviewer';
 
 export class Interview extends EventNote {
   // id?: number;
@@ -10,6 +11,7 @@ export class Interview extends EventNote {
   planEndDate: string;
   completed: boolean;
   comment?: string;
+  interviewers: Interviewer;
 }
 
 export class InterviewExtended extends Interview {

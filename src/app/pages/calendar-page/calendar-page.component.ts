@@ -14,6 +14,8 @@ import {BaseDialogResult} from '../../interfaces/dialog/result/base-dialog-resul
 import {Subscription} from 'rxjs';
 import Base = moment.unitOfTime.Base;
 import {Router} from '@angular/router';
+import {InterviewerService} from '../../services/interviewer/interviewer.service';
+import {Interviewer} from '../../classes/interviewer';
 
 
 @Component({
@@ -23,18 +25,26 @@ import {Router} from '@angular/router';
 })
 export class CalendarPageComponent implements OnInit {
   interviews: InterviewExtended[];
+  private interviewers: Interviewer[];
   lang: string;
   constructor(private interviewService: InterviewService,
               private dateTimeWorker: DateTimeWorker,
               private dialog: MatDialog,
               public router: Router,
+              private interviewerService: InterviewerService,
               public translateWorker: TranslateWorker) {}
   ngOnInit(): void {
     this.getInterviews();
+    this.getInterviewers();
     this.lang = this.translateWorker.getLanguage();
     this.translateWorker.changeValue.subscribe(res => {
       console.log(res.lang);
       this.lang = res.lang;
+    });
+  }
+  getInterviewers(): Subscription {
+    return this.interviewerService.getAll().subscribe(resInterviewers => {
+      this.interviewers = resInterviewers;
     });
   }
 
@@ -57,6 +67,7 @@ export class CalendarPageComponent implements OnInit {
           sourceDate: event.targetDate,
           sourceEndDate: targetEndDate,
           fixedCandidate: false,
+          sourceInterviewers: this.interviewers,
           isEdit: false
         },
         disableClose: true

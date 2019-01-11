@@ -191,5 +191,6 @@
   "completed": "завершено",
   "not completed": "не завершено",
   "Interview can be completed only in past": "Интервью может завершиться только в прошлом",
-  "preferred contact" : "Предпочтительный контакт"
+  "preferred contact" : "Предпочтительный контакт",
+  "Interviewers": "Интервьюверы"
 }

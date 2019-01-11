@@ -18,6 +18,7 @@ import {DevFeedbackService} from '../../services/dev-feedback/dev-feedback.servi
 import {DevFeedback} from '../../classes/dev-feedback';
 import {Subscription} from 'rxjs';
 import {DeleteInterviewModalComponent} from '../../components/modals/interview/delete-interview-modal/delete-interview-modal.component';
+import {InterviewerService} from '../../services/interviewer/interviewer.service';
 
 
 @Component({

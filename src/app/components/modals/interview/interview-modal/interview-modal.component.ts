@@ -20,6 +20,7 @@ import {DeleteCandidateModalComponent} from '../../candidate/delete-candidate-mo
 import {DeleteInterviewModalComponent} from '../delete-interview-modal/delete-interview-modal.component';
 import * as moment from 'moment';
 import Base = moment.unitOfTime.Base;
+import {User} from '../../../../classes/user';
 
 @Component({
   selector: 'app-interview-modal',
@@ -74,6 +75,7 @@ export class InterviewModalComponent implements OnInit {
     public dateTimeWorker: DateTimeWorker,
     public typeCheckingWorker: TypeCheckingWorker,
     public dialog: MatDialog,
+    public candidateWorker: CandidateWorker,
     public userWorker: UserWorker,
     private fb: FormBuilder,
     private cd: ChangeDetectorRef,
@@ -129,7 +131,8 @@ export class InterviewModalComponent implements OnInit {
       toTime: ['', Validators.compose([Validators.required])],
       validTime: [true, Validators.compose([Validators.requiredTrue])],
       candidate: ['', Validators.compose([Validators.required])],
-      vacancy: ['', Validators.compose([Validators.required])]
+      vacancy: ['', Validators.compose([Validators.required])],
+      interviewers: ['', Validators.compose([])]
       ,
       completed: [true]
     });
@@ -193,6 +196,7 @@ export class InterviewModalComponent implements OnInit {
 
   addInterview() {
     this.updateDateTime();
+    console.log('editedInterview', this.editedInterview);
     // console.log(this.planDate);
     // console.log('editedInterveiw', this.editedInterview);
     this.editedInterview.candidateId = this.editedCandidate.id;
@@ -213,6 +217,7 @@ export class InterviewModalComponent implements OnInit {
     // });
   }
   editInterview() {
+    console.log('editedInterview', this.editedInterview);
     this.updateDateTime();
     this.editedInterview.candidateId = this.editedCandidate.id;
     this.editedInterview.vacancyId = this.sourceVacancy.id;
