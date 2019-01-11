@@ -1,4 +1,4 @@
-import {AfterContentChecked, AfterViewChecked, Component, ElementRef, OnChanges, OnInit, ViewChild} from '@angular/core';
+import {AfterContentChecked, AfterViewChecked, Component, ElementRef, HostListener, OnChanges, OnInit, ViewChild} from '@angular/core';
 import {ActivatedRoute} from '@angular/router';
 import {CandidateService} from 'src/app/services/candidate/candidate.service';
 import {Candidate} from 'src/app/classes/candidate';
@@ -41,10 +41,14 @@ export class CandidatePageComponent implements OnInit, AfterContentChecked, Afte
   candidate: Candidate;
   eventNoteList: EventNote[];
   vacancies: Vacancy[];
-  h: number;
+  public height: number;
+  public topString: string;
+  navbarHeight: number = 60;
+  scrollY: number = 0;
   positions: PositionModel[];
   @ViewChild('fileInput') fileInput: ElementRef;
   @ViewChild('containerSticky') stickyContainer: ElementRef;
+  @ViewChild('stickyChild') stickyChild: ElementRef;
 
   constructor(
     private route: ActivatedRoute,
@@ -69,9 +73,27 @@ export class CandidatePageComponent implements OnInit, AfterContentChecked, Afte
 
   }
   ngAfterViewChecked() {
-    // setTimeout(() => {
-      this.h = $('#short-info').height();
-    // }, 2000);
+
+  }
+
+  @HostListener('window:scroll', ['$event'])
+  onScroll(event: Event) {
+      console.log(this.stickyChild.nativeElement.getBoundingClientRect().top);
+    //setTimeout(() => {
+      this.height = $('#short-info').height();
+      const wo = window.innerHeight - this.navbarHeight;
+      const st = window.pageYOffset || document.documentElement.scrollTop;
+       if (this.height > wo) {
+      if (this.scrollY < st) {
+        this.topString = 'calc(100vh - ' + this.height + 'px - 24px)';
+      } else {
+        this.topString = '85px';
+      }
+      this.scrollY = st <= 0 ? 0 : st; } else {
+        this.topString = '85px';
+       }
+         // }
+     //, 200);
   }
 
   ngAfterContentChecked() {

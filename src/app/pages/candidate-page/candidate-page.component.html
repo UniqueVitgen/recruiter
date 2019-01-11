@@ -20,7 +20,7 @@
     <!--</div>-->
   <!--</div>-->
   <div #containerSticky class="container-sticky">
-    <div #stickyChild class="custom-sticky-short-info" [ngStyle]="{'top': 'calc(100vh - ' + h + 'px - 1rem)'}" id="short-info">
+    <div #stickyChild class="custom-sticky-short-info" [ngStyle]="{'top': topString}" id="short-info">
       <app-short-info-user id="short" (clickAvatar)="clickAvatar()" (clickEditContacts)="clickEditContacts()"
                            *ngIf="candidate"
                            [haveHoverEffectOnAvatar]="true" [isEditIconOnAvatar]="true" [readonly]="false"
