@@ -22,6 +22,7 @@ import {SortField} from '../../classes/html/sort-field';
 import {SortStorage} from '../../storages/sort.storage';
 import {SortDashboard} from '../../classes/dashboard/sort-dashboard';
 import {FilterStorage} from '../../storages/filter.storage';
+import {PaginationStorage} from '../../storages/pagination.storage';
 
 @Component({
   selector: 'app-candidate-dashboard-page',
@@ -60,6 +61,7 @@ export class CandidateDashboardPageComponent implements OnInit {
               private positionService: PositionService,
               private sortStorage: SortStorage,
               private filterStorage: FilterStorage,
+              private paginationStorage: PaginationStorage,
               public dialog: MatDialog, public vacancyService: VacancyService) { }
 
   ngOnInit() {
@@ -106,6 +108,11 @@ export class CandidateDashboardPageComponent implements OnInit {
     } else {
       this.sortedProperty = this.sourceProperties[0].field;
       this.sortDirection = <any>this.sourceDirections[0];
+    }
+    const paginationObject = this.paginationStorage.getCandidatePagination();
+    if (paginationObject != null) {
+      this.page = paginationObject.page;
+      this.size = paginationObject.size;
     }
     // this.mockCandidates = this.candidateService.mockCandidates;
   }
@@ -194,6 +201,13 @@ export class CandidateDashboardPageComponent implements OnInit {
       maxYearRequired: this.maxYearRequired,
       selectedStatuses: this.selectedStatuses,
       isFilter: this.isFilter
+    });
+  }
+  changePaginationObject(): void {
+    console.log(this.page, this.size)
+    this.paginationStorage.setCandidatePagination({
+      page: this.page,
+      size: this.size
     });
   }
 }

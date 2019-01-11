@@ -69,6 +69,8 @@
     [numberOfVacanciesTitle]="'Total number of vacancies' | translate "
     [(size)]="size"
     [(page)]="page"
+    (sizeChange)="changePaginationObject()"
+    (pageChange)="changePaginationObject()"
     [idPagination]="idPagination"
     (clickAddButton)="openJobDescriptionDialog()"  >
   </app-pagination-toolbar>

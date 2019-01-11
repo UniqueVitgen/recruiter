@@ -103,7 +103,7 @@ export class UserWorker {
       }
       return candidate[property] == null;
     });
-    const candidatesNonUndefinedSorted = candidates.sort((value, value2) => {
+    const candidatesNonUndefinedSorted = candidatesNonUndefined.sort((value, value2) => {
       if (property === 'fullname') {
         return this.sortByFullname(value, value2) * direction;
       } else if (property === 'age') {

@@ -78,6 +78,8 @@
     [addButtonText]="'Add new candidate'"
     [(size)]="size"
     [(page)]="page"
+    (sizeChange)="changePaginationObject()"
+    (pageChange)="changePaginationObject()"
     [idPagination]="idPagination"
     (clickAddButton)="addCandidate()"
     [numberOfVacancies]="candidates?.length"

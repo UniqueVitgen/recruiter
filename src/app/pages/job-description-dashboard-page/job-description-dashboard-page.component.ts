@@ -18,6 +18,7 @@ import {SortField} from '../../classes/html/sort-field';
 import {SortStorage} from '../../storages/sort.storage';
 import {FilterStorage} from '../../storages/filter.storage';
 import {CandidateState} from '../../enums/candidate-state.enum';
+import {PaginationStorage} from '../../storages/pagination.storage';
 
 @Component({
   selector: 'app-job-description-dashboard-page',
@@ -54,12 +55,14 @@ export class JobDescriptionDashboardPageComponent implements OnInit {
               private positionWorker: PositionWorker,
               private sortStorage: SortStorage,
               private filterStorage: FilterStorage,
+              private paginationStorage: PaginationStorage,
               private arrayWorker: ArrayWorker,
               private positionService: PositionService,
               private enumWorker: EnumWorker) { }
 
   ngOnInit() {
     this.initSort();
+    this.initPagination();
     this.getVacancies().add(() => {
       this.lowSalary = this.arrayWorker.calculateMin(this.jobDescriptionList, 'salaryInDollarsFrom');
       this.topSalary = this.arrayWorker.calculateMax(this.jobDescriptionList, 'salaryInDollarsTo');
@@ -102,6 +105,13 @@ export class JobDescriptionDashboardPageComponent implements OnInit {
     } else {
       this.sortedProperty = this.sourceProperties[0].field;
       this.sortDirection = <any>this.sourceDirections[0];
+    }
+  }
+  initPagination(): void {
+    const paginationObject = this.paginationStorage.getVacancyPagination();
+    if (paginationObject != null) {
+      this.page = paginationObject.page;
+      this.size = paginationObject.size;
     }
   }
   search(value: string) {
@@ -166,6 +176,13 @@ export class JobDescriptionDashboardPageComponent implements OnInit {
       maxYearRequired: this.maxYearRequired,
       selectedStatuses: this.selectedList,
       isFilter: this.isFilter
+    });
+  }
+  changePaginationObject(): void {
+    console.log(this.page, this.size)
+    this.paginationStorage.setVacancyPagination({
+      page: this.page,
+      size: this.size
     });
   }
 
