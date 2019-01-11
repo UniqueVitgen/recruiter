@@ -22,7 +22,7 @@
 
   </mat-card-title>
   <mat-form-field class="custom-form-field">
-    <input [readonly]="editedInterview.completed" required (dateChange)="onFocusoutAnyInput()" matInput [(ngModel)]="planDate.dateDate" [matDatepicker]="picker1" placeholder="{{'Plan Date' | translate}}">
+    <input readonly required (dateChange)="onFocusoutAnyInput()" matInput [(ngModel)]="planDate.dateDate" [matDatepicker]="picker1" placeholder="{{'Plan Date' | translate}}" (click)="picker1.open()">
     <mat-datepicker-toggle name="dateSuffix1" matSuffix [for]="picker1"></mat-datepicker-toggle>
     <mat-datepicker [disabled]="editedInterview.completed" #picker1></mat-datepicker>
   </mat-form-field>

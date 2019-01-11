@@ -24,8 +24,8 @@
             <mat-error *ngIf="candidateForm.controls['name'].hasError('required')">
               {{'Name is required' | translate}}
             </mat-error>
-            <mat-error *ngIf="candidateForm.controls['name'].hasError('pattern')">
-              {{'Name must contain only latin characters or only cyrillic characters' | translate}}
+            <mat-error *ngIf="candidateForm.controls['name'].hasError('pattern')" matTooltip="{{'Name must contain only latin characters or only cyrillic characters' | translate}}" matTooltipPosition="right">
+              <span class="candidate-one-row">{{'Name must contain only latin characters or only cyrillic characters' | translate}}</span>
             </mat-error>
           </mat-form-field>
           <mat-form-field class="example-full-width custom-form-field">
@@ -36,8 +36,8 @@
             <mat-error *ngIf="candidateForm.controls['surname'].hasError('required')">
               {{'Surname is required' | translate}}
             </mat-error>
-            <mat-error *ngIf="candidateForm.controls['surname'].hasError('pattern')">
-              {{'Surname must contain only latin characters or only cyrillic characters' | translate}}
+            <mat-error *ngIf="candidateForm.controls['surname'].hasError('pattern')" matTooltip="{{'Surname must contain only latin characters or only cyrillic characters' | translate}}" matTooltipPosition="right">
+              <span class="candidate-one-row">{{'Surname must contain only latin characters or only cyrillic characters' | translate}}</span>
             </mat-error>
           </mat-form-field>
           <mat-form-field class="example-full-width custom-form-field">
@@ -47,7 +47,7 @@
             </button>
           </mat-form-field>
           <mat-form-field class="example-full-width custom-form-field">
-            <input matInput [min]="minBirthdayDate" [max]="maxBirthdayDate" (ngModelChange)="onFocusoutAnyInput()" formControlName="birthday" [matDatepicker]="picker" placeholder="{{'Birthday' | translate}}">
+            <input matInput readonly [min]="minBirthdayDate" [max]="maxBirthdayDate" (ngModelChange)="onFocusoutAnyInput()" formControlName="birthday" [matDatepicker]="picker" placeholder="{{'Birthday' | translate}}" (click)="picker.open()">
             <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
             <mat-datepicker #picker startView="multi-year"></mat-datepicker>
           </mat-form-field>

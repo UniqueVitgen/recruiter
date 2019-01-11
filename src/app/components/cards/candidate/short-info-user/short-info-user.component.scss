@@ -1,5 +1,10 @@
 .edit-icon {
   float: right;
 }
-
+.candidate-one-row {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  display: block;
+}
 
