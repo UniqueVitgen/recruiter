@@ -30,10 +30,30 @@
 
         </div>
         <div class="col-6">
-          <mat-form-field class="example-full-width">
+          <mat-form-field  *ngIf="requirement.contactType === 'PHONE'" class="example-full-width">
             <input [name]="'requirements-' + i" matInput required placeholder="{{'Contact details' | translate}}"
                    [pattern]="getPattern(requirement)"
+                   [textMask]="{mask: MaskConst.PHONE}"
+                   #phone="ngModel"
                    [(ngModel)]="requirement.contactDetails">
+            <mat-error class="multi-row-text" *ngIf="phone.hasError('pattern')">
+              {{'Please enter a valid phone number with valida operator code like 17, 29, 33, 44' | translate}}
+            </mat-error>
+            <mat-error class="multi-row-text" *ngIf="phone.hasError('required')">
+              {{requirement.contactType | translate}} {{'is required' | translate}}
+            </mat-error>
+          </mat-form-field>
+          <mat-form-field  *ngIf="requirement.contactType !== 'PHONE'" class="example-full-width">
+            <input [name]="'requirements-' + i" matInput required placeholder="{{'Contact details' | translate}}"
+                   [pattern]="getPattern(requirement)"
+                   #contact="ngModel"
+                   [(ngModel)]="requirement.contactDetails">
+            <mat-error class="multi-row-text" *ngIf="requirement.contactType === 'EMAIL' && contact.hasError('pattern')">
+            {{'Please enter a valid email address' | translate}}
+            </mat-error>
+            <mat-error class="multi-row-text" *ngIf="contact.hasError('required')">
+              {{requirement.contactType | translate}} {{'is required' | translate}}
+            </mat-error>
           </mat-form-field>
 
         </div>

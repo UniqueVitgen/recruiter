@@ -8,6 +8,7 @@ import {EnumWorker} from '../../../../workers/enum/enum.worker';
 import {ContactDetails} from '../../../../classes/contact-details';
 import {RegexpConst} from '../../../../const/regexp.const';
 import {ArrayWorker} from '../../../../workers/array/array.worker';
+import {MaskConst} from '../../../../const/mask.const';
 
 @Component({
   selector: 'app-contacts-candidate-modal',
@@ -17,6 +18,7 @@ import {ArrayWorker} from '../../../../workers/array/array.worker';
 export class ContactsCandidateModalComponent implements OnInit {
   public editedCandidate: Candidate;
   public contactTypes: ContactType[];
+  MaskConst = MaskConst;
   @Output() outputClickSave: EventEmitter<Candidate> = new EventEmitter();
 
   constructor(

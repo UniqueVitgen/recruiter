@@ -2,7 +2,7 @@ import {Component, Inject, OnInit} from '@angular/core';
 import {MAT_DIALOG_DATA, MatDialogRef} from '@angular/material';
 import {JobDescriptionDialogData} from '../../../../interfaces/dialog/init/job-description-dialog-data';
 import {Vacancy, VacancyForm} from '../../../../classes/vacancy';
-import {FormBuilder, FormGroup} from '@angular/forms';
+import {FormBuilder, FormGroup, NgForm} from '@angular/forms';
 import {SearchWorker} from '../../../../workers/search/search.worker';
 import {CdkDragDrop, moveItemInArray} from '@angular/cdk/drag-drop';
 import {ArrayWorker} from '../../../../workers/array/array.worker';
@@ -12,6 +12,8 @@ import {VacancyState} from '../../../../enums/vacancy-state.enum';
 import {PositionModel} from '../../../../classes/position-model';
 import {PositionService} from '../../../../services/position/position.service';
 import {TypeCheckingWorker} from '../../../../workers/type-checking/type-checking.worker';
+import {TranslateWorker} from '../../../../workers/translate/translate.worker';
+import {NumberWorker} from '../../../../workers/number/number.worker';
 
 export interface StateGroup {
   letter: string;
@@ -39,6 +41,7 @@ export class JobDescriptionModalComponent implements OnInit {
   constructor(private fb: FormBuilder,
               public dialogRef: MatDialogRef<JobDescriptionModalComponent>,
               public searchWorker: SearchWorker,
+              public numberWorker: NumberWorker,
               private typeCheckingWorker: TypeCheckingWorker,
               private vacancyService: VacancyService,
               private arrayWorker: ArrayWorker,
@@ -132,6 +135,15 @@ export class JobDescriptionModalComponent implements OnInit {
 
   drop(event: CdkDragDrop<string[]>) {
     moveItemInArray(this.editedVacancy.requirements, event.previousIndex, event.currentIndex);
+  }
+
+  updateValidation(form: NgForm) {
+    // form.v
+    setTimeout(() => {
+      form.control.updateValueAndValidity();
+      form.controls.salaryInDollarsFrom.updateValueAndValidity();
+      form.controls.salaryInDollarsTo.updateValueAndValidity();
+    }, 200);
   }
 
   save() {

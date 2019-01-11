@@ -185,5 +185,7 @@
   "yearsB" : "years",
   "yearsC" : "year",
   "Not required" : "not required",
-  "of" : "of"
+  "of" : "of",
+  "must be lower than": "must be lower than",
+  "must be higher than": "must be higher than"
 }

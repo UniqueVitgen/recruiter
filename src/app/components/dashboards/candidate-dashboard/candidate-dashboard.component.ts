@@ -112,17 +112,18 @@ export class CandidateDashboardComponent implements OnInit, OnChanges {
   sortByProperty(candidates: CandidateDashboardItem[], property: string): CandidateDashboardItem[] {
     let direction: number;
     this.sortedDirection === SortDirection.ASCENDING ? direction = 1 : direction = -1;
-    return candidates.sort((value, value2) => {
-      if (property === 'fullname') {
-        return this.userWorker.sortByFullname(value, value2) * direction;
-      } else if (property === 'age') {
-        return this.userWorker.sortByAge(value, value2) * direction;
-      } else if (property === 'salaryInDollars') {
-        return this.userWorker.sortBySalaryInDollars(value, value2) * direction;
-      } else if (property === 'candidateState') {
-        return this.userWorker.sortByCandidateState(value, value2) * direction;
-      }
-    });
+    return this.userWorker.sortByProperty(candidates, property, direction);
+    // return candidates.sort((value, value2) => {
+    //   if (property === 'fullname') {
+    //     return this.userWorker.sortByFullname(value, value2) * direction;
+    //   } else if (property === 'age') {
+    //     return this.userWorker.sortByAge(value, value2) * direction;
+    //   } else if (property === 'salaryInDollars') {
+    //     return this.userWorker.sortBySalaryInDollars(value, value2) * direction;
+    //   } else if (property === 'candidateState') {
+    //     return this.userWorker.sortByCandidateState(value, value2) * direction;
+    //   }
+    // });
   }
   searchValues(value: string) {
     if (value) {

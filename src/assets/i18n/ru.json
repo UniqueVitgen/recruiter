@@ -184,5 +184,7 @@
   "yearsB" : "лет",
   "yearsC" : "год",
   "Not required" : "не требуется",
-  "of" : "из"
+  "of" : "из",
+  "must be lower than": "должен быть меньше чем",
+  "must be higher than": "должен быть больше чем"
 }

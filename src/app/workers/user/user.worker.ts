@@ -1,7 +1,8 @@
 import { Injectable } from '@angular/core';
-import {Candidate} from '../../classes/candidate';
+import {Candidate, CandidateDashboardItem} from '../../classes/candidate';
 import {DateTimeWorker} from '../date-time/date-time.worker';
 import {CandidateStateEnumWorker} from '../enum/candidate-state-enum.worker';
+import {SortDirection} from '../../enums/sort-direction.enum';
 
 @Injectable({
   providedIn: 'root'
@@ -80,5 +81,39 @@ export class UserWorker {
     } else {
       return this.sortByNull(value.candidateState.name, value2.candidateState.name);
     }
+  }
+  sortByProperty(candidates: CandidateDashboardItem[], property: string, direction: number): CandidateDashboardItem[] {
+    const candidatesNonUndefined = candidates.filter(candidate => {
+      if (property === 'age') {
+        return candidate.birthday != null;
+      } else if (property === 'fullname') {
+        return this.formatFullName(candidate) != null;
+      } else {
+        return candidate[property] != null;
+      }
+      return candidate[property] != null;
+    });
+    const candidatesUndefined = candidates.filter(candidate => {
+      if (property === 'age') {
+        return candidate.birthday == null;
+      } else if (property === 'fullname') {
+        return this.formatFullName(candidate) == null;
+      } else {
+        return candidate[property] == null;
+      }
+      return candidate[property] == null;
+    });
+    const candidatesNonUndefinedSorted = candidates.sort((value, value2) => {
+      if (property === 'fullname') {
+        return this.sortByFullname(value, value2) * direction;
+      } else if (property === 'age') {
+        return this.sortByAge(value, value2) * direction;
+      } else if (property === 'salaryInDollars') {
+        return this.sortBySalaryInDollars(value, value2) * direction;
+      } else if (property === 'candidateState') {
+        return this.sortByCandidateState(value, value2) * direction;
+      }
+    });
+    return candidatesNonUndefinedSorted.concat(candidatesUndefined);
   }
 }

@@ -119,22 +119,23 @@ export class JobDescriptionDashboardComponent implements OnInit, OnChanges {
   sortByProperty(vacancies: Vacancy[], property: string): Vacancy[] {
     let direction: number;
     this.sortedDirection === SortDirection.ASCENDING ? direction = 1 : direction = -1;
-    return vacancies.sort((value, value2) => {
-      if (property === 'position') {
-        return this.vacancyWorker.sortByPosition(value, value2) * direction;
-      } else if (property === 'vacancyState') {
-        return this.vacancyWorker.sortByVacancyState(value, value2) * direction;
-      } else if (property === 'salaryInDollarsFrom') {
-        return this.vacancyWorker.sortBySalaryInDollarsFrom(value, value2) * direction;
-      } else if (property === 'salaryInDollarsTo') {
-        return this.vacancyWorker.sortBySalaryInDollarsTo(value, value2) * direction;
-      } else if (property === 'experienceYearsRequire') {
-        console.log('experienceYearsRequire', value.experienceYearsRequire, value2.experienceYearsRequire);
-        return this.vacancyWorker.sortByExperienceYearsRequire(value, value2) * direction;
-      } else if (property === 'candidates') {
-        return this.vacancyWorker.sortByCandidates(value, value2) * direction;
-      }
-    });
+    return this.vacancyWorker.sortByProperty(vacancies, property, direction);
+    // return vacancies.sort((value, value2) => {
+    //   if (property === 'position') {
+    //     return this.vacancyWorker.sortByPosition(value, value2) * direction;
+    //   } else if (property === 'vacancyState') {
+    //     return this.vacancyWorker.sortByVacancyState(value, value2) * direction;
+    //   } else if (property === 'salaryInDollarsFrom') {
+    //     return this.vacancyWorker.sortBySalaryInDollarsFrom(value, value2) * direction;
+    //   } else if (property === 'salaryInDollarsTo') {
+    //     return this.vacancyWorker.sortBySalaryInDollarsTo(value, value2) * direction;
+    //   } else if (property === 'experienceYearsRequire') {
+    //     console.log('experienceYearsRequire', value.experienceYearsRequire, value2.experienceYearsRequire);
+    //     return this.vacancyWorker.sortByExperienceYearsRequire(value, value2) * direction;
+    //   } else if (property === 'candidates') {
+    //     return this.vacancyWorker.sortByCandidates(value, value2) * direction;
+    //   }
+    // });
   }
 
   openDeleteVacancyDialog(vacancyID: number): void {

@@ -2,6 +2,7 @@ import {Injectable} from '@angular/core';
 
 import {Vacancy} from '../../classes/vacancy';
 import {VacancyStateEnumWorker} from '../enum/vacancy-state-enum.worker';
+import {SortDirection} from '../../enums/sort-direction.enum';
 
 @Injectable({
   providedIn: 'root'
@@ -21,9 +22,11 @@ export class VacancyWorker {
     }
   }
   sortByNull<T>(value: T, value2: T): number {
-    if (value != null) {
+    if (value && value2) {
+      return 0;
+    } else if (value) {
       return 1;
-    } else if (value2 != null) {
+    } else if (value2) {
       return -1;
     } else {
       return 0;
@@ -64,5 +67,31 @@ export class VacancyWorker {
     } else {
       return this.sortByNull(value, value2);
     }
+  }
+
+  sortByProperty(vacancies: Vacancy[], property: string, direction: number): Vacancy[] {
+    const vacanciesNonUndefined = vacancies.filter(vacancy => {
+      return vacancy[property] != null;
+    });
+    const vacanciesUndefined = vacancies.filter(vacancy => {
+      return vacancy[property] == null;
+    });
+    const vacanciesNonUndefinedSorted =  vacanciesNonUndefined.sort((value, value2) => {
+      if (property === 'position') {
+        return this.sortByPosition(value, value2) * direction;
+      } else if (property === 'vacancyState') {
+        return this.sortByVacancyState(value, value2) * direction;
+      } else if (property === 'salaryInDollarsFrom') {
+        return this.sortBySalaryInDollarsFrom(value, value2) * direction;
+      } else if (property === 'salaryInDollarsTo') {
+        return this.sortBySalaryInDollarsTo(value, value2) * direction;
+      } else if (property === 'experienceYearsRequire') {
+        console.log('experienceYearsRequire', value.experienceYearsRequire, value2.experienceYearsRequire);
+        return this.sortByExperienceYearsRequire(value, value2) * direction;
+      } else if (property === 'candidates') {
+        return this.sortByCandidates(value, value2) * direction;
+      }
+    });
+    return vacanciesNonUndefinedSorted.concat(vacanciesUndefined);
   }
 }

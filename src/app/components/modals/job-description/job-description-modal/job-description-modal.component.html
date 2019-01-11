@@ -25,13 +25,21 @@
         </mat-select>
       </mat-form-field>
       <mat-form-field class="example-full-width">
-        <input matInput only-numbers [(ngModel)]="editedVacancy.salaryInDollarsFrom" name="salaryInDollarsFrom" placeholder="{{'Salary in dollars from' | translate}}">
+        <input matInput only-numbers [(ngModel)]="editedVacancy.salaryInDollarsFrom" (ngModelChange)="updateValidation(vacancyForm)" name="salaryInDollarsFrom" placeholder="{{'Salary in dollars from' | translate}}">
       </mat-form-field>
     <mat-form-field class="example-full-width">
-      <input matInput only-numbers [min]="editedVacancy.salaryInDollarsFrom" [(ngModel)]="editedVacancy.salaryInDollarsTo" name="salaryInDollarsTo" placeholder="{{'Salary in dollars to' | translate}}">
+      <input #salaryInDollarsTo="ngModel" matInput only-numbers [min]="editedVacancy.salaryInDollarsFrom"
+             [(ngModel)]="editedVacancy.salaryInDollarsTo"  (ngModelChange)="updateValidation(vacancyForm)"
+             name="salaryInDollarsTo" placeholder="{{'Salary in dollars to' | translate}}">
+      <mat-error *ngIf="salaryInDollarsTo.hasError('min')">"{{'Salary in dollars to' | translate}}"
+        {{'must be higher than' | translate}} "{{'Salary in dollars from' | translate  }}" (${{editedVacancy.salaryInDollarsFrom}})</mat-error>
     </mat-form-field>
     <mat-form-field class="example-full-width">
-      <input matInput only-numbers [max]="50" [(ngModel)]="editedVacancy.experienceYearsRequire" name="Required years" placeholder="{{'Experience years required' | translate}}">
+      <input #experienceYearsRequire="ngModel" matInput only-numbers [max]="50"
+             [(ngModel)]="editedVacancy.experienceYearsRequire" (ngModelChange)="updateValidation(vacancyForm)"
+             name="Required years"
+             placeholder="{{'Experience years required' | translate}}">
+      <mat-error *ngIf="experienceYearsRequire.hasError('max')">{{'Experience years required' | translate}} {{'must be lower than' | translate}} {{numberWorker.formatYears(50)}}</mat-error>
     </mat-form-field>
       <mat-form-field class="example-full-width">
         <textarea matInput [(ngModel)]="editedVacancy.description" name="description" placeholder="{{'Description' | translate}}"></textarea>
@@ -69,7 +77,7 @@
 
           </div>
           <div class="col-2 checkbox-col">
-            <mat-checkbox color="primary" [name]="'requred' + i" [(ngModel)]="requirement.required"
+            <mat-checkbox  color="primary" [name]="'requred' + i" [(ngModel)]="requirement.required"
                           class="example-margin" ></mat-checkbox>
           </div>
           <div class="col-2 checkbox-col">

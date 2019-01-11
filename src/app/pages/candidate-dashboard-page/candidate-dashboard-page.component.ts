@@ -110,7 +110,6 @@ export class CandidateDashboardPageComponent implements OnInit {
     // this.mockCandidates = this.candidateService.mockCandidates;
   }
   clickAdvancedSearch() {
-    this.isFilter = !this.isFilter;
     this.changeFilterObject();
   }
 

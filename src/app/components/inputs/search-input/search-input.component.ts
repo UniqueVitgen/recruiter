@@ -8,14 +8,14 @@ import set = Reflect.set;
 })
 export class SearchInputComponent implements OnInit, OnChanges {
   @Input() isAdvancedSearch: boolean;
+  @Input() isActiveAdvancedSearch: boolean;
+  @Output() isActiveAdvancedSearchChange: EventEmitter<boolean> = new EventEmitter<boolean>();
   @Input() autocompleteList: string[];
   @Output('onSearch') outputOnSearch: EventEmitter<string> = new EventEmitter();
-  @Output('clickAdvancedSearch') outputClickAdvancedSearch: EventEmitter<boolean> = new EventEmitter();
   value: string;
   isFocus: boolean;
   limitTo: number = 5;
   public filteredAutocompleteList: string[];
-  public isTurnOnAdvancedSearch: boolean;
 
   constructor() { }
 
@@ -35,8 +35,8 @@ export class SearchInputComponent implements OnInit, OnChanges {
     this.outputOnSearch.emit(value);
   }
   clickAdvancedSearch() {
-    this.isTurnOnAdvancedSearch = !this.isTurnOnAdvancedSearch;
-    this.outputClickAdvancedSearch.emit(this.isTurnOnAdvancedSearch);
+    this.isActiveAdvancedSearch = !this.isActiveAdvancedSearch;
+    this.isActiveAdvancedSearchChange.emit(this.isActiveAdvancedSearch);
   }
   focus() {
     // setTimeout(() => {

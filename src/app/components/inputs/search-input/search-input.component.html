@@ -11,7 +11,7 @@
                (ngModelChange)="search(value)"
                (focus)="focus()" (blur)="blur()" class="form-control" placeholder="{{'Search'| translate}}">
         <div *ngIf="isAdvancedSearch" (click)="clickAdvancedSearch()" class="input-group-append">
-          <span class="input-group-text" id="inputGroupFileAddon02"><a>{{(isTurnOnAdvancedSearch ? 'Turn off' : 'Turn on') | translate}} {{'advanced search' | translate}}</a></span>
+          <span class="input-group-text" id="inputGroupFileAddon02"><a>{{(isActiveAdvancedSearch ? 'Turn off' : 'Turn on') | translate}} {{'advanced search' | translate}}</a></span>
         </div>
         <!-- <span class="input-group-addon">
           <button type="submit">

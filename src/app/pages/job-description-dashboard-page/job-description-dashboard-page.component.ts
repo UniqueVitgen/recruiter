@@ -129,7 +129,7 @@ export class JobDescriptionDashboardPageComponent implements OnInit {
     this.vacancyService.delete(object).subscribe(res => { this.getVacancies(); });
   }
   clickAdvancedSearch() {
-    this.isFilter = !this.isFilter;
+    this.changeFilterObject();
   }
 
   openJobDescriptionDialog(): void {
