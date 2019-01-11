@@ -47,6 +47,7 @@ export class ShortInfoUserComponent implements OnInit, OnDestroy, OnChanges {
   isSaved: boolean = true;
   isSavedCandidate: boolean = true;
   minBirthdayDate: Date;
+  visible: boolean;
   maxBirthdayDate: Date;
   constructor(public dialog: MatDialog,
               private candidateSerivce: CandidateService,
@@ -210,5 +211,9 @@ export class ShortInfoUserComponent implements OnInit, OnDestroy, OnChanges {
         this.outputEditCandidate.emit(res);
       });
     }
+  }
+  clearBirthday() {
+    this.candidateForm.controls.birthday.setValue(null);
+    this.onFocusoutAnyInput();
   }
 }

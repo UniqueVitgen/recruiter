@@ -46,8 +46,9 @@
               <mat-icon>edit</mat-icon>
             </button>
           </mat-form-field>
-          <mat-form-field class="example-full-width custom-form-field">
-            <input matInput readonly [min]="minBirthdayDate" [max]="maxBirthdayDate" (ngModelChange)="onFocusoutAnyInput()" formControlName="birthday" [matDatepicker]="picker" placeholder="{{'Birthday' | translate}}" (click)="picker.open()">
+          <mat-form-field (mouseenter)="visible = true" (mouseleave)="visible = false" class="example-full-width custom-form-field">
+            <input matInput readonly #pickerInput [min]="minBirthdayDate" [max]="maxBirthdayDate"  (ngModelChange)="onFocusoutAnyInput()" formControlName="birthday" [matDatepicker]="picker" placeholder="{{'Birthday' | translate}}" (click)="picker.open()">
+            <mat-icon *ngIf="visible && pickerInput.value" class="text-align-button" mat-icon-button matSuffix matTooltip="{{'Delete' | translate}}" (click)="clearBirthday()">close</mat-icon>
             <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
             <mat-datepicker #picker startView="multi-year"></mat-datepicker>
           </mat-form-field>
