@@ -20,9 +20,9 @@ export class FileWorker {
   public getFilename(url: string) {
     let filename: string;
     filename = url.substring(url.lastIndexOf('/') + 1);
-    console.log('agfter /', filename);
+    //console.log('agfter /', filename);
     filename = filename.substring(filename.lastIndexOf('\\') + 1);
-    console.log('agfter \\', filename);
+    //console.log('agfter \\', filename);
     return filename;
     // alert(filename);
   }

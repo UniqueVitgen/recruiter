@@ -12,7 +12,7 @@
       <!--</span>-->
     <!--</mat-checkbox>-->
     <span class="float-right">
-  <mat-checkbox matTooltip="{{'completed' | translate}}" *ngIf="visibleCheckbox" (ngModelChange)="onFocusoutAnyInput()" [(ngModel)]="editedInterview.completed" color="primary">
+  <mat-checkbox matTooltip="{{'Interview can be completed only in past' | translate}}" [disabled]="!isCanCompleted" *ngIf="visibleCheckbox"  [(ngModel)]="editedInterview.completed" (ngModelChange)="onFocusoutAnyInput()" color="primary">
     <!--{{'completed' | translate}}-->
   </mat-checkbox>&nbsp;
       &nbsp;
@@ -22,7 +22,7 @@
 
   </mat-card-title>
   <mat-form-field class="custom-form-field">
-    <input readonly required (dateChange)="onFocusoutAnyInput()" matInput [(ngModel)]="planDate.dateDate" [matDatepicker]="picker1" placeholder="{{'Plan Date' | translate}}" (click)="picker1.open()">
+    <input readonly required (dateChange)="onFocusoutAnyInput()" matInput [min]="minDate" [(ngModel)]="planDate.dateDate" [matDatepicker]="picker1" placeholder="{{'Plan Date' | translate}}" (click)="picker1.open()">
     <mat-datepicker-toggle name="dateSuffix1" matSuffix [for]="picker1"></mat-datepicker-toggle>
     <mat-datepicker [disabled]="editedInterview.completed" #picker1></mat-datepicker>
   </mat-form-field>

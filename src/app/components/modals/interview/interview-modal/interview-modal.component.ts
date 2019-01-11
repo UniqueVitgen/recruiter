@@ -172,7 +172,7 @@ export class InterviewModalComponent implements OnInit {
     }
     const now = this.dateTimeWorker.getNow();
     const completedInterviewTime = new Date(this.editedInterview.planEndDate);
-    this.isCanCompleted = completedInterviewTime< now;
+    this.isCanCompleted = completedInterviewTime < now;
     console.log('isCanCompleted', this.isCanCompleted);
   }
   updateTime() {

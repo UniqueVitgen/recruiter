@@ -41,7 +41,7 @@
             </mat-error>
           </mat-form-field>
           <mat-form-field class="example-full-width custom-form-field">
-            <input (blur)="onFocusoutAnyInput()" only-numbers formControlName="salaryInDollars" matInput [placeholder]="'Required salary' | translate" >
+            <input (ngModelChange)="onFocusoutAnyInput()" only-numbers formControlName="salaryInDollars" matInput [placeholder]="'Required salary' | translate" >
             <button mat-button  matSuffix mat-icon-button aria-label="Clear" class="edited-hover-button">
               <mat-icon>edit</mat-icon>
             </button>
