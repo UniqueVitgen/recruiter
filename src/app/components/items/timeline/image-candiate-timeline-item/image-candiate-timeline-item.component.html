@@ -1,7 +1,10 @@
 <mat-label style="color: gray;">  {{viewOfDate}}</mat-label>
-<mat-card >
-  <mat-icon class="delete" matTooltip="{{'Delete' | translate}}" (click)="delete()">delete</mat-icon>
-  <mat-card-title><mat-icon class="myIcon">insert_drive_file</mat-icon> {{'PHOTO' | translate}}</mat-card-title>
+<mat-card (mouseenter)="visible = true" (mouseleave)="visible = false" class="backgroundCard">
+  <mat-card-title><mat-icon class="myIcon">insert_drive_file</mat-icon> {{'PHOTO' | translate}}
+    <span class="float-right">
+      <mat-icon *ngIf="visible" matTooltip="{{'Delete' | translate}}" (click)="delete()">delete</mat-icon>
+    </span>
+  </mat-card-title>
   <mat-card-content>
     <div class="image-item-container">
       <img class="image-item" [src]=" candidateWorker.generatePhotoUrl(editedAttachment)" />

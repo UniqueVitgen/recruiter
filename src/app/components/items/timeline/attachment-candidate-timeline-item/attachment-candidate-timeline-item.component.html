@@ -1,7 +1,11 @@
 <mat-label style="color: gray;">  {{viewOfDate}}</mat-label>
-<mat-card class="backgroundCard">
-  <mat-icon class="delete" matTooltip="Delete" matTooltip="{{'Delete' | translate}}" (click)="delete()">delete</mat-icon>
-  <mat-card-title><mat-icon class="myIcon">insert_drive_file</mat-icon> {{attachment.attachmentType | translate}}</mat-card-title>
+<mat-card (mouseenter)="visible = true" (mouseleave)="visible = false" class="backgroundCard">
+  <mat-card-title>
+    <mat-icon class="myIcon">insert_drive_file</mat-icon> {{attachment.attachmentType | translate}}
+    <span class="float-right">
+      <mat-icon *ngIf="visible" matTooltip="{{'Delete' | translate}}" (click)="delete()">delete</mat-icon>
+    </span>
+  </mat-card-title>
   <mat-card-content>
     <app-candidate-attachment [attachment]="attachment"></app-candidate-attachment>
     <!--<mat-form-field class="example-full-width custom-form-field">-->

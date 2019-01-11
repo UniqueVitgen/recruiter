@@ -17,6 +17,7 @@ export class AttachmentCandidateTimelineItemComponent implements OnInit, OnChang
   @Output() changeCandidate: EventEmitter<any> = new EventEmitter();
   @Output() deleteEvent: EventEmitter<any> = new EventEmitter();
   viewOfDate: string;
+  visible: boolean;
 
   constructor(public fileWorker: FileWorker, private dateTimeWorker: DateTimeWorker, private translateWorker: TranslateWorker) { }
 

@@ -24,6 +24,7 @@ export class ExperienceCandidateTimelineItemComponent implements OnInit, OnChang
   editedExperience: ExperienceTimeline;
   viewOfDate: string;
   isSaved: boolean = true;
+  visible: boolean;
   constructor(private dateTimeWorker: DateTimeWorker, private translateWorker: TranslateWorker,
               private fb: FormBuilder,
               private positionService: PositionService, private teamService: TeamService) { }

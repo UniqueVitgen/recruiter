@@ -15,6 +15,7 @@ export class NoteCandidateTimelineItemComponent implements OnInit {
   @Output() deleteEvent: EventEmitter<any> = new EventEmitter();
   editedNote: Feedback;
   viewOfDate: string;
+  visible: boolean;
   constructor(private dateTimeWorker: DateTimeWorker, private translateWorker: TranslateWorker) { }
   ngOnInit() {
     this.editedNote = Object.assign({}, this.note);

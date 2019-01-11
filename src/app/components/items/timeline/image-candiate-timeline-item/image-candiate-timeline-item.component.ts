@@ -14,6 +14,7 @@ export class ImageCandiateTimelineItemComponent implements OnInit {
   @Input() attachment: Attachment;
   viewOfDate: string;
   editedAttachment: Attachment;
+  visible: boolean;
   @Output() changeCandidate: EventEmitter<any> = new EventEmitter();
   @Output() deleteEvent: EventEmitter<any> = new EventEmitter();
 

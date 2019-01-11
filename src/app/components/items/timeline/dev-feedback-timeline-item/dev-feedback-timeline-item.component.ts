@@ -18,6 +18,7 @@ export class DevFeedbackTimelineItemComponent implements OnInit, OnChanges {
   editedNote: DevFeedback;
   viewOfDate: string;
   viewOfInterview: string;
+  visible: boolean;
   private isSaved: boolean = true;
   constructor(private dateTimeWorker: DateTimeWorker,
               private translateWorker: TranslateWorker, private typeCheckingWorker: TypeCheckingWorker) { }
