@@ -78,7 +78,7 @@ export class CandidatePageComponent implements OnInit, AfterContentChecked, Afte
 
   @HostListener('window:scroll', ['$event'])
   onScroll(event: Event) {
-      console.log(this.stickyChild.nativeElement.getBoundingClientRect().top);
+      //console.log(this.stickyChild.nativeElement.getBoundingClientRect().top);
     //setTimeout(() => {
       this.height = $('#short-info').height();
       const wo = window.innerHeight - this.navbarHeight;

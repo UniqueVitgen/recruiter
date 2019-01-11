@@ -12,11 +12,17 @@
     </button>
   </dialog-title>
   <dialog-body>
+
     <div *ngIf="editedCandidate">
+      <mat-radio-group>
       <div class="row" *ngFor="let requirement of editedCandidate.contacts; let i = index">
         <!--<div class="col-1 checkbox-col">-->
         <!--<mat-icon>format_line_spacing</mat-icon>-->
         <!--</div>-->
+
+        <div class="col-1">
+            <mat-radio-button [checked]="requirement.preferred" (change)="radioClick($event, i)" color="primary"  [value]="i" ></mat-radio-button>
+        </div>
         <div class="col-3">
           <mat-form-field class="example-full-width">
             <mat-select [name]="'requirements-' + i" required placeholder="{{'Contact type' | translate}}"
@@ -57,12 +63,13 @@
           </mat-form-field>
 
         </div>
-        <div classs="col-3">
+        <div classs="col-2">
           <button (click)="deleteContact(i)" color="primary" mat-icon-button>
             <mat-icon>delete</mat-icon>
           </button>
         </div>
       </div>
+      </mat-radio-group>
     </div>
     <button color="primary" (click)="addContact()"  mat-icon-button>
       <mat-icon aria-label="Example icon-button with a heart icon" [matTooltip]="'Add new requirement' | translate" >add_circle_outline</mat-icon>

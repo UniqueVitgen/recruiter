@@ -29,7 +29,7 @@
       <span [matTooltip]="candidate.salaryInDollars"> {{candidate.salaryInDollars}}$</span>
     </div>
     <div *ngFor="let contact of candidate.contacts">
-      <div *ngIf="contact.contactDetails !== ''" class="candidate-one-row">
+      <div *ngIf="contact.contactDetails !== '' && contact.preferred" class="candidate-one-row">
         <mat-icon *ngIf="contact.contactType.toString() === 'SKYPE'" svgIcon="skype-business"></mat-icon>
         <mat-icon *ngIf="contact.contactType.toString() == 'PHONE'" svgIcon="phone"></mat-icon>
         <mat-icon *ngIf="contact.contactType.toString() == 'EMAIL'" svgIcon="email-outline"></mat-icon>

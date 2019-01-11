@@ -114,7 +114,7 @@
                 <mat-icon *ngIf="contact.contactType.toString() == 'PHONE'" svgIcon="phone"></mat-icon>
                 <mat-icon *ngIf="contact.contactType.toString() == 'EMAIL'" svgIcon="email-outline"></mat-icon>
                 &nbsp;
-                <span [matTooltip]="contact.contactDetails">{{contact.contactDetails}}</span>
+                <span [matTooltip]="contact.contactDetails">{{contact.contactDetails}}</span><span *ngIf="contact.preferred" [matTooltip]="'preferred contact' | translate" style="color: #007bff;"> *</span>
               </div>
             </div>
           </div>
