@@ -11,4 +11,6 @@ export class CalendarEvent {
   candidate?: Candidate;
   vacancy: Vacancy;
   interview: Interview;
+  editable?: boolean;
+  droppable?: boolean;
 }

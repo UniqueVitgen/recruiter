@@ -21,10 +21,12 @@ export class InterviewWorker {
   convertInterviewToCalendarEvent(interview: InterviewExtended): CalendarEvent {
     const date = new Date(interview.planDate);
     const dateEnd = new Date(interview.planEndDate);
-    let color, textColor;
-    if (interview.factDate) {
+    let color, editabled;
+    if (interview.completed) {
+      editabled = false;
       color = 'darkgray';
     } else {
+      editabled = true;
       // color = '#4285f4';
     }
     return {
@@ -36,7 +38,8 @@ export class InterviewWorker {
       candidate: interview.candidate,
       interview: interview,
       vacancy: interview.vacancy,
-      color: color
+      color: color,
+      editable: editabled
     };
   }
 }

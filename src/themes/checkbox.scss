@@ -15,6 +15,14 @@
     white-space: normal;
   }
 }
+.checkbox-with-hover {
+  .mat-checkbox-inner-container {
+    visibility: hidden;
+  }
+  &:hover .mat-checkbox-inner-container {
+    visibility: visible;
+  }
+}
 //.mat-checkbox{
 //  &.mat-checkbox-checked {
 //    .mat-checkbox-frame {

@@ -187,5 +187,9 @@
   "Not required" : "not required",
   "of" : "of",
   "must be lower than": "must be lower than",
-  "must be higher than": "must be higher than"
+  "must be higher than": "must be higher than",
+  "Completed": "Completed",
+  "completed": "completed",
+  "not completed": "not completed",
+  "Interview can be completed only in past": "Interview can be completed only in past"
 }

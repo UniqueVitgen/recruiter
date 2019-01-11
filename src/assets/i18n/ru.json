@@ -186,5 +186,9 @@
   "Not required" : "не требуется",
   "of" : "из",
   "must be lower than": "должен быть меньше чем",
-  "must be higher than": "должен быть больше чем"
+  "must be higher than": "должен быть больше чем",
+  "Completed": "Завершено",
+  "completed": "завершено",
+  "not completed": "не завершено",
+  "Interview can be completed only in past": "Интервью может завершиться только в прошлом"
 }

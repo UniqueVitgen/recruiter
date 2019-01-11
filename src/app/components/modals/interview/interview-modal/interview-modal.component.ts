@@ -1,4 +1,4 @@
-import {Component, EventEmitter, Inject, OnInit, Output} from '@angular/core';
+import {ChangeDetectorRef, Component, EventEmitter, Inject, OnInit, Output} from '@angular/core';
 import {MAT_DIALOG_DATA, MatDialog, MatDialogRef} from '@angular/material';
 import {InterviewDialogDataInterface} from '../../../../interfaces/dialog/init/interview-dialog-data-interface';
 import {Interview, InterviewExtended} from '../../../../classes/interview';
@@ -35,6 +35,7 @@ export class InterviewModalComponent implements OnInit {
   public sourceVacancy: Vacancy;
   public candidates: Candidate[];
   public minDate: Date;
+  public isCanCompleted: boolean;
   @Output('clickSave') outputClickSave: EventEmitter<BaseDialogResult<InterviewExtended>> = new EventEmitter();
   @Output('clickDelete') outputClickDelete: EventEmitter<BaseDialogResult<InterviewExtended>> = new EventEmitter();
   darkTheme: NgxMaterialTimepickerTheme = {
@@ -75,18 +76,25 @@ export class InterviewModalComponent implements OnInit {
     public dialog: MatDialog,
     public userWorker: UserWorker,
     private fb: FormBuilder,
+    private cd: ChangeDetectorRef,
     @Inject(MAT_DIALOG_DATA) public data: InterviewDialogDataInterface ) {
-    this.minDate = this.dateTimeWorker.getTodayStart();
-    this.interviewForm = this.fb.group({
-      from: ['', Validators.compose([Validators.required])],
-      fromTime: ['', Validators.compose([Validators.required])],
-      toTime: ['', Validators.compose([Validators.required])],
-      validTime: [true, Validators.compose([Validators.requiredTrue])],
-      candidate: ['', Validators.compose([Validators.required])],
-      vacancy: ['', Validators.compose([Validators.required])]
-      // ,
-      // completed: [f]
+  }
+
+  onNoClick(): void {
+    this.dialogRef.close();
+  }
+  getVacancies() {
+    this.canidateService.getVacancies(this.editedCandidate).subscribe(resVacancies => {
+      this.vacancies = resVacancies;
     });
+  }
+  getCandidates() {
+    this.canidateService.getAll().subscribe(res => {
+      this.candidates = res;
+    });
+  }
+  initData() {
+    this.minDate = this.dateTimeWorker.getTodayStart();
     if (this.data) {
       if ( this.data.isEdit) {
         this.editedInterview = Object.assign(new Interview(), this.data.sourceInterview);
@@ -111,27 +119,27 @@ export class InterviewModalComponent implements OnInit {
         this.planDate.time = this.dateTimeWorker.parseTimeObject(this.data.sourceDate);
         this.planDate.endTime = this.dateTimeWorker.parseTimeObject(this.data.sourceEndDate);
       }
+      // this.interviewForm.controls.completed.setValue(true);
     } else {
       this.editedInterview = new Interview();
     }
+    this.interviewForm = this.fb.group({
+      from: [{value: '', disabled: this.editedInterview.completed}, Validators.compose([Validators.required])],
+      fromTime: ['', Validators.compose([Validators.required])],
+      toTime: ['', Validators.compose([Validators.required])],
+      validTime: [true, Validators.compose([Validators.requiredTrue])],
+      candidate: ['', Validators.compose([Validators.required])],
+      vacancy: ['', Validators.compose([Validators.required])]
+      ,
+      completed: [true]
+    });
     this.updateDate();
     this.updateTime();
   }
-
-  onNoClick(): void {
-    this.dialogRef.close();
-  }
-  getVacancies() {
-    this.canidateService.getVacancies(this.editedCandidate).subscribe(resVacancies => {
-      this.vacancies = resVacancies;
-    });
-  }
-  getCandidates() {
-    this.canidateService.getAll().subscribe(res => {
-      this.candidates = res;
-    });
-  }
   ngOnInit() {
+    // setTimeout(() => {
+      this.initData();
+    // }, 200);
   }
   updateDateTime() {
     this.updateDate();
@@ -162,6 +170,10 @@ export class InterviewModalComponent implements OnInit {
     } else {
       this.interviewForm.controls.validTime.setValue(true);
     }
+    const now = this.dateTimeWorker.getNow();
+    const completedInterviewTime = new Date(this.editedInterview.planEndDate);
+    this.isCanCompleted = completedInterviewTime< now;
+    console.log('isCanCompleted', this.isCanCompleted);
   }
   updateTime() {
     for (const prop in this.planDate.time) {

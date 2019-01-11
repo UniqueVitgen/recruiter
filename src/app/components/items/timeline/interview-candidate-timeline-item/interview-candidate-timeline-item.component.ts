@@ -21,6 +21,7 @@ export class InterviewCandidateTimelineItemComponent implements OnInit, OnChange
   @Output() deleteEvent: EventEmitter<any> = new EventEmitter();
   time: TimeInput;
   planDate: DateTimeForm;
+  visibleCheckbox: boolean;
   darkTheme: NgxMaterialTimepickerTheme = {
     container: {
       // bodyBackgroundColor: '#424242',
