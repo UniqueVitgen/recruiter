@@ -59,6 +59,10 @@
         </mat-select>
       </mat-form-field>
 
+      <mat-form-filed class="example-full-width">
+        <mat-checkbox formControlName="completed">Check me!</mat-checkbox>
+      </mat-form-filed>
+
       <!--<mat-form-field class="example-full-width">-->
         <!--<input matInput placeholder="End Time"  [format]="24" [ngxTimepicker]="toggleTimepickerEnd">-->
         <!--<button class="custom-timepicker-toggle" mat-button matSuffix mat-icon-button aria-label="Pick End Time">-->
@@ -70,11 +74,6 @@
       <!--</mat-form-field>-->
 
       <br>
-      <mat-form-field class="example-full-width">
-        <input matInput formControlName="to"  [(ngModel)]="editedInterview.factDate" [min]="editedInterview.planDate" [matDatepicker]="picker1" placeholder="{{'Fact Date' | translate}}">
-        <mat-datepicker-toggle name="dateSuffix1" matSuffix [for]="picker1"></mat-datepicker-toggle>
-        <mat-datepicker #picker1></mat-datepicker>
-      </mat-form-field>
     </form>
   </dialog-body>
   <dialog-footer class="example-full-width">
