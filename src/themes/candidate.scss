@@ -49,16 +49,17 @@
       padding: 16px 16px 0 16px;
     }
     .user-avatar-hover:hover {
-      background-color: rgba(0, 0, 0, .3);
+      background-color: rgba(0, 0, 0, 0) !important;
     }
     &.candidate-have-hover {
       &:hover {
         cursor: pointer;
-        background-color: rgba(0, 0, 0, .3);
+        //background-color: rgba(0, 0, 0, .3);
         //border-color: #00b0f0;
         .user-avatar-hover {
           .avatar-hover {
             display: block;
+            background-color: rgba(0, 0, 0, 0) !important;
           }
         }
       }
