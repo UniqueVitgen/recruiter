@@ -28,6 +28,14 @@
       <span class="font-weight-bold">{{'Salary' | translate}}:</span>
       <span [matTooltip]="candidate.salaryInDollars"> {{candidate.salaryInDollars}}$</span>
     </div>
+    <div *ngIf="candidate.interviews && candidate.interviews.length > 0">
+      <span class="font-weight-bold">{{'Interview' | translate}}:</span>
+      <a  [routerLink]="'/interview/'+candidate.interviews[0].id" [matTooltip]="dateTimeWorker.getShortDateWithTime(candidate.interviews[0].planDate, 'short')"> {{dateTimeWorker.getShortDateWithTime(candidate.interviews[0].planDate, 'short')}}</a>
+    </div>
+    <div class="candidate-one-row" *ngIf="cv">
+      <span class="font-weight-bold">{{'CV' | translate}}:</span>
+      <a (click)="$event.stopPropagation()"  [href]="candidateWorker.generatePhotoUrl(cv)" [matTooltip]="fileWorker.getFilename(cv.filePath)"> {{fileWorker.getFilename(cv?.filePath)}}</a>
+    </div>
     <div *ngFor="let contact of candidate.contacts">
       <div *ngIf="contact.contactDetails !== '' && contact.preferred" class="candidate-one-row">
         <mat-icon *ngIf="contact.contactType.toString() === 'SKYPE'" svgIcon="skype-business"></mat-icon>
@@ -39,13 +47,4 @@
     </div>
 
   </div>
-
-
-  <!--</div>-->
-  <!--</div>-->
-  <!--<br>-->
-  <!--<span></span>-->
-  <!--<mat-card-content>-->
-
-  <!--</mat-card-content>-->
 </mat-card>

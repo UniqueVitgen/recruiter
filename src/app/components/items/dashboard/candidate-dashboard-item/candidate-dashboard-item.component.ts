@@ -7,6 +7,7 @@ import {Attachment} from '../../../../classes/attachment';
 import {CandidateWorker} from '../../../../workers/candidate/candidate.worker';
 import {TooltipPosition} from '@angular/material';
 import {DateTimeWorker} from '../../../../workers/date-time/date-time.worker';
+import {FileWorker} from '../../../../workers/file/file.worker';
 
 @Component({
   selector: 'app-candidate-dashboard-item',
@@ -27,6 +28,7 @@ export class CandidateDashboardItemComponent implements OnChanges {
   @Input() isCheck: boolean;
   select: boolean;
   public photo: Attachment;
+  public cv: Attachment;
   checkBoxValue: boolean;
   @Input()
   get checkBox() {
@@ -45,12 +47,14 @@ export class CandidateDashboardItemComponent implements OnChanges {
     public userWorker: UserWorker,
     public candidateWorker: CandidateWorker,
     public candidateService: CandidateService,
+    public fileWorker: FileWorker,
     public  dateTimeWorker: DateTimeWorker) {
     // this.photo = this.candidateWorker.findPhoto(this.candidate);
   }
 
   ngOnChanges(changes: SimpleChanges): void {
     this.photo = this.candidateWorker.findPhoto(this.candidate);
+    this.cv = this.candidateWorker.findCV(this.candidate);
   }
 
   deleteCandidate(): void {

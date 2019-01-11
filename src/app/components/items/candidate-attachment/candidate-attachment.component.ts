@@ -1,7 +1,7 @@
-import { 
-  Component, 
-  OnInit, 
-  Input, 
+import {
+  Component,
+  OnInit,
+  Input,
   Output,
   EventEmitter
 } from '@angular/core';
@@ -16,6 +16,7 @@ import {CandidateWorker} from '../../../workers/candidate/candidate.worker';
   styleUrls: ['./candidate-attachment.component.scss']
 })
 export class CandidateAttachmentComponent implements OnInit {
+  @Input() bigSize: boolean;
   @Input() attachment: Attachment;
   @Output() onDelete: EventEmitter<Attachment> = new EventEmitter();
 

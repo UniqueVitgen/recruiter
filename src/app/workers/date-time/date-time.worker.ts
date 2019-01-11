@@ -65,10 +65,15 @@ export class DateTimeWorker {
     }
   }
 
-  getDateWithTime(dateWithTime: Date, format?: string ) {
+  getDateWithTime(dateWithTime: Date) {
     if (dateWithTime) {
       return this.localDatePipe.transform(dateWithTime, 'mediumDate') + ' ' + this.translateWorker.translateWord('at')
         + ' ' + this.localDatePipe.transform(dateWithTime, 'shortTime');
+    }
+  }
+  getShortDateWithTime(dateWithTime: Date ) {
+    if (dateWithTime) {
+      return this.localDatePipe.transform(dateWithTime, 'short');
     }
   }
   getYesterday() {

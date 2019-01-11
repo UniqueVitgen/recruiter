@@ -114,6 +114,14 @@ export class CandidateWorker {
       });
     }
   }
+  findCV(candidate: Candidate) {
+    if (candidate) {
+      const attachments = candidate.attachments.slice();
+      return  attachments.reverse().find((attachment) => {
+        return attachment.attachmentType === AttachmentType.CV;
+      });
+    }
+  }
   transformCandidateContactInputArrayToContactArray(candidateContactInputArray: CandidateContactInput[],
                                                     oldContacts: ContactDetails[]): ContactDetails[] {
     return candidateContactInputArray.filter(candidateContactInput => {

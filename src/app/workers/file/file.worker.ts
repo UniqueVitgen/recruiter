@@ -17,10 +17,12 @@ export class FileWorker {
     link.click();
     link.parentNode.removeChild(link);
   }
-  getFilename(url: string) {
+  public getFilename(url: string) {
     let filename: string;
     filename = url.substring(url.lastIndexOf('/') + 1);
-    filename = url.substring(filename.lastIndexOf('\\') + 1);
+    console.log('agfter /', filename);
+    filename = filename.substring(filename.lastIndexOf('\\') + 1);
+    console.log('agfter \\', filename);
     return filename;
     // alert(filename);
   }

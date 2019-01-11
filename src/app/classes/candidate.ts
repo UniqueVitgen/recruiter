@@ -5,6 +5,7 @@ import { Attachment } from './attachment';
 import { CandidateState } from './candidate-state';
 import {Responsibility} from './responsibility';
 import {PositionModel} from './position-model';
+import {Interview} from './interview';
 
 export class Candidate {
   id?: number;
@@ -20,6 +21,7 @@ export class Candidate {
   responsibilities?: Responsibility[];
   timelines?: any[];
   position?: PositionModel = new PositionModel();
+  interviews?: Interview[];
 }
 export class CandidateSelected extends Candidate {
   select?: boolean;

@@ -1,13 +1,13 @@
-<div class="attachment-item">
-  <div class="row">
-    <div href="{{ attachment?.filePath }}" target="_blank"  class="col-2">
-      <mat-icon class="file-icon">assignment</mat-icon>
-    </div>
-    <div class="col-10 center-vertical-text-container">
-      <a [href]="candidateWorker.generatePhotoUrl(attachment)">{{fileWorker.getFilename(attachment?.filePath)}}</a>
-    </div>
-  </div>
+
+  <!--<div class="row">-->
+    <!--<div class="col-12">-->
+      <div class="center-vertical-text-container attachment-item" [href]="candidateWorker.generatePhotoUrl(attachment)">
+        <a  class="center-vertical-text-container" [href]="candidateWorker.generatePhotoUrl(attachment)">
+          <mat-icon [ngClass]="{'file-icon': bigSize}" class="file-icon">link</mat-icon>
+          &nbsp;{{fileWorker.getFilename(attachment?.filePath)}}</a>
+      </div>
+    <!--</div>-->
+  <!--</div>-->
   <!--<div class="text-center">-->
     <!--<mat-icon (click)="deleteAttachment()">delete_sweep</mat-icon>-->
   <!--</div>-->
-</div>
