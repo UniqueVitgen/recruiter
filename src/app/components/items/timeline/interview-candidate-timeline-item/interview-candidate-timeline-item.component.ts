@@ -21,7 +21,9 @@ export class InterviewCandidateTimelineItemComponent implements OnInit, OnChange
   @Output() deleteEvent: EventEmitter<any> = new EventEmitter();
   time: TimeInput;
   planDate: DateTimeForm;
+  minDate: Date;
   visibleCheckbox: boolean;
+  isCanCompleted: boolean;
   darkTheme: NgxMaterialTimepickerTheme = {
     container: {
       // bodyBackgroundColor: '#424242',
@@ -58,6 +60,10 @@ export class InterviewCandidateTimelineItemComponent implements OnInit, OnChange
       this.viewOfDate = this.localDatePipe.transform(this.editedInterview.createdAt, 'mediumDate');
       this.viewOfTime = this.localDatePipe.transform(this.editedInterview.createdAt, 'shortTime');
     });
+    this.minDate = this.dateTimeWorker.getTodayStart();
+    const now = this.dateTimeWorker.getNow();
+    const completedInterviewTime = new Date(this.editedInterview.planEndDate);
+    this.isCanCompleted = completedInterviewTime < now;
   }
   onFocusoutAnyInput(value: boolean = true) {
     this.updateDateTime();
