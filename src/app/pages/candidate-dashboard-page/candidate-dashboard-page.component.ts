@@ -87,7 +87,7 @@ export class CandidateDashboardPageComponent implements OnInit {
       this.topYearRequired = this.arrayWorker.calculateMax(candidateWithAges, 'age');
       console.log('lowYearRequired', this.lowYearRequired);
       console.log('topYearRequired', this.topYearRequired);
-      this.changeFilterObject();
+      // this.changeFilterObject();
       this.initFilterObject();
       this.sourceStatuses = this.enumWorker.getValuesFromEnum(CandidateState);
     });
@@ -129,7 +129,7 @@ export class CandidateDashboardPageComponent implements OnInit {
     if (this.minSalary < this.lowSalary || filterObject.minSalaryOnTheEdge) {
       this.minSalary = this.lowSalary;
     }
-    if (this.maxSalary > this.topSalary || filterObject.maxYearRequiredOnTheEdge) {
+    if (this.maxSalary > this.topSalary || filterObject.maxSalaryOnTheEdge) {
       this.maxSalary = this.topSalary;
     }
     console.log('this.minYearRequired', this.minYearRequired);
@@ -239,6 +239,7 @@ export class CandidateDashboardPageComponent implements OnInit {
       selectedStatuses: this.selectedStatuses,
       isFilter: this.isFilter
     });
+    console.log('filterobjectchange', this.filterStorage.getCandidateFilter());
   }
   changePaginationObject(): void {
     console.log(this.page, this.size)
