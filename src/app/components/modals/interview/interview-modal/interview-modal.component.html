@@ -57,7 +57,7 @@
                     [placeholder]="'Interviewers' | translate" required>
           <mat-option *ngFor="let interviewer of data.sourceInterviewers" [value]="interviewer">
             <img class="select-img"  [src]="candidateWorker.generatePhotoUrl(interviewer.attachment)"
-                 onerror="this.src = '/assets/candidate/middle-man.jpg'">
+                 onerror="this.src = '/assets/candidate/middle-man-interviewer.png'">
             {{userWorker.formatFullName(interviewer)}}
           </mat-option>
         </mat-select>
