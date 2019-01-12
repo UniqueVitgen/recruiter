@@ -36,6 +36,7 @@ export class InterviewModalComponent implements OnInit {
   public sourceVacancy: Vacancy;
   public candidates: Candidate[];
   public minDate: Date;
+  public minTime: string;
   public isCanCompleted: boolean;
   @Output('clickSave') outputClickSave: EventEmitter<BaseDialogResult<InterviewExtended>> = new EventEmitter();
   @Output('clickDelete') outputClickDelete: EventEmitter<BaseDialogResult<InterviewExtended>> = new EventEmitter();
@@ -96,7 +97,30 @@ export class InterviewModalComponent implements OnInit {
     });
   }
   initData() {
-    this.minDate = this.dateTimeWorker.getTodayStart();
+    const now = this.dateTimeWorker.getNow();
+    this.minDate = now;
+    this.doIfHaveData();
+    // this.minTime = this.initMinTime(this.planDate.dateDate);
+    this.interviewForm = this.fb.group({
+      from: [{value: '', disabled: this.editedInterview.completed}, Validators.compose([Validators.required])],
+      fromTime: ['', Validators.compose([Validators.required])],
+      toTime: ['', Validators.compose([Validators.required])],
+      validTime: [true, Validators.compose([Validators.requiredTrue])],
+      candidate: [this.userWorker.formatFullName(this.editedCandidate), Validators.compose([Validators.required])],
+      vacancy: ['', Validators.compose([Validators.required])],
+      interviewers: ['', Validators.compose([])]
+      ,
+      completed: [true]
+    });
+    this.updateDate();
+    this.updateTime();
+  }
+  ngOnInit() {
+    // setTimeout(() => {
+      this.initData();
+    // }, 200);
+  }
+  doIfHaveData() {
     if (this.data) {
       if ( this.data.isEdit) {
         this.editedInterview = Object.assign(new Interview(), this.data.sourceInterview);
@@ -125,24 +149,12 @@ export class InterviewModalComponent implements OnInit {
     } else {
       this.editedInterview = new Interview();
     }
-    this.interviewForm = this.fb.group({
-      from: [{value: '', disabled: this.editedInterview.completed}, Validators.compose([Validators.required])],
-      fromTime: ['', Validators.compose([Validators.required])],
-      toTime: ['', Validators.compose([Validators.required])],
-      validTime: [true, Validators.compose([Validators.requiredTrue])],
-      candidate: [this.userWorker.formatFullName(this.editedCandidate), Validators.compose([Validators.required])],
-      vacancy: ['', Validators.compose([Validators.required])],
-      interviewers: ['', Validators.compose([])]
-      ,
-      completed: [true]
-    });
-    this.updateDate();
-    this.updateTime();
   }
-  ngOnInit() {
-    // setTimeout(() => {
-      this.initData();
-    // }, 200);
+  initMinTime(date: Date) {
+    const now = this.dateTimeWorker.getNow();
+    if (this.dateTimeWorker.isToday(date)) {
+      return this.dateTimeWorker.convertDateToTimeString(now);
+    }
   }
   updateDateTime() {
     this.updateDate();
@@ -159,6 +171,7 @@ export class InterviewModalComponent implements OnInit {
       console.log(this.planDate.value);
     }
     this.setPlaneDate();
+    // this.minTime = this.initMinTime(this.planDate.dateDate);
   }
   changeCandidate() {
     this.getVacancies();
@@ -190,6 +203,7 @@ export class InterviewModalComponent implements OnInit {
       this.planDate.endTimeString = this.dateTimeWorker.convertTimeInputToTimeString(this.planDate.endTime, 24);
     }
     console.log(this.planDate);
+    if(this.planDate.dateDate)
     this.setPlaneDate();
     console.log(this.interviewForm);
   }

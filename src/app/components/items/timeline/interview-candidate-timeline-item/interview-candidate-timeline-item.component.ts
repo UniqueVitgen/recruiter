@@ -42,6 +42,7 @@ export class InterviewCandidateTimelineItemComponent implements OnInit, OnChange
   editedInterview: Interview;
   viewOfDate: string;
   viewOfTime: string;
+  minTime: string;
 
   constructor(public dateTimeWorker: DateTimeWorker,
               private dateTimeFormWorker: DateTimeFormWorker,
@@ -55,6 +56,7 @@ export class InterviewCandidateTimelineItemComponent implements OnInit, OnChange
       new Date(this.editedInterview.planEndDate));
     const result = this.dateTimeFormWorker.updateDateTime(this.editedInterview, this.planDate);
     this.planDate = result.planDate;
+    // this.minTime = this.dateTimeWorker.initMinTime(this.planDate.dateDate);
     this.translateWorker.changeValue.subscribe(res => {
       // this.viewOfDate = this.dateTimeWorker.getDateWithTime(this.editedInterview.createdAt);
       this.viewOfDate = this.localDatePipe.transform(this.editedInterview.createdAt, 'mediumDate');

@@ -40,8 +40,8 @@
       <!--<button [md2DatepickerToggle]="birthday"></button>-->
 
 
-      <app-custom-timepicker  [disabled]="editedInterview.completed" [placeholder]="'Start time'" required formControlName="fromTime" [min]="dateTimeWorker.config.minTime" [max]="dateTimeWorker.config.maxTime" [(ngModel)]="planDate.time" [fullWidth]="true" (ngModelChange)="updateTime()"></app-custom-timepicker>
-      <app-custom-timepicker  [disabled]="editedInterview.completed" [placeholder]="'End time'" required formControlName="toTime" [min]="planDate.timeString || dateTimeWorker.config.minTime" [max]="dateTimeWorker.config.maxTime" [(ngModel)]="planDate.endTime" [fullWidth]="true" (ngModelChange)="updateTime()"></app-custom-timepicker>
+      <app-custom-timepicker  [disabled]="editedInterview.completed" [placeholder]="'Start time'" required formControlName="fromTime" [min]="minTime || dateTimeWorker.config.minTime" [max]="dateTimeWorker.config.maxTime" [(ngModel)]="planDate.time" [fullWidth]="true" (ngModelChange)="updateTime()"></app-custom-timepicker>
+      <app-custom-timepicker  [disabled]="editedInterview.completed" [placeholder]="'End time'" required formControlName="toTime" [min]="minTime || planDate.timeString || dateTimeWorker.config.minTime" [max]="dateTimeWorker.config.maxTime" [(ngModel)]="planDate.endTime" [fullWidth]="true" (ngModelChange)="updateTime()"></app-custom-timepicker>
       <mat-form-field class="example-full-width" *ngIf="!data.fixedCandidate">
         <mat-select  [disabled]="editedInterview.completed" [placeholder]="'Candidate' | translate" required formControlName="candidate"
           [compareWith]="typeCheckingWorker.compareObjects" [(ngModel)]="editedCandidate" (selectionChange)="changeCandidate()">

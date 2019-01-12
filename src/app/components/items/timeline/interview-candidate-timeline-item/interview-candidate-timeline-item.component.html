@@ -26,9 +26,9 @@
     <mat-datepicker-toggle name="dateSuffix1" matSuffix [for]="picker1"></mat-datepicker-toggle>
     <mat-datepicker [disabled]="editedInterview.completed" #picker1></mat-datepicker>
   </mat-form-field>
-    <app-custom-timepicker [readonly]="editedInterview.completed" required placeholder="Start time" [min]="dateTimeWorker.config.minTime" [max]="planDate.endTimeString || dateTimeWorker.config.maxTime" [(ngModel)]="planDate.time" (ngModelChange)="onFocusoutAnyInput()" [hideUnderline]="true"></app-custom-timepicker>
+    <app-custom-timepicker [readonly]="editedInterview.completed" required placeholder="Start time" [min]="minTime || dateTimeWorker.config.minTime" [max]="planDate.endTimeString || dateTimeWorker.config.maxTime" [(ngModel)]="planDate.time" (ngModelChange)="onFocusoutAnyInput()" [hideUnderline]="true"></app-custom-timepicker>
   &nbsp;
-    <app-custom-timepicker [readonly]="editedInterview.completed" required placeholder="End time" [min]="planDate.timeString || dateTimeWorker.config.minTime" [max]="dateTimeWorker.config.maxTime" [(ngModel)]="planDate.endTime" (ngModelChange)="onFocusoutAnyInput()" [hideUnderline]="true"></app-custom-timepicker>
+    <app-custom-timepicker [readonly]="editedInterview.completed" required placeholder="End time" [min]="minTime || planDate.timeString || dateTimeWorker.config.minTime" [max]="dateTimeWorker.config.maxTime" [(ngModel)]="planDate.endTime" (ngModelChange)="onFocusoutAnyInput()" [hideUnderline]="true"></app-custom-timepicker>
 
   <br>
   <!--<mat-form-field class="custom-form-field">-->

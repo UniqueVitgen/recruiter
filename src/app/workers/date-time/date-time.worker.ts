@@ -132,6 +132,10 @@ export class DateTimeWorker {
       hours: timeObject.getHours()
     };
   }
+  convertDateToTimeString(date: Date) {
+    const timeObject: TimeInput = this.parseTimeObject(date);
+    return this.convertTimeInputToTimeString(timeObject, 24);
+  }
   convertTimeInputToTimeString(timeInput: TimeInput, format: number): string {
     let time = this.transformTimeComponent(timeInput.hours) + ':' + this.transformTimeComponent(timeInput.minutes);
     if (format === 12) {
@@ -200,5 +204,11 @@ export class DateTimeWorker {
   }
   transformTimeComponent(num: number) {
     return num < 10 ? '0' + num : num;
+  }
+  initMinTime(date: Date) {
+    const now = this.getNow();
+    if (this.isToday(date)) {
+      return this.convertDateToTimeString(now);
+    }
   }
 }
