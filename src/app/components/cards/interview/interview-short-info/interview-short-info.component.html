@@ -35,6 +35,17 @@
         <a [routerLink]="'/job-description/'+interview.vacancy.id">{{interview.vacancy.position.name}}</a>
       </div>
     </div>
+    <div class="row">
+      <div class="col-3">
+        <span class="font-weight-bold float-right">{{ 'Interviewers' | translate}}:</span>
+      </div>
+      <div class="col-9">
+        <a *ngFor="let interviewer of interview.interviewers; let i = index">
+          <span>{{userWorker.formatFullName(interviewer)}}</span>
+          <span *ngIf="interview.interviewers.length - 1 != i ">, </span>
+        </a>
+      </div>
+    </div>
 
     <!--<mat-form-field class="example-full-width">-->
       <!--<input matInput [value]="interview.planDate" [matDatepicker]="picker" placeholder="When">-->

@@ -5,6 +5,7 @@ import {UserWorker} from '../../../../workers/user/user.worker';
 import {DateTimeWorker} from '../../../../workers/date-time/date-time.worker';
 import {TranslateWorker} from '../../../../workers/translate/translate.worker';
 import {Router} from '@angular/router';
+import {FileWorker} from '../../../../workers/file/file.worker';
 
 @Component({
   selector: 'app-interview-short-info',
@@ -20,6 +21,7 @@ export class InterviewShortInfoComponent implements OnInit, OnChanges {
 
   constructor(public userWorker: UserWorker,
               private dateTimeWorker: DateTimeWorker,
+              private fileWorker: FileWorker,
               private translateWorker: TranslateWorker) {
   }
 

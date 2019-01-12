@@ -11,7 +11,7 @@ export class Interview extends EventNote {
   planEndDate: string;
   completed: boolean;
   comment?: string;
-  interviewers: Interviewer;
+  interviewers: Interviewer[];
 }
 
 export class InterviewExtended extends Interview {
