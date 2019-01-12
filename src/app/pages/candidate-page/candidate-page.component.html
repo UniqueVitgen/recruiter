@@ -24,6 +24,7 @@
       <app-short-info-user id="short" (clickAvatar)="clickAvatar()" (clickEditContacts)="clickEditContacts()"
                            *ngIf="candidate"
                            [haveHoverEffectOnAvatar]="true" [isEditIconOnAvatar]="true" [readonly]="false"
+                           (editCandidate)="updateCandidate($event)"
                            [candidate]="candidate" [vacancies]="vacancies"></app-short-info-user>
     </div>
     <div  class="custom-sticky-timeline">

@@ -1,4 +1,14 @@
-import {AfterContentChecked, AfterViewChecked, Component, ElementRef, HostListener, OnChanges, OnInit, ViewChild} from '@angular/core';
+import {
+  AfterContentChecked,
+  AfterViewChecked,
+  Component,
+  ElementRef,
+  HostListener,
+  NgZone,
+  OnChanges,
+  OnInit,
+  ViewChild
+} from '@angular/core';
 import {ActivatedRoute} from '@angular/router';
 import {CandidateService} from 'src/app/services/candidate/candidate.service';
 import {Candidate} from 'src/app/classes/candidate';
@@ -32,6 +42,7 @@ import {PositionModel} from '../../classes/position-model';
 import {ContactsCandidateModalComponent} from '../../components/modals/candidate/contacts-candidate-modal/contacts-candidate-modal.component';
 import {InterviewerService} from '../../services/interviewer/interviewer.service';
 import {Interviewer} from '../../classes/interviewer';
+import {TypeCheckingWorker} from '../../workers/type-checking/type-checking.worker';
 
 @Component({
   selector: 'app-candidate-page',
@@ -56,12 +67,14 @@ export class CandidatePageComponent implements OnInit, AfterContentChecked, Afte
   constructor(
     private route: ActivatedRoute,
     private eventNoteWorker: EventNoteWorker,
+    private typeCheckingWorker: TypeCheckingWorker,
     private feedbackService: FeedbackService,
     private devFeedbackService: DevFeedbackService,
     private candidateService: CandidateService,
     private interviewService: InterviewService,
     private vacancyService: VacancyService,
     private interviewerService: InterviewerService,
+    private zone: NgZone,
     public dialog: MatDialog) { }
 
   ngOnInit() {
@@ -105,7 +118,11 @@ export class CandidatePageComponent implements OnInit, AfterContentChecked, Afte
          // }
      //, 200);
   }
-
+  updateCandidate(candidate: Candidate): Subscription {
+    return this.candidateService.update(candidate).subscribe(resCandidate => {
+      this.candidate = candidate;
+    });
+  }
   ngAfterContentChecked() {
   }
   clickEditContacts() {
@@ -256,6 +273,13 @@ export class CandidatePageComponent implements OnInit, AfterContentChecked, Afte
       }
   }
   changeTimelineItem(object: any) {
+    this.eventNoteList = this.eventNoteList.map(event => {
+      if (event.id === object.id) {
+        return object;
+      } else {
+        return event;
+      }
+    });
     if (this.eventNoteWorker.isAttachement(object)) {
       this.candidate.attachments = this.candidate.attachments.map((attachment) => {
         if (attachment.id === object.id) {
@@ -279,11 +303,22 @@ export class CandidatePageComponent implements OnInit, AfterContentChecked, Afte
           return attachment;
         }
       });
+      this.eventNoteList = this.eventNoteList.map(event => {
+        if (event.id === object.id) {
+          return object;
+        } else {
+          return event;
+        }
+      });
+      console.log('candidate', this.candidate, this.eventNoteList);
       this.candidateService.update(this.candidate).subscribe(resMessage => {
-        // this.getCandidate();
+        this.zone.runOutsideAngular(() => {
+          this.getCandidate(false);
+        });
       });
     } else if (this.eventNoteWorker.isInterview(object)) {
       this.interviewService.update(object).subscribe( res => {
+        this.getCandidate();
         // this.getCandidate();
       });
     }
@@ -411,14 +446,21 @@ export class CandidatePageComponent implements OnInit, AfterContentChecked, Afte
   addTimelineItem(candidate: Candidate) {
     this.getCandidate();
   }
-  getCandidate(): Subscription {
+  getCandidate(withTimeline: boolean = true): Subscription {
     return this.candidateService.get(this.id).subscribe(res => {
       this.candidate = res;
-      this.candidateService.getTimeline(this.candidate).subscribe(resTimeline => {
-        this.eventNoteList = resTimeline;
-      });
+      if (withTimeline) {
+        this.candidateService.getTimeline(this.candidate).subscribe(resTimeline => {
+          this.eventNoteList = resTimeline;
+        });
+      }
       console.log(this.eventNoteList);
       console.log('res', res);
+    });
+  }
+  getTimeline(): Subscription {
+    return this.candidateService.getTimeline(this.candidate).subscribe(resTimeline => {
+      this.eventNoteList = resTimeline;
     });
   }
   getInterviewers(): Subscription {

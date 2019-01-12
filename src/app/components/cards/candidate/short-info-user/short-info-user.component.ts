@@ -78,8 +78,9 @@ export class ShortInfoUserComponent implements OnInit, OnDestroy, OnChanges {
 
   ngOnChanges(changes: SimpleChanges): void {
     console.log('candidate', this.editedCandidate, this.isSavedCandidate);
+    this.editedCandidate = this.typeCheckingWorker.parseObject(this.candidate);
+    console.log('editedCandidate new ', this.editedCandidate);
     if (this.isSavedCandidate) {
-      this.editedCandidate = this.typeCheckingWorker.parseObject(this.candidate);
       // if (this.editedCandidate.position == null) {this.editedCandidate.position = new PositionModel(); }
       console.log('editedCandidate -', this.editedCandidate);
       this.candidateForm = this.fb.group({
@@ -228,9 +229,9 @@ export class ShortInfoUserComponent implements OnInit, OnDestroy, OnChanges {
       const contacts = this.candidateWorker.transformCandidateContactInputArrayToContactArray(this.tests, this.editedCandidate.contacts);
       this.editedCandidate.contacts = contacts;
       this.editedCandidate = this.saveInfoFormValue(this.editedCandidate);
-      this.candidateSerivce.update(this.editedCandidate).subscribe(res => {
-        this.outputEditCandidate.emit(res);
-      });
+      // this.candidateSerivce.update(this.editedCandidate).subscribe(res => {
+        this.outputEditCandidate.emit(this.editedCandidate);
+      // });
     }
   }
 

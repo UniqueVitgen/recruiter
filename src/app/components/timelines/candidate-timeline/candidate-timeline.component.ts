@@ -79,7 +79,7 @@ export class CandidateTimelineComponent implements OnInit, OnChanges {
   ngOnChanges(changes: SimpleChanges): void {
     console.log(this.timelineNotes);
     if (this.timelineNotes) {
-      this.editedTimeLine = JSON.parse(JSON.stringify(this.timelineNotes));
+      this.editedTimeLine = this.typeCheckingWorker.parseObject(this.timelineNotes);
     }
     console.log(this.editedTimeLine);
   }

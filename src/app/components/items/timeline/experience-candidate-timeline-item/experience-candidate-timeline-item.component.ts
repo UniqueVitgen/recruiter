@@ -47,7 +47,8 @@ export class ExperienceCandidateTimelineItemComponent implements OnInit, OnChang
 
   ngOnChanges(changes: SimpleChanges): void {
     if (this.isSaved) {
-      this.editedExperience = Object.assign({}, this.experience);
+      // this.editedExperience = Object.assign({}, this.experience);
+      this.editedExperience = this.experience;
       this.experienceForm = this.fb.group({
         companyName: [this.editedExperience.companyName.name, Validators.compose([Validators.required])],
         dateFrom: [this.editedExperience.dateFrom, Validators.compose([Validators.required])],
