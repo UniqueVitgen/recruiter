@@ -14,6 +14,8 @@ import {PositionModel} from '../../../../classes/position-model';
 import {SearchWorker} from '../../../../workers/search/search.worker';
 import {TeamService} from '../../../../services/team/team.service';
 import {Team} from '../../../../classes/team';
+import {UserWorker} from '../../../../workers/user/user.worker';
+import {DateTimeWorker} from '../../../../workers/date-time/date-time.worker';
 
 @Component({
   selector: 'app-experience-candidate-modal',
@@ -29,6 +31,8 @@ export class ExperienceCandidateModalComponent implements OnInit {
   public positions: PositionModel[];
   public teams: Team[];
   public selectedPositions: PositionModel[];
+  public maxDate: Date;
+  public minDate: Date;
   @Output('clickSave') outputClickSave: EventEmitter<CandidateExperience> = new EventEmitter();
 
   constructor(
@@ -39,6 +43,8 @@ export class ExperienceCandidateModalComponent implements OnInit {
     private teamService: TeamService,
     private searchWorker: SearchWorker,
     private fb: FormBuilder,
+    private dateTimeWorker: DateTimeWorker,
+    private userWorker: UserWorker,
     @Inject(MAT_DIALOG_DATA) public data: ExperienceDialogData ) {
     // console.log('candidate', this.candidate);
     this.editedCandidate = Object.assign({}, this.data.sourceCandidate);
@@ -58,6 +64,8 @@ export class ExperienceCandidateModalComponent implements OnInit {
   }
 
   ngOnInit() {
+    this.minDate = this.userWorker.generateRequiredStartDate();
+    this.maxDate = this.dateTimeWorker.getTodayStart();
   }
   getPositions() {
     this.positionService.getAll().subscribe((resPositions) => {

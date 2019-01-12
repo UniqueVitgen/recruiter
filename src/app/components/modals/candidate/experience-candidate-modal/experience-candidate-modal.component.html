@@ -17,16 +17,16 @@
       <!--</mat-form-field>-->
       <app-autocomplete-input formControlName="companyName" [placeholder]="'company Name'" [searchProperty]="'name'" [visibleUnderline]="true" [fullWidth]="true" [positions]="teams" [(ngModel)]="editedExperience.companyName.name" required></app-autocomplete-input>
 
-      <mat-form-field>
-        <input required readonly formControlName="dateFrom" matInput [(ngModel)]="editedExperience.dateFrom" [matDatepicker]="picker" placeholder="{{'Start Experience' | translate}}" (click)="picker.open()">
+      <mat-form-field class="custom-form-field-candidate">
+        <input required readonly formControlName="dateFrom" matInput [min]="minDate" [max]="maxDate" [(ngModel)]="editedExperience.dateFrom" [matDatepicker]="picker" placeholder="{{'Start Experience' | translate}}" (click)="picker.open()">
         <mat-datepicker-toggle name="dateSuffix" matSuffix [for]="picker"></mat-datepicker-toggle>
         <mat-datepicker  #picker startView="multi-year"></mat-datepicker>
       </mat-form-field>
       &nbsp;
       &nbsp;
       <!--<br>-->
-      <mat-form-field >
-        <input required readonly matInput formControlName="dateTo"  [(ngModel)]="editedExperience.dateTo" [min]="editedExperience.dateFrom" [matDatepicker]="picker1" placeholder="{{'End Experience' | translate}}" (click)="picker1.open()">
+      <mat-form-field class="custom-form-field-candidate">
+        <input required [disabled]="!editedExperience.dateFrom" [matTooltip]="(!editedExperience.dateFrom ? 'Enter start experience' : null) | translate" matTooltipPosition="right" readonly matInput formControlName="dateTo" [max]="maxDate" [(ngModel)]="editedExperience.dateTo" [min]="editedExperience.dateFrom" [matDatepicker]="picker1" placeholder="{{'End Experience' | translate}}" (click)="picker1.open()">
         <mat-datepicker-toggle name="dateSuffix1" matSuffix [for]="picker1"></mat-datepicker-toggle>
         <mat-datepicker #picker1 startView="multi-year"></mat-datepicker>
       </mat-form-field>
