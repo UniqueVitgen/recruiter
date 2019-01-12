@@ -1,4 +1,4 @@
-import {Component, OnChanges, OnInit, SimpleChanges} from '@angular/core';
+import {ChangeDetectorRef, Component, OnChanges, OnInit, SimpleChanges} from '@angular/core';
 import {Candidate, CandidateDashboardItem} from 'src/app/classes/candidate';
 import { CandidateService } from 'src/app/services/candidate/candidate.service';
 import {SearchWorker} from '../../workers/search/search.worker';
@@ -64,6 +64,7 @@ export class CandidateDashboardPageComponent implements OnInit {
               private sortStorage: SortStorage,
               private filterStorage: FilterStorage,
               private paginationStorage: PaginationStorage,
+              private cd: ChangeDetectorRef,
               public dialog: MatDialog, public vacancyService: VacancyService) { }
 
   ngOnInit() {
@@ -88,7 +89,9 @@ export class CandidateDashboardPageComponent implements OnInit {
       console.log('lowYearRequired', this.lowYearRequired);
       console.log('topYearRequired', this.topYearRequired);
       // this.changeFilterObject();
-      this.initFilterObject();
+      setTimeout(() => {
+        this.initFilterObject();
+        }, 200);
       this.sourceStatuses = this.enumWorker.getValuesFromEnum(CandidateState);
     });
     this.getVacancies();
@@ -101,39 +104,41 @@ export class CandidateDashboardPageComponent implements OnInit {
     this.changeFilterObject();
   }
   initFilterObject() {
-    const filterObject = this.filterStorage.getCandidateFilter();
-    if (filterObject) {
-      this.minSalary = filterObject.minSalary;
-      this.maxSalary = filterObject.maxSalary;
-      this.minYearRequired = filterObject.minYearRequired;
-      this.maxYearRequired = filterObject.maxYearRequired;
-      this.selectedStatuses = filterObject.selectedStatuses;
-      this.includeUndefinedBirthday = filterObject.includeUndefinedBirthday;
-      this.isFilter = filterObject.isFilter;
-    } else {
-      this.minSalary = this.lowSalary;
-      this.maxSalary = this.topSalary;
-      this.minYearRequired = this.lowYearRequired;
-      this.maxYearRequired = this.topYearRequired;
-      this.selectedStatuses = this.enumWorker.getValuesFromEnum(CandidateState);
-      this.includeUndefinedBirthday = true;
-      this.isFilter = false;
-    }
-    console.log('filterObject', filterObject);
-    if (this.minYearRequired < this.lowYearRequired || filterObject.minYearRequiredOnTheEdge) {
-      this.minYearRequired = this.lowYearRequired;
-    }
-    if (this.maxYearRequired > this.topYearRequired || filterObject.maxYearRequiredOnTheEdge) {
-      this.maxYearRequired = this.topYearRequired;
-    }
-    if (this.minSalary < this.lowSalary || filterObject.minSalaryOnTheEdge) {
-      this.minSalary = this.lowSalary;
-    }
-    if (this.maxSalary > this.topSalary || filterObject.maxSalaryOnTheEdge) {
-      this.maxSalary = this.topSalary;
-    }
-    console.log('this.minYearRequired', this.minYearRequired);
-    console.log('this.maxYearRequired', this.maxYearRequired);
+    setTimeout(() => {
+      const filterObject = this.filterStorage.getCandidateFilter();
+      if (filterObject) {
+        this.minSalary = filterObject.minSalary;
+        this.maxSalary = filterObject.maxSalary;
+        this.minYearRequired = filterObject.minYearRequired;
+        this.maxYearRequired = filterObject.maxYearRequired;
+        this.selectedStatuses = filterObject.selectedStatuses;
+        this.includeUndefinedBirthday = filterObject.includeUndefinedBirthday;
+        this.isFilter = filterObject.isFilter;
+      } else {
+        this.minSalary = this.lowSalary;
+        this.maxSalary = this.topSalary;
+        this.minYearRequired = this.lowYearRequired;
+        this.maxYearRequired = this.topYearRequired;
+        this.selectedStatuses = this.enumWorker.getValuesFromEnum(CandidateState);
+        this.includeUndefinedBirthday = true;
+        this.isFilter = false;
+      }
+      console.log('filterObject', filterObject);
+      if (this.minYearRequired < this.lowYearRequired || filterObject.minYearRequiredOnTheEdge) {
+        this.minYearRequired = this.lowYearRequired;
+      }
+      if (this.maxYearRequired > this.topYearRequired || filterObject.maxYearRequiredOnTheEdge) {
+        this.maxYearRequired = this.topYearRequired;
+      }
+      if (this.minSalary < this.lowSalary || filterObject.minSalaryOnTheEdge) {
+        this.minSalary = this.lowSalary;
+      }
+      if (this.maxSalary > this.topSalary || filterObject.maxSalaryOnTheEdge) {
+        this.maxSalary = this.topSalary;
+      }
+      // this.cd.detectChanges();
+      console.log('maxSalary', filterObject.maxSalaryOnTheEdge, this.topSalary, this.maxSalary);
+    }, 0);
   }
   initSortObject() {
     const sortObject: SortDashboard = this.sortStorage.getCandidateSort();

@@ -55,8 +55,6 @@ export class CandidateDashboardComponent implements OnInit, OnChanges {
   }
 
   ngOnChanges(changes: SimpleChanges): void {
-    console.log('this.minYearRequired', this.minYearsRequired);
-    console.log('this.maxYearRequired', this.maxYearsRequired);
     if (this.isPagination) {
       if (this.itemsPerPage == null) {
         this.itemsPerPage = 4;
