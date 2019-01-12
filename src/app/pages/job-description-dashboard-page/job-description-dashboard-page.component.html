@@ -34,12 +34,13 @@
 <br>
 <mat-card>
   <div class="row">
-    <div class="col-3 padding-element">
+    <div class="col-5 padding-element">
       <div class="column">
-        <label style="margin-left: 50px;">{{'Total number of vacancies' | translate}} ({{jobDescriptionList?.length}})</label>
+        <label style="margin-left: 50px;"><span>{{'Selected number of vacancies' | translate}}</span> ({{filteredVacanciesLength}}
+          {{'of' | translate}} {{jobDescriptionList?.length}})</label>
       </div>
     </div>
-    <div class="col-5">
+    <div class="col-3">
     </div>
     <div class="col-4 item-center">
       <button (click)="openJobDescriptionDialog()" class="vacancy-add-buttons" mat-raised-button color="primary">{{'Add new vacancy' | translate}}
@@ -63,13 +64,14 @@
                                  [sortedProperty]="sortedProperty"
                                  [validSalaryFilter]="validSalaryFilter"
                                  [validYearsRequiredFilter]="validYearsRequiredFilter"
+                                 (changeFilteredLength)="changeFilteredLength($event)"
                                  (addVacancy)="getVacancies()" (deleteVacancy)="deleteVacancy($event)"></app-job-description-dashboard>
   <br>
   <app-pagination-toolbar
     [itemsPerPageValues]="itemsPerPageValues"
     [placeholder]="'VacancyPerPage'"
     [addButtonText]="'Add new vacancy'"
-    [numberOfVacancies]="jobDescriptionList?.length"
+    [numberOfVacancies]="filteredVacanciesLength"
     [numberOfVacanciesTitle]="'Total number of vacancies' | translate "
     [(size)]="size"
     [(page)]="page"

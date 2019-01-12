@@ -51,6 +51,7 @@ export class JobDescriptionDashboardPageComponent implements OnInit {
   sourceDirections: string[];
   sortDirection: SortDirection;
   sortedProperty: string;
+  filteredVacanciesLength: number = 0;
   constructor(private vacancyService: VacancyService,
               public dialog: MatDialog,
               private typeCheckingWorker: TypeCheckingWorker,
@@ -136,6 +137,9 @@ export class JobDescriptionDashboardPageComponent implements OnInit {
       this.page = paginationObject.page;
       this.size = paginationObject.size;
     }
+  }
+  changeFilteredLength(value: number) {
+    this.filteredVacanciesLength = value;
   }
   search(value: string) {
     this.searchValue = value;

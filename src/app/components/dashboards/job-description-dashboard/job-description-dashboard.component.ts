@@ -43,6 +43,7 @@ export class JobDescriptionDashboardComponent implements OnInit, OnChanges {
   @Input() isSort: boolean;
   @Input() sortedProperty: string;
   @Input() sortedDirection: SortDirection;
+  @Output('changeFilteredLength') outputChangeFilteredLength: EventEmitter<number> = new EventEmitter();
   isClosedIcon: boolean = false;
   public selectedVacancies: Vacancy[];
 
@@ -76,6 +77,7 @@ export class JobDescriptionDashboardComponent implements OnInit, OnChanges {
       console.log('isSort', this.isSort, this.sortedProperty);
       this.selectedVacancies = this.sortByProperty(this.selectedVacancies, this.sortedProperty);
     }
+    this.outputChangeFilteredLength.emit(this.selectedVacancies.length);
     console.log('selectedVacancies', this.selectedVacancies);
   }
 

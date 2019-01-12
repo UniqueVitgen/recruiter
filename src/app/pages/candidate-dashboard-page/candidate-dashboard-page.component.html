@@ -37,12 +37,21 @@
 
 <mat-card>
   <div class="row">
-    <div class="col-3 padding-element">
+    <div class="col-5 padding-element">
       <div class="column">
-        <label style="margin-left: 50px;">{{'Total number of candidates' | translate}} ({{candidates?.length}})</label>
+        <label style="margin-left: 50px;"><span>{{'Selected number of candidates' | translate}}</span> ({{filteredCandidatesLength}}
+          {{'of' | translate}} {{candidates?.length}})</label>
       </div>
+      <!--<div class="column" *ngIf="filteredCandidatesLength">-->
+        <!--<label style="margin-left: 50px;"><span>{{'Selected number of candidates' | translate}}</span> ({{filteredCandidatesLength}}-->
+          <!--{{'of' | translate}} {{candidates?.length}} )</label>-->
+      <!--</div>-->
    </div>
-    <div class="col-5">
+    <div class="col-3">
+      <!--<div class="column">-->
+        <!--<label style="margin-left: 50px;"><span>{{'Selected number of candidates' | translate}}</span> ({{filteredCandidatesLength}}-->
+          <!--{{'of' | translate}} {{candidates?.length}} )</label>-->
+      <!--</div>-->
     </div>
     <div class="col-4 item-center">
       <button (click)="addCandidate()" class="vacancy-add-buttons" mat-raised-button color="primary">{{'Add new candidate' | translate}}
@@ -73,6 +82,7 @@
                            [isSort]="isFilter"
                            [sortedDirection]="sortDirection"
                            [sortedProperty]="sortedProperty"
+                           (changeFilteredLength)="changeFilteredLength($event)"
                            [vacancies]="vacancies"></app-candidate-dashboard>
   <!--</div>-->
   <br>
@@ -86,7 +96,7 @@
     (pageChange)="changePaginationObject()"
     [idPagination]="idPagination"
     (clickAddButton)="addCandidate()"
-    [numberOfVacancies]="candidates?.length"
+    [numberOfVacancies]="filteredCandidatesLength"
     [numberOfVacanciesTitle]="'Total number of candidates' | translate "
     [isButtonAdd]="false"
   >

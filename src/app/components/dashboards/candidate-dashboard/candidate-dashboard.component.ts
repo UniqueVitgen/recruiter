@@ -46,6 +46,7 @@ export class CandidateDashboardComponent implements OnInit, OnChanges {
   @Output('deleteCandidate') outputDeleteCandidate: EventEmitter<number> = new EventEmitter();
   @Output('deleteCandidateFromTheBase') outputDeleteCandidateFromTheBase: EventEmitter<number> = new EventEmitter();
   @Input() limitTo: number;
+  @Output('changeFilteredLength') outputChangeFilteredLength: EventEmitter<number> = new EventEmitter();
   public selectedCandidates: CandidateDashboardItem[];
 
   constructor(public dialog: MatDialog, private userWorker: UserWorker, private typeCheckingWorker: TypeCheckingWorker) {
@@ -78,6 +79,7 @@ export class CandidateDashboardComponent implements OnInit, OnChanges {
         // console.log('isSort', this.isSort, this.sortedProperty);
         this.selectedCandidates = this.sortByProperty(this.selectedCandidates, this.sortedProperty);
       }
+      this.outputChangeFilteredLength.emit(this.selectedCandidates.length);
       // console.log('selectedCandidates', this.selectedCandidates);
     }
   }
