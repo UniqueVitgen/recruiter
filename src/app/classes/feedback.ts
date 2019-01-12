@@ -7,5 +7,4 @@ export class Feedback extends EventNote {
   feedbackText: string;
   candidateId: number;
   userId: number;
-  feedbackState: FeedbackState = new FeedbackState();
 }

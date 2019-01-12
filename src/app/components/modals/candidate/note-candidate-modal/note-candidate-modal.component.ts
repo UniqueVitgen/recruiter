@@ -43,7 +43,7 @@ export class NoteCandidateModalComponent implements OnInit {
     }
     this.editedFeedback.candidateId = this.data.sourceCandidate.id;
     this.formNote = this.fb.group({
-      state: ['', Validators.compose([Validators.required])],
+      // state: ['', Validators.compose([Validators.required])],
       text: ['', Validators.compose([Validators.required])]
     });
   }

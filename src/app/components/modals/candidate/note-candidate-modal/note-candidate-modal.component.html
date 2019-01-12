@@ -12,11 +12,11 @@
   </dialog-title>
   <dialog-body>
     <form [formGroup]="formNote">
-      <mat-form-field class="example-full-width">
-        <mat-select required formControlName="state" placeholder="{{'Feedback State' | translate}}" [(ngModel)]="editedFeedback.feedbackState.name" matInput>
-          <mat-option *ngFor="let state of testFeedbackStates" [value]="state" >{{state | translate}}</mat-option>
-        </mat-select>
-      </mat-form-field>
+      <!--<mat-form-field class="example-full-width">-->
+        <!--<mat-select required formControlName="state" placeholder="{{'Feedback State' | translate}}" [(ngModel)]="editedFeedback.feedbackState.name" matInput>-->
+          <!--<mat-option *ngFor="let state of testFeedbackStates" [value]="state" >{{state | translate}}</mat-option>-->
+        <!--</mat-select>-->
+      <!--</mat-form-field>-->
       <mat-form-field class="example-full-width">
         <textarea formControlName="text" required [(ngModel)]="editedFeedback.feedbackText" matInput placeholder="{{'Feedback comment' | translate}}"></textarea>
       </mat-form-field>
