@@ -6,6 +6,10 @@ import {Attachment} from '../../classes/attachment';
   providedIn: 'root'
 })
 export class FileWorker {
+  aspectRatio: number = 16 / 10;
+  resizeToWidth: number = 300;
+  maintainAspectRatio: boolean = true;
+  roundCropper: boolean = false;
   downloadFile(attachment: Attachment) {
     const data = new Blob([attachment.data]);
     const file = window.URL.createObjectURL(data);
