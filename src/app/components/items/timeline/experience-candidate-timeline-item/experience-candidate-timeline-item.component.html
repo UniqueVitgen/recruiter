@@ -15,7 +15,7 @@
   <app-autocomplete-input required formControlName="companyName" name="companyName" [placeholder]="'company Name'" [searchProperty]="'name'" [visibleUnderline]="false" [fullWidth]="true" [positions]="teams" (blur)="onFocusoutAnyInput()"></app-autocomplete-input>
 
   <mat-form-field class="custom-form-field">
-    <input required readonly formControlName="dateFrom" name="dateFrom" (blur)="onFocusoutAnyInput()" (dateChange)="onFocusoutAnyInput()" matInput [matDatepicker]="picker" placeholder="{{'From' | translate}}" (click)="picker.open()">
+    <input required readonly formControlName="dateFrom" name="dateFrom" [min]="!candidate.birthday ? minDate : minDateWithBirthday" [max]="editedExperience.dateTo" (blur)="onFocusoutAnyInput()" (dateChange)="onFocusoutAnyInput()" matInput [matDatepicker]="picker" placeholder="{{'From' | translate}}" (click)="picker.open()">
     <mat-datepicker-toggle name="dateSuffix" matSuffix [for]="picker"></mat-datepicker-toggle>
     <mat-datepicker  #picker startView="multi-year"></mat-datepicker>
   </mat-form-field>
@@ -23,7 +23,7 @@
   &nbsp;
   <!--<br>-->
   <mat-form-field class="custom-form-field" >
-    <input required readonly formControlName="dateTo" name="dateTo" matInput (blur)="onFocusoutAnyInput()" (dateChange)="onFocusoutAnyInput()" [min]="editedExperience.dateFrom" [matDatepicker]="picker1" placeholder="{{'To' | translate}}" (click)="picker1.open()">
+    <input required readonly formControlName="dateTo" name="dateTo" matInput (blur)="onFocusoutAnyInput()" [max]="maxDate" (dateChange)="onFocusoutAnyInput()" [min]="editedExperience.dateFrom" [matDatepicker]="picker1" placeholder="{{'To' | translate}}" (click)="picker1.open()">
     <mat-datepicker-toggle name="dateSuffix1" matSuffix [for]="picker1"></mat-datepicker-toggle>
     <mat-datepicker #picker1 startView="multi-year"></mat-datepicker>
   </mat-form-field>

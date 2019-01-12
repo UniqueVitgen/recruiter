@@ -7,6 +7,8 @@ import {PositionModel} from '../../../../classes/position-model';
 import {TeamService} from '../../../../services/team/team.service';
 import {Team} from '../../../../classes/team';
 import {FormBuilder, FormGroup, NgForm, Validators} from '@angular/forms';
+import {UserWorker} from '../../../../workers/user/user.worker';
+import {Candidate} from '../../../../classes/candidate';
 
 @Component({
   selector: 'app-experience-candidate-timeline-item',
@@ -15,7 +17,7 @@ import {FormBuilder, FormGroup, NgForm, Validators} from '@angular/forms';
 })
 export class ExperienceCandidateTimelineItemComponent implements OnInit, OnChanges {
   @Input() experience: ExperienceTimeline;
-
+  @Input() candidate: Candidate;
   @Output() changeCandidate: EventEmitter<any> = new EventEmitter();
   @Output() deleteEvent: EventEmitter<any> = new EventEmitter();
   public experienceForm: FormGroup;
@@ -25,11 +27,22 @@ export class ExperienceCandidateTimelineItemComponent implements OnInit, OnChang
   viewOfDate: string;
   isSaved: boolean = true;
   visible: boolean;
-  constructor(private dateTimeWorker: DateTimeWorker, private translateWorker: TranslateWorker,
+  public maxDate: Date;
+  public minDate: Date;
+  public minDateWithBirthday: Date;
+  constructor(private dateTimeWorker: DateTimeWorker,
+              private translateWorker: TranslateWorker,
               private fb: FormBuilder,
-              private positionService: PositionService, private teamService: TeamService) { }
+              private userWorker: UserWorker,
+              private positionService: PositionService,
+              private teamService: TeamService) { }
 
   ngOnInit() {
+    this.minDate = new Date(this.userWorker.generateRequiredStartDate().setFullYear(
+      this.userWorker.generateRequiredStartDate().getFullYear() + 18,
+            this.userWorker.generateRequiredStartDate().getMonth(),
+            this.userWorker.generateRequiredStartDate().getDay()));
+    this.maxDate = this.dateTimeWorker.getTodayStart();
   }
 
   ngOnChanges(changes: SimpleChanges): void {
@@ -47,6 +60,7 @@ export class ExperienceCandidateTimelineItemComponent implements OnInit, OnChang
       });
       this.getPositions();
       this.getTeams();
+      this.getCandidateBirthday();
     }
   }
   getPositions() {
@@ -58,6 +72,13 @@ export class ExperienceCandidateTimelineItemComponent implements OnInit, OnChang
     this.teamService.getAll().subscribe(resTeams => {
       this.teams = resTeams;
     });
+  }
+
+  getCandidateBirthday() {
+    this.minDateWithBirthday = new Date(new Date(this.candidate.birthday).setFullYear(
+      new Date(this.candidate.birthday).getFullYear() + 18,
+            new Date(this.candidate.birthday).getMonth(),
+            new Date(this.candidate.birthday).getDay()));
   }
 
   onFocusoutAnyInput() {
@@ -75,6 +96,7 @@ export class ExperienceCandidateTimelineItemComponent implements OnInit, OnChang
       }
     }
     this.changeCandidate.emit(this.experience);
+    this.getCandidateBirthday();
     // this.form.controls
     // console.log(value);
     // if (value) {

@@ -69,7 +69,7 @@ export class CandidateDashboardComponent implements OnInit, OnChanges {
         if (this.validSalaryFilter) {
           this.selectedCandidates = this.filterBySalary(this.selectedCandidates, this.minSalary, this.maxSalary);
         }
-        console.log('validYearsRequiredFilter 2', this.validYearsRequiredFilter);
+        // console.log('validYearsRequiredFilter 2', this.validYearsRequiredFilter);
         if (this.validYearsRequiredFilter) {
           this.selectedCandidates = this.filterByAge(this.selectedCandidates,
             this.minYearsRequired, this.maxYearsRequired, this.includeUndefinedBirthday);
@@ -148,7 +148,7 @@ export class CandidateDashboardComponent implements OnInit, OnChanges {
     );
     dialogRef.afterClosed().subscribe((res: CandidateDialogResult) => {
       if (res) {
-        console.log('res - ', res);
+        // console.log('res - ', res);
         this.outputAddCandidate.emit(res.resCandidate);
       }
     });

@@ -55,12 +55,10 @@ export class SearchInputComponent implements OnInit, OnChanges {
   }
 
   ngOnChanges(changes: SimpleChanges): void {
-    if (this.filteredAutocompleteList == null) {
-      this.filteredAutocompleteList = this.autocompleteList.filter((item) => {
-        console.log(item);
-        const itemSearch = item.toLowerCase();
-        return itemSearch;
-      });
+    if(this.value) {
+      this.search(this.value);
+    } else {
+      this.search('');
     }
   }
 

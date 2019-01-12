@@ -31,7 +31,8 @@ import {PaginationStorage} from '../../storages/pagination.storage';
 })
 export class CandidateDashboardPageComponent implements OnInit {
   candidates: CandidateDashboardItem[];
-  positions: string[];
+  // positions: string[];
+  fullnames: string[];
   sourceStatuses: string[];
   selectedStatuses: string[];
   searchValue: string;
@@ -80,15 +81,16 @@ export class CandidateDashboardPageComponent implements OnInit {
       {field: 'candidateState', text: 'Status'}
     ];
     this.sourceDirections = this.enumWorker.getKeysFromEnum(SortDirection);
-    console.log('sourceProperties', this.sourceProperties);
+    // console.log('sourceProperties', this.sourceProperties);
     this.getAll().add(() => {
+      this.generateFullnames();
       this.lowSalary = this.arrayWorker.calculateMin(this.candidates, 'salaryInDollars');
       this.topSalary = this.arrayWorker.calculateMax(this.candidates, 'salaryInDollars');
       const candidateWithAges = this.candidates.filter(candidate => !isNaN(candidate.age) && candidate.age);
       this.lowYearRequired = this.arrayWorker.calculateMin(candidateWithAges, 'age');
       this.topYearRequired = this.arrayWorker.calculateMax(candidateWithAges, 'age');
-      console.log('lowYearRequired', this.lowYearRequired);
-      console.log('topYearRequired', this.topYearRequired);
+      // console.log('lowYearRequired', this.lowYearRequired);
+      // console.log('topYearRequired', this.topYearRequired);
       // this.changeFilterObject();
         this.initFilterObject();
       this.sourceStatuses = this.enumWorker.getValuesFromEnum(CandidateState);
@@ -122,7 +124,7 @@ export class CandidateDashboardPageComponent implements OnInit {
         this.includeUndefinedBirthday = true;
         this.isFilter = false;
       }
-      console.log('filterObject', filterObject);
+      // console.log('filterObject', filterObject);
       if (this.minYearRequired < this.lowYearRequired || filterObject.minYearRequiredOnTheEdge) {
         this.minYearRequired = this.lowYearRequired;
       }
@@ -136,7 +138,7 @@ export class CandidateDashboardPageComponent implements OnInit {
         this.maxSalary = this.topSalary;
       }
       // this.cd.detectChanges();
-      console.log('maxSalary', filterObject.maxSalaryOnTheEdge, this.topSalary, this.maxSalary);
+      // console.log('maxSalary', filterObject.maxSalaryOnTheEdge, this.topSalary, this.maxSalary);
     }, 0);
   }
   initSortObject() {
@@ -165,9 +167,9 @@ export class CandidateDashboardPageComponent implements OnInit {
   }
 
   getAll(): Subscription {
-    console.log('1');
+    // console.log('1');
     return this.candidateService.getAll().subscribe((res: CandidateDashboardItem[]) => {
-      console.log (res);
+      // console.log (res);
       this.candidates = res;
       this.candidates = this.candidates.map((candidate: CandidateDashboardItem) => {
         if (candidate.birthday) {
@@ -176,10 +178,19 @@ export class CandidateDashboardPageComponent implements OnInit {
         }
         return candidate;
       });
-      console.log('resCandidates', this.candidates);
+      // setTimeout(() => {
+        this.generateFullnames();
+      // }, 0);
+      // console.log('resCandidates', this.candidates);
     }, err => {
-      console.log('1' + err);
+      // console.log('1' + err);
     });
+  }
+  generateFullnames(): void {
+    this.fullnames = this.candidates.map(candidate => {
+      return this.userWorker.formatFullName(candidate);
+    });
+    console.log('fullnames', this.fullnames);
   }
   deleteCandidateFromTheBase(candidate: Candidate): void {
     this.candidateService.delete(candidate).subscribe(res => {
@@ -208,9 +219,9 @@ export class CandidateDashboardPageComponent implements OnInit {
   }
   getPositions() {
     this.positionService.getAll().subscribe(resPositions => {
-      this.positions = resPositions.map((itemPosition) => {
-        return itemPosition.name;
-      });
+      // this.positions = resPositions.map((itemPosition) => {
+      //   return itemPosition.name;
+      // });
     });
   }
   addCandidate() {
@@ -221,7 +232,7 @@ export class CandidateDashboardPageComponent implements OnInit {
     );
     dialogRef.afterClosed().subscribe((res: CandidateDialogResult) => {
       if (res) {
-        console.log('res - ', res);
+        // console.log('res - ', res);
         this.initPage();
       }
     });
@@ -246,21 +257,21 @@ export class CandidateDashboardPageComponent implements OnInit {
       selectedStatuses: this.selectedStatuses,
       isFilter: this.isFilter
     });
-    console.log('filterobjectchange', this.filterStorage.getCandidateFilter());
+    // console.log('filterobjectchange', this.filterStorage.getCandidateFilter());
   }
   changePaginationObject(): void {
-    console.log(this.page, this.size)
+    // console.log(this.page, this.size)
     this.paginationStorage.setCandidatePagination({
       page: this.page,
       size: this.size
     });
   }
   validSalaryFilterChange(value: boolean) {
-    console.log('validSalaryFilterChange', value);
+    // console.log('validSalaryFilterChange', value);
     this.validSalaryFilter = value;
   }
   validYearsRequiredFilterChange(value: boolean) {
-    console.log('validYearsRequiredFilter', value);
+    // console.log('validYearsRequiredFilter', value);
     this.validYearsRequiredFilter = value;
   }
 }
