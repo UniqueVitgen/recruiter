@@ -60,10 +60,7 @@ export class InterviewCandidateTimelineItemComponent implements OnInit, OnChange
       this.viewOfDate = this.localDatePipe.transform(this.editedInterview.createdAt, 'mediumDate');
       this.viewOfTime = this.localDatePipe.transform(this.editedInterview.createdAt, 'shortTime');
     });
-    this.minDate = this.dateTimeWorker.getTodayStart();
-    const now = this.dateTimeWorker.getNow();
-    const completedInterviewTime = new Date(this.editedInterview.planEndDate);
-    this.isCanCompleted = completedInterviewTime < now;
+    this.initDateValidation();
   }
   onFocusoutAnyInput(value: boolean = true) {
     this.updateDateTime();
@@ -71,6 +68,14 @@ export class InterviewCandidateTimelineItemComponent implements OnInit, OnChange
       console.log('exp', this.editedInterview);
       this.changeCandidate.emit(this.editedInterview);
     }
+    this.initDateValidation();
+  }
+  initDateValidation() {
+    console.log('initDateValidation');
+    this.minDate = this.dateTimeWorker.getTodayStart();
+    const now = this.dateTimeWorker.getNow();
+    const completedInterviewTime = new Date(this.editedInterview.planEndDate);
+    this.isCanCompleted = completedInterviewTime < now;
   }
   delete() {
     this.deleteEvent.emit(this.editedInterview);
