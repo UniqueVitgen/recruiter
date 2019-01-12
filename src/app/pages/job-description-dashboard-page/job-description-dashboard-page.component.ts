@@ -63,6 +63,9 @@ export class JobDescriptionDashboardPageComponent implements OnInit {
               private enumWorker: EnumWorker) { }
 
   ngOnInit() {
+    this.initPage();
+  }
+  initPage() {
     this.initSort();
     this.initPagination();
     this.getVacancies().add(() => {
@@ -70,6 +73,13 @@ export class JobDescriptionDashboardPageComponent implements OnInit {
       this.topSalary = this.arrayWorker.calculateMax(this.jobDescriptionList, 'salaryInDollarsTo');
       this.lowYearRequired = this.arrayWorker.calculateMin(this.jobDescriptionList, 'experienceYearsRequire');
       this.topYearRequired = this.arrayWorker.calculateMax(this.jobDescriptionList, 'experienceYearsRequire');
+        this.initFilterObject();
+    });
+    this.getStatuses();
+    this.getPositions();
+  }
+  initFilterObject() {
+    setTimeout(() => {
       const filterObject = this.filterStorage.getVacancyFilter();
       if (filterObject) {
         this.minSalary = filterObject.minSalary;
@@ -86,9 +96,20 @@ export class JobDescriptionDashboardPageComponent implements OnInit {
         this.selectedList = this.enumWorker.getValuesFromEnum(VacancyState);
         this.isFilter = false;
       }
+      if (this.minYearRequired < this.lowYearRequired || filterObject.minYearRequiredOnTheEdge) {
+        this.minYearRequired = this.lowYearRequired;
+      }
+      if (this.maxYearRequired > this.topYearRequired || filterObject.maxYearRequiredOnTheEdge) {
+        this.maxYearRequired = this.topYearRequired;
+      }
+      if (this.minSalary < this.lowSalary || filterObject.minSalaryOnTheEdge) {
+        this.minSalary = this.lowSalary;
+      }
+      if (this.maxSalary > this.topSalary || filterObject.maxSalaryOnTheEdge) {
+        this.maxSalary = this.topSalary;
+      }
+      console.log('this.maxSalary', filterObject.maxSalaryOnTheEdge, this.topSalary, this.maxSalary);
     });
-    this.getStatuses();
-    this.getPositions();
   }
   initSort() {
     this.sourceProperties = [
@@ -138,7 +159,7 @@ export class JobDescriptionDashboardPageComponent implements OnInit {
   }
   deleteVacancy(index: number) {
     const object = this.jobDescriptionList[index];
-    this.vacancyService.delete(object).subscribe(res => { this.getVacancies(); });
+    this.vacancyService.delete(object).subscribe(res => { this.initPage(); });
   }
   clickAdvancedSearch() {
     this.changeFilterObject();
@@ -159,7 +180,7 @@ export class JobDescriptionDashboardPageComponent implements OnInit {
     dialogRef.afterClosed().subscribe((res: BaseDialogResult<Vacancy>) => {
       if (res) {
         if (res.success) {
-          this.getVacancies();
+          this.initPage();
         }
       }
     });
@@ -173,9 +194,13 @@ export class JobDescriptionDashboardPageComponent implements OnInit {
   changeFilterObject() {
     this.filterStorage.setVacancyFilter({
       minSalary: this.minSalary,
+      minSalaryOnTheEdge: this.minSalary === this.lowSalary,
       maxSalary: this.maxSalary,
+      maxSalaryOnTheEdge: this.maxSalary === this.topSalary,
       minYearRequired: this.minYearRequired,
+      minYearRequiredOnTheEdge: this.minYearRequired === this.lowYearRequired,
       maxYearRequired: this.maxYearRequired,
+      maxYearRequiredOnTheEdge: this.maxYearRequired === this.topYearRequired,
       selectedStatuses: this.selectedList,
       isFilter: this.isFilter
     });

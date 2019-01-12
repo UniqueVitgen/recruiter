@@ -89,9 +89,7 @@ export class CandidateDashboardPageComponent implements OnInit {
       console.log('lowYearRequired', this.lowYearRequired);
       console.log('topYearRequired', this.topYearRequired);
       // this.changeFilterObject();
-      setTimeout(() => {
         this.initFilterObject();
-        }, 200);
       this.sourceStatuses = this.enumWorker.getValuesFromEnum(CandidateState);
     });
     this.getVacancies();
