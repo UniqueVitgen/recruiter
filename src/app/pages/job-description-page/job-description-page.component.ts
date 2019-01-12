@@ -16,6 +16,7 @@ import {CandidateDialogData} from '../../interfaces/dialog/init/candidate-dialog
 import {CandidateDialogResult} from '../../interfaces/dialog/result/candidate-dialog-result';
 import {forEach} from '@angular/router/src/utils/collection';
 import {ArrayWorker} from '../../workers/array/array.worker';
+import {UserWorker} from '../../workers/user/user.worker';
 
 
 @Component({
@@ -29,7 +30,7 @@ export class JobDescriptionPageComponent implements OnInit {
   candidates: Candidate[];
   searchInputSelected: boolean;
   searchValueSelected: string;
-
+  fullname: string[];
 
   //searchValuePossible: string;
 
@@ -37,6 +38,7 @@ export class JobDescriptionPageComponent implements OnInit {
     private route: ActivatedRoute,
     private vacancyService: VacancyService,
     public dialog: MatDialog,
+    private userWorker: UserWorker,
     private arrayWorker: ArrayWorker,
     private candidateService: CandidateService) {
     this.searchInputSelected = false;
@@ -55,8 +57,14 @@ export class JobDescriptionPageComponent implements OnInit {
     }, err => {
       console.log('1' + err);
     });
-  }
 
+  }
+  generateFullnames(): void {
+    this.fullname = this.vacancy.candidates.map(candidate => {
+      return this.userWorker.formatFullName(candidate);
+    });
+    console.log('fullnames', this.fullname);
+  }
   changeSearchInputSelected(): void {
     this.searchInputSelected = !this.searchInputSelected;
   }
@@ -96,6 +104,7 @@ export class JobDescriptionPageComponent implements OnInit {
         this.id = params['id'];
         this.vacancyService.get(this.id).subscribe(res => {
           this.vacancy = res;
+          this.generateFullnames();
           this.getCandidateList(this.vacancy);
           console.log(this.vacancy);
         });
