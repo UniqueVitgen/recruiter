@@ -88,15 +88,20 @@ export class CandidatePageComponent implements OnInit, AfterContentChecked, Afte
       this.height = $('#short-info').height();
       const wo = window.innerHeight - this.navbarHeight;
       const st = window.pageYOffset || document.documentElement.scrollTop;
-       if (this.height > wo) {
-      if (this.scrollY < st) {
-        this.topString = 'calc(100vh - ' + this.height + 'px - 24px)';
+      if (window.innerWidth > 990) {
+        if (this.height > wo) {
+          if (this.scrollY < st) {
+            this.topString = 'calc(100vh - ' + this.height + 'px - 24px)';
+          } else {
+            this.topString = '85px';
+          }
+          this.scrollY = st <= 0 ? 0 : st;
+        } else {
+          this.topString = '85px';
+        }
       } else {
-        this.topString = '85px';
+        this.topString = 'auto';
       }
-      this.scrollY = st <= 0 ? 0 : st; } else {
-        this.topString = '85px';
-       }
          // }
      //, 200);
   }

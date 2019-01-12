@@ -21,10 +21,10 @@
       <div *ngIf="editedAttachment.attachmentType === 'PHOTO'">
         <image-cropper
           [imageChangedEvent]="imageChangedEvent"
-          [maintainAspectRatio]="true"
-          [aspectRatio]="4 / 3"
-          [resizeToWidth]="250"
-          [roundCropper]="false"
+          [maintainAspectRatio]="fileWorker.maintainAspectRatio"
+          [aspectRatio]="fileWorker.aspectRatio"
+          [resizeToWidth]="fileWorker.resizeToWidth"
+          [roundCropper]="fileWorker.roundCropper"
           format="png"
           outputType="base64"
           (imageCropped)="imageCropped($event)"
