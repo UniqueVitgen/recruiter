@@ -21,6 +21,8 @@ export class NumberWorker {
     return years + ' ' + this.translateWorker.translateWord(addedWord);
   }
   isValidNumber(value: number): boolean {
-    return isFinite(value);
+    if (value) {
+      return isFinite(value) && value.toString() !== '';
+    }
   }
 }

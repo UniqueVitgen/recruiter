@@ -148,6 +148,15 @@ export class JobDescriptionModalComponent implements OnInit {
 
   save() {
     if (this.data.isEdit) {
+      if (!this.numberWorker.isValidNumber(this.editedVacancy.salaryInDollarsTo)) {
+        this.editedVacancy.salaryInDollarsTo = null;
+      }
+      if (!this.numberWorker.isValidNumber(this.editedVacancy.salaryInDollarsFrom)) {
+        this.editedVacancy.salaryInDollarsFrom = null;
+      }
+      if (!this.numberWorker.isValidNumber(this.editedVacancy.experienceYearsRequire)) {
+        this.editedVacancy.experienceYearsRequire = null;
+      }
       this.vacancyService.update(this.editedVacancy).subscribe(resVacancy => {
         this.dialogResult = {
           isEdit: this.data.isEdit,
