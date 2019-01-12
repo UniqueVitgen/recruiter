@@ -30,6 +30,8 @@ import {Vacancy} from '../../classes/vacancy';
 import {PositionService} from '../../services/position/position.service';
 import {PositionModel} from '../../classes/position-model';
 import {ContactsCandidateModalComponent} from '../../components/modals/candidate/contacts-candidate-modal/contacts-candidate-modal.component';
+import {InterviewerService} from '../../services/interviewer/interviewer.service';
+import {Interviewer} from '../../classes/interviewer';
 
 @Component({
   selector: 'app-candidate-page',
@@ -46,6 +48,7 @@ export class CandidatePageComponent implements OnInit, AfterContentChecked, Afte
   navbarHeight: number = 60;
   scrollY: number = 0;
   positions: PositionModel[];
+  interviewers: Interviewer[];
   @ViewChild('fileInput') fileInput: ElementRef;
   @ViewChild('containerSticky') stickyContainer: ElementRef;
   @ViewChild('stickyChild') stickyChild: ElementRef;
@@ -58,6 +61,7 @@ export class CandidatePageComponent implements OnInit, AfterContentChecked, Afte
     private candidateService: CandidateService,
     private interviewService: InterviewService,
     private vacancyService: VacancyService,
+    private interviewerService: InterviewerService,
     public dialog: MatDialog) { }
 
   ngOnInit() {
@@ -66,6 +70,7 @@ export class CandidatePageComponent implements OnInit, AfterContentChecked, Afte
       this.id = params['id'];
       this.getCandidate();
       this.getVacancies();
+      this.getInterviewers();
     });
   }
 
@@ -155,7 +160,8 @@ export class CandidatePageComponent implements OnInit, AfterContentChecked, Afte
       const dialogRef = this.dialog.open(InterviewModalComponent, {
         data: <InterviewDialogDataInterface> {
                 sourceCandidate: this.candidate,
-                fixedCandidate: true
+                fixedCandidate: true,
+                sourceInterviewers: this.interviewers
         },
         disableClose: true
       });
@@ -408,6 +414,11 @@ export class CandidatePageComponent implements OnInit, AfterContentChecked, Afte
       });
       console.log(this.eventNoteList);
       console.log('res', res);
+    });
+  }
+  getInterviewers(): Subscription {
+    return this.interviewerService.getAll().subscribe(resInterviewers => {
+      this.interviewers = resInterviewers;
     });
   }
 

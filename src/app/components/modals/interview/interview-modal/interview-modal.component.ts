@@ -130,7 +130,7 @@ export class InterviewModalComponent implements OnInit {
       fromTime: ['', Validators.compose([Validators.required])],
       toTime: ['', Validators.compose([Validators.required])],
       validTime: [true, Validators.compose([Validators.requiredTrue])],
-      candidate: ['', Validators.compose([Validators.required])],
+      candidate: [this.userWorker.formatFullName(this.editedCandidate), Validators.compose([Validators.required])],
       vacancy: ['', Validators.compose([Validators.required])],
       interviewers: ['', Validators.compose([])]
       ,

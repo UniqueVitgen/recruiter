@@ -16,7 +16,9 @@ export class UserWorker {
     maxRequiredYear: 50
   };
   formatFullName(candidate: Candidate) {
-    return candidate.surname +  ' ' + candidate.name;
+    if (candidate) {
+      return candidate.surname +  ' ' + candidate.name;
+    }
   }
   generateRequiredEndDate() {
     const now = new Date();

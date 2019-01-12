@@ -19,6 +19,7 @@ import {DevFeedback} from '../../classes/dev-feedback';
 import {Subscription} from 'rxjs';
 import {DeleteInterviewModalComponent} from '../../components/modals/interview/delete-interview-modal/delete-interview-modal.component';
 import {InterviewerService} from '../../services/interviewer/interviewer.service';
+import {Interviewer} from '../../classes/interviewer';
 
 
 @Component({
@@ -33,8 +34,10 @@ export class InterviewPageComponent implements OnInit {
   photoUrl: string;
   isFeedbackEdited: boolean;
   feedback: DevFeedback;
+  interviewers: Interviewer[];
 
   constructor(private interviewService: InterviewService,
+  private interviewerService: InterviewerService,
   private route: ActivatedRoute,
   private translateWorker: TranslateWorker,
   private vacancyService: VacancyService,
@@ -50,6 +53,7 @@ export class InterviewPageComponent implements OnInit {
       .subscribe(params => {
         this.id = params['id'];
         this.getInterview();
+        this.getInterviewers();
         // this.candidateService.get()
         // Defaults to 0 if no query param provided.
       });
@@ -86,6 +90,11 @@ export class InterviewPageComponent implements OnInit {
       console.log(res);
     });
   }
+  getInterviewers(): Subscription {
+    return this.interviewerService.getAll().subscribe(resInterviewers => {
+      this.interviewers = resInterviewers;
+    });
+  }
   clickEdit(interview: InterviewExtended): void {
     console.log('change event', event);
     const dialogRef = this.dialog.open(InterviewModalComponent, {
@@ -95,7 +104,8 @@ export class InterviewPageComponent implements OnInit {
         fixedCandidate: false,
         isEdit: true,
         sourceCandidate: interview.candidate,
-        sourceInterview: interview
+        sourceInterview: interview,
+        sourceInterviewers: this.interviewers
       }
     });
     dialogRef.componentInstance.outputClickSave.subscribe((resInterview: BaseDialogResult<InterviewExtended>) => {
