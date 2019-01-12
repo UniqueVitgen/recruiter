@@ -31,17 +31,18 @@
             {{'Surname must contain only latin characters or only cyrillic characters' | translate}}
           </mat-error>
         </mat-form-field>
-        <mat-form-field class="example-full-width">
-          <input class="star-input" formControlName="position" [(ngModel)]="editedCandidate.position.name" matInput placeholder="{{'Position' | translate}}" >
-        </mat-form-field>
+        <!--<mat-form-field class="example-full-width">-->
+          <app-autocomplete-input  [placeholder]="'Position'" [searchProperty]="'name'" [visibleUnderline]="true" [fullWidth]="true" [positions]="positions" [(ngModel)]="editedCandidate.position.name" formControlName="position"></app-autocomplete-input>
+          <!--<input class="star-input" formControlName="position" [(ngModel)]="editedCandidate.position.name" matInput placeholder="{{'Position' | translate}}" >-->
+        <!--</mat-form-field>-->
         <mat-form-field class="example-full-width">
           <input class="star-input" only-numbers formControlName="salaryInDollars" [(ngModel)]="editedCandidate.salaryInDollars" matInput placeholder="{{'Required salary' | translate}}" >
         </mat-form-field>
         <!--<mat-form-field class="example-full-width">-->
           <!--<input class="star-input" only-numbers formControlName="birthday" [(ngModel)]="editedCandidate.birthday" matInput placeholder="{{'Required salary' | translate}}" >-->
         <!--</mat-form-field>-->
-        <mat-form-field class="example-full-width">
-          <input matInput formControlName="birthday" [min]="minBirthdayDate" [max]="maxBirthdayDate"  [(ngModel)]="editedCandidate.birthday" [matDatepicker]="picker" placeholder="{{'Birthday' | translate}}">
+        <mat-form-field class="example-full-width custom-form-field-candidate">
+          <input matInput readonly formControlName="birthday" [min]="minBirthdayDate" [max]="maxBirthdayDate"  [(ngModel)]="editedCandidate.birthday" [matDatepicker]="picker" placeholder="{{'Birthday' | translate}}" (click)="picker.open()">
           <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
           <mat-datepicker #picker startView="multi-year"></mat-datepicker>
         </mat-form-field>

@@ -11,6 +11,8 @@ import {CandidateState} from '../../../../enums/candidate-state.enum';
 import {ArrayWorker} from '../../../../workers/array/array.worker';
 import {EnumWorker} from '../../../../workers/enum/enum.worker';
 import {UserWorker} from '../../../../workers/user/user.worker';
+import {PositionModel} from '../../../../classes/position-model';
+import {PositionService} from '../../../../services/position/position.service';
 
 @Component({
   selector: 'app-candidate-modal',
@@ -21,6 +23,8 @@ export class CandidateModalComponent implements OnInit {
   public editedCandidate: Candidate = new Candidate();
   private dialogResult: CandidateDialogResult;
   public candidateForm: FormGroup;
+  public positions: PositionModel[];
+  public selectedPositions: PositionModel[];
   public mask = ['+', '3', '7', '5', ' ', '(', /\d/, /\d/, ')', ' ', /\d/, /\d/, /\d/, '-', /\d/, /\d/, '-', /\d/, /\d/];
   setStates: string[];
   public minBirthdayDate: Date;
@@ -29,6 +33,7 @@ export class CandidateModalComponent implements OnInit {
   constructor(
     public dialogRef: MatDialogRef<CandidateModalComponent>,
     private candidateService: CandidateService,
+    private positionService: PositionService,
     private formBuilder: FormBuilder,
     public  enumWorker: EnumWorker,
     private userWorker: UserWorker,
@@ -38,6 +43,7 @@ export class CandidateModalComponent implements OnInit {
   ngOnInit() {
     this.minBirthdayDate = this.userWorker.generateRequiredStartDate();
     this.maxBirthdayDate = this.userWorker.generateRequiredEndDate();
+    this.getPositions();
     if (this.data.isEdit) {
       this.editedCandidate = Object.assign({}, this.data.sourceCandidate);
     } else {
@@ -87,6 +93,13 @@ export class CandidateModalComponent implements OnInit {
   }
 
   changePhone() {
+  }
+
+  getPositions() {
+    this.positionService.getAll().subscribe((resPositions: PositionModel[]) => {
+      this.positions = resPositions;
+      this.selectedPositions = resPositions;
+    });
   }
 
   editCandidate() {

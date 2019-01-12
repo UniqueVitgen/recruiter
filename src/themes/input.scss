@@ -43,6 +43,15 @@ textarea {
   }
 //}
 
+.custom-form-field-candidate {
+  &.mat-form-field {
+    &:hover {
+      .mat-input-element {
+        cursor: pointer;
+      }
+    }
+  }
+}
 
 .custom-form-field {
   &.mat-form-field {
