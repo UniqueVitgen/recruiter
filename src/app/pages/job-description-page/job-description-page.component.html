@@ -33,7 +33,7 @@
     <!--</button>-->
   </mat-card-title>
   <div *ngIf="searchInputSelected">
-    <app-search-input (onSearch)="searchSelected($event)"></app-search-input>
+    <app-search-input (onSearch)="searchSelected($event)" [autocompleteList]="fullname"></app-search-input>
     <br>
   </div>
   <mat-divider></mat-divider>
