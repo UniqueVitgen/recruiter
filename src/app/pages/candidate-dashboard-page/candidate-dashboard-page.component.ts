@@ -50,6 +50,8 @@ export class CandidateDashboardPageComponent implements OnInit {
   minYearRequired: number;
   maxYearRequired: number;
   includeUndefinedBirthday: boolean;
+  validSalaryFilter: boolean;
+  validYearsRequiredFilter: boolean;
   sourceProperties: SortField[];
   sourceDirections: string[];
   sortDirection: SortDirection;
@@ -74,33 +76,55 @@ export class CandidateDashboardPageComponent implements OnInit {
     this.sourceDirections = this.enumWorker.getKeysFromEnum(SortDirection);
     console.log('sourceProperties', this.sourceProperties);
     this.getAll().add(() => {
-      const filterObject = this.filterStorage.getCandidateFilter();
       this.lowSalary = this.arrayWorker.calculateMin(this.candidates, 'salaryInDollars');
       this.topSalary = this.arrayWorker.calculateMax(this.candidates, 'salaryInDollars');
       const candidateWithAges = this.candidates.filter(candidate => !isNaN(candidate.age) && candidate.age);
       this.lowYearRequired = this.arrayWorker.calculateMin(candidateWithAges, 'age');
       this.topYearRequired = this.arrayWorker.calculateMax(candidateWithAges, 'age');
+      console.log('lowYearRequired', this.lowYearRequired);
+      console.log('topYearRequired', this.topYearRequired);
+      this.initFilterObject();
       this.sourceStatuses = this.enumWorker.getValuesFromEnum(CandidateState);
-      if (filterObject) {
-        this.minSalary = filterObject.minSalary;
-        this.maxSalary = filterObject.maxSalary;
-        this.minYearRequired = filterObject.minYearRequired;
-        this.maxYearRequired = filterObject.maxYearRequired;
-        this.selectedStatuses = filterObject.selectedStatuses;
-        this.includeUndefinedBirthday = filterObject.includeUndefinedBirthday;
-        this.isFilter = filterObject.isFilter;
-      } else {
-        this.minSalary = this.lowSalary;
-        this.maxSalary = this.topSalary;
-        this.minYearRequired = this.lowYearRequired;
-        this.maxYearRequired = this.topYearRequired;
-        this.selectedStatuses = this.enumWorker.getValuesFromEnum(CandidateState);
-        this.includeUndefinedBirthday = true;
-        this.isFilter = false;
-      }
     });
     this.getVacancies();
     this.getPositions();
+    this.initFilterObject();
+    this.initSortObject();
+    this.initPaginationObject();
+    // this.mockCandidates = this.candidateService.mockCandidates;
+  }
+  clickAdvancedSearch() {
+    this.changeFilterObject();
+  }
+  initFilterObject() {
+    const filterObject = this.filterStorage.getCandidateFilter();
+    if (filterObject) {
+      this.minSalary = filterObject.minSalary;
+      this.maxSalary = filterObject.maxSalary;
+      this.minYearRequired = filterObject.minYearRequired;
+      this.maxYearRequired = filterObject.maxYearRequired;
+      this.selectedStatuses = filterObject.selectedStatuses;
+      this.includeUndefinedBirthday = filterObject.includeUndefinedBirthday;
+      this.isFilter = filterObject.isFilter;
+    } else {
+      this.minSalary = this.lowSalary;
+      this.maxSalary = this.topSalary;
+      this.minYearRequired = this.lowYearRequired;
+      this.maxYearRequired = this.topYearRequired;
+      this.selectedStatuses = this.enumWorker.getValuesFromEnum(CandidateState);
+      this.includeUndefinedBirthday = true;
+      this.isFilter = false;
+    }
+    if (this.minYearRequired == null) {
+      this.minYearRequired = 0;
+    }
+    if (this.maxYearRequired == null) {
+      this.maxYearRequired = 0;
+    }
+    console.log('this.minYearRequired', this.minYearRequired);
+    console.log('this.maxYearRequired', this.maxYearRequired);
+  }
+  initSortObject() {
     const sortObject: SortDashboard = this.sortStorage.getCandidateSort();
     if (sortObject) {
       this.sortedProperty = <any> sortObject.field;
@@ -109,15 +133,13 @@ export class CandidateDashboardPageComponent implements OnInit {
       this.sortedProperty = this.sourceProperties[0].field;
       this.sortDirection = <any>this.sourceDirections[0];
     }
+  }
+  initPaginationObject() {
     const paginationObject = this.paginationStorage.getCandidatePagination();
     if (paginationObject != null) {
       this.page = paginationObject.page;
       this.size = paginationObject.size;
     }
-    // this.mockCandidates = this.candidateService.mockCandidates;
-  }
-  clickAdvancedSearch() {
-    this.changeFilterObject();
   }
 
   search(value: string) {
@@ -209,5 +231,13 @@ export class CandidateDashboardPageComponent implements OnInit {
       page: this.page,
       size: this.size
     });
+  }
+  validSalaryFilterChange(value: boolean) {
+    console.log('validSalaryFilterChange', value);
+    this.validSalaryFilter = value;
+  }
+  validYearsRequiredFilterChange(value: boolean) {
+    console.log('validYearsRequiredFilter', value);
+    this.validYearsRequiredFilter = value;
   }
 }

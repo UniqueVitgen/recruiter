@@ -29,6 +29,8 @@ export class JobDescriptionDashboardComponent implements OnInit, OnChanges {
   @Input() maxSalary: number;
   @Input() minYearsRequired: number;
   @Input() maxYearsRequired: number;
+  @Input() validSalaryFilter: boolean;
+  @Input() validYearsRequiredFilter: boolean;
   @Input() idPagination: number;
   @Output('deleteVacancy') outputDeleteVacancy: EventEmitter<any> = new EventEmitter();
   @Output('addVacancy') outputAddVacancy: EventEmitter<Vacancy> = new EventEmitter();
@@ -63,8 +65,12 @@ export class JobDescriptionDashboardComponent implements OnInit, OnChanges {
     this.selectedVacancies = this.searchValues(this.search);
     if (this.isFilter) {
       this.selectedVacancies = this.filterByStatus(this.selectedVacancies, this.filterStatuses);
-      this.selectedVacancies = this.filterBySalary(this.selectedVacancies, this.minSalary, this.maxSalary);
-      this.selectedVacancies = this.filterByYearsRequire(this.selectedVacancies, this.minYearsRequired, this.maxYearsRequired);
+      if (this.validSalaryFilter) {
+        this.selectedVacancies = this.filterBySalary(this.selectedVacancies, this.minSalary, this.maxSalary);
+      }
+      if (this.validYearsRequiredFilter) {
+        this.selectedVacancies = this.filterByYearsRequire(this.selectedVacancies, this.minYearsRequired, this.maxYearsRequired);
+      }
     }
     if (this.isSort) {
       console.log('isSort', this.isSort, this.sortedProperty);
@@ -96,11 +102,11 @@ export class JobDescriptionDashboardComponent implements OnInit, OnChanges {
   filterBySalary(vacancies: Vacancy[], minSalary: number, maxSalary: number) {
     if (minSalary != null && maxSalary != null) {
       return vacancies.filter((vacancy) => {
-        return (vacancy.salaryInDollarsFrom >= minSalary
-          && vacancy.salaryInDollarsFrom <= maxSalary)
+        return (minSalary >= vacancy.salaryInDollarsFrom
+          && minSalary <= vacancy.salaryInDollarsTo)
           ||
-          (vacancy.salaryInDollarsTo >= minSalary
-            && vacancy.salaryInDollarsTo <= maxSalary);
+          (maxSalary >= vacancy.salaryInDollarsFrom
+            && maxSalary <= vacancy.salaryInDollarsTo);
       });
     } else {
       return vacancies;
@@ -120,22 +126,6 @@ export class JobDescriptionDashboardComponent implements OnInit, OnChanges {
     let direction: number;
     this.sortedDirection === SortDirection.ASCENDING ? direction = 1 : direction = -1;
     return this.vacancyWorker.sortByProperty(vacancies, property, direction);
-    // return vacancies.sort((value, value2) => {
-    //   if (property === 'position') {
-    //     return this.vacancyWorker.sortByPosition(value, value2) * direction;
-    //   } else if (property === 'vacancyState') {
-    //     return this.vacancyWorker.sortByVacancyState(value, value2) * direction;
-    //   } else if (property === 'salaryInDollarsFrom') {
-    //     return this.vacancyWorker.sortBySalaryInDollarsFrom(value, value2) * direction;
-    //   } else if (property === 'salaryInDollarsTo') {
-    //     return this.vacancyWorker.sortBySalaryInDollarsTo(value, value2) * direction;
-    //   } else if (property === 'experienceYearsRequire') {
-    //     console.log('experienceYearsRequire', value.experienceYearsRequire, value2.experienceYearsRequire);
-    //     return this.vacancyWorker.sortByExperienceYearsRequire(value, value2) * direction;
-    //   } else if (property === 'candidates') {
-    //     return this.vacancyWorker.sortByCandidates(value, value2) * direction;
-    //   }
-    // });
   }
 
   openDeleteVacancyDialog(vacancyID: number): void {

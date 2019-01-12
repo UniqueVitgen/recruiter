@@ -40,6 +40,8 @@ export class JobDescriptionDashboardPageComponent implements OnInit {
   topYearRequired: number;
   minYearRequired: number;
   maxYearRequired: number;
+  validSalaryFilter: boolean;
+  validYearsRequiredFilter: boolean;
   idPagination: number = 2;
   public isFilter;
   public toppingList: string[];
@@ -184,6 +186,12 @@ export class JobDescriptionDashboardPageComponent implements OnInit {
       page: this.page,
       size: this.size
     });
+  }
+  validSalaryFilterChange(value: boolean) {
+    this.validSalaryFilter = value;
+  }
+  validYearsRequiredFilterChange(value: boolean) {
+    this.validYearsRequiredFilter = value;
   }
 
 }

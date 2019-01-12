@@ -36,6 +36,8 @@ export class CandidateDashboardComponent implements OnInit, OnChanges {
   @Input() minYearsRequired: number;
   @Input() maxYearsRequired: number;
   @Input() includeUndefinedBirthday: boolean;
+  @Input() validSalaryFilter: boolean;
+  @Input() validYearsRequiredFilter: boolean;
   @Input() isSort: boolean;
   @Input() sortedProperty: string;
   @Input() sortedDirection: SortDirection;
@@ -53,6 +55,8 @@ export class CandidateDashboardComponent implements OnInit, OnChanges {
   }
 
   ngOnChanges(changes: SimpleChanges): void {
+    console.log('this.minYearRequired', this.minYearsRequired);
+    console.log('this.maxYearRequired', this.maxYearsRequired);
     if (this.isPagination) {
       if (this.itemsPerPage == null) {
         this.itemsPerPage = 4;
@@ -61,16 +65,22 @@ export class CandidateDashboardComponent implements OnInit, OnChanges {
     if (this.candidates) {
       this.searchValues(this.search);
       if (this.isFilter) {
+        // console.log('this.minYearsRequired', this.minYearsRequired);
         this.selectedCandidates = this.filterByStatus(this.selectedCandidates, this.filterStatuses);
-        this.selectedCandidates = this.filterBySalary(this.selectedCandidates, this.minSalary, this.maxSalary);
-        this.selectedCandidates = this.filterByAge(this.selectedCandidates,
-          this.minYearsRequired, this.maxYearsRequired, this.includeUndefinedBirthday);
+        if (this.validSalaryFilter) {
+          this.selectedCandidates = this.filterBySalary(this.selectedCandidates, this.minSalary, this.maxSalary);
+        }
+        console.log('validYearsRequiredFilter 2', this.validYearsRequiredFilter);
+        if (this.validYearsRequiredFilter) {
+          this.selectedCandidates = this.filterByAge(this.selectedCandidates,
+            this.minYearsRequired, this.maxYearsRequired, this.includeUndefinedBirthday);
+        }
       }
       if (this.isSort) {
-        console.log('isSort', this.isSort, this.sortedProperty);
+        // console.log('isSort', this.isSort, this.sortedProperty);
         this.selectedCandidates = this.sortByProperty(this.selectedCandidates, this.sortedProperty);
       }
-      console.log('selectedCandidates', this.selectedCandidates);
+      // console.log('selectedCandidates', this.selectedCandidates);
     }
   }
   filterByStatus(candidates: CandidateDashboardItem[], statuses: string[]) {
@@ -95,7 +105,9 @@ export class CandidateDashboardComponent implements OnInit, OnChanges {
     }
   }
   filterByAge(candidates: CandidateDashboardItem[], minYearsRequired: number, maxYearsRequired: number, includeUndefinedBirthday: boolean) {
-    if (minYearsRequired && maxYearsRequired) {
+    if ((minYearsRequired != null && !isNaN(minYearsRequired))
+      &&
+      (maxYearsRequired != null && !isNaN(maxYearsRequired))) {
       return candidates.filter(candidate => {
         if (includeUndefinedBirthday) {
           if (candidate.age == null) {
@@ -113,17 +125,6 @@ export class CandidateDashboardComponent implements OnInit, OnChanges {
     let direction: number;
     this.sortedDirection === SortDirection.ASCENDING ? direction = 1 : direction = -1;
     return this.userWorker.sortByProperty(candidates, property, direction);
-    // return candidates.sort((value, value2) => {
-    //   if (property === 'fullname') {
-    //     return this.userWorker.sortByFullname(value, value2) * direction;
-    //   } else if (property === 'age') {
-    //     return this.userWorker.sortByAge(value, value2) * direction;
-    //   } else if (property === 'salaryInDollars') {
-    //     return this.userWorker.sortBySalaryInDollars(value, value2) * direction;
-    //   } else if (property === 'candidateState') {
-    //     return this.userWorker.sortByCandidateState(value, value2) * direction;
-    //   }
-    // });
   }
   searchValues(value: string) {
     if (value) {

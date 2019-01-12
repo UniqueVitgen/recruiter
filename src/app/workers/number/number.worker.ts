@@ -20,4 +20,7 @@ export class NumberWorker {
     }
     return years + ' ' + this.translateWorker.translateWord(addedWord);
   }
+  isValidNumber(value: number): boolean {
+    return isFinite(value);
+  }
 }

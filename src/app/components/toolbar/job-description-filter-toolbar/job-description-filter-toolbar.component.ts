@@ -37,6 +37,24 @@ export class JobDescriptionFilterToolbarComponent implements OnInit, OnChanges {
   maxYearsRequiredChange: EventEmitter<number> = new  EventEmitter();
   salaryOptions: Options;
   yearsRequiredOptions: Options;
+  private _validSalaryFilter: boolean;
+  get validSalaryFilter(): boolean {
+    return this._validSalaryFilter;
+  }
+  set validSalaryFilter(value: boolean) {
+    this._validSalaryFilter = value;
+    this.validSalaryFilterChange.emit(value);
+  }
+  @Output() validSalaryFilterChange: EventEmitter<boolean> = new EventEmitter();
+  private _validYearsRequiredFilter: boolean;
+  get validYearsRequiredFilter(): boolean {
+    return this._validYearsRequiredFilter;
+  }
+  set validYearsRequiredFilter(value: boolean) {
+    this._validYearsRequiredFilter = value;
+    this.validYearsRequiredFilterChange.emit(value);
+  }
+  @Output() validYearsRequiredFilterChange: EventEmitter<boolean> = new EventEmitter();
   constructor(private typeCheckingWorker: TypeCheckingWorker,
               private translateWorker: TranslateWorker,
               private numberWorker: NumberWorker) { }
@@ -48,24 +66,35 @@ export class JobDescriptionFilterToolbarComponent implements OnInit, OnChanges {
   }
 
   ngOnChanges(changes: SimpleChanges): void {
-    if (this.salaryLow != null && this.salaryTop != null) {
-      if (isNaN(this.minSalary) || !this.minSalary == null) {
-        console.log('low 2', this.salaryLow);
+    this.initSalary();
+    this.initYearsRequired();
+  }
+  initSalary() {
+    if (isFinite(this.salaryLow) && isFinite(this.salaryTop)) {
+      if (!isFinite(this.minSalary)) {
         this.minSalary = this.salaryLow;
       }
-      if (isNaN(this.maxSalary) || !this.maxSalary) {
+      if (!isFinite(this.maxSalary)) {
         this.maxSalary = this.salaryTop;
       }
+      this.validSalaryFilter = this.salaryTop !== this.salaryLow;
       this.salaryOptions = this.generateSalaryOptions();
+    } else {
+      this.validSalaryFilter = false;
     }
-    if (this.yearsRequiredLow != null && this.yearsRequiredTop != null) {
-      if (isNaN(this.minYearsRequired) || !this.minYearsRequired == null) {
+  }
+  initYearsRequired() {
+    if (isFinite(this.yearsRequiredLow) && isFinite(this.yearsRequiredTop)) {
+      if (!isFinite(this.minYearsRequired)) {
         this.minYearsRequired = this.yearsRequiredLow;
       }
-      if (isNaN(this.maxYearsRequired) || !this.maxYearsRequired) {
+      if (!isFinite(this.maxYearsRequired)) {
         this.maxYearsRequired = this.yearsRequiredTop;
       }
+      this.validYearsRequiredFilter = this.yearsRequiredTop !== this.yearsRequiredLow;
       this.yearsRequiredOptions = this.generateYearsRequiredOptions();
+    } else {
+      this.validYearsRequiredFilter = false;
     }
   }
   generateSalaryOptions(): Options {

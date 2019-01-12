@@ -20,17 +20,23 @@ export class ArrayWorker {
     return arrayCopy;
   }
   public calculateMax(array, property: string) {
-    return Math.max(...array.map(value => {
+    const resultMax = Math.max(...array.map(value => {
       return value[property];
     }));
+    if (!isNaN(resultMax)) {
+      return resultMax;
+    }
   }
   public calculateMaxSimpleArray(array) {
     return Math.max(...array);
   }
   public calculateMin(array, property: string) {
-    return Math.min(...array.map(value => {
+    const resultMin = Math.min(...array.map(value => {
       return value[property];
     }));
+    if (!isNaN(resultMin)) {
+      return resultMin;
+    }
   }
   public calculateMinSimpleArray(array) {
     return Math.min(...array);

@@ -14,15 +14,19 @@
 </mat-form-field>
   </div>
   <div class="col-4 custom-slider">
-    <label class="custom-label-slider">{{'Salary' | translate}}</label>
-    <ng5-slider [(value)]="minSalary" (valueChange)="changeMinSalary()"
-                (highValueChange)="changeMaxSalary()" [(highValue)]="maxSalary" [options]="salaryOptions"></ng5-slider>
+    <div *ngIf="validSalaryFilter">
+      <label class="custom-label-slider">{{'Salary' | translate}}</label>
+      <ng5-slider [(value)]="minSalary" (valueChange)="changeMinSalary()"
+                  (highValueChange)="changeMaxSalary()" [(highValue)]="maxSalary" [options]="salaryOptions"></ng5-slider>
+    </div>
   </div>
   <div class="col-4 custom-slider">
-    <label class="custom-label-slider">{{'Age' | translate}}</label>
-    <ng5-slider *ngIf="yearsRequiredOptions" [(value)]="minYearsRequired" (valueChange)="changeMinYearsRequired()"
-                (highValueChange)="changeMaxYearsRequired()"
-                [(highValue)]="maxYearsRequired" [options]="yearsRequiredOptions"></ng5-slider>
+    <div *ngIf="validYearsRequiredFilter">
+      <label class="custom-label-slider">{{'Age' | translate}}</label>
+      <ng5-slider *ngIf="yearsRequiredOptions" [(value)]="minYearsRequired" (valueChange)="changeMinYearsRequired()"
+                  (highValueChange)="changeMaxYearsRequired()"
+                  [(highValue)]="maxYearsRequired" [options]="yearsRequiredOptions"></ng5-slider>
+    </div>
   </div>
 </div>
 <div class="row">
@@ -33,6 +37,8 @@
 
   </div>
   <div class="col-4">
-    <mat-checkbox class="checkbox-with-multiline-text" [(ngModel)]="includeUndefinedBirthday" (ngModelChange)="changeIncludeUndefinedBirthday()" color="primary">{{'Show candidates with undefined birthday' | translate}}</mat-checkbox>
+    <ng-container *ngIf="validYearsRequiredFilter">
+      <mat-checkbox class="checkbox-with-multiline-text" [(ngModel)]="includeUndefinedBirthday" (ngModelChange)="changeIncludeUndefinedBirthday()" color="primary">{{'Show candidates with undefined birthday' | translate}}</mat-checkbox>
+    </ng-container>
   </div>
 </div>

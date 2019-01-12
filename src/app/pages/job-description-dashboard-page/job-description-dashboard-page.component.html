@@ -19,6 +19,8 @@
                                       (minYearsRequiredChange)="changeFilterObject()"
                                       (minSalaryChange)="changeFilterObject()"
                                       (maxSalaryChange)="changeFilterObject()"
+                                      (validYearsRequiredFilterChange)="validYearsRequiredFilterChange($event)"
+                                      (validSalaryFilterChange)="validSalaryFilterChange($event)"
                                       (selectedStatusesChange)="changeFilterObject()"></app-job-description-filter-toolbar>
   <app-sort-toolbar
     [sourceProperties]="sourceProperties"
@@ -59,6 +61,8 @@
                                  [isSort]="isFilter"
                                  [sortedDirection]="sortDirection"
                                  [sortedProperty]="sortedProperty"
+                                 [validSalaryFilter]="validSalaryFilter"
+                                 [validYearsRequiredFilter]="validYearsRequiredFilter"
                                  (addVacancy)="getVacancies()" (deleteVacancy)="deleteVacancy($event)"></app-job-description-dashboard>
   <br>
   <app-pagination-toolbar

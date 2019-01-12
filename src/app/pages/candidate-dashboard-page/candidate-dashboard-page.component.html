@@ -21,6 +21,8 @@
                                         (minYearsRequiredChange)="changeFilterObject()"
                                         (maxYearsRequiredChange)="changeFilterObject()"
                                         (includeUndefinedBirthdayChange)="changeFilterObject()"
+                                        (validSalaryFilterChange)="validSalaryFilterChange($event)"
+                                        (validYearsRequiredFilterChange)="validYearsRequiredFilterChange($event)"
   ></app-candidate-filter-toolbar>
   <app-sort-toolbar
     [sourceProperties]="sourceProperties"
@@ -66,6 +68,8 @@
                            [minYearsRequired]="minYearRequired"
                            [maxYearsRequired]="maxYearRequired"
                            [includeUndefinedBirthday]="includeUndefinedBirthday"
+                           [validSalaryFilter]="validSalaryFilter"
+                           [validYearsRequiredFilter]="validYearsRequiredFilter"
                            [isSort]="isFilter"
                            [sortedDirection]="sortDirection"
                            [sortedProperty]="sortedProperty"
