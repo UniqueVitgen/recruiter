@@ -26,6 +26,8 @@ import {AlertDialogData} from '../../../interfaces/dialog/init/alert-dialog-data
 import {TypeCheckingWorker} from '../../../workers/type-checking/type-checking.worker';
 import {Router} from '@angular/router';
 import {InterviewCalendarEvent} from '../../../classes/event/interview-calendar-event';
+// import * as $ from 'jQuery';
+// import {EventObject, ViewObject} from 'fullcalendar';
 // import {EventObject, ViewObject} from 'fullcalendar';
 // import {  } from 'fullcalendar';
 // import { FullCalendarOptions, EventObject } from 'ngx-fullcalendar';
@@ -46,7 +48,7 @@ export class InterviewCalendarComponent implements OnInit, OnChanges {
   @Output('resizeEvent') outputResizeEvent: EventEmitter<InterviewCalendarEvent> = new EventEmitter();
   // options: FullCalendarOptions;
   // events: EventObject[];
-  options;
+  options: Object;
   public calendarEventList: CalendarEvent[];
   public calendarOptions = <any>{
     allDaySlot: false,
@@ -101,7 +103,7 @@ export class InterviewCalendarComponent implements OnInit, OnChanges {
         month:    'Месяц',
         // today:    '>',
         week:     'Неделя',
-        day:      'Лист',
+        day:      'День',
         list:     'Список'
       };
       firstDay = 1;
@@ -130,7 +132,7 @@ export class InterviewCalendarComponent implements OnInit, OnChanges {
       header: {
         left: 'prev,next',
         center: 'title',
-        right: 'month,agendaWeek,agendaDay'
+        right: 'month,agendaWeek'
       },
       bootstrapGlyphicons: {
         today: 'glyphicon-repeat'
@@ -146,8 +148,7 @@ export class InterviewCalendarComponent implements OnInit, OnChanges {
       },
       eventDrop: (e) => {
         this.dropInterview(e);
-      }
-      ,
+      },
       eventResize(event, jsEvent: MouseEvent, ui: any, view): void {
         that.resizeEvent(event);
       }
