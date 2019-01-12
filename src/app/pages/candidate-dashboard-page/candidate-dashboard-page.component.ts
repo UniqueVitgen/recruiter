@@ -67,6 +67,10 @@ export class CandidateDashboardPageComponent implements OnInit {
               public dialog: MatDialog, public vacancyService: VacancyService) { }
 
   ngOnInit() {
+    this.initPage();
+    // this.mockCandidates = this.candidateService.mockCandidates;
+  }
+  initPage() {
     this.sourceProperties = [
       {field: 'fullname', text: 'Fullname'},
       {field: 'age', text: 'Age'},
@@ -83,6 +87,7 @@ export class CandidateDashboardPageComponent implements OnInit {
       this.topYearRequired = this.arrayWorker.calculateMax(candidateWithAges, 'age');
       console.log('lowYearRequired', this.lowYearRequired);
       console.log('topYearRequired', this.topYearRequired);
+      this.changeFilterObject();
       this.initFilterObject();
       this.sourceStatuses = this.enumWorker.getValuesFromEnum(CandidateState);
     });
@@ -91,7 +96,6 @@ export class CandidateDashboardPageComponent implements OnInit {
     this.initFilterObject();
     this.initSortObject();
     this.initPaginationObject();
-    // this.mockCandidates = this.candidateService.mockCandidates;
   }
   clickAdvancedSearch() {
     this.changeFilterObject();
@@ -115,11 +119,18 @@ export class CandidateDashboardPageComponent implements OnInit {
       this.includeUndefinedBirthday = true;
       this.isFilter = false;
     }
-    if (this.minYearRequired == null) {
-      this.minYearRequired = 0;
+    console.log('filterObject', filterObject);
+    if (this.minYearRequired < this.lowYearRequired || filterObject.minYearRequiredOnTheEdge) {
+      this.minYearRequired = this.lowYearRequired;
     }
-    if (this.maxYearRequired == null) {
-      this.maxYearRequired = 0;
+    if (this.maxYearRequired > this.topYearRequired || filterObject.maxYearRequiredOnTheEdge) {
+      this.maxYearRequired = this.topYearRequired;
+    }
+    if (this.minSalary < this.lowSalary || filterObject.minSalaryOnTheEdge) {
+      this.minSalary = this.lowSalary;
+    }
+    if (this.maxSalary > this.topSalary || filterObject.maxYearRequiredOnTheEdge) {
+      this.maxSalary = this.topSalary;
     }
     console.log('this.minYearRequired', this.minYearRequired);
     console.log('this.maxYearRequired', this.maxYearRequired);
@@ -165,7 +176,7 @@ export class CandidateDashboardPageComponent implements OnInit {
   }
   deleteCandidateFromTheBase(candidate: Candidate): void {
     this.candidateService.delete(candidate).subscribe(res => {
-      this.getAll();
+      this.initPage();
     });
   }
   deleteCandidate(candidate: Candidate) {
@@ -204,7 +215,7 @@ export class CandidateDashboardPageComponent implements OnInit {
     dialogRef.afterClosed().subscribe((res: CandidateDialogResult) => {
       if (res) {
         console.log('res - ', res);
-        this.getAll();
+        this.initPage();
       }
     });
   }
@@ -218,9 +229,13 @@ export class CandidateDashboardPageComponent implements OnInit {
     this.filterStorage.setCandidateFilter({
       includeUndefinedBirthday: this.includeUndefinedBirthday,
       minSalary: this.minSalary,
+      minSalaryOnTheEdge: this.minSalary === this.lowSalary,
       maxSalary: this.maxSalary,
+      maxSalaryOnTheEdge: this.maxSalary === this.topSalary,
       minYearRequired: this.minYearRequired,
+      minYearRequiredOnTheEdge: this.minYearRequired === this.lowYearRequired,
       maxYearRequired: this.maxYearRequired,
+      maxYearRequiredOnTheEdge: this.maxYearRequired === this.topYearRequired,
       selectedStatuses: this.selectedStatuses,
       isFilter: this.isFilter
     });
