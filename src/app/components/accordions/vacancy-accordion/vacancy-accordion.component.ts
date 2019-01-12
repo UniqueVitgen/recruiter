@@ -2,6 +2,7 @@ import {Component, EventEmitter, HostListener, Input, OnInit, Output} from '@ang
 import {Candidate} from '../../../classes/candidate';
 import {VacancyColorService} from '../../../services/vacancy/vacancy-color.service';
 import {Vacancy} from '../../../classes/vacancy';
+import {NumberWorker} from '../../../workers/number/number.worker';
 
 @Component({
   selector: 'app-vacancy-accordion',
@@ -16,15 +17,16 @@ export class VacancyAccordionComponent implements OnInit {
   @Output() onOpenDeleteVacancyDialog: EventEmitter<number> = new EventEmitter();
   showInfoAndDeleteIcons: boolean = false;
 
+  constructor(private vacancyColorService: VacancyColorService, public numberWorker: NumberWorker) {
+
+  }
+
   @HostListener('mouseleave') onMouseLeave(): void {
     this.showInfoAndDeleteIcons = false;
   }
 
   @HostListener('mouseenter') onMouseEnter(): void {
     this.showInfoAndDeleteIcons = true;
-  }
-
-  constructor(private vacancyColorService: VacancyColorService) {
   }
 
   goToJobDescriptionPage(vacancy: Vacancy): void {

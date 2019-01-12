@@ -53,6 +53,7 @@
 
       <mat-form-field *ngIf="data.sourceInterviewers" class="example-full-width">
         <mat-select multiple [(ngModel)]="editedInterview.interviewers" formControlName="interviewers"
+                    [matTooltip]="(data.sourceInterviewers && data.sourceInterviewers.length === 0 ? 'Interviewers have not yet in the system': null ) | translate"
                     [compareWith]="typeCheckingWorker.compareObjects"  [disabled]="editedInterview.completed"
                     [placeholder]="'Interviewers' | translate" required>
           <mat-option *ngFor="let interviewer of data.sourceInterviewers" [value]="interviewer">
@@ -64,7 +65,8 @@
       </mat-form-field>
 
       <mat-form-field class="example-full-width">
-        <mat-select  [disabled]="editedInterview.completed" [placeholder]="'Vacancy' | translate" required formControlName="vacancy" [compareWith]="typeCheckingWorker.compareObjects" [(ngModel)]="sourceVacancy">
+        <mat-select
+          [matTooltip]="(vacancies && vacancies.length === 0 ? 'This candidate don\'t have any vacancy': null ) | translate"  [disabled]="editedInterview.completed" [placeholder]="'Vacancy' | translate" required formControlName="vacancy" [compareWith]="typeCheckingWorker.compareObjects" [(ngModel)]="sourceVacancy">
           <mat-option *ngFor="let food of vacancies" [value]="food">
             {{food.position.name}}
           </mat-option>

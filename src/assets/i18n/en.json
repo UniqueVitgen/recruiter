@@ -195,5 +195,7 @@
   "preferred contact" : "Preferred contact",
   "Interviewers": "Interviewers",
   "Selected number of candidates": "Selected number of candidates",
-  "Selected number of vacancies": "Selected number of vacancies"
+  "Selected number of vacancies": "Selected number of vacancies",
+  "This candidate don't have any vacancy": "This candidate don't have any vacancy",
+  "Interviewers have not yet in the system": "Interviewers have not yet in the system"
 }

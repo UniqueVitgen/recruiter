@@ -19,14 +19,24 @@
             <span
               class="description"> {{'Total number of candidates' | translate}}: {{vacancy.candidates.length}}</span>
           <span
-            class="description"> {{'Salary' | translate}}: ${{vacancy.salaryInDollarsFrom}} - ${{vacancy.salaryInDollarsTo}}</span>
+            class="description"> {{'Salary' | translate}}:
+            <span  *ngIf="vacancy.salaryInDollarsTo || vacancy.salaryInDollarsFrom">
+              <span *ngIf="vacancy.salaryInDollarsFrom" matTooltip="{{'From salary' | translate}}">${{vacancy.salaryInDollarsFrom}}</span>
+              <span *ngIf="vacancy.salaryInDollarsTo && vacancy.salaryInDollarsFrom">-</span>
+              <span *ngIf="vacancy.salaryInDollarsTo" matTooltip="{{'To salary' | translate}}">${{vacancy.salaryInDollarsTo}}</span>
+            </span>
+            <span *ngIf="!(vacancy.salaryInDollarsTo || vacancy.salaryInDollarsFrom)">-</span>
+          </span>
           <span
-            class="description"> {{'Experience years required' | translate}}: {{vacancy.experienceYearsRequire}}</span>
+            class="description"> {{'Experience years required' | translate}}:
+            <span *ngIf="vacancy.experienceYearsRequire != null">{{numberWorker.formatYears(vacancy.experienceYearsRequire) | translate}}</span>
+            <span *ngIf="vacancy.experienceYearsRequire == null">-</span>
+          </span>
 
-          <span><button *ngIf="showInfoAndDeleteIcons"  mat-icon-button (click)="goToJobDescriptionPage(vacancy); $event.stopPropagation() "
+          <span><button [ngClass]="{'custom-hidden-item': !showInfoAndDeleteIcons}"  mat-icon-button (click)="goToJobDescriptionPage(vacancy); $event.stopPropagation() "
           ><mat-icon [matTooltip]="'Vacancy info' | translate">info</mat-icon></button>
 
-          <button *ngIf="showInfoAndDeleteIcons"  mat-icon-button (click)="openDeleteVacancyDialog(vacancyID); $event.stopPropagation()"><mat-icon
+          <button [ngClass]="{'custom-hidden-item': !showInfoAndDeleteIcons}"  mat-icon-button (click)="openDeleteVacancyDialog(vacancyID); $event.stopPropagation()"><mat-icon
             [matTooltip]="'Delete this vacancy' | translate">delete</mat-icon></button></span>
         </mat-panel-description>
 

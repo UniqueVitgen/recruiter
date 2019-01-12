@@ -194,5 +194,7 @@
   "preferred contact" : "Предпочтительный контакт",
   "Interviewers": "Интервьюверы",
   "Selected number of candidates": "Выбранные кандидаты",
-  "Selected number of vacancies": "Выбранные вакансии"
+  "Selected number of vacancies": "Выбранные вакансии",
+  "This candidate don't have any vacancy": "У данного кандидата нету какой-либо вакансии",
+  "Interviewers have not yet in the system": "Интервьюеров, нет в системе"
 }
