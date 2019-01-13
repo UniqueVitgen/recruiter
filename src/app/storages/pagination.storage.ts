@@ -1,7 +1,7 @@
 import {Injectable} from '@angular/core';
 import {PaginationDashbord} from '../classes/dashboard/pagination-dashbord';
 const CANDIDATE_PAGINATION = 'CandidatePaginationObject';
-const EXICTED_CANDIDATE_PAGINATION = 'CandidatePaginationObject';
+const EXICTED_CANDIDATE_PAGINATION = 'ExistedCandidatePaginationObject';
 const VACANCY_PAGINATION = 'VacancyPaginationObject';
 
 @Injectable({
