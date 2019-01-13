@@ -58,7 +58,7 @@ export class SearchInputComponent implements OnInit, OnChanges {
     if(this.value) {
       this.search(this.value);
     } else {
-      this.filteredAutocompleteList = this.autocompleteList;
+      this.search('');
     }
   }
 
