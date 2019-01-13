@@ -1,4 +1,7 @@
 .mat-radio-button {
-  margin-left: 16px;
-  padding-top: 10px;
+    margin-left: 16px;
+    padding-top: 10px;
+}
+::ng-deep .mat-radio-outer-circle {
+  z-index: 10;
 }
