@@ -35,6 +35,10 @@ export class JobDescriptionFilterToolbarComponent implements OnInit, OnChanges {
   maxYearsRequired: number;
   @Output()
   maxYearsRequiredChange: EventEmitter<number> = new  EventEmitter();
+  @Input() includeUndefinedYearsRequired: boolean;
+  @Output() includeUndefinedYearsRequiredChange: EventEmitter<boolean> = new EventEmitter();
+  @Input() includeUndefinedSalary: boolean;
+  @Output() includeUndefinedSalaryChange: EventEmitter<boolean> = new EventEmitter();
   salaryOptions: Options;
   yearsRequiredOptions: Options;
   private _validSalaryFilter: boolean;
@@ -146,6 +150,12 @@ export class JobDescriptionFilterToolbarComponent implements OnInit, OnChanges {
   }
   changeMaxYearsRequired() {
     this.maxYearsRequiredChange.emit(this.maxYearsRequired);
+  }
+  changeIncludeUndefinedYearsRequired() {
+    this.includeUndefinedYearsRequiredChange.emit(this.includeUndefinedYearsRequired);
+  }
+  changeIncludeUndefinedSalary() {
+    this.includeUndefinedSalaryChange.emit(this.includeUndefinedSalary);
   }
 
 }

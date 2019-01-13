@@ -15,6 +15,10 @@
                                       [(minYearsRequired)]="minYearRequired"
                                       [(maxYearsRequired)]="maxYearRequired"
                                       [(selectedStatuses)]="selectedList"
+                                      [(includeUndefinedYearsRequired)]="includeUndefinedYearsRequired"
+                                      [(includeUndefinedSalary)]="includeUndefinedSalary"
+                                      (includeUndefinedSalaryChange)="changeFilterObject()"
+                                      (includeUndefinedYearsRequiredChange)="changeFilterObject()"
                                       (maxYearsRequiredChange)="changeFilterObject()"
                                       (minYearsRequiredChange)="changeFilterObject()"
                                       (minSalaryChange)="changeFilterObject()"
@@ -64,6 +68,8 @@
                                  [sortedProperty]="sortedProperty"
                                  [validSalaryFilter]="validSalaryFilter"
                                  [validYearsRequiredFilter]="validYearsRequiredFilter"
+                                 [includeUndefinedSalary]="includeUndefinedSalary"
+                                 [includeUndefinedYearsRequired]="includeUndefinedYearsRequired"
                                  (changeFilteredLength)="changeFilteredLength($event)"
                                  (addVacancy)="getVacancies()" (deleteVacancy)="deleteVacancy($event)"></app-job-description-dashboard>
   <br>

@@ -10,4 +10,5 @@ export class CandidateFilterDashboard extends FilterDashboard{
   maxYearRequired: number;
   maxYearRequiredOnTheEdge: boolean;
   includeUndefinedBirthday: boolean;
+  includeUndefinedSalary: boolean;
 }

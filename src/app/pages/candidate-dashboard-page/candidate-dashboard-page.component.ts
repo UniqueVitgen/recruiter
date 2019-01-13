@@ -51,6 +51,7 @@ export class CandidateDashboardPageComponent implements OnInit {
   minYearRequired: number;
   maxYearRequired: number;
   includeUndefinedBirthday: boolean;
+  includeUndefinedSalary: boolean;
   validSalaryFilter: boolean;
   validYearsRequiredFilter: boolean;
   sourceProperties: SortField[];
@@ -115,6 +116,7 @@ export class CandidateDashboardPageComponent implements OnInit {
         this.maxYearRequired = filterObject.maxYearRequired;
         this.selectedStatuses = filterObject.selectedStatuses;
         this.includeUndefinedBirthday = filterObject.includeUndefinedBirthday;
+        this.includeUndefinedSalary = filterObject.includeUndefinedSalary;
         this.isFilter = filterObject.isFilter;
       } else {
         this.minSalary = this.lowSalary;
@@ -247,6 +249,7 @@ export class CandidateDashboardPageComponent implements OnInit {
   changeFilterObject() {
     this.filterStorage.setCandidateFilter({
       includeUndefinedBirthday: this.includeUndefinedBirthday,
+      includeUndefinedSalary: this.includeUndefinedSalary,
       minSalary: this.minSalary,
       minSalaryOnTheEdge: this.minSalary === this.lowSalary,
       maxSalary: this.maxSalary,

@@ -9,4 +9,6 @@ export class VacancyFilterDashboard extends FilterDashboard {
   minSalaryOnTheEdge: boolean;
   maxSalary: number;
   maxSalaryOnTheEdge: boolean;
+  includeUndefinedYearsRequired: boolean;
+  includeUndefinedSalary: boolean;
 }

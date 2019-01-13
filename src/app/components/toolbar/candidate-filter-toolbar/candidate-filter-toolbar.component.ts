@@ -37,7 +37,7 @@ export class CandidateFilterToolbarComponent implements OnInit, OnChanges {
   @Input() includeUndefinedBirthday: boolean;
   @Output() includeUndefinedBirthdayChange: EventEmitter<boolean> = new EventEmitter();
   @Input() includeUndefinedSalary: boolean;
-  @Output() includeUndefinedSalaryChange: EventEmitter<boolean>
+  @Output() includeUndefinedSalaryChange: EventEmitter<boolean> = new EventEmitter();
   salaryOptions: Options;
   yearsRequiredOptions: Options;
   private _validSalaryFilter: boolean;

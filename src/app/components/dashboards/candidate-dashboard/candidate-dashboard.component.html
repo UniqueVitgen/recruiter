@@ -3,9 +3,9 @@
   <div
     *ngFor="let candidate of selectedCandidates | paginate: { itemsPerPage: size, currentPage: page, id: idPagination } | slice:0:limitTo ? limitTo : selectedCandidates.length; let i = index"
     [ngClass]=" filledCells ? 'col-md-' + filledCells : 'col-md-3'" class="col-12 center-item heightitem">
-    <app-candidate-dashboard-item [clickableCandidate]="true" [haveHoverEffect]="haveHoverEffect" [haveBoxShadow]="true"
+    <app-candidate-dashboard-item [haveHoverEffect]="haveHoverEffect" [haveBoxShadow]="true"
                                   [isDeleteIcon]="isDeleteIcon" [isClosedIcon]="isClosedIcon" (deleteCandidate)="deleteCandidate(candidate)" (deleteCandidateFromTheBase)="deleteCandidateFromTheBase(candidate)"
-
+                                  (click)="clickCandidate()"
                                   [candidate]="candidate"></app-candidate-dashboard-item>
   </div>
   <div *ngIf="haveAddElement" [ngClass]=" filledCells ? 'col-md-' + filledCells : 'col-md-3'"

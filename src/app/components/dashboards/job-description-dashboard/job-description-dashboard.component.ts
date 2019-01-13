@@ -29,6 +29,8 @@ export class JobDescriptionDashboardComponent implements OnInit, OnChanges {
   @Input() maxSalary: number;
   @Input() minYearsRequired: number;
   @Input() maxYearsRequired: number;
+  @Input() includeUndefinedSalary: boolean;
+  @Input() includeUndefinedYearsRequired: boolean;
   @Input() validSalaryFilter: boolean;
   @Input() validYearsRequiredFilter: boolean;
   @Input() idPagination: number;
@@ -62,15 +64,15 @@ export class JobDescriptionDashboardComponent implements OnInit, OnChanges {
   }
 
   ngOnChanges(changes: SimpleChanges): void {
-    console.log('2', this.p, this.itemsPerPage);
     this.selectedVacancies = this.searchValues(this.search);
     if (this.isFilter) {
       this.selectedVacancies = this.filterByStatus(this.selectedVacancies, this.filterStatuses);
       if (this.validSalaryFilter) {
-        this.selectedVacancies = this.filterBySalary(this.selectedVacancies, this.minSalary, this.maxSalary);
+        this.selectedVacancies = this.filterBySalary(this.selectedVacancies, this.minSalary, this.maxSalary, this.includeUndefinedSalary);
       }
       if (this.validYearsRequiredFilter) {
-        this.selectedVacancies = this.filterByYearsRequire(this.selectedVacancies, this.minYearsRequired, this.maxYearsRequired);
+        this.selectedVacancies = this.filterByYearsRequire(this.selectedVacancies, this.minYearsRequired, this.maxYearsRequired,
+          this.includeUndefinedYearsRequired);
       }
     }
     if (this.isSort) {
@@ -101,9 +103,14 @@ export class JobDescriptionDashboardComponent implements OnInit, OnChanges {
       });
     }
   }
-  filterBySalary(vacancies: Vacancy[], minSalary: number, maxSalary: number) {
+  filterBySalary(vacancies: Vacancy[], minSalary: number, maxSalary: number, includeUndefinedSalary: boolean) {
     if (minSalary != null && maxSalary != null) {
       return vacancies.filter((vacancy) => {
+        if (includeUndefinedSalary) {
+          if (vacancy.salaryInDollarsTo == null && vacancy.salaryInDollarsFrom == null) {
+            return true;
+          }
+        }
         return (minSalary >= vacancy.salaryInDollarsFrom
           && minSalary <= vacancy.salaryInDollarsTo)
           ||
@@ -114,9 +121,14 @@ export class JobDescriptionDashboardComponent implements OnInit, OnChanges {
       return vacancies;
     }
   }
-  filterByYearsRequire(vacancies: Vacancy[], minYearsRequired: number, maxYearsRequired: number) {
+  filterByYearsRequire(vacancies: Vacancy[], minYearsRequired: number, maxYearsRequired: number, includeUndefinedYearsRequired: boolean) {
     if (minYearsRequired != null && maxYearsRequired != null) {
       return vacancies.filter((vacancy) => {
+        if (includeUndefinedYearsRequired) {
+          if (vacancy.experienceYearsRequire == null) {
+            return true;
+          }
+        }
         return (vacancy.experienceYearsRequire >= minYearsRequired
           && vacancy.experienceYearsRequire <= maxYearsRequired);
       });

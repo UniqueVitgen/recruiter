@@ -33,3 +33,18 @@
   </div>
   <!--<nouislider [min]="0" [max]="2" [step]="0.05" [(ngModel)]="someValue" [disabled]="false"></nouislider>-->
 </div>
+<div class="row">
+  <div class="col-4">
+
+  </div>
+  <div class="col-4">
+    <ng-container *ngIf="validSalaryFilter">
+      <mat-checkbox class="checkbox-with-multiline-text" [(ngModel)]="includeUndefinedSalary" (ngModelChange)="changeIncludeUndefinedSalary()" color="primary">{{'Show candidates with undefined salary' | translate}}</mat-checkbox>
+    </ng-container>
+  </div>
+  <div class="col-4">
+    <ng-container *ngIf="validYearsRequiredFilter">
+      <mat-checkbox class="checkbox-with-multiline-text" [(ngModel)]="includeUndefinedYearsRequired" (ngModelChange)="changeIncludeUndefinedYearsRequired()" color="primary">{{'Show candidates with undefined birthday' | translate}}</mat-checkbox>
+    </ng-container>
+  </div>
+</div>

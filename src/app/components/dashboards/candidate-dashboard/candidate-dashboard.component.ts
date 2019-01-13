@@ -156,6 +156,9 @@ export class CandidateDashboardComponent implements OnInit, OnChanges {
       }
     });
   }
+  clickCandidate() {
+    console.log('clicked');
+  }
 
   deleteCandidate(candidateID: number) {
     this.outputDeleteCandidate.emit(candidateID);

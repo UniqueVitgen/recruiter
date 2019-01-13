@@ -42,6 +42,8 @@ export class JobDescriptionDashboardPageComponent implements OnInit {
   maxYearRequired: number;
   validSalaryFilter: boolean;
   validYearsRequiredFilter: boolean;
+  includeUndefinedYearsRequired: boolean;
+  includeUndefinedSalary: boolean;
   idPagination: number = 2;
   public isFilter;
   public toppingList: string[];
@@ -92,6 +94,8 @@ export class JobDescriptionDashboardPageComponent implements OnInit {
         this.maxYearRequired = filterObject.maxYearRequired;
         this.selectedList = filterObject.selectedStatuses;
         this.isFilter = filterObject.isFilter;
+        this.includeUndefinedYearsRequired = filterObject.includeUndefinedYearsRequired;
+        this.includeUndefinedSalary = filterObject.includeUndefinedSalary;
       } else {
         this.minSalary = this.lowSalary;
         this.maxSalary = this.topSalary;
@@ -205,7 +209,9 @@ export class JobDescriptionDashboardPageComponent implements OnInit {
       maxYearRequired: this.maxYearRequired,
       maxYearRequiredOnTheEdge: this.maxYearRequired === this.topYearRequired,
       selectedStatuses: this.selectedList,
-      isFilter: this.isFilter
+      isFilter: this.isFilter,
+      includeUndefinedYearsRequired: this.includeUndefinedYearsRequired,
+      includeUndefinedSalary: this.includeUndefinedSalary
     });
   }
   changePaginationObject(): void {
