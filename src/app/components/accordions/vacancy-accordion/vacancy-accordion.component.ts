@@ -1,8 +1,20 @@
-import {Component, EventEmitter, HostListener, Input, OnInit, Output} from '@angular/core';
+import {
+  AfterContentChecked,
+  AfterContentInit,
+  AfterViewInit,
+  Component,
+  EventEmitter,
+  HostListener,
+  Input,
+  OnChanges,
+  OnInit,
+  Output
+} from '@angular/core';
 import {Candidate} from '../../../classes/candidate';
 import {VacancyColorService} from '../../../services/vacancy/vacancy-color.service';
 import {Vacancy} from '../../../classes/vacancy';
 import {NumberWorker} from '../../../workers/number/number.worker';
+import {TranslateWorker} from '../../../workers/translate/translate.worker';
 
 @Component({
   selector: 'app-vacancy-accordion',
@@ -16,8 +28,9 @@ export class VacancyAccordionComponent implements OnInit {
   @Output() onGoToJobDescriptionPage: EventEmitter<Vacancy> = new EventEmitter();
   @Output() onOpenDeleteVacancyDialog: EventEmitter<number> = new EventEmitter();
   showInfoAndDeleteIcons: boolean = false;
+  language: string;
 
-  constructor(private vacancyColorService: VacancyColorService, public numberWorker: NumberWorker) {
+  constructor(private vacancyColorService: VacancyColorService, private translateWorker: TranslateWorker, public numberWorker: NumberWorker) {
 
   }
 
@@ -38,6 +51,8 @@ export class VacancyAccordionComponent implements OnInit {
   }
 
   ngOnInit() {
+    this.language = this.translateWorker.getLanguage();
+    console.log(this.language);
   }
 
 }

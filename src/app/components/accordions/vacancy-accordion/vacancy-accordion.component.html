@@ -1,43 +1,43 @@
 <div>
 
-  <mat-accordion class="example-headers-align">
+  <mat-accordion class="example-headers-align-vacancy">
     <mat-expansion-panel class="vacancyPannel">
       <mat-expansion-panel-header >
 
-        <mat-panel-title>
+        <mat-panel-title class="mat-panel-title-max-width">
           <mat-icon class="fiber-icon-image vacancy-status"
                     matTooltip="{{'Status' | translate}}: {{vacancy.vacancyState | translate}}"
                     [ngClass]="{
                     'success-fiber': vacancyColorService.isVacancyOpened(vacancy.vacancyState),
                   'fail-fiber': vacancyColorService.isVacancyClosed(vacancy.vacancyState)}">fiber_manual_record
           </mat-icon>
-          {{vacancy.position.name }}
+          <span class="candidate-one-row" matTooltip="{{vacancy.position.name }}">{{vacancy.position.name }}</span>
 
         </mat-panel-title>
-
         <mat-panel-description>
-            <span
-              class="description"> {{'Total number of candidates' | translate}}: {{vacancy.candidates.length}}</span>
+            <span class="description-width-candidates"> {{'Total candidates' | translate}}: {{vacancy.candidates.length}}</span>
+          <!--<span *ngIf="!(vacancy.salaryInDollarsTo || vacancy.salaryInDollarsFrom)" class="description-salary"></span>-->
           <span
-            class="description"> {{'Salary' | translate}}:
+            class="description-salary"> {{'Salary' | translate}}:
             <span  *ngIf="vacancy.salaryInDollarsTo || vacancy.salaryInDollarsFrom">
-              <span *ngIf="vacancy.salaryInDollarsFrom" matTooltip="{{'From salary' | translate}}">${{vacancy.salaryInDollarsFrom}}</span>
+              <span *ngIf="vacancy.salaryInDollarsFrom">${{vacancy.salaryInDollarsFrom}}</span>
               <span *ngIf="vacancy.salaryInDollarsTo && vacancy.salaryInDollarsFrom">-</span>
-              <span *ngIf="vacancy.salaryInDollarsTo" matTooltip="{{'To salary' | translate}}">${{vacancy.salaryInDollarsTo}}</span>
+              <span *ngIf="vacancy.salaryInDollarsTo">${{vacancy.salaryInDollarsTo}}</span>
             </span>
             <span *ngIf="!(vacancy.salaryInDollarsTo || vacancy.salaryInDollarsFrom)">-</span>
           </span>
+          <!--<span *ngIf="!vacancy.experienceYearsRequire"></span>-->
           <span
-            class="description"> {{'Experience years required' | translate}}:
+            class="description-width-experience"> {{'Experience required' | translate}}:
             <span *ngIf="vacancy.experienceYearsRequire != null">{{numberWorker.formatYears(vacancy.experienceYearsRequire) | translate}}</span>
-            <span *ngIf="vacancy.experienceYearsRequire == null">-</span>
+            <span *ngIf="vacancy.experienceYearsRequire == null">{{'Not' | translate}}</span>
           </span>
-
-          <span><button [ngClass]="{'custom-hidden-item': !showInfoAndDeleteIcons}"  mat-icon-button (click)="goToJobDescriptionPage(vacancy); $event.stopPropagation() "
+          <div class="description-width-icon"><button [ngClass]="{'custom-hidden-item': !showInfoAndDeleteIcons}"  mat-icon-button (click)="goToJobDescriptionPage(vacancy); $event.stopPropagation() "
           ><mat-icon [matTooltip]="'Vacancy info' | translate">info</mat-icon></button>
 
           <button [ngClass]="{'custom-hidden-item': !showInfoAndDeleteIcons}"  mat-icon-button (click)="openDeleteVacancyDialog(vacancyID); $event.stopPropagation()"><mat-icon
-            [matTooltip]="'Delete this vacancy' | translate">delete</mat-icon></button></span>
+            [matTooltip]="'Delete this vacancy' | translate">delete</mat-icon></button></div>
+
         </mat-panel-description>
 
         <!--<button class="vacancyEditButton" mat-raised-button (click)="goToJobDescriptionPage(vacancy)">{{'Info' | translate}}</button>-->
