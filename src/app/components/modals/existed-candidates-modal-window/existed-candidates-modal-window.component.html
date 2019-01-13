@@ -14,32 +14,35 @@
 
   </dialog-title>
   <dialog-body>
-    <app-candidate-dashboard
-      [existingMode]="true"
-      [filledCells]="4"
-      [candidates]="neededCandidates"
-      (onItemClick)="selectClick(getCandidateNumber($event))"
-      [size]="size"
-      [page]="page"
-      [itemsPerPageValues]="itemsPerPageValues"
+    <app-search-input [isAdvancedSearch]="false"
+                      [autocompleteList]="fullnames"
+                      (onSearch)="search($event)"
+    ></app-search-input>
 
-    >
-    </app-candidate-dashboard>
+    <app-candidate-dashboard [existingMode]="true"
+                             [filledCells]="4"
+                             [candidates]="neededCandidates"
+                             (onItemClick)="selectClick(getCandidateNumber($event))"
+                             [size]="size"
+                             [page]="page"
+                             [itemsPerPageValues]="itemsPerPageValues"
+                             [search]="searchValue"
+                             [idPagination]="idPagination"
+    ></app-candidate-dashboard>
     <app-pagination-toolbar
-      [itemsPerPageValues]="itemsPerPageValues"
-      [placeholder]="'ItemPerPage'"
-      [addButtonText]="'Add new candidate'"
-      [(size)]="size"
-      [(page)]="page"
-      (sizeChange)="changePaginationObject()"
-      (pageChange)="changePaginationObject()"
-      [idPagination]="idPagination"
-      (clickAddButton)="addCandidate()"
-      [numberOfVacancies]="neededCandidates.length"
-      [numberOfVacanciesTitle]="'Total number of candidates' | translate "
-      [isButtonAdd]="false"
-    >
-    </app-pagination-toolbar>
+                            [itemsPerPageValues]="itemsPerPageValues"
+                            [placeholder]="'ItemPerPage'"
+                            [addButtonText]="'Add new candidate'"
+                            [(size)]="size"
+                            [(page)]="page"
+                            (sizeChange)="changePaginationObject()"
+                            (pageChange)="changePaginationObject()"
+                            [idPagination]="idPagination"
+                            (clickAddButton)="addCandidate()"
+                            [numberOfVacancies]="neededCandidates.length"
+                            [numberOfVacanciesTitle]="'Total number of candidates' | translate "
+                            [isButtonAdd]="false"
+    ></app-pagination-toolbar>
 
   </dialog-body>
   <dialog-footer class="example-full-width">

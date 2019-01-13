@@ -1,7 +1,7 @@
 
 
 <div class="row">
-  <div class="col-3 padding-element">
+  <div class="col-7 center-vertical-text-container padding-element">
     <span class="height-div"></span>
     <div class="column">
       <!--<label class="number-of-vacanies">{{numberOfVacanciesTitle}} ({{numberOfVacancies}})</label>-->
@@ -10,14 +10,22 @@
           <mat-option *ngFor="let state of itemsPerPageValues" [value]="state">{{state}} {{'of' | translate}} {{numberOfVacancies}}</mat-option>
         </mat-select>
       </mat-form-field>
-    </div>
 
-  </div>
-  <div class="col-5 center-vertical-text-container">
+    </div>
+    &nbsp;
+    &nbsp;
+    &nbsp;
+    &nbsp;
+    &nbsp;
+    &nbsp;
     <pagination-controls class="custom-pagination float-left" [nextLabel]="''" [previousLabel]="''"
                          [id]="idPagination"
                          [responsive]="true" [autoHide]="true" (pageChange)="changePage($event)">
     </pagination-controls>
+  </div>
+
+  <div class="col-md-5 col-12 ">
+
   </div>
 
   <div *ngIf="isButtonAdd" class="col-4 center-item">

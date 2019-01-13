@@ -6,6 +6,7 @@ import {MAT_DIALOG_DATA, MatDialogRef, TooltipPosition} from '@angular/material'
 import {DeleteVacancyDialogComponent} from '../delete-vacancy-dialog/delete-vacancy-dialog.component';
 import {Vacancy} from '../../../classes/vacancy';
 import {PaginationStorage} from '../../../storages/pagination.storage';
+import {UserWorker} from '../../../workers/user/user.worker';
 
 @Component({
   selector: 'app-existed-candidates-modal-window',
@@ -24,13 +25,20 @@ export class ExistedCandidatesModalWindowComponent implements OnInit {
   page: number;
   size: number;
   idPagination: number = 1;
+  fullnames: string[];
+  isFilter: boolean;
+  searchValue: string;
 
   isCheck: boolean;
 
   constructor(private candidateService: CandidateService,
               public dialogRef: MatDialogRef<DeleteVacancyDialogComponent>,
               private paginationStorage: PaginationStorage,
+              private userWorker: UserWorker,
               @Inject(MAT_DIALOG_DATA) public data: { currentVacancy: Vacancy }) {
+  }
+  search(value: string) {
+    this.searchValue = value;
   }
 
   changePaginationObject(): void {
@@ -103,12 +111,19 @@ export class ExistedCandidatesModalWindowComponent implements OnInit {
       this.neededCandidates = this.filterNeededCandidates(this.candidates);
       this.numberOfAvailableCandidates = res.length - this.data.currentVacancy.candidates.length;
       this.noCandidateToAdd = this.numberOfAvailableCandidates === 0;
+      this.generateFullnames();
     }, err => {
       console.log('1' + err);
     });
     this.addMoreCandidates = false;
-  }
 
+  }
+  generateFullnames(): void {
+    this.fullnames = this.neededCandidates.map(candidate => {
+      return this.userWorker.formatFullName(candidate);
+    });
+    console.log('fullnames', this.fullnames);
+  }
   onNoClick(): void {
     this.dialogRef.close();
   }

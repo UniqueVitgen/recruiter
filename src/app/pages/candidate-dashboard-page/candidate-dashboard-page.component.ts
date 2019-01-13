@@ -58,7 +58,9 @@ export class CandidateDashboardPageComponent implements OnInit {
   sortDirection: SortDirection;
   sortedProperty: string;
   filteredCandidatesLength: number = 0;
-  constructor(private candidateService: CandidateService, private searchWorker: SearchWorker, private userWorker: UserWorker,
+  constructor(private candidateService: CandidateService,
+              private searchWorker: SearchWorker,
+              private userWorker: UserWorker,
               private enumWorker: EnumWorker,
               private dateTimeWorker: DateTimeWorker,
               private arrayWorker: ArrayWorker,
