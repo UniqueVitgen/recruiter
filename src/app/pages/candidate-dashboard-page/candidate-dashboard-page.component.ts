@@ -84,6 +84,7 @@ export class CandidateDashboardPageComponent implements OnInit {
     // console.log('sourceProperties', this.sourceProperties);
     this.getAll().add(() => {
       this.generateFullnames();
+      console.log(this.candidates.map(candidate => candidate.salaryInDollars))
       this.lowSalary = this.arrayWorker.calculateMin(this.candidates, 'salaryInDollars');
       this.topSalary = this.arrayWorker.calculateMax(this.candidates, 'salaryInDollars');
       const candidateWithAges = this.candidates.filter(candidate => !isNaN(candidate.age) && candidate.age);

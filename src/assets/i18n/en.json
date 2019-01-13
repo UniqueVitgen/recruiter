@@ -161,6 +161,7 @@
   "Required salary": "Required salary",
   "Birthday": "Birthday",
   "Show candidates with undefined birthday": "Show candidates with undefined birthday",
+  "Show candidates with undefined salary": "Show candidates with undefined salary",
   "fullname": "fullname",
   "Field": "Field",
   "Direction": "Direction",

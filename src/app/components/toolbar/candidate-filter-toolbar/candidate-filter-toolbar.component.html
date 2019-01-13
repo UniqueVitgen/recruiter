@@ -34,7 +34,9 @@
 
   </div>
   <div class="col-4">
-
+    <ng-container *ngIf="validSalaryFilter">
+      <mat-checkbox class="checkbox-with-multiline-text" [(ngModel)]="includeUndefinedSalary" (ngModelChange)="changeIncludeUndefinedSalary()" color="primary">{{'Show candidates with undefined salary' | translate}}</mat-checkbox>
+    </ng-container>
   </div>
   <div class="col-4">
     <ng-container *ngIf="validYearsRequiredFilter">

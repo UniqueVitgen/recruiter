@@ -20,9 +20,12 @@ export class ArrayWorker {
     return arrayCopy;
   }
   public calculateMax(array, property: string) {
-    const resultMax = Math.max(...array.map(value => {
+    const targetArray = array.map(value => {
       return value[property];
-    }));
+    }).filter(value => {
+      return value != null;
+    });
+    const resultMax = Math.max(...targetArray);
     if (isFinite(resultMax)) {
       return resultMax;
     }
@@ -31,9 +34,12 @@ export class ArrayWorker {
     return Math.max(...array);
   }
   public calculateMin(array, property: string) {
-    const resultMin = Math.min(...array.map(value => {
+    const targetArray = array.map(value => {
       return value[property];
-    }));
+    }).filter(value => {
+      return value != null;
+    });
+    const resultMin = Math.min(...targetArray);
     if (isFinite(resultMin)) {
       console.log('isFiniteMin', property, resultMin);
       return resultMin;

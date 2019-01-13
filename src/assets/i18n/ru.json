@@ -161,6 +161,7 @@
   "Required salary": "Требуемая зарплата",
   "Birthday": "День рождения",
   "Show candidates with undefined birthday": "Показывать кандидатов с неопределенной датой рождения",
+  "Show candidates with undefined salary": "Показывать кандидатов с неопределенной зарплатой",
   "Field": "Поле",
   "Direction": "Направление",
   "ASCENDING": "По возрастанию",

@@ -36,6 +36,8 @@ export class CandidateFilterToolbarComponent implements OnInit, OnChanges {
   maxYearsRequiredChange: EventEmitter<number> = new  EventEmitter();
   @Input() includeUndefinedBirthday: boolean;
   @Output() includeUndefinedBirthdayChange: EventEmitter<boolean> = new EventEmitter();
+  @Input() includeUndefinedSalary: boolean;
+  @Output() includeUndefinedSalaryChange: EventEmitter<boolean>
   salaryOptions: Options;
   yearsRequiredOptions: Options;
   private _validSalaryFilter: boolean;
@@ -145,6 +147,9 @@ export class CandidateFilterToolbarComponent implements OnInit, OnChanges {
   }
   changeIncludeUndefinedBirthday() {
     this.includeUndefinedBirthdayChange.emit(this.includeUndefinedBirthday);
+  }
+  changeIncludeUndefinedSalary() {
+    this.includeUndefinedSalaryChange.emit(this.includeUndefinedSalary);
   }
 
 }

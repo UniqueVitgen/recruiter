@@ -35,6 +35,7 @@ export class CandidateDashboardComponent implements OnInit, OnChanges {
   @Input() maxSalary: number;
   @Input() minYearsRequired: number;
   @Input() maxYearsRequired: number;
+  @Input() includeUndefinedSalary: boolean;
   @Input() includeUndefinedBirthday: boolean;
   @Input() validSalaryFilter: boolean;
   @Input() validYearsRequiredFilter: boolean;
@@ -64,23 +65,20 @@ export class CandidateDashboardComponent implements OnInit, OnChanges {
     if (this.candidates) {
       this.searchValues(this.search);
       if (this.isFilter) {
-        // console.log('this.minYearsRequired', this.minYearsRequired);
         this.selectedCandidates = this.filterByStatus(this.selectedCandidates, this.filterStatuses);
         if (this.validSalaryFilter) {
-          this.selectedCandidates = this.filterBySalary(this.selectedCandidates, this.minSalary, this.maxSalary);
+          this.selectedCandidates = this.filterBySalary(this.selectedCandidates, this.minSalary, this.maxSalary,
+            this.includeUndefinedSalary);
         }
-        // console.log('validYearsRequiredFilter 2', this.validYearsRequiredFilter);
         if (this.validYearsRequiredFilter) {
           this.selectedCandidates = this.filterByAge(this.selectedCandidates,
             this.minYearsRequired, this.maxYearsRequired, this.includeUndefinedBirthday);
         }
       }
       if (this.isSort) {
-        // console.log('isSort', this.isSort, this.sortedProperty);
         this.selectedCandidates = this.sortByProperty(this.selectedCandidates, this.sortedProperty);
       }
       this.outputChangeFilteredLength.emit(this.selectedCandidates.length);
-      // console.log('selectedCandidates', this.selectedCandidates);
     }
   }
   filterByStatus(candidates: CandidateDashboardItem[], statuses: string[]) {
@@ -94,9 +92,14 @@ export class CandidateDashboardComponent implements OnInit, OnChanges {
       }
     }
   }
-  filterBySalary(candidates: CandidateDashboardItem[], minSalary: number, maxSalary: number) {
+  filterBySalary(candidates: CandidateDashboardItem[], minSalary: number, maxSalary: number, includeUndefinedSalary: boolean) {
     if (minSalary != null && maxSalary != null) {
       return candidates.filter((candidate) => {
+        if (includeUndefinedSalary) {
+          if (candidate.salaryInDollars == null) {
+            return true;
+          }
+        }
         return candidate.salaryInDollars >= minSalary
           && candidate.salaryInDollars <= maxSalary;
       });
