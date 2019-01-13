@@ -12,39 +12,38 @@
       <mat-icon [matTooltip]="'To close' | translate">close</mat-icon>
     </button>
 
-
-    <!--<span class="float-right">-->
-    <!--<button mat-icon-button (click)="close()"><mat-icon>close</mat-icon></button>-->
-    <!--</span>-->
   </dialog-title>
   <dialog-body>
+    <app-search-input [isAdvancedSearch]="false"
+                      [autocompleteList]="fullnames"
+                      (onSearch)="search($event)"
+    ></app-search-input>
 
-    <div #candidateView *ngFor="let candidate of candidates; let i = index">
-      <!--<div *ngIf="isThisCandidateAlreadyHere(candidate)" (click)="addCandidate(i)"-->
-      <!--class="candidate-line example-full-width">-->
-      <!--<app-candidate-dashboard-item [haveHoverEffect]="true" [isClosedIcon]="false"-->
-      <!--[candidate]="candidate"-->
-      <!--[clickableCandidate]="false"></app-candidate-dashboard-item>-->
+    <app-candidate-dashboard [existingMode]="true"
+                             [filledCells]="4"
+                             [candidates]="neededCandidates"
+                             (onItemClick)="selectClick(getCandidateNumber($event))"
+                             [size]="size"
+                             [page]="page"
+                             [itemsPerPageValues]="itemsPerPageValues"
+                             [search]="searchValue"
+                             [idPagination]="idPagination"
+    ></app-candidate-dashboard>
+    <app-pagination-toolbar
+                            [itemsPerPageValues]="itemsPerPageValues"
+                            [placeholder]="'ItemPerPage'"
+                            [addButtonText]="'Add new candidate'"
+                            [(size)]="size"
+                            [(page)]="page"
+                            (sizeChange)="changePaginationObject()"
+                            (pageChange)="changePaginationObject()"
+                            [idPagination]="idPagination"
+                            (clickAddButton)="addCandidate()"
+                            [numberOfVacancies]="neededCandidates.length"
+                            [numberOfVacanciesTitle]="'Total number of candidates' | translate "
+                            [isButtonAdd]="false"
+    ></app-pagination-toolbar>
 
-      <!--<button class="example-full-width" mat-button>-->
-      <!--<mat-icon>add</mat-icon>-->
-      <!--</button>-->
-      <div *ngIf="isThisCandidateAlreadyHere(candidate)">
-        <div class="row">
-          <div>
-           <!-- [ngClass]="{'chosen-hoover': addMoreCandidates && isThisCandidateChosen(i)}" -->
-            <app-candidate-dashboard-item [haveBoxShadow]="true"
-                                          [haveHoverEffect]="false" [isClosedIcon]="false"
-                                          [candidate]="candidate"
-                                          [clickableCandidate]="false" (click)="selectClick(i)" [isSelect]="true" [(checkBox)]="candidate.select" [selectBoxShadow]="candidate.select" ></app-candidate-dashboard-item>
-
-            <!--<button class="example-full-width" mat-button><mat-icon>add</mat-icon></button>-->
-
-          </div>
-        </div>
-        <br>
-      </div>
-    </div>
   </dialog-body>
   <dialog-footer class="example-full-width">
     <span class="float-left">

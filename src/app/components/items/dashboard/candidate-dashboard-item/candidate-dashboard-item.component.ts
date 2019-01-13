@@ -32,6 +32,7 @@ export class CandidateDashboardItemComponent implements OnChanges {
   checkBoxValue: boolean;
   @Input()
   get checkBox() {
+    console.log('get', this.checkBoxValue);
     return this.checkBoxValue;
   }
   @Output() checkBoxChange: EventEmitter<any> =  new EventEmitter();

@@ -10,3 +10,8 @@
   border: 3px solid rgba(0, 99, 255, 0.64); /* Белая рамка */
   border-radius: 10px; /* Радиус скругления */
 }
+.pagination{
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+}

@@ -6,7 +6,7 @@ import { Directive, ElementRef, HostListener } from '@angular/core';
 export class OnlyNumbersDirective {
   private regex: RegExp = new RegExp(/^[1-9][0-9]*(\.[0-9]*)?$/g);
 
-  private specialKeys: Array<string> = [ 'Backspace', 'Tab', 'End', 'Home' ];
+  private specialKeys: Array<string> = [ 'Backspace', 'Tab', 'End', 'Home', 'ArrowLeft', 'ArrowRight' ];
 
   constructor(private el: ElementRef) {
   }

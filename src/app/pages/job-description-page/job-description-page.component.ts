@@ -195,7 +195,7 @@ export class JobDescriptionPageComponent implements OnInit {
     const dialogRef = this.dialog.open(ExistedCandidatesModalWindowComponent, {
         data: {currentVacancy: this.vacancy},
         disableClose: true,
-        // width: '350px'
+        width: '850px'
       }
     );
     dialogRef.afterClosed().subscribe((existingCandidatesModalWindowResult) => {

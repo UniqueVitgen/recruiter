@@ -1,13 +1,13 @@
 <div class="user-avatar" [ngClass]="{'user-avatar-hover': haveHoverEffect}">
-  <img [src]="src" alt="" onerror="this.src = '/assets/candidate/middle-man.jpg'" />
+  <img [src]="src ? src: '/assets/candidate/middle-man.jpg'" alt="" onerror="this.src = '/assets/candidate/middle-man.jpg'" />
   <mat-icon *ngIf="isStatus" class="fiber-icon-image"
             matTooltip="{{'Status' | translate}}: {{candidate.candidateState?.name | translate}}"
             [ngClass]="{'cv-accepted': candidate.candidateState?.name== 'CV accepted',
             'cv-rejected': candidate.candidateState?.name== 'CV rejected',
             'accepted-for-interview': candidate.candidateState?.name== 'Accepted for interview',
             'new' : candidate.candidateState?.name== 'New'}">fiber_manual_record</mat-icon>
-  <input type="checkbox" *ngIf="isSelect" class="modal-select-checkbox"
-              [matTooltip]="'Select' | translate" [(ngModel)]="checkBoxValue">
+  <mat-checkbox color="primary" type="checkbox" *ngIf="isSelect" class="modal-select-checkbox"
+                [matTooltip]="'Select' | translate" [(ngModel)]="checkBox" (ngModelChange)="checkBoxChange.emit(checkBox)"></mat-checkbox>
   <div (click)="clickAvatar()" class="avatar-hover">
     <mat-icon *ngIf="isClosedIcon" (click)="$event.stopPropagation()"  mat-icon-button [matMenuTriggerFor]="menu" class="close-icon-image" [matTooltip]="'Delete Candidate' | translate">more_horiz</mat-icon>
     <mat-icon *ngIf="isDeleteIcon" (click)="clickDelete(); $event.stopPropagation()"  mat-icon-button class="close-icon-image" [matTooltip]="'Delete Candidate' | translate">delete</mat-icon>
