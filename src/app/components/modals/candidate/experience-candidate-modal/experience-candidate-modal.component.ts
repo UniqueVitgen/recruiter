@@ -33,6 +33,7 @@ export class ExperienceCandidateModalComponent implements OnInit {
   public selectedPositions: PositionModel[];
   public maxDate: Date;
   public minDate: Date;
+  public minDateWithBirthday: Date;
   @Output('clickSave') outputClickSave: EventEmitter<CandidateExperience> = new EventEmitter();
 
   constructor(
@@ -64,9 +65,21 @@ export class ExperienceCandidateModalComponent implements OnInit {
   }
 
   ngOnInit() {
-    this.minDate = this.userWorker.generateRequiredStartDate();
+    this.minDate = new Date(this.userWorker.generateRequiredStartDate().setFullYear(
+      this.userWorker.generateRequiredStartDate().getFullYear() + 18,
+      this.userWorker.generateRequiredStartDate().getMonth(),
+      this.userWorker.generateRequiredStartDate().getDay()));
     this.maxDate = this.dateTimeWorker.getTodayStart();
+    this.getCandidateBirthday();
   }
+
+  getCandidateBirthday() {
+    this.minDateWithBirthday = new Date(new Date(this.editedCandidate.birthday).setFullYear(
+      new Date(this.editedCandidate.birthday).getFullYear() + 18,
+      new Date(this.editedCandidate.birthday).getMonth(),
+      new Date(this.editedCandidate.birthday).getDay()));
+  }
+
   getPositions() {
     this.positionService.getAll().subscribe((resPositions) => {
       this.positions = resPositions;
