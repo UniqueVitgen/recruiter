@@ -1,6 +1,6 @@
 import {Component, EventEmitter, Input, OnChanges, OnInit, Output, SimpleChanges} from '@angular/core';
 import {InterviewTimeline} from '../../../../classes/timeline/interview-timeline';
-import {Interview} from '../../../../classes/interview';
+import {Interview, InterviewExtended} from '../../../../classes/interview';
 import {DateTimeWorker} from '../../../../workers/date-time/date-time.worker';
 import {DateTimeForm} from '../../../../classes/html/dateTime/date-time-form';
 import {NgxMaterialTimepickerTheme} from 'ngx-material-timepicker/src/app/material-timepicker/models/ngx-material-timepicker-theme.interface';
@@ -9,6 +9,8 @@ import {DateInput} from '../../../../classes/html/dateTime/date-input';
 import {TranslateWorker} from '../../../../workers/translate/translate.worker';
 import {LocalDatePipe} from '../../../../pipes/local-date/local-date.pipe';
 import {DateTimeFormWorker} from '../../../../workers/date-time-form/date-time-form.worker';
+import {UserWorker} from '../../../../workers/user/user.worker';
+import {CandidateWorker} from '../../../../workers/candidate/candidate.worker';
 
 @Component({
   selector: 'app-interview-candidate-timeline-item',
@@ -16,7 +18,7 @@ import {DateTimeFormWorker} from '../../../../workers/date-time-form/date-time-f
   styleUrls: ['./interview-candidate-timeline-item.component.scss']
 })
 export class InterviewCandidateTimelineItemComponent implements OnInit, OnChanges {
-  @Input() interview: Interview;
+  @Input() interview: InterviewExtended;
   @Output() changeCandidate: EventEmitter<any> = new EventEmitter();
   @Output() deleteEvent: EventEmitter<any> = new EventEmitter();
   time: TimeInput;
@@ -46,6 +48,8 @@ export class InterviewCandidateTimelineItemComponent implements OnInit, OnChange
 
   constructor(public dateTimeWorker: DateTimeWorker,
               private dateTimeFormWorker: DateTimeFormWorker,
+              public userWorker: UserWorker,
+              public candidateWorker: CandidateWorker,
               private translateWorker: TranslateWorker, private localDatePipe: LocalDatePipe) {
   }
   ngOnInit() {

@@ -56,7 +56,16 @@
                     [matTooltip]="(data.sourceInterviewers && data.sourceInterviewers.length === 0 ? 'Interviewers have not yet in the system': null ) | translate"
                     [compareWith]="typeCheckingWorker.compareObjects"  [disabled]="editedInterview.completed"
                     [placeholder]="'Interviewers' | translate" required>
+          <mat-select-trigger>
+            <span *ngFor="let interviewer of editedInterview.interviewers; let i = index">
+              <img class="select-img"  [src]="candidateWorker.generatePhotoUrl(interviewer.attachment)"
+                   onerror="this.src = '/assets/candidate/middle-man-interviewer.png'">
+          <span> {{userWorker.formatFullName(interviewer)}}</span>
+          <span *ngIf="editedInterview.interviewers.length - 1 != i ">, </span>
+            </span>
+          </mat-select-trigger>
           <mat-option *ngFor="let interviewer of data.sourceInterviewers" [value]="interviewer">
+
             <img class="select-img"  [src]="candidateWorker.generatePhotoUrl(interviewer.attachment)"
                  onerror="this.src = '/assets/candidate/middle-man-interviewer.png'">
             {{userWorker.formatFullName(interviewer)}}
