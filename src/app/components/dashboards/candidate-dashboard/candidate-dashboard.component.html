@@ -1,18 +1,37 @@
-<div >
-<div *ngIf="selectedCandidates" class="row">
-  <div
-    *ngFor="let candidate of selectedCandidates | paginate: { itemsPerPage: size, currentPage: page, id: idPagination } | slice:0:limitTo ? limitTo : selectedCandidates.length; let i = index"
-    [ngClass]=" filledCells ? 'col-md-' + filledCells : 'col-md-3'" class="col-12 center-item heightitem">
-    <app-candidate-dashboard-item [clickableCandidate]="true" [haveHoverEffect]="haveHoverEffect" [haveBoxShadow]="true"
-                                  [isDeleteIcon]="isDeleteIcon" [isClosedIcon]="isClosedIcon" (deleteCandidate)="deleteCandidate(candidate)" (deleteCandidateFromTheBase)="deleteCandidateFromTheBase(candidate)"
+<div>
+  <div *ngIf="selectedCandidates" class="row">
+    <div
+      *ngFor="let candidate of selectedCandidates | paginate: { itemsPerPage: size, currentPage: page, id: idPagination } | slice:0:limitTo ? limitTo : selectedCandidates.length; let i = index"
+      [ngClass]=" filledCells ? 'col-md-' + filledCells : 'col-md-3'" class="col-12 center-item heightitem">
+      <app-candidate-dashboard-item *ngIf="!existingMode" [clickableCandidate]="true" [haveHoverEffect]="haveHoverEffect"
+                                    [haveBoxShadow]="true"
+                                    [isDeleteIcon]="isDeleteIcon" [isClosedIcon]="isClosedIcon"
+                                    (deleteCandidate)="deleteCandidate(candidate)"
+                                    (deleteCandidateFromTheBase)="deleteCandidateFromTheBase(candidate)"
+                                    [candidate]="candidate"
+      ></app-candidate-dashboard-item>
 
-                                  [candidate]="candidate"></app-candidate-dashboard-item>
+      <app-candidate-dashboard-item *ngIf="existingMode"
+
+                                    [haveBoxShadow]="true"
+                                    [haveHoverEffect]="false"
+                                    [isClosedIcon]="false"
+                                    [candidate]="candidate"
+                                    [clickableCandidate]="false"
+                                    (click)="itemClick(candidate.id)"
+                                    [isSelect]="true"
+                                    [(checkBox)]="candidate.select"
+                                    (checkBoxChange)="checkBoxChanged()"
+                                    [selectBoxShadow]="candidate.select"
+
+      ></app-candidate-dashboard-item>
+
+    </div>
+    <div *ngIf="haveAddElement" [ngClass]=" filledCells ? 'col-md-' + filledCells : 'col-md-3'"
+         class="col-12 center-item">
+      <mat-card class="candidate-dashboard-item add-item" (click)="addCandidate()">
+        <mat-icon>add</mat-icon>
+      </mat-card>
+    </div>
   </div>
-  <div *ngIf="haveAddElement" [ngClass]=" filledCells ? 'col-md-' + filledCells : 'col-md-3'"
-       class="col-12 center-item">
-    <mat-card class="candidate-dashboard-item add-item" (click)="addCandidate()">
-      <mat-icon>add</mat-icon>
-    </mat-card>
-  </div>
-</div>
 </div>

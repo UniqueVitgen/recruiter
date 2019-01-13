@@ -1,6 +1,6 @@
 import {Component, Inject, OnChanges, OnInit, SimpleChanges, ViewChild} from '@angular/core';
 import {CandidateService} from '../../../services/candidate/candidate.service';
-import {Candidate, CandidateSelected} from '../../../classes/candidate';
+import {Candidate, CandidateDashboardItem, CandidateSelected} from '../../../classes/candidate';
 import {Attachment} from '../../../classes/attachment';
 import {MAT_DIALOG_DATA, MatDialogRef, TooltipPosition} from '@angular/material';
 import {DeleteVacancyDialogComponent} from '../delete-vacancy-dialog/delete-vacancy-dialog.component';
@@ -13,6 +13,7 @@ import {Vacancy} from '../../../classes/vacancy';
 })
 export class ExistedCandidatesModalWindowComponent implements OnInit {
   public candidates: CandidateSelected[];
+  public neededCandidates: CandidateSelected[];
   public photo: Attachment;
   public numberOfAvailableCandidates: number;
   public noCandidateToAdd: boolean;
@@ -52,6 +53,22 @@ export class ExistedCandidatesModalWindowComponent implements OnInit {
     });
   }
 
+  filterNeededCandidates(candidates: Candidate[]): Candidate[] {
+    return candidates.filter(candidate => {
+      return this.isThisCandidateAlreadyHere(candidate);
+    });
+  }
+
+  getCandidateNumber(candidateID): number {
+    let res = -1;
+    this.candidates.forEach((candidate, i) => {
+      if (candidate.id === candidateID) {
+        res = i;
+      }
+    });
+    return res;
+  }
+
   isThisCandidateChosen(candidate: number): boolean {
     return this.selectedCandidatesIDs.some(candidateID => {
       return candidateID === candidate;
@@ -61,6 +78,7 @@ export class ExistedCandidatesModalWindowComponent implements OnInit {
   getAll(): void {
     this.candidateService.getAll().subscribe(res => {
       this.candidates = <CandidateSelected[]>res;
+      this.neededCandidates = this.filterNeededCandidates(this.candidates);
       this.numberOfAvailableCandidates = res.length - this.data.currentVacancy.candidates.length;
       this.noCandidateToAdd = this.numberOfAvailableCandidates === 0;
     }, err => {
@@ -74,6 +92,9 @@ export class ExistedCandidatesModalWindowComponent implements OnInit {
   }
 
   selectClick(candidateID: number): void {
+
+    console.log(candidateID);
+    console.log('NEEDED CANDIDATE', this.neededCandidates);
     if (!this.selectedCandidatesIDs.some((item: number) => {
       return item === candidateID;
     })

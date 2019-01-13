@@ -50,13 +50,28 @@ export class CandidateDashboardComponent implements OnInit, OnChanges {
   @Output('changeFilteredLength') outputChangeFilteredLength: EventEmitter<number> = new EventEmitter();
   public selectedCandidates: CandidateDashboardItem[];
 
+  @Input() existingMode: boolean;
+  @Output() onItemClick: EventEmitter<number> = new EventEmitter<number>();
+
   constructor(public dialog: MatDialog, private userWorker: UserWorker, private typeCheckingWorker: TypeCheckingWorker) {
   }
 
   ngOnInit() {
   }
 
-  ngOnChanges(changes: SimpleChanges): void {
+  checkBoxChanged(): void {
+   // this.initPage();
+    console.log('CANDIDATE', this.selectedCandidates);
+  }
+
+  itemClick(candidateID: number): void {
+    console.log('CANDIDATE222', this.selectedCandidates);
+    this.onItemClick.emit(candidateID);
+    this.initPage();
+  }
+
+  initPage(): void {
+    console.log('IAM HERE');
     if (this.isPagination) {
       if (this.itemsPerPage == null) {
         this.itemsPerPage = 4;
@@ -81,6 +96,11 @@ export class CandidateDashboardComponent implements OnInit, OnChanges {
       this.outputChangeFilteredLength.emit(this.selectedCandidates.length);
     }
   }
+
+  ngOnChanges(changes: SimpleChanges): void {
+    this.initPage();
+  }
+
   filterByStatus(candidates: CandidateDashboardItem[], statuses: string[]) {
     if (candidates) {
       if (statuses) {
@@ -92,6 +112,7 @@ export class CandidateDashboardComponent implements OnInit, OnChanges {
       }
     }
   }
+
   filterBySalary(candidates: CandidateDashboardItem[], minSalary: number, maxSalary: number, includeUndefinedSalary: boolean) {
     if (minSalary != null && maxSalary != null) {
       return candidates.filter((candidate) => {
@@ -107,6 +128,7 @@ export class CandidateDashboardComponent implements OnInit, OnChanges {
       return candidates;
     }
   }
+
   filterByAge(candidates: CandidateDashboardItem[], minYearsRequired: number, maxYearsRequired: number, includeUndefinedBirthday: boolean) {
     if ((minYearsRequired != null && !isNaN(minYearsRequired))
       &&
@@ -118,17 +140,19 @@ export class CandidateDashboardComponent implements OnInit, OnChanges {
           }
         }
         return candidate.age >= minYearsRequired
-        && candidate.age <= maxYearsRequired;
+          && candidate.age <= maxYearsRequired;
       });
     } else {
       return candidates;
     }
   }
+
   sortByProperty(candidates: CandidateDashboardItem[], property: string): CandidateDashboardItem[] {
     let direction: number;
     this.sortedDirection === SortDirection.ASCENDING ? direction = 1 : direction = -1;
     return this.userWorker.sortByProperty(candidates, property, direction);
   }
+
   searchValues(value: string) {
     if (value) {
       const valueLowercase = value.toLowerCase();
@@ -145,7 +169,7 @@ export class CandidateDashboardComponent implements OnInit, OnChanges {
 
   addCandidate() {
     const dialogRef = this.dialog.open(CandidateModalComponent, {
-        data: <CandidateDialogData> { sourceVacancies: this.vacancies },
+        data: <CandidateDialogData> {sourceVacancies: this.vacancies},
         disableClose: true
       }
     );
@@ -160,6 +184,7 @@ export class CandidateDashboardComponent implements OnInit, OnChanges {
   deleteCandidate(candidateID: number) {
     this.outputDeleteCandidate.emit(candidateID);
   }
+
   deleteCandidateFromTheBase(candidateID: number) {
     this.outputDeleteCandidateFromTheBase.emit(candidateID);
   }
