@@ -162,6 +162,8 @@
   "Birthday": "День рождения",
   "Show candidates with undefined birthday": "Показывать кандидатов с неопределенной датой рождения",
   "Show candidates with undefined salary": "Показывать кандидатов с неопределенной зарплатой",
+  "Show vacancies with undefined salary": "Показывать вакансии с неопределенной зарплатой",
+  "Show vacancies with undefined years required": "Показывать вакансии с неуказанным требуемым опытом",
   "Field": "Поле",
   "Direction": "Направление",
   "ASCENDING": "По возрастанию",
