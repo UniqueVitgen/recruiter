@@ -198,5 +198,8 @@
   "Selected number of vacancies": "Выбранные вакансии",
   "This candidate don't have any vacancy": "У данного кандидата нету какой-либо вакансии",
   "Interviewers have not yet in the system": "Интервьюеров, нет в системе",
-  "Enter start experience" : "Введите начало стажа"
+  "Enter start experience" : "Введите начало стажа",
+  "Experience required" : "Требуемый опыт",
+  "Total candidates" : "Всего кандидатов",
+  "Not" : "нет"
 }

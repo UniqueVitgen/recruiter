@@ -199,5 +199,8 @@
   "Selected number of vacancies": "Selected number of vacancies",
   "This candidate don't have any vacancy": "This candidate don't have any vacancy",
   "Interviewers have not yet in the system": "Interviewers have not yet in the system",
-  "Enter start experience" : "Enter start experience"
+  "Enter start experience" : "Enter start experience",
+  "Experience required" : "Experience required",
+  "Total candidates" : "Total candidates",
+  "Not" : "no"
 }

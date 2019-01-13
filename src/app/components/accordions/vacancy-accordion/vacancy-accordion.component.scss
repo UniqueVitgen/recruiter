@@ -1,3 +1,100 @@
 .vacancy-status{
   margin-right: 15px;
 }
+.candidate-one-row {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  display: block;
+}
+.example-headers-align-vacancy .mat-expansion-panel-header-description {
+  align-items: center;
+  justify-content: flex-end;
+}
+@media (min-width: 458px) {
+  .mat-panel-title-max-width {
+    max-width: 260px;
+    min-width: 260px;
+  }
+  .description-width-candidates {
+    display: none;
+    width: 200px;
+  }
+  .description-salary {
+    display: none;
+    width: 250px;
+  }
+  .description-width-experience {
+    display: none;
+    width: 200px;
+  }
+  .description-width-icon {
+    min-width: 80px;
+  }
+}
+
+@media (min-width: 768px) {
+  .mat-panel-title-max-width {
+    max-width: 260px;
+    min-width: 260px;
+  }
+  .description-width-candidates {
+    display: block;
+    width: 200px;
+  }
+  .description-salary {
+    display: none;
+    width: 250px;
+  }
+  .description-width-experience {
+    display: none;
+    width: 200px;
+  }
+  .description-width-icon {
+    min-width: 80px;
+  }
+}
+
+@media (min-width: 992px) {
+  .mat-panel-title-max-width {
+    max-width: 260px;
+    min-width: 260px;
+  }
+  .description-width-candidates {
+    display: block;
+    width: 200px;
+  }
+  .description-salary {
+    display: block;
+    width: 250px;
+  }
+  .description-width-experience {
+    display: none;
+    width: 200px;
+  }
+  .description-width-icon {
+    min-width: 80px;
+  }
+}
+
+@media (min-width: 1200px) {
+  .mat-panel-title-max-width {
+    max-width: 260px;
+    min-width: 260px;
+  }
+  .description-width-candidates {
+    width: 200px;
+    display: block;
+  }
+  .description-salary {
+    width: 250px;
+    display: block;
+  }
+  .description-width-experience {
+    width: 200px;
+    display: block;
+  }
+  .description-width-icon {
+    min-width: 80px;
+  }
+}
