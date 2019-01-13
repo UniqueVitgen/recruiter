@@ -4,11 +4,8 @@ import { Directive, ElementRef, HostListener } from '@angular/core';
   selector: '[only-numbers]'
 })
 export class OnlyNumbersDirective {
-  // Allow decimal numbers. The \. is only allowed once to occur
-  private regex: RegExp = new RegExp(/^[0-9]+(\.[0-9]{0,2}){0,1}$/g);
+  private regex: RegExp = new RegExp(/^[1-9][0-9]*(\.[0-9]*)?$/g);
 
-  // Allow key codes for special events. Reflect :
-  // Backspace, tab, end, home
   private specialKeys: Array<string> = [ 'Backspace', 'Tab', 'End', 'Home' ];
 
   constructor(private el: ElementRef) {
@@ -16,17 +13,17 @@ export class OnlyNumbersDirective {
 
   @HostListener('keydown', [ '$event' ])
   onKeyDown(event: KeyboardEvent) {
-      // Allow Backspace, tab, end, and home keys
       if (this.specialKeys.indexOf(event.key) !== -1) {
           return;
       }
+      setTimeout(() => {
+        console.log('123', this.el.nativeElement.value.indexOf('.')); }, 0);
 
-      // Do not use event.keycode this is deprecated.
-      // See: https://developer.mozilla.org/en-US/docs/Web/API/KeyboardEvent/keyCode
       let current: string = this.el.nativeElement.value;
-      // We need this because the current value on the DOM element
-      // is not yet updated with the value from this event
-      let next: string = current.concat(event.key);
+
+      let next: string = current.slice(0, this.el.nativeElement.selectionStart) +
+        event.key + current.slice(this.el.nativeElement.selectionStart);
+
       if (next && !String(next).match(this.regex)) {
           event.preventDefault();
       }
