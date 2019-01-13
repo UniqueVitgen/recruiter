@@ -22,6 +22,7 @@ export class InterviewShortInfoComponent implements OnInit, OnChanges {
   constructor(public userWorker: UserWorker,
               private dateTimeWorker: DateTimeWorker,
               private fileWorker: FileWorker,
+              public candidateWorker: CandidateWorker,
               private translateWorker: TranslateWorker) {
   }
 

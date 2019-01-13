@@ -21,6 +21,19 @@
     </span>
 
   </mat-card-title>
+
+  <span class="font-weight-bold">{{'Vacancy' | translate}}: </span>
+  <a [routerLink]="'/job-description/'+interview.vacancy.id">{{interview.vacancy.position.name}}</a>
+  <br>
+  <span class="font-weight-bold">{{'Interviewers' | translate}}: </span>
+  <a *ngFor="let interviewer of interview.interviewers; let i = index">
+    <img class="select-img"  [src]="candidateWorker.generatePhotoUrl(interviewer.attachment)"
+         onerror="this.src = '/assets/candidate/middle-man-interviewer.png'">
+    <span> {{userWorker.formatFullName(interviewer)}}</span>
+    <span *ngIf="interview.interviewers.length - 1 != i ">, </span>
+  </a>
+  <br>
+  <br>
   <mat-form-field class="custom-form-field">
     <input readonly required (dateChange)="onFocusoutAnyInput()" matInput [min]="minDate" [(ngModel)]="planDate.dateDate" [matDatepicker]="picker1" placeholder="{{'Plan Date' | translate}}" (click)="picker1.open()">
     <mat-datepicker-toggle name="dateSuffix1" matSuffix [for]="picker1"></mat-datepicker-toggle>
