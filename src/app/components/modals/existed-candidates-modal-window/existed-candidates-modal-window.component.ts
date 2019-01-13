@@ -5,6 +5,7 @@ import {Attachment} from '../../../classes/attachment';
 import {MAT_DIALOG_DATA, MatDialogRef, TooltipPosition} from '@angular/material';
 import {DeleteVacancyDialogComponent} from '../delete-vacancy-dialog/delete-vacancy-dialog.component';
 import {Vacancy} from '../../../classes/vacancy';
+import {PaginationStorage} from '../../../storages/pagination.storage';
 
 @Component({
   selector: 'app-existed-candidates-modal-window',
@@ -19,14 +20,34 @@ export class ExistedCandidatesModalWindowComponent implements OnInit {
   public noCandidateToAdd: boolean;
   public addMoreCandidates: boolean;
   public selectedCandidatesIDs: number[] = [];
+  itemsPerPageValues: number[] = [3, 6, 9];
+  page: number;
+  size: number;
+  idPagination: number = 1;
+
   isCheck: boolean;
 
   constructor(private candidateService: CandidateService,
               public dialogRef: MatDialogRef<DeleteVacancyDialogComponent>,
+              private paginationStorage: PaginationStorage,
               @Inject(MAT_DIALOG_DATA) public data: { currentVacancy: Vacancy }) {
   }
 
+  changePaginationObject(): void {
+    // console.log(this.page, this.size)
+    this.paginationStorage.setExictedCandidatePagination({
+      page: this.page,
+      size: this.size
+    });
+  }
 
+  initPaginationObject() {
+    const paginationObject = this.paginationStorage.getExictedCandidatePagination();
+    if (paginationObject != null) {
+      this.page = paginationObject.page;
+      this.size = paginationObject.size;
+    }
+  }
   addCandidate(choice: number): void {
     console.log('CHOISE RESULT: ' + choice);
     this.dialogRef.close({addCandidate: true, addArray: false, chosenCandidateID: choice});
@@ -45,6 +66,7 @@ export class ExistedCandidatesModalWindowComponent implements OnInit {
 
   ngOnInit() {
     this.getAll();
+    this.initPaginationObject();
   }
 
   isThisCandidateAlreadyHere(candidateForCheck: Candidate): boolean {
