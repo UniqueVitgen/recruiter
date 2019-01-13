@@ -16,7 +16,7 @@
   <dialog-body>
     <form [formGroup]="interviewForm">
       <mat-form-field class="example-full-width">
-        <input readonly [disabled]="editedInterview.completed" matInput [min]="minDate" [(ngModel)]="planDate.dateDate" (dateChange)="updateDate($event)" formControlName="from" [matDatepicker]="picker" placeholder="{{'Plan Date' | translate}}" (click)="picker.open()">
+        <input readonly [disabled]="editedInterview.completed" matInput [min]="!editedInterview.completed? minDate: null" [(ngModel)]="planDate.dateDate" (dateChange)="updateDate($event)" formControlName="from" [matDatepicker]="picker" placeholder="{{'Plan Date' | translate}}" (click)="picker.open()">
         <mat-datepicker-toggle name="dateSuffix" matSuffix [for]="picker"></mat-datepicker-toggle>
         <mat-datepicker #picker></mat-datepicker>
       </mat-form-field>
