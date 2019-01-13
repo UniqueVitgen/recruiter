@@ -8,7 +8,7 @@ export class NumberWorker {
   constructor(private translateWorker: TranslateWorker) {}
 
   formatYears(years: number): string {
-    if (years) {
+    if (this.isValidNumber(years)) {
       let addedWord: string;
       if (years === 1) {
         addedWord = 'yearsC';
@@ -23,8 +23,8 @@ export class NumberWorker {
     }
   }
   isValidNumber(value: number): boolean {
-    if (value) {
-      return isFinite(value) && value.toString() !== '';
+    if (value != null) {
+      return (isFinite(value) && value.toString() !== '');
     }
   }
 }

@@ -97,8 +97,9 @@ export class InterviewCalendarComponent implements OnInit, OnChanges {
   }
   determineOptions() {{
     const that = this;
-    let buttonText, firstDay, titleFormat;
+    let buttonText, firstDay, titleFormat, timeFormat;
     if (this.locale === 'ru') {
+      timeFormat = 'HH(:mm)';
       buttonText = {
         month:    'Месяц',
         // today:    '>',
@@ -109,6 +110,7 @@ export class InterviewCalendarComponent implements OnInit, OnChanges {
       firstDay = 1;
       titleFormat = 'MMM YYYY';
     } else {
+      timeFormat = 'hh(:mm)tt';
       buttonText = {
         month:    'Month',
         // today:    'Today',
@@ -128,6 +130,7 @@ export class InterviewCalendarComponent implements OnInit, OnChanges {
       // titleFormat: 'MMM YYYY',
       buttonText: buttonText,
       firstDay: firstDay,
+      nowIndicator: true,
       theme: 'bootstrap4',
       header: {
         left: 'prev,next',

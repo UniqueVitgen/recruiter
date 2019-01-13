@@ -70,14 +70,17 @@ export class JobDescriptionDashboardPageComponent implements OnInit {
     this.initSort();
     this.initPagination();
     this.getVacancies().add(() => {
-      this.lowSalary = this.arrayWorker.calculateMin(this.jobDescriptionList, 'salaryInDollarsFrom');
-      this.topSalary = this.arrayWorker.calculateMax(this.jobDescriptionList, 'salaryInDollarsTo');
-      this.lowYearRequired = this.arrayWorker.calculateMin(this.jobDescriptionList, 'experienceYearsRequire');
-      this.topYearRequired = this.arrayWorker.calculateMax(this.jobDescriptionList, 'experienceYearsRequire');
-        this.initFilterObject();
+      this.initLimits();
+      this.initFilterObject();
     });
     this.getStatuses();
     this.getPositions();
+  }
+  initLimits() {
+    this.lowSalary = this.arrayWorker.calculateMin(this.jobDescriptionList, 'salaryInDollarsFrom');
+    this.topSalary = this.arrayWorker.calculateMax(this.jobDescriptionList, 'salaryInDollarsTo');
+    this.lowYearRequired = this.arrayWorker.calculateMin(this.jobDescriptionList, 'experienceYearsRequire');
+    this.topYearRequired = this.arrayWorker.calculateMax(this.jobDescriptionList, 'experienceYearsRequire');
   }
   initFilterObject() {
     setTimeout(() => {
@@ -109,7 +112,6 @@ export class JobDescriptionDashboardPageComponent implements OnInit {
       if (this.maxSalary > this.topSalary || filterObject.maxSalaryOnTheEdge) {
         this.maxSalary = this.topSalary;
       }
-      console.log('this.maxSalary', filterObject.maxSalaryOnTheEdge, this.topSalary, this.maxSalary);
     });
   }
   initSort() {
@@ -150,10 +152,8 @@ export class JobDescriptionDashboardPageComponent implements OnInit {
   }
   getVacancies(): Subscription {
     return this.vacancyService.getAll().subscribe(res => {
-      console.log(res);
       this.jobDescriptionList = res;
       this.selectedJobDescriptionList = this.typeCheckingWorker.parseObject(res);
-      console.log('this.jobDescriptionList', this.jobDescriptionList);
     });
   }
   getPositions(): Subscription {
@@ -170,7 +170,6 @@ export class JobDescriptionDashboardPageComponent implements OnInit {
   }
 
   openJobDescriptionDialog(): void {
-    console.log('i');
     const dialogRef = this.dialog.open(JobDescriptionModalComponent, {
         data: <JobDescriptionDialogData> {
           sourceJobDescription: null,
@@ -210,7 +209,6 @@ export class JobDescriptionDashboardPageComponent implements OnInit {
     });
   }
   changePaginationObject(): void {
-    console.log(this.page, this.size)
     this.paginationStorage.setVacancyPagination({
       page: this.page,
       size: this.size

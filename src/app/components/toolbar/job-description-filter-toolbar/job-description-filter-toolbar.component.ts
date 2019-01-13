@@ -84,6 +84,7 @@ export class JobDescriptionFilterToolbarComponent implements OnInit, OnChanges {
     }
   }
   initYearsRequired() {
+    console.log('this.yearsRequiredLow', this.yearsRequiredLow);
     if (isFinite(this.yearsRequiredLow) && isFinite(this.yearsRequiredTop)) {
       if (!isFinite(this.minYearsRequired)) {
         this.minYearsRequired = this.yearsRequiredLow;

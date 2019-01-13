@@ -23,7 +23,7 @@ export class ArrayWorker {
     const resultMax = Math.max(...array.map(value => {
       return value[property];
     }));
-    if (!isNaN(resultMax)) {
+    if (isFinite(resultMax)) {
       return resultMax;
     }
   }
@@ -34,7 +34,8 @@ export class ArrayWorker {
     const resultMin = Math.min(...array.map(value => {
       return value[property];
     }));
-    if (!isNaN(resultMin)) {
+    if (isFinite(resultMin)) {
+      console.log('isFiniteMin', property, resultMin);
       return resultMin;
     }
   }
