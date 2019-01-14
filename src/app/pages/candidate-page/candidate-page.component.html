@@ -30,6 +30,7 @@
     <div  class="custom-sticky-timeline">
       <app-candidate-timeline *ngIf="candidate"  [candidate]="candidate" (clickClose)="deleteTimelineItem($event)"
                               (addTimelineItem)="addTimelineItem($event)" (changeTimeline)="changeTimelineItem($event)"
+                              (changeEvent)="changeEvent($event)"
                               (clickTimelineToolbar)="clickToolbar($event)"
                               [timelineNotes]="eventNoteList"></app-candidate-timeline>
     </div>

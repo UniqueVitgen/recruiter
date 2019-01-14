@@ -31,9 +31,9 @@ export class ExperienceCandidateModalComponent implements OnInit {
   public positions: PositionModel[];
   public teams: Team[];
   public selectedPositions: PositionModel[];
-  public maxDate: Date;
-  public minDate: Date;
-  public minDateWithBirthday: Date;
+  public maxDate: string;
+  public minDate: string;
+  public minDateWithBirthday: string;
   @Output('clickSave') outputClickSave: EventEmitter<CandidateExperience> = new EventEmitter();
 
   constructor(
@@ -47,37 +47,40 @@ export class ExperienceCandidateModalComponent implements OnInit {
     private dateTimeWorker: DateTimeWorker,
     private userWorker: UserWorker,
     @Inject(MAT_DIALOG_DATA) public data: ExperienceDialogData ) {
+  }
+
+  ngOnInit() {
     // console.log('candidate', this.candidate);
+    this.minDate = new Date(this.userWorker.generateRequiredStartDate().setFullYear(
+      this.userWorker.generateRequiredStartDate().getFullYear() + 18,
+      this.userWorker.generateRequiredStartDate().getMonth(),
+      this.userWorker.generateRequiredStartDate().getDay())).toISOString();
+    this.maxDate = this.dateTimeWorker.getTodayStart().toISOString();
     this.editedCandidate = Object.assign({}, this.data.sourceCandidate);
     if (this.data.isEdit) {
       this.editedExperience = Object.assign(new CandidateExperience(), this.data.sourceExperience);
+      // this.editedExperience.dateFrom = <any>new Date(this.editedExperience.dateFrom);
+      // this.editedExperience.dateTo = <any>new Date(this.editedExperience.dateTo);
     } else {
       this.editedExperience = new CandidateExperience();
     }
     this.formExperience = this.fb.group({
-      companyName: ['', Validators.compose([Validators.required])],
-      dateFrom: ['', Validators.compose([Validators.required])],
-      dateTo: ['', Validators.compose([Validators.required])],
-      position: ['', Validators.compose([Validators.required])]
+      companyName: [this.editedExperience.companyName.name, Validators.compose([Validators.required])],
+      dateFrom: [this.editedExperience.dateFrom, Validators.compose([Validators.required])],
+      dateTo: [this.editedExperience.dateTo, Validators.compose([Validators.required])],
+      position: [this.editedExperience.jobPosition.name, Validators.compose([Validators.required])]
     });
     this.getPositions();
     this.getTeams();
-  }
-
-  ngOnInit() {
-    this.minDate = new Date(this.userWorker.generateRequiredStartDate().setFullYear(
-      this.userWorker.generateRequiredStartDate().getFullYear() + 18,
-      this.userWorker.generateRequiredStartDate().getMonth(),
-      this.userWorker.generateRequiredStartDate().getDay()));
-    this.maxDate = this.dateTimeWorker.getTodayStart();
     this.getCandidateBirthday();
+    console.log('formExperienct', this.formExperience);
   }
 
   getCandidateBirthday() {
     this.minDateWithBirthday = new Date(new Date(this.editedCandidate.birthday).setFullYear(
       new Date(this.editedCandidate.birthday).getFullYear() + 18,
       new Date(this.editedCandidate.birthday).getMonth(),
-      new Date(this.editedCandidate.birthday).getDay()));
+      new Date(this.editedCandidate.birthday).getDay())).toISOString();
   }
 
   getPositions() {

@@ -122,6 +122,7 @@ import { PaginationToolbarComponent } from './components/toolbar/pagination-tool
 import { CandidateFilterToolbarComponent } from './components/toolbar/candidate-filter-toolbar/candidate-filter-toolbar.component';
 import { SortToolbarComponent } from './components/toolbar/sort-toolbar/sort-toolbar.component';
 import { ContactsCandidateModalComponent } from './components/modals/candidate/contacts-candidate-modal/contacts-candidate-modal.component';
+import { DevFeedbackModalComponent } from './components/modals/dev-feedback-modal/dev-feedback-modal.component';
 
 
 export function HttpLoaderFactory(http: HttpClient) {
@@ -202,7 +203,8 @@ export function HttpLoaderFactory(http: HttpClient) {
     PaginationToolbarComponent,
     CandidateFilterToolbarComponent,
     SortToolbarComponent,
-    ContactsCandidateModalComponent
+    ContactsCandidateModalComponent,
+    DevFeedbackModalComponent
   ],
   imports: [
     BrowserModule,
@@ -280,7 +282,8 @@ export function HttpLoaderFactory(http: HttpClient) {
     DeleteCandidateModalComponent,
     DeleteInterviewModalComponent,
     AlertWithButtonModalComponent,
-    ContactsCandidateModalComponent
+    ContactsCandidateModalComponent,
+    DevFeedbackModalComponent
   ],
   schemas: [NO_ERRORS_SCHEMA] // add this line
 })

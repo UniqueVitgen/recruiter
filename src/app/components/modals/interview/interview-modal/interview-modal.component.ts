@@ -124,6 +124,9 @@ export class InterviewModalComponent implements OnInit {
     if (this.data) {
       if ( this.data.isEdit) {
         this.editedInterview = Object.assign(new Interview(), this.data.sourceInterview);
+        this.planDate.dateDate = new Date(this.data.sourceInterview.planDate);
+        this.planDate.time = this.dateTimeWorker.parseTimeObject(<any>this.data.sourceInterview.planDate);
+        this.planDate.endTime = this.dateTimeWorker.parseTimeObject(<any>this.data.sourceInterview.planEndDate);
         this.sourceVacancy = this.editedInterview.vacancy;
         this.editedCandidate = this.editedInterview.candidate;
         this.getVacancies();

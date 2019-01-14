@@ -3,6 +3,7 @@
 <mat-card (mouseenter)="visible = true" (mouseleave)="visible = false" class="backgroundCard">
   <mat-card-title><mat-icon class="myIcon">description</mat-icon> {{'Experience' | translate}}
     <span class="float-right">
+      <mat-icon *ngIf="visible" matTooltip="{{'Delete' | translate}}" (click)="change()">create</mat-icon>
       <mat-icon *ngIf="visible" matTooltip="{{'Delete' | translate}}" (click)="delete()">delete</mat-icon>
     </span>
   </mat-card-title>
@@ -12,22 +13,36 @@
       <!--<mat-icon>edit</mat-icon>-->
     <!--</button>-->
   <!--</mat-form-field>-->
-  <app-autocomplete-input required formControlName="companyName" name="companyName" [placeholder]="'company Name'" [searchProperty]="'name'" [visibleUnderline]="false" [fullWidth]="true" [positions]="teams" (blur)="onFocusoutAnyInput()"></app-autocomplete-input>
-
-  <mat-form-field class="custom-form-field">
-    <input required readonly formControlName="dateFrom" name="dateFrom" [min]="!candidate.birthday ? minDate : minDateWithBirthday" [max]="editedExperience.dateTo" (blur)="onFocusoutAnyInput()" (dateChange)="onFocusoutAnyInput()" matInput [matDatepicker]="picker" placeholder="{{'From' | translate}}" (click)="picker.open()">
-    <mat-datepicker-toggle name="dateSuffix" matSuffix [for]="picker"></mat-datepicker-toggle>
-    <mat-datepicker  #picker startView="multi-year"></mat-datepicker>
-  </mat-form-field>
-  &nbsp;
+  <!--<app-autocomplete-input required formControlName="companyName" name="companyName" [placeholder]="'company Name'" [searchProperty]="'name'" [visibleUnderline]="false" [fullWidth]="true" [positions]="teams" (blur)="onFocusoutAnyInput()"></app-autocomplete-input>-->
+  <!--<div class="col-4">-->
+    <div class="gray-item material-placeholder-text small-text">{{'company Name' | translate}}</div>
+    <div>{{experience.companyName.name}}</div>
+  <div class="row">
+    <div class="col-4">
+      <div class="gray-item material-placeholder-text small-text">{{'Start Experience' | translate}}</div>
+      <div>{{dateTimeWorker.getDate(experience.dateFrom, 'mediumDate')}}</div>
+    </div>
+    <div class="col-4">
+      <div class="gray-item material-placeholder-text small-text">{{'End Experience' | translate}}</div>
+      <div>{{dateTimeWorker.getDate(experience.dateTo, 'mediumDate')}}</div>
+    </div>
+  </div>
+  <div class="gray-item material-placeholder-text small-text">{{'Position' | translate}}</div>
+  <div>{{experience.jobPosition.name}}</div>
+  <!--</div>-->
+  <!--<mat-form-field class="custom-form-field">-->
+    <!--<input required readonly formControlName="dateFrom" name="dateFrom" [min]="!candidate.birthday ? minDate : minDateWithBirthday" [max]="editedExperience.dateTo" (blur)="onFocusoutAnyInput()" (dateChange)="onFocusoutAnyInput()" matInput [matDatepicker]="picker" placeholder="{{'From' | translate}}" (click)="picker.open()">-->
+    <!--<mat-datepicker-toggle name="dateSuffix" matSuffix [for]="picker"></mat-datepicker-toggle>-->
+    <!--<mat-datepicker  #picker startView="multi-year"></mat-datepicker>-->
+  <!--</mat-form-field>-->
   &nbsp;
   <!--<br>-->
-  <mat-form-field class="custom-form-field" >
-    <input required readonly formControlName="dateTo" name="dateTo" matInput (blur)="onFocusoutAnyInput()" [max]="maxDate" (dateChange)="onFocusoutAnyInput()" [min]="editedExperience.dateFrom" [matDatepicker]="picker1" placeholder="{{'To' | translate}}" (click)="picker1.open()">
-    <mat-datepicker-toggle name="dateSuffix1" matSuffix [for]="picker1"></mat-datepicker-toggle>
-    <mat-datepicker #picker1 startView="multi-year"></mat-datepicker>
-  </mat-form-field>
-  <app-autocomplete-input required formControlName="jobPosition" name="jobPosition" [placeholder]="'Position'" [searchProperty]="'name'" [fullWidth]="true" [visibleUnderline]="false" [positions]="positions" (blur)="onFocusoutAnyInput()"></app-autocomplete-input>
+  <!--<mat-form-field class="custom-form-field" >-->
+    <!--<input required readonly formControlName="dateTo" name="dateTo" matInput (blur)="onFocusoutAnyInput()" [max]="maxDate" (dateChange)="onFocusoutAnyInput()" [min]="editedExperience.dateFrom" [matDatepicker]="picker1" placeholder="{{'To' | translate}}" (click)="picker1.open()">-->
+    <!--<mat-datepicker-toggle name="dateSuffix1" matSuffix [for]="picker1"></mat-datepicker-toggle>-->
+    <!--<mat-datepicker #picker1 startView="multi-year"></mat-datepicker>-->
+  <!--</mat-form-field>-->
+  <!--<app-autocomplete-input required formControlName="jobPosition" name="jobPosition" [placeholder]="'Position'" [searchProperty]="'name'" [fullWidth]="true" [visibleUnderline]="false" [positions]="positions" (blur)="onFocusoutAnyInput()"></app-autocomplete-input>-->
   <!--<mat-form-field class="example-full-width custom-form-field">-->
     <!--<textarea  (blur)="onFocusoutAnyInput()" matInput placeholder="{{'Comment' | translate}}" [(ngModel)]="editedExperience.comment"></textarea>-->
     <!--<button mat-button  matSuffix mat-icon-button aria-label="Clear" class="edited-hover-button">-->

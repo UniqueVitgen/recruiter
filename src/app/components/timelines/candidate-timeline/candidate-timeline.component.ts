@@ -28,6 +28,7 @@ export class CandidateTimelineComponent implements OnInit, OnChanges {
   @Output('clickClose') outputClickClose: EventEmitter<any> = new EventEmitter();
   @Output('changeTimeline') outputChangeTimeline: EventEmitter<any> = new EventEmitter();
   @Output('addTimelineItem') outputAddTimelineItem: EventEmitter<any> = new EventEmitter();
+  @Output('changeEvent') outputChangeEvent: EventEmitter<any> = new EventEmitter<any>();
   @Output('clickTimelineToolbar') outputClickTimelineToolbar: EventEmitter<EventTimelineType> = new EventEmitter<EventTimelineType>();
   constructor(private typeCheckingWorker: TypeCheckingWorker,
               private eventTimelineWorker: EventTimelineWorker,
@@ -65,6 +66,9 @@ export class CandidateTimelineComponent implements OnInit, OnChanges {
     this.outputChangeTimeline.emit(baseTimeline);
     // this.candidateService.update(this.candidate).subscribe();
     console.log(this.candidate);
+  }
+  changeEvent(event: BaseTimeline) {
+    this.outputChangeEvent.emit(event);
   }
   deleteEvent(i: number) {
     // this.candidate.timelines = this.arrayWorker.removeElementByIndex(this.candidate.timelines, i);

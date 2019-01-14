@@ -2,13 +2,17 @@
 <mat-card (mouseenter)="visible = true" (mouseleave)="visible = false" class="backgroundCard">
   <mat-card-title><mat-icon class="myIcon">feedback</mat-icon> {{'Feedback' | translate}}
     <span class="float-right">
+      <mat-icon *ngIf="visible" matTooltip="{{'Change' | translate}}" (click)="change()">create</mat-icon>
       <mat-icon *ngIf="visible" matTooltip="{{'Delete' | translate}}" (click)="delete()">delete</mat-icon>
     </span>
   </mat-card-title>
-  <mat-form-field class="example-full-width custom-form-field">
-    <textarea required (blur)="onFocusoutAnyInput()" [(ngModel)]="editedNote.feedbackText" placeholder="{{'Feedback comment' | translate}}" matInput></textarea>
-    <button mat-button  matSuffix mat-icon-button aria-label="Clear" class="edited-hover-button">
-      <mat-icon>edit</mat-icon>
-    </button>
-  </mat-form-field>
+
+  <div class="gray-item material-placeholder-text small-text">{{'Feedback comment' | translate}}</div>
+  <div>{{editedNote.feedbackText}}</div>
+  <!--<mat-form-field class="example-full-width custom-form-field">-->
+    <!--<textarea required (blur)="onFocusoutAnyInput()" [(ngModel)]="editedNote.feedbackText" placeholder="{{'Feedback comment' | translate}}" matInput></textarea>-->
+    <!--<button mat-button  matSuffix mat-icon-button aria-label="Clear" class="edited-hover-button">-->
+      <!--<mat-icon>edit</mat-icon>-->
+    <!--</button>-->
+  <!--</mat-form-field>-->
 </mat-card>

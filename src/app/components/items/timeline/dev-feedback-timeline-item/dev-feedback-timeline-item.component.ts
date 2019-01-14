@@ -14,6 +14,7 @@ import {PositionModel} from '../../../../classes/position-model';
 export class DevFeedbackTimelineItemComponent implements OnInit, OnChanges {
   @Input() note: DevFeedback;
   @Output() changeCandidate: EventEmitter<any> = new EventEmitter();
+  @Output() changeEvent: EventEmitter<any> = new EventEmitter<any>();
   @Output() deleteEvent: EventEmitter<any> = new EventEmitter();
   editedNote: DevFeedback;
   viewOfDate: string;
@@ -41,6 +42,9 @@ export class DevFeedbackTimelineItemComponent implements OnInit, OnChanges {
     } else {
       this.isSaved = false;
     }
+  }
+  change() {
+    this.changeEvent.emit(this.editedNote);
   }
   delete() {
     this.deleteEvent.emit(this.editedNote);

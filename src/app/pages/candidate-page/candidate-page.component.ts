@@ -43,6 +43,10 @@ import {ContactsCandidateModalComponent} from '../../components/modals/candidate
 import {InterviewerService} from '../../services/interviewer/interviewer.service';
 import {Interviewer} from '../../classes/interviewer';
 import {TypeCheckingWorker} from '../../workers/type-checking/type-checking.worker';
+import {ExperienceDialogData} from '../../interfaces/dialog/init/experience-dialog-data';
+import {NoteDialogData} from '../../interfaces/dialog/init/note-dialog-data';
+import {DevFeedbackModalComponent} from '../../components/modals/dev-feedback-modal/dev-feedback-modal.component';
+import {DevFeedbackDialogData} from '../../interfaces/dialog/init/dev-feedback-dialog-data';
 
 @Component({
   selector: 'app-candidate-page',
@@ -198,6 +202,29 @@ export class CandidatePageComponent implements OnInit, AfterContentChecked, Afte
         });
       });
   }
+  changeInterview(event) {
+    const todayStart: Date = new Date();
+    const dialogRef = this.dialog.open(InterviewModalComponent, {
+      data: <InterviewDialogDataInterface> {
+        sourceCandidate: this.candidate,
+        fixedCandidate: true,
+        sourceInterviewers: this.interviewers,
+        sourceInterview: event,
+        isEdit: true
+      },
+      disableClose: true
+    });
+    dialogRef.componentInstance.outputClickSave.subscribe((resInterview: BaseDialogResult<InterviewExtended>) => {
+      this.interviewService.update(resInterview.resObject).subscribe(res => {
+        // this.getInterviews().add(() => {
+        //   dialogRef.close();
+        // });
+        this.getCandidate().add(() => {
+          dialogRef.close();
+        });
+      });
+    });
+  }
   addAttachment() {
     const dialogRef = this.dialog.open(AttachmentCandidateModalComponent, {
         data: <CandidateDialogData> {
@@ -239,6 +266,32 @@ export class CandidatePageComponent implements OnInit, AfterContentChecked, Afte
       });
     });
   }
+  changeExperience(event) {
+    const dialogRef = this.dialog.open(ExperienceCandidateModalComponent, {
+        data: <ExperienceDialogData> {
+          sourceCandidate: this.candidate,
+          sourceExperience: event,
+          isEdit: true
+        },
+        disableClose: true
+      }
+    );
+    dialogRef.componentInstance.outputClickSave.subscribe(resExperience => {
+      console.log('resExperience', resExperience);
+      this.candidate.experiences = this.candidate.experiences.map((experience) => {
+        if (experience.id === resExperience.id) {
+          return resExperience;
+        } else {
+          return experience;
+        }
+      });
+      this.candidateService.update(this.candidate).subscribe(resCandidate => {
+        this.getCandidate().add(() => {
+          dialogRef.close();
+        });
+      });
+    });
+  }
   addNote() {
     const dialogRef = this.dialog.open(NoteCandidateModalComponent, {
         data: <CandidateDialogData> {
@@ -249,6 +302,43 @@ export class CandidatePageComponent implements OnInit, AfterContentChecked, Afte
     );
     dialogRef.componentInstance.outputClickSave.subscribe((resFeedback: Feedback) => {
       this.feedbackService.add(resFeedback).subscribe(res => {
+        this.getCandidate().add(() => {
+          dialogRef.close();
+        });
+      });
+    });
+  }
+  changeNote(event) {
+    const dialogRef = this.dialog.open(NoteCandidateModalComponent, {
+        data: <NoteDialogData> {
+          sourceCandidate: this.candidate,
+          sourceFeedback: event,
+          isEdit: true
+        },
+        disableClose: true
+      }
+    );
+    dialogRef.componentInstance.outputClickSave.subscribe((resFeedback: Feedback) => {
+      this.feedbackService.update(resFeedback).subscribe(res => {
+        this.getCandidate().add(() => {
+          dialogRef.close();
+        });
+      });
+    });
+  }
+  changeDevFeedback(event) {
+    const dialogRef = this.dialog.open(DevFeedbackModalComponent, {
+        data: <DevFeedbackDialogData> {
+          sourceCandidate: this.candidate,
+          sourceDevFeedback: event,
+          isEdit: true
+        },
+        disableClose: true,
+      minWidth: '400px'
+      },
+    );
+    dialogRef.componentInstance.outputClickSave.subscribe((resFeedback: DevFeedback) => {
+      this.devFeedbackService.update(resFeedback).subscribe(res => {
         this.getCandidate().add(() => {
           dialogRef.close();
         });
@@ -273,13 +363,13 @@ export class CandidatePageComponent implements OnInit, AfterContentChecked, Afte
       }
   }
   changeTimelineItem(object: any) {
-    this.eventNoteList = this.eventNoteList.map(event => {
-      if (event.id === object.id) {
-        return object;
-      } else {
-        return event;
-      }
-    });
+    // this.eventNoteList = this.eventNoteList.map(event => {
+    //   if (event.id === object.id) {
+    //     return object;
+    //   } else {
+    //     return event;
+    //   }
+    // });
     if (this.eventNoteWorker.isAttachement(object)) {
       this.candidate.attachments = this.candidate.attachments.map((attachment) => {
         if (attachment.id === object.id) {
@@ -303,24 +393,38 @@ export class CandidatePageComponent implements OnInit, AfterContentChecked, Afte
           return attachment;
         }
       });
-      this.eventNoteList = this.eventNoteList.map(event => {
-        if (event.id === object.id) {
-          return object;
-        } else {
-          return event;
-        }
-      });
+      // this.eventNoteList = this.eventNoteList.map(event => {
+      //   if (event.id === object.id) {
+      //     return object;
+      //   } else {
+      //     return event;
+      //   }
+      // });
       console.log('candidate', this.candidate, this.eventNoteList);
       this.candidateService.update(this.candidate).subscribe(resMessage => {
-        this.zone.runOutsideAngular(() => {
+      //   this.zone.runOutsideAngular(() => {
           this.getCandidate(false);
-        });
+      //   });
       });
     } else if (this.eventNoteWorker.isInterview(object)) {
       this.interviewService.update(object).subscribe( res => {
         this.getCandidate();
         // this.getCandidate();
       });
+    }
+  }
+  changeEvent(event) {
+    if (this.eventNoteWorker.isInterview(event)) {
+      // this.addInterview();
+      this.changeInterview(event);
+    } else if (this.eventNoteWorker.isAttachement(event)) {
+      // this.addAttachment();
+    } else if (this.eventNoteWorker.isExperience(event)) {
+      this.changeExperience(event);
+    } else if (this.eventNoteWorker.isNote(event)) {
+      this.changeNote(event);
+    } else if (this.eventNoteWorker.isDevFeedback(event)) {
+      this.changeDevFeedback(event)
     }
   }
   alertDeleteAttachment(attachment: Attachment) {
@@ -451,7 +555,11 @@ export class CandidatePageComponent implements OnInit, AfterContentChecked, Afte
       this.candidate = res;
       if (withTimeline) {
         this.candidateService.getTimeline(this.candidate).subscribe(resTimeline => {
-          this.eventNoteList = resTimeline;
+          return this.eventNoteList = resTimeline;
+          // this.eventNoteList.sort((a, b) => {
+          //   return new Date(a.createdAt).getTime() - new Date(b.createdAt).getTime();
+          // });
+          // console.log('eventNoteList', this.eventNoteList);
         });
       }
       console.log(this.eventNoteList);

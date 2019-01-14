@@ -46,7 +46,7 @@ export class DateTimeWorker {
     if (format == null) {
       format = 'H:mm';
     }
-    return this.datePipe.transform(date, format, 'UTC', this.translateWorker.getLanguage());
+    return this.datePipe.transform(date, format, null, this.translateWorker.getLanguage());
   }
   getTime2(dateWithTime) {
     const date = new Date(dateWithTime);

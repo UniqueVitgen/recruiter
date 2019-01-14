@@ -1,0 +1,59 @@
+
+<form  #myForm="ngForm"><app-modal-component>
+  <dialog-title>
+    <span *ngIf="data.isEdit">
+      {{'Edit dev feedback' | translate}}
+    </span>
+    <span *ngIf="!data.isEdit">
+      {{'Add feedback' | translate}}
+    </span>
+    <button (click)="onNoClick()" class="float-right" mat-icon-button>
+      <mat-icon [matTooltip]="'To close' | translate">close</mat-icon>
+    </button>
+  </dialog-title>
+  <dialog-body>
+      <!--<mat-form-field class="example-full-width">-->
+      <!--<mat-select required formControlName="state" placeholder="{{'Feedback State' | translate}}" [(ngModel)]="editedFeedback.feedbackState.name" matInput>-->
+      <!--<mat-option *ngFor="let state of testFeedbackStates" [value]="state" >{{state | translate}}</mat-option>-->
+      <!--</mat-select>-->
+      <!--</mat-form-field>-->
+      <div *ngFor="let feedbackDetails of editedFeedback.feedbackDetails; let feedbackIndex = index">
+        <mat-card-title *ngIf="feedbackIndex === 0 && feedbackDetails.requirement.public == true">{{'Public' | translate}}</mat-card-title>
+        <mat-card-title *ngIf="feedbackDetails.requirement.public == false &&
+      (feedbackIndex === 0 || editedFeedback.feedbackDetails[feedbackIndex - 1].requirement.public == true)">{{'Private' | translate}}</mat-card-title>
+        <!--<form #myForm="ngForm">-->
+          <mat-form-field  class="example-full-width custom-form-field">
+            <textarea [name]="feedbackDetails.requirement.name" [required]="feedbackDetails.requirement.required" [(ngModel)]="feedbackDetails.feedbackText" placeholder="{{feedbackDetails.requirement.name | translate}}" matInput></textarea>
+            <button mat-button  matSuffix mat-icon-button aria-label="Clear" class="edited-hover-button">
+              <mat-icon>edit</mat-icon>
+            </button>
+          </mat-form-field>
+        <!--</form>-->
+      </div>
+    <!--<mat-form-field class="example-full-width">-->
+    <!--<input required [(ngModel)]="editedFeedback.feedbackState.name" matInput placeholder="feedback state">-->
+    <!--</mat-form-field>-->
+    <!--<mat-form-field>-->
+    <!--<input matInput [(ngModel)]="editedExperience.dateFrom" [matDatepicker]="picker" placeholder="From">-->
+    <!--<mat-datepicker-toggle name="dateSuffix" matSuffix [for]="picker"></mat-datepicker-toggle>-->
+    <!--<mat-datepicker  #picker></mat-datepicker>-->
+    <!--</mat-form-field>-->
+    <!--&nbsp;-->
+    <!--&nbsp;-->
+    <!--<mat-form-field >-->
+    <!--<input matInput  [(ngModel)]="editedExperience.dateTo" [min]="editedExperience.dateFrom" [matDatepicker]="picker1" placeholder="To">-->
+    <!--<mat-datepicker-toggle name="dateSuffix1" matSuffix [for]="picker1"></mat-datepicker-toggle>-->
+    <!--<mat-datepicker #picker1></mat-datepicker>-->
+    <!--</mat-form-field>-->
+    <!--<mat-form-field class="example-full-width">-->
+    <!--<textarea matInput placeholder="Comment" [(ngModel)]="editedExperience."></textarea>-->
+    <!--</mat-form-field>-->
+  </dialog-body>
+  <dialog-footer class="example-full-width">
+    <span class="float-right">
+    <button mat-button (click)="onNoClick()">{{'No Thanks' | translate}}</button>
+    <button mat-raised-button color="primary" [disabled]="myForm.invalid" (click)="editCandidate()" cdkFocusInitial>{{'Ok' | translate}}</button>
+    </span>
+  </dialog-footer>
+</app-modal-component>
+</form>

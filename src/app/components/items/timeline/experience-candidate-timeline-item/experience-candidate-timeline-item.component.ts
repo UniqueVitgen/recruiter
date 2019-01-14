@@ -19,6 +19,7 @@ export class ExperienceCandidateTimelineItemComponent implements OnInit, OnChang
   @Input() experience: ExperienceTimeline;
   @Input() candidate: Candidate;
   @Output() changeCandidate: EventEmitter<any> = new EventEmitter();
+  @Output() changeEvent: EventEmitter<any> = new EventEmitter();
   @Output() deleteEvent: EventEmitter<any> = new EventEmitter();
   public experienceForm: FormGroup;
   teams: Team[];
@@ -30,7 +31,7 @@ export class ExperienceCandidateTimelineItemComponent implements OnInit, OnChang
   public maxDate: Date;
   public minDate: Date;
   public minDateWithBirthday: Date;
-  constructor(private dateTimeWorker: DateTimeWorker,
+  constructor(public dateTimeWorker: DateTimeWorker,
               private translateWorker: TranslateWorker,
               private fb: FormBuilder,
               private userWorker: UserWorker,
@@ -107,6 +108,9 @@ export class ExperienceCandidateTimelineItemComponent implements OnInit, OnChang
   }
   delete() {
     this.deleteEvent.emit(this.editedExperience);
+  }
+  change() {
+    this.changeEvent.emit(this.editedExperience);
   }
 
 }

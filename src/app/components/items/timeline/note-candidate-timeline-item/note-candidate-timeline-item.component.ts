@@ -12,6 +12,7 @@ import {TranslateWorker} from '../../../../workers/translate/translate.worker';
 export class NoteCandidateTimelineItemComponent implements OnInit {
   @Input() note: Feedback;
   @Output() changeCandidate: EventEmitter<any> = new EventEmitter();
+  @Output() changeEvent: EventEmitter<any> = new EventEmitter<any>();
   @Output() deleteEvent: EventEmitter<any> = new EventEmitter();
   editedNote: Feedback;
   viewOfDate: string;
@@ -33,6 +34,9 @@ export class NoteCandidateTimelineItemComponent implements OnInit {
   }
   delete() {
     this.deleteEvent.emit(this.editedNote);
+  }
+  change() {
+    this.changeEvent.emit(this.editedNote);
   }
 
 }

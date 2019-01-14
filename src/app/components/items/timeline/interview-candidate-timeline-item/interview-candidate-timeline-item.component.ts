@@ -20,6 +20,7 @@ import {CandidateWorker} from '../../../../workers/candidate/candidate.worker';
 export class InterviewCandidateTimelineItemComponent implements OnInit, OnChanges {
   @Input() interview: InterviewExtended;
   @Output() changeCandidate: EventEmitter<any> = new EventEmitter();
+  @Output() changeEvent: EventEmitter<any> = new EventEmitter<any>();
   @Output() deleteEvent: EventEmitter<any> = new EventEmitter();
   time: TimeInput;
   planDate: DateTimeForm;
@@ -40,6 +41,11 @@ export class InterviewCandidateTimelineItemComponent implements OnInit, OnChange
       // clockFaceTimeInactiveColor: '#fff'
     }
   };
+  interviewString = {
+    date: <string> '',
+    startTime: <string> '',
+    endTime: <string> ''
+  }
 
   editedInterview: Interview;
   viewOfDate: string;
@@ -60,8 +66,10 @@ export class InterviewCandidateTimelineItemComponent implements OnInit, OnChange
       new Date(this.editedInterview.planEndDate));
     const result = this.dateTimeFormWorker.updateDateTime(this.editedInterview, this.planDate);
     this.planDate = result.planDate;
+    this.interviewString = this.createInterviewString();
     // this.minTime = this.dateTimeWorker.initMinTime(this.planDate.dateDate);
     this.translateWorker.changeValue.subscribe(res => {
+      this.interviewString = this.createInterviewString();
       // this.viewOfDate = this.dateTimeWorker.getDateWithTime(this.editedInterview.createdAt);
       this.viewOfDate = this.localDatePipe.transform(this.editedInterview.createdAt, 'mediumDate');
       this.viewOfTime = this.localDatePipe.transform(this.editedInterview.createdAt, 'shortTime');
@@ -76,12 +84,22 @@ export class InterviewCandidateTimelineItemComponent implements OnInit, OnChange
     }
     this.initDateValidation();
   }
+  createInterviewString() {
+    return {
+      date: this.dateTimeWorker.getDate(this.planDate.dateDate, 'mediumDate'),
+      startTime: this.dateTimeWorker.getTime(this.planDate.dateDate),
+      endTime: this.dateTimeWorker.getTime(this.dateTimeWorker.setDateFromDateTimeInput(this.planDate.endValue))
+    };
+  }
   initDateValidation() {
     console.log('initDateValidation');
     this.minDate = this.dateTimeWorker.getTodayStart();
     const now = this.dateTimeWorker.getNow();
     const completedInterviewTime = new Date(this.editedInterview.planEndDate);
     this.isCanCompleted = completedInterviewTime < now;
+  }
+  change() {
+    this.changeEvent.emit(this.interview);
   }
   delete() {
     this.deleteEvent.emit(this.editedInterview);

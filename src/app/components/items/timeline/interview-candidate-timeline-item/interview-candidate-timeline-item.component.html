@@ -17,6 +17,7 @@
   </mat-checkbox>&nbsp;
       &nbsp;
       &nbsp;
+    <mat-icon *ngIf="visibleCheckbox"  matTooltip="{{'Change' | translate}}" (click)="change()">create</mat-icon>
     <mat-icon *ngIf="visibleCheckbox"  matTooltip="{{'Delete' | translate}}" (click)="delete()">delete</mat-icon>
     </span>
 
@@ -34,14 +35,29 @@
   </a>
   <br>
   <br>
-  <mat-form-field class="custom-form-field">
-    <input readonly required (dateChange)="onFocusoutAnyInput()" matInput [min]="minDate" [(ngModel)]="planDate.dateDate" [matDatepicker]="picker1" placeholder="{{'Plan Date' | translate}}" (click)="picker1.open()">
-    <mat-datepicker-toggle name="dateSuffix1" matSuffix [for]="picker1"></mat-datepicker-toggle>
-    <mat-datepicker [disabled]="editedInterview.completed" #picker1></mat-datepicker>
-  </mat-form-field>
-    <app-custom-timepicker [readonly]="editedInterview.completed" required placeholder="Start time" [min]="minTime || dateTimeWorker.config.minTime" [max]="planDate.endTimeString || dateTimeWorker.config.maxTime" [(ngModel)]="planDate.time" (ngModelChange)="onFocusoutAnyInput()" [hideUnderline]="true"></app-custom-timepicker>
+  <div class="row">
+    <div class="col-4">
+      <div class="gray-item material-placeholder-text small-text">{{'Plan Date' | translate}}</div>
+      <div>{{interviewString.date}}</div>
+    </div>
+    <div class="col-4">
+      <div class="gray-item material-placeholder-text small-text">{{'Start time' | translate}}</div>
+      <div>{{interviewString.startTime}}</div>
+    </div>
+    <div class="col-4">
+      <div class="gray-item material-placeholder-text small-text">{{'End time' | translate}}</div>
+      <div>{{interviewString.endTime}}</div>
+    </div>
+  </div>
+
+  <!--<mat-form-field class="custom-form-field">-->
+    <!--<input readonly required (dateChange)="onFocusoutAnyInput()" matInput [min]="minDate" [(ngModel)]="planDate.dateDate" [matDatepicker]="picker1" placeholder="{{'Plan Date' | translate}}" (click)="picker1.open()">-->
+    <!--<mat-datepicker-toggle name="dateSuffix1" matSuffix [for]="picker1"></mat-datepicker-toggle>-->
+    <!--<mat-datepicker [disabled]="editedInterview.completed" #picker1></mat-datepicker>-->
+  <!--</mat-form-field>-->
+    <!--<app-custom-timepicker [readonly]="editedInterview.completed" required placeholder="Start time" [min]="minTime || dateTimeWorker.config.minTime" [max]="planDate.endTimeString || dateTimeWorker.config.maxTime" [(ngModel)]="planDate.time" (ngModelChange)="onFocusoutAnyInput()" [hideUnderline]="true"></app-custom-timepicker>-->
   &nbsp;
-    <app-custom-timepicker [readonly]="editedInterview.completed" required placeholder="End time" [min]="minTime || planDate.timeString || dateTimeWorker.config.minTime" [max]="dateTimeWorker.config.maxTime" [(ngModel)]="planDate.endTime" (ngModelChange)="onFocusoutAnyInput()" [hideUnderline]="true"></app-custom-timepicker>
+    <!--<app-custom-timepicker [readonly]="editedInterview.completed" required placeholder="End time" [min]="minTime || planDate.timeString || dateTimeWorker.config.minTime" [max]="dateTimeWorker.config.maxTime" [(ngModel)]="planDate.endTime" (ngModelChange)="onFocusoutAnyInput()" [hideUnderline]="true"></app-custom-timepicker>-->
 
   <br>
   <!--<mat-form-field class="custom-form-field">-->

@@ -203,5 +203,6 @@
   "Enter start experience" : "Введите начало стажа",
   "Experience required" : "Требуемый опыт",
   "Total candidates" : "Всего кандидатов",
-  "Not" : "нет"
+  "Not" : "нет",
+  "Edit dev feedback": "Редактировать интервью отзыв"
 }
