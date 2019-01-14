@@ -36,6 +36,7 @@ export class InterviewFeedbackComponent implements OnInit, OnChanges {
     }
   }
   saveFeedback() {
+    console.log('feedback', this.feedback);
     this.outputSaveClick.emit(this.feedback);
   }
   clickDelete(): void {

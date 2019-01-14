@@ -47,6 +47,7 @@ import {ExperienceDialogData} from '../../interfaces/dialog/init/experience-dial
 import {NoteDialogData} from '../../interfaces/dialog/init/note-dialog-data';
 import {DevFeedbackModalComponent} from '../../components/modals/dev-feedback-modal/dev-feedback-modal.component';
 import {DevFeedbackDialogData} from '../../interfaces/dialog/init/dev-feedback-dialog-data';
+import {DeleteInterviewModalComponent} from '../../components/modals/interview/delete-interview-modal/delete-interview-modal.component';
 
 @Component({
   selector: 'app-candidate-page',
@@ -223,6 +224,31 @@ export class CandidatePageComponent implements OnInit, AfterContentChecked, Afte
           dialogRef.close();
         });
       });
+    });
+    dialogRef.componentInstance.outputClickDelete.subscribe((resInterview: BaseDialogResult<InterviewExtended>) => {
+      // this.deleteInterview(resInterview.resObject).add(() => {
+      //   this.getInterview().add(() => {
+      //     dialogRef.close();
+      //   });
+      // });
+      this.clickDeleteInterview(resInterview.resObject, dialogRef);
+    });
+  }
+  clickDeleteInterview(interview: InterviewExtended, customDialogRef) {
+    const dialogRef = this.dialog.open(DeleteInterviewModalComponent, {
+      width: '400px',
+      disableClose: true
+    });
+    dialogRef.afterClosed().subscribe(res => {
+      if (res) {
+        this.deleteInterview(interview).add(() => {
+          customDialogRef.close();
+          this.getCandidate();
+        });
+        // this.candidateService.delete(candidate.id).subscribe(res => {
+        //   this.getAll();
+        // });
+      }
     });
   }
   addAttachment() {

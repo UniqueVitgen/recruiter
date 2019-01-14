@@ -11,7 +11,9 @@
   <br>
   <mat-card>
     <div *ngFor="let feedbackDetails of editedNote.feedbackDetails; let feedbackIndex = index">
-      <mat-card-title *ngIf="feedbackIndex === 0 && feedbackDetails.requirement.public == true">{{'Public' | translate}}</mat-card-title>
+      <div  *ngIf="feedbackIndex === 0 && feedbackDetails.requirement.public == true">
+        <mat-card-title>{{'Public' | translate}}</mat-card-title>
+      </div>
       <mat-card-title *ngIf="feedbackDetails.requirement.public == false &&
       (feedbackIndex === 0 || editedNote.feedbackDetails[feedbackIndex - 1].requirement.public == true)">{{'Private' | translate}}</mat-card-title>
       <!--<form #myForm="ngForm">-->
@@ -22,8 +24,10 @@
           <!--</button>-->
         <!--</mat-form-field>-->
       <!--</form>-->
-      <div class="gray-item material-placeholder-text small-text">{{feedbackDetails.requirement.name | translate}}</div>
-      <div>{{feedbackDetails.feedbackText}}</div>
+      <mat-card-content>
+        <div class="gray-item material-placeholder-text small-text">{{feedbackDetails.requirement.name | translate}}</div>
+        <div>{{feedbackDetails.feedbackText}}</div>
+      </mat-card-content>
     </div>
   </mat-card>
 </mat-card>
