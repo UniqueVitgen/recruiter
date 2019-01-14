@@ -111,8 +111,13 @@ export class JobDescriptionDashboardComponent implements OnInit, OnChanges {
             return true;
           }
         }
-        return (minSalary >= vacancy.salaryInDollarsFrom
-          && minSalary <= vacancy.salaryInDollarsTo)
+        return (minSalary <= vacancy.salaryInDollarsTo
+          && maxSalary >= vacancy.salaryInDollarsTo)
+          ||
+          (minSalary >= vacancy.salaryInDollarsFrom
+            && maxSalary <= vacancy.salaryInDollarsFrom)
+          || (minSalary <= vacancy.salaryInDollarsFrom
+            && minSalary >= vacancy.salaryInDollarsTo)
           ||
           (maxSalary >= vacancy.salaryInDollarsFrom
             && maxSalary <= vacancy.salaryInDollarsTo);
